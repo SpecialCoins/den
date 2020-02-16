@@ -1,0 +1,15 @@
+# http://standards.freedesktop.org/desktop-entry-spec/desktop-entry-spec-1.0.html
+
+[Desktop Entry]
+Encoding=UTF-8
+Name=BCZ Core
+Comment=BCZ Core QT main network
+GenericName=BCZ Digital Currency QT client main network
+Exec=bcz-core.qt %u
+Terminal=false
+Type=Application
+Icon=${SNAP}/share/pixmaps/bcz.png
+MimeType=x-scheme-handler/bcz;
+Categories=X-Office;X-Finance;
+Keywords=internet;bcz;core;wallet;qt;main;snap;launchpad;crypto;digital;currency;coin;token;
+Version=1.0
