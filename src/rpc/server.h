@@ -1,6 +1,6 @@
 // Copyright (c) 2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
-// Copyright (c) 2015-2020 The PIVX developers
+// Copyright (c) 2020 The BCZ developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -8,7 +8,6 @@
 #define BITCOIN_RPCSERVER_H
 
 #include "amount.h"
-#include "zpiv/zerocoin.h"
 #include "rpc/protocol.h"
 #include "uint256.h"
 
@@ -129,7 +128,7 @@ public:
 };
 
 /**
- * PIVX RPC command dispatcher.
+ * BCZ RPC command dispatcher.
  */
 class CRPCTable
 {
@@ -179,7 +178,6 @@ extern std::string HelpExampleCli(std::string methodname, std::string args);
 extern std::string HelpExampleRpc(std::string methodname, std::string args);
 
 extern void EnsureWalletIsUnlocked(bool fAllowAnonOnly = false);
-extern UniValue DoZpivSpend(const CAmount nAmount, std::vector<CZerocoinMint>& vMintsSelected, std::string address_str);
 
 extern UniValue getconnectioncount(const UniValue& params, bool fHelp); // in rpc/net.cpp
 extern UniValue getpeerinfo(const UniValue& params, bool fHelp);
@@ -191,7 +189,7 @@ extern UniValue getnettotals(const UniValue& params, bool fHelp);
 extern UniValue setban(const UniValue& params, bool fHelp);
 extern UniValue listbanned(const UniValue& params, bool fHelp);
 extern UniValue clearbanned(const UniValue& params, bool fHelp);
-
+extern UniValue makekeypair(const UniValue& params, bool fHelp);
 extern UniValue dumpprivkey(const UniValue& params, bool fHelp); // in rpcdump.cpp
 extern UniValue importprivkey(const UniValue& params, bool fHelp);
 extern UniValue importaddress(const UniValue& params, bool fHelp);
@@ -200,11 +198,9 @@ extern UniValue importwallet(const UniValue& params, bool fHelp);
 extern UniValue bip38encrypt(const UniValue& params, bool fHelp);
 extern UniValue bip38decrypt(const UniValue& params, bool fHelp);
 
-extern UniValue getgenerate(const UniValue& params, bool fHelp); // in rpc/mining.cpp
-extern UniValue setgenerate(const UniValue& params, bool fHelp);
-extern UniValue generate(const UniValue& params, bool fHelp);
+extern UniValue getstake(const UniValue& params, bool fHelp);
+extern UniValue setstake(const UniValue& params, bool fHelp);
 extern UniValue getnetworkhashps(const UniValue& params, bool fHelp);
-extern UniValue gethashespersec(const UniValue& params, bool fHelp);
 extern UniValue getmininginfo(const UniValue& params, bool fHelp);
 extern UniValue prioritisetransaction(const UniValue& params, bool fHelp);
 extern UniValue getblocktemplate(const UniValue& params, bool fHelp);
@@ -261,27 +257,6 @@ extern UniValue setstakesplitthreshold(const UniValue& params, bool fHelp);
 extern UniValue getstakesplitthreshold(const UniValue& params, bool fHelp);
 extern UniValue multisend(const UniValue& params, bool fHelp);
 extern UniValue autocombinerewards(const UniValue& params, bool fHelp);
-extern UniValue getzerocoinbalance(const UniValue& params, bool fHelp);
-extern UniValue listmintedzerocoins(const UniValue& params, bool fHelp);
-extern UniValue listspentzerocoins(const UniValue& params, bool fHelp);
-extern UniValue listzerocoinamounts(const UniValue& params, bool fHelp);
-extern UniValue mintzerocoin(const UniValue& params, bool fHelp);
-extern UniValue spendzerocoin(const UniValue& params, bool fHelp);
-extern UniValue spendrawzerocoin(const UniValue& params, bool fHelp);
-extern UniValue spendzerocoinmints(const UniValue& params, bool fHelp);
-extern UniValue resetmintzerocoin(const UniValue& params, bool fHelp);
-extern UniValue resetspentzerocoin(const UniValue& params, bool fHelp);
-extern UniValue getarchivedzerocoin(const UniValue& params, bool fHelp);
-extern UniValue importzerocoins(const UniValue& params, bool fHelp);
-extern UniValue exportzerocoins(const UniValue& params, bool fHelp);
-extern UniValue reconsiderzerocoins(const UniValue& params, bool fHelp);
-extern UniValue getspentzerocoinamount(const UniValue& params, bool fHelp);
-extern UniValue setzpivseed(const UniValue& params, bool fHelp);
-extern UniValue getzpivseed(const UniValue& params, bool fHelp);
-extern UniValue generatemintlist(const UniValue& params, bool fHelp);
-extern UniValue searchdzpiv(const UniValue& params, bool fHelp);
-extern UniValue dzpivstate(const UniValue& params, bool fHelp);
-
 extern UniValue getrawtransaction(const UniValue& params, bool fHelp); // in rpc/rawtransaction.cpp
 extern UniValue listunspent(const UniValue& params, bool fHelp);
 extern UniValue lockunspent(const UniValue& params, bool fHelp);
@@ -291,9 +266,6 @@ extern UniValue decoderawtransaction(const UniValue& params, bool fHelp);
 extern UniValue decodescript(const UniValue& params, bool fHelp);
 extern UniValue signrawtransaction(const UniValue& params, bool fHelp);
 extern UniValue sendrawtransaction(const UniValue& params, bool fHelp);
-extern UniValue createrawzerocoinspend(const UniValue& params, bool fHelp);
-
-extern UniValue findserial(const UniValue& params, bool fHelp); // in rpc/blockchain.cpp
 extern UniValue getblockcount(const UniValue& params, bool fHelp);
 extern UniValue getbestblockhash(const UniValue& params, bool fHelp);
 extern UniValue waitfornewblock(const UniValue& params, bool fHelp);
@@ -314,8 +286,6 @@ extern UniValue getchaintips(const UniValue& params, bool fHelp);
 extern UniValue invalidateblock(const UniValue& params, bool fHelp);
 extern UniValue reconsiderblock(const UniValue& params, bool fHelp);
 extern UniValue getblockindexstats(const UniValue& params, bool fHelp);
-extern UniValue getmintsinblocks(const UniValue& params, bool fHelp);
-extern UniValue getserials(const UniValue& params, bool fHelp);
 extern void validaterange(const UniValue& params, int& heightStart, int& heightEnd, int minHeightStart=1);
 
 extern UniValue getpoolinfo(const UniValue& params, bool fHelp); // in rpc/masternode.cpp
@@ -334,17 +304,6 @@ extern UniValue listmasternodeconf(const UniValue& params, bool fHelp);
 extern UniValue getmasternodestatus(const UniValue& params, bool fHelp);
 extern UniValue getmasternodewinners(const UniValue& params, bool fHelp);
 extern UniValue getmasternodescores(const UniValue& params, bool fHelp);
-
-extern UniValue preparebudget(const UniValue& params, bool fHelp); // in rpc/budget.cpp
-extern UniValue submitbudget(const UniValue& params, bool fHelp);
-extern UniValue mnbudgetvote(const UniValue& params, bool fHelp);
-extern UniValue getbudgetvotes(const UniValue& params, bool fHelp);
-extern UniValue getnextsuperblock(const UniValue& params, bool fHelp);
-extern UniValue getbudgetprojection(const UniValue& params, bool fHelp);
-extern UniValue getbudgetinfo(const UniValue& params, bool fHelp);
-extern UniValue mnbudgetrawvote(const UniValue& params, bool fHelp);
-extern UniValue mnfinalbudget(const UniValue& params, bool fHelp);
-extern UniValue checkbudgets(const UniValue& params, bool fHelp);
 
 extern UniValue getinfo(const UniValue& params, bool fHelp); // in rpc/misc.cpp
 extern UniValue mnsync(const UniValue& params, bool fHelp);

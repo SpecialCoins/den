@@ -1,7 +1,7 @@
 // Copyright (c) 2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2020 The PIVX developers
+// Copyright (c) 2020 The BCZ developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -114,7 +114,7 @@ CAmount AmountFromValue(const UniValue& value)
         throw JSONRPCError(RPC_TYPE_ERROR, "Amount is not a number");
 
     double dAmount = value.get_real();
-    if (dAmount <= 0.0 || dAmount > 21000000.0)
+    if (dAmount <= 0.0 || dAmount > 3999999.0)
         throw JSONRPCError(RPC_TYPE_ERROR, "Invalid amount");
     CAmount nAmount = roundint64(dAmount * COIN);
     if (!MoneyRange(nAmount))
@@ -265,11 +265,11 @@ UniValue stop(const UniValue& params, bool fHelp)
     if (fHelp || params.size() > 1)
         throw std::runtime_error(
             "stop\n"
-            "\nStop PIVX server.");
+            "\nStop BCZ server.");
     // Event loop will exit after current HTTP requests have been handled, so
     // this reply will get back to the client.
     StartShutdown();
-    return "PIVX server stopping";
+    return "BCZ server stopping";
 }
 
 
@@ -299,10 +299,7 @@ static const CRPCCommand vRPCCommands[] =
         {"network", "clearbanned", &clearbanned, true, false, false},
 
         /* Block chain and UTXO */
-        {"blockchain", "findserial", &findserial, true, false, false},
         {"blockchain", "getblockindexstats", &getblockindexstats, true, false, false},
-        {"blockchain", "getmintsinblocks", &getmintsinblocks, true, false, false},
-        {"blockchain", "getserials", &getserials, true, false, false},
         {"blockchain", "getblockchaininfo", &getblockchaininfo, true, false, false},
         {"blockchain", "getbestblockhash", &getbestblockhash, true, false, false},
         {"blockchain", "getblockcount", &getblockcount, true, false, false},
@@ -321,20 +318,14 @@ static const CRPCCommand vRPCCommands[] =
         {"blockchain", "verifychain", &verifychain, true, false, false},
 
         /* Mining */
+        {"mining", "getstake", &getstake, true, false, false},
+        {"mining", "setstake", &setstake, true, false, false},
         {"mining", "getblocktemplate", &getblocktemplate, true, false, false},
         {"mining", "getmininginfo", &getmininginfo, true, false, false},
         {"mining", "getnetworkhashps", &getnetworkhashps, true, false, false},
         {"mining", "prioritisetransaction", &prioritisetransaction, true, false, false},
         {"mining", "submitblock", &submitblock, true, true, false},
         {"mining", "reservebalance", &reservebalance, true, true, false},
-
-#ifdef ENABLE_WALLET
-        /* Coin generation */
-        {"generating", "getgenerate", &getgenerate, true, false, false},
-        {"generating", "gethashespersec", &gethashespersec, true, false, false},
-        {"generating", "setgenerate", &setgenerate, true, true, false},
-        {"generating", "generate", &generate, true, true, false},
-#endif
 
         /* Raw transactions */
         {"rawtransactions", "createrawtransaction", &createrawtransaction, true, false, false},
@@ -359,35 +350,25 @@ static const CRPCCommand vRPCCommands[] =
         { "hidden",             "waitforblock",           &waitforblock,           true,  true,  false  },
         { "hidden",             "waitforblockheight",     &waitforblockheight,     true,  true,  false  },
 
-        /* PIVX features */
-        {"pivx", "listmasternodes", &listmasternodes, true, true, false},
-        {"pivx", "getmasternodecount", &getmasternodecount, true, true, false},
-        {"pivx", "masternodeconnect", &masternodeconnect, true, true, false},
-        {"pivx", "createmasternodebroadcast", &createmasternodebroadcast, true, true, false},
-        {"pivx", "decodemasternodebroadcast", &decodemasternodebroadcast, true, true, false},
-        {"pivx", "relaymasternodebroadcast", &relaymasternodebroadcast, true, true, false},
-        {"pivx", "masternodecurrent", &masternodecurrent, true, true, false},
-        {"pivx", "masternodedebug", &masternodedebug, true, true, false},
-        {"pivx", "startmasternode", &startmasternode, true, true, false},
-        {"pivx", "createmasternodekey", &createmasternodekey, true, true, false},
-        {"pivx", "getmasternodeoutputs", &getmasternodeoutputs, true, true, false},
-        {"pivx", "listmasternodeconf", &listmasternodeconf, true, true, false},
-        {"pivx", "getmasternodestatus", &getmasternodestatus, true, true, false},
-        {"pivx", "getmasternodewinners", &getmasternodewinners, true, true, false},
-        {"pivx", "getmasternodescores", &getmasternodescores, true, true, false},
-        {"pivx", "preparebudget", &preparebudget, true, true, false},
-        {"pivx", "submitbudget", &submitbudget, true, true, false},
-        {"pivx", "mnbudgetvote", &mnbudgetvote, true, true, false},
-        {"pivx", "getbudgetvotes", &getbudgetvotes, true, true, false},
-        {"pivx", "getnextsuperblock", &getnextsuperblock, true, true, false},
-        {"pivx", "getbudgetprojection", &getbudgetprojection, true, true, false},
-        {"pivx", "getbudgetinfo", &getbudgetinfo, true, true, false},
-        {"pivx", "mnbudgetrawvote", &mnbudgetrawvote, true, true, false},
-        {"pivx", "mnfinalbudget", &mnfinalbudget, true, true, false},
-        {"pivx", "checkbudgets", &checkbudgets, true, true, false},
-        {"pivx", "mnsync", &mnsync, true, true, false},
-        {"pivx", "spork", &spork, true, true, false},
-        {"pivx", "getpoolinfo", &getpoolinfo, true, true, false},
+        /* BCZ features */
+        {"bcz", "listmasternodes", &listmasternodes, true, true, false},
+        {"bcz", "getmasternodecount", &getmasternodecount, true, true, false},
+        {"bcz", "masternodeconnect", &masternodeconnect, true, true, false},
+        {"bcz", "createmasternodebroadcast", &createmasternodebroadcast, true, true, false},
+        {"bcz", "decodemasternodebroadcast", &decodemasternodebroadcast, true, true, false},
+        {"bcz", "relaymasternodebroadcast", &relaymasternodebroadcast, true, true, false},
+        {"bcz", "masternodecurrent", &masternodecurrent, true, true, false},
+        {"bcz", "masternodedebug", &masternodedebug, true, true, false},
+        {"bcz", "startmasternode", &startmasternode, true, true, false},
+        {"bcz", "createmasternodekey", &createmasternodekey, true, true, false},
+        {"bcz", "getmasternodeoutputs", &getmasternodeoutputs, true, true, false},
+        {"bcz", "listmasternodeconf", &listmasternodeconf, true, true, false},
+        {"bcz", "getmasternodestatus", &getmasternodestatus, true, true, false},
+        {"bcz", "getmasternodewinners", &getmasternodewinners, true, true, false},
+        {"bcz", "getmasternodescores", &getmasternodescores, true, true, false},
+        {"bcz", "mnsync", &mnsync, true, true, false},
+        {"bcz", "spork", &spork, true, true, false},
+        {"bcz", "getpoolinfo", &getpoolinfo, true, true, false},
 
 #ifdef ENABLE_WALLET
         /* Wallet */
@@ -449,28 +430,7 @@ static const CRPCCommand vRPCCommands[] =
         {"wallet", "walletpassphrase", &walletpassphrase, true, false, true},
         {"wallet", "delegatoradd", &delegatoradd, true, false, true},
         {"wallet", "delegatorremove", &delegatorremove, true, false, true},
-
-        {"zerocoin", "createrawzerocoinspend", &createrawzerocoinspend, false, false, true},
-        {"zerocoin", "getzerocoinbalance", &getzerocoinbalance, false, false, true},
-        {"zerocoin", "listmintedzerocoins", &listmintedzerocoins, false, false, true},
-        {"zerocoin", "listspentzerocoins", &listspentzerocoins, false, false, true},
-        {"zerocoin", "listzerocoinamounts", &listzerocoinamounts, false, false, true},
-        {"zerocoin", "mintzerocoin", &mintzerocoin, false, false, true},
-        {"zerocoin", "spendzerocoin", &spendzerocoin, false, false, true},
-        {"zerocoin", "spendrawzerocoin", &spendrawzerocoin, true, false, false},
-        {"zerocoin", "spendzerocoinmints", &spendzerocoinmints, false, false, true},
-        {"zerocoin", "resetmintzerocoin", &resetmintzerocoin, false, false, true},
-        {"zerocoin", "resetspentzerocoin", &resetspentzerocoin, false, false, true},
-        {"zerocoin", "getarchivedzerocoin", &getarchivedzerocoin, false, false, true},
-        {"zerocoin", "importzerocoins", &importzerocoins, false, false, true},
-        {"zerocoin", "exportzerocoins", &exportzerocoins, false, false, true},
-        {"zerocoin", "reconsiderzerocoins", &reconsiderzerocoins, false, false, true},
-        {"zerocoin", "getspentzerocoinamount", &getspentzerocoinamount, false, false, false},
-        {"zerocoin", "getzpivseed", &getzpivseed, false, false, true},
-        {"zerocoin", "setzpivseed", &setzpivseed, false, false, true},
-        {"zerocoin", "generatemintlist", &generatemintlist, false, false, true},
-        {"zerocoin", "searchdzpiv", &searchdzpiv, false, false, true},
-        {"zerocoin", "dzpivstate", &dzpivstate, false, false, true},
+        {"wallet", "makekeypair", &makekeypair, true, false, true},
 
 #endif // ENABLE_WALLET
 };
@@ -634,7 +594,7 @@ std::vector<std::string> CRPCTable::listCommands() const
 
 std::string HelpExampleCli(std::string methodname, std::string args)
 {
-    return "> pivx-cli " + methodname + " " + args + "\n";
+    return "> bcz-cli " + methodname + " " + args + "\n";
 }
 
 std::string HelpExampleRpc(std::string methodname, std::string args)

@@ -1,5 +1,5 @@
 // Copyright (c) 2014-2016 The Dash developers
-// Copyright (c) 2016-2019 The PIVX developers
+// Copyright (c) 2020 The BCZ developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -60,7 +60,7 @@ void ProcessMessageSwiftTX(CNode* pfrom, std::string& strCommand, CDataStream& v
         }
 
         for (const CTxOut &o : tx.vout) {
-            // IX supports normal scripts and unspendable scripts (used in DS collateral and Budget collateral).
+            // IX supports normal scripts and unspendable scripts (used in DS collateral collateral).
             // TODO: Look into other script types that are normal and can be included
             if (!o.scriptPubKey.IsNormalPaymentScript() && !o.scriptPubKey.IsUnspendable()) {
                 LogPrintf("%s : Invalid Script %s\n", __func__, tx.ToString().c_str());

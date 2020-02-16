@@ -1,6 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
-// Copyright (c) 2015-2019 The PIVX developers
+// Copyright (c) 2020 The BCZ developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -12,16 +12,21 @@
 #include "tinyformat.h"
 #include "utilstrencodings.h"
 #include "util.h"
+#include "crypto/Lyra2Z/Lyra2.h"
 
 uint256 CBlockHeader::GetHash() const
 {
-    if (nVersion < 4)
-        return HashQuark(BEGIN(nVersion), END(nNonce));
 
-    if (nVersion < 7)
-        return Hash(BEGIN(nVersion), END(nAccumulatorCheckpoint));
-
-    return Hash(BEGIN(nVersion), END(nNonce));
+    if ((nVersion == 2) || (nVersion == 5))
+    {
+        return SerializeHash(*this);
+    }
+    else if (nVersion == 4)
+    {
+        uint256 powHash;
+        LYRA2(BEGIN(powHash), 32, BEGIN(nVersion), 80, BEGIN(nVersion), 80, 2, 4, 256);
+        return powHash;
+    }
 }
 
 std::string CBlock::ToString() const
@@ -44,9 +49,4 @@ std::string CBlock::ToString() const
 void CBlock::print() const
 {
     LogPrintf("%s", ToString());
-}
-
-bool CBlock::IsZerocoinStake() const
-{
-    return IsProofOfStake() && vtx[1].HasZerocoinSpendInputs();
 }

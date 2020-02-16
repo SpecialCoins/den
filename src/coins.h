@@ -1,6 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
-// Copyright (c) 2016-2019 The PIVX developers
+// Copyright (c) 2020 The BCZ developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -8,7 +8,7 @@
 #define BITCOIN_COINS_H
 
 #include "compressor.h"
-#include "consensus/consensus.h"  // can be removed once policy/ established
+#include "consensus/consensus.h"
 #include "script/standard.h"
 #include "serialize.h"
 #include "uint256.h"
@@ -21,7 +21,7 @@
 
 /** 
 
-    ****Note - for PIVX we added fCoinStake to the 2nd bit. Keep in mind when reading the following and adjust as needed.
+    ****Note - for BCZ we added fCoinStake to the 2nd bit. Keep in mind when reading the following and adjust as needed.
  * Pruned version of CTransaction: only retains metadata and unspent transaction outputs
  *
  * Serialized format:
@@ -272,7 +272,7 @@ public:
     //! check whether a particular output is still available
     bool IsAvailable(unsigned int nPos) const
     {
-        return (nPos < vout.size() && !vout[nPos].IsNull() && !vout[nPos].IsZerocoinMint());
+        return (nPos < vout.size() && !vout[nPos].IsNull());
     }
 
     //! check whether the entire CCoins is spent
@@ -449,7 +449,7 @@ public:
     unsigned int GetCacheSize() const;
 
     /** 
-     * Amount of pivx coming in to a transaction
+     * Amount of bcz coming in to a transaction
      * Note that lightweight clients may not know anything besides the hash of previous transactions,
      * so may not be able to calculate this.
      *

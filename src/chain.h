@@ -1,9 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
-// Copyright (c) 2011-2013 The PPCoin developers
-// Copyright (c) 2013-2014 The NovaCoin Developers
-// Copyright (c) 2014-2018 The BlackCoin Developers
-// Copyright (c) 2015-2019 The PIVX developers
+// Copyright (c) 2020 The BCZ developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -17,7 +14,6 @@
 #include "tinyformat.h"
 #include "uint256.h"
 #include "util.h"
-#include "libzerocoin/Denominations.h"
 
 #include <vector>
 
@@ -240,10 +236,6 @@ public:
     //! (memory only) Sequential id assigned to distinguish order in which blocks are received.
     uint32_t nSequenceId;
 
-    //! zerocoin specific fields
-    std::map<libzerocoin::CoinDenomination, int64_t> mapZerocoinSupply;
-    std::vector<libzerocoin::CoinDenomination> vMintDenominationsInBlock;
-
     void SetNull()
     {
         phashBlock = NULL;
@@ -274,11 +266,6 @@ public:
         nBits = 0;
         nNonce = 0;
         nAccumulatorCheckpoint = 0;
-        // Start supply of each denomination with 0s
-        for (auto& denom : libzerocoin::zerocoinDenomList) {
-            mapZerocoinSupply.insert(std::make_pair(denom, 0));
-        }
-        vMintDenominationsInBlock.clear();
     }
 
     CBlockIndex()
@@ -295,7 +282,7 @@ public:
         nTime = block.nTime;
         nBits = block.nBits;
         nNonce = block.nNonce;
-        if(block.nVersion > 3 && block.nVersion < 7)
+        if(block.nVersion > 3 && block.nVersion < 5)
             nAccumulatorCheckpoint = block.nAccumulatorCheckpoint;
 
         if (block.IsProofOfStake()) {
@@ -338,40 +325,6 @@ public:
         block.nNonce = nNonce;
         block.nAccumulatorCheckpoint = nAccumulatorCheckpoint;
         return block;
-    }
-
-    int64_t GetZerocoinSupply() const
-    {
-        int64_t nTotal = 0;
-        for (auto& denom : libzerocoin::zerocoinDenomList) {
-            nTotal += GetZcMintsAmount(denom);
-        }
-        return nTotal;
-    }
-
-    /**
-     * Total of mints added to the specific accumulator.
-     * @param denom
-     * @return
-     */
-    int64_t GetZcMints(libzerocoin::CoinDenomination denom) const
-    {
-        return mapZerocoinSupply.at(denom);
-    }
-
-    /**
-     * Total available amount in an specific denom.
-     * @param denom
-     * @return
-     */
-    int64_t GetZcMintsAmount(libzerocoin::CoinDenomination denom) const
-    {
-        return libzerocoin::ZerocoinDenominationToAmount(denom) * GetZcMints(denom);
-    }
-
-    bool MintedDenomination(libzerocoin::CoinDenomination denom) const
-    {
-        return std::find(vMintDenominationsInBlock.begin(), vMintDenominationsInBlock.end(), denom) != vMintDenominationsInBlock.end();
     }
 
     uint256 GetBlockHash() const
@@ -562,6 +515,7 @@ public:
         if (IsProofOfStake()) {
             READWRITE(prevoutStake);
             READWRITE(nStakeTime);
+            READWRITE(hashProofOfStake);
         } else {
             const_cast<CDiskBlockIndex*>(this)->prevoutStake.SetNull();
             const_cast<CDiskBlockIndex*>(this)->nStakeTime = 0;
@@ -576,10 +530,8 @@ public:
         READWRITE(nTime);
         READWRITE(nBits);
         READWRITE(nNonce);
-        if(this->nVersion > 3) {
+        if(nVersion > 3 && nVersion < 5) {
             READWRITE(nAccumulatorCheckpoint);
-            READWRITE(mapZerocoinSupply);
-            READWRITE(vMintDenominationsInBlock);
         }
 
     }

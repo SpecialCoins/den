@@ -1,5 +1,5 @@
 // Copyright (c) 2015 The Bitcoin Core developers
-// Copyright (c) 2018-2019 The PIVX developers
+// Copyright (c) 2020 The BCZ developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -476,8 +476,12 @@ void StopHTTPServer()
     LogPrint("http", "Stopping HTTP server\n");
     if (workQueue) {
         LogPrint("http", "Waiting for HTTP worker threads to exit\n");
+#ifdef WIN32
+        delete workQueue;
+#else
         workQueue->WaitExit();
         delete workQueue;
+#endif
     }
     MilliSleep(500); // Avoid race condition while the last HTTP-thread is exiting
     if (eventBase) {

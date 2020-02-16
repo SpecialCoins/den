@@ -1,6 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2013 The Bitcoin developers
-// Copyright (c) 2015-2019 The PIVX developers
+// Copyright (c) 2020 The BCZ developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -23,14 +23,14 @@ class CBlockHeader
 {
 public:
     // header
-    static const int32_t CURRENT_VERSION=7;     //!> Version 7 removes nAccumulatorCheckpoint from serialization
+    static const int32_t CURRENT_VERSION=3;     //!> Version 5 removes nAccumulatorCheckpoint from serialization
     int32_t nVersion;
     uint256 hashPrevBlock;
     uint256 hashMerkleRoot;
     uint32_t nTime;
     uint32_t nBits;
     uint32_t nNonce;
-    uint256 nAccumulatorCheckpoint;             // only for version 4, 5 and 6.
+    uint256 nAccumulatorCheckpoint;             // only for version 4.
 
     CBlockHeader()
     {
@@ -48,9 +48,7 @@ public:
         READWRITE(nTime);
         READWRITE(nBits);
         READWRITE(nNonce);
-
-        //zerocoin active, header changes to include accumulator checksum
-        if(nVersion > 3 && nVersion < 7)
+        if(nVersion > 3 && nVersion < 5)
             READWRITE(nAccumulatorCheckpoint);
     }
 
@@ -145,8 +143,6 @@ public:
     {
         return !IsProofOfStake();
     }
-
-    bool IsZerocoinStake() const;
 
     std::pair<COutPoint, unsigned int> GetProofOfStake() const
     {

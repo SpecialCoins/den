@@ -1,6 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2016 The Bitcoin Core developers
-// Copyright (c) 2019 The PIVX developers
+// Copyright (c) 2019 The BCZ developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -10,7 +10,7 @@
 #include <stdint.h>
 
 /** The maximum allowed size for a block, in bytes (only for buffer size limits) */
-static const unsigned int MAX_BLOCK_SIZE_CURRENT = 2000000;
+static const unsigned int MAX_BLOCK_SIZE_CURRENT = 4000000;
 static const unsigned int MAX_BLOCK_SIZE_LEGACY = 1000000;
 
 /** The maximum allowed number of signature check operations in a block (network rule) */

@@ -1,5 +1,5 @@
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2019 The PIVX developers
+// Copyright (c) 2020 The BCZ developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -69,7 +69,6 @@ CMasternode::CMasternode() :
     lastPing = CMasternodePing();
     cacheInputAge = 0;
     cacheInputAgeBlock = 0;
-    unitTest = false;
     allowFreeTx = true;
     nActiveState = MASTERNODE_ENABLED,
     protocolVersion = PROTOCOL_VERSION;
@@ -94,7 +93,6 @@ CMasternode::CMasternode(const CMasternode& other) :
     lastPing = other.lastPing;
     cacheInputAge = other.cacheInputAge;
     cacheInputAgeBlock = other.cacheInputAgeBlock;
-    unitTest = other.unitTest;
     allowFreeTx = other.allowFreeTx;
     nActiveState = MASTERNODE_ENABLED,
     protocolVersion = other.protocolVersion;
@@ -209,10 +207,9 @@ void CMasternode::Check(bool forceCheck)
         return;
     }
 
-    if (!unitTest) {
         CValidationState state;
         CMutableTransaction tx = CMutableTransaction();
-        CTxOut vout = CTxOut(9999.99 * COIN, obfuScationPool.collateralPubKey);
+        CTxOut vout = CTxOut(4999.99 * COIN, obfuScationPool.collateralPubKey);
         tx.vin.push_back(vin);
         tx.vout.push_back(vout);
 
@@ -225,7 +222,6 @@ void CMasternode::Check(bool forceCheck)
                 return;
             }
         }
-    }
 
     activeState = MASTERNODE_ENABLED; // OK
 }
@@ -324,7 +320,7 @@ bool CMasternode::IsValidNetAddr()
 {
     // TODO: regtest is fine with any addresses for now,
     // should probably be a bit smarter if one day we start to implement tests for this
-    return Params().IsRegTestNet() ||
+    return Params().NetworkID() == CBaseChainParams::REGTEST ||
            (IsReachable(addr) && addr.IsRoutable());
 }
 
@@ -337,7 +333,7 @@ bool CMasternode::IsInputAssociatedWithPubkey() const
     uint256 hash;
     if(GetTransaction(vin.prevout.hash, txVin, hash, true)) {
         for (CTxOut out : txVin.vout) {
-            if (out.nValue == 10000 * COIN && out.scriptPubKey == payee) return true;
+            if (out.nValue == 5000 * COIN && out.scriptPubKey == payee) return true;
         }
     }
 
@@ -556,8 +552,8 @@ bool CMasternodeBroadcast::CheckAndUpdate(int& nDos)
     }
 
     if (Params().NetworkID() == CBaseChainParams::MAIN) {
-        if (addr.GetPort() != 51472) return false;
-    } else if (addr.GetPort() == 51472)
+        if (addr.GetPort() != 29500) return false;
+    } else if (addr.GetPort() == 29500)
         return false;
 
     //search existing Masternode list, this is where we update existing Masternodes with new mnb broadcasts
@@ -615,7 +611,7 @@ bool CMasternodeBroadcast::CheckInputsAndAdd(int& nDoS)
 
     CValidationState state;
     CMutableTransaction tx = CMutableTransaction();
-    CTxOut vout = CTxOut(9999.99 * COIN, obfuScationPool.collateralPubKey);
+    CTxOut vout = CTxOut(4999.99 * COIN, obfuScationPool.collateralPubKey);
     tx.vin.push_back(vin);
     tx.vout.push_back(vout);
 
@@ -646,13 +642,13 @@ bool CMasternodeBroadcast::CheckInputsAndAdd(int& nDoS)
     }
 
     // verify that sig time is legit in past
-    // should be at least not earlier than block when 1000 PIV tx got MASTERNODE_MIN_CONFIRMATIONS
+    // should be at least not earlier than block when 1000 BCZ tx got MASTERNODE_MIN_CONFIRMATIONS
     uint256 hashBlock = 0;
     CTransaction tx2;
     GetTransaction(vin.prevout.hash, tx2, hashBlock, true);
     BlockMap::iterator mi = mapBlockIndex.find(hashBlock);
     if (mi != mapBlockIndex.end() && (*mi).second) {
-        CBlockIndex* pMNIndex = (*mi).second;                                                        // block for 1000 PIVX tx -> 1 confirmation
+        CBlockIndex* pMNIndex = (*mi).second;                                                        // block for 1000 BCZ tx -> 1 confirmation
         CBlockIndex* pConfIndex = chainActive[pMNIndex->nHeight + MASTERNODE_MIN_CONFIRMATIONS - 1]; // block where tx got MASTERNODE_MIN_CONFIRMATIONS
         if (pConfIndex->GetBlockTime() > sigTime) {
             LogPrint("masternode","mnb - Bad sigTime %d for Masternode %s (%i conf block is at %d)\n",
@@ -670,7 +666,8 @@ bool CMasternodeBroadcast::CheckInputsAndAdd(int& nDoS)
         activeMasternode.EnableHotColdMasterNode(vin, addr);
     }
 
-    bool isLocal = (addr.IsRFC1918() || addr.IsLocal()) && !Params().IsRegTestNet();
+    bool isLocal = addr.IsRFC1918() || addr.IsLocal();
+    if (Params().NetworkID() == CBaseChainParams::REGTEST) isLocal = false;
 
     if (!isLocal) Relay();
 

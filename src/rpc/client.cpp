@@ -1,7 +1,7 @@
 // Copyright (c) 2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2020 The PIVX developers
+// Copyright (c) 2020 The BCZ developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -30,8 +30,10 @@ static const CRPCConvertParam vRPCConvertParams[] =
         {"stop", 0},
         {"setmocktime", 0},
         {"getaddednodeinfo", 0},
-        {"setgenerate", 0},
-        {"setgenerate", 1},
+        {"setstake", 0},
+        {"setstake", 1},
+        {"getstake", 0},
+        {"getstake", 1},
         {"generate", 0},
         {"getnetworkhashps", 0},
         {"getnetworkhashps", 1},
@@ -119,13 +121,7 @@ static const CRPCConvertParam vRPCConvertParams[] =
         {"setban", 2},
         {"setban", 3},
         {"spork", 1},
-        {"preparebudget", 2},
-        {"preparebudget", 3},
-        {"preparebudget", 5},
-        {"submitbudget", 2},
-        {"submitbudget", 3},
-        {"submitbudget", 5},
-        {"submitbudget", 7},
+        {"makekeypair", 2},
         // disabled until removal of the legacy 'masternode' command
         //{"startmasternode", 1},
         {"mnvoteraw", 1},
@@ -135,37 +131,9 @@ static const CRPCConvertParam vRPCConvertParams[] =
         {"setstakesplitthreshold", 0},
         {"autocombinerewards", 0},
         {"autocombinerewards", 1},
-        {"getzerocoinbalance", 0},
-        {"listmintedzerocoins", 0},
-        {"listmintedzerocoins", 1},
-        {"listspentzerocoins", 0},
-        {"listzerocoinamounts", 0},
-        {"mintzerocoin", 0},
-        {"mintzerocoin", 1},
-        {"spendzerocoin", 0},
-        {"spendrawzerocoin", 2},
-        {"spendzerocoinmints", 0},
-        {"importzerocoins", 0},
-        {"exportzerocoins", 0},
-        {"exportzerocoins", 1},
-        {"resetmintzerocoin", 0},
-        {"getspentzerocoinamount", 1},
-        {"generatemintlist", 0},
-        {"generatemintlist", 1},
-        {"searchdzpiv", 0},
-        {"searchdzpiv", 1},
-        {"searchdzpiv", 2},
-        {"getmintsvalues", 2},
-        {"enableautomintaddress", 0},
         {"getblockindexstats", 0},
         {"getblockindexstats", 1},
         {"getblockindexstats", 2},
-        {"getmintsinblocks", 0},
-        {"getmintsinblocks", 1},
-        {"getmintsinblocks", 2},
-        {"getserials", 0},
-        {"getserials", 1},
-        {"getserials", 2},
         {"getfeeinfo", 0},
     };
 
