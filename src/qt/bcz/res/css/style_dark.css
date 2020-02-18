@@ -19,12 +19,12 @@ HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
 
 *[cssClass="container_right"] {
     background-color:#121214;
-    border-left:  1px solid #33FFFFFF;
+    border-left:  1px solid #33FFFF;
 }
 
 *[cssClass="container-right"] {
     background-color:#121214;
-    border-left:  1px solid #33FFFFFF;
+    border-left:  1px solid #33FFFF;
 }
 
 *[cssClass="container-square"] {
@@ -86,7 +86,7 @@ QPushButton[cssClass="img-nav-logo"] {
 }
 
 *[cssClass="btn-nav-receive"]:hover {
-    background-color: #1A000000;
+    background-color: #1A0000;
     color: #69656F;
 }
 
@@ -125,7 +125,7 @@ QPushButton[cssClass="img-nav-logo"] {
 *[cssClass="btn-nav-cold-staking"]:hover {
     qproperty-icon: url("://ic-nav-cold-staking-hover");
     qproperty-iconSize: 24px 40px;
-    background-color: #1A000000;
+    background-color: #1A0000;
     color: #69656F;
 }
 
@@ -175,7 +175,7 @@ QPushButton[cssClass="btn-check-cold-staking-checked"] {
 QPushButton[cssClass="btn-check-cold-staking-unchecked"] {
     qproperty-icon: url("://ic-check-cold-staking-enabled");
     qproperty-iconSize: 24px 24px;
-    color:#B3FFFFFF;
+    color:#B3FFFF;
     background-color:#400be0cb;
     border-bottom:2px solid #0be0cb;
     border-radius:2px;
@@ -214,7 +214,7 @@ QPushButton[cssClass="btn-check-cold-staking"]:checked {
 }
 
 *[cssClass="btn-nav-settings"]:hover {
-    background-color: #1A000000;
+    background-color: #1A0000;
     color: #69656F;
 }
 
@@ -248,7 +248,7 @@ QPushButton[cssClass="btn-check-cold-staking"]:checked {
 
 
 *[cssClass="btn-nav-dash"]:hover {
-    background-color: #1A000000;
+    background-color: #1A0000;
     color: #69656F;
 }
 
@@ -281,7 +281,7 @@ QPushButton[cssClass="btn-check-cold-staking"]:checked {
 }
 
 *[cssClass="btn-nav-send"]:hover {
-    background-color: #1A000000;
+    background-color: #1A0000;
     color: #69656F;
 }
 
@@ -314,7 +314,7 @@ QPushButton[cssClass="btn-check-cold-staking"]:checked {
 }
 
 *[cssClass="btn-nav-address"]:hover {
-    background-color: #1A000000;
+    background-color: #1A0000;
     color: #69656F;
 }
 
@@ -349,7 +349,7 @@ QPushButton[cssClass="btn-check-cold-staking"]:checked {
 }
 
 *[cssClass="btn-nav-master"]:hover {
-    background-color: #1A000000;
+    background-color: #1A0000;
     color: #69656F;
 }
 
