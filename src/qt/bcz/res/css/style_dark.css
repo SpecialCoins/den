@@ -7,38 +7,38 @@ HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
 }
 
 *[cssClass="container-border"] {
-    background-color:#0f0b16;
-    border:  1px solid #0f0b16;
+    background-color:#121214;
+    border:  1px solid #121214;
 }
 
 *[cssClass="container-border-light"] {
-    background-color:#0f0b16;
+    background-color:#121214;
     border:  1px solid #33FFFFFF;
     border-radius:2px;
 }
 
 *[cssClass="container_right"] {
-    background-color:#0f0b16;
+    background-color:#121214;
     border-left:  1px solid #33FFFFFF;
 }
 
 *[cssClass="container-right"] {
-    background-color:#0f0b16;
+    background-color:#121214;
     border-left:  1px solid #33FFFFFF;
 }
 
 *[cssClass="container-square"] {
-    background-color:#0f0b16;
-    border:  1px solid #33FFFFFF;
+    background-color:#121214;
+    border:  1px solid #dfde92;
 }
 
 *[cssClass="container-options"] {
-    background-color:#0f0b16;
-    border-bottom: 1px solid #69656F;
+    background-color:#121214;
+    border-bottom: 1px solid #7d7d7d;
 }
 
 *[cssClass="container-divider"] {
-    background-color:#B3FFFFFF;
+    background-color:#dfde92;
 }
 
 *[cssClass="container-purple"] {
@@ -47,7 +47,7 @@ HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
 }
 
 *[cssClass="container-border-purple"] {
-    background-color:#0f0b16;
+    background-color:#121214;
     border:  1px solid #0be0cb;
     border-radius:2px;
 }
@@ -57,7 +57,7 @@ HH       NAVIGATION
 HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
 
 *[cssClass="container-nav"] {
-    background-color: qlineargradient(y1:0, y2: 1, stop: 0 #0f0b16, stop: 1 #0f5b69);
+    background-color: qlineargradient(y1:0, y2: 1, stop: 0 #000, stop: 1 #101010);
 }
 
 QPushButton[cssClass="img-nav-logo"] {
@@ -75,13 +75,13 @@ QPushButton[cssClass="img-nav-logo"] {
 }
 
 *[cssClass="btn-nav-receive"]:checked {
-    background-color: #0f0b16;
+    background-color: #121214;
     font-size:14px;
     color: #0be0cb;
 }
 
 *[cssClass="btn-nav-receive"]:checked:hover  {
-    background-color: #0f0b16;
+    background-color: #121214;
     color: #0be0cb;
 }
 
@@ -93,7 +93,7 @@ QPushButton[cssClass="img-nav-logo"] {
 *[cssClass="btn-nav-receive-active"] {
     qproperty-icon:url("://ic-nav-receive-active")  ;
     qproperty-iconSize: 24px 40px;
-    background-color: #0f0b16;
+    background-color: #121214;
     font-size:14px;
     color: #0be0cb;
 }
