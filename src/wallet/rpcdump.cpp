@@ -140,8 +140,8 @@ UniValue importprivkey(const UniValue& params, bool fHelp)
         if (fRescan) {
             CBlockIndex *pindex = chainActive.Genesis();
             if (fStakingAddress && Params().NetworkID() != CBaseChainParams::REGTEST) {
-                // cold staking was activated after nBlockTimeProtocolV2. No need to scan the whole chain
-                pindex = chainActive[Params().BlockStartTimeProtocolV2()];
+                // cold staking, no need to scan the whole chain
+                pindex = chainActive[Params().ColdStart()];
             }
             pwalletMain->ScanForWalletTransactions(pindex, true);
         }

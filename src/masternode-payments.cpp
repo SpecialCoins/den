@@ -329,6 +329,13 @@ void CMasternodePayments::FillBlockPayee(CMutableTransaction& txNew, int64_t nFe
               //subtract mn payment from the stake reward
               txNew.vout[i - 1].nValue -= masternodePayment + 1.1 * COIN;
         }
+        else  {
+                   txNew.vout.resize(2);
+                   txNew.vout[1].scriptPubKey = payee;
+                   txNew.vout[1].nValue = masternodePayment;
+                   txNew.vout[0].nValue = blockValue - masternodePayment;
+               }
+
 
               CTxDestination address1;
               ExtractDestination(payee, address1);

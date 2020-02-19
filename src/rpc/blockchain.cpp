@@ -144,14 +144,17 @@ UniValue blockToJSON(const CBlock& block, const CBlockIndex* blockindex, bool tx
         uint256 hashProofOfStakeRet;
         std::unique_ptr <CStakeInput> stake;
         // Initialize the stake object (we should look for this in some other place and not initialize it every time..)
-        if (!initStakeInput(block, stake))
+        if (!initStakeInput(block, stake, blockindex->nHeight - 1))
             throw JSONRPCError(RPC_INTERNAL_ERROR, "Cannot initialize stake input");
 
         unsigned int nTxTime = block.nTime;
         // todo: Add the debug as param..
         if (!GetHashProofOfStake(blockindex->pprev, stake.get(), nTxTime, false, hashProofOfStakeRet))
             throw JSONRPCError(RPC_INTERNAL_ERROR, "Cannot get proof of stake hash");
-
+        std::string stakeModifier = (Params().IsStakeModifierV2(blockindex->nHeight) ?
+                                     blockindex->nStakeModifierV2.GetHex() :
+                                     strprintf("%016x", blockindex->nStakeModifier));
+        result.push_back(Pair("stakeModifier", stakeModifier));
         result.push_back(Pair("hashProofOfStake", hashProofOfStakeRet.GetHex()));
     }
 
@@ -494,6 +497,7 @@ UniValue getblock(const UniValue& params, bool fHelp)
             "  \"previousblockhash\" : \"hash\",  (string) The hash of the previous block\n"
             "  \"nextblockhash\" : \"hash\"       (string) The hash of the next block\n"
             "  \"moneysupply\" : \"supply\"       (numeric) The money supply when this block was added to the blockchain\n"
+            "  \"stakeModifier\" : \"xxx\",       (string) Proof of Stake modifier\n"
             "  \"hashProofOfStake\" : \"hash\",   (string) Proof of Stake hash\n"
             "  }\n"
             "}\n"

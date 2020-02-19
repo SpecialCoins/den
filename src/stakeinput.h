@@ -9,7 +9,10 @@
 #include "streams.h"
 #include "uint256.h"
 
+class CKeyStore;
 class CWallet;
+class CWalletTx;
+
 class CStakeInput
 {
 protected:

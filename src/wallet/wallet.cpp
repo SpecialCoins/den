@@ -2397,6 +2397,7 @@ bool CWallet::CreateTransaction(CScript scriptPubKey, const CAmount& nValue, CWa
 
 // ppcoin: create coin stake transaction
 bool CWallet::CreateCoinStake(
+        const CKeyStore& keystore,
         const CBlockIndex* pindexPrev,
         unsigned int nBits,
         CMutableTransaction& txNew,
@@ -2430,6 +2431,14 @@ bool CWallet::CreateCoinStake(
     CAmount nCredit;
     bool fKernelFound = false;
     int nAttempts = 0;
+
+    // Block time.
+    nTxNewTime = GetAdjustedTime();
+    // If the block time is in the future, then starts there.
+    if (pindexPrev->nTime > nTxNewTime) {
+        nTxNewTime = pindexPrev->nTime;
+    }
+
     for (std::unique_ptr<CStakeInput>& stakeInput : listInputs) {
         //new block came in, move on
         if (chainActive.Height() != pindexPrev->nHeight) return false;
@@ -3669,6 +3678,7 @@ void CWallet::SetNull()
     } else {
         pStakerStatus = new CStakerStatus();
     }
+    nHashInterval = 22;
     nStakeSplitThreshold = STAKE_SPLIT_THRESHOLD;
 
     //MultiSend

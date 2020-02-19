@@ -88,14 +88,6 @@ static const Checkpoints::CCheckpointData dataRegtest = {
     0,
     100};
 
-int CChainParams::FutureBlockTimeDrift(const int nHeight) const
-{
-    if (IsTimeProtocolV2(nHeight))
-        return TimeSlotLength() - 1;
-
-    return nFutureTimeDrift;
-}
-
 bool CChainParams::HasStakeMinAgeOrDepth(const int contextHeight, const uint32_t contextTime,
         const int utxoFromBlockHeight, const uint32_t utxoFromBlockTime) const
 {
@@ -105,16 +97,6 @@ bool CChainParams::HasStakeMinAgeOrDepth(const int contextHeight, const uint32_t
 
     // after stake modifier V2, we require the utxo to be nStakeMinDepth deep in the chain
     return (contextHeight - utxoFromBlockHeight >= nStakeMinDepth);
-}
-
-bool CChainParams::IsValidBlockTimeStamp(const int64_t nTime, const int nHeight) const
-{
-    // Before time protocol V2, blocks can have arbitrary timestamps
-    if (!IsTimeProtocolV2(nHeight))
-        return true;
-
-    // Time protocol v2 requires time in slots
-    return (nTime % TimeSlotLength()) == 0;
 }
 
 class CMainParams : public CChainParams
@@ -147,16 +129,15 @@ public:
         nMaturity = 100;
         nStakeMinDepth = 120;
         nFutureTimeDrift = 180;
-        nFutureDrift = 180;
-        nMinColdStakingAmount = 1 * COIN;
+        nMinColdStakingAmount = 5000 * COIN;
 
         /** Height or Time Based Activations **/
         nLastPOWBlock = 50000;
         nBlockStakeModifierlV2 = 66555;
-        nBlockTimeProtocolV2 = 9999999;
 
         // New P2P messages signatures
-        nBlockEnforceNewMessageSignatures = 9999999;
+        nBlockEnforceNewMessageSignatures = 162000;
+        nColdStart = 145000;  //cold rescan
 
         const char* pszTimestamp = "BCZ BORN";
         CMutableTransaction txNew;

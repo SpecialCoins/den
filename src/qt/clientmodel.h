@@ -57,6 +57,11 @@ public:
     int getNumBlocks() const;
     int getNumBlocksAtStartup();
 
+    //! Return number of transactions in the mempool
+    long getMempoolSize() const;
+    //! Return the dynamic memory usage of the mempool
+    size_t getMempoolDynamicUsage() const;
+
     quint64 getTotalBytesRecv() const;
     quint64 getTotalBytesSent() const;
 
@@ -109,6 +114,7 @@ Q_SIGNALS:
     void strMasternodesChanged(const QString& strMasternodes);
     void alertsChanged(const QString& warnings);
     void bytesChanged(quint64 totalBytesIn, quint64 totalBytesOut);
+    void mempoolSizeChanged(long count, size_t mempoolSizeInBytes);
 
     //! Fired when a message should be reported to the user
     void message(const QString& title, const QString& message, unsigned int style);

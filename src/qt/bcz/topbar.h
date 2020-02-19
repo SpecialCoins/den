@@ -72,6 +72,8 @@ private:
     int nDisplayUnit = -1;
     QTimer* timerStakingIcon = nullptr;
     bool isInitializing = true;
+
+    void updateTorIcon();
 };
 
 #endif // TOPBAR_H

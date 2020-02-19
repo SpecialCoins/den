@@ -138,6 +138,8 @@
         <file alias="ic-check-box-liliac-indeterminate">bcz/res/img/ic-check-box-liliac-indeterminate.svg</file>
         <file alias="ic-check-connect-off">bcz/res/img/ic-check-connect-off.svg</file>
         <file alias="ic-check-connect">bcz/res/img/ic-check-connect.svg</file>
+        <file alias="ic-check-tor-off">bcz/res/img/ic-check-tor-off.svg</file>
+        <file alias="ic-check-tor">bcz/res/img/ic-check-tor.svg</file>
         <file alias="ic-check-dark">bcz/res/img/ic-check-dark.svg</file>
         <file alias="ic-check-liliac-on">bcz/res/img/ic-check-liliac-on.svg</file>
         <file alias="ic-check-locked-off">bcz/res/img/ic-check-locked-off.svg</file>

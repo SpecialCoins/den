@@ -23,7 +23,7 @@ uint256 ComputeStakeModifier(const CBlockIndex* pindexPrev, const uint256& kerne
 bool Stake(const CBlockIndex* pindexPrev, CStakeInput* stakeInput, unsigned int nBits, unsigned int& nTimeTx, uint256& hashProofOfStake);
 
 // Initialize the stake input object
-bool initStakeInput(const CBlock block, std::unique_ptr<CStakeInput>& stake);
+bool initStakeInput(const CBlock block, std::unique_ptr<CStakeInput>& stake, int nPreviousBlockHeight);
 
 // Check kernel hash target and coinstake signature
 // Sets hashProofOfStake on success return

@@ -5,6 +5,7 @@
 #include "qt/bcz/settings/settingsinformationwidget.h"
 #include "qt/bcz/settings/forms/ui_settingsinformationwidget.h"
 #include "clientmodel.h"
+#include "rpcconsole.h"
 #include "chainparams.h"
 #include "db.h"
 #include "util.h"
@@ -38,6 +39,11 @@ SettingsInformationWidget::SettingsInformationWidget(BCZGUI* _window,QWidget *pa
     ui->labelTitleNetwork->setText(tr("Network"));
     ui->labelTitleName->setText(tr("Name:"));
     ui->labelTitleConnections->setText(tr("Connections:"));
+    ui->labelTitleMasternode->setText(tr("Masternodes:"));
+    ui->labelTitleMemory->setText(tr("Memory Pool"));
+    ui->labelTitleNumberTransactions->setText(tr("Current number of transactions:"));
+    ui->labelTitleMem->setText(tr("Memory usage:"));
+
 
     setCssProperty({
         ui->labelTitleDataDir,
@@ -47,16 +53,21 @@ SettingsInformationWidget::SettingsInformationWidget(BCZGUI* _window,QWidget *pa
         ui->labelTitleTime,
         ui->labelTitleName,
         ui->labelTitleConnections,
+        ui->labelTitleMasternode,
+        ui->labelTitleNumberTransactions,
+        ui->labelTitleMem,
         ui->labelTitleBlockNumber,
         ui->labelTitleBlockTime,
         ui->labelTitleNumberTransactions,
         ui->labelInfoNumberTransactions,
+        ui->labelInfoMem,
         ui->labelInfoClient,
         ui->labelInfoAgent,
         ui->labelInfoBerkeley,
         ui->labelInfoDataDir,
         ui->labelInfoTime,
         ui->labelInfoConnections,
+        ui->labelInfoMasternodeCount,
         ui->labelInfoBlockNumber
         }, "text-main-settings");
 
@@ -72,19 +83,11 @@ SettingsInformationWidget::SettingsInformationWidget(BCZGUI* _window,QWidget *pa
     ui->labelTitleBlockNumber->setText(tr("Current number of blocks:"));
     ui->labelTitleBlockTime->setText(tr("Last block time:"));
 
-    ui->labelTitleMemory->setText(tr("Memory Pool"));
-    ui->labelTitleMemory->setVisible(false);
-
-    ui->labelTitleNumberTransactions->setText(tr("Current number of transactions:"));
-    ui->labelTitleNumberTransactions->setVisible(false);
-
-    ui->labelInfoNumberTransactions->setText("0");
-    ui->labelInfoNumberTransactions->setVisible(false);
-
     // Information Network
     ui->labelInfoName->setText(tr("Main"));
     ui->labelInfoName->setProperty("cssClass", "text-main-settings");
     ui->labelInfoConnections->setText("0 (In: 0 / Out:0)");
+
 
     // Information Blockchain
     ui->labelInfoBlockNumber->setText("0");
@@ -131,8 +134,16 @@ void SettingsInformationWidget::loadClientModel(){
         setNumConnections(clientModel->getNumConnections());
         connect(clientModel, SIGNAL(numConnectionsChanged(int)), this, SLOT(setNumConnections(int)));
 
+        setMasternodeCount(clientModel->getMasternodeCountString());
+        connect(clientModel, SIGNAL(strMasternodesChanged(QString)), this, SLOT(setMasternodeCount(QString)));
+
         setNumBlocks(clientModel->getNumBlocks());
         connect(clientModel, SIGNAL(numBlocksChanged(int)), this, SLOT(setNumBlocks(int)));
+
+        updateTrafficStats(clientModel->getTotalBytesRecv(), clientModel->getTotalBytesSent());
+        connect(clientModel, SIGNAL(bytesChanged(quint64, quint64)), this, SLOT(updateTrafficStats(quint64, quint64)));
+
+        connect(clientModel, SIGNAL(mempoolSizeChanged(long,size_t)), this, SLOT(setMempoolSize(long,size_t)));
     }
 }
 
@@ -145,6 +156,28 @@ void SettingsInformationWidget::setNumConnections(int count){
     connections += tr("Out:") + " " + QString::number(clientModel->getNumConnections(CONNECTIONS_OUT)) + ")";
 
     ui->labelInfoConnections->setText(connections);
+}
+
+void SettingsInformationWidget::setMasternodeCount(const QString& strMasternodes)
+{
+    ui->labelInfoMasternodeCount->setText(strMasternodes);
+}
+
+void SettingsInformationWidget::updateTrafficStats(quint64 totalBytesIn, quint64 totalBytesOut)
+{
+    //ui->lblBytesIn->setText(FormatBytes(totalBytesIn));
+    //ui->lblBytesOut->setText(FormatBytes(totalBytesOut));
+}
+
+
+void SettingsInformationWidget::setMempoolSize(long numberOfTxs, size_t dynUsage)
+{
+    ui->labelInfoNumberTransactions->setText(QString::number(numberOfTxs));
+
+    if (dynUsage < 1000000)
+        ui->labelInfoMem->setText(QString::number(dynUsage/1000.0, 'f', 2) + " KB");
+    else
+        ui->labelInfoMem->setText(QString::number(dynUsage/1000000.0, 'f', 2) + " MB");
 }
 
 void SettingsInformationWidget::setNumBlocks(int count){

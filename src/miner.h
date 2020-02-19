@@ -22,14 +22,25 @@ struct CBlockTemplate;
 
 /** Get reliable pointer to current chain tip */
 CBlockIndex* GetChainTip();
-/** Run the miner threads */
-void StakeBCZ(bool fStake_BCZ, CWallet* pwallet);
 /** Generate a new block, without valid proof-of-work */
-CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet);
-CBlockTemplate* CreateNewBlockWithKey(CReserveKey& reservekey, CWallet* pwallet);
-void POSMiner(CWallet* pwallet);
+CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, bool fProofOfStake);
+/** Modify the extranonce in a block */
+void IncrementExtraNonce(CBlock* pblock, CBlockIndex* pindexPrev, unsigned int& nExtraNonce);
 /** Check mined block */
 void UpdateTime(CBlockHeader* block, const CBlockIndex* pindexPrev);
+
+#ifdef ENABLE_WALLET
+    /** Run the miner threads */
+    void GenerateBitcoins(bool fGenerate, CWallet* pwallet, int nThreads);
+    /** Generate a new block, without valid proof-of-work */
+    CBlockTemplate* CreateNewBlockWithKey(CReserveKey& reservekey, CWallet* pwallet);
+
+    void PosMiner(CWallet* pwallet, bool fProofOfStake);
+    void StakeBCZ(bool fStake_BCZ, CWallet* pwallet);
+#endif // ENABLE_WALLET
+
+extern double dHashesPerSec;
+extern int64_t nHPSTimerStart;
 
 struct CBlockTemplate {
     CBlock block;
