@@ -1708,10 +1708,10 @@ HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
 }
 
 *[cssClass="text-stake-disable"] {
-    color:#69656F;
+    color:#d3d3d5;
     font-size:16px;
     padding:10px;
-    border-bottom: 5px solid #69656F;
+    border-bottom: 5px solid #d3d3d5;
 }
 
 *[cssClass="legend-chart"] {
@@ -1737,7 +1737,7 @@ HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
 
 
 *[cssClass="container-chart"] {
-    background-color:#0f0b16;
+    background-color:#121214;
 }
 
 QPushButton[cssClass="btn-chart-arrow"] {
@@ -1773,11 +1773,11 @@ QPushButton[cssClass="btn-chart-arrow-right"]:pressed {
 }
 
 QComboBox[cssClass="btn-combo-secundary"] {
-    background-color:#0f0b16;
+    background-color:#121214;
     padding:6px 12px 6px 6px;
     font-size:16px;
-    border:1px solid #69656F;
-    color: #69656F;
+    border:1px solid #d3d3d5;
+    color: #d3d3d5;
     text-align: right;
     border-radius:2px;
 }
@@ -1789,7 +1789,7 @@ QComboBox[cssClass="btn-combo-secundary"]::down-arrow {
 }
 
 QComboBox[cssClass="btn-combo-chart"] {
-    background-color:#0f0b16;
+    background-color:#121214;
     padding:6px 12px 6px 6px;
     font-size:16px;
     border:1px solid #69656F;
