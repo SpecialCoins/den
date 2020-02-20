@@ -1595,8 +1595,8 @@ HH       LINE EDIT
 HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
 
 *[cssClass="edit-primary"] {
-    border:  1px solid #69656F;
-    background-color:#0f0b16;
+    border:  1px solid #d3d3d5;
+    background-color:#121214;
     font-size:18px;
     border-radius: 2px;
     padding:8px;
