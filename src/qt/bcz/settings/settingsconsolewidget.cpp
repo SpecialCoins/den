@@ -510,13 +510,13 @@ void SettingsConsoleWidget::changeTheme(bool isLightTheme, QString &theme)
     // Set default style sheet
     if (isLightTheme) {
         ui->messagesWidget->document()->setDefaultStyleSheet(
-                "table { color: #69656F;  }"
+                "table { color: #908c96;  }"
                 "td.time { color: #808080; padding-top: 3px; } "
-                "td.message { color: #69656F;font-family: Courier, Courier New, Lucida Console, monospace; font-size: 12px; } " // Todo: Remove fixed font-size
+                "td.message { color: #908c96;font-family: Courier, Courier New, Lucida Console, monospace; font-size: 12px; } " // Todo: Remove fixed font-size
                 "td.cmd-request { color: #006060; } "
                 "td.cmd-error { color: red; } "
                 ".secwarning { color: red; }"
-                "b { color: #69656F; } ");
+                "b { color: #908c96; } ");
     } else {
         ui->messagesWidget->document()->setDefaultStyleSheet(
                 "table { color: #FFFFFF; }"

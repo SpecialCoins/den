@@ -116,7 +116,7 @@
           <property name="styleSheet">
            <string notr="true">#helpMessage {
 background-color:#FFFFFF;
-	color:#69656F;
+	color:#908c96;
 }</string>
           </property>
           <property name="readOnly">
@@ -166,7 +166,7 @@ background-color:#FFFFFF;
               <property name="styleSheet">
                <string notr="true">#aboutMessage {
 background-color:#FFFFFF;
-	color:#69656F;
+	color:#908c96;
 }</string>
               </property>
               <property name="textFormat">

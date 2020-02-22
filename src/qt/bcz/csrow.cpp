@@ -29,7 +29,7 @@ void CSRow::updateView(const QString& address, const QString& label, bool isStak
 }
 
 void CSRow::updateState(bool isLightTheme, bool isHovered, bool isSelected) {
-    ui->lblDivisory->setStyleSheet((isLightTheme) ?  "background-color:#69656F" : "background-color:#40ffffff");
+    ui->lblDivisory->setStyleSheet((isLightTheme) ?  "background-color:#908c96" : "background-color:#40ffffff");
     if (fShowMenuButton) {
         ui->pushButtonMenu->setVisible(isHovered);
     }

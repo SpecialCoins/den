@@ -40,7 +40,9 @@ TopBar::TopBar(BCZGUI* _mainWindow, QWidget *parent) :
 #endif
 
     std::initializer_list<QWidget*> lblTitles = {ui->labelTitle1, ui->labelTitle3, ui->labelTitle4};
-    setCssProperty(lblTitles, "text-title-topbar");
+    setCssProperty({ui->labelTitle1}, "text-title-topbar1");
+    setCssProperty({ui->labelTitle3}, "text-title-topbar3");
+    setCssProperty({ui->labelTitle4}, "text-title-topbar4");
     QFont font;
     font.setWeight(QFont::Light);
     Q_FOREACH (QWidget* w, lblTitles) { w->setFont(font); }

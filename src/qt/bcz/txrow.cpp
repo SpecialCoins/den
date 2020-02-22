@@ -32,7 +32,7 @@ void TxRow::setConfirmStatus(bool isConfirm){
 
 void TxRow::updateStatus(bool isLightTheme, bool isHover, bool isSelected){
     if(isLightTheme)
-        ui->lblDivisory->setStyleSheet("background-color:#69656F");
+        ui->lblDivisory->setStyleSheet("background-color:#908c96");
     else
         ui->lblDivisory->setStyleSheet("background-color:#40ffffff");
 }
