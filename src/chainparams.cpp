@@ -59,11 +59,12 @@ static Checkpoints::MapCheckpoints mapCheckpoints =
         (  107147, uint256("0x07c6580691382ff7087cfa4dbaf539b940098af6c2c78046d7c1f18df8e25988"))
         (  107198, uint256("0x4c9590a77382e857146bd0cac355589ad1decf5a7d54327c0347bd3acf52a88f"))
         (  108374, uint256("0x55957713ec6e6951e6f451c8cf3fb07c73cddaeb74dfefdb77acabba5d2c9f51"))
-        (  126318, uint256("0xffcdbdf74be6db9497258de737b16cd596ce7bedf175a6796f54be1e3805dc98"));
+        (  126318, uint256("0xffcdbdf74be6db9497258de737b16cd596ce7bedf175a6796f54be1e3805dc98"))
+        (  144624, uint256("0x1bd9410c714db4051a34b2d60b641ad9c63f4aed21b95a6f21018f6e221ce081"));
 
 static const Checkpoints::CCheckpointData data = {
     &mapCheckpoints,
-    1579254069, // * UNIX timestamp of last checkpoint block
+    1582137628, // * UNIX timestamp of last checkpoint block
     10000,    // * total number of transactions between genesis and last checkpoint
                 //   (the tx=... number in the SetBestChain debug.log lines)
     500        // * estimated number of transactions per day after checkpoint
@@ -129,7 +130,7 @@ public:
         nMaturity = 100;
         nStakeMinDepth = 120;
         nFutureTimeDrift = 180;
-        nMinColdStakingAmount = 5000 * COIN;
+        nMinColdStakingAmount = 1000 * COIN;
 
         /** Height or Time Based Activations **/
         nLastPOWBlock = 50000;

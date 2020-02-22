@@ -100,7 +100,6 @@
     </qresource>
     <qresource prefix="/">
         <file alias="bg-splash-png">bcz/res/img/bg-splash.png</file>
-        <file alias="img-logo-png">bcz/res/img/img-logo.png</file>
         <file alias="img-nav-logo">bcz/res/img/img-nav-logo.png</file>
         <file alias="img-qr-test-big">bcz/res/img/img-qr-test-big.png</file>
         <file alias="img-qr-test">bcz/res/img/img-qr-test.png</file>
@@ -163,7 +162,6 @@
         <file alias="ic-clear-purple">bcz/res/img/ic-clear-purple.svg</file>
         <file alias="ic-close-white">bcz/res/img/ic-close-white.svg</file>
         <file alias="ic-close">bcz/res/img/ic-close.svg</file>
-        <file alias="ic-coin">bcz/res/img/ic-coin.svg</file>
         <file alias="ic-combo-box">bcz/res/img/ic-combo-box.svg</file>
         <file alias="ic-connect">bcz/res/img/ic-connect.svg</file>
         <file alias="ic-copy-liliac">bcz/res/img/ic-copy-liliac.svg</file>

@@ -346,25 +346,40 @@ void TopBar::loadClientModel(){
 
         timerStakingIcon = new QTimer(ui->pushButtonStack);
         connect(timerStakingIcon, SIGNAL(timeout()), this, SLOT(updateStakingStatus()));
-        timerStakingIcon->start(5000);
+        timerStakingIcon->start(10000);
         updateStakingStatus();
     }
 }
 
 void TopBar::setStakingStatusActive(bool fActive)
 {
-    if (ui->pushButtonStack->isChecked() != fActive) {
-        ui->pushButtonStack->setButtonText(fActive ? tr("Staking active") : tr("Staking not active"));
-        ui->pushButtonStack->setChecked(fActive);
-        ui->pushButtonStack->setButtonClassStyle("cssClass", (fActive ?
-                                                                "btn-check-stack" :
-                                                                "btn-check-stack-inactive"), true);
+    bool stakes = fActive;
+    ui->pushButtonStack->setChecked(stakes);
+
+    QString className;
+    QString text;
+
+    if (stakes)
+    {
+        text = "Staking active";
+        className = "btn-check-stack";
     }
+    else
+    {
+        text = "Staking not active";
+        className = "btn-check-stack-inactive";
+    }
+
+    ui->pushButtonStack->setButtonClassStyle("cssClass", className, true);
+    ui->pushButtonStack->setButtonText(text);
+    updateStyle(ui->pushButtonStack);
 }
+
 void TopBar::updateStakingStatus(){
-    setStakingStatusActive(walletModel &&
-                           !walletModel->isWalletLocked() &&
-                           walletModel->isStakingStatusActive());
+    bool setstake = (walletModel &&
+            !walletModel->isWalletLocked() &&
+            walletModel->isStakingStatusActive());
+    setStakingStatusActive(setstake)           ;
 
     // Taking advantage of this timer to update Tor status if needed.
     updateTorIcon();

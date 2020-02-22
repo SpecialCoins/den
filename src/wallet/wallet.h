@@ -177,7 +177,7 @@ private:
 
 public:
 
-    static const int STAKE_SPLIT_THRESHOLD = 200;
+    static const int STAKE_SPLIT_THRESHOLD = 220;
 
     bool StakeableCoins(std::vector<COutput>* pCoins = nullptr);
     bool IsCollateralAmount(CAmount nInputAmount) const;

@@ -65,7 +65,7 @@ bool WalletModel::isColdStakingNetworkelyEnabled() const {
 }
 
 bool WalletModel::isStakingStatusActive() const {
-    return wallet->pStakerStatus->IsActive();
+    return (wallet->pStakerStatus->IsActive() && fStake_BCZ);
 }
 
 CAmount WalletModel::getBalance(const CCoinControl* coinControl) const
