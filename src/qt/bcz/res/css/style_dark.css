@@ -13,18 +13,18 @@ HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
 
 *[cssClass="container-border-light"] {
     background-color:#0f0b16;
-    border:  1px solid #33FFFFFF;
+    border:  1px solid #33FFFF;
     border-radius:2px;
 }
 
 *[cssClass="container_right"] {
     background-color:#0f0b16;
-    border-left:  1px solid #33FFFFFF;
+    border-left:  1px solid #33FFFF;
 }
 
 *[cssClass="container-right"] {
     background-color:#0f0b16;
-    border-left:  1px solid #33FFFFFF;
+    border-left:  1px solid #33FFFF;
 }
 
 *[cssClass="container-square"] {
