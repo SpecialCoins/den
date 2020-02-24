@@ -3112,12 +3112,12 @@ Please check the address and try again.</translation>
         <translation>Unable to locate enough Obfuscation denominated funds for this transaction.</translation>
     </message>
     <message>
-        <source>Unable to locate enough Obfuscation non-denominated funds for this transaction that are not equal 10000 BCZ.</source>
-        <translation>Unable to locate enough Obfuscation non-denominated funds for this transaction that are not equal 10000 BCZ.</translation>
+        <source>Unable to locate enough Obfuscation non-denominated funds for this transaction that are not equal 5000 BCZ.</source>
+        <translation>Unable to locate enough Obfuscation non-denominated funds for this transaction that are not equal 5000 BCZ.</translation>
     </message>
     <message>
-        <source>Unable to locate enough funds for this transaction that are not equal 10000 BCZ.</source>
-        <translation>Unable to locate enough funds for this transaction that are not equal 10000 BCZ.</translation>
+        <source>Unable to locate enough funds for this transaction that are not equal 5000 BCZ.</source>
+        <translation>Unable to locate enough funds for this transaction that are not equal 5000 BCZ.</translation>
     </message>
     <message>
         <source>Use separate SOCKS5 proxy to reach peers via Tor hidden services (default: %s)</source>
