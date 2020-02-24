@@ -1,19 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="24px" height="40px" viewBox="0 0 24 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 52.6 (67491) - http://www.bohemiancoding.com/sketch -->
-    <title>Dashboard</title>
-    <desc>Created with Sketch.</desc>
-    <g id="Dashboard" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Group" transform="translate(1.000000, 11.000000)" fill="#0be0cb" fill-rule="nonzero">
-            <g id="Group_8812">
-                <path d="M10,8 L0,8 L0,0 L10,0 L10,8 Z M2,6 L8,6 L8,2 L2,2 L2,6 Z" id="Path_18866"></path>
-            </g>
-            <g id="Group_8813" transform="translate(12.000000, 0.000000)">
-                <path d="M10,22 L0,22 L0,0 L10,0 L10,22 Z M2,20 L8,20 L8,2 L2,2 L2,20 Z" id="Path_18867"></path>
-            </g>
-            <g id="Group_8814" transform="translate(0.000000, 10.000000)">
-                <path d="M10,12 L0,12 L0,0 L10,0 L10,12 Z M2,10 L8,10 L8,2 L2,2 L2,10 Z" id="Path_18868"></path>
-            </g>
-        </g>
-    </g>
+<svg width="22" height="22" xmlns="http://www.w3.org/2000/svg">
+
+ <title width="0" height="0"/>
+ <desc width="0" height="0">Created with Sketch.</desc>
+ <g fill-rule="evenodd" fill="none" id="imagebot_1" width="0" height="0">
+  <g fill-rule="nonzero" fill="#0be0cb" transform="translate(-1 -11) translate(1 11)" id="imagebot_2" width="0" height="0">
+   <g id="imagebot_7" width="0" height="0">
+    <path fill="#7d7d4b" id="imagebot_8" d="M10,8L0,8L0,0L10,0L10,8zM2,6L8,6L8,2L2,2L2,6z" width="0" height="0"/>
+   </g>
+   <g transform="translate(12.000000, 0.000000)" id="imagebot_5" width="0" height="0">
+    <path fill="#7d7d4b" id="imagebot_6" d="M10,22L0,22L0,0L10,0L10,22zM2,20L8,20L8,2L2,2L2,20z" width="0" height="0"/>
+   </g>
+   <g transform="translate(0.000000, 10.000000)" id="imagebot_3" width="0" height="0">
+    <path fill="#7d7d4b" id="imagebot_4" d="M10,12L0,12L0,0L10,0L10,12zM2,10L8,10L8,2L2,2L2,10z" width="0" height="0"/>
+   </g>
+  </g>
+  <title width="0" height="0">imagebot_1</title>
+ </g>
 </svg>
