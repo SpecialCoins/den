@@ -57,7 +57,7 @@ HH       NAVIGATION
 HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
 
 *[cssClass="container-nav"] {
-    background-color: qlineargradient(y1:0, y2: 1, stop: 0 #2f3030, stop: 1 #5b5c5c);
+    background-color: qlineargradient(y1:0, y2: 1, stop: 0 #0f0b16, stop: 1 #0f5b69);
 }
 
 QPushButton[cssClass="img-nav-logo"] {
@@ -71,29 +71,29 @@ QPushButton[cssClass="img-nav-logo"] {
     qproperty-iconSize: 24px 40px;
     background-color:transparent;
     font-size:14px;
-    color: #898989;
+    color: #908c96;
 }
 
 *[cssClass="btn-nav-receive"]:checked {
-    background-color: qlineargradient(x1:0, x2: 1, stop: 0 #777a78, stop: 1 #464948);
+    background-color: qlineargradient(x1:0, x2: 1, stop: 0 #0be0cb, stop: 1 #1f162b);
     font-size:14px;
     color: #0be0cb;
 }
 
 *[cssClass="btn-nav-receive"]:checked:hover {
-    background-color: qlineargradient(x1:0, x2: 1, stop: 0 #777a78, stop: 1 #464948);
+    background-color: qlineargradient(x1:0, x2: 1, stop: 0 #0be0cb, stop: 1 #1f162b);
     color: #0be0cb;
 }
 
 *[cssClass="btn-nav-receive"]:hover {
-    background-color: #5a5c5b;
+    background-color: #1A000000;
     color: #908c96;
 }
 
 *[cssClass="btn-nav-receive-active"] {
     qproperty-icon:url("://ic-nav-receive-active")  ;
     qproperty-iconSize: 24px 40px;
-    background-color: qlineargradient(x1:0, x2: 1, stop: 0 #0777a78, stop: 1 #464948);
+    background-color: qlineargradient(x1:0, x2: 1, stop: 0 #0be0cb, stop: 1 #1f162b);
     font-size:14px;
     color: #0be0cb;
 }
@@ -324,7 +324,7 @@ HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
 
 *[cssClass="container-top"] {
     background-color:#000000;
-    border-image: url("://bg-dashboard-banner2") 0 0 0 0 stretch stretch;
+    border-image: url("://bg-dashboard-banner") 0 0 0 0 stretch stretch;
 }
 
 *[cssClass="container-topbar-no-image"] {
@@ -332,19 +332,19 @@ HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
 }
 
 *[cssClass="text-title-topbar1"] {
-    color:#36ffd7;
+    color:#908c96;
     font-size:16px;
     font-weight: ligther;
 }
 
 *[cssClass="text-title-topbar3"] {
-    color:#fff;
+    color:#908c96;
     font-size:16px;
     font-weight: ligther;
 }
 
 *[cssClass="text-title-topbar4"] {
-    color:#dedd76;
+    color:#908c96;
     font-size:16px;
     font-weight: ligther;
 }
