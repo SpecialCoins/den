@@ -374,8 +374,8 @@ HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
 }
 
 *[cssClass="text-title-topbar1"] {
-    color:#908c96;
-    font-size:16px;
+    color:#1b9b77;
+    font-size:20px;
     font-weight: ligther;
 }
 
@@ -392,12 +392,12 @@ HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
 }
 
 *[cssClass="amount-topbar"] {
-    color:#FFFFFF;
+    color:#e1dfa2;
     font-size:35px;
 }
 
 *[cssClass="amount-small-topbar"] {
-    color:#FFFFFF;
+    color:#e1dfa2;
     font-size:22px;
 }
 
