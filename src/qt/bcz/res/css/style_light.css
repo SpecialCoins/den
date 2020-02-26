@@ -57,7 +57,7 @@ HH       NAVIGATION
 HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
 
 *[cssClass="container-nav"] {
-    background-color: qlineargradient(y1:0, y2: 1, stop: 0 #0f0b16, stop: 1 #0f5b69);
+    background-color: qlineargradient(y1:0, y2: 1, stop: 0 #2f3030, stop: 1 #5b5c5c);
 }
 
 QPushButton[cssClass="img-nav-logo"] {
@@ -71,7 +71,7 @@ QPushButton[cssClass="img-nav-logo"] {
     qproperty-iconSize: 24px 40px;
     background-color:transparent;
     font-size:14px;
-    color: #908c96;
+    color: #e0fff8;
 }
 
 *[cssClass="btn-nav-receive"]:checked {
@@ -87,7 +87,7 @@ QPushButton[cssClass="img-nav-logo"] {
 
 *[cssClass="btn-nav-receive"]:hover {
     background-color: #1A000000;
-    color: #908c96;
+    color: #e0fff8;
 }
 
 *[cssClass="btn-nav-receive-active"] {
@@ -108,7 +108,7 @@ QPushButton[cssClass="img-nav-logo"] {
     qproperty-iconSize: 24px 40px;
     background-color:transparent;
     font-size:14px;
-    color: #908c96;
+    color: #e0fff8;
 }
 
 *[cssClass="btn-nav-cold-staking"]:checked {
@@ -126,7 +126,7 @@ QPushButton[cssClass="img-nav-logo"] {
     qproperty-icon: url("://ic-nav-cold-staking-hover");
     qproperty-iconSize: 24px 40px;
     background-color: #1A000000;
-    color: #908c96;
+    color: #e0fff8;
 }
 
 *[cssClass="btn-nav-cold-staking-active"] {
@@ -147,7 +147,7 @@ QPushButton[cssClass="img-nav-logo"] {
     qproperty-iconSize: 24px 40px;
     background-color:transparent;
     font-size:14px;
-    color: #908c96;
+    color: #e0fff8;
 }
 
 *[cssClass="btn-nav-settings"]:checked {
@@ -165,7 +165,7 @@ QPushButton[cssClass="img-nav-logo"] {
     qproperty-icon: url("://ic-nav-settings-hover");
     qproperty-iconSize: 24px 40px;
     background-color: #1A000000;
-    color: #908c96;
+    color: #e0fff8;
 }
 
 *[cssClass="btn-nav-settings-active"] {
@@ -182,7 +182,7 @@ QPushButton[cssClass="img-nav-logo"] {
     qproperty-iconSize: 24px 40px;
     background-color:transparent;
     font-size:14px;
-    color: #908c96;
+    color: #e0fff8;
 }
 
 *[cssClass="btn-nav-dash"]:checked {
@@ -201,7 +201,7 @@ QPushButton[cssClass="img-nav-logo"] {
     qproperty-icon: url("://ic-nav-dashboard-hover");
     qproperty-iconSize: 24px 40px;
     background-color: #1A000000;
-    color: #908c96;
+    color: #e0fff8;
 }
 
 *[cssClass="btn-nav-dash-active"] {
@@ -218,7 +218,7 @@ QPushButton[cssClass="img-nav-logo"] {
     qproperty-iconSize: 24px 40px;
     background-color:transparent;
     font-size:14px;
-    color: #908c96;
+    color: #e0fff8;
 }
 
 *[cssClass="btn-nav-send"]:checked {
@@ -236,7 +236,7 @@ QPushButton[cssClass="img-nav-logo"] {
     qproperty-icon: url("://ic-nav-send-hover");
     qproperty-iconSize: 24px 40px;
     background-color: #1A000000;
-    color: #908c96;
+    color: #e0fff8;
 }
 
 *[cssClass="btn-nav-send-active"] {
@@ -253,7 +253,7 @@ QPushButton[cssClass="img-nav-logo"] {
     qproperty-iconSize: 24px 40px;
     background-color:transparent;
     font-size:14px;
-    color: #908c96;
+    color: #e0fff8;
 }
 
 *[cssClass="btn-nav-address"]:checked {
@@ -271,7 +271,7 @@ QPushButton[cssClass="img-nav-logo"] {
     qproperty-icon: url("://ic-nav-address-hover");
     qproperty-iconSize: 24px 40px;
     background-color: #1A000000;
-    color: #908c96;
+    color: #e0fff8;
 }
 
 *[cssClass="btn-nav-address-active"] {
@@ -288,7 +288,7 @@ QPushButton[cssClass="img-nav-logo"] {
     qproperty-iconSize: 24px 30px;
     background-color:transparent;
     font-size:14px;
-    color: #908c96;
+    color: #e0fff8;
 }
 
 *[cssClass="btn-nav-master"]:checked {
@@ -307,7 +307,7 @@ QPushButton[cssClass="img-nav-logo"] {
     qproperty-icon: url("://ic-nav-master-hover");
     qproperty-iconSize: 24px 30px;
     background-color: #1A000000;
-    color: #908c96;
+    color: #e0fff8;
 }
 
 *[cssClass="btn-nav-master-active"] {
@@ -332,8 +332,8 @@ HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
 }
 
 *[cssClass="text-title-topbar1"] {
-    color:#908c96;
-    font-size:16px;
+    color:#1b9b77;
+    font-size:20px;
     font-weight: ligther;
 }
 
@@ -350,7 +350,7 @@ HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
 }
 
 *[cssClass="amount-topbar"] {
-    color:#FFFFFF;
+    color:#e1dfa2;
     font-size:35px;
 }
 
