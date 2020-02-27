@@ -13,32 +13,32 @@ HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
 
 *[cssClass="container-border-light"] {
     background-color:#FFFFFF;
-    border:  1px solid #908c96;
+    border:  1px solid #6d6f6f;
     border-radius:2px;
 }
 
 *[cssClass="container_right"] {
     background-color:#FFFFFF;
-    border-left:  1px solid #908c96;
+    border-left:  1px solid #6d6f6f;
 }
 
 *[cssClass="container-right"] {
     background-color:#FFFFFF;
-    border-left:  1px solid #908c96;
+    border-left:  1px solid #6d6f6f;
 }
 
 *[cssClass="container-square"] {
     background-color:#FFFFFF;
-    border:  1px solid #908c96;
+    border:  1px solid #6d6f6f;
 }
 
 *[cssClass="container-options"] {
     background-color:#FFFFFF;
-    border-bottom: 1px solid #908c96;
+    border-bottom: 1px solid #6d6f6f;
 }
 
 *[cssClass="container-divider"] {
-    background-color:#908c96;
+    background-color:#6d6f6f;
 }
 
 *[cssClass="container-purple"] {
@@ -57,7 +57,7 @@ HH       NAVIGATION
 HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
 
 *[cssClass="container-nav"] {
-    background-color: qlineargradient(y1:0, y2: 1, stop: 0 #2f3030, stop: 1 #5b5c5c);
+    background-color: qlineargradient(y1:0, y2: 1, stop: 0 #1e5c4e, stop: 1 #24ab8c);
 }
 
 QPushButton[cssClass="img-nav-logo"] {
@@ -71,7 +71,7 @@ QPushButton[cssClass="img-nav-logo"] {
     qproperty-iconSize: 24px 40px;
     background-color:transparent;
     font-size:14px;
-    color: #e0fff8;
+    color: #2effcf;
 }
 
 *[cssClass="btn-nav-receive"]:checked {
@@ -81,19 +81,19 @@ QPushButton[cssClass="img-nav-logo"] {
 }
 
 *[cssClass="btn-nav-receive"]:checked:hover {
-    background-color: qlineargradient(x1:0, x2: 1, stop: 0 #0be0cb, stop: 1 #1f162b);
+    background-color: qlineargradient(x1:0, x2: 1, stop: 0 #108369, stop: 1 #0d3e33);
     color: #0be0cb;
 }
 
 *[cssClass="btn-nav-receive"]:hover {
     background-color: #1A000000;
-    color: #e0fff8;
+    color: #2effcf;
 }
 
 *[cssClass="btn-nav-receive-active"] {
     qproperty-icon:url("://ic-nav-receive-active")  ;
     qproperty-iconSize: 24px 40px;
-    background-color: qlineargradient(x1:0, x2: 1, stop: 0 #0be0cb, stop: 1 #1f162b);
+    background-color: qlineargradient(x1:0, x2: 1, stop: 0 #108369, stop: 1 #0d3e33);
     font-size:14px;
     color: #0be0cb;
 }
