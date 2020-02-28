@@ -13,18 +13,18 @@ HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
 
 *[cssClass="container-border-light"] {
     background-color:#121214;
-    border:  1px solid #33FFFFFF;
+    border:  1px solid #839392;
     border-radius:2px;
 }
 
 *[cssClass="container_right"] {
     background-color:#121214;
-    border-left:  1px solid #33FFFFFF;
+    border-left:  1px solid #839392;
 }
 
 *[cssClass="container-right"] {
     background-color:#121214;
-    border-left:  1px solid #33FFFFFF;
+    border-left:  1px solid #839392;
 }
 
 *[cssClass="container-square"] {
@@ -38,17 +38,17 @@ HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
 }
 
 *[cssClass="container-divider"] {
-    background-color:#B3FFFFFF;
+    background-color:#839392;
 }
 
 *[cssClass="container-purple"] {
-    background-color:#0be0cb;
+    background-color:#29b48e;
     border:  0;
 }
 
 *[cssClass="container-border-purple"] {
     background-color:#121214;
-    border:  1px solid #0be0cb;
+    border:  1px solid #29b48e;
     border-radius:2px;
 }
 
@@ -374,19 +374,19 @@ HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
 }
 
 *[cssClass="text-title-topbar1"] {
-    color:#1b9b77;
+    color:#1ae1b3;
     font-size:20px;
     font-weight: ligther;
 }
 
 *[cssClass="text-title-topbar3"] {
-    color:#908c96;
+    color:#839392;
     font-size:16px;
     font-weight: ligther;
 }
 
 *[cssClass="text-title-topbar4"] {
-    color:#908c96;
+    color:#839392;
     font-size:16px;
     font-weight: ligther;
 }
@@ -403,7 +403,7 @@ HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
 
 *[cssClass="container-qr"] {
     border-radius: 2px;
-    background-color: #bb0f5b69;
+    background-color: #500be0cb;
 }
 
 QPushButton[cssClass="btn-qr"] {
