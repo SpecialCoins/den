@@ -1700,7 +1700,7 @@ HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
 }
 
 *[cssClass="text-violet-warning"] {
-    color: #0be0cb;;
+    color: #29b48e;;
     font-size:13px;
 }
 
@@ -1712,15 +1712,15 @@ HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
 
 
 *[cssClass="text-amount-grey"] {
-    color:#908c96;
+    color:#839392;
     font-size:20px;
 }
 
 *[cssClass="text-stake"] {
-    color:#0be0cb;
+    color:#29b48e;
     font-size:16px;
     padding:10px;
-    border-bottom: 5px solid #0be0cb;
+    border-bottom: 5px solid #29b48e;
 }
 
 *[cssClass="text-stake-disable"] {
@@ -1731,23 +1731,23 @@ HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
 }
 
 *[cssClass="legend-chart"] {
-    color:#908c96;
+    color:#839392;
     font-size:16px;
 }
 
 *[cssClass="text-chart"] {
-    color:#0be0cb;
+    color:#29b48e;
     font-size:16px;
     padding-left:4px;
 }
 
 *[cssClass="square-chart"] {
-    background-color:#0be0cb;
+    background-color:#29b48e;
     border:none;
 }
 
 *[cssClass="text-amount-grey-big"] {
-    color:#908c96;
+    color:#839392;
     font-size:26px;
 }
 
@@ -1769,7 +1769,7 @@ QPushButton[cssClass="btn-chart-arrow"]:hover {
 }
 
 QPushButton[cssClass="btn-chart-arrow"]:pressed {
-    background-color:#0f5b69;
+    background-color:#edeb93;
 }
 
 QPushButton[cssClass="btn-chart-arrow-right"] {
@@ -1785,15 +1785,15 @@ QPushButton[cssClass="btn-chart-arrow-right"]:hover {
 }
 
 QPushButton[cssClass="btn-chart-arrow-right"]:pressed {
-    background-color:#0f5b69;
+    background-color:#edeb93;
 }
 
 QComboBox[cssClass="btn-combo-secundary"] {
     background-color:#ffffff;
     padding:6px 12px 6px 6px;
     font-size:16px;
-    border:1px solid #0be0cb;
-    color: #0be0cb;
+    border:1px solid #29b48e;
+    color: #29b48e;
     text-align: right;
     border-radius: 2px;
 }
@@ -1810,7 +1810,7 @@ QComboBox[cssClass="btn-combo-chart"] {
     padding:6px 12px 6px 6px;
     font-size:16px;
     border:1px solid #ffffff;
-    color: #908c96;
+    color: #839392;
     text-align: right;
     border-radius: 2px;
 }
@@ -1823,10 +1823,10 @@ QComboBox[cssClass="btn-combo-chart"]::down-arrow {
 
 
 QComboBox[cssClass="btn-combo-chart-selected"] {
-    background-color:#0be0cb;
+    background-color:#29b48e;
     padding:6px 12px 6px 6px;
     font-size:16px;
-    border:1px solid #0be0cb;
+    border:1px solid #29b48e;
     color: #FFFFFF;
     text-align: right;
     border-radius: 2px;
@@ -1842,14 +1842,14 @@ QComboBox[cssClass="btn-combo-chart-selected"]::down-arrow {
 QComboBox[cssClass="btn-combo-chart-selected"]:on {
     padding-top: 10px;
     padding-left: 10px;
-    background-color: #0be0cb;
+    background-color: #29b48e;
 }
 
 QComboBox[cssClass="btn-combo-chart-selected"]:disabled {
-    background-color:#0f5b69;
+    background-color:#d327c1;
     padding:6px 12px 6px 6px;
     font-size:16px;
-    border:1px solid #0be0cb;
+    border:1px solid #29b48e;
     color: #FFFFFF;
     text-align: right;
     border-radius: 2px;
@@ -1866,13 +1866,13 @@ QComboBox::down-arrow {
 QPushButton[cssClass="btn-check-time"] {
     background-color:#FFFFFF;
     font-size:14px;
-    color: #908c96;
+    color: #839392;
     padding:4px;
     border-radius: 2px;
 }
 
 QPushButton[cssClass="btn-check-time"]:checked {
-    background-color:#0be0cb;
+    background-color:#29b48e;
     border-radius:2px;
     font-size:14px;
     padding:4px;
@@ -1880,7 +1880,7 @@ QPushButton[cssClass="btn-check-time"]:checked {
 }
 
 QPushButton[cssClass="btn-check-time"]:hover {
-    background-color:#908c96;
+    background-color:#839392;
     border-radius:2px;
     font-size:14px;
     padding:4px;
@@ -1888,19 +1888,19 @@ QPushButton[cssClass="btn-check-time"]:hover {
 }
 
 QPushButton[cssClass="btn-check-time"]:pressed {
-    background-color:#0f5b69;
+    background-color:#eee662;
     border-radius:2px;
     font-size:14px;
     padding:4px;
-    color: #0be0cb;
+    color: #29b48e;
 }
 
 QPushButton[cssClass="btn-check-time"]:disabled {
-    background-color:#0f5b69;
+    background-color:#eee662;
     font-size:14px;
     color: #FFFFFF;
     padding:4px;
-    border:1px solid #0be0cb;
+    border:1px solid #29b48e;
     border-radius: 2px;
 }
 
