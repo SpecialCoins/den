@@ -2445,9 +2445,9 @@ QPushButton[cssClass="btn-settings-check"] {
     background-repeat:no-repeat;
     background-color: #FFFFFF;
     border:none;
-    border-bottom:1px solid #908c96;
+    border-bottom:1px solid #839392;
     font-size:20px;
-    color: #908c96;
+    color: #839392;
     text-align:left;
 }
 
@@ -2459,15 +2459,15 @@ QPushButton[cssClass="btn-settings-check"]:checked {
     border:none;
     border-bottom:1px solid #FFFFFF;
     font-size:20px;
-    color: #908c96;
+    color: #839392;
     text-align:left;
 }
 
 QPushButton[cssClass="btn-settings-options"] {
-    background-color: #0f5b69;
+    background-color: #f44a15;
     border:none;
     font-size:20px;
-    color: #908c96;
+    color: #839392;
     padding:0 20px;
     text-align:left;
 }
