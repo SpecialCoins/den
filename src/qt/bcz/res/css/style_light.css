@@ -2255,20 +2255,20 @@ HH       DIALOG MASTER NODE
 HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
 
 *[cssClass="line-purple"] {
-    background-color:#0be0cb;
+    background-color:#29b48e;
 }
 
 QPushButton[cssClass="btn-number-check"] {
-    border:  1px solid #0be0cb;
+    border:  1px solid #29b48e;
     background-color:#FFFFFF;
     font-size:14px;
     border-radius:11px;
-    color: #0be0cb;
+    color: #29b48e;
 }
 
 QPushButton[cssClass="btn-number-check"]:checked {
-    border:  1px solid #0be0cb;
-    background-color:#0be0cb;
+    border:  1px solid #29b48e;
+    background-color:#29b48e;
     font-size:14px;
     border-radius:11px;
     color: #FFFFFF;
@@ -2278,14 +2278,14 @@ QPushButton[cssClass="btn-name-check"] {
     background-color: #FFFFFF;
     border:none;
     font-size:20px;
-    color: #0f5b69;
+    color: #2a7b68;
 }
 
 QPushButton[cssClass="btn-name-check"]:checked {
     background-color:#FFFFFF;
     border:none;
     font-size:20px;
-    color: #0be0cb;
+    color: #29b48e;
 }
 
 QPushButton[cssClass="ic-step-confirm"] {
@@ -2293,8 +2293,8 @@ QPushButton[cssClass="ic-step-confirm"] {
     background-position:center;
     background-repeat:no-repeat;
     border-radius:11px;
-    border:  1px solid #908c96;
-    background-color:#908c96;
+    border:  1px solid #728f8d;
+    background-color:#728f8d;
 }
 
 
@@ -2304,7 +2304,7 @@ HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
 
 *[cssClass="container-coin-type"] {
     background-color:#FFFFFF;
-    border:  1px solid #908c96;
+    border:  1px solid #728f8d;
     border-radius: 2px;
 }
 
