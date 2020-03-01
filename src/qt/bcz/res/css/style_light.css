@@ -2318,34 +2318,34 @@ HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
 }
 
 *[cssClass="text-title2-dialog"] {
-    color:#0be0cb;
+    color:#29b48e;
     font-size:16px;
 }
 
 *[cssClass="text-title1-dialog"] {
-    color:#908c96;
+    color:#839392;
     font-size:22px;
 }
 
 
 *[cssClass="text-body1-dialog"] {
-    color:#908c96;
+    color:#839392;
     font-size:18px;
 }
 
 *[cssClass="text-body2-dialog"] {
-    color:#908c96;
+    color:#839392;
     font-size:15px;
 }
 
 *[cssClass="text-body3-dialog"] {
-    color:#908c96;
+    color:#839392;
     font-size:17px;
 }
 
 QDialogButtonBox QPushButton {
-    border:  1px solid #0be0cb;
-    background-color:#0be0cb;
+    border:  1px solid #29b48e;
+    background-color:#29b48e;
     font-size:18px;
     padding:4px 10px;
     color: #FFFFFF;
@@ -2357,30 +2357,30 @@ QPushButton[cssClass="btn-dialog-cancel"] {
     background-color:transparent;
     font-size:18px;
     padding:4px 10px;
-    color: #908c96;
+    color: #839392;
     border-radius: 2px;
 }
 
 
 QLineEdit[cssClass="edit-primary-dialog"] {
-    border:  1px solid #908c96;
+    border:  1px solid #839392;
     background-color:#ffffff;
     font-size:18px;
     border-radius: 2px;
     padding:8px;
-    color: #908c96;
+    color: #839392;
 }
 
 QLineEdit[cssClass="edit-primary-dialog"]:focus {
-    border: 1px solid #0be0cb;
+    border: 1px solid #29b48e;
 }
 
 QLineEdit[cssClass="edit-primary-dialog"]:focus:hover {
-    border: 1px solid #0be0cb;
+    border: 1px solid #29b48e;
 }
 
 QLineEdit[cssClass="edit-primary-dialog"]:hover {
-    border: 1px solid #908c96;
+    border: 1px solid #839392;
 }
 
 QLineEdit[cssClass="edit-primary-dialog-error"] {
@@ -2389,7 +2389,7 @@ QLineEdit[cssClass="edit-primary-dialog-error"] {
     font-size:18px;
     border-radius: 2px;
     padding:8px;
-    color: #908c96;
+    color: #839392;
 }
 
 
@@ -2397,8 +2397,8 @@ QComboBox[cssClass="btn-combo-edit-dialog"] {
     background-color:#ffffff;
     padding:10px 20px 10px 10px;
     font-size:16px;
-    border:1px solid #908c96;
-    color: #0be0cb;
+    border:1px solid #839392;
+    color: #29b48e;
     text-align: right;
 }
 
@@ -2414,7 +2414,7 @@ QComboBox[cssClass="btn-combo-dialog"] {
     padding:10px 20px 10px 10px;
     font-size:16px;
     border:1px solid #ffffff;
-    color: #0be0cb;
+    color: #29b48e;
     text-align: right;
 }
 
@@ -2428,7 +2428,7 @@ QComboBox[cssClass="btn-combo-dialog"]::down-arrow {
 QLabel[cssClass="label-subtitle-dialog"] {
     background-color:#ffffff;
     font-size:16px;
-    color: #0be0cb;
+    color: #29b48e;
     padding-top: 10px;
     padding-bottom: 10px;
 }
