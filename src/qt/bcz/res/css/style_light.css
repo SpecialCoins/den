@@ -1913,13 +1913,13 @@ HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
 QCheckBox {
     spacing: 5px;
     font-size:18px;
-    color:#908c96;
+    color:#839392;
 }
 
 QCheckBox:checked  {
     spacing: 5px;
     font-size:18px;
-    color:#0be0cb;
+    color:#29b48e;
 }
 
 QCheckBox::indicator {
@@ -1957,18 +1957,18 @@ HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
 
 
 QComboBox[cssClass="btn-combo-coins"] {
-    background-color:#0be0cb;
+    background-color:#29b48e;
     padding:10px 20px 10px 10px;
     font-size:16px;
-    border:1px solid #0be0cb;
+    border:1px solid #29b48e;
     color: #FFFFFF;
 }
 
 QLabel[cssClass="btn-combo-coins"] {
-    background-color:#0be0cb;
+    background-color:#29b48e;
     padding:10px 10px 10px 10px;
     font-size:16px;
-    border:1px solid #0be0cb;
+    border:1px solid #29b48e;
     color: #FFFFFF;
 }
 
@@ -1985,8 +1985,8 @@ HH        RECEIVE
 HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
 
 *[cssClass="label-address-box"] {
-    color:#908c96;
-    background-color: #f2f2f2;
+    color:#839392;
+    background-color: #908b5d;
     font-size:22px;
     padding:10px 10px;
 }
