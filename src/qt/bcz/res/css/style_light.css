@@ -1713,7 +1713,7 @@ HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
 
 
 *[cssClass="text-amount-grey"] {
-    color:#908c96;
+    color:#728f8d;
     font-size:20px;
 }
 
@@ -1725,14 +1725,14 @@ HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
 }
 
 *[cssClass="text-stake-disable"] {
-    color:#d7d5da;
+    color:#adbdbc;
     font-size:16px;
     padding:10px;
-    border-bottom: 5px solid #bbb8c0;
+    border-bottom: 5px solid #afc6c4;
 }
 
 *[cssClass="legend-chart"] {
-    color:#908c96;
+    color:#728f8d;
     font-size:16px;
 }
 
@@ -1748,7 +1748,7 @@ HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
 }
 
 *[cssClass="text-amount-grey-big"] {
-    color:#908c96;
+    color:#728f8d;
     font-size:26px;
 }
 
@@ -1766,11 +1766,11 @@ QPushButton[cssClass="btn-chart-arrow"] {
 }
 
 QPushButton[cssClass="btn-chart-arrow"]:hover {
-    background-color: #B30be0cb;
+    background-color: #500be0cb;
 }
 
 QPushButton[cssClass="btn-chart-arrow"]:pressed {
-    background-color:#0f5b69;
+    background-color:#908b5d;
 }
 
 QPushButton[cssClass="btn-chart-arrow-right"] {
@@ -1782,19 +1782,19 @@ QPushButton[cssClass="btn-chart-arrow-right"] {
 }
 
 QPushButton[cssClass="btn-chart-arrow-right"]:hover {
-    background-color: #B30be0cb;
+    background-color: #500be0cb;
 }
 
 QPushButton[cssClass="btn-chart-arrow-right"]:pressed {
-    background-color:#0f5b69;
+    background-color:#908b5d;
 }
 
 QComboBox[cssClass="btn-combo-secundary"] {
     background-color:#ffffff;
     padding:6px 12px 6px 6px;
     font-size:16px;
-    border:1px solid #0be0cb;
-    color: #0be0cb;
+    border:1px solid #29b48e;
+    color: #29b48e;
     text-align: right;
     border-radius: 2px;
 }
@@ -1811,7 +1811,7 @@ QComboBox[cssClass="btn-combo-chart"] {
     padding:6px 12px 6px 6px;
     font-size:16px;
     border:1px solid #ffffff;
-    color: #908c96;
+    color: #728f8d;
     text-align: right;
     border-radius: 2px;
 }
@@ -1824,10 +1824,10 @@ QComboBox[cssClass="btn-combo-chart"]::down-arrow {
 
 
 QComboBox[cssClass="btn-combo-chart-selected"] {
-    background-color:#0be0cb;
+    background-color:#29b48e;
     padding:6px 12px 6px 6px;
     font-size:16px;
-    border:1px solid #0be0cb;
+    border:1px solid #29b48e;
     color: #FFFFFF;
     text-align: right;
     border-radius: 2px;
@@ -1843,14 +1843,14 @@ QComboBox[cssClass="btn-combo-chart-selected"]::down-arrow {
 QComboBox[cssClass="btn-combo-chart-selected"]:on {
     padding-top: 10px;
     padding-left: 10px;
-    background-color: #0be0cb;
+    background-color: #29b48e;
 }
 
 QComboBox[cssClass="btn-combo-chart-selected"]:disabled {
-    background-color:#0f5b69;
+    background-color:#908b5d;
     padding:6px 12px 6px 6px;
     font-size:16px;
-    border:1px solid #0be0cb;
+    border:1px solid #29b48e;
     color: #FFFFFF;
     text-align: right;
     border-radius: 2px;
@@ -1867,13 +1867,13 @@ QComboBox::down-arrow {
 QPushButton[cssClass="btn-check-time"] {
     background-color:#FFFFFF;
     font-size:14px;
-    color: #908c96;
+    color: #728f8d;
     padding:4px;
     border-radius: 2px;
 }
 
 QPushButton[cssClass="btn-check-time"]:checked {
-    background-color:#0be0cb;
+    background-color:#29b48e;
     border-radius:2px;
     font-size:14px;
     padding:4px;
@@ -1881,7 +1881,7 @@ QPushButton[cssClass="btn-check-time"]:checked {
 }
 
 QPushButton[cssClass="btn-check-time"]:hover {
-    background-color:#908c96;
+    background-color:#728f8d;
     border-radius:2px;
     font-size:14px;
     padding:4px;
@@ -1889,19 +1889,19 @@ QPushButton[cssClass="btn-check-time"]:hover {
 }
 
 QPushButton[cssClass="btn-check-time"]:pressed {
-    background-color:#0f5b69;
+    background-color:#908b5d;
     border-radius:2px;
     font-size:14px;
     padding:4px;
-    color: #0be0cb;
+    color: #29b48e;
 }
 
 QPushButton[cssClass="btn-check-time"]:disabled {
-    background-color:#0f5b69;
+    background-color:908b5d;
     font-size:14px;
     color: #FFFFFF;
     padding:4px;
-    border:1px solid #0be0cb;
+    border:1px solid #29b48e;
     border-radius: 2px;
 }
 
