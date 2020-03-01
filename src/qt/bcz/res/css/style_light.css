@@ -810,83 +810,83 @@ HH       LISTS ELEMENTS
 HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
 
 *[cssClass="text-list-title-purple"] {
-    color:#0be0cb;
+    color:#29b48e;
     font-size:20px;
 }
 
 *[cssClass="text-list-contact-title1"] {
-    color:#0be0cb;
+    color:#29b48e;
     font-size:16px;
 }
 
 *[cssClass="text-list-title1"] {
-    color:#0be0cb;
+    color:#29b48e;
     font-size:16px;
 }
 
 *[cssClass="text-list-body1-purple"] {
-    color:#0be0cb;
+    color:#29b48e;
     font-size:14px;
 }
 
 *[cssClass="text-list-body1"] {
-    color:#908c96;
+    color:#839392;
     font-size:16px;
 }
 
 *[cssClass="text-list-body-unconfirmed"] {
-    color:#908c96;
+    color:#839392;
     font-size:16px;
 }
 
 *[cssClass="text-list-body2"] {
-    color:#908c96;
+    color:#839392;
     font-size:15.5px;
 }
 
 *[cssClass="text-list-contact-body1"] {
-    color:#908c96;
+    color:#839392;
     font-size:16px;
 }
 
 
 *[cssClass="text-list-body1-grey"] {
-    color:#908c96;
+    color:#839392;
     font-size:16px;
 }
 
 *[cssClass="text-list-body2-grey"] {
-    color:#908c96;
+    color:#839392;
     font-size:14px;
 }
 
 *[cssClass="text-list-caption"] {
-    color:#908c96;
+    color:#839392;
     font-size:12px;
 }
 
 *[cssClass="text-list-caption-medium"] {
-    color:#908c96;
+    color:#839392;
     font-size:14px;
 }
 
 *[cssClass="text-list-caption-medium-green"] {
-    color:#0be0cb;
+    color:#29b48e;
     font-size:14px;
 }
 
 *[cssClass="text-list-caption-unconfirmed"] {
-    color:#908c96;
+    color:#839392;
 }
 
 *[cssClass="text-list-caption-grey"] {
-    color:#908c96;
+    color:#839392;
     font-size:12px;
 }
 
 
 *[cssClass="text-list-amount-receive"] {
-    color:#0be0cb;
+    color:#29b48e;
     font-size:16px;
 }
 
@@ -897,7 +897,7 @@ HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
 }
 
 *[cssClass="text-list-amount-unconfirmed"] {
-    color:#908c96;
+    color:#839392;
     font-size:16px;
 }
 
