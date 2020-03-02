@@ -2692,9 +2692,9 @@ QPushButton[cssClass="ic-step-confirm-welcome"] {
     background-image: url("://ic-check-white");
     background-position:center;
     background-repeat:no-repeat;
-    border:  1px solid #0f5b69;
-    border-radius:11px;
-    background-color:#0f5b69;
+    border:  1px solid #0be0cb;
+    border-radius:2px;
+    background-color:#0be0cb;
 }
 
 *[cssClass="text-title-welcome"] {
@@ -2709,12 +2709,12 @@ QPushButton[cssClass="ic-step-confirm-welcome"] {
 
 
 *[cssClass="container-welcome"] {
-    background-color: #000000;
+    background-color: #19191a;
     border-image: url("://bg-welcome") 0 0 0 0 stretch stretch;
 }
 
 *[cssClass="container-welcome-no-image"] {
-    background-color:#000000;
+    background-color:#19191a;
 }
 
 *[cssClass="container-welcome-box"] {
@@ -2724,7 +2724,7 @@ QPushButton[cssClass="ic-step-confirm-welcome"] {
 
 
 *[cssClass="line-welcome"] {
-    background-color: #908c96;
+    background-color: #589d96;
 }
 
 *[cssClass="container-welcome-stack"] {
@@ -2732,8 +2732,8 @@ QPushButton[cssClass="ic-step-confirm-welcome"] {
     background-position:center;
     background-repeat:no-repeat;
     background-color: transparent;
-    border:  1px solid #0be0cb;
-    border-radius: 4px;
+    border:0;
+    
 }
 
 *[cssClass="container-welcome-step1"] {
@@ -2765,7 +2765,7 @@ QPushButton[cssClass="ic-step-confirm-welcome"] {
 }
 
 QComboBox[cssClass="btn-combo-welcome"] {
-    background-color:#171022;
+    background-color:#589d96;
     padding:10px 20px 10px 10px;
     font-size:16px;
     border:1px solid #0be0cb;
@@ -2783,8 +2783,8 @@ QPushButton[cssClass="btn-welcome-back"] {
     background-repeat:no-repeat;
     background-position:center;
     border:  0px;
-    background-color:#0be0cb;
-    color: #0be0cb;
+    background-color:#323232;
+    color: #323232;
 }
 
 QPushButton[cssClass="btn-welcome-next"] {
@@ -2792,8 +2792,8 @@ QPushButton[cssClass="btn-welcome-next"] {
     background-repeat:no-repeat;
     background-position:center;
     border:  0;
-    background-color:#0be0cb;
-    color: #0be0cb;
+    background-color:#323232;
+    color: #323232;
 }
 
 
@@ -2801,15 +2801,15 @@ QPushButton[cssClass="btn-welcome-number-check"] {
     border:  1px solid #0be0cb;
     background-color:transparent;
     font-size:14px;
-    border-radius:11px;
-    color: #908c96;
+    border-radius:2px;
+    color: #c7bf69;
 }
 
 QPushButton[cssClass="btn-welcome-number-check"]:checked {
     border:  1px solid #0be0cb;
     background-color:#0be0cb;
     font-size:14px;
-    border-radius:11px;
+    border-radius:2px;
     color: #0be0cb;
 }
 
@@ -2817,14 +2817,14 @@ QPushButton[cssClass="btn-welcome-name-check"] {
     background-color: transparent;
     border:none;
     font-size:20px;
-    color: #908c96;
+    color: #d04c4c;
 }
 
 QPushButton[cssClass="btn-welcome-name-check"]:checked {
     background-color:transparent;
     border:none;
     font-size:20px;
-    color: #0be0cb;
+    color: #c245b8;
 }
 
 
