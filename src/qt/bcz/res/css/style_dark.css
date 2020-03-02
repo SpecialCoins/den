@@ -2814,7 +2814,7 @@ QPushButton[cssClass="btn-welcome-number-check"]:checked {
     background-color:#0be0cb;
     font-size:18px;
     border-radius:2px;
-    color: #29b48e;
+    color: #d3fff5;
 }
 
 QPushButton[cssClass="btn-welcome-name-check"] {
@@ -2839,7 +2839,7 @@ HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
 
 QToolTip {
     color: white;
-    background-color: #0be0cb;
+    background-color: #29b48e;
     border: none;
     padding:4px;
     border-radius:3px;
