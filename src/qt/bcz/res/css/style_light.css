@@ -2749,7 +2749,7 @@ QPushButton[cssClass="ic-step-confirm-welcome"] {
     background-image: url("://img-welcome-step2");
     background-position:left center;
     background-repeat:no-repeat;
-    background-color: transparent;
+    background-color:#d50f30;
 }
 
 *[cssClass="container-welcome-step3"] {
@@ -2812,7 +2812,7 @@ QPushButton[cssClass="btn-welcome-number-check"]:checked {
     background-color:#0be0cb;
     font-size:18px;
     border-radius:2px;
-    color: #29b48e;
+    color: #d3fff5;
 }
 
 QPushButton[cssClass="btn-welcome-name-check"] {
@@ -2856,18 +2856,18 @@ HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
     background-color:white;
     border-radius:2px;
     padding:15px;
-    border: 1px solid #908c96;
+    border: 1px solid #728f8d;
 }
 
 *[cssClass="btn-list-menu"]{
     border: 0;
     background-color:#FFFFFF;
     font-size:16px;
-    color: #908c96;
+    color: #728f8d;
 }
 
 *[cssClass="btn-list-menu"]:hover{
-    color: #0be0cb;
+    color: #29b48e;
 }
 
 
@@ -2876,7 +2876,7 @@ HH        EMPTY LIST
 HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
 
 *[cssClass="text-empty"]{
-    color: #908c96;
+    color: #728f8d;
     font-size: 18px;
 }
 
@@ -2979,9 +2979,9 @@ HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
 
 #treeWidget::item {
     border:none;
-    border-bottom: 1px solid #908c96;
+    border-bottom: 1px solid #839392;
     border-radius:0px;
-    color: #908c96;
+    color: #839392;
     padding-top: 6px;
     padding-bottom: 6px;
     background-color:#ffffff;
@@ -2991,14 +2991,14 @@ HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
     border-image: none;
     background-color:#ffffff;
     image: url("://ic-arrow-drop-up");
-    border-bottom: 1px solid #908c96;
+    border-bottom: 1px solid #839392;
 }
 
 #treeWidget::branch:closed:has-children:has-siblings {
     border-image: none;
     background-color:#ffffff;
     image: url("://ic-arrow-drop-up");
-    border-bottom: 1px solid #908c96;
+    border-bottom: 1px solid #839392;
 }
 
 
@@ -3006,31 +3006,31 @@ HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
 #treeWidget::branch:open:has-children:has-siblings {
     border-image: none;
     image: url("://ic-arrow-drop-down");
-    border-bottom: 1px solid #908c96;
+    border-bottom: 1px solid #839392;
 }
 
 #treeWidget::item:hover {
     border:none;
-    border-bottom: 1px solid #908c96;
+    border-bottom: 1px solid #839392;
     border-radius:0px;
-    color: #908c96;
+    color: #839392;
     background-color:#26908c96;
 }
 
 #treeWidget::item:selected {
     border:none;
-    border-bottom: 1px solid #908c96;
+    border-bottom: 1px solid #839392;
     border-radius:0px;
-    color: #908c96;
+    color: #839392;
     background-color:#330be0cb;
 }
 
 
 #treeWidget::item:hover:selected {
     border:none;
-    border-bottom: 1px solid #908c96;
+    border-bottom: 1px solid #839392;
     border-radius:0px;
-    color: #908c96;
+    color: #839392;
     background-color:#330be0cb;
 }
 
@@ -3073,7 +3073,7 @@ QHeaderView::section {
     background-repeat:no-repeat;
     font-size:14px;
     border-radius:0px;
-    color: #908c96;
+    color: #839392;
 }
 
 /*HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
@@ -3158,7 +3158,7 @@ QPushButton[cssClass="btn-dots-welcome"] {
 
 QPushButton[cssClass="btn-dots-welcome"]:hover {
     border:  1px solid #0be0cb;
-    background-color:#908c96;
+    background-color:#839392;
     font-size:18px;
     padding:8px;
     color: #FFFFFF;
@@ -3167,7 +3167,7 @@ QPushButton[cssClass="btn-dots-welcome"]:hover {
 
 QPushButton[cssClass="btn-dots-welcome"]:pressed {
     border:  1px solid #0be0cb;
-    background-color:#908c96;
+    background-color:#839392;
     font-size:18px;
     padding:8px;
     color: #0be0cb;
@@ -3215,12 +3215,12 @@ QRadioButton[cssClass="radio-welcome"]:checked {
 }
 
 QRadioButton[cssClass="radio-welcome"]:unchecked {
-    color: #908c96;
+    color: #839392;
     font-size:20px;
 }
 
 QRadioButton[cssClass="radio-welcome"] {
-    color: #908c96;
+    color: #839392;
     font-size:20px;
     spacing:20px;
 }
