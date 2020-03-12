@@ -7,8 +7,10 @@ mkdir -p $OUTDIR/bin
 
 ARCHIVE_CMD="zip"
 
-if [[ $HOST = "x86_64-w64-mingw32" ]]; then
-    ARCHIVE_NAME+="windows.zip"
+if [[ $HOST = "i686-w64-mingw32" ]]; then
+  ARCHIVE_NAME="windows32.zip"
+elif [[ $HOST = "x86_64-w64-mingw32" ]]; then
+    ARCHIVE_NAME+="windows64.zip"
 elif [[ $HOST = "x86_64-pc-linux-gnu" ]]; then
     ARCHIVE_NAME+="linux-pc.tar.gz"
 ARCHIVE_CMD="tar -czf"
