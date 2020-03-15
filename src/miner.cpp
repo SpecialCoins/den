@@ -481,7 +481,7 @@ void POSMiner(CWallet* pwallet, bool fProofOfStake)
 {
     LogPrintf("PosMiner started\n");
     SetThreadPriority(THREAD_PRIORITY_LOWEST);
-    RenameThread("PosMiner");
+    util::ThreadRename("PosMiner");
 
     // Each thread has its own key and counter
     CReserveKey reservekey(pwallet);

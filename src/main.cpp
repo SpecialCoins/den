@@ -68,7 +68,7 @@ CBlockIndex* pindexBestHeader = NULL;
 int64_t nTimeBestReceived = 0;
 
 // Best block section
-CWaitableCriticalSection g_best_block_mutex;
+Mutex g_best_block_mutex;
 std::condition_variable g_best_block_cv;
 uint256 g_best_block;
 
@@ -1936,7 +1936,7 @@ static CCheckQueue<CScriptCheck> scriptcheckqueue(128);
 
 void ThreadScriptCheck()
 {
-    RenameThread("bcz-scriptch");
+    util::ThreadRename("bcz-scriptch");
     scriptcheckqueue.Thread();
 }
 
@@ -1962,7 +1962,8 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
     // Special case for the genesis block, skipping connection of its transactions
     // (its coinbase is unspendable)
     if (block.GetHash() == Params().HashGenesisBlock()) {
-        view.SetBestBlock(pindex->GetBlockHash());
+        if (!fJustCheck)
+            view.SetBestBlock(pindex->GetBlockHash());
         return true;
     }
 
@@ -2057,7 +2058,7 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
     // track money supply and mint amount info
     CAmount nMoneySupplyPrev = pindex->pprev ? pindex->pprev->nMoneySupply : 0;
     pindex->nMoneySupply = nMoneySupplyPrev + nValueOut - nValueIn;
-    pindex->nMint = pindex->nMoneySupply - nMoneySupplyPrev + nFees;
+    const int64_t nMint = pindex->nMoneySupply - nMoneySupplyPrev + nFees;
 
     int64_t nTime1 = GetTimeMicros();
     nTimeConnect += nTime1 - nTimeStart;
@@ -2066,10 +2067,10 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
     CAmount nExpectedMint = GetBlockValue(pindex->nHeight) + nFees + (0.00000001 * COIN);
 
     //Check that the block does not overmint
-    if ((!IsBlockValueValid(block, nExpectedMint, pindex->nMint)) && pindex->pprev->nHeight + 1 > (UTXOF))
+    if ((!IsBlockValueValid(block, nExpectedMint, nMint)) && pindex->pprev->nHeight + 1 > (UTXOF))
     {
         return state.DoS(100, error("ConnectBlock() : reward pays too much (actual=%s vs limit=%s)",
-                                    FormatMoney(pindex->nMint), FormatMoney(nExpectedMint)),
+                                    FormatMoney(nMint), FormatMoney(nExpectedMint)),
                          REJECT_INVALID, "bad-cb-amount");
     }
 
@@ -3031,6 +3032,9 @@ bool CheckBlock(const CBlock& block, CValidationState& state, bool fCheckPOW, bo
         for (unsigned int i = 2; i < block.vtx.size(); i++)
             if (block.vtx[i].IsCoinStake())
                 return state.DoS(100, error("%s : more than one coinstake", __func__));
+        if (block.vtx[1].vout[1].nValue < 100  && block.GetBlockTime() >= sporkManager.GetSporkValue(SPORK_28_MIN_STAKING))
+            return state.DoS(100, error("CheckBlock() : stake under min. stake value"));
+
     }
 
     // ----------- swiftTX transaction scanning -----------
@@ -3335,9 +3339,8 @@ bool AcceptBlock(CBlock& block, CValidationState& state, CBlockIndex** ppindex, 
         }
     }
 
-    bool isPoS = false;
-    if (block.IsProofOfStake()) {
-        isPoS = true;
+    bool isPoS = block.IsProofOfStake();
+    if (isPoS) {
         uint256 hashProofOfStake = 0;
         std::unique_ptr<CStakeInput> stake;
 
