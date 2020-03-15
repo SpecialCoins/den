@@ -13,28 +13,28 @@ HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
 
 *[cssClass="container-border-light"] {
     background-color:#FFFFFF;
-    border:  1px solid #908c96;
+    border:  1px solid #839392;
     border-radius:2px;
 }
 
 *[cssClass="container_right"] {
     background-color:#FFFFFF;
-    border-left:  1px solid #908c96;
+    border-left:  1px solid #839392;
 }
 
 *[cssClass="container-right"] {
     background-color:#FFFFFF;
-    border-left:  1px solid #908c96;
+    border-left:  1px solid #839392;
 }
 
 *[cssClass="container-square"] {
     background-color:#FFFFFF;
-    border:  1px solid #908c96;
+    border:  1px solid #839392;
 }
 
 *[cssClass="container-options"] {
     background-color:#FFFFFF;
-    border-bottom: 1px solid #908c96;
+    border-bottom: 1px solid #839392;
 }
 
 *[cssClass="container-divider"] {
@@ -42,13 +42,13 @@ HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH*/
 }
 
 *[cssClass="container-purple"] {
-    background-color:#0be0cb;
+    background-color:#29b48e;
     border:  0;
 }
 
 *[cssClass="container-border-purple"] {
     background-color:#FFFFFF;
-    border:  1px solid #0be0cb;
+    border:  1px solid #29b48e;
     border-radius:2px;
 }
 
