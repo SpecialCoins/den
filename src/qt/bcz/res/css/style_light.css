@@ -77,12 +77,12 @@ QPushButton[cssClass="img-nav-logo"] {
 *[cssClass="btn-nav-receive"]:checked {
     background-color: qlineargradient(x1:0, x2: 1, stop: 0 #0be0cb, stop: 1 #1f162b);
     font-size:14px;
-    color: #0be0cb;
+    color: #29b48e;
 }
 
 *[cssClass="btn-nav-receive"]:checked:hover {
     background-color: qlineargradient(x1:0, x2: 1, stop: 0 #0be0cb, stop: 1 #1f162b);
-    color: #0be0cb;
+    color: #29b48e;
 }
 
 *[cssClass="btn-nav-receive"]:hover {
