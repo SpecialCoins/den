@@ -253,6 +253,7 @@
         <file alias="bg-welcome">bcz/res/img/bg-welcome.png</file>
         <file alias="bg-welcome-container-png">bcz/res/img/bg-welcome-container.png</file>
         <file alias="bg-dashboard-banner">bcz/res/img/bg-dashboard-banner.png</file>
+		<file alias="bg-dashboard-banner2">bcz/res/img/bg-dashboard-banner2.png</file>
         <file alias="ic-check-box-dark-active">bcz/res/img/ic-check-box-dark-active.svg</file>
         <file alias="ic-check-box-indeterminate">bcz/res/img/ic-check-box-indeterminate.svg</file>
         <file alias="ic-check-liliac-indeterminate">bcz/res/img/ic-check-liliac-indeterminate.svg</file>
