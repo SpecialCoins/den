@@ -381,6 +381,7 @@ RES_ICONS = \
   qt/res/icons/unit_tm.png \
   qt/res/icons/unit_tu.png \
   qt/bcz/res/img/bg-dashboard-banner.png \
+  qt/bcz/res/img/bg-dashboard-banner2.png \
   qt/bcz/res/img/bg-multi-number-dark.svg \
   qt/bcz/res/img/ic-check-locked.svg \
   qt/bcz/res/img/ic-nav-address.svg \
