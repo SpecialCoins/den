@@ -13,22 +13,22 @@
 
 int CAddrInfo::GetTriedBucket(const uint256& nKey) const
 {
-    uint64_t hash1 = (CHashWriter(SER_GETHASH, 0) << nKey << GetKey()).GetHash().GetLow64();
-    uint64_t hash2 = (CHashWriter(SER_GETHASH, 0) << nKey << GetGroup() << (hash1 % ADDRMAN_TRIED_BUCKETS_PER_GROUP)).GetHash().GetLow64();
+    uint64_t hash1 = (CHashWriter(SER_GETHASH, 0) << nKey << GetKey()).GetHash().GetCheapHash();
+    uint64_t hash2 = (CHashWriter(SER_GETHASH, 0) << nKey << GetGroup() << (hash1 % ADDRMAN_TRIED_BUCKETS_PER_GROUP)).GetHash().GetCheapHash();
     return hash2 % ADDRMAN_TRIED_BUCKET_COUNT;
 }
 
 int CAddrInfo::GetNewBucket(const uint256& nKey, const CNetAddr& src) const
 {
     std::vector<unsigned char> vchSourceGroupKey = src.GetGroup();
-    uint64_t hash1 = (CHashWriter(SER_GETHASH, 0) << nKey << GetGroup() << vchSourceGroupKey).GetHash().GetLow64();
-    uint64_t hash2 = (CHashWriter(SER_GETHASH, 0) << nKey << vchSourceGroupKey << (hash1 % ADDRMAN_NEW_BUCKETS_PER_SOURCE_GROUP)).GetHash().GetLow64();
+    uint64_t hash1 = (CHashWriter(SER_GETHASH, 0) << nKey << GetGroup() << vchSourceGroupKey).GetHash().GetCheapHash();
+    uint64_t hash2 = (CHashWriter(SER_GETHASH, 0) << nKey << vchSourceGroupKey << (hash1 % ADDRMAN_NEW_BUCKETS_PER_SOURCE_GROUP)).GetHash().GetCheapHash();
     return hash2 % ADDRMAN_NEW_BUCKET_COUNT;
 }
 
 int CAddrInfo::GetBucketPosition(const uint256& nKey, bool fNew, int nBucket) const
 {
-    uint64_t hash1 = (CHashWriter(SER_GETHASH, 0) << nKey << (fNew ? 'N' : 'K') << nBucket << GetKey()).GetHash().GetLow64();
+    uint64_t hash1 = (CHashWriter(SER_GETHASH, 0) << nKey << (fNew ? 'N' : 'K') << nBucket << GetKey()).GetHash().GetCheapHash();
     return hash1 % ADDRMAN_BUCKET_SIZE;
 }
 
@@ -199,6 +199,9 @@ void CAddrMan::MakeTried(CAddrInfo& info, int nId)
 void CAddrMan::Good_(const CService& addr, int64_t nTime)
 {
     int nId;
+
+    nLastGood = nTime;
+
     CAddrInfo* pinfo = Find(addr, &nId);
 
     // if not found, bail out
@@ -239,7 +242,7 @@ void CAddrMan::Good_(const CService& addr, int64_t nTime)
     if (nUBucket == -1)
         return;
 
-    LogPrint("addrman", "Moving %s to tried\n", addr.ToString());
+    LogPrint(BCLog::ADDRMAN, "Moving %s to tried\n", addr.ToString());
 
     // move nId to the tried tables
     MakeTried(info, nId);
@@ -313,7 +316,7 @@ bool CAddrMan::Add_(const CAddress& addr, const CNetAddr& source, int64_t nTimeP
     return fNew;
 }
 
-void CAddrMan::Attempt_(const CService& addr, int64_t nTime)
+void CAddrMan::Attempt_(const CService& addr, bool fCountFailure, int64_t nTime)
 {
     CAddrInfo* pinfo = Find(addr);
 
@@ -329,7 +332,10 @@ void CAddrMan::Attempt_(const CService& addr, int64_t nTime)
 
     // update info
     info.nLastTry = nTime;
-    info.nAttempts++;
+    if (fCountFailure && info.nLastCountAttempt < nLastGood) {
+        info.nLastCountAttempt = nTime;
+        info.nAttempts++;
+    }
 }
 
 CAddrInfo CAddrMan::Select_(bool newOnly)

@@ -21,7 +21,7 @@ void CActiveMasternode::ManageStatus()
 
     if (!fMasterNode) return;
 
-    if (fDebug) LogPrintf("CActiveMasternode::ManageStatus() - Begin\n");
+    if (logCategories != BCLog::NONE) LogPrintf("CActiveMasternode::ManageStatus() - Begin\n");
 
     //need correct blocks to send ping
     if (Params().NetworkID() != CBaseChainParams::REGTEST && !masternodeSync.IsBlockchainSynced()) {
@@ -74,7 +74,7 @@ void CActiveMasternode::ManageStatus()
 
         LogPrintf("CActiveMasternode::ManageStatus() - Checking inbound connection to '%s'\n", service.ToString());
 
-        CNode* pnode = ConnectNode((CAddress)service, NULL, false);
+        CNode* pnode = ConnectNode((CAddress)service, NULL, false, true);
         if (!pnode) {
             notCapableReason = "Could not connect to " + service.ToString();
             LogPrintf("CActiveMasternode::ManageStatus() - not capable: %s\n", notCapableReason);
@@ -298,7 +298,7 @@ bool CActiveMasternode::GetMasterNodeVin(CTxIn& vin, CPubKey& pubkey, CKey& secr
     // Find the vin
     if (!strTxHash.empty()) {
         // Let's find it
-        uint256 txHash(strTxHash);
+        uint256 txHash(uint256S(strTxHash));
         int outputIndex;
         try {
             outputIndex = std::stoi(strOutputIndex.c_str());

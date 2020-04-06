@@ -16,14 +16,15 @@
 
 #include <boost/assign/list_of.hpp>
 #include <limits>
-
-
-struct SeedSpec6 {
-    uint8_t addr[16];
-    uint16_t port;
-};
-
 #include "chainparamsseeds.h"
+
+std::string CDNSSeedData::getHost(uint64_t requiredServiceBits) const {
+    //use default host for non-filter-capable seeds or if we use the default service bits (NODE_NETWORK)
+    if (!supportsServiceBitsFiltering || requiredServiceBits == NODE_NETWORK)
+        return host;
+
+    return strprintf("x%x.%s", requiredServiceBits, host);
+}
 
 /**
  * Main network
@@ -138,7 +139,7 @@ public:
 
         // New P2P messages signatures
         nBlockEnforceNewMessageSignatures = 162000;
-        nColdStart = 145000;  //cold rescan
+        nColdStart = 165000;  //cold rescan
 
         const char* pszTimestamp = "BCZ BORN";
         CMutableTransaction txNew;

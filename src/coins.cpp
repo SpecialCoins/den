@@ -54,14 +54,14 @@ bool CCoins::Spend(const COutPoint& out, CTxInUndo& undo)
 bool CCoins::Spend(int nPos)
 {
     CTxInUndo undo;
-    COutPoint out(0, nPos);
+    COutPoint out(UINT256_ZERO, nPos);
     return Spend(out, undo);
 }
 
 
 bool CCoinsView::GetCoins(const uint256& txid, CCoins& coins) const { return false; }
 bool CCoinsView::HaveCoins(const uint256& txid) const { return false; }
-uint256 CCoinsView::GetBestBlock() const { return uint256(0); }
+uint256 CCoinsView::GetBestBlock() const { return UINT256_ZERO; }
 bool CCoinsView::BatchWrite(CCoinsMap& mapCoins, const uint256& hashBlock) { return false; }
 bool CCoinsView::GetStats(CCoinsStats& stats) const { return false; }
 
@@ -152,7 +152,7 @@ bool CCoinsViewCache::HaveCoins(const uint256& txid) const
 
 uint256 CCoinsViewCache::GetBestBlock() const
 {
-    if (hashBlock == uint256(0))
+    if (hashBlock.IsNull())
         hashBlock = base->GetBestBlock();
     return hashBlock;
 }
