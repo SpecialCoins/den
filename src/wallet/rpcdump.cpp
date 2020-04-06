@@ -6,6 +6,7 @@
 
 #include "bip38.h"
 #include "init.h"
+#include "key_io.h"
 #include "main.h"
 #include "rpc/server.h"
 #include "script/script.h"
@@ -71,6 +72,11 @@ std::string DecodeDumpString(const std::string& str)
         ret << c;
     }
     return ret.str();
+}
+
+bool IsStakingDerPath(KeyOriginInfo keyOrigin)
+{
+    return keyOrigin.path.size() > 3 && keyOrigin.path[3] == (2 | BIP32_HARDENED_KEY_LIMIT);
 }
 
 UniValue importprivkey(const UniValue& params, bool fHelp)
@@ -369,7 +375,7 @@ UniValue dumpwallet(const UniValue& params, bool fHelp)
     if (fHelp || params.size() != 1)
         throw std::runtime_error(
             "dumpwallet \"filename\"\n"
-            "\nDumps all wallet keys in a human-readable format.\n" +
+            "\nDumps all wallet keys in a human-readable format to a server-side file. This does not allow overwriting existing files.\n" +
             HelpRequiringPassphrase() + "\n"
 
             "\nArguments:\n"
@@ -382,8 +388,19 @@ UniValue dumpwallet(const UniValue& params, bool fHelp)
 
     EnsureWalletIsUnlocked();
 
+    ScriptPubKeyMan* spk_man = pwalletMain->GetScriptPubKeyMan();
+
     boost::filesystem::path filepath = params[0].get_str().c_str();
     filepath = boost::filesystem::absolute(filepath);
+
+    /* Prevent arbitrary files from being overwritten. There have been reports
+     * that users have overwritten wallet files this way:
+     * https://github.com/bitcoin/bitcoin/issues/9934
+     * It may also avoid other security issues.
+     */
+    if (boost::filesystem::exists(filepath)) {
+        throw JSONRPCError(RPC_INVALID_PARAMETER, filepath.string() + " already exists. If you are sure this is what you want, move it out of the way first");
+    }
 
     std::ofstream file;
     file.open(params[0].get_str().c_str());
@@ -391,9 +408,8 @@ UniValue dumpwallet(const UniValue& params, bool fHelp)
         throw JSONRPCError(RPC_INVALID_PARAMETER, "Cannot open wallet dump file");
 
     std::map<CKeyID, int64_t> mapKeyBirth;
-    std::set<CKeyID> setKeyPool;
     pwalletMain->GetKeyBirthTimes(mapKeyBirth);
-    pwalletMain->GetAllReserveKeys(setKeyPool);
+    const std::map<CKeyID, int64_t>& mapKeyPool = spk_man->GetAllReserveKeys();
 
     // sort time/key pairs
     std::vector<std::pair<int64_t, CKeyID> > vKeyBirth;
@@ -403,25 +419,54 @@ UniValue dumpwallet(const UniValue& params, bool fHelp)
     mapKeyBirth.clear();
     std::sort(vKeyBirth.begin(), vKeyBirth.end());
 
+    CBlockIndex* tip = chainActive.Tip();
     // produce output
     file << strprintf("# Wallet dump created by BCZ %s (%s)\n", CLIENT_BUILD, CLIENT_DATE);
     file << strprintf("# * Created on %s\n", EncodeDumpTime(GetTime()));
-    file << strprintf("# * Best block at time of backup was %i (%s),\n", chainActive.Height(), chainActive.Tip()->GetBlockHash().ToString());
-    file << strprintf("#   mined on %s\n", EncodeDumpTime(chainActive.Tip()->GetBlockTime()));
+    if (tip) {
+        file << strprintf("# * Best block at time of backup was %i (%s),\n", tip->nHeight,
+                          tip->GetBlockHash().ToString());
+        file << strprintf("#   mined on %s\n", EncodeDumpTime(tip->GetBlockTime()));
+    } else {
+        file << "# Missing tip information\n";
+    }
     file << "\n";
+
+    // Add the base58check encoded extended master if the wallet uses HD
+    CKeyID seed_id = spk_man->GetHDChain().GetID();
+    if (!seed_id.IsNull())
+    {
+        CKey seed;
+        if (pwalletMain->GetKey(seed_id, seed)) {
+            CExtKey masterKey;
+            masterKey.SetSeed(seed.begin(), seed.size());
+
+            file << "# extended private masterkey: " << KeyIO::EncodeExtKey(masterKey) << "\n\n";
+        }
+    }
+
     for (std::vector<std::pair<int64_t, CKeyID> >::const_iterator it = vKeyBirth.begin(); it != vKeyBirth.end(); it++) {
         const CKeyID& keyid = it->second;
         std::string strTime = EncodeDumpTime(it->first);
-        std::string strAddr = CBitcoinAddress(keyid).ToString();
         CKey key;
         if (pwalletMain->GetKey(keyid, key)) {
+            const CKeyMetadata& metadata = pwalletMain->mapKeyMetadata[keyid];
+            std::string strAddr = CBitcoinAddress(keyid, (metadata.HasKeyOrigin() && IsStakingDerPath(metadata.key_origin) ?
+                                                          CChainParams::STAKING_ADDRESS :
+                                                          CChainParams::PUBKEY_ADDRESS)).ToString();
+
+            file << strprintf("%s %s ", KeyIO::EncodeSecret(key), strTime);
             if (pwalletMain->mapAddressBook.count(keyid)) {
-                file << strprintf("%s %s label=%s # addr=%s\n", CBitcoinSecret(key).ToString(), strTime, EncodeDumpString(pwalletMain->mapAddressBook[keyid].name), strAddr);
-            } else if (setKeyPool.count(keyid)) {
-                file << strprintf("%s %s reserve=1 # addr=%s\n", CBitcoinSecret(key).ToString(), strTime, strAddr);
+                auto entry = pwalletMain->mapAddressBook[keyid];
+                file << strprintf("label=%s", EncodeDumpString(entry.name));
+            } else if (keyid == seed_id) {
+                file << "hdseed=1";
+            } else if (mapKeyPool.count(keyid)) {
+                file << "reserve=1";
             } else {
-                file << strprintf("%s %s change=1 # addr=%s\n", CBitcoinSecret(key).ToString(), strTime, strAddr);
+                file << "change=1";
             }
+            file << strprintf(" # addr=%s%s\n", strAddr, (metadata.HasKeyOrigin() ? " hdkeypath="+metadata.key_origin.pathToString() : ""));
         }
     }
     file << "\n";
