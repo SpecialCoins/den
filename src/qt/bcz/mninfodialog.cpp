@@ -23,21 +23,22 @@ MnInfoDialog::MnInfoDialog(QWidget *parent) :
     setCssTextBodyDialog({ui->textAmount, ui->textAddress, ui->textInputs, ui->textStatus, ui->textId, ui->textExport});
     setCssProperty({ui->pushCopy, ui->pushCopyId, ui->pushExport}, "ic-copy-big");
     setCssProperty(ui->btnEsc, "ic-close");
-    connect(ui->btnEsc, SIGNAL(clicked()), this, SLOT(closeDialog()));
+    connect(ui->btnEsc, &QPushButton::clicked, this, &MnInfoDialog::closeDialog);
     connect(ui->pushCopy, &QPushButton::clicked, [this](){ copyInform(pubKey, "Masternode public key copied"); });
     connect(ui->pushCopyId, &QPushButton::clicked, [this](){ copyInform(txId, "Collateral tx id copied"); });
     connect(ui->pushExport, &QPushButton::clicked, [this](){ exportMN = true; accept(); });
 }
 
-void MnInfoDialog::setData(QString pubKey, QString name, QString address, QString txId, QString outputIndex, QString status){
+void MnInfoDialog::setData(QString pubKey, QString name, QString address, QString txId, QString outputIndex, QString status)
+{
     this->pubKey = pubKey;
     this->txId = txId;
     QString shortPubKey = pubKey;
     QString shortTxId = txId;
-    if(shortPubKey.length() > 20) {
+    if (shortPubKey.length() > 20) {
         shortPubKey = shortPubKey.left(13) + "..." + shortPubKey.right(13);
     }
-    if(shortTxId.length() > 20) {
+    if (shortTxId.length() > 20) {
         shortTxId = shortTxId.left(12) + "..." + shortTxId.right(12);
     }
     ui->textId->setText(shortPubKey);
@@ -47,20 +48,22 @@ void MnInfoDialog::setData(QString pubKey, QString name, QString address, QStrin
     ui->textStatus->setText(status);
 }
 
-void MnInfoDialog::copyInform(QString& copyStr, QString message){
+void MnInfoDialog::copyInform(QString& copyStr, QString message)
+{
     GUIUtil::setClipboard(copyStr);
-    if(!snackBar) snackBar = new SnackBar(nullptr, this);
+    if (!snackBar) snackBar = new SnackBar(nullptr, this);
     snackBar->setText(tr(message.toStdString().c_str()));
     snackBar->resize(this->width(), snackBar->height());
     openDialog(snackBar, this);
 }
 
 void MnInfoDialog::closeDialog(){
-    if(snackBar && snackBar->isVisible()) snackBar->hide();
+    if (snackBar && snackBar->isVisible()) snackBar->hide();
     close();
 }
 
-MnInfoDialog::~MnInfoDialog(){
-    if(snackBar) delete snackBar;
+MnInfoDialog::~MnInfoDialog()
+{
+    if (snackBar) delete snackBar;
     delete ui;
 }

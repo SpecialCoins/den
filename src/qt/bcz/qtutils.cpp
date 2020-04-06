@@ -122,6 +122,40 @@ QPixmap encodeToQr(QString str, QString &errorStr, QColor qrColor){
     return QPixmap();
 }
 
+void setFilterAddressBook(QComboBox* filter, SortEdit* lineEdit) {
+    initComboBox(filter, lineEdit);
+    filter->addItem("All", "");
+    filter->addItem("Receiving", AddressTableModel::Receive);
+    filter->addItem("Contacts", AddressTableModel::Send);
+    filter->addItem("Cold Staking", AddressTableModel::ColdStaking);
+    filter->addItem("Delegators", AddressTableModel::Delegators);
+    filter->addItem("Staking Contacts", AddressTableModel::ColdStakingSend);
+}
+
+void setSortTx(QComboBox* filter, SortEdit* lineEdit) {
+    // Sort Transactions
+    initComboBox(filter, lineEdit);
+    filter->addItem("Date desc", SortTx::DATE_DESC);
+    filter->addItem("Date asc", SortTx::DATE_ASC);
+    filter->addItem("Amount desc", SortTx::AMOUNT_ASC);
+    filter->addItem("Amount asc", SortTx::AMOUNT_DESC);
+}
+
+void setSortTxTypeFilter(QComboBox* filter, SortEdit* lineEditType) {
+    initComboBox(filter, lineEditType);
+    filter->addItem(filter->tr("All"), TransactionFilterProxy::ALL_TYPES);
+    filter->addItem(filter->tr("Received"), TransactionFilterProxy::TYPE(TransactionRecord::RecvWithAddress) | TransactionFilterProxy::TYPE(TransactionRecord::RecvFromOther));
+    filter->addItem(filter->tr("Sent"), TransactionFilterProxy::TYPE(TransactionRecord::SendToAddress) | TransactionFilterProxy::TYPE(TransactionRecord::SendToOther));
+    filter->addItem(filter->tr("Mined"), TransactionFilterProxy::TYPE(TransactionRecord::Generated));
+    filter->addItem(filter->tr("Minted"), TransactionFilterProxy::TYPE(TransactionRecord::StakeMint));
+    filter->addItem(filter->tr("MN reward"), TransactionFilterProxy::TYPE(TransactionRecord::MNReward));
+    filter->addItem(filter->tr("To yourself"), TransactionFilterProxy::TYPE(TransactionRecord::SendToSelf));
+    filter->addItem(filter->tr("Cold stakes"), TransactionFilterProxy::TYPE(TransactionRecord::StakeDelegated));
+    filter->addItem(filter->tr("Hot stakes"), TransactionFilterProxy::TYPE(TransactionRecord::StakeHot));
+    filter->addItem(filter->tr("Delegated"), TransactionFilterProxy::TYPE(TransactionRecord::P2CSDelegationSent) | TransactionFilterProxy::TYPE(TransactionRecord::P2CSDelegationSentOwner));
+    filter->addItem(filter->tr("Delegations"), TransactionFilterProxy::TYPE(TransactionRecord::P2CSDelegation));
+}
+
 void setupSettings(QSettings *settings){
     if(!settings->contains("lightTheme")){
         settings->setValue("lightTheme", true);
@@ -180,8 +214,9 @@ QColor getRowColor(bool isLightTheme, bool isHovered, bool isSelected){
     }
 }
 
-void initComboBox(QComboBox* combo, QLineEdit* lineEdit){
-    setCssProperty(combo, "btn-combo");
+void initComboBox(QComboBox* combo, QLineEdit* lineEdit, QString cssClass)
+{
+    setCssProperty(combo, cssClass);
     combo->setEditable(true);
     if (lineEdit) {
         lineEdit->setReadOnly(true);
@@ -190,6 +225,21 @@ void initComboBox(QComboBox* combo, QLineEdit* lineEdit){
     }
     combo->setStyleSheet("selection-background-color:transparent; selection-color:transparent;");
     combo->setView(new QListView());
+}
+
+void fillAddressSortControls(SortEdit* seType, SortEdit* seOrder, QComboBox* boxType, QComboBox* boxOrder)
+{
+    // Sort Type
+    initComboBox(boxType, seType, "btn-combo-small");
+    boxType->addItem(QObject::tr("by Label"), AddressTableModel::Label);
+    boxType->addItem(QObject::tr("by Address"), AddressTableModel::Address);
+    boxType->addItem(QObject::tr("by Date"), AddressTableModel::Date);
+    boxType->setCurrentIndex(0);
+    // Sort Order
+    initComboBox(boxOrder, seOrder, "btn-combo-small");
+    boxOrder->addItem("asc", Qt::AscendingOrder);
+    boxOrder->addItem("desc", Qt::DescendingOrder);
+    boxOrder->setCurrentIndex(0);
 }
 
 void initCssEditLine(QLineEdit *edit, bool isDialog){

@@ -17,17 +17,20 @@ MNRow::MNRow(QWidget *parent) :
     ui->lblDivisory->setStyleSheet("background-color:#908c96;");
 }
 
-void MNRow::updateView(QString address, QString label, QString status, bool wasCollateralAccepted){
+void MNRow::updateView(QString address, QString label, QString status, bool wasCollateralAccepted)
+{
     ui->labelName->setText(label);
     ui->labelAddress->setText(address);
     ui->labelDate->setText("Status: " + status);
-    if (!wasCollateralAccepted){
+    if (!wasCollateralAccepted)
+    {
         ui->labelDate->setText("Status: Collateral tx not found");
     } else {
         ui->labelDate->setText("Status: " + status);
     }
 }
 
-MNRow::~MNRow(){
+MNRow::~MNRow()
+{
     delete ui;
 }
