@@ -101,7 +101,7 @@ void CAddress::Init()
 CInv::CInv()
 {
     type = 0;
-    hash = 0;
+    hash.SetNull();
 }
 
 CInv::CInv(int typeIn, const uint256& hashIn)
@@ -120,7 +120,7 @@ CInv::CInv(const std::string& strType, const uint256& hashIn)
         }
     }
     if (i == ARRAYLEN(ppszTypeName))
-        LogPrint("net", "CInv::CInv(string, uint256) : unknown type '%s'", strType);
+        LogPrint(BCLog::NET, "CInv::CInv(string, uint256) : unknown type '%s'", strType);
     hash = hashIn;
 }
 
@@ -141,7 +141,7 @@ bool CInv::IsMasterNodeType() const{
 const char* CInv::GetCommand() const
 {
     if (!IsKnownType()) {
-        LogPrint("net", "CInv::GetCommand() : type=%d unknown type", type);
+        LogPrint(BCLog::NET, "CInv::GetCommand() : type=%d unknown type", type);
         return "UNKNOWN";
     }
 

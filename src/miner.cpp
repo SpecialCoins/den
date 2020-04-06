@@ -143,7 +143,7 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
         CMutableTransaction txCoinStake;
         unsigned int nTxNewTime = 0;
         if (!pwallet->CreateCoinStake(*pwallet, pindexPrev, pblock->nBits, txCoinStake, nTxNewTime)) {
-            LogPrint("staking", "%s : stake not found\n", __func__);
+            LogPrint(BCLog::STAKING, "%s : stake not found\n", __func__);
             return nullptr;
         }
         // Stake found
@@ -203,7 +203,6 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
                     // or other transactions in the memory pool.
                     if (!mempool.mapTx.count(txin.prevout.hash)) {
                         LogPrintf("ERROR: mempool transaction missing input\n");
-                        if (fDebug) assert("mempool transaction missing input" == 0);
                         fMissingInputs = true;
                         if (porphan)
                             vOrphan.pop_back();
@@ -433,7 +432,7 @@ bool ProcessBlockFound(CBlock* pblock, CWallet& wallet, CReserveKey& reservekey)
 
     // Found a solution
     {
-        WaitableLock lock(g_best_block_mutex);
+        WAIT_LOCK(g_best_block_mutex, lock);
         if (pblock->hashPrevBlock != g_best_block)
             return error("PosMiner : generated block is stale");
     }
@@ -577,7 +576,7 @@ void POSMiner(CWallet* pwallet, bool fProofOfStake)
             } else
                 nHashCounter += nHashesDone;
             if (GetTimeMillis() - nHPSTimerStart > 4000) {
-                static CCriticalSection cs;
+                static RecursiveMutex cs;
                 {
                     LOCK(cs);
                     if (GetTimeMillis() - nHPSTimerStart > 4000) {
