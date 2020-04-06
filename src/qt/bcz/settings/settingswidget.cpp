@@ -44,13 +44,13 @@ SettingsWidget::SettingsWidget(BCZGUI* parent) :
     fontLight.setWeight(QFont::Light);
 
     /* Title */
-    ui->labelTitle->setText(tr("Settings"));
     setCssProperty(ui->labelTitle, "text-title-screen");
     ui->labelTitle->setFont(fontLight);
 
     setCssProperty(ui->pushButtonFile, "btn-settings-check");
     setCssProperty(ui->pushButtonFile2, "btn-settings-options");
     setCssProperty(ui->pushButtonFile3, "btn-settings-options");
+    setCssProperty(ui->pushButtonExportCsv, "btn-settings-options");
 
     setCssProperty(ui->pushButtonConfiguration, "btn-settings-check");
     setCssProperty(ui->pushButtonConfiguration3, "btn-settings-options");
@@ -73,6 +73,7 @@ SettingsWidget::SettingsWidget(BCZGUI* parent) :
     options = {
         ui->pushButtonFile2,
         ui->pushButtonFile3,
+        ui->pushButtonExportCsv,
         ui->pushButtonOptions1,
         ui->pushButtonOptions2,
         ui->pushButtonOptions5,
@@ -84,16 +85,14 @@ SettingsWidget::SettingsWidget(BCZGUI* parent) :
         ui->pushButtonTools5,
     };
 
-    ui->pushButtonFile->setChecked(true);
-    ui->fileButtonsWidget->setVisible(true);
-    ui->optionsButtonsWidget->setVisible(false);
-    ui->configurationButtonsWidget->setVisible(false);
-    ui->toolsButtonsWidget->setVisible(false);
-    ui->helpButtonsWidget->setVisible(false);
-
-    ui->pushButtonFile2->setChecked(true);
+    menus.insert(ui->pushButtonFile, ui->fileButtonsWidget);
+    menus.insert(ui->pushButtonConfiguration, ui->configurationButtonsWidget);
+    menus.insert(ui->pushButtonOptions, ui->optionsButtonsWidget);
+    menus.insert(ui->pushButtonTools, ui->toolsButtonsWidget);
+    menus.insert(ui->pushButtonHelp, ui->helpButtonsWidget);
 
     settingsBackupWallet = new SettingsBackupWallet(window, this);
+    settingsExportCsvWidget = new SettingsExportCSV(window, this);
     settingsBitToolWidget = new SettingsBitToolWidget(window, this);
     settingsSingMessageWidgets = new SettingsSignMessageWidgets(window, this);
     settingsWalletRepairWidget = new SettingsWalletRepairWidget(window, this);
@@ -105,6 +104,7 @@ SettingsWidget::SettingsWidget(BCZGUI* parent) :
     settingsConsoleWidget = new SettingsConsoleWidget(window, this);
 
     ui->stackedWidgetContainer->addWidget(settingsBackupWallet);
+    ui->stackedWidgetContainer->addWidget(settingsExportCsvWidget);
     ui->stackedWidgetContainer->addWidget(settingsBitToolWidget);
     ui->stackedWidgetContainer->addWidget(settingsSingMessageWidgets);
     ui->stackedWidgetContainer->addWidget(settingsWalletRepairWidget);
@@ -117,39 +117,43 @@ SettingsWidget::SettingsWidget(BCZGUI* parent) :
     ui->stackedWidgetContainer->setCurrentWidget(settingsBackupWallet);
 
     // File Section
-    connect(ui->pushButtonFile, SIGNAL(clicked()), this, SLOT(onFileClicked()));
-    connect(ui->pushButtonFile2, SIGNAL(clicked()), this, SLOT(onBackupWalletClicked()));
-    connect(ui->pushButtonFile3, SIGNAL(clicked()), this, SLOT(onMultisendClicked()));
+    connect(ui->pushButtonFile, &QPushButton::clicked, this, &SettingsWidget::onFileClicked);
+    connect(ui->pushButtonFile2, &QPushButton::clicked, this, &SettingsWidget::onBackupWalletClicked);
+    connect(ui->pushButtonFile3, &QPushButton::clicked, this, &SettingsWidget::onMultisendClicked);
+    connect(ui->pushButtonExportCsv, &QPushButton::clicked, this, &SettingsWidget::onExportCSVClicked);
 
     // Options
-    connect(ui->pushButtonOptions, SIGNAL(clicked()), this, SLOT(onOptionsClicked()));
-    connect(ui->pushButtonOptions1, SIGNAL(clicked()), this, SLOT(onMainOptionsClicked()));
-    connect(ui->pushButtonOptions2, SIGNAL(clicked()), this, SLOT(onWalletOptionsClicked()));
-    connect(ui->pushButtonOptions5, SIGNAL(clicked()), this, SLOT(onDisplayOptionsClicked()));
+    connect(ui->pushButtonOptions, &QPushButton::clicked, this, &SettingsWidget::onOptionsClicked);
+    connect(ui->pushButtonOptions1, &QPushButton::clicked, this, &SettingsWidget::onMainOptionsClicked);
+    connect(ui->pushButtonOptions2, &QPushButton::clicked, this, &SettingsWidget::onWalletOptionsClicked);
+    connect(ui->pushButtonOptions5, &QPushButton::clicked, this, &SettingsWidget::onDisplayOptionsClicked);
 
     // Configuration
-    connect(ui->pushButtonConfiguration, SIGNAL(clicked()), this, SLOT(onConfigurationClicked()));
-    connect(ui->pushButtonConfiguration3, SIGNAL(clicked()), this, SLOT(onBipToolClicked()));
-    connect(ui->pushButtonConfiguration4, SIGNAL(clicked()), this, SLOT(onSignMessageClicked()));
+    connect(ui->pushButtonConfiguration, &QPushButton::clicked, this, &SettingsWidget::onConfigurationClicked);
+    connect(ui->pushButtonConfiguration3, &QPushButton::clicked, this, &SettingsWidget::onBipToolClicked);
+    connect(ui->pushButtonConfiguration4, &QPushButton::clicked, this, &SettingsWidget::onSignMessageClicked);
 
     // Tools
-    connect(ui->pushButtonTools, SIGNAL(clicked()), this, SLOT(onToolsClicked()));
-    connect(ui->pushButtonTools1, SIGNAL(clicked()), this, SLOT(onInformationClicked()));
-    connect(ui->pushButtonTools2, SIGNAL(clicked()), this, SLOT(onDebugConsoleClicked()));
+    connect(ui->pushButtonTools, &QPushButton::clicked, this, &SettingsWidget::onToolsClicked);
+    connect(ui->pushButtonTools1, &QPushButton::clicked, this, &SettingsWidget::onInformationClicked);
+    connect(ui->pushButtonTools2, &QPushButton::clicked, this, &SettingsWidget::onDebugConsoleClicked);
     ui->pushButtonTools2->setShortcut(QKeySequence(SHORT_KEY + Qt::Key_C));
-    connect(ui->pushButtonTools5, SIGNAL(clicked()), this, SLOT(onWalletRepairClicked()));
+    connect(ui->pushButtonTools5, &QPushButton::clicked, this, &SettingsWidget::onWalletRepairClicked);
 
     // Help
-    connect(ui->pushButtonHelp, SIGNAL(clicked()), this, SLOT(onHelpClicked()));
-    connect(ui->pushButtonHelp1, SIGNAL(clicked()), window, SLOT(openFAQ()));
-    connect(ui->pushButtonHelp2, SIGNAL(clicked()), this, SLOT(onAboutClicked()));
+    connect(ui->pushButtonHelp, &QPushButton::clicked, this, &SettingsWidget::onHelpClicked);
+    connect(ui->pushButtonHelp1, &QPushButton::clicked, window, &BCZGUI::openFAQ);
+    connect(ui->pushButtonHelp2, &QPushButton::clicked, this, &SettingsWidget::onAboutClicked);
 
     // Get restart command-line parameters and handle restart
     connect(settingsWalletRepairWidget, &SettingsWalletRepairWidget::handleRestart, [this](QStringList arg){Q_EMIT handleRestart(arg);});
 
-    connect(settingsBackupWallet,&SettingsBackupWallet::message,this, &SettingsWidget::message);
+    connect(settingsBackupWallet, &SettingsBackupWallet::message,this, &SettingsWidget::message);
     connect(settingsBackupWallet, &SettingsBackupWallet::showHide, this, &SettingsWidget::showHide);
     connect(settingsBackupWallet, &SettingsBackupWallet::execDialog, this, &SettingsWidget::execDialog);
+    connect(settingsExportCsvWidget, &SettingsExportCSV::message,this, &SettingsWidget::message);
+    connect(settingsExportCsvWidget, &SettingsExportCSV::showHide, this, &SettingsWidget::showHide);
+    connect(settingsExportCsvWidget, &SettingsExportCSV::execDialog, this, &SettingsWidget::execDialog);
     connect(settingsMultisendWidget, &SettingsMultisendWidget::showHide, this, &SettingsWidget::showHide);
     connect(settingsMultisendWidget, &SettingsMultisendWidget::message, this, &SettingsWidget::message);
     connect(settingsMainOptionsWidget, &SettingsMainOptionsWidget::message, this, &SettingsWidget::message);
@@ -157,13 +161,36 @@ SettingsWidget::SettingsWidget(BCZGUI* parent) :
     connect(settingsWalletOptionsWidget, &SettingsWalletOptionsWidget::message, this, &SettingsWidget::message);
     connect(settingsInformationWidget, &SettingsInformationWidget::message,this, &SettingsWidget::message);
 
+    connect(settingsDisplayOptionsWidget, &SettingsDisplayOptionsWidget::saveSettings, this, &SettingsWidget::onSaveOptionsClicked);
+    connect(settingsDisplayOptionsWidget, &SettingsDisplayOptionsWidget::discardSettings, this, &SettingsWidget::onDiscardChanges);
+
+    connect(settingsMainOptionsWidget, &SettingsMainOptionsWidget::saveSettings, this, &SettingsWidget::onSaveOptionsClicked);
+    connect(settingsMainOptionsWidget, &SettingsMainOptionsWidget::discardSettings, this, &SettingsWidget::onDiscardChanges);
+
+    connect(settingsWalletOptionsWidget, &SettingsWalletOptionsWidget::saveSettings, this, &SettingsWidget::onSaveOptionsClicked);
+    connect(settingsWalletOptionsWidget, &SettingsWalletOptionsWidget::discardSettings, this, &SettingsWidget::onDiscardChanges);
+
     /* Widget-to-option mapper */
     mapper = new QDataWidgetMapper(this);
     mapper->setSubmitPolicy(QDataWidgetMapper::ManualSubmit);
     mapper->setOrientation(Qt::Vertical);
+
+    // scroll area
+    ui->scrollArea->setWidgetResizable(true);
+    QSizePolicy scrollAreaPolicy = ui->scrollArea->sizePolicy();
+    scrollAreaPolicy.setVerticalStretch(1);
+    ui->scrollArea->setSizePolicy(scrollAreaPolicy);
+    QSizePolicy scrollVertPolicy = ui->scrollAreaWidgetContents->sizePolicy();
+    scrollVertPolicy.setVerticalStretch(1);
+    ui->scrollAreaWidgetContents->setSizePolicy(scrollVertPolicy);
+
+    ui->pushButtonFile->setChecked(true);
+    onFileClicked();
+    ui->pushButtonFile2->setChecked(true);
 }
 
-void SettingsWidget::loadClientModel(){
+void SettingsWidget::loadClientModel()
+{
     if(clientModel) {
         this->settingsInformationWidget->setClientModel(this->clientModel);
         this->settingsConsoleWidget->setClientModel(this->clientModel);
@@ -177,7 +204,6 @@ void SettingsWidget::loadClientModel(){
             settingsDisplayOptionsWidget->setClientModel(clientModel);
             settingsWalletOptionsWidget->setClientModel(clientModel);
             /* keep consistency for action triggered elsewhere */
-            //connect(optionsModel, SIGNAL(hideOrphansChanged(bool)), this, SLOT(updateHideOrphans(bool)));
 
             // TODO: Connect show restart needed and apply changes.
         }
@@ -186,6 +212,7 @@ void SettingsWidget::loadClientModel(){
 
 void SettingsWidget::loadWalletModel(){
     this->settingsBackupWallet->setWalletModel(this->walletModel);
+    this->settingsExportCsvWidget->setWalletModel(this->walletModel);
     this->settingsSingMessageWidgets->setWalletModel(this->walletModel);
     this->settingsBitToolWidget->setWalletModel(this->walletModel);
     this->settingsMultisendWidget->setWalletModel(this->walletModel);
@@ -235,22 +262,26 @@ void SettingsWidget::onSaveOptionsClicked(){
     }
 }
 
-void SettingsWidget::onFileClicked() {
-    if (ui->pushButtonFile->isChecked()) {
-        ui->fileButtonsWidget->setVisible(true);
-
-        ui->optionsButtonsWidget->setVisible(false);
-        ui->toolsButtonsWidget->setVisible(false);
-        ui->configurationButtonsWidget->setVisible(false);
-        ui->helpButtonsWidget->setVisible(false);
-        ui->pushButtonOptions->setChecked(false);
-        ui->pushButtonTools->setChecked(false);
-        ui->pushButtonConfiguration->setChecked(false);
-        ui->pushButtonHelp->setChecked(false);
-
+void SettingsWidget::selectMenu(QPushButton* btn)
+{
+    QWidget* subMenuSelected = menus[btn];
+    if (btn->isChecked()) {
+        QMapIterator<QPushButton*, QWidget*> it(menus);
+        while (it.hasNext()) {
+            it.next();
+            QWidget* value = it.value();
+            QPushButton* key = it.key();
+            value->setVisible(value == subMenuSelected);
+            if (key != btn) key->setChecked(false);
+        }
     } else {
-        ui->fileButtonsWidget->setVisible(false);
+        subMenuSelected->setVisible(false);
     }
+}
+
+void SettingsWidget::onFileClicked()
+{
+    selectMenu(ui->pushButtonFile);
 }
 
 void SettingsWidget::onBackupWalletClicked() {
@@ -264,21 +295,7 @@ void SettingsWidget::onSignMessageClicked() {
 }
 
 void SettingsWidget::onConfigurationClicked() {
-    if (ui->pushButtonConfiguration->isChecked()) {
-        ui->configurationButtonsWidget->setVisible(true);
-
-        ui->optionsButtonsWidget->setVisible(false);
-        ui->toolsButtonsWidget->setVisible(false);
-        ui->fileButtonsWidget->setVisible(false);
-        ui->helpButtonsWidget->setVisible(false);
-        ui->pushButtonOptions->setChecked(false);
-        ui->pushButtonTools->setChecked(false);
-        ui->pushButtonFile->setChecked(false);
-        ui->pushButtonHelp->setChecked(false);
-
-    } else {
-        ui->configurationButtonsWidget->setVisible(false);
-    }
+    selectMenu(ui->pushButtonConfiguration);
 }
 
 void SettingsWidget::onBipToolClicked() {
@@ -291,22 +308,13 @@ void SettingsWidget::onMultisendClicked() {
     selectOption(ui->pushButtonFile3);
 }
 
+void SettingsWidget::onExportCSVClicked() {
+    ui->stackedWidgetContainer->setCurrentWidget(settingsExportCsvWidget);
+    selectOption(ui->pushButtonExportCsv);
+}
+
 void SettingsWidget::onOptionsClicked() {
-    if (ui->pushButtonOptions->isChecked()) {
-        ui->optionsButtonsWidget->setVisible(true);
-
-        ui->fileButtonsWidget->setVisible(false);
-        ui->toolsButtonsWidget->setVisible(false);
-        ui->configurationButtonsWidget->setVisible(false);
-        ui->helpButtonsWidget->setVisible(false);
-        ui->pushButtonFile->setChecked(false);
-        ui->pushButtonTools->setChecked(false);
-        ui->pushButtonConfiguration->setChecked(false);
-        ui->pushButtonHelp->setChecked(false);
-
-    } else {
-        ui->optionsButtonsWidget->setVisible(false);
-    }
+    selectMenu(ui->pushButtonOptions);
 }
 
 void SettingsWidget::onMainOptionsClicked() {
@@ -326,21 +334,7 @@ void SettingsWidget::onDisplayOptionsClicked() {
 
 
 void SettingsWidget::onToolsClicked() {
-    if (ui->pushButtonTools->isChecked()) {
-        ui->toolsButtonsWidget->setVisible(true);
-
-        ui->optionsButtonsWidget->setVisible(false);
-        ui->fileButtonsWidget->setVisible(false);
-        ui->configurationButtonsWidget->setVisible(false);
-        ui->helpButtonsWidget->setVisible(false);
-        ui->pushButtonOptions->setChecked(false);
-        ui->pushButtonFile->setChecked(false);
-        ui->pushButtonConfiguration->setChecked(false);
-        ui->pushButtonHelp->setChecked(false);
-
-    } else {
-        ui->toolsButtonsWidget->setVisible(false);
-    }
+    selectMenu(ui->pushButtonTools);
 }
 
 void SettingsWidget::onInformationClicked() {
@@ -367,20 +361,7 @@ void SettingsWidget::onWalletRepairClicked() {
 
 
 void SettingsWidget::onHelpClicked() {
-    if (ui->pushButtonHelp->isChecked()) {
-        ui->helpButtonsWidget->setVisible(true);
-
-        ui->toolsButtonsWidget->setVisible(false);
-        ui->optionsButtonsWidget->setVisible(false);
-        ui->fileButtonsWidget->setVisible(false);
-        ui->configurationButtonsWidget->setVisible(false);
-        ui->pushButtonOptions->setChecked(false);
-        ui->pushButtonFile->setChecked(false);
-        ui->pushButtonConfiguration->setChecked(false);
-        ui->pushButtonTools->setChecked(false);
-    } else {
-        ui->helpButtonsWidget->setVisible(false);
-    }
+    selectMenu(ui->pushButtonHelp);
 }
 
 void SettingsWidget::onAboutClicked() {
@@ -412,7 +393,8 @@ void SettingsWidget::setMapper(){
     settingsDisplayOptionsWidget->setMapper(mapper);
 }
 
-bool SettingsWidget::openStandardDialog(QString title, QString body, QString okBtn, QString cancelBtn){
+bool SettingsWidget::openStandardDialog(const QString& title, const QString& body, const QString& okBtn, const QString& cancelBtn)
+{
     showHideOp(true);
     DefaultDialog *confirmDialog = new DefaultDialog(window);
     confirmDialog->setText(title, body, okBtn, cancelBtn);
