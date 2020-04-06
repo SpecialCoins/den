@@ -18,8 +18,8 @@ Either
 <summary><strong>Download the prebuilt binaries</strong></summary>
 <strong>0.1</strong> Install prebuild client and full chain
 
-	wget https://github.com/SpecialCoins/bitcoincz/releases/download/6.0.1.5/linux-x64.tar.gz
-    tar xvfz linux-x64.tar.gz
+    wget https://github.com/SpecialCoins/bitcoincz/releases/download/6.0.1.7/linux-pc.tar.gz
+    tar xvfz linux-pc.tar.gz
     ---
     (optional to remove old chain):
     cd .bcz
@@ -116,7 +116,7 @@ Step 2. ON LOCAL MACHINE: First run on your Local Wallet
 
 **2.6.**  Create file **masternode.conf** (in **~/.BCZ**, **C:\Users\USER\AppData\Roaming\BCZ** or **~/Library/Application Support/BCZ** depending on your Operating System) containing the following info:
  - LABEL: A one word name you make up to call your node (ex. XN1)
- - IP:PORT: Your masternode VPS's IP, and the port is always 29100.
+ - IP:PORT: Your masternode VPS's IP, and the port is always 29500.
  - MASTERNODEPRIVKEY: This is the result of your "masternode genkey" from earlier.
  - TRANSACTION HASH: The collateral tx. hash from the 5000 BCZ deposit.
  - INDEX: The Index from the transaction hash
