@@ -83,7 +83,7 @@ AddressesWidget::AddressesWidget(BCZGUI* parent) :
     setCssTitleScreen(ui->labelTitle);
     setCssSubtitleScreen(ui->labelSubtitle1);
 
-    // Change eddress option
+    // Change address option
     ui->btnAddContact->setTitleClassAndText("btn-title-grey", "Add new contact");
     ui->btnAddContact->setSubTitleClassAndText("text-subtitle", "Generate a new address to receive tokens.");
     ui->btnAddContact->setRightIconClass("ic-arrow-down");
@@ -95,6 +95,15 @@ AddressesWidget::AddressesWidget(BCZGUI* parent) :
     ui->listAddresses->setAttribute(Qt::WA_MacShowFocusRect, false);
     ui->listAddresses->setSelectionBehavior(QAbstractItemView::SelectRows);
     ui->listAddresses->setUniformItemSizes(true);
+
+    // Sort Controls
+    SortEdit* lineEdit = new SortEdit(ui->comboBoxSort);
+    connect(lineEdit, &SortEdit::Mouse_Pressed, [this](){ui->comboBoxSort->showPopup();});
+    connect(ui->comboBoxSort, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &AddressesWidget::onSortChanged);
+    SortEdit* lineEditOrder = new SortEdit(ui->comboBoxSortOrder);
+    connect(lineEditOrder, &SortEdit::Mouse_Pressed, [this](){ui->comboBoxSortOrder->showPopup();});
+    connect(ui->comboBoxSortOrder, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &AddressesWidget::onSortOrderChanged);
+    fillAddressSortControls(lineEdit, lineEditOrder, ui->comboBoxSort, ui->comboBoxSortOrder);
 
     //Empty List
     ui->emptyContainer->setVisible(false);
@@ -123,9 +132,9 @@ AddressesWidget::AddressesWidget(BCZGUI* parent) :
     ui->btnSave->setText(tr("SAVE"));
     setCssBtnPrimary(ui->btnSave);
 
-    connect(ui->listAddresses, SIGNAL(clicked(QModelIndex)), this, SLOT(handleAddressClicked(QModelIndex)));
-    connect(ui->btnSave, SIGNAL(clicked()), this, SLOT(onStoreContactClicked()));
-    connect(ui->btnAddContact, SIGNAL(clicked()), this, SLOT(onAddContactShowHideClicked()));
+    connect(ui->listAddresses, &QListView::clicked, this, &AddressesWidget::handleAddressClicked);
+    connect(ui->btnSave, &QPushButton::clicked, this, &AddressesWidget::onStoreContactClicked);
+    connect(ui->btnAddContact, &OptionButton::clicked, this, &AddressesWidget::onAddContactShowHideClicked);
 }
 
 void AddressesWidget::handleAddressClicked(const QModelIndex &index){
@@ -140,9 +149,9 @@ void AddressesWidget::handleAddressClicked(const QModelIndex &index){
     if(!this->menu){
         this->menu = new TooltipMenu(window, this);
         connect(this->menu, &TooltipMenu::message, this, &AddressesWidget::message);
-        connect(this->menu, SIGNAL(onEditClicked()), this, SLOT(onEditClicked()));
-        connect(this->menu, SIGNAL(onDeleteClicked()), this, SLOT(onDeleteClicked()));
-        connect(this->menu, SIGNAL(onCopyClicked()), this, SLOT(onCopyClicked()));
+        connect(this->menu, &TooltipMenu::onEditClicked, this, &AddressesWidget::onEditClicked);
+        connect(this->menu, &TooltipMenu::onDeleteClicked, this, &AddressesWidget::onDeleteClicked);
+        connect(this->menu, &TooltipMenu::onCopyClicked, this, &AddressesWidget::onCopyClicked);
     }else {
         this->menu->hide();
     }
@@ -151,11 +160,13 @@ void AddressesWidget::handleAddressClicked(const QModelIndex &index){
     menu->show();
 }
 
-void AddressesWidget::loadWalletModel(){
+void AddressesWidget::loadWalletModel()
+{
     if(walletModel) {
         addressTablemodel = walletModel->getAddressTableModel();
         this->filter = new AddressFilterProxyModel(QStringList({AddressTableModel::Send, AddressTableModel::ColdStakingSend}), this);
         this->filter->setSourceModel(addressTablemodel);
+        this->filter->sort(sortType, sortOrder);
         ui->listAddresses->setModel(this->filter);
         ui->listAddresses->setModelColumn(AddressTableModel::Address);
 
@@ -257,6 +268,24 @@ void AddressesWidget::onAddContactShowHideClicked(){
         ui->btnAddContact->setRightIconClass("ic-arrow", true);
         ui->layoutNewContact->setVisible(false);
     }
+}
+
+void AddressesWidget::onSortChanged(int idx)
+{
+    sortType = (AddressTableModel::ColumnIndex) ui->comboBoxSort->itemData(idx).toInt();
+    sortAddresses();
+}
+
+void AddressesWidget::onSortOrderChanged(int idx)
+{
+    sortOrder = (Qt::SortOrder) ui->comboBoxSortOrder->itemData(idx).toInt();
+    sortAddresses();
+}
+
+void AddressesWidget::sortAddresses()
+{
+    if (this->filter)
+        this->filter->sort(sortType, sortOrder);
 }
 
 void AddressesWidget::changeTheme(bool isLightTheme, QString& theme){

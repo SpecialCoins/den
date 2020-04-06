@@ -59,6 +59,7 @@ AskPassphraseDialog::AskPassphraseDialog(Mode mode, QWidget* parent, WalletModel
     ui->passLabel3->setText("Repeat passphrase");
     ui->passLabel3->setProperty("cssClass", "text-title");
 
+    setCssProperty(ui->capsLabel, "text-warning-small");
     ui->capsLabel->setVisible(false);
 
     ui->passEdit1->setMinimumSize(ui->passEdit1->sizeHint());
@@ -129,12 +130,12 @@ AskPassphraseDialog::AskPassphraseDialog(Mode mode, QWidget* parent, WalletModel
     ui->labelTitle->setText(title);
 
     textChanged();
-    connect(btnWatch, SIGNAL(clicked()), this, SLOT(onWatchClicked()));
-    connect(ui->passEdit1, SIGNAL(textChanged(QString)), this, SLOT(textChanged()));
-    connect(ui->passEdit2, SIGNAL(textChanged(QString)), this, SLOT(textChanged()));
-    connect(ui->passEdit3, SIGNAL(textChanged(QString)), this, SLOT(textChanged()));
-    connect(ui->pushButtonOk, SIGNAL(clicked()), this, SLOT(accept()));
-    connect(ui->btnEsc, SIGNAL(clicked()), this, SLOT(close()));
+    connect(btnWatch, &QCheckBox::clicked, this, &AskPassphraseDialog::onWatchClicked);
+    connect(ui->passEdit1, &QLineEdit::textChanged, this, &AskPassphraseDialog::textChanged);
+    connect(ui->passEdit2, &QLineEdit::textChanged, this, &AskPassphraseDialog::textChanged);
+    connect(ui->passEdit3, &QLineEdit::textChanged, this, &AskPassphraseDialog::textChanged);
+    connect(ui->pushButtonOk, &QPushButton::clicked, this, &AskPassphraseDialog::accept);
+    connect(ui->btnEsc, &QPushButton::clicked, this, &AskPassphraseDialog::close);
 }
 
 void AskPassphraseDialog::onWatchClicked()
@@ -183,7 +184,8 @@ void AskPassphraseDialog::accept()
         hide();
         bool ret = openStandardDialog(
                 tr("Confirm wallet encryption"),
-                tr("Warning: If you encrypt your wallet and lose your passphrase, you will <b>LOSE ALL OF YOUR BCZ</b>!") + "<br><br>" + tr("Are you sure you wish to encrypt your wallet?"),
+                    "<b>" + tr("WARNING") + ":</b> " + tr("If you encrypt your wallet and lose your passphrase, you will") +
+                    " <b>" + tr("LOSE ALL OF YOUR COINS") + "</b>!<br><br>" + tr("Are you sure you wish to encrypt your wallet?"),
                 tr("ENCRYPT"), tr("CANCEL")
         );
         if (ret) {
@@ -271,7 +273,7 @@ bool AskPassphraseDialog::event(QEvent* event)
         if (ke->key() == Qt::Key_CapsLock) {
             fCapsLock = !fCapsLock;
             ui->capsLabel->setVisible(fCapsLock);
-            fCapsLock ? ui->capsLabel->setText(tr("Warning: The Caps Lock key is on!")) : ui->capsLabel->clear();
+            fCapsLock ? ui->capsLabel->setText(tr("WARNING: The Caps Lock key is on!")) : ui->capsLabel->clear();
         }
         // Detect Enter key press
         if ((ke->key() == Qt::Key_Enter || ke->key() == Qt::Key_Return) && ui->pushButtonOk->isEnabled()) {
@@ -297,7 +299,7 @@ bool AskPassphraseDialog::eventFilter(QObject* object, QEvent* event)
             bool fShift = (ke->modifiers() & Qt::ShiftModifier) != 0;
             if ((fShift && *psz >= 'a' && *psz <= 'z') || (!fShift && *psz >= 'A' && *psz <= 'Z')) {
                 fCapsLock = true;
-                ui->capsLabel->setText(tr("Warning: The Caps Lock key is on!"));
+                ui->capsLabel->setText(tr("WARNING: The Caps Lock key is on!"));
                 ui->capsLabel->setVisible(true);
             } else if (psz->isLetter()) {
                 fCapsLock = false;
@@ -365,7 +367,9 @@ void AskPassphraseDialog::run(int type)
 }
 void AskPassphraseDialog::onError(QString error, int type)
 {
-    newpassCache = "";
+    newpassCache.clear();
+    LogPrintf("Error encrypting wallet, %s\n", error.toStdString());
+    QMetaObject::invokeMethod(this, "errorEncryptingWallet", Qt::QueuedConnection);
 }
 
 void AskPassphraseDialog::initWatch(QWidget *parent)
