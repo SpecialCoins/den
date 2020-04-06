@@ -124,15 +124,6 @@ QString formatBalance(CAmount amount, int nDisplayUnit){
     return (amount == 0) ? ("0.00 " + BitcoinUnits::name(nDisplayUnit)) : BitcoinUnits::floorHtmlWithUnit(nDisplayUnit, amount, false, BitcoinUnits::separatorAlways, true);
 }
 
-bool requestUnlock(WalletModel* walletModel, AskPassphraseDialog::Context context, bool relock){
-    // Request unlock if wallet was locked or unlocked for mixing:
-    WalletModel::EncryptionStatus encStatus = walletModel->getEncryptionStatus();
-    if (encStatus == walletModel->Locked) {
-        return WalletModel::UnlockContext(walletModel->requestUnlock(context, relock)).isValid();
-    }
-    return true;
-}
-
 void setupAddressWidget(QValidatedLineEdit* widget, QWidget* parent)
 {
     parent->setFocusProxy(widget);
@@ -284,11 +275,11 @@ void copyEntryData(QAbstractItemView* view, int column, int role)
 
 QString getEntryData(QAbstractItemView *view, int column, int role)
 {
-    if(!view || !view->selectionModel())
+    if (!view || !view->selectionModel())
         return QString();
     QModelIndexList selection = view->selectionModel()->selectedRows(column);
 
-    if(!selection.isEmpty()) {
+    if (!selection.isEmpty()) {
         // Return first item
         return (selection.at(0).data(role).toString());
     }
@@ -483,15 +474,15 @@ bool ToolTipToRichTextFilter::eventFilter(QObject* obj, QEvent* evt)
 
 void TableViewLastColumnResizingFixer::connectViewHeadersSignals()
 {
-    connect(tableView->horizontalHeader(), SIGNAL(sectionResized(int, int, int)), this, SLOT(on_sectionResized(int, int, int)));
-    connect(tableView->horizontalHeader(), SIGNAL(geometriesChanged()), this, SLOT(on_geometriesChanged()));
+    connect(tableView->horizontalHeader(), &QHeaderView::sectionResized, this, &TableViewLastColumnResizingFixer::on_sectionResized);
+    connect(tableView->horizontalHeader(), &QHeaderView::geometriesChanged, this, &TableViewLastColumnResizingFixer::on_geometriesChanged);
 }
 
 // We need to disconnect these while handling the resize events, otherwise we can enter infinite loops.
 void TableViewLastColumnResizingFixer::disconnectViewHeadersSignals()
 {
-    disconnect(tableView->horizontalHeader(), SIGNAL(sectionResized(int, int, int)), this, SLOT(on_sectionResized(int, int, int)));
-    disconnect(tableView->horizontalHeader(), SIGNAL(geometriesChanged()), this, SLOT(on_geometriesChanged()));
+    disconnect(tableView->horizontalHeader(), &QHeaderView::sectionResized, this, &TableViewLastColumnResizingFixer::on_sectionResized);
+    disconnect(tableView->horizontalHeader(), &QHeaderView::geometriesChanged, this, &TableViewLastColumnResizingFixer::on_geometriesChanged);
 }
 
 // Setup the resize mode, handles compatibility for Qt5 and below as the method signatures changed.
@@ -765,7 +756,7 @@ LSSharedFileListItemRef findStartupItemInList(LSSharedFileListRef list, CFURLRef
         CFURLRef currentItemURL = NULL;
 
 #if defined(MAC_OS_X_VERSION_MAX_ALLOWED) && MAC_OS_X_VERSION_MAX_ALLOWED >= 10100
-    if(&LSSharedFileListItemCopyResolvedURL)
+    if (&LSSharedFileListItemCopyResolvedURL)
         currentItemURL = LSSharedFileListItemCopyResolvedURL(item, resolutionFlags, NULL);
 #if defined(MAC_OS_X_VERSION_MIN_REQUIRED) && MAC_OS_X_VERSION_MIN_REQUIRED < 10100
     else
@@ -775,7 +766,7 @@ LSSharedFileListItemRef findStartupItemInList(LSSharedFileListRef list, CFURLRef
     LSSharedFileListItemResolve(item, resolutionFlags, &currentItemURL, NULL);
 #endif
 
-        if(currentItemURL && CFEqual(currentItemURL, findUrl)) {
+        if (currentItemURL && CFEqual(currentItemURL, findUrl)) {
             // found
             CFRelease(currentItemURL);
             return item;

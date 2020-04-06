@@ -8,6 +8,7 @@
 #define BITCOIN_QT_CLIENTMODEL_H
 
 #include "uint256.h"
+#include "chain.h"
 #include <QObject>
 #include <QDateTime>
 
@@ -53,9 +54,14 @@ public:
 
     //! Return number of connections, default is in- and outbound (total)
     int getNumConnections(unsigned int flags = CONNECTIONS_ALL) const;
-    QString getMasternodeCountString() const;
-    int getNumBlocks() const;
     int getNumBlocksAtStartup();
+    QString getMasternodeCountString() const;
+
+    // from cached block index
+    int getNumBlocks();
+    QDateTime getLastBlockDate() const;
+    QString getLastBlockHash() const;
+    double getVerificationProgress() const;
 
     //! Return number of transactions in the mempool
     long getMempoolSize() const;
@@ -64,11 +70,6 @@ public:
 
     quint64 getTotalBytesRecv() const;
     quint64 getTotalBytesSent() const;
-
-    double getVerificationProgress() const;
-    QDateTime getLastBlockDate() const;
-
-    QString getLastBlockHash() const;
 
     //! Return true if core is doing initial block download
     bool inInitialBlockDownload() const;
@@ -84,9 +85,10 @@ public:
     QString formatClientStartupTime() const;
     QString dataDir() const;
 
-    void setCacheNumBlocks(int blockNum) { cachedNumBlocks = blockNum; };
-    void setCacheReindexing(bool reindex) { cachedReindexing = reindex; };
-    void setCacheImporting(bool import) { cachedImporting = import; };
+    void setCacheTip(const CBlockIndex* const tip) { cacheTip = tip; }
+    void setCacheReindexing(bool reindex) { cachedReindexing = reindex; }
+    void setCacheImporting(bool import) { cachedImporting = import; }
+    void setCacheInitialSync(bool _initialSync) { cachedInitialSync = _initialSync; }
 
     bool getTorInfo(std::string& ip_port) const;
 
@@ -95,10 +97,11 @@ private:
     PeerTableModel* peerTableModel;
     BanTableModel *banTableModel;
 
-    int cachedNumBlocks;
+    const CBlockIndex* cacheTip{nullptr};
     QString cachedMasternodeCountString;
     bool cachedReindexing;
     bool cachedImporting;
+    bool cachedInitialSync;
 
     int numBlocksAtStartup;
 
@@ -117,7 +120,7 @@ Q_SIGNALS:
     void mempoolSizeChanged(long count, size_t mempoolSizeInBytes);
 
     //! Fired when a message should be reported to the user
-    void message(const QString& title, const QString& message, unsigned int style);
+    void message(const QString& title, const QString& message, unsigned int style, bool* ret = nullptr);
 
     // Show progress dialog e.g. for verifychain
     void showProgress(const QString& title, int nProgress);
@@ -126,7 +129,7 @@ public Q_SLOTS:
     void updateTimer();
     void updateMnTimer();
     void updateNumConnections(int numConnections);
-    void updateAlert(const QString& hash, int status);
+    void updateAlert();
     void updateBanlist();
 };
 

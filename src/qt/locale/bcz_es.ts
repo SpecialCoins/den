@@ -1557,8 +1557,8 @@ It will start automatically as soon as the wallet has enough confirmations on an
         <translation>Crear Nuevo Controlador de Master Node</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;To create a BCZ Masternode you must dedicate 10.000 BCZ (the unit of BCZ) to the network (however, these coins are still yours and will never leave your possession). &lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;You can deactivate the node and unlock the coins at any time.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>Para crear un Masternode de BCZ debes desponer 10.000 BCZ (la unidad de BCZ) a la red (sin embargo, estas monedas siguen siendo tuyas y nunca saldrán de tu posesión). Puedes desactivar el nodo y desbloquear las monedas en cualquier momento.</translation>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;To create a BCZ Masternode you must dedicate 5,000 BCZ (the unit of BCZ) to the network (however, these coins are still yours and will never leave your possession). &lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;You can deactivate the node and unlock the coins at any time.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>Para crear un Masternode de BCZ debes desponer 5,000 BCZ (la unidad de BCZ) a la red (sin embargo, estas monedas siguen siendo tuyas y nunca saldrán de tu posesión). Puedes desactivar el nodo y desbloquear las monedas en cualquier momento.</translation>
     </message>
     <message>
         <source>Make sure you have this amount of coins.</source>
@@ -1799,7 +1799,7 @@ Are you sure?</source>
     </message>
     <message>
         <source>Not enough balance to create a masternode, 5,000 BCZ required.</source>
-        <translation>No hay suficiente saldo para crear un masternode, se necesitan 10.000 BCZ.</translation>
+        <translation>No hay suficiente saldo para crear un masternode, se necesitan 5,000 BCZ.</translation>
     </message>
     <message>
         <source>Error creating masternode</source>

@@ -962,115 +962,6 @@ for staking</source>
     </message>
 </context>
 <context>
-    <name>CoinControlBczWidget</name>
-    <message>
-        <location filename="../bcz/forms/coincontrolwidget.ui" line="+14"/>
-        <source>Dialog</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+78"/>
-        <source>Transaction Details</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+38"/>
-        <source>PushButton</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+30"/>
-        <source>BCZ:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <location line="+36"/>
-        <location line="+36"/>
-        <location line="+143"/>
-        <location line="+20"/>
-        <location line="+20"/>
-        <location line="+20"/>
-        <source>TextLabel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="-246"/>
-        <source>Quantity:</source>
-        <translation type="unfinished">Quantity:</translation>
-    </message>
-    <message>
-        <location line="+36"/>
-        <source>Fee:</source>
-        <translation type="unfinished">Fee:</translation>
-    </message>
-    <message>
-        <location line="+37"/>
-        <source>Amount</source>
-        <translation type="unfinished">Amount</translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>Label</source>
-        <translation type="unfinished">Label</translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>Address</source>
-        <translation type="unfinished">Address</translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>Type</source>
-        <translation type="unfinished">Type</translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>Date</source>
-        <translation type="unfinished">Date</translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>Confirmations</source>
-        <translation type="unfinished">Confirmations</translation>
-    </message>
-    <message>
-        <location line="+39"/>
-        <source>CheckBox</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+17"/>
-        <source>Bytes:</source>
-        <translation type="unfinished">Bytes:</translation>
-    </message>
-    <message>
-        <location line="+20"/>
-        <source>Dust:</source>
-        <translation type="unfinished">Dust:</translation>
-    </message>
-    <message>
-        <location line="+20"/>
-        <source>Change:</source>
-        <translation type="unfinished">Change:</translation>
-    </message>
-    <message>
-        <location line="+20"/>
-        <source>After Fee: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+65"/>
-        <source>CANCEL</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+16"/>
-        <source>OK</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>ColdStakingWidget</name>
     <message>
         <location filename="../bcz/forms/coldstakingwidget.ui" line="+14"/>
@@ -1944,7 +1835,7 @@ It will start automatically as soon as the wallet has enough confirmations on an
     </message>
     <message>
         <location line="+23"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;To create a BCZ Masternode you must dedicate 10.000 BCZ (the unit of BCZ) to the network (however, these coins are still yours and will never leave your possession). &lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;You can deactivate the node and unlock the coins at any time.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;To create a BCZ Masternode you must dedicate 5,000 BCZ (the unit of BCZ) to the network (however, these coins are still yours and will never leave your possession). &lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;You can deactivate the node and unlock the coins at any time.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
