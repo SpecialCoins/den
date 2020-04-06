@@ -407,6 +407,31 @@ QPushButton[cssClass="btn-check-faq-inactive"] {
     border-radius:2px;
 }
 
+/** btn HD Upgrade */
+
+QPushButton[cssClass="btn-check-hd-upgrade"] {
+    background-color:#500be0cb;
+    color:#FFFFFF;
+    font-weight: bold;
+    font-size: 15px;
+    padding-right:6px;
+    padding-left:6px;
+    border-bottom:2px solid #0be0cb;
+    border-radius:2px;
+}
+
+QPushButton[cssClass="btn-check-hd-upgrade"]:hover {
+    font-size: 14px;
+}
+
+QPushButton[cssClass="btn-check-hd-upgrade"]:checked {
+    background-color:#500be0cb;
+    border-bottom:2px solid #0be0cb;
+    border-radius:2px;
+}
+
+/** End btn HD Upgrade */
+
 QPushButton[cssClass="btn-check-faq"]:checked {
     background-color:#500be0cb;
     border-bottom:2px solid #0be0cb;
