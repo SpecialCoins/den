@@ -10,21 +10,23 @@
 #include <string>
 
 class CScheduler;
-class CWallet;
 
 namespace boost
 {
 class thread_group;
 } // namespace boost
 
-extern CWallet* pwalletMain;
-
+extern bool fDisableWallet;
 void StartShutdown();
 bool ShutdownRequested();
 /** Interrupt threads */
 void Interrupt();
 void Shutdown();
 void PrepareShutdown();
+//!Initialize the logging infrastructure
+void InitLogging();
+//!Parameter interaction: change current parameters depending on various rules
+void InitParameterInteraction();
 bool AppInit2();
 
 /** Initialize BCZ core: Basic context setup.

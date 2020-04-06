@@ -122,7 +122,6 @@ bool DecryptAES256(const SecureString& sKey, const std::string& sCiphertext, con
 class CCryptoKeyStore : public CBasicKeyStore
 {
 private:
-    CKeyingMaterial vMasterKey;
 
     //! if fUseCrypto is true, mapKeys must be empty
     //! if fUseCrypto is false, vMasterKey must be empty
@@ -132,6 +131,7 @@ private:
     bool fDecryptionThoroughlyChecked;
 
 protected:
+    CKeyingMaterial vMasterKey;
     bool SetCrypted();
 
     //! will encrypt previously unencrypted keys

@@ -61,7 +61,7 @@ static bool SelectBlockFromCandidates(
     const CBlockIndex** pindexSelected)
 {
     bool fSelected = false;
-    uint256 hashBest = 0;
+    uint256 hashBest;
     *pindexSelected = (const CBlockIndex*)0;
     for (const PAIRTYPE(int64_t, uint256) & item : vSortedByTimestamp) {
         if (!mapBlockIndex.count(item.second))
@@ -94,7 +94,7 @@ static bool SelectBlockFromCandidates(
         }
     }
     if (GetBoolArg("-printstakemodifier", false))
-        LogPrintf("%s : selection hash=%s\n", __func__, hashBest.ToString().c_str());
+        LogPrintf("staking", "%s : selection hash=%s\n", __func__, hashBest.ToString().c_str());
     return fSelected;
 }
 
@@ -157,7 +157,7 @@ bool ComputeNextStakeModifier(const CBlockIndex* pindexPrev, uint64_t& nStakeMod
         return error("%s : unable to get last modifier", __func__);
 
     if (GetBoolArg("-printstakemodifier", false))
-        LogPrintf("%s : prev modifier= %s time=%s\n", __func__, std::to_string(nStakeModifier).c_str(), DateTimeStrFormat("%Y-%m-%d %H:%M:%S", nModifierTime).c_str());
+        LogPrintf("staking", "%s : prev modifier= %s time=%s\n", __func__, std::to_string(nStakeModifier).c_str(), DateTimeStrFormat("%Y-%m-%d %H:%M:%S", nModifierTime).c_str());
 
     if (nModifierTime / MODIFIER_INTERVAL >= pindexPrev->GetBlockTime() / MODIFIER_INTERVAL)
         return true;
@@ -195,7 +195,7 @@ bool ComputeNextStakeModifier(const CBlockIndex* pindexPrev, uint64_t& nStakeMod
         // add the selected block from candidates to selected list
         mapSelectedBlocks.insert(std::make_pair(pindex->GetBlockHash(), pindex));
         if (GetBoolArg("-printstakemodifier", false))
-            LogPrintf("%s : selected round %d stop=%s height=%d bit=%d\n", __func__,
+            LogPrintf("staking", "%s : selected round %d stop=%s height=%d bit=%d\n", __func__,
                 nRound, DateTimeStrFormat("%Y-%m-%d %H:%M:%S", nSelectionIntervalStop).c_str(), pindex->nHeight, pindex->GetStakeEntropyBit());
     }
 
@@ -216,10 +216,10 @@ bool ComputeNextStakeModifier(const CBlockIndex* pindexPrev, uint64_t& nStakeMod
             // 'W' indicates selected proof-of-work blocks
             strSelectionMap.replace(item.second->nHeight - nHeightFirstCandidate, 1, item.second->IsProofOfStake() ? "S" : "W");
         }
-        LogPrintf("%s : selection height [%d, %d] map %s\n", __func__, nHeightFirstCandidate, pindexPrev->nHeight, strSelectionMap.c_str());
+        LogPrintf("staking", "%s : selection height [%d, %d] map %s\n", __func__, nHeightFirstCandidate, pindexPrev->nHeight, strSelectionMap.c_str());
     }
     if (GetBoolArg("-printstakemodifier", false)) {
-        LogPrintf("%s : new modifier=%s time=%s\n", __func__, std::to_string(nStakeModifierNew).c_str(), DateTimeStrFormat("%Y-%m-%d %H:%M:%S", pindexPrev->GetBlockTime()).c_str());
+        LogPrintf("staking", "%s : new modifier=%s time=%s\n", __func__, std::to_string(nStakeModifierNew).c_str(), DateTimeStrFormat("%Y-%m-%d %H:%M:%S", pindexPrev->GetBlockTime()).c_str());
     }
 
     nStakeModifier = nStakeModifierNew;
@@ -286,7 +286,7 @@ bool CheckStakeKernelHash(const CBlockIndex* pindexPrev, const unsigned int nBit
     const bool res = (hashProofOfStake < bnTarget);
 
     if (fVerify || res) {
-        LogPrint("staking", "%s : Proof Of Stake:"
+        LogPrintf("staking", "%s : Proof Of Stake:"
                             "\nssUniqueID=%s"
                             "\nnTimeTx=%d"
                             "\nhashProofOfStake=%s"
@@ -325,7 +325,7 @@ bool GetHashProofOfStake(const CBlockIndex* pindexPrev, CStakeInput* stake, cons
     hashProofOfStakeRet = Hash(ss.begin(), ss.end());
 
     if (fVerify) {
-        LogPrint("staking", "%s :{ nStakeModifier=%s\n"
+        LogPrintf("staking", "%s :{ nStakeModifier=%s\n"
                             "nStakeModifierHeight=%s\n"
                             "}\n",
             __func__, HexStr(modifier_ss), ((false) ? "Not available" : std::to_string(stake->getStakeModifierHeight())));
@@ -401,7 +401,7 @@ bool initStakeInput(const CBlock block, std::unique_ptr<CStakeInput>& stake, int
             return error("%s : VerifySignature failed on coinstake %s", __func__, tx.GetHash().ToString().c_str());
 
         CBczStake* bczInput = new CBczStake();
-        bczInput->SetInput(txPrev, txin.prevout.n);
+        bczInput->SetPrevout(txPrev, txin.prevout.n);
         stake = std::unique_ptr<CStakeInput>(bczInput);
 
     return true;
