@@ -72,7 +72,7 @@ typedef std::set<std::pair<void*, void*> > InvLockOrders;
 struct LockData {
     // Very ugly hack: as the global constructs and destructors run single
     // threaded, we use this boolean to know whether LockData still exists,
-    // as DeleteLock can get called by global CCriticalSection destructors
+    // as DeleteLock can get called by global RecursiveMutex destructors
     // after LockData disappears.
     bool available;
     LockData() : available(true) {}
@@ -112,6 +112,11 @@ static void potential_deadlock_detected(const std::pair<void*, void*>& mismatch,
         }
         LogPrintf(" %s\n", i.second.ToString());
     }
+    if (g_debug_lockorder_abort) {
+        tfm::format(std::cerr, "Assertion failed: detected inconsistent lock order at %s:%i, details in debug log.\n", __FILE__, __LINE__);
+        abort();
+    }
+    throw std::logic_error("potential deadlock detected");
 }
 
 static void push_lock(void* c, const CLockLocation& locklocation)
@@ -169,6 +174,16 @@ void AssertLockHeldInternal(const char* pszName, const char* pszFile, int nLine,
     abort();
 }
 
+void AssertLockNotHeldInternal(const char* pszName, const char* pszFile, int nLine, void* cs)
+{
+    for (const std::pair<void*, CLockLocation>& i : g_lockstack) {
+        if (i.first == cs) {
+            tfm::format(std::cerr, "Assertion failed: lock %s held in %s:%i; locks held:\n%s", pszName, pszFile, nLine, LocksHeld());
+            abort();
+        }
+    }
+}
+
 void DeleteLock(void* cs)
 {
     LockData& lockdata = GetLockData();
@@ -191,5 +206,7 @@ void DeleteLock(void* cs)
         lockdata.invlockorders.erase(invit++);
     }
 }
+
+bool g_debug_lockorder_abort = true;
 
 #endif /* DEBUG_LOCKORDER */

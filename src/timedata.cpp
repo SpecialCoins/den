@@ -13,7 +13,7 @@
 #include "utilstrencodings.h"
 
 
-static CCriticalSection cs_nTimeOffset;
+static RecursiveMutex cs_nTimeOffset;
 static int64_t nTimeOffset = 0;
 
 /**
@@ -82,7 +82,7 @@ void AddTimeData(const CNetAddr& ip, int64_t nOffsetSample, int nOffsetLimit)
             LogPrintf("*** %s\n", strMessage);
             uiInterface.ThreadSafeMessageBox(strMessage, "", CClientUIInterface::MSG_ERROR);
         }
-        if (fDebug) {
+        if (logCategories != BCLog::NONE) {
             for (int64_t n : vSorted)
                 LogPrintf("%+d  ", n);
             LogPrintf("|  ");

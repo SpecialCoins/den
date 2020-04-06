@@ -104,7 +104,7 @@ private:
     uint64_t totalTxSize; //! sum of all mempool tx' byte sizes
 
 public:
-    mutable CCriticalSection cs;
+    mutable RecursiveMutex cs;
     std::map<uint256, CTxMemPoolEntry> mapTx;
     std::map<COutPoint, CInPoint> mapNextTx;
     std::map<uint256, std::pair<double, CAmount> > mapDeltas;
