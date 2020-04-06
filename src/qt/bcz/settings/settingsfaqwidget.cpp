@@ -8,7 +8,7 @@
 #include <QMetaObject>
 #include "qt/bcz/qtutils.h"
 
-SettingsFaqWidget::SettingsFaqWidget(QWidget *parent) :
+SettingsFaqWidget::SettingsFaqWidget(BCZGUI *parent) :
     QDialog(parent),
     ui(new Ui::SettingsFaqWidget)
 {
@@ -96,20 +96,20 @@ SettingsFaqWidget::SettingsFaqWidget(QWidget *parent) :
     setCssProperty(ui->containerButtons, "container-faq-buttons");
 
     // Buttons
-    connect(ui->pushButtonExit, SIGNAL(clicked()), this, SLOT(close()));
-    connect(ui->pushButtonFaq1, SIGNAL(clicked()), this, SLOT(onFaq1Clicked()));
-    connect(ui->pushButtonFaq2, SIGNAL(clicked()), this, SLOT(onFaq2Clicked()));
-    connect(ui->pushButtonFaq3, SIGNAL(clicked()), this, SLOT(onFaq3Clicked()));
-    connect(ui->pushButtonFaq4, SIGNAL(clicked()), this, SLOT(onFaq4Clicked()));
-    connect(ui->pushButtonFaq5, SIGNAL(clicked()), this, SLOT(onFaq5Clicked()));
-    connect(ui->pushButtonFaq6, SIGNAL(clicked()), this, SLOT(onFaq6Clicked()));
-    connect(ui->pushButtonFaq7, SIGNAL(clicked()), this, SLOT(onFaq7Clicked()));
-    connect(ui->pushButtonFaq8, SIGNAL(clicked()), this, SLOT(onFaq8Clicked()));
-    connect(ui->pushButtonFaq9, SIGNAL(clicked()), this, SLOT(onFaq9Clicked()));
-    connect(ui->pushButtonFaq10, SIGNAL(clicked()), this, SLOT(onFaq10Clicked()));
+    connect(ui->pushButtonExit, &QPushButton::clicked, this, &SettingsFaqWidget::close);
+    connect(ui->pushButtonFaq1, &QPushButton::clicked, this, &SettingsFaqWidget::onFaq1Clicked);
+    connect(ui->pushButtonFaq2, &QPushButton::clicked, this, &SettingsFaqWidget::onFaq2Clicked);
+    connect(ui->pushButtonFaq3, &QPushButton::clicked, this, &SettingsFaqWidget::onFaq3Clicked);
+    connect(ui->pushButtonFaq4, &QPushButton::clicked, this, &SettingsFaqWidget::onFaq4Clicked);
+    connect(ui->pushButtonFaq5, &QPushButton::clicked, this, &SettingsFaqWidget::onFaq5Clicked);
+    connect(ui->pushButtonFaq6, &QPushButton::clicked, this, &SettingsFaqWidget::onFaq6Clicked);
+    connect(ui->pushButtonFaq7, &QPushButton::clicked, this, &SettingsFaqWidget::onFaq7Clicked);
+    connect(ui->pushButtonFaq8, &QPushButton::clicked, this, &SettingsFaqWidget::onFaq8Clicked);
+    connect(ui->pushButtonFaq9, &QPushButton::clicked, this, &SettingsFaqWidget::onFaq9Clicked);
+    connect(ui->pushButtonFaq10, &QPushButton::clicked, this, &SettingsFaqWidget::onFaq10Clicked);
 
     if (parent)
-        connect(parent, SIGNAL(windowResizeEvent(QResizeEvent*)), this, SLOT(windowResizeEvent(QResizeEvent*)));
+        connect(parent, &BCZGUI::windowResizeEvent, this, &SettingsFaqWidget::windowResizeEvent);
 }
 
 void SettingsFaqWidget::showEvent(QShowEvent *event){
@@ -166,13 +166,15 @@ void SettingsFaqWidget::onFaq10Clicked(){
     ui->scrollAreaFaq->verticalScrollBar()->setValue(ui->widgetFaq10->y());
 }
 
-void SettingsFaqWidget::windowResizeEvent(QResizeEvent* event){
+void SettingsFaqWidget::windowResizeEvent(QResizeEvent* event)
+{
     QWidget* w = qobject_cast<QWidget*>(parent());
     this->resize(w->width(), w->height());
     this->move(QPoint(0, 0));
 }
 
-std::vector<QPushButton*> SettingsFaqWidget::getButtons(){
+std::vector<QPushButton*> SettingsFaqWidget::getButtons()
+{
     return {
             ui->pushButtonFaq1,
             ui->pushButtonFaq2,
@@ -187,7 +189,8 @@ std::vector<QPushButton*> SettingsFaqWidget::getButtons(){
     };
 }
 
-SettingsFaqWidget::~SettingsFaqWidget(){
+SettingsFaqWidget::~SettingsFaqWidget()
+{
     delete ui;
 }
 

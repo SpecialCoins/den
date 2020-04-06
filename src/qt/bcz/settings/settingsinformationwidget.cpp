@@ -119,7 +119,7 @@ SettingsInformationWidget::SettingsInformationWidget(BCZGUI* _window,QWidget *pa
         if (!GUIUtil::openConfigfile())
             inform(tr("Unable to open bcz.conf with default application"));
     });
-    connect(ui->pushButtonNetworkMonitor, SIGNAL(clicked()), this, SLOT(openNetworkMonitor()));
+    connect(ui->pushButtonNetworkMonitor, &QPushButton::clicked, this, &SettingsInformationWidget::openNetworkMonitor);
 }
 
 
@@ -132,13 +132,13 @@ void SettingsInformationWidget::loadClientModel(){
         ui->labelInfoName->setText(QString::fromStdString(Params().NetworkIDString()));
 
         setNumConnections(clientModel->getNumConnections());
-        connect(clientModel, SIGNAL(numConnectionsChanged(int)), this, SLOT(setNumConnections(int)));
+        connect(clientModel, &ClientModel::numConnectionsChanged, this, &SettingsInformationWidget::setNumConnections);
 
         setMasternodeCount(clientModel->getMasternodeCountString());
         connect(clientModel, SIGNAL(strMasternodesChanged(QString)), this, SLOT(setMasternodeCount(QString)));
 
         setNumBlocks(clientModel->getNumBlocks());
-        connect(clientModel, SIGNAL(numBlocksChanged(int)), this, SLOT(setNumBlocks(int)));
+        connect(clientModel, &ClientModel::numBlocksChanged, this, &SettingsInformationWidget::setNumBlocks);
 
         updateTrafficStats(clientModel->getTotalBytesRecv(), clientModel->getTotalBytesSent());
         connect(clientModel, SIGNAL(bytesChanged(quint64, quint64)), this, SLOT(updateTrafficStats(quint64, quint64)));
