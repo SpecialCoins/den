@@ -21,25 +21,35 @@ ExpandableButton::ExpandableButton(QWidget *parent) :
     ui->pushButton->setCheckable(true);
     this->layout()->setSizeConstraint(QLayout::SetFixedSize);
 
-    connect(ui->pushButton, SIGNAL(clicked()), this, SLOT(mousePressEvent()));
+    connect(ui->pushButton, &QPushButton::clicked, this, &ExpandableButton::mousePressEvent);
 }
 
-void ExpandableButton::setButtonClassStyle(const char *name, const QVariant &value, bool forceUpdate){
+void ExpandableButton::setButtonClassStyle(const char *name, const QVariant &value, bool forceUpdate)
+{
     ui->pushButton->setProperty(name, value);
     if(forceUpdate){
         updateStyle(ui->pushButton);
     }
 }
 
-void ExpandableButton::setIcon(QString path){
+void ExpandableButton::setIcon(QString path)
+{
     ui->pushButton->setIcon(QIcon(path));
 }
 
-void ExpandableButton::setButtonText(const QString _text){
+void ExpandableButton::setButtonText(const QString& _text)
+{
     this->text = _text;
     if(this->isExpanded){
         ui->pushButton->setText(_text);
     }
+}
+
+void ExpandableButton::setNoIconText(const QString& _text)
+{
+    notExpandedText = _text;
+    if (!this->isExpanded)
+        ui->pushButton->setText(_text);
 }
 
 void ExpandableButton::setText2(QString text2)
@@ -63,7 +73,7 @@ void ExpandableButton::setChecked(bool check){
 
 void ExpandableButton::setSmall()
 {
-    ui->pushButton->setText("");
+    ui->pushButton->setText(notExpandedText);
     this->setMaximumWidth(36);
     this->isExpanded = false;
     update();
@@ -91,11 +101,6 @@ void ExpandableButton::leaveEvent(QEvent *) {
 }
 
 void ExpandableButton::mousePressEvent(){
-    Q_EMIT Mouse_Pressed();
-}
-
-void ExpandableButton::mousePressEvent(QMouseEvent *ev)
-{
     Q_EMIT Mouse_Pressed();
 }
 

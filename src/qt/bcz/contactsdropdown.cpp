@@ -78,7 +78,7 @@ ContactsDropdown::ContactsDropdown(int minWidth, int minHeight, PWidget *parent)
     list->setAttribute(Qt::WA_MacShowFocusRect, false);
     list->setSelectionBehavior(QAbstractItemView::SelectRows);
 
-    connect(list, SIGNAL(clicked(QModelIndex)), this, SLOT(handleClick(QModelIndex)));
+    connect(list, &QListView::clicked, this, &ContactsDropdown::handleClick);
 }
 
 void ContactsDropdown::setWalletModel(WalletModel* _model, const QString& type){
@@ -86,6 +86,7 @@ void ContactsDropdown::setWalletModel(WalletModel* _model, const QString& type){
         model = _model->getAddressTableModel();
         this->filter = new AddressFilterProxyModel(type, this);
         this->filter->setSourceModel(model);
+        this->filter->sort(AddressTableModel::Label, Qt::AscendingOrder);
         list->setModel(this->filter);
         list->setModelColumn(AddressTableModel::Address);
     } else {
