@@ -91,32 +91,51 @@ ReceiveWidget::ReceiveWidget(BCZGUI* parent) :
     ui->container_right->addItem(spacer);
     ui->listViewAddress->setVisible(false);
 
+    // Sort Controls
+    SortEdit* lineEdit = new SortEdit(ui->comboBoxSort);
+    connect(lineEdit, &SortEdit::Mouse_Pressed, [this](){ui->comboBoxSort->showPopup();});
+    connect(ui->comboBoxSort, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &ReceiveWidget::onSortChanged);
+    SortEdit* lineEditOrder = new SortEdit(ui->comboBoxSortOrder);
+    connect(lineEditOrder, &SortEdit::Mouse_Pressed, [this](){ui->comboBoxSortOrder->showPopup();});
+    connect(ui->comboBoxSortOrder, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &ReceiveWidget::onSortOrderChanged);
+    fillAddressSortControls(lineEdit, lineEditOrder, ui->comboBoxSort, ui->comboBoxSortOrder);
+    ui->sortWidget->setVisible(false);
+
     // Connect
-    connect(ui->pushButtonLabel, SIGNAL(clicked()), this, SLOT(onLabelClicked()));
-    connect(ui->pushButtonCopy, SIGNAL(clicked()), this, SLOT(onCopyClicked()));
-    connect(ui->pushButtonNewAddress, SIGNAL(clicked()), this, SLOT(onNewAddressClicked()));
-    connect(ui->listViewAddress, SIGNAL(clicked(QModelIndex)), this, SLOT(handleAddressClicked(QModelIndex)));
-    connect(ui->btnRequest, SIGNAL(clicked()), this, SLOT(onRequestClicked()));
-    connect(ui->btnMyAddresses, SIGNAL(clicked()), this, SLOT(onMyAddressesClicked()));
+    connect(ui->pushButtonLabel, &QPushButton::clicked, this, &ReceiveWidget::onLabelClicked);
+    connect(ui->pushButtonCopy, &QPushButton::clicked, this, &ReceiveWidget::onCopyClicked);
+    connect(ui->pushButtonNewAddress, &QPushButton::clicked, this, &ReceiveWidget::onNewAddressClicked);
+    connect(ui->listViewAddress, &QListView::clicked, this, &ReceiveWidget::handleAddressClicked);
+    connect(ui->btnRequest, &OptionButton::clicked, this, &ReceiveWidget::onRequestClicked);
+    connect(ui->btnMyAddresses, &OptionButton::clicked, this, &ReceiveWidget::onMyAddressesClicked);
 }
 
-void ReceiveWidget::loadWalletModel(){
-    if(walletModel) {
+void ReceiveWidget::loadWalletModel()
+{
+    if (walletModel) {
         this->addressTableModel = walletModel->getAddressTableModel();
         this->filter = new AddressFilterProxyModel(AddressTableModel::Receive, this);
         this->filter->setSourceModel(addressTableModel);
+        this->filter->sort(sortType, sortOrder);
         ui->listViewAddress->setModel(this->filter);
         ui->listViewAddress->setModelColumn(AddressTableModel::Address);
 
-        if(!info) info = new SendCoinsRecipient();
+        if (!info) info = new SendCoinsRecipient();
         refreshView();
 
         // data change
-        connect(this->addressTableModel, SIGNAL(dataChanged(QModelIndex,QModelIndex)), this, SLOT(refreshView()));
+        connect(this->addressTableModel, &AddressTableModel::dataChanged, [this](const QModelIndex& tl, const QModelIndex& br){ refreshView(tl, br); });
     }
 }
 
-void ReceiveWidget::refreshView(QString refreshAddress){
+void ReceiveWidget::refreshView(const QModelIndex& tl, const QModelIndex& br)
+{
+    const QModelIndex& index = tl.sibling(tl.row(), AddressTableModel::Address);
+    return refreshView(index.data(Qt::DisplayRole).toString());
+}
+
+void ReceiveWidget::refreshView(QString refreshAddress)
+{
     try {
         QString latestAddress = (refreshAddress.isEmpty()) ? this->addressTableModel->getAddressToShow() : refreshAddress;
         if (latestAddress.isEmpty()) { // new default address
@@ -135,27 +154,29 @@ void ReceiveWidget::refreshView(QString refreshAddress){
         ui->labelDate->setText(GUIUtil::dateTimeStr(QDateTime::fromTime_t(static_cast<uint>(time))));
         updateQr(latestAddress);
         updateLabel();
-    } catch (const std::runtime_error& error){
+    } catch (const std::runtime_error& error) {
         ui->labelQrImg->setText(tr("No available address, try unlocking the wallet"));
         inform(tr("Error generating address"));
     }
 }
 
-void ReceiveWidget::updateLabel(){
-    if(!info->address.isEmpty()) {
+void ReceiveWidget::updateLabel()
+{
+    if (!info->address.isEmpty()) {
         // Check if address label exists
         QString label = addressTableModel->labelForAddress(info->address);
         if (!label.isEmpty()) {
             ui->labelLabel->setVisible(true);
             ui->labelLabel->setText(label);
             ui->pushButtonLabel->setText(tr("Edit Label"));
-        }else{
+        } else {
             ui->labelLabel->setVisible(false);
         }
     }
 }
 
-void ReceiveWidget::updateQr(QString address){
+void ReceiveWidget::updateQr(QString address)
+{
     info->address = address;
     QString uri = GUIUtil::formatBitcoinURI(*info);
     ui->labelQrImg->setText("");
@@ -163,21 +184,23 @@ void ReceiveWidget::updateQr(QString address){
     QString error;
     QColor qrColor("#0f5b69");
     QPixmap pixmap = encodeToQr(uri, error, qrColor);
-    if(!pixmap.isNull()){
+    if (!pixmap.isNull()) {
         qrImage = &pixmap;
         ui->labelQrImg->setPixmap(qrImage->scaled(ui->labelQrImg->width(), ui->labelQrImg->height()));
-    }else{
+    } else {
         ui->labelQrImg->setText(!error.isEmpty() ? error : "Error encoding address");
     }
 }
 
-void ReceiveWidget::handleAddressClicked(const QModelIndex &index){
+void ReceiveWidget::handleAddressClicked(const QModelIndex &index)
+{
     QModelIndex rIndex = filter->mapToSource(index);
     refreshView(rIndex.data(Qt::DisplayRole).toString());
 }
 
-void ReceiveWidget::onLabelClicked(){
-    if(walletModel && !isShowingDialog) {
+void ReceiveWidget::onLabelClicked()
+{
+    if (walletModel && !isShowingDialog) {
         isShowingDialog = true;
         showHideOp(true);
         AddNewContactDialog *dialog = new AddNewContactDialog(window);
@@ -203,14 +226,20 @@ void ReceiveWidget::onLabelClicked(){
     }
 }
 
-void ReceiveWidget::onNewAddressClicked(){
+void ReceiveWidget::onNewAddressClicked()
+{
     try {
-        if (!verifyWalletUnlocked()) return;
+        WalletModel::UnlockContext ctx(walletModel->requestUnlock());
+        if (!ctx.isValid()) {
+            // Unlock wallet was cancelled
+            inform(tr("Cannot create new address, wallet locked"));
+            return;
+        }
         CBitcoinAddress address;
         PairResult r = walletModel->getNewAddress(address, "");
 
         // Check for validity
-        if(!r.result) {
+        if (!r.result) {
             inform(r.status->c_str());
             return;
         }
@@ -219,34 +248,42 @@ void ReceiveWidget::onNewAddressClicked(){
         ui->labelAddress->setText(!info->address.isEmpty() ? info->address : tr("No address"));
         updateLabel();
         inform(tr("New address created"));
-    } catch (const std::runtime_error& error){
+    } catch (const std::runtime_error& error) {
         // Error generating address
         inform("Error generating address");
     }
 }
 
-void ReceiveWidget::onCopyClicked(){
+void ReceiveWidget::onCopyClicked()
+{
     GUIUtil::setClipboard(info->address);
     inform(tr("Address copied"));
 }
 
 
-void ReceiveWidget::onRequestClicked(){
+void ReceiveWidget::onRequestClicked()
+{
     showAddressGenerationDialog(true);
 }
 
-void ReceiveWidget::showAddressGenerationDialog(bool isPaymentRequest) {
-    if(walletModel && !isShowingDialog) {
-        if (!verifyWalletUnlocked()) return;
+void ReceiveWidget::showAddressGenerationDialog(bool isPaymentRequest)
+{
+    if (walletModel && !isShowingDialog) {
+        WalletModel::UnlockContext ctx(walletModel->requestUnlock());
+        if (!ctx.isValid()) {
+            // Unlock wallet was cancelled
+            inform(tr("Cannot perform operation, wallet locked"));
+            return;
+        }
         isShowingDialog = true;
         showHideOp(true);
         RequestDialog *dialog = new RequestDialog(window);
         dialog->setWalletModel(walletModel);
         dialog->setPaymentRequest(isPaymentRequest);
         openDialogWithOpaqueBackgroundY(dialog, window, 3.5, 12);
-        if (dialog->res == 1){
+        if (dialog->res == 1) {
             inform(tr("URI copied to clipboard"));
-        } else if (dialog->res == 2){
+        } else if (dialog->res == 2) {
             inform(tr("Address copied to clipboard"));
         }
         dialog->deleteLater();
@@ -254,24 +291,47 @@ void ReceiveWidget::showAddressGenerationDialog(bool isPaymentRequest) {
     }
 }
 
-void ReceiveWidget::onMyAddressesClicked(){
+void ReceiveWidget::onMyAddressesClicked()
+{
     bool isVisible = ui->listViewAddress->isVisible();
-    if(!isVisible){
+    if (!isVisible) {
         ui->btnMyAddresses->setRightIconClass("btn-dropdown", true);
         ui->listViewAddress->setVisible(true);
+        ui->sortWidget->setVisible(true);
         ui->container_right->removeItem(spacer);
         ui->listViewAddress->update();
-    }else{
+    } else {
         ui->btnMyAddresses->setRightIconClass("ic-arrow", true);
         ui->container_right->addItem(spacer);
         ui->listViewAddress->setVisible(false);
+        ui->sortWidget->setVisible(false);
     }
 }
 
-void ReceiveWidget::changeTheme(bool isLightTheme, QString& theme){
+void ReceiveWidget::onSortChanged(int idx)
+{
+    sortType = (AddressTableModel::ColumnIndex) ui->comboBoxSort->itemData(idx).toInt();
+    sortAddresses();
+}
+
+void ReceiveWidget::onSortOrderChanged(int idx)
+{
+    sortOrder = (Qt::SortOrder) ui->comboBoxSortOrder->itemData(idx).toInt();
+    sortAddresses();
+}
+
+void ReceiveWidget::sortAddresses()
+{
+    if (this->filter)
+        this->filter->sort(sortType, sortOrder);
+}
+
+void ReceiveWidget::changeTheme(bool isLightTheme, QString& theme)
+{
     static_cast<AddressHolder*>(this->delegate->getRowFactory())->isLightTheme = isLightTheme;
 }
 
-ReceiveWidget::~ReceiveWidget(){
+ReceiveWidget::~ReceiveWidget()
+{
     delete ui;
 }
