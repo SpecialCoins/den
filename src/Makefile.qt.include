@@ -45,7 +45,6 @@ QT_FORMS_UI = \
   qt/forms/addressbookpage.ui \
   qt/forms/askpassphrasedialog.ui \
   qt/forms/coincontroldialog.ui \
-  qt/forms/blockexplorer.ui \
   qt/forms/editaddressdialog.ui \
   qt/forms/helpmessagedialog.ui \
   qt/forms/intro.ui \
@@ -58,11 +57,9 @@ QT_FORMS_UI = \
   qt/bcz/forms/lockunlock.ui \
   qt/bcz/forms/expandablebutton.ui \
   qt/bcz/forms/receivedialog.ui \
-  qt/bcz/forms/walletpassworddialog.ui \
   qt/bcz/forms/topbar.ui \
   qt/bcz/forms/txrow.ui \
   qt/bcz/forms/dashboardwidget.ui \
-  qt/bcz/forms/coincontrolwidget.ui \
   qt/bcz/forms/addresslabelrow.ui \
   qt/bcz/forms/contactdropdownrow.ui \
   qt/bcz/forms/mninfodialog.ui \
@@ -87,6 +84,7 @@ QT_FORMS_UI = \
   qt/bcz/forms/defaultdialog.ui \
   qt/bcz/forms/coldstakingwidget.ui \
   qt/bcz/settings/forms/settingsbackupwallet.ui \
+  qt/bcz/settings/forms/settingsexportcsv.ui \
   qt/bcz/settings/forms/settingsbittoolwidget.ui \
   qt/bcz/settings/forms/settingsconsolewidget.ui \
   qt/bcz/settings/forms/settingsdisplayoptionswidget.ui \
@@ -111,7 +109,6 @@ QT_MOC_CPP = \
   qt/moc_bitcoinamountfield.cpp \
   qt/bcz/moc_bczgui.cpp \
   qt/moc_bitcoinunits.cpp \
-  qt/moc_blockexplorer.cpp \
   qt/moc_clientmodel.cpp \
   qt/moc_coincontroldialog.cpp \
   qt/moc_coincontroltreewidget.cpp \
@@ -146,12 +143,10 @@ QT_MOC_CPP = \
   qt/bcz/moc_expandablebutton.cpp \
   qt/bcz/moc_furabstractlistitemdelegate.cpp \
   qt/bcz/moc_receivedialog.cpp \
-  qt/bcz/moc_walletpassworddialog.cpp \
   qt/bcz/moc_pfborderimage.cpp \
   qt/bcz/moc_topbar.cpp \
   qt/bcz/moc_txrow.cpp \
   qt/bcz/moc_dashboardwidget.cpp \
-  qt/bcz/moc_coincontrolwidget.cpp \
   qt/bcz/moc_addresslabelrow.cpp \
   qt/bcz/moc_contactdropdownrow.cpp \
   qt/bcz/moc_mninfodialog.cpp \
@@ -179,6 +174,7 @@ QT_MOC_CPP = \
   qt/bcz/moc_defaultdialog.cpp \
   qt/bcz/moc_coldstakingwidget.cpp \
   qt/bcz/settings/moc_settingsbackupwallet.cpp \
+  qt/bcz/settings/moc_settingsexportcsv.cpp \
   qt/bcz/settings/moc_settingsbittoolwidget.cpp \
   qt/bcz/settings/moc_settingsconsolewidget.cpp \
   qt/bcz/settings/moc_settingsdisplayoptionswidget.cpp \
@@ -223,7 +219,6 @@ BITCOIN_QT_H = \
   qt/bitcoinamountfield.h \
   qt/bcz/bczgui.h \
   qt/bitcoinunits.h \
-  qt/blockexplorer.h \
   qt/clientmodel.h \
   qt/coincontroldialog.h \
   qt/coincontroltreewidget.h \
@@ -271,13 +266,11 @@ BITCOIN_QT_H = \
   qt/bcz/txviewholder.h \
   qt/bcz/qtutils.h \
   qt/bcz/expandablebutton.h \
-  qt/bcz/walletpassworddialog.h \
   qt/bcz/topbar.h \
   qt/bcz/txrow.h \
   qt/bcz/addressholder.h \
   qt/bcz/addressfilterproxymodel.h \
   qt/bcz/dashboardwidget.h \
-  qt/bcz/coincontrolwidget.h \
   qt/bcz/addresslabelrow.h \
   qt/bcz/contactdropdownrow.h \
   qt/bcz/mninfodialog.h \
@@ -305,6 +298,7 @@ BITCOIN_QT_H = \
   qt/bcz/defaultdialog.h \
   qt/bcz/coldstakingwidget.h \
   qt/bcz/settings/settingsbackupwallet.h \
+  qt/bcz/settings/settingsexportcsv.h \
   qt/bcz/settings/settingsbittoolwidget.h \
   qt/bcz/settings/settingsconsolewidget.h \
   qt/bcz/settings/settingsdisplayoptionswidget.h \
@@ -325,9 +319,6 @@ RES_ICONS = \
   qt/res/icons/address-book.png \
   qt/res/icons/bitcoin.ico \
   qt/res/icons/bitcoin.png \
-  qt/res/icons/bitcoin_testnet.ico \
-  qt/res/icons/bitcoin_testnet.png \
-  qt/res/icons/bitcoin_regtest.png \
   qt/res/icons/browse.png \
   qt/res/icons/clock1.png \
   qt/res/icons/clock2.png \
@@ -344,7 +335,6 @@ RES_ICONS = \
   qt/res/icons/edit.png \
   qt/res/icons/editcopy.png \
   qt/res/icons/editpaste.png \
-  qt/res/icons/explorer.png \
   qt/res/icons/export.png \
   qt/res/icons/eye.png \
   qt/res/icons/eye_minus.png \
@@ -381,7 +371,6 @@ RES_ICONS = \
   qt/res/icons/unit_tm.png \
   qt/res/icons/unit_tu.png \
   qt/bcz/res/img/bg-dashboard-banner.png \
-  qt/bcz/res/img/bg-dashboard-banner2.png \
   qt/bcz/res/img/bg-multi-number-dark.svg \
   qt/bcz/res/img/ic-check-locked.svg \
   qt/bcz/res/img/ic-nav-address.svg \
@@ -569,7 +558,6 @@ BITCOIN_QT_BASE_CPP = \
   qt/bitcoinamountfield.cpp \
   qt/bcz/bczgui.cpp \
   qt/bitcoinunits.cpp \
-  qt/blockexplorer.cpp \
   qt/clientmodel.cpp \
   qt/csvmodelwriter.cpp \
   qt/guiutil.cpp \
@@ -593,7 +581,6 @@ BITCOIN_QT_WALLET_CPP = \
   qt/addressbookpage.cpp \
   qt/addresstablemodel.cpp \
   qt/askpassphrasedialog.cpp \
-  qt/blockexplorer.cpp \
   qt/coincontroldialog.cpp \
   qt/coincontroltreewidget.cpp \
   qt/editaddressdialog.cpp \
@@ -618,13 +605,11 @@ BITCOIN_QT_WALLET_CPP = \
   qt/bcz/txviewholder.cpp \
   qt/bcz/qtutils.cpp \
   qt/bcz/expandablebutton.cpp \
-  qt/bcz/walletpassworddialog.cpp \
   qt/bcz/topbar.cpp \
   qt/bcz/txrow.cpp \
   qt/bcz/addressholder.cpp \
   qt/bcz/addressfilterproxymodel.cpp \
   qt/bcz/dashboardwidget.cpp \
-  qt/bcz/coincontrolwidget.cpp \
   qt/bcz/addresslabelrow.cpp \
   qt/bcz/contactdropdownrow.cpp \
   qt/bcz/contactsdropdown.cpp \
@@ -652,6 +637,7 @@ BITCOIN_QT_WALLET_CPP = \
   qt/bcz/defaultdialog.cpp \
   qt/bcz/coldstakingwidget.cpp \
   qt/bcz/settings/settingsbackupwallet.cpp \
+  qt/bcz/settings/settingsexportcsv.cpp \
   qt/bcz/settings/settingsbittoolwidget.cpp \
   qt/bcz/settings/settingsconsolewidget.cpp \
   qt/bcz/settings/settingsdisplayoptionswidget.cpp \
