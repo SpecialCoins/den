@@ -104,7 +104,7 @@ UniValue listmasternodes(const UniValue& params, bool fHelp)
             std::string strHost;
             int port;
             SplitHostPort(mn->addr.ToString(), port, strHost);
-            CNetAddr node = CNetAddr(strHost, false);
+            CNetAddr node = CNetAddr(strHost);
             std::string strNetwork = GetNetworkName(node.GetNetwork());
 
             obj.push_back(Pair("rank", (strStatus == "ENABLED" ? s.first : 0)));
@@ -143,7 +143,7 @@ UniValue masternodeconnect(const UniValue& params, bool fHelp)
 
     CService addr = CService(strAddress);
 
-    CNode* pnode = ConnectNode((CAddress)addr, NULL, false);
+    CNode* pnode = ConnectNode((CAddress)addr, NULL, false, true);
     if (pnode) {
         pnode->Release();
         return NullUniValue;
@@ -195,24 +195,25 @@ UniValue masternodecurrent (const UniValue& params, bool fHelp)
     if (fHelp || (params.size() != 0))
         throw std::runtime_error(
             "masternodecurrent\n"
-            "\nGet current masternode winner\n"
+            "\nGet current masternode winner (scheduled to be paid next).\n"
 
             "\nResult:\n"
             "{\n"
             "  \"protocol\": xxxx,        (numeric) Protocol version\n"
             "  \"txhash\": \"xxxx\",      (string) Collateral transaction hash\n"
             "  \"pubkey\": \"xxxx\",      (string) MN Public key\n"
-            "  \"lastseen\": xxx,       (numeric) Time since epoch of last seen\n"
-            "  \"activeseconds\": xxx,  (numeric) Seconds MN has been active\n"
+            "  \"lastseen\": xxx,         (numeric) Time since epoch of last seen\n"
+            "  \"activeseconds\": xxx,    (numeric) Seconds MN has been active\n"
             "}\n"
 
             "\nExamples:\n" +
             HelpExampleCli("masternodecurrent", "") + HelpExampleRpc("masternodecurrent", ""));
 
-    CMasternode* winner = mnodeman.GetCurrentMasterNode(1);
+    const int nHeight = WITH_LOCK(cs_main, return chainActive.Height() + 1);
+    int nCount = 0;
+    CMasternode* winner = mnodeman.GetNextMasternodeInQueueForPayment(nHeight, true, nCount);
     if (winner) {
         UniValue obj(UniValue::VOBJ);
-
         obj.push_back(Pair("protocol", (int64_t)winner->protocolVersion));
         obj.push_back(Pair("txhash", winner->vin.prevout.hash.ToString()));
         obj.push_back(Pair("pubkey", CBitcoinAddress(winner->pubKeyCollateralAddress.GetID()).ToString()));
@@ -256,7 +257,7 @@ bool StartMasternodeEntry(UniValue& statusObjRet, CMasternodeBroadcast& mnbRet, 
         return false;
     }
 
-    CTxIn vin = CTxIn(uint256(mne.getTxHash()), uint32_t(nIndex));
+    CTxIn vin = CTxIn(uint256S(mne.getTxHash()), uint32_t(nIndex));
     CMasternode* pmn = mnodeman.Find(vin);
     if (pmn != NULL) {
         if (strCommand == "missing") return false;
@@ -431,7 +432,7 @@ UniValue startmasternode (const UniValue& params, bool fHelp)
 
         if(!found) {
             statusObj.push_back(Pair("success", false));
-            statusObj.push_back(Pair("error_message", "Could not find alias in config. Verify with list-conf."));
+            statusObj.push_back(Pair("error_message", "Could not find alias in config. Verify with listmasternodeconf."));
         }
 
         return statusObj;
@@ -530,7 +531,7 @@ UniValue listmasternodeconf (const UniValue& params, bool fHelp)
         int nIndex;
         if(!mne.castOutputIndex(nIndex))
             continue;
-        CTxIn vin = CTxIn(uint256(mne.getTxHash()), uint32_t(nIndex));
+        CTxIn vin = CTxIn(uint256S(mne.getTxHash()), uint32_t(nIndex));
         CMasternode* pmn = mnodeman.Find(vin);
 
         std::string strStatus = pmn ? pmn->Status() : "MISSING";
@@ -725,7 +726,7 @@ UniValue getmasternodescores (const UniValue& params, bool fHelp)
 
     std::vector<CMasternode> vMasternodes = mnodeman.GetFullMasternodeVector();
     for (int nHeight = chainActive.Tip()->nHeight - nLast; nHeight < chainActive.Tip()->nHeight + 20; nHeight++) {
-        uint256 nHigh = 0;
+        uint256 nHigh;
         CMasternode* pBestMasternode = NULL;
         for (CMasternode& mn : vMasternodes) {
             uint256 n = mn.CalculateScore(1, nHeight - 100);
@@ -826,7 +827,7 @@ UniValue createmasternodebroadcast(const UniValue& params, bool fHelp)
 
         if(!found) {
             statusObj.push_back(Pair("success", false));
-            statusObj.push_back(Pair("error_message", "Could not find alias in config. Verify with list-conf."));
+            statusObj.push_back(Pair("error_message", "Could not find alias in config. Verify with listmasternodeconf."));
         }
 
         return statusObj;

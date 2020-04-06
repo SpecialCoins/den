@@ -8,16 +8,48 @@
 #include "wallet/wallet.h"
 
 //Normal Stake
-bool CBczStake::SetInput(CTransaction txPrev, unsigned int n)
+
+bool CBczStake::InitFromTxIn(const CTxIn& txin)
+{
+
+    // Find the previous transaction in database
+    uint256 hashBlock;
+    CTransaction txPrev;
+    if (!GetTransaction(txin.prevout.hash, txPrev, hashBlock, true))
+        return error("%s : INFO: read txPrev failed, tx id prev: %s", __func__, txin.prevout.hash.GetHex());
+    SetPrevout(txPrev, txin.prevout.n);
+
+    // Find the index of the block of the previous transaction
+    if (mapBlockIndex.count(hashBlock)) {
+        CBlockIndex* pindex = mapBlockIndex.at(hashBlock);
+        if (chainActive.Contains(pindex)) pindexFrom = pindex;
+    }
+    // Check that the input is in the active chain
+    if (!pindexFrom)
+        return error("%s : Failed to find the block index for stake origin", __func__);
+
+    // All good
+    return true;
+}
+
+bool CBczStake::SetPrevout(CTransaction txPrev, unsigned int n)
 {
     this->txFrom = txPrev;
     this->nPosition = n;
     return true;
 }
 
-bool CBczStake::GetTxFrom(CTransaction& tx)
+bool CBczStake::GetTxFrom(CTransaction& tx) const
 {
     tx = txFrom;
+    return true;
+}
+
+bool CBczStake::GetTxOutFrom(CTxOut& out) const
+{
+    if (txFrom.IsNull() || nPosition >= txFrom.vout.size())
+        return false;
+    out = txFrom.vout[nPosition];
     return true;
 }
 
@@ -27,7 +59,7 @@ bool CBczStake::CreateTxIn(CWallet* pwallet, CTxIn& txIn, uint256 hashTxOut)
     return true;
 }
 
-CAmount CBczStake::GetValue()
+CAmount CBczStake::GetValue() const
 {
     return txFrom.vout[nPosition].nValue;
 }
@@ -97,7 +129,7 @@ bool CBczStake::GetModifier(uint64_t& nStakeModifier)
     return true;
 }
 
-CDataStream CBczStake::GetUniqueness()
+CDataStream CBczStake::GetUniqueness() const
 {
     //The unique identifier for a BCZ stake is the outpoint
     CDataStream ss(SER_NETWORK, 0);
@@ -110,7 +142,7 @@ CBlockIndex* CBczStake::GetIndexFrom()
 {
     if (pindexFrom)
         return pindexFrom;
-    uint256 hashBlock = 0;
+    uint256 hashBlock = UINT256_ZERO;
     CTransaction tx;
     if (GetTransaction(txFrom.GetHash(), tx, hashBlock, true)) {
         // If the index is in the chain, then set it as the "index from"
@@ -124,4 +156,22 @@ CBlockIndex* CBczStake::GetIndexFrom()
     }
 
     return pindexFrom;
+}
+
+// Verify stake contextual checks
+bool CBczStake::ContextCheck(int nHeight, uint32_t nTime)
+{
+    // Get Stake input block time/height
+    CBlockIndex* pindexFrom = GetIndexFrom();
+    if (!pindexFrom)
+        return error("%s: unable to get previous index for stake input");
+    const int nHeightBlockFrom = pindexFrom->nHeight;
+    const uint32_t nTimeBlockFrom = pindexFrom->nTime;
+
+    // Check that the stake has the required depth/age
+    if (!Params().HasStakeMinAgeOrDepth(nHeight, nTime, nHeightBlockFrom, nTimeBlockFrom))
+        return error("%s : min age violation - height=%d - time=%d, nHeightBlockFrom=%d, nTimeBlockFrom=%d",
+                         __func__, nHeight, nTime, nHeightBlockFrom, nTimeBlockFrom);
+    // All good
+    return true;
 }
