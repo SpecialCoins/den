@@ -90,10 +90,10 @@ SendWidget::SendWidget(BCZGUI* parent) :
     ui->btnUri->setTitleClassAndText("btn-title-grey", "Open URI");
     ui->btnUri->setSubTitleClassAndText("text-subtitle", "Parse a payment request.");
 
-    connect(ui->pushButtonFee, SIGNAL(clicked()), this, SLOT(onChangeCustomFeeClicked()));
-    connect(ui->btnCoinControl, SIGNAL(clicked()), this, SLOT(onCoinControlClicked()));
-    connect(ui->btnChangeAddress, SIGNAL(clicked()), this, SLOT(onChangeAddressClicked()));
-    connect(ui->btnUri, SIGNAL(clicked()), this, SLOT(onOpenUriClicked()));
+    connect(ui->pushButtonFee, &QPushButton::clicked, this, &SendWidget::onChangeCustomFeeClicked);
+    connect(ui->btnCoinControl, &OptionButton::clicked, this, &SendWidget::onCoinControlClicked);
+    connect(ui->btnChangeAddress, &OptionButton::clicked, this, &SendWidget::onChangeAddressClicked);
+    connect(ui->btnUri, &OptionButton::clicked, this, &SendWidget::onOpenUriClicked);
     connect(ui->pushButtonReset, &QPushButton::clicked, [this](){ onResetCustomOptions(true); });
 
     setCssProperty(ui->coinWidget, "container-coin-type");
@@ -132,14 +132,15 @@ SendWidget::SendWidget(BCZGUI* parent) :
 
     // Connect
     connect(ui->pushLeft, &QPushButton::clicked, [this](){onBCZSelected();});
-    connect(ui->pushButtonSave, SIGNAL(clicked()), this, SLOT(onSendClicked()));
-    connect(ui->pushButtonAddRecipient, SIGNAL(clicked()), this, SLOT(onAddEntryClicked()));
-    connect(ui->pushButtonClear, SIGNAL(clicked()), this, SLOT(clearAll()));
+    connect(ui->pushButtonSave, &QPushButton::clicked, this, &SendWidget::onSendClicked);
+    connect(ui->pushButtonAddRecipient, &QPushButton::clicked, this, &SendWidget::onAddEntryClicked);
+    connect(ui->pushButtonClear, &QPushButton::clicked, this, &SendWidget::clearAll);
 }
 
-void SendWidget::refreshView(){
+void SendWidget::refreshView()
+{
     QString btnText;
-    if(ui->pushLeft->isChecked()){
+    if (ui->pushLeft->isChecked()) {
         btnText = tr("Send BCZ");
         ui->pushButtonAddRecipient->setVisible(true);
     }
@@ -148,8 +149,8 @@ void SendWidget::refreshView(){
     refreshAmounts();
 }
 
-void SendWidget::refreshAmounts() {
-
+void SendWidget::refreshAmounts()
+{
     CAmount total = 0;
     QMutableListIterator<SendMultiRow*> it(entries);
     while (it.hasNext()) {
@@ -164,7 +165,7 @@ void SendWidget::refreshAmounts() {
     ui->labelAmountSend->setText(GUIUtil::formatBalance(total, nDisplayUnit));
 
     CAmount totalAmount = 0;
-    if (CoinControlDialog::coinControl->HasSelected()){
+    if (CoinControlDialog::coinControl->HasSelected()) {
         // Set remaining balance to the sum of the coinControl selected inputs
         totalAmount = walletModel->getBalance(CoinControlDialog::coinControl) - total;
         ui->labelTitleTotalRemaining->setText(tr("Total remaining from the selected UTXO"));
@@ -181,7 +182,8 @@ void SendWidget::refreshAmounts() {
     );
 }
 
-void SendWidget::loadClientModel(){
+void SendWidget::loadClientModel()
+{
     if (clientModel) {
         connect(clientModel, &ClientModel::numBlocksChanged, [this](){
             if (customFeeDialog) customFeeDialog->updateFee();
@@ -194,8 +196,8 @@ void SendWidget::loadWalletModel() {
         // display unit
         nDisplayUnit = walletModel->getOptionsModel()->getDisplayUnit();
 
-        for(SendMultiRow *entry : entries){
-            if(entry){
+        for (SendMultiRow *entry : entries) {
+            if (entry) {
                 entry->setWalletModel(walletModel);
             }
         }
@@ -205,22 +207,24 @@ void SendWidget::loadWalletModel() {
 
         // TODO: This only happen when the coin control features are modified in other screen, check before do this if the wallet has another screen modifying it.
         // Coin Control
-        //connect(model->getOptionsModel(), SIGNAL(coinControlFeaturesChanged(bool)), this, SLOT(coinControlFeatureChanged(bool)));
+        //connect(walletModel->getOptionsModel(), &OptionsModel::coinControlFeaturesChanged, [this](){});
         //ui->frameCoinControl->setVisible(model->getOptionsModel()->getCoinControlFeatures());
         //coinControlUpdateLabels();
     }
 }
 
-void SendWidget::clearAll(){
+void SendWidget::clearAll()
+{
     onResetCustomOptions(false);
-    if(customFeeDialog) customFeeDialog->clear();
+    if (customFeeDialog) customFeeDialog->clear();
     ui->pushButtonFee->setText(tr("Customize Fee"));
-    if(walletModel) walletModel->setWalletDefaultFee();
+    if (walletModel) walletModel->setWalletDefaultFee();
     clearEntries();
     refreshAmounts();
 }
 
-void SendWidget::onResetCustomOptions(bool fRefreshAmounts){
+void SendWidget::onResetCustomOptions(bool fRefreshAmounts)
+{
     CoinControlDialog::coinControl->SetNull();
     ui->btnChangeAddress->setActive(false);
     ui->btnCoinControl->setActive(false);
@@ -229,7 +233,8 @@ void SendWidget::onResetCustomOptions(bool fRefreshAmounts){
     }
 }
 
-void SendWidget::clearEntries(){
+void SendWidget::clearEntries()
+{
     int num = entries.length();
     for (int i = 0; i < num; ++i) {
         ui->scrollAreaWidgetContents->layout()->takeAt(0)->widget()->deleteLater();
@@ -239,15 +244,16 @@ void SendWidget::clearEntries(){
     addEntry();
 }
 
-void SendWidget::addEntry(){
-    if(entries.isEmpty()){
+void SendWidget::addEntry()
+{
+    if (entries.isEmpty()) {
         createEntry();
     } else {
         if (entries.length() == 1) {
             SendMultiRow *entry = entries.at(0);
             entry->hideLabels();
             entry->setNumber(1);
-        }else if(entries.length() == MAX_SEND_POPUP_ENTRIES){
+        } else if (entries.length() == MAX_SEND_POPUP_ENTRIES) {
             inform(tr("Maximum amount of outputs reached"));
             return;
         }
@@ -256,11 +262,13 @@ void SendWidget::addEntry(){
         sendMultiRow->setNumber(entries.length());
         sendMultiRow->hideLabels();
     }
+    setFocusOnLastEntry();
 }
 
-SendMultiRow* SendWidget::createEntry(){
+SendMultiRow* SendWidget::createEntry()
+{
     SendMultiRow *sendMultiRow = new SendMultiRow(this);
-    if(this->walletModel) sendMultiRow->setWalletModel(this->walletModel);
+    if (this->walletModel) sendMultiRow->setWalletModel(this->walletModel);
     entries.append(sendMultiRow);
     ui->scrollAreaWidgetContents->layout()->addWidget(sendMultiRow);
     connect(sendMultiRow, &SendMultiRow::onContactsClicked, this, &SendWidget::onContactsClicked);
@@ -269,10 +277,11 @@ SendMultiRow* SendWidget::createEntry(){
     return sendMultiRow;
 }
 
-void SendWidget::onAddEntryClicked(){
+void SendWidget::onAddEntryClicked()
+{
     // Check prev valid entries before add a new one.
-    for (SendMultiRow* entry : entries){
-        if(!entry || !entry->validate()) {
+    for (SendMultiRow* entry : entries) {
+        if (!entry || !entry->validate()) {
             inform(tr("Invalid entry, previous entries must be valid before add a new one"));
             return;
         }
@@ -280,25 +289,36 @@ void SendWidget::onAddEntryClicked(){
     addEntry();
 }
 
-void SendWidget::resizeEvent(QResizeEvent *event){
+void SendWidget::resizeEvent(QResizeEvent *event)
+{
     resizeMenu();
     QWidget::resizeEvent(event);
 }
 
+void SendWidget::showEvent(QShowEvent *event)
+{
+    // Set focus on last recipient address when Send-window is displayed
+    setFocusOnLastEntry();
+}
 
-void SendWidget::onSendClicked(){
+void SendWidget::setFocusOnLastEntry()
+{
+    if (!entries.isEmpty()) entries.last()->setFocus();
+}
 
+void SendWidget::onSendClicked()
+{
     if (!walletModel || !walletModel->getOptionsModel())
         return;
 
     QList<SendCoinsRecipient> recipients;
 
-    for (SendMultiRow* entry : entries){
+    for (SendMultiRow* entry : entries) {
         // TODO: Check UTXO splitter here..
         // Validate send..
-        if(entry && entry->validate()) {
+        if (entry && entry->validate()) {
             recipients.append(entry->getValue());
-        }else{
+        } else {
             inform(tr("Invalid entry"));
             return;
         }
@@ -311,11 +331,8 @@ void SendWidget::onSendClicked(){
 
     bool sendBcz = ui->pushLeft->isChecked();
 
-    // request unlock only if was locked or unlocked for mixing:
-    // this way we let users unlock by walletpassphrase or by menu
-    // and make many transactions while unlocking through this dialog
-    // will call relock
-    if(!GUIUtil::requestUnlock(walletModel, AskPassphraseDialog::Context::Send_BCZ, true)){
+    WalletModel::UnlockContext ctx(walletModel->requestUnlock());
+    if (!ctx.isValid()) {
         // Unlock wallet was cancelled
         inform(tr("Cannot send, wallet locked"));
         return;
@@ -324,9 +341,11 @@ void SendWidget::onSendClicked(){
     if(send(recipients)) {
         updateEntryLabels(recipients);
     }
+    setFocusOnLastEntry();
 }
 
-bool SendWidget::send(QList<SendCoinsRecipient> recipients){
+bool SendWidget::send(QList<SendCoinsRecipient> recipients)
+{
     // prepare transaction for getting txFee earlier
     WalletModelTransaction currentTransaction(recipients);
     WalletModel::SendCoinsReturn prepareStatus;
@@ -359,7 +378,7 @@ bool SendWidget::send(QList<SendCoinsRecipient> recipients){
     dialog->adjustSize();
     openDialogWithOpaqueBackgroundY(dialog, window, 3, 5);
 
-    if(dialog->isConfirm()){
+    if (dialog->isConfirm()) {
         // now send the prepared transaction
         WalletModel::SendCoinsReturn sendStatus = dialog->getStatus();
         // process sendStatus and on error generate message shown to user
@@ -381,20 +400,22 @@ bool SendWidget::send(QList<SendCoinsRecipient> recipients){
     return false;
 }
 
-QString SendWidget::recipientsToString(QList<SendCoinsRecipient> recipients){
+QString SendWidget::recipientsToString(QList<SendCoinsRecipient> recipients)
+{
     QString s = "";
-    for (SendCoinsRecipient rec : recipients){
+    for (SendCoinsRecipient rec : recipients) {
         s += rec.address + " -> " + BitcoinUnits::formatWithUnit(walletModel->getOptionsModel()->getDisplayUnit(), rec.amount, false, BitcoinUnits::separatorAlways) + "\n";
     }
     return s;
 }
 
-void SendWidget::updateEntryLabels(QList<SendCoinsRecipient> recipients){
-    for (SendCoinsRecipient rec : recipients){
+void SendWidget::updateEntryLabels(QList<SendCoinsRecipient> recipients)
+{
+    for (SendCoinsRecipient rec : recipients) {
         QString label = rec.label;
-        if(!label.isNull()) {
+        if (!label.isNull()) {
             QString labelOld = walletModel->getAddressTableModel()->labelForAddress(rec.address);
-            if(label.compare(labelOld) != 0) {
+            if (label.compare(labelOld) != 0) {
                 CTxDestination dest = CBitcoinAddress(rec.address.toStdString()).Get();
                 if (!walletModel->updateAddressBookLabels(dest, label.toStdString(),
                                                           this->walletModel->isMine(dest) ?
@@ -411,19 +432,20 @@ void SendWidget::updateEntryLabels(QList<SendCoinsRecipient> recipients){
 }
 
 
-void SendWidget::onChangeAddressClicked(){
+void SendWidget::onChangeAddressClicked()
+{
     showHideOp(true);
     SendChangeAddressDialog* dialog = new SendChangeAddressDialog(window);
-    if(!boost::get<CNoDestination>(&CoinControlDialog::coinControl->destChange)){
+    if (!boost::get<CNoDestination>(&CoinControlDialog::coinControl->destChange)) {
         dialog->setAddress(QString::fromStdString(CBitcoinAddress(CoinControlDialog::coinControl->destChange).ToString()));
     }
-    if(openDialogWithOpaqueBackgroundY(dialog, window, 3, 5)) {
-        if(dialog->selected) {
+    if (openDialogWithOpaqueBackgroundY(dialog, window, 3, 5)) {
+        if (dialog->selected) {
             QString ret;
             if (dialog->getAddress(walletModel, &ret)) {
                 CoinControlDialog::coinControl->destChange = CBitcoinAddress(ret.toStdString()).Get();
                 ui->btnChangeAddress->setActive(true);
-            }else{
+            } else {
                 inform(tr("Invalid change address"));
                 ui->btnChangeAddress->setActive(false);
             }
@@ -432,7 +454,8 @@ void SendWidget::onChangeAddressClicked(){
     dialog->deleteLater();
 }
 
-void SendWidget::onOpenUriClicked(){
+void SendWidget::onOpenUriClicked()
+{
     showHideOp(true);
     OpenURIDialog *dlg = new OpenURIDialog(window);
     if (openDialogWithOpaqueBackgroundY(dlg, window, 3, 5)) {
@@ -467,13 +490,14 @@ void SendWidget::onOpenUriClicked(){
     dlg->deleteLater();
 }
 
-void SendWidget::onChangeCustomFeeClicked(){
+void SendWidget::onChangeCustomFeeClicked()
+{
     showHideOp(true);
     if (!customFeeDialog) {
         customFeeDialog = new SendCustomFeeDialog(window);
         customFeeDialog->setWalletModel(walletModel);
     }
-    if (openDialogWithOpaqueBackgroundY(customFeeDialog, window, 3, 5)){
+    if (openDialogWithOpaqueBackgroundY(customFeeDialog, window, 3, 5)) {
         ui->pushButtonFee->setText(tr("Custom Fee %1").arg(BitcoinUnits::formatWithUnit(nDisplayUnit, customFeeDialog->getFeeRate().GetFeePerK()) + "/kB"));
         isCustomFeeSelected = true;
         walletModel->setWalletDefaultFee(customFeeDialog->getFeeRate().GetFeePerK());
@@ -484,8 +508,8 @@ void SendWidget::onChangeCustomFeeClicked(){
     }
 }
 
-void SendWidget::onCoinControlClicked(){
-
+void SendWidget::onCoinControlClicked()
+{
         if (walletModel->getBalance() > 0) {
             if (!coinControlDialog) {
                 coinControlDialog = new CoinControlDialog();
@@ -501,24 +525,27 @@ void SendWidget::onCoinControlClicked(){
         }
 }
 
-void SendWidget::onValueChanged() {
+void SendWidget::onValueChanged()
+{
     refreshAmounts();
 }
 
-void SendWidget::onBCZSelected(){
+void SendWidget::onBCZSelected()
+{
     setCssProperty(coinIcon, "coin-icon");
     refreshView();
     updateStyle(coinIcon);
 }
 
-void SendWidget::onContactsClicked(SendMultiRow* entry){
+void SendWidget::onContactsClicked(SendMultiRow* entry)
+{
     focusedEntry = entry;
-    if(menu && menu->isVisible()){
+    if (menu && menu->isVisible()) {
         menu->hide();
     }
 
     int contactsSize = walletModel->getAddressTableModel()->sizeSend();
-    if(contactsSize == 0) {
+    if (contactsSize == 0) {
         inform(tr("No contacts available, you can go to the contacts screen and add some there!"));
         return;
     }
@@ -526,15 +553,15 @@ void SendWidget::onContactsClicked(SendMultiRow* entry){
     int height = (contactsSize <= 2) ? entry->getEditHeight() * ( 2 * (contactsSize + 1 )) : entry->getEditHeight() * 4;
     int width = entry->getEditWidth();
 
-    if(!menuContacts){
+    if (!menuContacts) {
         menuContacts = new ContactsDropdown(
                     width,
                     height,
                     this
         );
         menuContacts->setWalletModel(walletModel, AddressTableModel::Send);
-        connect(menuContacts, &ContactsDropdown::contactSelected, [this](QString address, QString label){
-            if(focusedEntry){
+        connect(menuContacts, &ContactsDropdown::contactSelected, [this](QString address, QString label) {
+            if (focusedEntry) {
                 focusedEntry->setLabel(label);
                 focusedEntry->setAddress(address);
             }
@@ -542,7 +569,7 @@ void SendWidget::onContactsClicked(SendMultiRow* entry){
 
     }
 
-    if(menuContacts->isVisible()){
+    if (menuContacts->isVisible()) {
         menuContacts->hide();
         return;
     }
@@ -552,7 +579,7 @@ void SendWidget::onContactsClicked(SendMultiRow* entry){
     menuContacts->adjustSize();
 
     QPoint pos;
-    if (entries.size() > 1){
+    if (entries.size() > 1) {
         pos = entry->pos();
         pos.setY((pos.y() + (focusedEntry->getEditHeight() - 12) * 4));
     } else {
@@ -564,32 +591,34 @@ void SendWidget::onContactsClicked(SendMultiRow* entry){
     menuContacts->show();
 }
 
-void SendWidget::onMenuClicked(SendMultiRow* entry){
+void SendWidget::onMenuClicked(SendMultiRow* entry)
+{
     focusedEntry = entry;
-    if(menuContacts && menuContacts->isVisible()){
+    if (menuContacts && menuContacts->isVisible()) {
         menuContacts->hide();
     }
     QPoint pos = entry->pos();
     pos.setX(pos.x() + (entry->width() - entry->getMenuBtnWidth()));
     pos.setY(pos.y() + entry->height() + (entry->getMenuBtnWidth()));
 
-    if(!this->menu){
+    if (!this->menu) {
         this->menu = new TooltipMenu(window, this);
         this->menu->setCopyBtnVisible(false);
         this->menu->setEditBtnText(tr("Save contact"));
         this->menu->setMinimumSize(this->menu->width() + 30,this->menu->height());
         connect(this->menu, &TooltipMenu::message, this, &AddressesWidget::message);
-        connect(this->menu, SIGNAL(onEditClicked()), this, SLOT(onContactMultiClicked()));
-        connect(this->menu, SIGNAL(onDeleteClicked()), this, SLOT(onDeleteClicked()));
-    }else {
+        connect(this->menu, &TooltipMenu::onEditClicked, this, &SendWidget::onContactMultiClicked);
+        connect(this->menu, &TooltipMenu::onDeleteClicked, this, &SendWidget::onDeleteClicked);
+    } else {
         this->menu->hide();
     }
     menu->move(pos);
     menu->show();
 }
 
-void SendWidget::onContactMultiClicked(){
-    if(focusedEntry) {
+void SendWidget::onContactMultiClicked()
+{
+    if (focusedEntry) {
         QString address = focusedEntry->getAddress();
         if (address.isEmpty()) {
             inform(tr("Address field is empty"));
@@ -608,7 +637,7 @@ void SendWidget::onContactMultiClicked(){
         showHideOp(true);
         AddNewContactDialog *dialog = new AddNewContactDialog(window);
         QString label = walletModel->getAddressTableModel()->labelForAddress(address);
-        if (!label.isNull()){
+        if (!label.isNull()) {
             dialog->setTexts(tr("Update Contact"), "Edit label for the selected address:\n%1");
             dialog->setData(address, label);
         } else {
@@ -632,7 +661,8 @@ void SendWidget::onContactMultiClicked(){
 
 }
 
-void SendWidget::onDeleteClicked(){
+void SendWidget::onDeleteClicked()
+{
     if (focusedEntry) {
         focusedEntry->hide();
         focusedEntry->deleteLater();
@@ -642,9 +672,9 @@ void SendWidget::onDeleteClicked(){
         QMutableListIterator<SendMultiRow*> it(entries);
         while (it.hasNext()) {
             SendMultiRow* entry = it.next();
-            if (focusedEntry == entry){
+            if (focusedEntry == entry) {
                 it.remove();
-            } else if (focusedEntry && entry->getNumber() > entryNumber){
+            } else if (focusedEntry && entry->getNumber() > entryNumber) {
                 entry->setNumber(entry->getNumber() - 1);
             }
         }
@@ -659,11 +689,13 @@ void SendWidget::onDeleteClicked(){
 
         // Update total amounts
         refreshAmounts();
+        setFocusOnLastEntry();
     }
 }
 
-void SendWidget::resizeMenu(){
-    if(menuContacts && menuContacts->isVisible() && focusedEntry){
+void SendWidget::resizeMenu()
+{
+    if (menuContacts && menuContacts->isVisible() && focusedEntry) {
         int width = focusedEntry->getEditWidth();
         menuContacts->resizeList(width, menuContacts->height());
         menuContacts->resize(width, menuContacts->height());
@@ -674,10 +706,12 @@ void SendWidget::resizeMenu(){
     }
 }
 
-void SendWidget::changeTheme(bool isLightTheme, QString& theme){
+void SendWidget::changeTheme(bool isLightTheme, QString& theme)
+{
     if (coinControlDialog) coinControlDialog->setStyleSheet(theme);
 }
 
-SendWidget::~SendWidget(){
+SendWidget::~SendWidget()
+{
     delete ui;
 }

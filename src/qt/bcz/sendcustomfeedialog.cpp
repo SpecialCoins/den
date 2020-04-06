@@ -11,7 +11,7 @@
 #include <QListView>
 #include <QComboBox>
 
-SendCustomFeeDialog::SendCustomFeeDialog(QWidget *parent) :
+SendCustomFeeDialog::SendCustomFeeDialog(BCZGUI *parent) :
     QDialog(parent),
     ui(new Ui::SendCustomFeeDialog)
 {
@@ -23,7 +23,7 @@ SendCustomFeeDialog::SendCustomFeeDialog(QWidget *parent) :
 
     // Text
     ui->labelTitle->setText(tr("Customize Fee"));
-    ui->labelMessage->setText(tr("Customize the transaction fee, depending on the fee value your transaction will be included or not in the blockchain."));
+    ui->labelMessage->setText(tr("Customize the transaction fee, depending on the fee value your transaction might be included faster in the blockchain."));
     setCssProperty(ui->labelTitle, "text-title-dialog");
     setCssProperty(ui->labelMessage, "text-main-grey");
 
@@ -37,8 +37,9 @@ SendCustomFeeDialog::SendCustomFeeDialog(QWidget *parent) :
 
     // Custom
     setCssProperty(ui->labelCustomFee, "label-subtitle-dialog");
-    ui->lineEditCustomFee->setPlaceholderText("0.000001 BCZ");
+    ui->lineEditCustomFee->setPlaceholderText("0.000001");
     initCssEditLine(ui->lineEditCustomFee, true);
+    GUIUtil::setupAmountWidget(ui->lineEditCustomFee, this);
 
     // Buttons
     setCssProperty(ui->btnEsc, "ic-close");
@@ -46,13 +47,15 @@ SendCustomFeeDialog::SendCustomFeeDialog(QWidget *parent) :
     ui->btnSave->setText(tr("SAVE"));
     setCssBtnPrimary(ui->btnSave);
 
-    connect(ui->btnEsc, SIGNAL(clicked()), this, SLOT(close()));
-    connect(ui->btnCancel, SIGNAL(clicked()), this, SLOT(close()));
-    connect(ui->btnSave, SIGNAL(clicked()), this, SLOT(accept()));
-    connect(ui->checkBoxCustom, SIGNAL(clicked()), this, SLOT(onCustomChecked()));
-    connect(ui->checkBoxRecommended, SIGNAL(clicked()), this, SLOT(onRecommendedChecked()));
-    connect(ui->comboBoxRecommended, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(updateFee()));
-    if(parent) connect(parent, SIGNAL(themeChanged(bool, QString&)), this, SLOT(onChangeTheme(bool, QString&)));
+    connect(ui->btnEsc, &QPushButton::clicked, this, &SendCustomFeeDialog::close);
+    connect(ui->btnCancel, &QPushButton::clicked, this, &SendCustomFeeDialog::close);
+    connect(ui->btnSave, &QPushButton::clicked, this, &SendCustomFeeDialog::accept);
+    connect(ui->checkBoxCustom, &QCheckBox::clicked, this, &SendCustomFeeDialog::onCustomChecked);
+    connect(ui->checkBoxRecommended, &QCheckBox::clicked, this, &SendCustomFeeDialog::onRecommendedChecked);
+    connect(ui->comboBoxRecommended, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+        this, &SendCustomFeeDialog::updateFee);
+    if (parent)
+        connect(parent, &BCZGUI::themeChanged, this, &SendCustomFeeDialog::onChangeTheme);
     ui->checkBoxRecommended->setChecked(true);
 }
 
