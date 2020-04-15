@@ -151,7 +151,7 @@ public:
     bool isHDEnabled() const;
     bool upgradeWallet(std::string& upgradeError);
 
-    CAmount getBalance(const CCoinControl* coinControl = NULL) const;
+    CAmount getBalance(const CCoinControl* coinControl = nullptr, bool fIncludeDelegated = true) const;
     CAmount getUnconfirmedBalance() const;
     CAmount getImmatureBalance() const;
     CAmount getLockedBalance() const;
@@ -186,11 +186,14 @@ public:
     };
 
     void setWalletDefaultFee(CAmount fee = DEFAULT_TRANSACTION_FEE);
+    bool hasWalletCustomFee();
+    bool getWalletCustomFee(CAmount& nFeeRet);
+    void setWalletCustomFee(bool fUseCustomFee, const CAmount& nFee = DEFAULT_TRANSACTION_FEE);
 
     const CWalletTx* getTx(uint256 id);
 
     // prepare transaction for getting txfee before sending coins
-    SendCoinsReturn prepareTransaction(WalletModelTransaction& transaction, const CCoinControl* coinControl = NULL);
+    SendCoinsReturn prepareTransaction(WalletModelTransaction& transaction, const CCoinControl* coinControl = NULL, bool fIncludeDelegations = true);
 
     // Send coins to a list of recipients
     SendCoinsReturn sendCoins(WalletModelTransaction& transaction);

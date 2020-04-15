@@ -91,9 +91,6 @@ enum WalletFeature {
 
 enum AvailableCoinsType {
     ALL_COINS = 1,
-    ONLY_DENOMINATED = 2,
-    ONLY_NOT10000IFMN = 3,
-    ONLY_NONDENOMINATED_NOT10000IFMN = 4,           // ONLY_NONDENOMINATED and not 5000 BCZ at the same time
     ONLY_10000 = 5,                                 // find masternode outputs including locked ones (use with caution)
     STAKEABLE_COINS = 6                             // UTXO's that are valid for staking
 };
@@ -167,6 +164,7 @@ private:
     int64_t nTime{0};
     int nTries{0};
     int nCoins{0};
+
 public:
     // Get
     const CBlockIndex* GetLastTip() const { return tipBlock; }
@@ -187,9 +185,11 @@ public:
         SetLastTip(nullptr);
         SetLastTime(0);
     }
-    // Check whether staking status is active (last attempt earlier than 150 seconds ago)
+    // Check whether staking status is active (last attempt earlier than 30 seconds ago)
     bool IsActive() const { return (nTime + 150) >= GetTime(); }
 };
+
+
 
 /**
  * A CWallet is an extension of a keystore, which also maintains a set of transactions and balances,
@@ -198,8 +198,6 @@ public:
 class CWallet : public CCryptoKeyStore, public CValidationInterface
 {
 private:
-    bool SelectCoins(const CAmount& nTargetValue, std::set<std::pair<const CWalletTx*, unsigned int> >& setCoinsRet, CAmount& nValueRet, const CCoinControl* coinControl = NULL, AvailableCoinsType coin_type = ALL_COINS, bool useIX = true, bool fIncludeColdStaking=false, bool fIncludeDelegated=true) const;
-    //it was public bool SelectCoins(int64_t nTargetValue, std::set<std::pair<const CWalletTx*,unsigned int> >& setCoinsRet, int64_t& nValueRet, const CCoinControl *coinControl = NULL, AvailableCoinsType coin_type=ALL_COINS, bool useIX = true) const;
 
     CWalletDB* pwalletdbEncryption;
     //! keeps track of whether Unlock has run a thorough check before
@@ -234,7 +232,7 @@ private:
 
 public:
 
-    static const CAmount STAKE_SPLIT_THRESHOLD = 201 * COIN;
+    static const CAmount DEFAULT_STAKE_SPLIT_THRESHOLD = 201 * COIN;
 
     //! Generates hd wallet //
     bool SetupSPKM();
@@ -247,9 +245,6 @@ public:
 
     //! Get spkm
     ScriptPubKeyMan* GetScriptPubKeyMan() const;
-
-    bool StakeableCoins(std::vector<COutput>* pCoins = nullptr);
-    bool IsCollateralAmount(CAmount nInputAmount) const;
 
     mutable RecursiveMutex cs_wallet;
 
@@ -268,6 +263,10 @@ public:
     CAmount nStakeSplitThreshold;
     // Staker status (last hashed block and time)
     CStakerStatus* pStakerStatus = nullptr;
+
+    // User-defined fee BCZ/kb
+    bool fUseCustomFee;
+    CAmount nCustomFee;
 
     //MultiSend
     std::vector<std::pair<std::string, int> > vMultiSend;
@@ -312,13 +311,26 @@ public:
     //! check whether we are allowed to upgrade (or already support) to the named feature
     bool CanSupportFeature(enum WalletFeature wf);
 
-    bool AvailableCoins(std::vector<COutput>* pCoins, bool fOnlyConfirmed = true, const CCoinControl* coinControl = NULL, bool fIncludeZeroValue = false, AvailableCoinsType nCoinType = ALL_COINS, bool fUseIX = false, int nWatchonlyConfig = 1, bool fIncludeColdStaking=false, bool fIncludeDelegated=true) const;
-
-    // Get available p2cs utxo
+    //! >> Available coins (generic)
+    bool AvailableCoins(std::vector<COutput>* pCoins,   // --> populates when != nullptr
+                        const CCoinControl* coinControl = nullptr,
+                        bool fIncludeDelegated          = true,
+                        bool fIncludeColdStaking        = false,
+                        AvailableCoinsType nCoinType    = ALL_COINS,
+                        bool fOnlyConfirmed             = true,
+                        bool fIncludeZeroValue          = false,
+                        bool fUseIX                     = false,
+                        int nWatchonlyConfig            = 1
+                        ) const;
+    //! >> Available coins (spending)
+    bool SelectCoinsToSpend(const CAmount& nTargetValue, std::set<std::pair<const CWalletTx*, unsigned int> >& setCoinsRet, CAmount& nValueRet, const CCoinControl* coinControl = nullptr, AvailableCoinsType coin_type = ALL_COINS, bool useIX = true, bool fIncludeColdStaking = false, bool fIncludeDelegated = true) const;
+    bool SelectCoinsMinConf(const CAmount& nTargetValue, int nConfMine, int nConfTheirs, std::vector<COutput> vCoins, std::set<std::pair<const CWalletTx*, unsigned int> >& setCoinsRet, CAmount& nValueRet) const;
+    //! >> Available coins (staking)
+    bool StakeableCoins(std::vector<COutput>* pCoins = nullptr);
+    //! >> Available coins (P2CS)
     void GetAvailableP2CSCoins(std::vector<COutput>& vCoins) const;
 
     std::map<CBitcoinAddress, std::vector<COutput> > AvailableCoinsByAddress(bool fConfirmed = true, CAmount maxCoinValue = 0);
-    bool SelectCoinsMinConf(const CAmount& nTargetValue, int nConfMine, int nConfTheirs, std::vector<COutput> vCoins, std::set<std::pair<const CWalletTx*, unsigned int> >& setCoinsRet, CAmount& nValueRet) const;
 
     /// Get 5000 BCZ output and keys which can be used for the Masternode
     bool GetMasternodeVinAndKeys(CTxIn& txinRet, CPubKey& pubKeyRet, CKey& keyRet, std::string strTxHash = "", std::string strOutputIndex = "");
@@ -409,7 +421,7 @@ public:
     void ResendWalletTransactions();
 
     CAmount loopTxsBalance(std::function<void(const uint256&, const CWalletTx&, CAmount&)>method) const;
-    CAmount GetBalance() const;
+    CAmount GetBalance(bool fIncludeDelegated = true) const;
     CAmount GetColdStakingBalance() const;  // delegated coins for which we have the staking key
     CAmount GetImmatureColdStakingBalance() const;
     CAmount GetStakingBalance(const bool fIncludeColdStaking = true) const;
@@ -454,10 +466,6 @@ public:
     std::map<CTxDestination, CAmount> GetAddressBalances();
 
     std::set<CTxDestination> GetAccountAddresses(std::string strAccount) const;
-
-    bool IsDenominated(const CTxIn& txin) const;
-
-    bool IsDenominatedAmount(CAmount nInputAmount) const;
 
     bool IsUsed(const CBitcoinAddress address) const;
 
@@ -636,7 +644,7 @@ public:
         READWRITE(nIndex);
     }
 
-    int SetMerkleBranch(const CBlock& block);
+    void SetMerkleBranch(const CBlock& block);
 
 
     /**
@@ -682,10 +690,6 @@ public:
     mutable bool fCreditCached;
     mutable bool fImmatureCreditCached;
     mutable bool fAvailableCreditCached;
-    mutable bool fAnonymizableCreditCached;
-    mutable bool fAnonymizedCreditCached;
-    mutable bool fDenomUnconfCreditCached;
-    mutable bool fDenomConfCreditCached;
     mutable bool fWatchDebitCached;
     mutable bool fWatchCreditCached;
     mutable bool fImmatureWatchCreditCached;
@@ -700,10 +704,6 @@ public:
     mutable CAmount nCreditCached;
     mutable CAmount nImmatureCreditCached;
     mutable CAmount nAvailableCreditCached;
-    mutable CAmount nAnonymizableCreditCached;
-    mutable CAmount nAnonymizedCreditCached;
-    mutable CAmount nDenomUnconfCreditCached;
-    mutable CAmount nDenomConfCreditCached;
     mutable CAmount nWatchDebitCached;
     mutable CAmount nWatchCreditCached;
     mutable CAmount nImmatureWatchCreditCached;
@@ -838,17 +838,6 @@ public:
         i = iIn;
         nDepth = nDepthIn;
         fSpendable = fSpendableIn;
-    }
-
-    //Used with Obfuscation. Will return largest nondenom, then denominations, then very small inputs
-    int Priority() const
-    {
-        for (CAmount d : obfuScationDenominations)
-            if (tx->vout[i].nValue == d) return 10000;
-        if (tx->vout[i].nValue < 1 * COIN) return 20000;
-
-        //nondenom return largest first
-        return -(tx->vout[i].nValue / COIN);
     }
 
     CAmount Value() const

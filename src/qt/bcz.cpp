@@ -490,7 +490,7 @@ void BitcoinApplication::initializeResult(int retval)
 #ifdef ENABLE_WALLET
         // Now that initialization/startup is done, process any command-line
         // BCZ: URIs or payment requests:
-        //connect(paymentServer, &PaymentServer::receivedPaymentRequest, window, &PIVXGUI::handlePaymentRequest);
+        //connect(paymentServer, &PaymentServer::receivedPaymentRequest, window, &BCZGUI::handlePaymentRequest);
         connect(window, &BCZGUI::receivedURI, paymentServer, &PaymentServer::handleURIOrFile);
         connect(paymentServer, &PaymentServer::message, [this](const QString& title, const QString& message, unsigned int style) {
           window->message(title, message, style);

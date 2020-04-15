@@ -341,6 +341,7 @@ static const CRPCCommand vRPCCommands[] =
 
         /* Utility functions */
         {"util", "createmultisig", &createmultisig, true, true, false},
+        {"util", "logging", &logging, true, false, false},
         {"util", "validateaddress", &validateaddress, true, false, false}, /* uses wallet if enabled */
         {"util", "verifymessage", &verifymessage, true, false, false},
         {"util", "estimatefee", &estimatefee, true, true, false},
@@ -372,7 +373,6 @@ static const CRPCCommand vRPCCommands[] =
         {"bcz", "getmasternodescores", &getmasternodescores, true, true, false},
         {"bcz", "mnsync", &mnsync, true, true, false},
         {"bcz", "spork", &spork, true, true, false},
-        {"bcz", "getpoolinfo", &getpoolinfo, true, true, false},
 
 #ifdef ENABLE_WALLET
         /* Wallet */

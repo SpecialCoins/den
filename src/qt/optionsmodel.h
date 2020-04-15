@@ -45,12 +45,15 @@ public:
         ThreadsScriptVerif,  // int
         DatabaseCache,       // int
         SpendZeroConfChange, // bool
+        HideCharts,          // bool
         HideZeroBalances,    // bool
         HideOrphans,    // bool
         ShowMasternodesTab,  // bool
         Listen,              // bool
-        StakeSplitThreshold, // int
-        ShowColdStakingScreen, // bool
+        StakeSplitThreshold,    // CAmount (LongLong)
+        ShowColdStakingScreen,  // bool
+        fUseCustomFee,          // bool
+        nCustomFee,             // CAmount (LongLong)
         OptionIDRowCount,
     };
 
@@ -65,8 +68,12 @@ public:
     void setDisplayUnit(const QVariant& value);
     /* Update StakeSplitThreshold's value in wallet */
     void setStakeSplitThreshold(const CAmount value);
+    /* Update Custom Fee value in wallet */
+    void setUseCustomFee(bool fUse);
+    void setCustomFeeValue(const CAmount& value);
 
     /* Explicit getters */
+    bool isHideCharts() { return fHideCharts; }
     bool getMinimizeToTray() { return fMinimizeToTray; }
     bool getMinimizeOnClose() { return fMinimizeOnClose; }
     int getDisplayUnit() { return nDisplayUnit; }
@@ -106,6 +113,7 @@ private:
     QString strThirdPartyTxUrls;
     bool fCoinControlFeatures;
     bool showColdStakingScreen;
+    bool fHideCharts;
     bool fHideZeroBalances;
     bool fHideOrphans;
     /* settings that were overriden by command-line */
@@ -116,8 +124,13 @@ private:
 
 Q_SIGNALS:
     void displayUnitChanged(int unit);
+    void zeromintEnableChanged(bool);
+    void zeromintAddressesChanged(bool);
+    void zeromintPercentageChanged(int);
+    void preferredDenomChanged(int);
     void coinControlFeaturesChanged(bool);
     void showHideColdStakingScreen(bool);
+    void hideChartsChanged(bool);
     void hideZeroBalancesChanged(bool);
     void hideOrphansChanged(bool);
 };

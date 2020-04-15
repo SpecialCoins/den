@@ -74,7 +74,7 @@ void CSporkManager::LoadSporksFromDB()
 
 void CSporkManager::ProcessSpork(CNode* pfrom, std::string& strCommand, CDataStream& vRecv)
 {
-    if (fLiteMode) return; // disable all obfuscation/masternode related functionality
+    if (fLiteMode) return; // disable all masternode related functionality
 
     int nChainHeight = 0;
     {
@@ -103,10 +103,8 @@ void CSporkManager::ProcessSpork(CNode* pfrom, std::string& strCommand, CDataStr
 
         // reject old signatures 600 blocks after hard-fork
         if (spork.nMessVersion != MessageVersion::MESS_VER_HASH) {
-            if (Params().NewSigsActive(nChainHeight - 600)) {
-                LogPrintf("%s : nMessVersion=%d not accepted anymore at block %d\n", __func__, spork.nMessVersion, nChainHeight);
-                return;
-            }
+            LogPrintf("%s : nMessVersion=%d not accepted anymore at block %d\n", __func__, spork.nMessVersion, nChainHeight);
+            return;
         }
 
 
@@ -166,16 +164,10 @@ void CSporkManager::ProcessSpork(CNode* pfrom, std::string& strCommand, CDataStr
 
 bool CSporkManager::UpdateSpork(SporkId nSporkID, int64_t nValue)
 {
-    bool fNewSigs = false;
-    {
-        LOCK(cs_main);
-        fNewSigs = chainActive.NewSigsActive();
-    }
-
 
     CSporkMessage spork = CSporkMessage(nSporkID, nValue, GetTime());
 
-    if(spork.Sign(strMasterPrivKey, fNewSigs)){
+    if(spork.Sign(strMasterPrivKey)){
         spork.Relay();
         LOCK(cs);
         mapSporks[spork.GetHash()] = spork;
@@ -236,7 +228,7 @@ bool CSporkManager::SetPrivKey(std::string strPrivKey)
 {
     CSporkMessage spork;
 
-    spork.Sign(strPrivKey, true);
+    spork.Sign(strPrivKey);
     bool fValidSig = spork.CheckSignature();
 
     if (fValidSig) {

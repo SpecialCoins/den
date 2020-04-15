@@ -334,7 +334,11 @@ void ColdStakingWidget::onContactsClicked()
         pos.setY((pos.y() + (height - 14) * 4));
     }
 
-    pos.setX(pos.x() + 40);
+    int margin1, margin2;
+    ui->verticalLayoutTop->getContentsMargins(&margin1, nullptr, nullptr, nullptr);
+    ui->vContainerOwner->getContentsMargins(&margin2, nullptr, nullptr, nullptr);
+    pos.setX(pos.x() + margin1 + margin2);
+
     height = (contactsSize <= 2) ? height * ( 2 * (contactsSize + 1 )) : height * 4;
 
     if (!menuContacts) {
@@ -483,9 +487,9 @@ void ColdStakingWidget::onSendClicked()
     QList<SendCoinsRecipient> recipients;
     recipients.append(dest);
 
-    // Prepare transaction for getting txFee earlier
+    // Prepare transaction for getting txFee earlier (exlude delegated coins)
     WalletModelTransaction currentTransaction(recipients);
-    WalletModel::SendCoinsReturn prepareStatus = walletModel->prepareTransaction(currentTransaction, CoinControlDialog::coinControl);
+    WalletModel::SendCoinsReturn prepareStatus = walletModel->prepareTransaction(currentTransaction, CoinControlDialog::coinControl, false);
 
     // process prepareStatus and on error generate message shown to user
     GuiTransactionsUtils::ProcessSendCoinsReturnAndInform(

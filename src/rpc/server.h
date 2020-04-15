@@ -293,7 +293,6 @@ extern UniValue reconsiderblock(const UniValue& params, bool fHelp);
 extern UniValue getblockindexstats(const UniValue& params, bool fHelp);
 extern void validaterange(const UniValue& params, int& heightStart, int& heightEnd, int minHeightStart=1);
 
-extern UniValue getpoolinfo(const UniValue& params, bool fHelp); // in rpc/masternode.cpp
 extern UniValue listmasternodes(const UniValue& params, bool fHelp);
 extern UniValue getmasternodecount(const UniValue& params, bool fHelp);
 extern UniValue createmasternodebroadcast(const UniValue& params, bool fHelp);
@@ -311,6 +310,7 @@ extern UniValue getmasternodewinners(const UniValue& params, bool fHelp);
 extern UniValue getmasternodescores(const UniValue& params, bool fHelp);
 
 extern UniValue getinfo(const UniValue& params, bool fHelp); // in rpc/misc.cpp
+extern UniValue logging(const UniValue& params, bool fHelp);
 extern UniValue mnsync(const UniValue& params, bool fHelp);
 extern UniValue spork(const UniValue& params, bool fHelp);
 extern UniValue validateaddress(const UniValue& params, bool fHelp);

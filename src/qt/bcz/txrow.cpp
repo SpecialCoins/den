@@ -60,7 +60,6 @@ void TxRow::setType(bool isLightTheme, int type, bool isConfirmed){
             path = "://ic-transaction-staked";
             css = "text-list-amount-receive";
             break;
-        case TransactionRecord::RecvWithObfuscation:
         case TransactionRecord::RecvWithAddress:
         case TransactionRecord::RecvFromOther:
         case TransactionRecord::SendToAddress:

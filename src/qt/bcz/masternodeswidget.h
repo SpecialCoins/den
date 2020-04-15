@@ -10,6 +10,7 @@
 #include "qt/bcz/furabstractlistitemdelegate.h"
 #include "qt/bcz/mnmodel.h"
 #include "qt/bcz/tooltipmenu.h"
+#include "walletmodel.h"
 #include <QTimer>
 #include <atomic>
 

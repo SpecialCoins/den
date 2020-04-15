@@ -61,11 +61,13 @@ static Checkpoints::MapCheckpoints mapCheckpoints =
         (  107198, uint256("0x4c9590a77382e857146bd0cac355589ad1decf5a7d54327c0347bd3acf52a88f"))
         (  108374, uint256("0x55957713ec6e6951e6f451c8cf3fb07c73cddaeb74dfefdb77acabba5d2c9f51"))
         (  126318, uint256("0xffcdbdf74be6db9497258de737b16cd596ce7bedf175a6796f54be1e3805dc98"))
-        (  144624, uint256("0x1bd9410c714db4051a34b2d60b641ad9c63f4aed21b95a6f21018f6e221ce081"));
+        (  144624, uint256("0x1bd9410c714db4051a34b2d60b641ad9c63f4aed21b95a6f21018f6e221ce081"))
+        (  162435, uint256("0xe33a7cbfdf66da89d490d0acf072e10fed16b8e6f7740061e64279534db0d36f"))
+        (  175281, uint256("0xfdb5fbd40c3a4c1288ccabf8c9b74a7590bbeb9bf900f3c520caafb8df74a773"));
 
 static const Checkpoints::CCheckpointData data = {
     &mapCheckpoints,
-    1582137628, // * UNIX timestamp of last checkpoint block
+    1586966108, // * UNIX timestamp of last checkpoint block
     10000,    // * total number of transactions between genesis and last checkpoint
                 //   (the tx=... number in the SetBestChain debug.log lines)
     500        // * estimated number of transactions per day after checkpoint
@@ -181,7 +183,6 @@ public:
 
         nPoolMaxTransactions = 3;
         strSporkPubKey = "04d7437801b20f7d3e585e829088d0773846b80fd06788d6f74b65d258b03fe9cbc2d2fb355bd878f81c491db08fbe5556d6aa220a80b43be927f4bdb41d2d00e8";
-        strObfuscationPoolDummyAddress = "B52EagiPxecjS9zwyebbCZz3x3QuYBNezo";
     }
 
     const Checkpoints::CCheckpointData& Checkpoints() const

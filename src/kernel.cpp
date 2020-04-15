@@ -13,6 +13,7 @@
 #include "utilmoneystr.h"
 #include "stakeinput.h"
 #include "spork.h"
+#include "masternode-sync.h"
 
 // Hard checkpoints of stake modifiers to ensure they are deterministic
 static std::map<int, unsigned int> mapStakeModifierCheckpoints =

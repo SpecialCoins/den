@@ -7,9 +7,11 @@
 
 #include "base58.h"
 #include "clientversion.h"
+#include "httpserver.h"
 #include "init.h"
 #include "main.h"
 #include "masternode-sync.h"
+#include "masternodeman.h"
 #include "net.h"
 #include "netbase.h"
 #include "rpc/server.h"
@@ -564,6 +566,77 @@ UniValue setmocktime(const UniValue& params, bool fHelp)
     return NullUniValue;
 }
 
+void EnableOrDisableLogCategories(UniValue cats, bool enable) {
+    cats = cats.get_array();
+    for (unsigned int i = 0; i < cats.size(); ++i) {
+        std::string cat = cats[i].get_str();
+
+        bool success;
+        if (enable) {
+            success = g_logger->EnableCategory(cat);
+        } else {
+            success = g_logger->DisableCategory(cat);
+        }
+
+        if (!success)
+            throw JSONRPCError(RPC_INVALID_PARAMETER, "unknown logging category " + cat);
+    }
+}
+
+UniValue logging(const UniValue& params, bool fHelp)
+{
+    if (fHelp || params.size() > 2) {
+        throw std::runtime_error(
+            "logging [include,...] <exclude>\n"
+            "Gets and sets the logging configuration.\n"
+            "When called without an argument, returns the list of categories that are currently being debug logged.\n"
+            "When called with arguments, adds or removes categories from debug logging.\n"
+            "The valid logging categories are: " + ListLogCategories() + "\n"
+            "libevent logging is configured on startup and cannot be modified by this RPC during runtime."
+            "Arguments:\n"
+            "1. \"include\" (array of strings) add debug logging for these categories.\n"
+            "2. \"exclude\" (array of strings) remove debug logging for these categories.\n"
+            "\nResult: <categories>  (string): a list of the logging categories that are active.\n"
+            "\nExamples:\n"
+            + HelpExampleCli("logging", "\"[\\\"all\\\"]\" \"[\\\"http\\\"]\"")
+            + HelpExampleRpc("logging", "[\"all\"], \"[libevent]\"")
+        );
+    }
+
+    uint32_t original_log_categories = g_logger->GetCategoryMask();
+    if (params.size() > 0 && params[0].isArray()) {
+        EnableOrDisableLogCategories(params[0], true);
+    }
+
+    if (params.size() > 1 && params[1].isArray()) {
+        EnableOrDisableLogCategories(params[1], false);
+    }
+    uint32_t updated_log_categories = g_logger->GetCategoryMask();
+    uint32_t changed_log_categories = original_log_categories ^ updated_log_categories;
+
+    // Update libevent logging if BCLog::LIBEVENT has changed.
+    // If the library version doesn't allow it, UpdateHTTPServerLogging() returns false,
+    // in which case we should clear the BCLog::LIBEVENT flag.
+    // Throw an error if the user has explicitly asked to change only the libevent
+    // flag and it failed.
+    if (changed_log_categories & BCLog::LIBEVENT) {
+        if (!UpdateHTTPServerLogging(g_logger->WillLogCategory(BCLog::LIBEVENT))) {
+            g_logger->DisableCategory(BCLog::LIBEVENT);
+            if (changed_log_categories == BCLog::LIBEVENT) {
+            throw JSONRPCError(RPC_INVALID_PARAMETER, "libevent logging cannot be updated when using libevent before v2.1.1.");
+            }
+        }
+    }
+
+    UniValue result(UniValue::VOBJ);
+    std::vector<CLogCategoryActive> vLogCatActive = ListActiveLogCategories();
+    for (const auto& logCatActive : vLogCatActive) {
+        result.pushKV(logCatActive.category, logCatActive.active);
+    }
+
+    return result;
+}
+
 #ifdef ENABLE_WALLET
 UniValue getstakingstatus(const UniValue& params, bool fHelp)
 {
@@ -580,8 +653,8 @@ UniValue getstakingstatus(const UniValue& params, bool fHelp)
             "  \"haveconnections\": true|false,     (boolean) whether network connections are present\n"
             "  \"mnsync\": true|false,              (boolean) whether the required masternode/spork data is synced\n"
             "  \"walletunlocked\": true|false,      (boolean) whether the wallet is unlocked\n"
-            "  \"stakeablecoins\": n                (numeric) number of stakeable UTXOs\n"
-            "  \"stakingbalance\": d                (numeric) BCZ value of the stakeable coins (minus reserve balance, if any)\n"
+            "  \"stakeable_utxo\": n                (numeric) number of stakeable UTXOs\n"
+            "  \"stakingbalance\": d                (numeric) value of the stakeable coins (minus reserve balance, if any)\n"
             "  \"stakesplitthreshold\": d           (numeric) value of the current threshold for stake split\n"
             "  \"lastattempt_age\": n               (numeric) seconds since last stake attempt\n"
             "  \"lastattempt_depth\": n             (numeric) depth of the block on top of which the last stake attempt was made\n"
@@ -600,15 +673,15 @@ UniValue getstakingstatus(const UniValue& params, bool fHelp)
         LOCK2(cs_main, &pwalletMain->cs_wallet);
         UniValue obj(UniValue::VOBJ);
         obj.push_back(Pair("staking_status", pwalletMain->pStakerStatus->IsActive()));
-        obj.push_back(Pair("staking_enabled", GetBoolArg("-stake", false)));
+        obj.push_back(Pair("staking_enabled", GetBoolArg("-staking", true)));
         bool fColdStaking = GetBoolArg("-coldstaking", true);
         obj.push_back(Pair("coldstaking_enabled", fColdStaking));
         obj.push_back(Pair("haveconnections", !vNodes.empty()));
-        obj.push_back(Pair("mnsync", masternodeSync.IsSynced()));
+        obj.push_back(Pair("mnsync", !masternodeSync.IsSynced()));
         obj.push_back(Pair("walletunlocked", !pwalletMain->IsLocked()));
         std::vector<COutput> vCoins;
         pwalletMain->StakeableCoins(&vCoins);
-        obj.push_back(Pair("stakeablecoins", (int)vCoins.size()));
+        obj.push_back(Pair("stakeable_utxo", (int)vCoins.size()));
         obj.push_back(Pair("stakingbalance", ValueFromAmount(pwalletMain->GetStakingBalance(fColdStaking))));
         obj.push_back(Pair("stakesplitthreshold", ValueFromAmount(pwalletMain->nStakeSplitThreshold)));
         CStakerStatus* ss = pwalletMain->pStakerStatus;

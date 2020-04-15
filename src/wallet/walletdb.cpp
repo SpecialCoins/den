@@ -158,10 +158,22 @@ bool CWalletDB::WriteOrderPosNext(int64_t nOrderPosNext)
     return Write(std::string("orderposnext"), nOrderPosNext);
 }
 
-bool CWalletDB::WriteStakeSplitThreshold(CAmount nStakeSplitThreshold)
+bool CWalletDB::WriteStakeSplitThreshold(const CAmount& nStakeSplitThreshold)
 {
     nWalletDBUpdated++;
     return Write(std::string("stakeSplitThreshold"), nStakeSplitThreshold);
+}
+
+bool CWalletDB::WriteUseCustomFee(bool fUse)
+{
+    nWalletDBUpdated++;
+    return Write(std::string("fUseCustomFee"), fUse);
+}
+
+bool CWalletDB::WriteCustomFeeValue(const CAmount& nFee)
+{
+    nWalletDBUpdated++;
+    return Write(std::string("nCustomFee"), nFee);
 }
 
 //presstab HyperStake
@@ -619,8 +631,12 @@ bool ReadKeyValue(CWallet* pwallet, CDataStream& ssKey, CDataStream& ssValue, CW
         } else if (strType == "stakeSplitThreshold") {
             ssValue >> pwallet->nStakeSplitThreshold;
             // originally saved as integer
-            if (pwallet->nStakeSplitThreshold < 101 * COIN)
-                pwallet->nStakeSplitThreshold *= 101 * COIN;
+            if (pwallet->nStakeSplitThreshold < 201 * COIN)
+                pwallet->nStakeSplitThreshold *= 201 * COIN;
+        } else if (strType == "fUseCustomFee") {
+            ssValue >> pwallet->fUseCustomFee;
+        } else if (strType == "nCustomFee") {
+            ssValue >> pwallet->nCustomFee;
         } else if (strType == "multisend") //presstab HyperStake
         {
             unsigned int i;

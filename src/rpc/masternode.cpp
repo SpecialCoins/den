@@ -8,6 +8,7 @@
 #include "init.h"
 #include "main.h"
 #include "masternode-payments.h"
+#include "masternode-sync.h"
 #include "masternodeconfig.h"
 #include "masternodeman.h"
 #include "rpc/server.h"
@@ -17,32 +18,6 @@
 
 #include <boost/tokenizer.hpp>
 #include <fstream>
-
-UniValue getpoolinfo(const UniValue& params, bool fHelp)
-{
-    if (fHelp || params.size() != 0)
-        throw std::runtime_error(
-            "getpoolinfo\n"
-            "\nReturns anonymous pool-related information\n"
-
-            "\nResult:\n"
-            "{\n"
-            "  \"current\": \"addr\",    (string) BCZ address of current masternode\n"
-            "  \"state\": xxxx,        (string) unknown\n"
-            "  \"entries\": xxxx,      (numeric) Number of entries\n"
-            "  \"accepted\": xxxx,     (numeric) Number of entries accepted\n"
-            "}\n"
-
-            "\nExamples:\n" +
-            HelpExampleCli("getpoolinfo", "") + HelpExampleRpc("getpoolinfo", ""));
-
-    UniValue obj(UniValue::VOBJ);
-    obj.push_back(Pair("current_masternode", mnodeman.GetCurrentMasterNode()->addr.ToString()));
-    obj.push_back(Pair("state", obfuScationPool.GetState()));
-    obj.push_back(Pair("entries", obfuScationPool.GetEntriesCount()));
-    obj.push_back(Pair("entries_accepted", obfuScationPool.GetCountEntriesAccepted()));
-    return obj;
-}
 
 UniValue listmasternodes(const UniValue& params, bool fHelp)
 {
@@ -109,6 +84,7 @@ UniValue listmasternodes(const UniValue& params, bool fHelp)
 
             obj.push_back(Pair("rank", (strStatus == "ENABLED" ? s.first : 0)));
             obj.push_back(Pair("network", strNetwork));
+            obj.push_back(Pair("ip:port", mn->addr.ToString()));
             obj.push_back(Pair("txhash", strTxHash));
             obj.push_back(Pair("outidx", (uint64_t)oIdx));
             obj.push_back(Pair("pubkey", HexStr(mn->pubKeyMasternode)));
@@ -143,7 +119,7 @@ UniValue masternodeconnect(const UniValue& params, bool fHelp)
 
     CService addr = CService(strAddress);
 
-    CNode* pnode = ConnectNode((CAddress)addr, NULL, false, true);
+    CNode* pnode = ConnectNode((CAddress)addr, NULL, true);
     if (pnode) {
         pnode->Release();
         return NullUniValue;
@@ -162,7 +138,6 @@ UniValue getmasternodecount (const UniValue& params, bool fHelp)
             "\nResult:\n"
             "{\n"
             "  \"total\": n,        (numeric) Total masternodes\n"
-            "  \"obfcompat\": n,    (numeric) Obfuscation Compatible\n"
             "  \"enabled\": n,      (numeric) Enabled masternodes\n"
             "  \"inqueue\": n       (numeric) Masternodes in queue\n"
             "}\n"
@@ -180,7 +155,6 @@ UniValue getmasternodecount (const UniValue& params, bool fHelp)
     mnodeman.CountNetworks(ActiveProtocol(), ipv4, ipv6, onion);
 
     obj.push_back(Pair("total", mnodeman.size()));
-    obj.push_back(Pair("obfcompat", mnodeman.CountEnabled(ActiveProtocol())));
     obj.push_back(Pair("enabled", mnodeman.CountEnabled()));
     obj.push_back(Pair("inqueue", nCount));
     obj.push_back(Pair("ipv4", ipv4));

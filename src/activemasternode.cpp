@@ -5,6 +5,7 @@
 
 #include "activemasternode.h"
 #include "addrman.h"
+#include "masternode-sync.h"
 #include "masternode.h"
 #include "masternodeconfig.h"
 #include "masternodeman.h"
@@ -21,7 +22,7 @@ void CActiveMasternode::ManageStatus()
 
     if (!fMasterNode) return;
 
-    if (logCategories != BCLog::NONE) LogPrintf("CActiveMasternode::ManageStatus() - Begin\n");
+    LogPrint(BCLog::MASTERNODE, "CActiveMasternode::ManageStatus() - Begin\n");
 
     //need correct blocks to send ping
     if (Params().NetworkID() != CBaseChainParams::REGTEST && !masternodeSync.IsBlockchainSynced()) {
@@ -74,7 +75,7 @@ void CActiveMasternode::ManageStatus()
 
         LogPrintf("CActiveMasternode::ManageStatus() - Checking inbound connection to '%s'\n", service.ToString());
 
-        CNode* pnode = ConnectNode((CAddress)service, NULL, false, true);
+         CNode* pnode = ConnectNode((CAddress)service, NULL, true);
         if (!pnode) {
             notCapableReason = "Could not connect to " + service.ToString();
             LogPrintf("CActiveMasternode::ManageStatus() - not capable: %s\n", notCapableReason);
@@ -169,14 +170,8 @@ bool CActiveMasternode::SendMasternodePing(std::string& errorMessage)
 
     LogPrintf("CActiveMasternode::SendMasternodePing() - Relay Masternode Ping vin = %s\n", vin.ToString());
 
-    bool fNewSigs = false;
-    {
-        LOCK(cs_main);
-        fNewSigs = chainActive.NewSigsActive();
-    }
-
     CMasternodePing mnp(vin);
-    if (!mnp.Sign(keyMasternode, pubKeyMasternode, fNewSigs)) {
+    if (!mnp.Sign(keyMasternode, pubKeyMasternode)) {
         errorMessage = "Couldn't sign Masternode Ping";
         return false;
     }
@@ -202,7 +197,7 @@ bool CActiveMasternode::SendMasternodePing(std::string& errorMessage)
         return true;
     } else {
         // Seems like we are trying to send a ping while the Masternode is not registered in the network
-        errorMessage = "Obfuscation Masternode List doesn't include our Masternode, shutting down Masternode pinging service! " + vin.ToString();
+        errorMessage = "Masternode List doesn't include our Masternode, shutting down Masternode pinging service! " + vin.ToString();
         status = ACTIVE_MASTERNODE_NOT_CAPABLE;
         notCapableReason = errorMessage;
         return false;
@@ -252,14 +247,8 @@ bool CActiveMasternode::CreateBroadcast(CTxIn vin, CService service, CKey keyCol
     // wait for reindex and/or import to finish
     if (fImporting || fReindex) return false;
 
-    bool fNewSigs = false;
-    {
-        LOCK(cs_main);
-        fNewSigs = chainActive.NewSigsActive();
-    }
-
     CMasternodePing mnp(vin);
-    if (!mnp.Sign(keyMasternode, pubKeyMasternode, fNewSigs)) {
+    if (!mnp.Sign(keyMasternode, pubKeyMasternode)) {
         errorMessage = strprintf("Failed to sign ping, vin: %s", vin.ToString());
         LogPrintf("CActiveMasternode::CreateBroadcast() -  %s\n", errorMessage);
         mnb = CMasternodeBroadcast();
@@ -268,7 +257,7 @@ bool CActiveMasternode::CreateBroadcast(CTxIn vin, CService service, CKey keyCol
 
     mnb = CMasternodeBroadcast(service, vin, pubKeyCollateralAddress, pubKeyMasternode, PROTOCOL_VERSION);
     mnb.lastPing = mnp;
-    if (!mnb.Sign(keyCollateralAddress, pubKeyCollateralAddress, fNewSigs)) {
+    if (!mnb.Sign(keyCollateralAddress, pubKeyCollateralAddress)) {
         errorMessage = strprintf("Failed to sign broadcast, vin: %s", vin.ToString());
         LogPrintf("CActiveMasternode::CreateBroadcast() - %s\n", errorMessage);
         mnb = CMasternodeBroadcast();

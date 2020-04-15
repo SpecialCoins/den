@@ -22,10 +22,10 @@
 #include "kernel.h"
 #include "masternode-payments.h"
 #include "masternodeman.h"
+#include "masternode-sync.h"
 #include "merkleblock.h"
 #include "messagesigner.h"
 #include "net.h"
-#include "obfuscation.h"
 #include "pow.h"
 #include "spork.h"
 #include "sporkdb.h"
@@ -1080,9 +1080,7 @@ bool AcceptToMemoryPool(CTxMemPool& pool, CValidationState& state, const CTransa
 
         // Don't accept it if it can't get into a block
         // but prioritise dstx and don't check fees for it
-        if (mapObfuscationBroadcastTxes.count(hash)) {
-            mempool.PrioritiseTransaction(hash, hash.ToString(), 1000, 0.1 * COIN);
-        } else if (!ignoreFees) {
+        if (!ignoreFees) {
             CAmount txMinFee = GetMinRelayFee(tx, nSize, true);
             if (fLimitFree && nFees < txMinFee)
                 return state.DoS(0, error("%s : not enough fees %s, %d < %d",
@@ -1836,6 +1834,8 @@ static bool AbortNode(CValidationState& state, const std::string& strMessage, co
 
 bool DisconnectBlock(CBlock& block, CValidationState& state, CBlockIndex* pindex, CCoinsViewCache& view, bool* pfClean)
 {
+    AssertLockHeld(cs_main);
+
     if (pindex->GetBlockHash() != view.GetBestBlock())
         LogPrintf("%s : pindex=%s view=%s\n", __func__, pindex->GetBlockHash().GetHex(), view.GetBestBlock().GetHex());
     assert(pindex->GetBlockHash() == view.GetBestBlock());
@@ -2991,18 +2991,31 @@ bool CheckColdStakeFreeOutput(const CTransaction& tx, const int nHeight)
     const unsigned int outs = tx.vout.size();
     const CTxOut& lastOut = tx.vout[outs-1];
     if (outs >=3 && lastOut.scriptPubKey != tx.vout[outs-2].scriptPubKey) {
-        // last output can either be a mn reward payment
-        // TODO: double check this if/when MN rewards change
-        if (lastOut.nValue == 1 * COIN)
+        if (lastOut.nValue == GetMasternodePayment())
             return true;
 
+        // if mnsync is incomplete, we cannot verify if this is a budget block.
+        // so we check that the staker is not transferring value to the free output
+        if (!masternodeSync.IsSynced()) {
+            // First try finding the previous transaction in database
+            CTransaction txPrev; uint256 hashBlock;
+            if (!GetTransaction(tx.vin[0].prevout.hash, txPrev, hashBlock, true))
+                return error("%s : read txPrev failed: %s",  __func__, tx.vin[0].prevout.hash.GetHex());
+            CAmount amtIn = txPrev.vout[tx.vin[0].prevout.n].nValue + GetBlockValue(nHeight - 1);
+            CAmount amtOut = 0;
+            for (unsigned int i = 1; i < outs-1; i++) amtOut += tx.vout[i].nValue;
+            if (amtOut != amtIn)
+                return error("%s: non-free outputs value %d less than required %d", __func__, amtOut, amtIn);
+            return true;
+        }
+
+        // wrong free output
         return error("%s: Wrong cold staking outputs: vout[%d].scriptPubKey (%s) != vout[%d].scriptPubKey (%s) - value: %s",
                 __func__, outs-1, HexStr(lastOut.scriptPubKey), outs-2, HexStr(tx.vout[outs-2].scriptPubKey), FormatMoney(lastOut.nValue).c_str());
     }
 
     return true;
 }
-
 bool CheckBlock(const CBlock& block, CValidationState& state, bool fCheckPOW, bool fCheckMerkleRoot, bool fCheckSig)
 {
     if (block.fChecked)
@@ -3119,7 +3132,6 @@ bool CheckBlock(const CBlock& block, CValidationState& state, bool fCheckPOW, bo
                         REJECT_INVALID, "bad-cb-payee");
             }
         } else {
-            if (logCategories != BCLog::NONE)
                 LogPrintf("%s: Masternode payment check skipped on sync - skipping IsBlockPayeeValid()\n", __func__);
         }
     }
@@ -3627,7 +3639,6 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
 
     if (!fLiteMode) {
         if (masternodeSync.RequestedMasternodeAssets > MASTERNODE_SYNC_LIST) {
-            obfuScationPool.NewBlock();
             masternodePayments.ProcessBlock(GetHeight() + 10);
         }
     }
@@ -4309,8 +4320,6 @@ bool static AlreadyHave(const CInv& inv)
         return txInMap || mapOrphanTransactions.count(inv.hash) ||
                pcoinsTip->HaveCoins(inv.hash);
     }
-    case MSG_DSTX:
-        return mapObfuscationBroadcastTxes.count(inv.hash);
     case MSG_BLOCK:
         return mapBlockIndex.count(inv.hash);
     case MSG_TXLOCK_REQUEST:
@@ -4495,18 +4504,6 @@ void static ProcessGetData(CNode* pfrom)
                         pushed = true;
                     }
                 }
-
-                if (!pushed && inv.type == MSG_DSTX) {
-                    if (mapObfuscationBroadcastTxes.count(inv.hash)) {
-                        CDataStream ss(SER_NETWORK, PROTOCOL_VERSION);
-                        ss.reserve(1000);
-                        ss << mapObfuscationBroadcastTxes[inv.hash].tx << mapObfuscationBroadcastTxes[inv.hash].vin << mapObfuscationBroadcastTxes[inv.hash].vchSig << mapObfuscationBroadcastTxes[inv.hash].sigTime;
-
-                        pfrom->PushMessage("dstx", ss);
-                        pushed = true;
-                    }
-                }
-
 
                 if (!pushed) {
                     vNotFound.push_back(inv);
@@ -4893,8 +4890,7 @@ bool static ProcessMessage(CNode* pfrom, std::string strCommand, CDataStream& vR
         // we must use CBlocks, as CBlockHeaders won't include the 0x00 nTx count at the end
         std::vector<CBlock> vHeaders;
         int nLimit = MAX_HEADERS_RESULTS;
-        if (logCategories != BCLog::NONE)
-            LogPrintf("getheaders %d to %s from peer=%d\n", (pindex ? pindex->nHeight : -1), hashStop.ToString(), pfrom->id);
+        LogPrintf("getheaders %d to %s from peer=%d\n", (pindex ? pindex->nHeight : -1), hashStop.ToString(), pfrom->id);
         for (; pindex; pindex = chainActive.Next(pindex)) {
             vHeaders.push_back(pindex->GetBlockHeader());
             if (--nLimit <= 0 || pindex->GetBlockHash() == hashStop)
@@ -4904,7 +4900,7 @@ bool static ProcessMessage(CNode* pfrom, std::string strCommand, CDataStream& vR
     }
 
 
-    else if (strCommand == "tx" || strCommand == "dstx") {
+    else if (strCommand == "tx") {
         std::vector<uint256> vWorkQueue;
         std::vector<uint256> vEraseQueue;
         CTransaction tx;
@@ -4915,43 +4911,7 @@ bool static ProcessMessage(CNode* pfrom, std::string strCommand, CDataStream& vR
         std::vector<unsigned char> vchSig;
         int64_t sigTime;
 
-        if (strCommand == "tx") {
-            vRecv >> tx;
-        } else if (strCommand == "dstx") {
-            //these allow masternodes to publish a limited amount of free transactions
-            vRecv >> tx >> vin >> vchSig >> sigTime;
-
-            CMasternode* pmn = mnodeman.Find(vin);
-            if (pmn != NULL) {
-                if (!pmn->allowFreeTx) {
-                    //multiple peers can send us a valid masternode transaction
-                    LogPrint(BCLog::MASTERNODE, "Masternode sending too many transactions %s\n", tx.GetHash().ToString());
-                    return true;
-                }
-
-                std::string strMessage = tx.GetHash().ToString() + std::to_string(sigTime);
-
-                std::string errorMessage = "";
-                if (!CMessageSigner::VerifyMessage(pmn->pubKeyMasternode, vchSig, strMessage, errorMessage)) {
-                    return error("dstx: Got bad masternode address signature %s, error: %s", vin.ToString(), errorMessage);
-                }
-
-                LogPrint(BCLog::MASTERNODE, "Got Masternode transaction %s\n", tx.GetHash().ToString());
-
-                ignoreFees = true;
-                pmn->allowFreeTx = false;
-
-                if (!mapObfuscationBroadcastTxes.count(tx.GetHash())) {
-                    CObfuscationBroadcastTx dstx;
-                    dstx.tx = tx;
-                    dstx.vin = vin;
-                    dstx.vchSig = vchSig;
-                    dstx.sigTime = sigTime;
-
-                    mapObfuscationBroadcastTxes.insert(std::make_pair(tx.GetHash(), dstx));
-                }
-            }
-        }
+        vRecv >> tx;
 
         CInv inv(MSG_TX, tx.GetHash());
         pfrom->AddInventoryKnown(inv);

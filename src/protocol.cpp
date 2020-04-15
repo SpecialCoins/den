@@ -28,8 +28,7 @@ static const char* ppszTypeName[] =
         "mn scan error",
         "mn quorum",
         "mn announce",
-        "mn ping",
-        "dstx"
+        "mn ping"
     };
 
 CMessageHeader::CMessageHeader()

@@ -65,11 +65,14 @@ private Q_SLOTS:
     void onMenuClicked(SendMultiRow* entry);
     void onAddEntryClicked();
     void clearEntries();
-    void clearAll();
+    void clearAll(bool fClearSettings = true);
     void refreshView();
+    void onCheckBoxChanged();
     void onContactMultiClicked();
     void onDeleteClicked();
     void onResetCustomOptions(bool fRefreshAmounts);
+    void onResetSettings();
+
 private:
     Ui::send *ui;
     QPushButton *coinIcon;
@@ -77,6 +80,8 @@ private:
 
     SendCustomFeeDialog* customFeeDialog = nullptr;
     bool isCustomFeeSelected = false;
+    bool fDelegationsChecked = false;
+    CAmount cachedDelegatedBalance{0};
 
     int nDisplayUnit;
     QList<SendMultiRow*> entries;
@@ -92,7 +97,9 @@ private:
     SendMultiRow* createEntry();
     bool send(QList<SendCoinsRecipient> recipients);
     void setFocusOnLastEntry();
+    void showHideCheckBoxDelegations();
     void updateEntryLabels(QList<SendCoinsRecipient> recipients);
+    void setCustomFeeSelected(bool isSelected, const CAmount& customFee = DEFAULT_TRANSACTION_FEE);
 
 };
 

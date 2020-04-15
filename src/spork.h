@@ -14,8 +14,7 @@
 #include "sporkid.h"
 #include "sync.h"
 #include "util.h"
-
-#include "obfuscation.h"
+#include "messagesigner.h"
 #include "protocol.h"
 
 

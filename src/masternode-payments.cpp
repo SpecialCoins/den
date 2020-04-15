@@ -8,7 +8,6 @@
 #include "chainparams.h"
 #include "masternode-sync.h"
 #include "masternodeman.h"
-#include "obfuscation.h"
 #include "spork.h"
 #include "sync.h"
 #include "util.h"
@@ -354,11 +353,11 @@ void CMasternodePayments::ProcessMessageMasternodePayments(CNode* pfrom, std::st
 {
     if (!masternodeSync.IsBlockchainSynced()) return;
 
-    if (fLiteMode) return; //disable all Obfuscation/Masternode related functionality
+    if (fLiteMode) return; //disable all Masternode related functionality
 
 
     if (strCommand == "mnget") { //Masternode Payments Request Sync
-        if (fLiteMode) return;   //disable all Obfuscation/Masternode related functionality
+        if (fLiteMode) return;   //disable all Masternode related functionality
 
         int nCountNeeded;
         vRecv >> nCountNeeded;
@@ -401,7 +400,7 @@ void CMasternodePayments::ProcessMessageMasternodePayments(CNode* pfrom, std::st
         }
 
         // reject old signatures 6000 blocks after hard-fork
-        if (winner.nMessVersion != MessageVersion::MESS_VER_HASH && Params().NewSigsActive(winner.nBlockHeight - 6000)) {
+        if (winner.nMessVersion != MessageVersion::MESS_VER_HASH) {
             LogPrintf("%s : nMessVersion=%d not accepted anymore at block %d\n", __func__, winner.nMessVersion, nHeight);
             return;
         }
@@ -511,22 +510,17 @@ bool CMasternodeBlockPayees::IsTransactionValid(const CTransaction& txNew)
 {
     LOCK(cs_vecPayments);
 
-    int nMaxSignatures = 0;
-    int nMasternode_Drift_Count = 0;
-
-    std::string strPayeesPossible = "";
-
-    CAmount nReward = GetBlockValue(nBlockHeight);
-
-    CAmount requiredMasternodePayment = GetMasternodePayment();
-
     //require at least 6 signatures
+    int nMaxSignatures = 0;
     for (CMasternodePayee& payee : vecPayments)
         if (payee.nVotes >= nMaxSignatures && payee.nVotes >= MNPAYMENTS_SIGNATURES_REQUIRED)
             nMaxSignatures = payee.nVotes;
 
     // if we don't have at least 6 signatures on a payee, approve whichever is the longest chain
     if (nMaxSignatures < MNPAYMENTS_SIGNATURES_REQUIRED) return true;
+
+    std::string strPayeesPossible = "";
+    CAmount requiredMasternodePayment = GetMasternodePayment();
 
     for (CMasternodePayee& payee : vecPayments) {
         bool found = false;
@@ -687,10 +681,8 @@ bool CMasternodePayments::ProcessBlock(int nBlockHeight)
         return false;
     }
 
-    const bool fNewSigs = Params().NewSigsActive(nBlockHeight - 20);
-
     LogPrint(BCLog::MASTERNODE,"CMasternodePayments::ProcessBlock() - Signing Winner\n");
-    if (newWinner.Sign(keyMasternode, pubKeyMasternode, fNewSigs)) {
+    if (newWinner.Sign(keyMasternode, pubKeyMasternode)) {
         LogPrint(BCLog::MASTERNODE,"CMasternodePayments::ProcessBlock() - AddWinningMasternode\n");
 
         if (AddWinningMasternode(newWinner)) {

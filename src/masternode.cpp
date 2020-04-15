@@ -5,10 +5,13 @@
 
 #include "masternode.h"
 #include "addrman.h"
+#include "init.h"
+#include "masternode-payments.h"
+#include "masternode-sync.h"
 #include "masternodeman.h"
-#include "obfuscation.h"
 #include "sync.h"
 #include "util.h"
+#include "wallet/wallet.h"
 
 // keep track of the scanning errors I've seen
 std::map<uint256, int> mapSeenMasternodeScanningErrors;
@@ -203,18 +206,16 @@ void CMasternode::Check(bool forceCheck)
         return;
     }
 
-        CValidationState state;
-        CMutableTransaction tx = CMutableTransaction();
-        CTxOut vout = CTxOut(4999.99 * COIN, obfuScationPool.collateralPubKey);
-        tx.vin.push_back(vin);
-        tx.vout.push_back(vout);
-
         {
             TRY_LOCK(cs_main, lockMain);
             if (!lockMain) return;
 
-            if (!AcceptableInputs(mempool, state, CTransaction(tx), false, NULL)) {
-                activeState = MASTERNODE_VIN_SPENT;
+            CCoins coins;
+            if (!pcoinsTip->GetCoins(vin.prevout.hash, coins) ||
+               (unsigned int)vin.prevout.n>=coins.vout.size() ||
+               coins.vout[vin.prevout.n].IsNull()) {
+                nActiveState = MASTERNODE_OUTPOINT_SPENT;
+                LogPrint(BCLog::MASTERNODE, "CMasternode::Check -- Failed to find Masternode UTXO, masternode=%s\n", vin.prevout.ToStringShort());
                 return;
             }
         }
@@ -393,18 +394,12 @@ bool CMasternodeBroadcast::Create(CTxIn txin, CService service, CKey keyCollater
     // wait for reindex and/or import to finish
     if (fImporting || fReindex) return false;
 
-    bool fNewSigs = false;
-    {
-        LOCK(cs_main);
-        fNewSigs = chainActive.NewSigsActive();
-    }
-
     LogPrint(BCLog::MASTERNODE, "CMasternodeBroadcast::Create -- pubKeyCollateralAddressNew = %s, pubKeyMasternodeNew.GetID() = %s\n",
         CBitcoinAddress(pubKeyCollateralAddressNew.GetID()).ToString(),
         pubKeyMasternodeNew.GetID().ToString());
 
     CMasternodePing mnp(txin);
-    if (!mnp.Sign(keyMasternodeNew, pubKeyMasternodeNew, fNewSigs)) {
+    if (!mnp.Sign(keyMasternodeNew, pubKeyMasternodeNew)) {
         strErrorRet = strprintf("Failed to sign ping, masternode=%s", txin.prevout.hash.ToString());
         LogPrint(BCLog::MASTERNODE,"CMasternodeBroadcast::Create -- %s\n", strErrorRet);
         mnbRet = CMasternodeBroadcast();
@@ -421,7 +416,7 @@ bool CMasternodeBroadcast::Create(CTxIn txin, CService service, CKey keyCollater
     }
 
     mnbRet.lastPing = mnp;
-    if (!mnbRet.Sign(keyCollateralAddressNew, pubKeyCollateralAddressNew, fNewSigs)) {
+    if (!mnbRet.Sign(keyCollateralAddressNew, pubKeyCollateralAddressNew)) {
         strErrorRet = strprintf("Failed to sign broadcast, masternode=%s", txin.prevout.hash.ToString());
         LogPrint(BCLog::MASTERNODE,"CMasternodeBroadcast::Create -- %s\n", strErrorRet);
         mnbRet = CMasternodeBroadcast();
@@ -431,18 +426,13 @@ bool CMasternodeBroadcast::Create(CTxIn txin, CService service, CKey keyCollater
     return true;
 }
 
-bool CMasternodeBroadcast::Sign(const CKey& key, const CPubKey& pubKey, const bool fNewSigs)
+bool CMasternodeBroadcast::Sign(const CKey& key, const CPubKey& pubKey)
 {
     std::string strError = "";
     std::string strMessage;
 
-    if (fNewSigs) {
-        nMessVersion = MessageVersion::MESS_VER_HASH;
-        strMessage = GetSignatureHash().GetHex();
-    } else {
-        nMessVersion = MessageVersion::MESS_VER_STRMESS;
-        strMessage = GetStrMessage();
-    }
+    nMessVersion = MessageVersion::MESS_VER_HASH;
+    strMessage = GetSignatureHash().GetHex();
 
     if (!CMessageSigner::SignMessage(strMessage, vchSig, key)) {
         return error("%s : SignMessage() (nMessVersion=%d) failed", __func__, nMessVersion);
@@ -456,7 +446,7 @@ bool CMasternodeBroadcast::Sign(const CKey& key, const CPubKey& pubKey, const bo
     return true;
 }
 
-bool CMasternodeBroadcast::Sign(const std::string strSignKey, const bool fNewSigs)
+bool CMasternodeBroadcast::Sign(const std::string strSignKey)
 {
     CKey key;
     CPubKey pubkey;
@@ -465,7 +455,7 @@ bool CMasternodeBroadcast::Sign(const std::string strSignKey, const bool fNewSig
         return error("%s : Invalid strSignKey", __func__);
     }
 
-    return Sign(key, pubkey, fNewSigs);
+    return Sign(key, pubkey);
 }
 
 bool CMasternodeBroadcast::CheckSignature() const
@@ -605,12 +595,6 @@ bool CMasternodeBroadcast::CheckInputsAndAdd(int& nDoS)
             mnodeman.Remove(pmn->vin);
     }
 
-    CValidationState state;
-    CMutableTransaction tx = CMutableTransaction();
-    CTxOut vout = CTxOut(4999.99 * COIN, obfuScationPool.collateralPubKey);
-    tx.vin.push_back(vin);
-    tx.vout.push_back(vout);
-
     {
         TRY_LOCK(cs_main, lockMain);
         if (!lockMain) {
@@ -620,9 +604,11 @@ bool CMasternodeBroadcast::CheckInputsAndAdd(int& nDoS)
             return false;
         }
 
-        if (!AcceptableInputs(mempool, state, CTransaction(tx), false, NULL)) {
-            //set nDos
-            state.IsInvalid(nDoS);
+        CCoins coins;
+        if (!pcoinsTip->GetCoins(vin.prevout.hash, coins) ||
+           (unsigned int)vin.prevout.n>=coins.vout.size() ||
+           coins.vout[vin.prevout.n].IsNull()) {
+            LogPrint(BCLog::MASTERNODE, "CMasternodeBroadcast::CheckInputsAndAdd -- Failed to find Masternode UTXO, masternode=%s\n", vin.prevout.ToStringShort());
             return false;
         }
     }

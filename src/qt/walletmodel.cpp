@@ -8,6 +8,7 @@
 
 #include "addresstablemodel.h"
 #include "guiconstants.h"
+#include "optionsmodel.h"
 #include "recentrequeststablemodel.h"
 #include "transactiontablemodel.h"
 
@@ -90,12 +91,12 @@ bool WalletModel::upgradeWallet(std::string& upgradeError)
     return wallet->Upgrade(upgradeError, prev_version);
 }
 
-CAmount WalletModel::getBalance(const CCoinControl* coinControl) const
+CAmount WalletModel::getBalance(const CCoinControl* coinControl, bool fIncludeDelegated) const
 {
     if (coinControl) {
         CAmount nBalance = 0;
         std::vector<COutput> vCoins;
-        wallet->AvailableCoins(&vCoins, true, coinControl);
+        wallet->AvailableCoins(&vCoins, coinControl, fIncludeDelegated);
         for (const COutput& out : vCoins)
             if (out.fSpendable)
                 nBalance += out.tx->vout[out.i].nValue;
@@ -103,7 +104,7 @@ CAmount WalletModel::getBalance(const CCoinControl* coinControl) const
         return nBalance;
     }
 
-    return wallet->GetBalance();
+    return wallet->GetBalance(fIncludeDelegated);
 }
 
 CAmount WalletModel::getMinColdStakingAmount() const
@@ -279,6 +280,28 @@ void WalletModel::setWalletDefaultFee(CAmount fee)
     payTxFee = CFeeRate(fee);
 }
 
+bool WalletModel::hasWalletCustomFee()
+{
+    if (!optionsModel) return false;
+    return optionsModel->data(optionsModel->index(OptionsModel::fUseCustomFee), Qt::EditRole).toBool();
+}
+
+bool WalletModel::getWalletCustomFee(CAmount& nFeeRet)
+{
+    nFeeRet = static_cast<CAmount>(optionsModel->data(optionsModel->index(OptionsModel::nCustomFee), Qt::EditRole).toLongLong());
+    return hasWalletCustomFee();
+}
+
+void WalletModel::setWalletCustomFee(bool fUseCustomFee, const CAmount& nFee)
+{
+    if (!optionsModel) return;
+    optionsModel->setData(optionsModel->index(OptionsModel::fUseCustomFee), fUseCustomFee);
+    // do not update custom fee value when fUseCustomFee is set to false
+    if (fUseCustomFee) {
+        optionsModel->setData(optionsModel->index(OptionsModel::nCustomFee), static_cast<qlonglong>(nFee));
+    }
+}
+
 void WalletModel::updateTransaction()
 {
     // Balance and number of transactions might have changed
@@ -334,7 +357,7 @@ bool WalletModel::updateAddressBookLabels(const CTxDestination& dest, const std:
     return false;
 }
 
-WalletModel::SendCoinsReturn WalletModel::prepareTransaction(WalletModelTransaction& transaction, const CCoinControl* coinControl)
+WalletModel::SendCoinsReturn WalletModel::prepareTransaction(WalletModelTransaction& transaction, const CCoinControl* coinControl, bool fIncludeDelegations)
 {
     CAmount total = 0;
     QList<SendCoinsRecipient> recipients = transaction.getRecipients();
@@ -411,7 +434,7 @@ WalletModel::SendCoinsReturn WalletModel::prepareTransaction(WalletModelTransact
         return DuplicateAddress;
     }
 
-    CAmount nBalance = getBalance(coinControl);
+    CAmount nBalance = getBalance(coinControl, fIncludeDelegations);
 
     if (total > nBalance) {
         return AmountExceedsBalance;

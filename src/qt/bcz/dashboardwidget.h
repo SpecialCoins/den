@@ -166,6 +166,7 @@ private:
 
     ChartData* chartData = nullptr;
     bool hasStakes = false;
+    bool fShowCharts = true;
 
     void initChart();
     void showHideEmptyChart(bool show, bool loading, bool forceView = false);
@@ -180,6 +181,7 @@ private:
 
 private Q_SLOTS:
     void onChartRefreshed();
+    void onHideChartsChanged(bool fHide);
 
 #endif
 

@@ -158,6 +158,18 @@ bool CCoinsViewDB::GetStats(CCoinsStats& stats) const
     return true;
 }
 
+static const char MONEYSUPPLY = 'M';
+
+bool CBlockTreeDB::WriteMoneySupply(const int64_t& nSupply)
+{
+    return Write(MONEYSUPPLY, nSupply);
+}
+
+bool CBlockTreeDB::ReadMoneySupply(int64_t& nSupply) const
+{
+    return Read(MONEYSUPPLY, nSupply);
+}
+
 bool CBlockTreeDB::WriteBatchSync(const std::vector<std::pair<int, const CBlockFileInfo*> >& fileInfo, int nLastFile, const std::vector<const CBlockIndex*>& blockinfo) {
     CLevelDBBatch batch;
     for (std::vector<std::pair<int, const CBlockFileInfo*> >::const_iterator it=fileInfo.begin(); it != fileInfo.end(); it++) {
@@ -271,3 +283,9 @@ bool CBlockTreeDB::LoadBlockIndexGuts()
 
     return true;
 }
+//xxxx
+//bool CBlockTreeDB::ReadLegacyBlockIndex(const uint256& blockHash, CLegacyBlockIndex& biRet)
+//{
+//    return Read(std::make_pair('b', blockHash), biRet);
+//}
+

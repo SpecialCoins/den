@@ -40,19 +40,22 @@ LoadingDialog::LoadingDialog(QWidget *parent) :
     ui->labelDots->setProperty("cssClass", "text-loading");
 }
 
-void LoadingDialog::execute(Runnable *runnable, int type){
+void LoadingDialog::execute(Runnable *runnable, int type, std::unique_ptr<WalletModel::UnlockContext> pctx)
+{
     loadingTimer = new QTimer(this);
     connect(loadingTimer, &QTimer::timeout, this, &LoadingDialog::loadingTextChange);
     loadingTimer->start(250);
 
     QThread* thread = new QThread;
-    Worker* worker = new Worker(runnable, type);
+    Worker* worker = (pctx == nullptr ?
+                      new Worker(runnable, type) :
+                      new WalletWorker(runnable, type, std::move(pctx)));
     worker->moveToThread(thread);
-    connect(thread, SIGNAL (started()), worker, SLOT (process()));
-    connect(worker, SIGNAL (finished()), thread, SLOT (quit()));
-    connect(worker, SIGNAL (finished()), worker, SLOT (deleteLater()));
-    connect(thread, SIGNAL (finished()), thread, SLOT (deleteLater()));
-    connect(worker, SIGNAL (finished()), this, SLOT (finished()));
+    connect(thread, &QThread::started, worker, &Worker::process);
+    connect(worker, &Worker::finished, thread, &QThread::quit);
+    connect(worker, &Worker::finished, worker, &Worker::deleteLater);
+    connect(thread, &QThread::finished, thread, &QThread::deleteLater);
+    connect(worker, &Worker::finished, this, &LoadingDialog::finished);
     thread->start();
 }
 

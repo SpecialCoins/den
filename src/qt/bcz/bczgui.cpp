@@ -14,6 +14,8 @@
 #include "networkstyle.h"
 #include "notificator.h"
 #include "guiinterface.h"
+#include "init.h"
+#include "util.h"
 #include "qt/bcz/qtutils.h"
 #include "qt/bcz/defaultdialog.h"
 #include "qt/bcz/settings/settingsfaqwidget.h"
@@ -26,8 +28,6 @@
 #include <QShortcut>
 #include <QKeySequence>
 #include <QWindowStateChangeEvent>
-
-#include "util.h"
 
 #define BASE_WINDOW_WIDTH 1200
 #define BASE_WINDOW_HEIGHT 740
@@ -71,15 +71,8 @@ BCZGUI::BCZGUI(const NetworkStyle* networkStyle, QWidget* parent) :
     windowTitle += " " + networkStyle->getTitleAddText();
     setWindowTitle(windowTitle);
 
-#ifndef Q_OS_MAC
     QApplication::setWindowIcon(networkStyle->getAppIcon());
     setWindowIcon(networkStyle->getAppIcon());
-#else
-    MacDockIconHandler::instance()->setIcon(networkStyle->getAppIcon());
-#endif
-
-
-
 
 #ifdef ENABLE_WALLET
     // Create wallet frame
@@ -294,8 +287,10 @@ void BCZGUI::createTrayIconMenu() {
 #else
     // Note: On Mac, the dock icon is used to provide the tray's functionality.
     MacDockIconHandler* dockIconHandler = MacDockIconHandler::instance();
-    dockIconHandler->setMainWindow((QMainWindow*)this);
-    trayIconMenu = dockIconHandler->dockMenu();
+    connect(dockIconHandler, &MacDockIconHandler::dockIconClicked, this, &BCZGUI::macosDockIconActivated);
+
+    trayIconMenu = new QMenu(this);
+    trayIconMenu->setAsDockMenu();
 #endif
 
     // Configuration of the tray icon (or dock icon) icon menu
@@ -316,6 +311,12 @@ void BCZGUI::trayIconActivated(QSystemTrayIcon::ActivationReason reason)
         toggleHidden();
     }
 }
+#else
+void BCZGUI::macosDockIconActivated()
+ {
+     show();
+     activateWindow();
+ }
 #endif
 
 void BCZGUI::changeEvent(QEvent* e)
@@ -438,18 +439,11 @@ bool BCZGUI::openStandardDialog(QString title, QString body, QString okBtn, QStr
 void BCZGUI::showNormalIfMinimized(bool fToggleHidden) {
     if (!clientModel)
         return;
-    // activateWindow() (sometimes) helps with keyboard focus on Windows
-    if (isHidden()) {
-        show();
-        activateWindow();
-    } else if (isMinimized()) {
-        showNormal();
-        activateWindow();
-    } else if (GUIUtil::isObscured(this)) {
-        raise();
-        activateWindow();
-    } else if (fToggleHidden)
+    if (!isHidden() && !isMinimized() && !GUIUtil::isObscured(this) && fToggleHidden) {
         hide();
+    } else {
+        GUIUtil::bringToFront(this);
+    }
 }
 
 void BCZGUI::toggleHidden() {
@@ -587,7 +581,7 @@ bool BCZGUI::addWallet(const QString& name, WalletModel* walletModel)
 
     // Connect actions..
     connect(masterNodesWidget, &MasterNodesWidget::message, this, &BCZGUI::message);
-    connect(coldStakingWidget, &MasterNodesWidget::message, this, &BCZGUI::message);
+    connect(coldStakingWidget, &ColdStakingWidget::message, this, &BCZGUI::message);
     connect(topBar, &TopBar::message, this, &BCZGUI::message);
     connect(sendWidget, &SendWidget::message,this, &BCZGUI::message);
     connect(receiveWidget, &ReceiveWidget::message,this, &BCZGUI::message);

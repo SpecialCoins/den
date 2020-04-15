@@ -103,7 +103,7 @@ public:
 };
 
 //
-// The Masternode Class. For managing the Obfuscation process. It contains the input of the 5000 BCZ, signature to prove
+// The Masternode Class. It contains the input of the 5000 BCZ, signature to prove
 // it's the one who own that ip address and code for calculating the payment election.
 //
 class CMasternode : public CSignedMessage
@@ -223,13 +223,6 @@ public:
 
     bool UpdateFromNewBroadcast(CMasternodeBroadcast& mnb);
 
-    inline uint64_t SliceHash(uint256& hash, int slice)
-    {
-        uint64_t n = 0;
-        memcpy(&n, &hash + slice * 64, 64);
-        return n;
-    }
-
     void Check(bool forceCheck = false);
 
     bool IsBroadcastedWithin(int seconds)
@@ -310,8 +303,8 @@ public:
     void Relay();
 
     // special sign/verify
-    bool Sign(const CKey& key, const CPubKey& pubKey, const bool fNewSigs);
-    bool Sign(const std::string strSignKey, const bool fNewSigs);
+    bool Sign(const CKey& key, const CPubKey& pubKey);
+    bool Sign(const std::string strSignKey);
     bool CheckSignature() const;
 
     ADD_SERIALIZE_METHODS;

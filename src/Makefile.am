@@ -108,8 +108,6 @@ BITCOIN_CORE_H = \
   crypter.h \
   pairresult.h \
   addressbook.h \
-  obfuscation.h \
-  obfuscation-relay.h \
   wallet/db.h \
   hash.h \
   httprpc.h \
@@ -124,6 +122,7 @@ BITCOIN_CORE_H = \
   keystore.h \
   leveldbwrapper.h \
   limitedmap.h \
+  logging.h \
   main.h \
   masternode.h \
   masternode-payments.h \
@@ -244,8 +243,6 @@ libbitcoin_wallet_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 libbitcoin_wallet_a_SOURCES = \
   activemasternode.cpp \
   bip38.cpp \
-  obfuscation.cpp \
-  obfuscation-relay.cpp \
   wallet/db.cpp \
   addressbook.cpp \
   crypter.cpp \
@@ -360,6 +357,7 @@ libbitcoin_util_a_SOURCES = \
   compat/glibc_sanity.cpp \
   compat/glibcxx_sanity.cpp \
   compat/strnlen.cpp \
+  logging.cpp \
   random.cpp \
   rpc/protocol.cpp \
   support/cleanse.cpp \

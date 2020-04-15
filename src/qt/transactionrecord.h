@@ -83,12 +83,6 @@ public:
         MNReward,
         RecvFromOther,
         SendToSelf,
-        RecvWithObfuscation,
-        ObfuscationDenominate,
-        ObfuscationCollateralPayment,
-        ObfuscationMakeCollaterals,
-        ObfuscationCreateDenominations,
-        Obfuscated,
         StakeDelegated, // Received cold stake (owner)
         StakeHot, // Staked via a delegated P2CS.
         P2CSDelegation, // Non-spendable P2CS, staker side.
