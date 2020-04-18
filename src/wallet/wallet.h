@@ -232,7 +232,7 @@ private:
 
 public:
 
-    static const CAmount DEFAULT_STAKE_SPLIT_THRESHOLD = 201 * COIN;
+    static const CAmount DEFAULT_STAKE_SPLIT_THRESHOLD = 101 * COIN;
 
     //! Generates hd wallet //
     bool SetupSPKM();
