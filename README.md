@@ -1,4 +1,4 @@
-Bitcoin CZ [BCZ] Core 2019
+Bitcoin CZ [BCZ] Core 2020
 ===============================
 
 [![Build Status](https://travis-ci.org/SpecialCoins/bitcoincz.svg?branch=master)](https://travis-ci.org/SpecialCoins/bitcoincz)
@@ -20,7 +20,7 @@ Net Parameters
 ----------------
 * P2P Port: 29500
 * RPC Port: 29501
-* Client core: BCZ 4.xx
+* Client core: PIVX 4.1.99
 * Client name: bcz.qt
 * Conf file: bcz.conf
 
