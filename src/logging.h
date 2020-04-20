@@ -134,32 +134,28 @@ std::vector<CLogCategoryActive> ListActiveLogCategories();
 /** Return true if str parses as a log category and set the flag */
 bool GetLogCategory(BCLog::LogFlags& flag, const std::string& str);
 
-/** Get format string from VA_ARGS for error reporting */
-template<typename... Args> std::string FormatStringFromLogArgs(const char *fmt, const Args&... args) { return fmt; }
+template <typename... Args>
+static inline void LogPrintf(const char* fmt, const Args&... args)
+{
+    if (LogInstance().Enabled()) {
+        std::string log_msg;
+        try {
+            log_msg = tfm::format(fmt, args...);
+        } catch (tinyformat::format_error& fmterr) {
+            /* Original format string will have newline so don't add one here */
+            log_msg = "Error \"" + std::string(fmterr.what()) + "\" while formatting log message: " + fmt;
+        }
+        LogInstance().LogPrintStr(log_msg);
+    }
+}
 
-// Be conservative when using LogPrintf/error or other things which
-// unconditionally log to debug.log! It should not be the case that an inbound
-// peer can fill up a user's disk with debug.log entries.
-
-#define LogPrintf(...) do {                                                         \
-    if(g_logger->Enabled()) {                                                       \
-        std::string _log_msg_; /* Unlikely name to avoid shadowing variables */     \
-        try {                                                                       \
-            _log_msg_ = tfm::format(__VA_ARGS__);                                   \
-        } catch (tinyformat::format_error &e) {                                     \
-            /* Original format string will have newline so don't add one here */    \
-            _log_msg_ = "Error \"" + std::string(e.what()) +                        \
-                        "\" while formatting log message: " +                       \
-                        FormatStringFromLogArgs(__VA_ARGS__);                       \
-        }                                                                           \
-        g_logger->LogPrintStr(_log_msg_);                                           \
-    }                                                                               \
-} while(0)
-
-#define LogPrint(category, ...) do {                                                \
-    if (LogAcceptCategory((category))) {                                            \
-        LogPrintf(__VA_ARGS__);                                                     \
-    }                                                                               \
-} while(0)
+// Use a macro instead of a function for conditional logging to prevent
+// evaluating arguments when logging for the category is not enabled.
+#define LogPrint(category, ...)              \
+    do {                                     \
+        if (LogAcceptCategory((category))) { \
+            LogPrintf(__VA_ARGS__);          \
+        }                                    \
+    } while (0)
 
 #endif // BITCOIN_LOGGING_H
