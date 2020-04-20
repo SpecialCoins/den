@@ -24,6 +24,7 @@ enum SporkId : int32_t {
     SPORK_26_COLDSTAKING_ENFORCEMENT            = 10026,
     SPORK_27_NODE_V_NEW                         = 10027,
     SPORK_28_MIN_STAKING                        = 10028,
+    SPORK_29_NODE_V_NEW2                        = 10029,
     SPORK_INVALID                               = -1
 };
 

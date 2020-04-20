@@ -25,6 +25,7 @@ std::vector<CSporkDef> sporkDefs = {
     MAKE_SPORK_DEF(SPORK_26_COLDSTAKING_ENFORCEMENT,        4070908800ULL), // OFF
     MAKE_SPORK_DEF(SPORK_27_NODE_V_NEW,                     4070908800ULL), // OFF
     MAKE_SPORK_DEF(SPORK_28_MIN_STAKING,                    4070908800ULL), // OFF
+    MAKE_SPORK_DEF(SPORK_29_NODE_V_NEW2,                    4070908800ULL), // OFF
 };
 
 CSporkManager sporkManager;

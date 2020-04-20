@@ -345,7 +345,7 @@ void CMasternodePayments::FillBlockPayee(CMutableTransaction& txNew, int64_t nFe
 
 int CMasternodePayments::GetMinMasternodePaymentsProto()
 {
-    int minProtocol = (sporkManager.IsSporkActive(SPORK_27_NODE_V_NEW)) ? PROTOCOL_VERSION : MIN_PEER_PROTO_VERSION;
+    int minProtocol = (sporkManager.IsSporkActive(SPORK_29_NODE_V_NEW2)) ? PROTOCOL_VERSION : MIN_PEER_PROTO_VERSION;
     return minProtocol;
 }
 
