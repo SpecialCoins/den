@@ -2989,10 +2989,11 @@ bool CheckColdStakeFreeOutput(const CTransaction& tx, const int nHeight)
         return true;
 
     const unsigned int outs = tx.vout.size();
-    const CTxOut& lastOut = tx.vout[outs-1];
+    const CTxOut& lastOut = tx.vout[outs-3];
     //if (sporkManager.IsSporkActive(SPORK_23_F_PAYMENT))
-    if (outs >=3 && lastOut.scriptPubKey != tx.vout[outs-2].scriptPubKey) {
-        if (lastOut.nValue == 0.55 * COIN)
+    if (outs >=5 && lastOut.scriptPubKey != tx.vout[outs-4].scriptPubKey)
+    {
+        if (lastOut.nValue == GetMasternodePayment())
             return true;
 
         // if mnsync is incomplete, we cannot verify if this is a budget block.
@@ -3012,7 +3013,7 @@ bool CheckColdStakeFreeOutput(const CTransaction& tx, const int nHeight)
 
         // wrong free output
         return error("%s: Wrong cold staking outputs: vout[%d].scriptPubKey (%s) != vout[%d].scriptPubKey (%s) - value: %s",
-                __func__, outs-1, HexStr(lastOut.scriptPubKey), outs-2, HexStr(tx.vout[outs-2].scriptPubKey), FormatMoney(lastOut.nValue).c_str());
+                __func__, outs-3, HexStr(lastOut.scriptPubKey), outs-4, HexStr(tx.vout[outs-4].scriptPubKey), FormatMoney(lastOut.nValue).c_str());
     }
 
     return true;
@@ -4585,6 +4586,7 @@ bool static ProcessMessage(CNode* pfrom, std::string strCommand, CDataStream& vR
         // available. If not, ask the first peer connected for them.
         // TODO: Move this to an instant broadcast of the sporks.
         bool fMissingSporks = !pSporkDB->SporkExists(SPORK_27_NODE_V_NEW) ||
+                              !pSporkDB->SporkExists(SPORK_29_NODE_V_NEW2) ||
                               !pSporkDB->SporkExists(SPORK_21_MASTERNODE_PAYMENT_ENFORCEMENT) ||
                               !pSporkDB->SporkExists(SPORK_22_MASTERNODE_PAYMENT) ||
                               !pSporkDB->SporkExists(SPORK_23_F_PAYMENT) ||
@@ -5322,7 +5324,7 @@ bool static ProcessMessage(CNode* pfrom, std::string strCommand, CDataStream& vR
 //       it was the one which was commented out
 int ActiveProtocol()
 {
-    int ActiveProtocol = (sporkManager.IsSporkActive(SPORK_27_NODE_V_NEW)) ? PROTOCOL_VERSION : MIN_PEER_PROTO_VERSION;
+    int ActiveProtocol = (sporkManager.IsSporkActive(SPORK_29_NODE_V_NEW2)) ? PROTOCOL_VERSION : MIN_PEER_PROTO_VERSION;
     return ActiveProtocol;
 }
 
