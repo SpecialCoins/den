@@ -283,9 +283,3 @@ bool CBlockTreeDB::LoadBlockIndexGuts()
 
     return true;
 }
-//xxxx
-//bool CBlockTreeDB::ReadLegacyBlockIndex(const uint256& blockHash, CLegacyBlockIndex& biRet)
-//{
-//    return Read(std::make_pair('b', blockHash), biRet);
-//}
-
