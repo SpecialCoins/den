@@ -133,7 +133,7 @@ public:
         nMaturity = 100;
         nStakeMinDepth = 120;
         nFutureTimeDrift = 180;
-        nMinColdStakingAmount = 1000 * COIN;
+        nMinColdStakingAmount = 100 * COIN;
 
         /** Height or Time Based Activations **/
         nLastPOWBlock = 50000;
