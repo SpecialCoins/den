@@ -93,8 +93,6 @@ public:
     bool WriteInt(const std::string& name, int nValue);
     bool ReadInt(const std::string& name, int& nValue);
     bool LoadBlockIndexGuts();
-    //xxxx
-    //bool ReadLegacyBlockIndex(const uint256& blockHash, CLegacyBlockIndex& biRet);
     bool WriteMoneySupply(const int64_t& nSupply);
     bool ReadMoneySupply(int64_t& nSupply) const;
 };
