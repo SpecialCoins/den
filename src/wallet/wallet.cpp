@@ -884,7 +884,7 @@ bool CWallet::AddToWallet(const CWalletTx& wtxIn, bool fFromLoadWallet, CWalletD
         }
 
         //// debug print
-        LogPrintf("AddToWallet %s  %s%s\n", wtxIn.GetHash().ToString(), (fInsertedNew ? "new" : ""), (fUpdated ? "update" : ""));
+        LogPrint("AddToWallet %s  %s%s\n", wtxIn.GetHash().ToString(), (fInsertedNew ? "new" : ""), (fUpdated ? "update" : ""));
 
         // Write to disk
         if (fInsertedNew || fUpdated)
@@ -3225,7 +3225,7 @@ unsigned int CWallet::ComputeTimeSmart(const CWalletTx& wtx) const
             int64_t blocktime = mapBlockIndex[wtx.hashBlock]->GetBlockTime();
             nTimeSmart = std::max(latestEntry, std::min(blocktime, latestNow));
         } else
-            LogPrintf("AddToWallet() : found %s in block %s not in index\n",
+            LogPrint("AddToWallet() : found %s in block %s not in index\n",
                 wtx.GetHash().ToString(),
                 wtx.hashBlock.ToString());
     }
