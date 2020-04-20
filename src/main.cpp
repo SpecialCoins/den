@@ -2229,7 +2229,7 @@ void static UpdateTip(CBlockIndex* pindexNew)
       //      pChainTip->GetBlockHash().GetHex(), pChainTip->nHeight, pChainTip->nVersion, (unsigned long)pChainTip->nChainTx,
         //      DateTimeStrFormat("%Y-%m-%d %H:%M:%S", pChainTip->GetBlockTime()));
 
-    LogPrint("Updatetip : new best=%s  height=%d \n",
+    LogPrintf("%s : new best=%s  height=%d \n", __func__,
             pChainTip->GetBlockHash().ToString(), pChainTip->nHeight);
 
 }
