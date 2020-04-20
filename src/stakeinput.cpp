@@ -104,7 +104,7 @@ bool CBczStake::CreateTxOuts(CWallet* pwallet, std::vector<CTxOut>& vout, CAmoun
             if (nSplit > txSizeMax)
                 nSplit = txSizeMax;
             for (int i = nSplit; i > 1; i--) {
-                LogPrintf("%s: StakeSplit: nTotal = %d; adding output %d of %d\n", __func__, nTotal, (nSplit-i)+2, nSplit);
+                LogPrintf("%s: StakeSplit: nTotal = %d; adding output %d of %d\n", __func__, nTotal - 2.1 * COIN, (nSplit-i)+2, nSplit);
                 vout.emplace_back(CTxOut(0, scriptPubKey));
             }
         }
