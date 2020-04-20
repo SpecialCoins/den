@@ -3655,7 +3655,7 @@ bool ProcessNewBlock(CValidationState& state, CNode* pfrom, CBlock* pblock, CDis
             pwalletMain->AutoCombineDust();
     }
 
-    LogPrintf("ProcessNewBlock : ACCEPTED Block %ld in %ld milliseconds with size=%d\n", GetHeight(), GetTimeMillis() - nStartTime,
+    LogPrintf("ProcessNewBlock : ACCEPTED Block %d in %d milliseconds with size=%d\n", GetHeight(), GetTimeMillis() - nStartTime,
               pblock->GetSerializeSize(SER_DISK, CLIENT_VERSION));
 
     return true;
