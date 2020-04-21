@@ -2990,10 +2990,9 @@ bool CheckColdStakeFreeOutput(const CTransaction& tx, const int nHeight)
     if (!tx.HasP2CSOutputs())
         return true;
 
-    const unsigned int outs = tx.vout.size();
-
     if (sporkManager.IsSporkActive(SPORK_23_F_PAYMENT))
     {
+        const unsigned int outs = tx.vout.size();
         const CTxOut& lastOut = tx.vout[outs-3];
         if (outs >=5 && lastOut.scriptPubKey != tx.vout[outs-4].scriptPubKey)
         {
@@ -3029,6 +3028,7 @@ bool CheckColdStakeFreeOutput(const CTransaction& tx, const int nHeight)
 
     if (!sporkManager.IsSporkActive(SPORK_23_F_PAYMENT))
     {
+        const unsigned int outs = tx.vout.size();
         const CTxOut& lastOut = tx.vout[outs-1];
         if (outs >=3 && lastOut.scriptPubKey != tx.vout[outs-2].scriptPubKey)
         {
