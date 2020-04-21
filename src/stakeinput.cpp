@@ -97,14 +97,14 @@ bool CBczStake::CreateTxOuts(CWallet* pwallet, std::vector<CTxOut>& vout, CAmoun
 
     // Calculate if we need to split the output
     if (pwallet->nStakeSplitThreshold > 0) {
-        int nSplit = static_cast<int>(nTotal - 2.1 / pwallet->nStakeSplitThreshold);
+        int nSplit = static_cast<int>(nTotal / pwallet->nStakeSplitThreshold);
         if (nSplit > 1) {
             // if nTotal is twice or more of the threshold; create more outputs
             int txSizeMax = MAX_STANDARD_TX_SIZE >> 11; // limit splits to <10% of the max TX size (/2048)
             if (nSplit > txSizeMax)
                 nSplit = txSizeMax;
             for (int i = nSplit; i > 1; i--) {
-                LogPrintf("%s: StakeSplit: nTotal = %d; adding output %d of %d\n", __func__, nTotal - 2.1, (nSplit-i)+2, nSplit);
+                LogPrintf("%s: StakeSplit: nTotal = %d; adding output %d of %d\n", __func__, nTotal, (nSplit-i)+2, nSplit);
                 vout.emplace_back(CTxOut(0, scriptPubKey));
             }
         }
