@@ -2991,10 +2991,10 @@ bool CheckColdStakeFreeOutput(const CTransaction& tx, const int nHeight)
         return true;
 
     const unsigned int outs = tx.vout.size();
-    const CTxOut& lastOut = tx.vout[outs-3];
 
     if ((outs >=5 && lastOut.scriptPubKey != tx.vout[outs-4].scriptPubKey) && (sporkManager.IsSporkActive(SPORK_23_F_PAYMENT)))
     {
+        const CTxOut& lastOut = tx.vout[outs-3];
         if (lastOut.nValue == GetMasternodePayment())
         {
             LogPrintf("CheckColdStakeFreeOutput : GetMasternodePayment \n");
@@ -3026,6 +3026,7 @@ bool CheckColdStakeFreeOutput(const CTransaction& tx, const int nHeight)
 
     if ((outs >=3 && lastOut.scriptPubKey != tx.vout[outs-2].scriptPubKey) && (!sporkManager.IsSporkActive(SPORK_23_F_PAYMENT)))
         {
+            const CTxOut& lastOut = tx.vout[outs-1];
             if (lastOut.nValue == GetMasternodePayment())
                 return true;
 
