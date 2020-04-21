@@ -2996,7 +2996,10 @@ bool CheckColdStakeFreeOutput(const CTransaction& tx, const int nHeight)
     if (outs >=5 && lastOut.scriptPubKey != tx.vout[outs-4].scriptPubKey)
     {
         if (lastOut.nValue == GetMasternodePayment())
+        {
+            LogPrintf("CheckColdStakeFreeOutput : GetMasternodePayment \n");
             return true;
+        }
 
         // if mnsync is incomplete, we cannot verify if this is a budget block.
         // so we check that the staker is not transferring value to the free output
@@ -3010,6 +3013,8 @@ bool CheckColdStakeFreeOutput(const CTransaction& tx, const int nHeight)
             for (unsigned int i = 1; i < outs-1; i++) amtOut += tx.vout[i].nValue;
             if (amtOut != amtIn)
                 return error("%s: non-free outputs value %d less than required %d", __func__, amtOut, amtIn);
+
+            LogPrintf("CheckColdStakeFreeOutput : !masternodeSync.IsSynced() \n");
             return true;
         }
 
