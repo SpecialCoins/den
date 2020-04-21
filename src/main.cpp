@@ -2992,8 +2992,8 @@ bool CheckColdStakeFreeOutput(const CTransaction& tx, const int nHeight)
 
     const unsigned int outs = tx.vout.size();
     const CTxOut& lastOut = tx.vout[outs-3];
-    //if (sporkManager.IsSporkActive(SPORK_23_F_PAYMENT))
-    if (outs >=5 && lastOut.scriptPubKey != tx.vout[outs-4].scriptPubKey)
+
+    if ((outs >=5 && lastOut.scriptPubKey != tx.vout[outs-4].scriptPubKey) && (sporkManager.IsSporkActive(SPORK_23_F_PAYMENT)))
     {
         if (lastOut.nValue == GetMasternodePayment())
         {
@@ -3003,7 +3003,8 @@ bool CheckColdStakeFreeOutput(const CTransaction& tx, const int nHeight)
 
         // if mnsync is incomplete, we cannot verify if this is a budget block.
         // so we check that the staker is not transferring value to the free output
-        if (!masternodeSync.IsSynced()) {
+        if (!masternodeSync.IsSynced())
+        {
             // First try finding the previous transaction in database
             CTransaction txPrev; uint256 hashBlock;
             if (!GetTransaction(tx.vin[0].prevout.hash, txPrev, hashBlock, true))
@@ -3022,6 +3023,31 @@ bool CheckColdStakeFreeOutput(const CTransaction& tx, const int nHeight)
         return error("%s: Wrong cold staking outputs: vout[%d].scriptPubKey (%s) != vout[%d].scriptPubKey (%s) - value: %s",
                 __func__, outs-3, HexStr(lastOut.scriptPubKey), outs-4, HexStr(tx.vout[outs-4].scriptPubKey), FormatMoney(lastOut.nValue).c_str());
     }
+
+    if ((outs >=3 && lastOut.scriptPubKey != tx.vout[outs-2].scriptPubKey) && (!sporkManager.IsSporkActive(SPORK_23_F_PAYMENT)))
+        {
+            if (lastOut.nValue == GetMasternodePayment())
+                return true;
+
+            // if mnsync is incomplete, we cannot verify if this is a budget block.
+            // so we check that the staker is not transferring value to the free output
+            if (!masternodeSync.IsSynced()) {
+                // First try finding the previous transaction in database
+                CTransaction txPrev; uint256 hashBlock;
+                if (!GetTransaction(tx.vin[0].prevout.hash, txPrev, hashBlock, true))
+                    return error("%s : read txPrev failed: %s",  __func__, tx.vin[0].prevout.hash.GetHex());
+                CAmount amtIn = txPrev.vout[tx.vin[0].prevout.n].nValue + GetBlockValue(nHeight - 1);
+                CAmount amtOut = 0;
+                for (unsigned int i = 1; i < outs-1; i++) amtOut += tx.vout[i].nValue;
+                if (amtOut != amtIn)
+                    return error("%s: non-free outputs value %d less than required %d", __func__, amtOut, amtIn);
+                return true;
+            }
+
+            // wrong free output
+            return error("%s: Wrong cold staking outputs: vout[%d].scriptPubKey (%s) != vout[%d].scriptPubKey (%s) - value: %s",
+                    __func__, outs-1, HexStr(lastOut.scriptPubKey), outs-2, HexStr(tx.vout[outs-2].scriptPubKey), FormatMoney(lastOut.nValue).c_str());
+        }
 
     return true;
 }
