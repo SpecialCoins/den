@@ -398,7 +398,7 @@ UniValue mempoolToJSON(bool fVerbose = false)
 
 static UniValue clearmempool(const UniValue& params, bool fHelp)
 {
-    if (rfHelp || params.size() > 1)
+    if (fHelp || params.size() > 1)
         throw std::runtime_error(
                 "clearmempool\n"
                         "\nRemoves all transactions from the mempool\n"
