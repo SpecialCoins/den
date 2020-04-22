@@ -396,7 +396,7 @@ UniValue mempoolToJSON(bool fVerbose = false)
     }
 }
 
-static UniValue clearmempool(const JSONRPCRequest& request)
+static UniValue clearmempool(const UniValue& params, bool fHelp)
 {
     if (request.fHelp || request.params.size() > 1)
         throw std::runtime_error(
