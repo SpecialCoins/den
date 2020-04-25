@@ -3004,7 +3004,7 @@ bool CheckColdStakeFreeOutput(const CTransaction& tx, const int nHeight)
 
             // if mnsync is incomplete, we cannot verify if this is a budget block.
             // so we check that the staker is not transferring value to the free output
-            if (!masternodeSync.IsSynced())
+            if (true)
             {
                 // First try finding the previous transaction in database
                 CTransaction txPrev; uint256 hashBlock;
