@@ -123,7 +123,7 @@ ColdStakingWidget::ColdStakingWidget(BCZGUI* parent) :
 
     connect(ui->pushButtonClear, &QPushButton::clicked, this, &ColdStakingWidget::clearAll);
 
-    ui->labelEditTitle->setText(tr("Cold Staking address (from remote staker, starts with letter S)"));
+    ui->labelEditTitle->setText(tr("Cold Staking address (from remote staker, this address is not able to spend any coins, starts with letter S)"));
     setCssProperty(ui->labelEditTitle, "text-title");
     sendMultiRow = new SendMultiRow(this);
     sendMultiRow->setOnlyStakingAddressAccepted(true);
