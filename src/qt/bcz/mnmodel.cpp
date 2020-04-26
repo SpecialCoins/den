@@ -9,6 +9,7 @@
 #include "sync.h"
 #include "uint256.h"
 #include "wallet/wallet.h"
+#include "net.h"
 
 MNModel::MNModel(QObject *parent) : QAbstractTableModel(parent)
 {
@@ -183,4 +184,9 @@ bool MNModel::isMNCollateralMature(QString mnAlias)
 bool MNModel::isMNsNetworkSynced()
 {
     return masternodeSync.IsSynced();
+}
+
+bool MNModel::validateMNIP(const QString& addrStr)
+{
+    return validateMasternodeIP(addrStr.toStdString());
 }

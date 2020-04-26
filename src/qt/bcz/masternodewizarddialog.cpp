@@ -4,14 +4,19 @@
 
 #include "qt/bcz/masternodewizarddialog.h"
 #include "qt/bcz/forms/ui_masternodewizarddialog.h"
-#include "qt/bcz/qtutils.h"
+
+#include "activemasternode.h"
 #include "optionsmodel.h"
 #include "pairresult.h"
-#include "activemasternode.h"
+#include "qt/bcz/mnmodel.h"
 #include "qt/bcz/guitransactionsutils.h"
+#include "qt/bcz/qtutils.h"
+
 #include <QFile>
 #include <QIntValidator>
 #include <QHostAddress>
+#include <QRegularExpression>
+#include <QRegularExpressionValidator>
 
 MasterNodeWizardDialog::MasterNodeWizardDialog(WalletModel *model, QWidget *parent) :
     QDialog(parent),
@@ -50,7 +55,9 @@ MasterNodeWizardDialog::MasterNodeWizardDialog(WalletModel *model, QWidget *pare
 
     ui->lineEditName->setPlaceholderText(tr("e.g user_masternode"));
     initCssEditLine(ui->lineEditName);
-    ui->lineEditName->setValidator(new QRegExpValidator(QRegExp("^[A-Za-z0-9]+"), ui->lineEditName));
+    // MN alias must not contain spaces or "#" character
+    QRegularExpression rx("^(?:(?![\\#\\s]).)*");
+    ui->lineEditName->setValidator(new QRegularExpressionValidator(rx, ui->lineEditName));
 
     // Frame 4
     setCssProperty(ui->labelTitle4, "text-title-dialog");
@@ -62,13 +69,8 @@ MasterNodeWizardDialog::MasterNodeWizardDialog(WalletModel *model, QWidget *pare
     initCssEditLine(ui->lineEditIpAddress);
     initCssEditLine(ui->lineEditPort);
     ui->stackedWidget->setCurrentIndex(pos);
-    ui->lineEditPort->setValidator(new QIntValidator(0, 9999999, ui->lineEditPort));
-    if(walletModel->isTestNetwork()){
-        ui->lineEditPort->setEnabled(false);
-        ui->lineEditPort->setText("29600");
-    } else {
-        ui->lineEditPort->setText("29500");
-    }
+    ui->lineEditPort->setEnabled(false);    // use default port number
+    ui->lineEditPort->setText("29500");
 
     // Confirm icons
     ui->stackedIcon1->addWidget(icConfirm1);
@@ -97,7 +99,7 @@ void MasterNodeWizardDialog::showEvent(QShowEvent *event)
 
 void MasterNodeWizardDialog::onNextClicked()
 {
-    switch(pos){
+    switch(pos) {
         case 0:{
             ui->stackedWidget->setCurrentIndex(1);
             ui->pushName4->setChecked(false);
@@ -177,12 +179,11 @@ bool MasterNodeWizardDialog::createMN()
             returnStr = tr("IP or port cannot be empty");
             return false;
         }
-        // TODO: Validate IP address..
-        int portInt = portStr.toInt();
-        if (portInt <= 0 && portInt > 999999) {
-            returnStr = tr("Invalid port number");
+        if (!MNModel::validateMNIP(addressStr)) {
+            returnStr = tr("Invalid IP address");
             return false;
         }
+
         // ip + port
         std::string ipAddress = addressStr.toStdString();
         std::string port = portStr.toStdString();
@@ -211,16 +212,16 @@ bool MasterNodeWizardDialog::createMN()
 
         QString returnMsg = "Unknown error";
         // process prepareStatus and on error generate message shown to user
-                CClientUIInterface::MessageBoxFlags informType;
-                returnMsg = GuiTransactionsUtils::ProcessSendCoinsReturn(
-                        this,
-                        prepareStatus,
-                        walletModel,
-                        informType, // this flag is not needed
-                        BitcoinUnits::formatWithUnit(walletModel->getOptionsModel()->getDisplayUnit(),
-                                                     currentTransaction.getTransactionFee()),
-                        true
-                );
+        CClientUIInterface::MessageBoxFlags informType;
+        returnMsg = GuiTransactionsUtils::ProcessSendCoinsReturn(
+                this,
+                prepareStatus,
+                walletModel,
+                informType, // this flag is not needed
+                BitcoinUnits::formatWithUnit(walletModel->getOptionsModel()->getDisplayUnit(),
+                                             currentTransaction.getTransactionFee()),
+                true
+        );
 
         if (prepareStatus.status != WalletModel::OK) {
             returnStr = tr("Prepare master node failed.\n\n%1\n").arg(returnMsg);
@@ -235,6 +236,7 @@ bool MasterNodeWizardDialog::createMN()
                 walletModel,
                 informType
         );
+
         if (sendStatus.status == WalletModel::OK) {
             // now change the conf
             std::string strConfFile = "masternode.conf";
@@ -379,7 +381,8 @@ void MasterNodeWizardDialog::onBackClicked()
     }
 }
 
-void MasterNodeWizardDialog::inform(QString text){
+void MasterNodeWizardDialog::inform(QString text)
+{
     if (!snackBar)
         snackBar = new SnackBar(nullptr, this);
     snackBar->setText(text);
