@@ -105,7 +105,8 @@ void ExpandableButton::leaveEvent(QEvent *)
     Q_EMIT Mouse_HoverLeave();
 }
 
-void ExpandableButton::innerMousePressEvent(){
+void ExpandableButton::innerMousePressEvent()
+{
     Q_EMIT Mouse_Pressed();
 }
 
