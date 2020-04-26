@@ -2360,5 +2360,5 @@ void DumpBanlist()
 bool validateMasternodeIP(const std::string& addrStr)
 {
     CNetAddr netAddr(addrStr.c_str());
-    return ((IsReachable(netAddr) && netAddr.IsRoutable());
+    return ((IsReachable(netAddr) && netAddr.IsRoutable()));
 }
