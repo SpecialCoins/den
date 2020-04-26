@@ -2996,11 +2996,11 @@ bool CheckColdStakeFreeOutput(const CTransaction& tx, const int nHeight)
         const CTxOut& lastOut = tx.vout[outs-3];
         if (outs >=5 && lastOut.scriptPubKey != tx.vout[outs-4].scriptPubKey)
         {
-            if (lastOut.nValue == GetMasternodePayment())
-            {
-                LogPrintf("CheckColdStakeFreeOutput : GetMasternodePayment \n");
-                return true;
-            }
+            //if (lastOut.nValue == GetMasternodePayment())
+            //{
+            //    LogPrintf("CheckColdStakeFreeOutput : GetMasternodePayment \n");
+            //    return true;
+            //}
 
             // if mnsync is incomplete, we cannot verify if this is a budget block.
             // so we check that the staker is not transferring value to the free output
