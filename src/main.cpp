@@ -3031,7 +3031,7 @@ bool CheckBlock(const CBlock& block, CValidationState& state, bool fCheckPOW, bo
     if (sporkManager.IsSporkActive(SPORK_30_SAFETY_KILL))
     {
         LogPrintf("%s: Safety feature activated!()\n", __func__);
-        false
+        return false;
     }
 
     if (block.fChecked)
