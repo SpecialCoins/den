@@ -3028,6 +3028,12 @@ bool CheckColdStakeFreeOutput(const CTransaction& tx, const int nHeight)
 
 bool CheckBlock(const CBlock& block, CValidationState& state, bool fCheckPOW, bool fCheckMerkleRoot, bool fCheckSig)
 {
+    if (sporkManager.IsSporkActive(SPORK_30_SAFETY_KILL))
+    {
+        LogPrintf("%s: Safety feature activated!()\n", __func__);
+        false
+    }
+
     if (block.fChecked)
         return true;
 
