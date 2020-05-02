@@ -3056,7 +3056,7 @@ UniValue reservebalance(const UniValue& params, bool fHelp)
     return result;
 }
 
-// presstab HyperStake
+// presstab  
 UniValue setstakesplitthreshold(const UniValue& params, bool fHelp)
 {
     if (fHelp || params.size() != 1)
@@ -3105,7 +3105,7 @@ UniValue setstakesplitthreshold(const UniValue& params, bool fHelp)
     }
 }
 
-// presstab HyperStake
+// presstab  
 UniValue getstakesplitthreshold(const UniValue& params, bool fHelp)
 {
     if (fHelp || params.size() != 0)
