@@ -1163,7 +1163,7 @@ bool AcceptToMemoryPool(CTxMemPool& pool, CValidationState& state, const CTransa
     return true;
 }
 
-bool AcceptableInputs(CTxMemPool& pool, CValidationState& state, const CTransaction& tx, bool fLimitFree, bool* pfMissingInputs, bool fRejectInsaneFee)
+bool AcceptableInputs(CTxMemPool& pool, CValidationState& state, const CTransaction& tx, bool fLimitFree, bool* pfMissingInputs, bool fRejectInsaneFee, bool isDSTX)
 {
     AssertLockHeld(cs_main);
     if (pfMissingInputs)
@@ -1275,6 +1275,11 @@ bool AcceptableInputs(CTxMemPool& pool, CValidationState& state, const CTransact
         CTxMemPoolEntry entry(tx, nFees, GetTime(), dPriority, chainHeight);
         unsigned int nSize = entry.GetTxSize();
 
+        // Don't accept it if it can't get into a block
+        // but prioritise dstx and don't check fees for it
+        if (isDSTX) {
+            mempool.PrioritiseTransaction(hash, hash.ToString(), 1000, 0.1 * COIN);
+        } else { // same as !ignoreFees for AcceptToMemoryPool
             CAmount txMinFee = GetMinRelayFee(tx, nSize, true);
             if (fLimitFree && nFees < txMinFee)
                 return state.DoS(0, error("AcceptableInputs : not enough fees %s, %d < %d", hash.ToString(), nFees, txMinFee),
@@ -1307,6 +1312,7 @@ bool AcceptableInputs(CTxMemPool& pool, CValidationState& state, const CTransact
                 LogPrint(BCLog::MEMPOOL, "Rate limit dFreeCount: %g => %g\n", dFreeCount, dFreeCount + nSize);
                 dFreeCount += nSize;
             }
+        }
 
         if (fRejectInsaneFee && nFees > ::minRelayTxFee.GetFee(nSize) * 10000)
             return error("AcceptableInputs: : insane fees %s, %d > %d",
@@ -4920,6 +4926,7 @@ bool static ProcessMessage(CNode* pfrom, std::string strCommand, CDataStream& vR
         bool ignoreFees = false;
         CTxIn vin;
         std::vector<unsigned char> vchSig;
+        int64_t sigTime;
 
         vRecv >> tx;
 
@@ -5004,6 +5011,11 @@ bool static ProcessMessage(CNode* pfrom, std::string strCommand, CDataStream& vR
             RelayTransaction(tx);
         }
 
+        if (strCommand == "dstx") {
+            CInv inv(MSG_DSTX, tx.GetHash());
+            RelayInv(inv);
+        }
+
         int nDoS = 0;
         if (state.IsInvalid(nDoS)) {
             LogPrint(BCLog::MEMPOOL, "%s from peer=%d %s was not accepted into the memory pool: %s\n", tx.GetHash().ToString(),
@@ -5015,6 +5027,7 @@ bool static ProcessMessage(CNode* pfrom, std::string strCommand, CDataStream& vR
                 Misbehaving(pfrom->GetId(), nDoS);
         }
     }
+
 
     else if (strCommand == "headers" && Params().HeadersFirstSyncingActive() && !fImporting && !fReindex) // Ignore headers received while importing
     {

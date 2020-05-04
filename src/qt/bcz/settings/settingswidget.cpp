@@ -85,8 +85,6 @@ SettingsWidget::SettingsWidget(BCZGUI* parent) :
         ui->pushButtonTools5,
     };
 
-    ui->pushButtonFile3->setVisible(false);
-
     menus.insert(ui->pushButtonFile, ui->fileButtonsWidget);
     menus.insert(ui->pushButtonConfiguration, ui->configurationButtonsWidget);
     menus.insert(ui->pushButtonOptions, ui->optionsButtonsWidget);

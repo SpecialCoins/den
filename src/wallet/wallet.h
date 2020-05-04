@@ -397,6 +397,7 @@ public:
 
     std::vector<CKeyID> GetAffectedKeys(const CScript& spk);
     void GetKeyBirthTimes(std::map<CKeyID, int64_t>& mapKeyBirth) const;
+    unsigned int ComputeTimeSmart(const CWalletTx& wtx) const;
 
     /**
      * Increment the next transaction order id
@@ -816,7 +817,7 @@ public:
     bool WriteToDisk(CWalletDB *pwalletdb);
 
     int64_t GetTxTime() const;
-    void UpdateTimeSmart();
+    int64_t GetComputedTxTime() const;
     int GetRequestCount() const;
     void RelayWalletTransaction(std::string strCommand = "tx");
     std::set<uint256> GetConflicts() const;

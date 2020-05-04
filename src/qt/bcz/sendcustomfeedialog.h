@@ -7,7 +7,6 @@
 
 #include <QDialog>
 #include "amount.h"
-#include "qt/bcz/snackbar.h"
 
 class BCZGUI;
 class WalletModel;
@@ -21,10 +20,11 @@ class SendCustomFeeDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit SendCustomFeeDialog(BCZGUI* parent, WalletModel* model);
+    explicit SendCustomFeeDialog(BCZGUI *parent = nullptr);
     ~SendCustomFeeDialog();
 
-    void showEvent(QShowEvent* event) override;
+    void setWalletModel(WalletModel* model);
+    void showEvent(QShowEvent *event) override;
     CFeeRate getFeeRate();
     bool isCustomFeeChecked();
     void clear();
@@ -39,11 +39,9 @@ protected Q_SLOTS:
     void accept() override;
 
 private:
-    Ui::SendCustomFeeDialog* ui;
+    Ui::SendCustomFeeDialog *ui;
     WalletModel* walletModel = nullptr;
     CFeeRate feeRate;
-    SnackBar* snackBar = nullptr;
-    void inform(const QString& text);
 };
 
 #endif // SENDCUSTOMFEEDIALOG_H

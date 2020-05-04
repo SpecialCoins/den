@@ -6,7 +6,6 @@
 #define SENDCHANGEADDRESSDIALOG_H
 
 #include <QDialog>
-#include "qt/bcz/snackbar.h"
 
 class WalletModel;
 
@@ -19,23 +18,16 @@ class SendChangeAddressDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit SendChangeAddressDialog(QWidget* parent, WalletModel* model);
+    explicit SendChangeAddressDialog(QWidget *parent = nullptr);
     ~SendChangeAddressDialog();
 
     void setAddress(QString address);
-    QString getAddress() const;
+    bool getAddress(WalletModel *model, QString *retAddress);
+    bool selected = false;
 
-    void showEvent(QShowEvent* event) override;
-
+    void showEvent(QShowEvent *event) override;
 private:
-    WalletModel* walletModel;
     Ui::SendChangeAddressDialog *ui;
-    SnackBar *snackBar = nullptr;
-    void inform(const QString& text);
-
-private Q_SLOTS:
-    void reset();
-    void save();
 };
 
 #endif // SENDCHANGEADDRESSDIALOG_H

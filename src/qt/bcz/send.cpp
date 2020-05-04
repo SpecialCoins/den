@@ -143,8 +143,13 @@ SendWidget::SendWidget(BCZGUI* parent) :
 
 void SendWidget::refreshView()
 {
-    ui->pushButtonSave->setText("Send BCZ");
-    ui->pushButtonAddRecipient->setVisible(true);
+    QString btnText;
+    if (ui->pushLeft->isChecked()) {
+        btnText = tr("Send BCZ");
+        ui->pushButtonAddRecipient->setVisible(true);
+    }
+    ui->pushButtonSave->setText(btnText);
+
     refreshAmounts();
 }
 
@@ -378,7 +383,7 @@ void SendWidget::onSendClicked()
         return;
     }
 
-    if (send(recipients)) {
+    if(send(recipients)) {
         updateEntryLabels(recipients);
     }
     setFocusOnLastEntry();
@@ -479,24 +484,29 @@ void SendWidget::updateEntryLabels(QList<SendCoinsRecipient> recipients)
 void SendWidget::onChangeAddressClicked()
 {
     showHideOp(true);
-    SendChangeAddressDialog* dialog = new SendChangeAddressDialog(window, walletModel);
+    SendChangeAddressDialog* dialog = new SendChangeAddressDialog(window);
     if (!boost::get<CNoDestination>(&CoinControlDialog::coinControl->destChange)) {
         dialog->setAddress(QString::fromStdString(CBitcoinAddress(CoinControlDialog::coinControl->destChange).ToString()));
     }
     if (openDialogWithOpaqueBackgroundY(dialog, window, 3, 5)) {
-        CBitcoinAddress address(dialog->getAddress().toStdString());
+        if (dialog->selected) {
+            QString ret;
+            if (dialog->getAddress(walletModel, &ret)) {
+                CBitcoinAddress address(ret.toStdString());
 
-        // Ask if it's what the user really wants
-        if (!walletModel->isMine(address) &&
-            !ask(tr("Warning!"), tr("The change address doesn't belong to this wallet.\n\nDo you want to continue?"))) {
-            return;
+                // Ask if it's what the user really wants
+                if (!walletModel->isMine(address) &&
+                    !ask(tr("Warning!"), tr("The change address doesn't belong to this wallet.\n\nDo you want to continue?"))) {
+                    return;
+                }
+                CoinControlDialog::coinControl->destChange = address.Get();
+                ui->btnChangeAddress->setActive(true);
+            } else {
+                inform(tr("Invalid change address"));
+                ui->btnChangeAddress->setActive(false);
+            }
         }
-        CoinControlDialog::coinControl->destChange = address.Get();
-        ui->btnChangeAddress->setActive(true);
     }
-    // check if changeAddress has been reset to NoDestination (or wasn't set at all)
-    if (boost::get<CNoDestination>(&CoinControlDialog::coinControl->destChange))
-        ui->btnChangeAddress->setActive(false);
     dialog->deleteLater();
 }
 
@@ -540,7 +550,8 @@ void SendWidget::onChangeCustomFeeClicked()
 {
     showHideOp(true);
     if (!customFeeDialog) {
-        customFeeDialog = new SendCustomFeeDialog(window, walletModel);
+        customFeeDialog = new SendCustomFeeDialog(window);
+        customFeeDialog->setWalletModel(walletModel);
     }
     if (openDialogWithOpaqueBackgroundY(customFeeDialog, window, 3, 5)) {
         const CAmount& nFeePerKb = customFeeDialog->getFeeRate().GetFeePerK();
@@ -764,6 +775,7 @@ void SendWidget::setCustomFeeSelected(bool isSelected, const CAmount& customFee)
     if (walletModel)
         walletModel->setWalletDefaultFee(customFee);
 }
+
 
 void SendWidget::changeTheme(bool isLightTheme, QString& theme)
 {
