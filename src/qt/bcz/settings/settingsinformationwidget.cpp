@@ -39,7 +39,7 @@ SettingsInformationWidget::SettingsInformationWidget(BCZGUI* _window,QWidget *pa
     ui->labelTitleNetwork->setText(tr("Network"));
     ui->labelTitleName->setText(tr("Name:"));
     ui->labelTitleConnections->setText(tr("Connections:"));
-    ui->labelTitlemnroi->setText(tr("Masternode ROI::"));
+    ui->labelTitlemnroi->setText(tr("Masternode ROI:"));
     ui->labelTitleMasternode->setText(tr("Masternodes:"));
     ui->labelTitleMemory->setText(tr("Memory Pool"));
     ui->labelTitleNumberTransactions->setText(tr("Current number of transactions:"));
@@ -140,8 +140,8 @@ void SettingsInformationWidget::loadClientModel(){
         setMasternodeCount(clientModel->getMasternodeCountString());
         connect(clientModel, SIGNAL(strMasternodesChanged(QString)), this, SLOT(setMasternodeCount(QString)));
 
-        setmnroi(clientModel->getMasternodeCountString());
-        connect(clientModel, SIGNAL(strMasternodesChanged(QString)), this, SLOT(setMasternodeCount(QString)));
+        setmnroi(clientModel->getmnroiString());
+        connect(clientModel, SIGNAL(strmnroiChanged(QString)), this, SLOT(setmnroiCount(QString)));
 
         setNumBlocks(clientModel->getNumBlocks());
         connect(clientModel, &ClientModel::numBlocksChanged, this, &SettingsInformationWidget::setNumBlocks);

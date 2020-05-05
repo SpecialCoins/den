@@ -159,6 +159,7 @@ void ClientModel::updateMnTimer()
         cachedMasternodeCountString = newMasternodeCountString;
 
         Q_EMIT strMasternodesChanged(cachedMasternodeCountString);
+        Q_EMIT strmnroiChanged(cachedMasternodeCountString);
     }
 }
 
