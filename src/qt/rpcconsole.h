@@ -91,6 +91,8 @@ public Q_SLOTS:
     void setNumBlocks(int count);
     /** Set number of masternodes shown in the UI */
     void setMasternodeCount(const QString& strMasternodes);
+    /** Set ROI of masternodes shown in the UI */
+    void setmnroi(const QString& strMasternodes);
     /** Go forward or back in history */
     void browseHistory(int offset);
     /** Scroll console view to end */
