@@ -56,7 +56,7 @@ public:
     int getNumConnections(unsigned int flags = CONNECTIONS_ALL) const;
     int getNumBlocksAtStartup();
     QString getMasternodeCountString() const;
-    QString getMnRoiString() const;
+    QString getMnRoiCountString() const;
 
     // from cached block index
     int getNumBlocks();

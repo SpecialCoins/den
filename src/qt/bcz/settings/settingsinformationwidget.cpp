@@ -140,7 +140,7 @@ void SettingsInformationWidget::loadClientModel(){
         setMasternodeCount(clientModel->getMasternodeCountString());
         connect(clientModel, SIGNAL(strMasternodesChanged(QString)), this, SLOT(setMasternodeCount(QString)));
 
-        setMnRoiCount(clientModel->getMnRoiString());
+        setMnRoiCount(clientModel->getMnRoiCountString());
         connect(clientModel, SIGNAL(strMnRoiChanged(QString)), this, SLOT(setMnRoiCount(QString)));
 
         setNumBlocks(clientModel->getNumBlocks());
