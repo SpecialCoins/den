@@ -89,7 +89,7 @@ QString ClientModel::getMnRoiCountString() const
     mnodeman.CountNetworks(ActiveProtocol(), ipv4, ipv6, onion);
     int value = mnodeman.size();
     int roi = 4204.8 / value;
-    return tr("%1 %/Year)").arg(roi);
+    return tr("%1 % / Year").arg(roi);
 }
 
 int ClientModel::getNumBlocks()
