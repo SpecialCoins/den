@@ -33,8 +33,26 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const CWallet* 
 
         CTxDestination address;
 
+        if (!ExtractDestination(wtx.vout[1].scriptPubKey, address))
+            return parts;
 
-        if (isminetype mine = wallet->IsMine(wtx.vout[1])) {
+        if (!IsMine(*wallet, address)) {
+            //if the address is not yours then it means you have a tx sent to you in someone elses coinstake tx
+            for (unsigned int i = 1; i < wtx.vout.size(); i++) {
+                CTxDestination outAddress;
+                if (ExtractDestination(wtx.vout[i].scriptPubKey, outAddress)) {
+                    if (IsMine(*wallet, outAddress)) {
+                        isminetype mine = wallet->IsMine(wtx.vout[i]);
+                        sub.involvesWatchAddress = mine & ISMINE_WATCH_ONLY;
+                        sub.type = TransactionRecord::MNReward;
+                        sub.address = CBitcoinAddress(outAddress).ToString();
+                        sub.credit = wtx.vout[i].nValue;
+                    }
+                }
+            }
+        }
+
+        else if (isminetype mine = wallet->IsMine(wtx.vout[1])) {
 
             // Check for cold stakes.
             if (wtx.HasP2CSOutputs()) {
