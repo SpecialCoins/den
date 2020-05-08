@@ -168,14 +168,20 @@ void ClientModel::updateMnTimer()
     {
         cachedMasternodeCountString = newMasternodeCountString;
 
-        Q_EMIT strMnRoiChanged(cachedMasternodeCountString);
+        Q_EMIT strMasternodeCountChanged(cachedMasternodeCountString);
+    }
+
+    if (cachedMnRoiCountString != newMnRoiCountString)
+    {
+        cachedMnRoiCountString = newMnRoiCountString;
+
+        Q_EMIT strMnRoiChanged(cachedMnRoiString);
     }
 }
 
 void ClientModel::updateNumConnections(int numConnections)
 {
     Q_EMIT numConnectionsChanged(numConnections);
-    Q_EMIT strMnRoiChanged(cachedMnRoiString);
 }
 
 void ClientModel::updateAlert()

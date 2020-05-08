@@ -391,7 +391,7 @@ void RPCConsole::setClientModel(ClientModel* model)
         connect(model, &ClientModel::numBlocksChanged, this, &RPCConsole::setNumBlocks);
 
         setMasternodeCount(model->getMasternodeCountString());
-        setMnRoiCount(model->getMnRoiString());
+        setMnRoiCount(model->getMnRoiCountString());
 
         updateTrafficStats(model->getTotalBytesRecv(), model->getTotalBytesSent());
         connect(model, &ClientModel::bytesChanged, this, &RPCConsole::updateTrafficStats);
