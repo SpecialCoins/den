@@ -239,7 +239,7 @@ void CoinControlDialog::buttonSelectAllClicked()
     } else {
         ui->pushButtonSelectAll->setText(tr("Unselect all"));
     }
-    fSelectAllToggled = !fSelectAllToggled
+    fSelectAllToggled = !fSelectAllToggled;
     CoinControlDialog::updateLabels(model, this);
     updateDialogLabels();
 }
