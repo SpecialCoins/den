@@ -15,24 +15,13 @@
 #include <algorithm>
 #include <stdint.h>
 
-bool TransactionRecord::showTransaction(const CWalletTx& wtx)
-{
-    if (wtx.IsCoinBase()) {
-        // Ensures we show generated coins / mined transactions at depth 1
-        if (!wtx.IsInMainChain()) {
-            return false;
-        }
-    }
-    return true;
-}
-
 /*
  * Decompose CWallet transaction to model transaction records.
  */
 QList<TransactionRecord> TransactionRecord::decomposeTransaction(const CWallet* wallet, const CWalletTx& wtx)
 {
     QList<TransactionRecord> parts;
-    int64_t nTime = wtx.GetComputedTxTime();
+    int64_t nTime = wtx.GetTxTime();
     CAmount nCredit = wtx.GetCredit(ISMINE_ALL);
     CAmount nDebit = wtx.GetDebit(ISMINE_ALL);
     CAmount nNet = nCredit - nDebit;
@@ -43,26 +32,9 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const CWallet* 
         TransactionRecord sub(hash, nTime, wtx.GetTotalSize());
 
         CTxDestination address;
-        if (!ExtractDestination(wtx.vout[1].scriptPubKey, address))
-            return parts;
 
-        if (!IsMine(*wallet, address)) {
-            //if the address is not yours then it means you have a tx sent to you in someone elses coinstake tx
-            for (unsigned int i = 1; i < wtx.vout.size(); i++) {
-                CTxDestination outAddress;
-                if (ExtractDestination(wtx.vout[i].scriptPubKey, outAddress)) {
-                    if (IsMine(*wallet, outAddress)) {
-                        isminetype mine = wallet->IsMine(wtx.vout[i]);
-                        sub.involvesWatchAddress = mine & ISMINE_WATCH_ONLY;
-                        sub.type = TransactionRecord::MNReward;
-                        sub.address = CBitcoinAddress(outAddress).ToString();
-                        sub.credit = wtx.vout[i].nValue;
-                    }
-                }
-            }
-        }
 
-        else if (isminetype mine = wallet->IsMine(wtx.vout[1])) {
+        if (isminetype mine = wallet->IsMine(wtx.vout[1])) {
 
             // Check for cold stakes.
             if (wtx.HasP2CSOutputs()) {
@@ -78,8 +50,7 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const CWallet* 
                 sub.address = CBitcoinAddress(address).ToString();
                 sub.credit = nNet;
             }
-        }
-        else {
+        } else {
             //Masternode reward
             CTxDestination destMN;
             int nIndexMN = wtx.vout.size() - 1;
@@ -111,12 +82,13 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const CWallet* 
         //
         // Credit
         //
-        for (const CTxOut& txout : wtx.vout) {
+        for (unsigned int nOut = 0; nOut < wtx.vout.size(); nOut++) {
+            const CTxOut& txout = wtx.vout[nOut];
             isminetype mine = wallet->IsMine(txout);
             if (mine) {
                 TransactionRecord sub(hash, nTime, wtx.GetTotalSize());
                 CTxDestination address;
-                sub.idx = parts.size(); // sequence number
+                sub.idx = nOut; // vout index
                 sub.credit = txout.nValue;
                 sub.involvesWatchAddress = mine & ISMINE_WATCH_ONLY;
                 if (ExtractDestination(txout.scriptPubKey, address) && IsMine(*wallet, address)) {
@@ -170,11 +142,6 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const CWallet* 
             sub.type = TransactionRecord::SendToSelf;
             sub.address = "";
 
-            for (unsigned int nOut = 0; nOut < wtx.vout.size(); nOut++) {
-                const CTxOut& txout = wtx.vout[nOut];
-                sub.idx = parts.size();
-            }
-
             // Label for payment to self
             CTxDestination address;
             if (ExtractDestination(wtx.vout[0].scriptPubKey, address)) {
@@ -187,7 +154,7 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const CWallet* 
             sub.credit = nCredit - nChange;
             parts.append(sub);
             parts.last().involvesWatchAddress = involvesWatchAddress; // maybe pass to TransactionRecord as constructor argument
-        }  else if (fAllFromMe) {
+        } else if (fAllFromMe) {
             //
             // Debit
             //
@@ -196,7 +163,7 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const CWallet* 
             for (unsigned int nOut = 0; nOut < wtx.vout.size(); nOut++) {
                 const CTxOut& txout = wtx.vout[nOut];
                 TransactionRecord sub(hash, nTime, wtx.GetTotalSize());
-                sub.idx = parts.size();
+                sub.idx = nOut;
                 sub.involvesWatchAddress = involvesWatchAddress;
 
                 if (wallet->IsMine(txout)) {
@@ -288,6 +255,7 @@ void TransactionRecord::loadHotOrColdStakeOrContract(
             break;
         }
     }
+
     bool isSpendable = (wallet->IsMine(p2csUtxo) & ISMINE_SPENDABLE_DELEGATED);
     bool isFromMe = wallet->IsFromMe(wtx);
 
@@ -309,7 +277,6 @@ void TransactionRecord::loadHotOrColdStakeOrContract(
             record.type = TransactionRecord::StakeDelegated;
             record.credit = wtx.GetCredit(ISMINE_SPENDABLE_DELEGATED);
             record.debit = -(wtx.GetDebit(ISMINE_SPENDABLE_DELEGATED));
-
         } else {
             // Online wallet receiving an stake due a received utxo delegation that won a block.
             record.type = TransactionRecord::StakeHot;
@@ -348,11 +315,15 @@ void TransactionRecord::updateStatus(const CWalletTx& wtx)
 
     // Determine transaction status
 
+    // Update time if needed
+    int64_t nTxTime = wtx.GetTxTime();
+    if (time != nTxTime) time = nTxTime;
+
     // Sort order, unrecorded transactions sort to the top
     status.sortKey = strprintf("%010d-%01d-%010u-%03d",
         (pindex ? pindex->nHeight : std::numeric_limits<int>::max()),
         (wtx.IsCoinBase() ? 1 : 0),
-        wtx.nTimeReceived,
+        time,
         idx);
 
     bool fConflicted = false;
@@ -377,10 +348,11 @@ void TransactionRecord::updateStatus(const CWalletTx& wtx)
     }
     // For generated transactions, determine maturity
     else if (type == TransactionRecord::Generated ||
-                type == TransactionRecord::StakeMint ||
-                type == TransactionRecord::MNReward ||
-                type == TransactionRecord::StakeDelegated ||
-                type == TransactionRecord::StakeHot) {
+            type == TransactionRecord::StakeMint ||
+            type == TransactionRecord::MNReward ||
+            type == TransactionRecord::StakeDelegated ||
+            type == TransactionRecord::StakeHot) {
+
         if (nBlocksToMaturity > 0) {
             status.status = TransactionStatus::Immature;
             status.matures_in = nBlocksToMaturity;
