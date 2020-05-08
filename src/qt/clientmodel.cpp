@@ -171,6 +171,8 @@ void ClientModel::updateMnTimer()
         Q_EMIT strMasternodesChanged(cachedMasternodeCountString);
     }
 
+    QString newMnRoiCountString = getMnRoiCountString();
+
     if (cachedMnRoiCountString != newMnRoiCountString)
     {
         cachedMnRoiCountString = newMnRoiCountString;
