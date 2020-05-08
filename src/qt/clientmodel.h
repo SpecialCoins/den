@@ -101,6 +101,7 @@ private:
 
     const CBlockIndex* cacheTip{nullptr};
     QString cachedMasternodeCountString;
+    QString cachedMnRoiCountString;
     bool cachedReindexing;
     bool cachedImporting;
     bool cachedInitialSync;

@@ -175,7 +175,7 @@ void ClientModel::updateMnTimer()
     {
         cachedMnRoiCountString = newMnRoiCountString;
 
-        Q_EMIT strMnRoiChanged(cachedMnRoiString);
+        Q_EMIT strMnRoiChanged(cachedMnRoiCountString);
     }
 }
 
