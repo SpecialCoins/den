@@ -687,7 +687,7 @@ void RPCConsole::setMasternodeCount(const QString& strMasternodes)
 
 void RPCConsole::setMnRoiCount(const QString& strMnRoi)
 {
-    ui->MnRoiCount->setText(strMnRoi);
+    ui->mnroiCount->setText(strMnRoi);
 }
 
 
