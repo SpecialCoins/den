@@ -26,7 +26,7 @@ public:
 private Q_SLOTS:
     void setNumConnections(int count);
     void setMasternodeCount(const QString& strMasternodes);
-    void setmnroi(const QString& strMasternodes);
+    void setmnroiCount(const QString& strMasternodes);
     void setMempoolSize(long numberOfTxs, size_t dynUsage);
     void setNumBlocks(int count);
     void openNetworkMonitor();

@@ -391,7 +391,7 @@ void RPCConsole::setClientModel(ClientModel* model)
         connect(model, &ClientModel::numBlocksChanged, this, &RPCConsole::setNumBlocks);
 
         setMasternodeCount(model->getMasternodeCountString());
-        setmnroi(model->getmnroiString());
+        setmnroiCount(model->getmnroiString());
 
         updateTrafficStats(model->getTotalBytesRecv(), model->getTotalBytesSent());
         connect(model, &ClientModel::bytesChanged, this, &RPCConsole::updateTrafficStats);
@@ -685,7 +685,7 @@ void RPCConsole::setMasternodeCount(const QString& strMasternodes)
     ui->masternodeCount->setText(strMasternodes);
 }
 
-void RPCConsole::setmnroi(const QString& strMasternodes)
+void RPCConsole::setmnroiCount(const QString& strMasternodes)
 {
     ui->mnroiCount->setText(strMasternodes);
 }
