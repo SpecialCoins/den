@@ -170,20 +170,12 @@ void ClientModel::updateMnTimer()
 
         Q_EMIT strmnroiChanged(cachedMasternodeCountString);
     }
-
-    QString newmnroiString = getmnroiString();
-
-    if (cachedmnroiString != newmnroiString)
-    {
-        cachedmnroiString = newmnroiString;
-
-        Q_EMIT strmnroiChanged(cachedmnroiString);
-    }
 }
 
 void ClientModel::updateNumConnections(int numConnections)
 {
     Q_EMIT numConnectionsChanged(numConnections);
+    Q_EMIT strmnroiChanged(cachedmnroiString);
 }
 
 void ClientModel::updateAlert()
