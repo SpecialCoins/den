@@ -83,7 +83,7 @@ QString ClientModel::getMasternodeCountString() const
     return tr("Total: %1 (IPv4: %2 / IPv6: %3 / Tor: %4 / Unknown: %5)").arg(QString::number((int)mnodeman.size())).arg(QString::number((int)ipv4)).arg(QString::number((int)ipv6)).arg(QString::number((int)onion)).arg(QString::number((int)nUnknown));
 }
 
-QString ClientModel::getmnroiString() const
+QString ClientModel::getMnRoiString() const
 {
     int ipv4 = 0, ipv6 = 0, onion = 0;
     mnodeman.CountNetworks(ActiveProtocol(), ipv4, ipv6, onion);
@@ -168,14 +168,14 @@ void ClientModel::updateMnTimer()
     {
         cachedMasternodeCountString = newMasternodeCountString;
 
-        Q_EMIT strmnroiChanged(cachedMasternodeCountString);
+        Q_EMIT strMnRoiChanged(cachedMasternodeCountString);
     }
 }
 
 void ClientModel::updateNumConnections(int numConnections)
 {
     Q_EMIT numConnectionsChanged(numConnections);
-    Q_EMIT strmnroiChanged(cachedmnroiString);
+    Q_EMIT strMnRoiChanged(cachedMnRoiString);
 }
 
 void ClientModel::updateAlert()

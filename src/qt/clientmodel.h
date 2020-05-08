@@ -56,7 +56,7 @@ public:
     int getNumConnections(unsigned int flags = CONNECTIONS_ALL) const;
     int getNumBlocksAtStartup();
     QString getMasternodeCountString() const;
-    QString getmnroiString() const;
+    QString getMnRoiString() const;
 
     // from cached block index
     int getNumBlocks();
@@ -117,7 +117,7 @@ Q_SIGNALS:
     void numConnectionsChanged(int count);
     void numBlocksChanged(int count);
     void strMasternodesChanged(const QString& strMasternodes);
-    void strmnroiChanged(const QString& strMasternodes);
+    void strMnRoiChanged(const QString& strMnRoi);
     void alertsChanged(const QString& warnings);
     void bytesChanged(quint64 totalBytesIn, quint64 totalBytesOut);
     void mempoolSizeChanged(long count, size_t mempoolSizeInBytes);

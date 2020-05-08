@@ -39,7 +39,7 @@ SettingsInformationWidget::SettingsInformationWidget(BCZGUI* _window,QWidget *pa
     ui->labelTitleNetwork->setText(tr("Network"));
     ui->labelTitleName->setText(tr("Name:"));
     ui->labelTitleConnections->setText(tr("Connections:"));
-    ui->labelTitlemnroi->setText(tr("Masternode ROI:"));
+    ui->labelTitleMnRoi->setText(tr("Masternode ROI:"));
     ui->labelTitleMasternode->setText(tr("Masternodes:"));
     ui->labelTitleMemory->setText(tr("Memory Pool"));
     ui->labelTitleNumberTransactions->setText(tr("Current number of transactions:"));
@@ -53,7 +53,7 @@ SettingsInformationWidget::SettingsInformationWidget(BCZGUI* _window,QWidget *pa
         ui->labelTitleClient,
         ui->labelTitleTime,
         ui->labelTitleName,
-        ui->labelTitlemnroi,
+        ui->labelTitleMnRoi,
         ui->labelTitleConnections,
         ui->labelTitleMasternode,
         ui->labelTitleNumberTransactions,
@@ -70,7 +70,7 @@ SettingsInformationWidget::SettingsInformationWidget(BCZGUI* _window,QWidget *pa
         ui->labelInfoTime,
         ui->labelInfoConnections,
         ui->labelInfoMasternodeCount,
-        ui->labelInfomnroi,
+        ui->labelInfoMnRoi,
         ui->labelInfoBlockNumber
         }, "text-main-settings");
 
@@ -140,8 +140,8 @@ void SettingsInformationWidget::loadClientModel(){
         setMasternodeCount(clientModel->getMasternodeCountString());
         connect(clientModel, SIGNAL(strMasternodesChanged(QString)), this, SLOT(setMasternodeCount(QString)));
 
-        setmnroiCount(clientModel->getmnroiString());
-        connect(clientModel, SIGNAL(strmnroiChanged(QString)), this, SLOT(setmnroiCount(QString)));
+        setMnRoiCount(clientModel->getMnRoiString());
+        connect(clientModel, SIGNAL(strMnRoiChanged(QString)), this, SLOT(setMnRoiCount(QString)));
 
         setNumBlocks(clientModel->getNumBlocks());
         connect(clientModel, &ClientModel::numBlocksChanged, this, &SettingsInformationWidget::setNumBlocks);
@@ -169,9 +169,9 @@ void SettingsInformationWidget::setMasternodeCount(const QString& strMasternodes
     ui->labelInfoMasternodeCount->setText(strMasternodes);
 }
 
-void SettingsInformationWidget::setmnroiCount(const QString& strMasternodes)
+void SettingsInformationWidget::setMnRoiCount(const QString& strMnRoi)
 {
-    ui->labelInfomnroi->setText(strMasternodes);
+    ui->labelInfoMnRoi->setText(strMnRoi);
 }
 
 void SettingsInformationWidget::updateTrafficStats(quint64 totalBytesIn, quint64 totalBytesOut)
