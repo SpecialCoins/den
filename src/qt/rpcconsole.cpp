@@ -670,6 +670,11 @@ void RPCConsole::setNumConnections(int count)
     ui->numberOfConnections->setText(connections);
 }
 
+void RPCConsole::setMasternodeCount(const QString& strMasternodes)
+{
+    ui->masternodeCount->setText(strMasternodes);
+}
+
 void RPCConsole::setNumBlocks(int count)
 {
     ui->numberOfBlocks->setText(QString::number(count));
