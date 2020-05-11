@@ -12,6 +12,7 @@
 #include "sync.h"
 #include "util.h"
 #include "wallet/wallet.h"
+#include "spork.h"
 
 // keep track of the scanning errors I've seen
 std::map<uint256, int> mapSeenMasternodeScanningErrors;
@@ -206,8 +207,7 @@ void CMasternode::Check(bool forceCheck)
         return;
     }
 
-    if (true)
-
+    if (sporkManager.IsSporkActive(SPORK_31_MN_FIX))
         {
             TRY_LOCK(cs_main, lockMain);
             if (!lockMain) return;
