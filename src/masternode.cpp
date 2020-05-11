@@ -217,7 +217,7 @@ void CMasternode::Check(bool forceCheck)
                (unsigned int)vin.prevout.n>=coins.vout.size() ||
                coins.vout[vin.prevout.n].IsNull()) {
                 nActiveState = MASTERNODE_OUTPOINT_SPENT;
-                LogPrintf(MASTERNODE, "CMasternode::Check -- Failed to find Masternode UTXO, masternode=%s\n", vin.prevout.ToStringShort());
+                LogPrintf("Masternode::Check -- Failed to find Masternode UTXO, masternode=%s\n", vin.prevout.ToStringShort());
                 return;
             }
         }
