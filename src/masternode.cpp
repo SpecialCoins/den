@@ -12,7 +12,6 @@
 #include "sync.h"
 #include "util.h"
 #include "wallet/wallet.h"
-#include "spork.h"
 
 // keep track of the scanning errors I've seen
 std::map<uint256, int> mapSeenMasternodeScanningErrors;
@@ -207,7 +206,6 @@ void CMasternode::Check(bool forceCheck)
         return;
     }
 
-    if (sporkManager.IsSporkActive(SPORK_31_MN_FIX))
         {
             TRY_LOCK(cs_main, lockMain);
             if (!lockMain) return;
@@ -217,7 +215,7 @@ void CMasternode::Check(bool forceCheck)
                (unsigned int)vin.prevout.n>=coins.vout.size() ||
                coins.vout[vin.prevout.n].IsNull()) {
                 nActiveState = MASTERNODE_OUTPOINT_SPENT;
-                LogPrintf("Masternode::Check -- Failed to find Masternode UTXO, masternode=%s\n", vin.prevout.ToStringShort());
+                LogPrint(BCLog::MASTERNODE, "CMasternode::Check -- Failed to find Masternode UTXO, masternode=%s\n", vin.prevout.ToStringShort());
                 return;
             }
         }
