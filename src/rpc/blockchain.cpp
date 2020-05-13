@@ -423,7 +423,7 @@ UniValue resendwallettransactions(const UniValue& params, bool fHelp)
 
     std::vector<uint256> txids = pwalletMain->ResendWalletTransactions();
     UniValue result(UniValue::VARR);
-    BOOST_FOREACH(const uint256& txid, txids)
+    for (const uint256& txid : txids)
     {
         result.push_back(txid.ToString());
     }
