@@ -21,10 +21,9 @@ std::vector<CSporkDef> sporkDefs = {
     MAKE_SPORK_DEF(SPORK_22_MASTERNODE_PAYMENT,             1),             // ON
     MAKE_SPORK_DEF(SPORK_23_F_PAYMENT,                      1),             // ON
     MAKE_SPORK_DEF(SPORK_24_F_PAYMENT_ENFORCEMENT,          4070908800ULL), // OFF
-    MAKE_SPORK_DEF(SPORK_25_BLOCK_V5,                       4070908800ULL), // OFF
-    MAKE_SPORK_DEF(SPORK_26_COLDSTAKING_ENFORCEMENT,        4070908800ULL), // OFF
-    MAKE_SPORK_DEF(SPORK_27_NODE_V_NEW,                     4070908800ULL), // OFF
-    MAKE_SPORK_DEF(SPORK_28_MIN_STAKING,                    4070908800ULL), // OFF
+    MAKE_SPORK_DEF(SPORK_25_BLOCK_V5,                       1),             // ON
+    MAKE_SPORK_DEF(SPORK_26_COLDSTAKING_ENFORCEMENT,        1),             // ON
+    MAKE_SPORK_DEF(SPORK_28_MIN_STAKING,                    1),             // ON
     MAKE_SPORK_DEF(SPORK_29_NODE_V_NEW2,                    4070908800ULL), // OFF
     MAKE_SPORK_DEF(SPORK_30_SAFETY_KILL,                    4070908800ULL), // OFF
 };

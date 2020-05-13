@@ -118,14 +118,7 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
     CBlockIndex* pindexPrev = GetChainTip();
     if (!pindexPrev) return nullptr;
     const int nHeight = pindexPrev->nHeight + 1;
-
-    // Make sure to create the correct block version
-    if (sporkManager.IsSporkActive(SPORK_25_BLOCK_V5))
-    {
-    pblock->nVersion = 5; }
-    else
-    {
-    pblock->nVersion = 4; }
+    pblock->nVersion = 5;
 
     // Create coinbase tx
     CMutableTransaction txNew;
