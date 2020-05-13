@@ -2972,7 +2972,7 @@ bool CheckBlockHeader(const CBlockHeader& block, CValidationState& state, bool f
         return state.DoS(50, error("CheckBlockHeader() : block version must be below 6"),
         REJECT_INVALID, "block-version");
 
-    if (block.nVersion <= 4)
+    if (block.nVersion <= 4 && block.GetBlockTime() >=1589399021)
             return state.DoS(50, error("CheckBlockHeader() : block version must be above 4"),
             REJECT_INVALID, "block-version");
 
