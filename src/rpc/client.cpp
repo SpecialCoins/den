@@ -117,6 +117,7 @@ static const CRPCConvertParam vRPCConvertParams[] =
         {"verifychain", 1},
         {"keypoolrefill", 0},
         {"clearmempool", 0},
+        {"resendwallettransactions", 0},
         {"getrawmempool", 0},
         {"estimatefee", 0},
         {"estimatepriority", 0},
