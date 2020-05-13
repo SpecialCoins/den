@@ -421,7 +421,7 @@ UniValue resendwallettransactions(const UniValue& params, bool fHelp)
 
     LOCK2(cs_main, pwalletMain->cs_wallet);
 
-    std::vector<uint256> txids = pwalletMain->ResendWalletTransactions();
+    std::vector<uint256> txids = pwalletMain->ResendWalletTransactions2();
     UniValue result(UniValue::VARR);
     for (const uint256& txid : txids)
     {

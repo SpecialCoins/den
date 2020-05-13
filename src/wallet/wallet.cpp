@@ -1755,6 +1755,42 @@ std::set<uint256> CWalletTx::GetConflicts() const
     return result;
 }
 
+std::vector <uint256> CWallet::ResendWalletTransactions2()
+{
+    // Do this infrequently and randomly to avoid giving away
+    // that these are our transactions.
+    if (GetTime() < nNextResend)
+        return;
+    bool fFirst = (nNextResend == 0);
+    nNextResend = GetTime() + GetRand(30 * 60);
+    if (fFirst)
+        return;
+
+    // Only do it if there's been a new block since last time
+    if (nTimeBestReceived < nLastResend)
+        return;
+    nLastResend = GetTime();
+
+    // Rebroadcast any of our txes that aren't in a block yet
+    LogPrintf("ResendWalletTransactions()\n");
+    {
+        LOCK(cs_wallet);
+        // Sort them in chronological order
+        std::multimap<unsigned int, CWalletTx*> mapSorted;
+        for (PAIRTYPE(const uint256, CWalletTx) & item : mapWallet) {
+            CWalletTx& wtx = item.second;
+            // Don't rebroadcast until it's had plenty of time that
+            // it should have gotten in already by now.
+            if (nTimeBestReceived - (int64_t)wtx.nTimeReceived > 5 * 60)
+                mapSorted.insert(std::make_pair(wtx.nTimeReceived, &wtx));
+        }
+        for (PAIRTYPE(const unsigned int, CWalletTx*) & item : mapSorted) {
+            CWalletTx& wtx = *item.second;
+            wtx.RelayWalletTransaction();
+        }
+    }
+}
+
 void CWallet::ResendWalletTransactions()
 {
     // Do this infrequently and randomly to avoid giving away
