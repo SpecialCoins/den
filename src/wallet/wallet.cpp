@@ -1781,7 +1781,7 @@ std::vector <uint256> CWallet::ResendWalletTransactionsBefore(int64_t nTime) {
 void CWallet::ResendWalletTransactions(int64_t nBestBlockTime) {
     // Do this infrequently and randomly to avoid giving away
     // that these are our transactions.
-    if (GetTime() < nNextResend || !fBroadcastTransactions)
+    if (GetTime() < nNextResend)
         return;
     bool fFirst = (nNextResend == 0);
     nNextResend = GetTime() + GetRand(30 * 60);
