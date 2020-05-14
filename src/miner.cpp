@@ -482,7 +482,7 @@ void POSMiner(CWallet* pwallet, bool fProofOfStake)
     while (fStake_BCZ) {
         CBlockIndex* pindexPrev = GetChainTip();
         if (!pindexPrev) {
-            MilliSleep(Params().TargetSpacing() * 1000);       // sleep a block
+            MilliSleep(150 * 1000);       // sleep a block
             continue;
         }
 
