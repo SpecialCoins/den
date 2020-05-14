@@ -1760,7 +1760,7 @@ std::vector <uint256> CWallet::ResendWalletTransactionsBefore(int64_t nTime) {
 
     LOCK(cs_wallet);
     // Sort them in chronological order
-    multimap < unsigned int, CWalletTx * > mapSorted;
+    std::multimap < unsigned int, CWalletTx * > mapSorted;
     BOOST_FOREACH(PAIRTYPE(const uint256, CWalletTx)&item, mapWallet)
     {
         CWalletTx &wtx = item.second;

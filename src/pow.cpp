@@ -34,7 +34,7 @@ unsigned int static DarkGravityWave3(const CBlockIndex* pindexLast) {
 
    uint256 bnNew(bnPastTargetAvg);
    int64_t nActualTimespan = pindexLast->GetBlockTime() - pindex->GetBlockTime();
-   int64_t nTargetTimespan = nPastBlocks * 150;
+   int64_t nTargetTimespan = nPastBlocks * nTargetSpacing;
    if (nActualTimespan < nTargetTimespan/1.5)
        nActualTimespan = nTargetTimespan/1.5;
    if (nActualTimespan > nTargetTimespan*1.5)
