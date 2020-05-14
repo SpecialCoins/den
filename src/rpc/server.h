@@ -280,6 +280,8 @@ extern UniValue getdifficulty(const UniValue& params, bool fHelp);
 extern UniValue settxfee(const UniValue& params, bool fHelp);
 extern UniValue getmempoolinfo(const UniValue& params, bool fHelp);
 extern UniValue clearmempool(const UniValue& params, bool fHelp);
+extern UniValue removetxwallet(const UniValue& params, bool fHelp);
+extern UniValue removetxmempool(const UniValue& params, bool fHelp);
 extern UniValue resendwallettransactions(const UniValue& params, bool fHelp);
 extern UniValue getrawmempool(const UniValue& params, bool fHelp);
 extern UniValue getblockhash(const UniValue& params, bool fHelp);

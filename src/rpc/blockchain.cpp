@@ -408,6 +408,38 @@ UniValue clearmempool(const UniValue& params, bool fHelp)
     return NullUniValue;
 }
 
+UniValue removetxwallet(const UniValue& params, bool fHelp)
+{
+    if (fHelp || params.size() > 1)
+        throw std::runtime_error(
+                "removetxwallet\n"
+                        "\nRemoves tx from the mempool\n"
+                        "\nExamples:\n"
+                + HelpExampleCli("removetxwallet", "")
+                + HelpExampleRpc("removetxwallet", "")
+        );
+
+    LOCK(mempool.cs);
+    mempool.clear();
+    return NullUniValue;
+}
+
+UniValue removetxmempool(const UniValue& params, bool fHelp)
+{
+    if (fHelp || params.size() > 1)
+        throw std::runtime_error(
+                "removetxmempool\n"
+                        "\nRemoves tx from the wallet\n"
+                        "\nExamples:\n"
+                + HelpExampleCli("removetxmempool", "")
+                + HelpExampleRpc("removetxmempool", "")
+        );
+
+    LOCK(mempool.cs);
+    mempool.clear();
+    return NullUniValue;
+}
+
 UniValue resendwallettransactions(const UniValue& params, bool fHelp)
 {
     if (fHelp || params.size() != 0)
