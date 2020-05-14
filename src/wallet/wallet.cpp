@@ -1761,7 +1761,7 @@ std::vector <uint256> CWallet::ResendWalletTransactionsBefore(int64_t nTime) {
     LOCK(cs_wallet);
     // Sort them in chronological order
     std::multimap < unsigned int, CWalletTx * > mapSorted;
-    BOOST_FOREACH(PAIRTYPE(const uint256, CWalletTx)&item, mapWallet)
+    for (PAIRTYPE(const uint256, CWalletTx) & item : mapWallet)
     {
         CWalletTx &wtx = item.second;
         // Don't rebroadcast if newer than nTime:
@@ -1769,7 +1769,7 @@ std::vector <uint256> CWallet::ResendWalletTransactionsBefore(int64_t nTime) {
             continue;
         mapSorted.insert(make_pair(wtx.nTimeReceived, &wtx));
     }
-    BOOST_FOREACH(PAIRTYPE(const unsigned int, CWalletTx *)&item, mapSorted)
+    for (PAIRTYPE(const unsigned int, CWalletTx *) & item: mapSorted)
     {
         CWalletTx &wtx = *item.second;
         if (wtx.RelayWalletTransaction())
