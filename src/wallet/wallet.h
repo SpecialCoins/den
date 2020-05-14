@@ -819,7 +819,7 @@ public:
     int64_t GetTxTime() const;
     void UpdateTimeSmart();
     int GetRequestCount() const;
-    void RelayWalletTransaction(std::string strCommand = "tx");
+    bool RelayWalletTransaction(std::string strCommand = "tx");
     std::set<uint256> GetConflicts() const;
 };
 
