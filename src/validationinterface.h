@@ -39,8 +39,7 @@ protected:
     virtual void SetBestChain(const CBlockLocator &locator) {}
     virtual bool UpdatedTransaction(const uint256 &hash) { return false;}
     virtual void Inventory(const uint256 &hash) {}
-// XX42    virtual void ResendWalletTransactions(int64_t nBestBlockTime) {}
-    virtual void ResendWalletTransactions() {}
+    virtual void ResendWalletTransactions(int64_t nBestBlockTime) {}
     virtual void BlockChecked(const CBlock&, const CValidationState&) {}
 // XX42    virtual void GetScriptForMining(boost::shared_ptr<CReserveScript>&) {};
     virtual void ResetRequestCount(const uint256 &hash) {};
