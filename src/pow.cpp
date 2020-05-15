@@ -22,7 +22,6 @@ unsigned int static DarkGravityWave3(const CBlockIndex* pindexLast) {
         timeblocks = 300;
     }
 
-   int64_t timeblocks = 150;
    int64_t nPastBlocks = 24;
    const CBlockIndex *pindex = pindexLast;
    uint256 bnPastTargetAvg;
