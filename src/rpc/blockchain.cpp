@@ -411,6 +411,16 @@ UniValue clearmempool(const UniValue& params, bool fHelp)
 UniValue removetxwallet(const UniValue& params, bool fHelp)
 {
     if (fHelp || params.size() != 1)
+        throw std::runtime_error("removetxwallet <txid>\n" + HelpRequiringPassphrase());
+
+    uint256 hash;
+    hash.SetHex(params[0].get_str());
+
+    if (pwalletMain->IsLocked())
+        throw JSONRPCError(RPC_WALLET_UNLOCK_NEEDED, "Error: Please enter the wallet passphrase with walletpassphrase first.");
+
+    pwalletMain->EraseFromWallet(hash);
+    return NullUniValue;
 
 }
 
