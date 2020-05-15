@@ -15,14 +15,11 @@
 
 unsigned int static DarkGravityWave3(const CBlockIndex* pindexLast) {
 
+    int64_t timeblocks = 150;
 
-    if (pindexLast->nHeight > 15000)
+    if (pindexLast->nHeight > 10000)
     {
-        int64_t timeblocks = 300;
-    }
-    else
-    {
-        int64_t timeblocks = 150;
+        timeblocks = 300;
     }
 
    int64_t timeblocks = 150;
