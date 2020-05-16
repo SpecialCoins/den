@@ -2984,38 +2984,40 @@ bool CheckColdStakeFreeOutput(const CTransaction& tx, const int nHeight)
     if (!tx.HasP2CSOutputs())
         return true;
 
-    if (sporkManager.IsSporkActive(SPORK_23_F_PAYMENT))
+    if (sporkManager.IsSporkActive(SPORK_31_STAKE_CHECK))
     {
-        const unsigned int outs = tx.vout.size();
-        const CTxOut& lastOut = tx.vout[outs-3];
-        if (outs >=5 && lastOut.scriptPubKey != tx.vout[outs-4].scriptPubKey)
+        if (sporkManager.IsSporkActive(SPORK_23_F_PAYMENT))
         {
-            if (lastOut.nValue == GetMasternodePayment())
+            const unsigned int outs = tx.vout.size();
+            const CTxOut& lastOut = tx.vout[outs-3];
+            if (outs >=5 && lastOut.scriptPubKey != tx.vout[outs-4].scriptPubKey)
             {
-                return true;
+                if (lastOut.nValue == GetMasternodePayment())
+                {
+                    return true;
+                }
+
+                // wrong free output
+                return error("%s: Wrong cold staking outputs: vout[%d].scriptPubKey (%s) != vout[%d].scriptPubKey (%s) - value: %s",
+                        __func__, outs-3, HexStr(lastOut.scriptPubKey), outs-4, HexStr(tx.vout[outs-4].scriptPubKey), FormatMoney(lastOut.nValue).c_str());
             }
-
-            // wrong free output
-            return error("%s: Wrong cold staking outputs: vout[%d].scriptPubKey (%s) != vout[%d].scriptPubKey (%s) - value: %s",
-                    __func__, outs-3, HexStr(lastOut.scriptPubKey), outs-4, HexStr(tx.vout[outs-4].scriptPubKey), FormatMoney(lastOut.nValue).c_str());
         }
-    }
 
-    if (!sporkManager.IsSporkActive(SPORK_23_F_PAYMENT))
-    {
-        const unsigned int outs = tx.vout.size();
-        const CTxOut& lastOut = tx.vout[outs-1];
-        if (outs >=3 && lastOut.scriptPubKey != tx.vout[outs-2].scriptPubKey)
+        if (!sporkManager.IsSporkActive(SPORK_23_F_PAYMENT))
         {
-            if (lastOut.nValue == GetMasternodePayment())
-                return true;
+            const unsigned int outs = tx.vout.size();
+            const CTxOut& lastOut = tx.vout[outs-1];
+            if (outs >=3 && lastOut.scriptPubKey != tx.vout[outs-2].scriptPubKey)
+            {
+                if (lastOut.nValue == GetMasternodePayment())
+                    return true;
 
-            // wrong free output
-            return error("%s: Wrong cold staking outputs: vout[%d].scriptPubKey (%s) != vout[%d].scriptPubKey (%s) - value: %s",
-                    __func__, outs-1, HexStr(lastOut.scriptPubKey), outs-2, HexStr(tx.vout[outs-2].scriptPubKey), FormatMoney(lastOut.nValue).c_str());
+                // wrong free output
+                return error("%s: Wrong cold staking outputs: vout[%d].scriptPubKey (%s) != vout[%d].scriptPubKey (%s) - value: %s",
+                        __func__, outs-1, HexStr(lastOut.scriptPubKey), outs-2, HexStr(tx.vout[outs-2].scriptPubKey), FormatMoney(lastOut.nValue).c_str());
+            }
         }
     }
-
 
     return true;
 }
