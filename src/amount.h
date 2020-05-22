@@ -12,6 +12,8 @@
 #include <stdlib.h>
 #include <string>
 
+extern const std::string CURRENCY_UNIT;
+
 typedef int64_t CAmount;
 
 static const CAmount COIN = 100000000;
