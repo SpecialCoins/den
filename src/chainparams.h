@@ -18,11 +18,9 @@
 
 typedef unsigned char MessageStartChars[MESSAGE_START_SIZE];
 
-class CDNSSeedData {
-public:
+struct CDNSSeedData {
     std::string name, host;
     bool supportsServiceBitsFiltering;
-    std::string getHost(uint64_t requiredServiceBits) const;
     CDNSSeedData(const std::string& strName, const std::string& strHost, bool supportsServiceBitsFilteringIn = false) : name(strName), host(strHost), supportsServiceBitsFiltering(supportsServiceBitsFilteringIn) {}
 };
 
@@ -136,6 +134,7 @@ protected:
     int nMinerThreads;
     std::vector<CDNSSeedData> vSeeds;
     std::vector<unsigned char> base58Prefixes[MAX_BASE58_TYPES];
+    std::vector<SeedSpec6> vFixedSeeds;
     CBaseChainParams::Network networkID;
     std::string strNetworkID;
     CBlock genesis;
