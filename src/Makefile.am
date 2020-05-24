@@ -78,6 +78,7 @@ BITCOIN_CORE_H = \
   activemasternode.h \
   addrman.h \
   allocators.h \
+  arith_uint256.h \
   amount.h \
   bignum/bignum.h \
   base58.h \
@@ -124,6 +125,7 @@ BITCOIN_CORE_H = \
   limitedmap.h \
   logging.h \
   main.h \
+  memusage.h \
   masternode.h \
   masternode-payments.h \
   masternode-sync.h \
@@ -137,6 +139,7 @@ BITCOIN_CORE_H = \
   net.h \
   noui.h \
   pow.h \
+  prevector.h \
   protocol.h \
   pubkey.h \
   random.h \
@@ -170,6 +173,8 @@ BITCOIN_CORE_H = \
   guiinterface.h \
   guiinterfaceutil.h \
   uint256.h \
+  uint512.h \
+  blob_uint256.h \
   undo.h \
   util/memory.h \
   util.h \
@@ -269,6 +274,8 @@ libbitcoin_wallet_a_SOURCES = \
 crypto_libbitcoin_crypto_a_CPPFLAGS = $(AM_CPPFLAGS) $(PIC_FLAGS)
 crypto_libbitcoin_crypto_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIC_FLAGS)
 crypto_libbitcoin_crypto_a_SOURCES = \
+  crypto/aes.cpp \
+  crypto/aes.h \
   crypto/sha1.cpp \
   crypto/sha256.cpp \
   crypto/sha512.cpp \
@@ -351,6 +358,7 @@ libbitcoin_common_a_SOURCES = \
 libbitcoin_util_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
 libbitcoin_util_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 libbitcoin_util_a_SOURCES = \
+  arith_uint256.cpp \
   allocators.cpp \
   chainparamsbase.cpp \
   clientversion.cpp \
@@ -363,6 +371,7 @@ libbitcoin_util_a_SOURCES = \
   support/cleanse.cpp \
   sync.cpp \
   uint256.cpp \
+  blob_uint256.cpp \
   util.cpp \
   utilmoneystr.cpp \
   utilstrencodings.cpp \
@@ -450,6 +459,7 @@ bcz_tx_LDADD += $(BOOST_LIBS) $(CRYPTO_LIBS)
 if BUILD_BITCOIN_LIBS
 include_HEADERS = script/bitcoinconsensus.h
 libbitcoinconsensus_la_SOURCES = \
+  arith_uint256.cpp \
   allocators.cpp \
   primitives/transaction.cpp \
   crypto/hmac_sha512.cpp \
@@ -464,6 +474,7 @@ libbitcoinconsensus_la_SOURCES = \
   script/interpreter.cpp \
   script/bitcoinconsensus.cpp \
   uint256.cpp \
+  blob_uint256.cpp \
   utilstrencodings.cpp
 
 if GLIBC_BACK_COMPAT
@@ -491,8 +502,13 @@ CLEANFILES += univalue/*.gcda univalue/*.gcno
 CLEANFILES += wallet/*.gcda wallet/*.gcno
 CLEANFILES += zmq/*.gcda zmq/*.gcno
 
-EXTRA_DIST =
+CTAES_DIST =  crypto/ctaes/bench.c
+CTAES_DIST += crypto/ctaes/ctaes.c
+CTAES_DIST += crypto/ctaes/ctaes.h
+CTAES_DIST += crypto/ctaes/README.md
+CTAES_DIST += crypto/ctaes/test.c
 
+EXTRA_DIST = $(CTAES_DIST)
 
 config/bcz-config.h: config/stamp-h1
 	@$(MAKE) -C $(top_builddir) $(subdir)/$(@)
