@@ -130,7 +130,7 @@ UniValue getinfo(const UniValue& params, bool fHelp)
         return obj;
     }
 
-    obj.push_back(Pair("moneysupply",ValueFromAmount(nMoneySupply)));
+    obj.push_back(Pair("moneysupply",ValueFromAmount(chainActive.Tip()->nMoneySupply)));
 
 #ifdef ENABLE_WALLET
     if (pwalletMain) {
