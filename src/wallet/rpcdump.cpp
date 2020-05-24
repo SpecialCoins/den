@@ -1,6 +1,6 @@
 // Copyright (c) 2009-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2020 The BCZ developers
+// Copyright (c) 2020 The BCZ developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -182,9 +182,11 @@ UniValue importaddress(const UniValue& params, bool fHelp)
 
     CScript script;
 
-    CBitcoinAddress address(params[0].get_str());
-    if (address.IsValid()) {
-        script = GetScriptForDestination(address.Get());
+    bool isStakingAddress = false;
+    CTxDestination dest = DecodeDestination(params[0].get_str(), isStakingAddress);
+    bool isAddressValid = IsValidDestination(dest);
+    if (isAddressValid) {
+        script = GetScriptForDestination(dest);
     } else if (IsHex(params[0].get_str())) {
         std::vector<unsigned char> data(ParseHex(params[0].get_str()));
         script = CScript(data.begin(), data.end());
@@ -206,9 +208,9 @@ UniValue importaddress(const UniValue& params, bool fHelp)
             throw JSONRPCError(RPC_WALLET_ERROR, "The wallet already contains the private key for this address or script");
 
         // add to address book or update label
-        if (address.IsValid()) {
-            pwalletMain->SetAddressBook(address.Get(), strLabel,
-                    (address.IsStakingAddress() ?
+        if (isAddressValid) {
+            pwalletMain->SetAddressBook(dest, strLabel,
+                    (isStakingAddress ?
                             AddressBook::AddressBookPurpose::COLD_STAKING :
                             AddressBook::AddressBookPurpose::RECEIVE));
         }
@@ -231,6 +233,7 @@ UniValue importaddress(const UniValue& params, bool fHelp)
     return NullUniValue;
 }
 
+// TODO: Needs further review over the HD flow, staking addresses and multisig import.
 UniValue importwallet(const UniValue& params, bool fHelp)
 {
     if (fHelp || params.size() != 1)
@@ -286,31 +289,34 @@ UniValue importwallet(const UniValue& params, bool fHelp)
         assert(key.VerifyPubKey(pubkey));
         CKeyID keyid = pubkey.GetID();
         if (pwalletMain->HaveKey(keyid)) {
-            LogPrintf("Skipping import of %s (key already present)\n", CBitcoinAddress(keyid).ToString());
+            LogPrintf("Skipping import of %s (key already present)\n", EncodeDestination(keyid));
             continue;
         }
         int64_t nTime = DecodeDumpTime(vstr[1]);
         std::string strLabel;
         bool fLabel = true;
         for (unsigned int nStr = 2; nStr < vstr.size(); nStr++) {
-            if (boost::algorithm::starts_with(vstr[nStr], "#"))
+            const std::string& type = vstr[nStr];
+            if (boost::algorithm::starts_with(type, "#"))
                 break;
-            if (vstr[nStr] == "change=1")
+            if (type == "change=1")
                 fLabel = false;
-            if (vstr[nStr] == "reserve=1")
+            else if (type == "reserve=1")
                 fLabel = false;
-            if (boost::algorithm::starts_with(vstr[nStr], "label=")) {
+            else if (type == "hdseed")
+                fLabel = false;
+            if (boost::algorithm::starts_with(type, "label=")) {
                 strLabel = DecodeDumpString(vstr[nStr].substr(6));
                 fLabel = true;
             }
         }
-        LogPrintf("Importing %s...\n", CBitcoinAddress(keyid).ToString());
+        LogPrintf("Importing %s...\n", EncodeDestination(keyid));
         if (!pwalletMain->AddKeyPubKey(key, pubkey)) {
             fGood = false;
             continue;
         }
         pwalletMain->mapKeyMetadata[keyid].nCreateTime = nTime;
-        if (fLabel)
+        if (fLabel) // TODO: This is not entirely true.. needs to be reviewed properly.
             pwalletMain->SetAddressBook(keyid, strLabel, AddressBook::AddressBookPurpose::RECEIVE);
         nTimeBegin = std::min(nTimeBegin, nTime);
     }
@@ -357,18 +363,17 @@ UniValue dumpprivkey(const UniValue& params, bool fHelp)
     EnsureWalletIsUnlocked();
 
     std::string strAddress = params[0].get_str();
-    CBitcoinAddress address;
-    if (!address.SetString(strAddress))
+    CTxDestination dest = DecodeDestination(strAddress);
+    if (!IsValidDestination(dest))
         throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid BCZ address");
-    CKeyID keyID;
-    if (!address.GetKeyID(keyID))
+    CKeyID keyID = *boost::get<CKeyID>(&dest);
+    if (!keyID)
         throw JSONRPCError(RPC_TYPE_ERROR, "Address does not refer to a key");
     CKey vchSecret;
     if (!pwalletMain->GetKey(keyID, vchSecret))
         throw JSONRPCError(RPC_WALLET_ERROR, "Private key for address " + strAddress + " is not known");
     return CBitcoinSecret(vchSecret).ToString();
 }
-
 
 UniValue dumpwallet(const UniValue& params, bool fHelp)
 {
@@ -411,6 +416,7 @@ UniValue dumpwallet(const UniValue& params, bool fHelp)
     pwalletMain->GetKeyBirthTimes(mapKeyBirth);
     const std::map<CKeyID, int64_t>& mapKeyPool = spk_man->GetAllReserveKeys();
 
+
     // sort time/key pairs
     std::vector<std::pair<int64_t, CKeyID> > vKeyBirth;
     for (std::map<CKeyID, int64_t>::const_iterator it = mapKeyBirth.begin(); it != mapKeyBirth.end(); it++) {
@@ -451,9 +457,9 @@ UniValue dumpwallet(const UniValue& params, bool fHelp)
         CKey key;
         if (pwalletMain->GetKey(keyid, key)) {
             const CKeyMetadata& metadata = pwalletMain->mapKeyMetadata[keyid];
-            std::string strAddr = CBitcoinAddress(keyid, (metadata.HasKeyOrigin() && IsStakingDerPath(metadata.key_origin) ?
+            std::string strAddr = EncodeDestination(keyid, (metadata.HasKeyOrigin() && IsStakingDerPath(metadata.key_origin) ?
                                                           CChainParams::STAKING_ADDRESS :
-                                                          CChainParams::PUBKEY_ADDRESS)).ToString();
+                                                          CChainParams::PUBKEY_ADDRESS));
 
             file << strprintf("%s %s ", KeyIO::EncodeSecret(key), strTime);
             if (pwalletMain->mapAddressBook.count(keyid)) {
@@ -505,11 +511,11 @@ UniValue bip38encrypt(const UniValue& params, bool fHelp)
     std::string strAddress = params[0].get_str();
     std::string strPassphrase = params[1].get_str();
 
-    CBitcoinAddress address;
-    if (!address.SetString(strAddress))
+    CTxDestination address = DecodeDestination(strAddress);
+    if (!IsValidDestination(address))
         throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid BCZ address");
-    CKeyID keyID;
-    if (!address.GetKeyID(keyID))
+    CKeyID keyID = *boost::get<CKeyID>(&address);
+    if (!keyID)
         throw JSONRPCError(RPC_TYPE_ERROR, "Address does not refer to a key");
     CKey vchSecret;
     if (!pwalletMain->GetKey(keyID, vchSecret))
@@ -569,7 +575,7 @@ UniValue bip38decrypt(const UniValue& params, bool fHelp)
     CPubKey pubkey = key.GetPubKey();
     pubkey.IsCompressed();
     assert(key.VerifyPubKey(pubkey));
-    result.push_back(Pair("Address", CBitcoinAddress(pubkey.GetID()).ToString()));
+    result.push_back(Pair("Address", EncodeDestination(pubkey.GetID())));
     CKeyID vchAddress = pubkey.GetID();
     {
         pwalletMain->MarkDirty();
@@ -625,10 +631,11 @@ UniValue makekeypair(const UniValue& params, bool fHelp)
     UniValue result(UniValue::VOBJ);
     result.push_back(Pair("private_key", HexStr<CPrivKey::iterator>(vchPrivKey.begin(), vchPrivKey.end())));
     result.push_back(Pair("U public_key", HexStr(key.GetPubKey())));
-    result.push_back(Pair("U wallet_address", CBitcoinAddress(keyID).ToString()));
+    result.push_back(Pair("U wallet_address", EncodeDestination(keyID).ToString()));
     result.push_back(Pair("U wallet_private_key", CBitcoinSecret(vchSecret).ToString()));
     result.push_back(Pair("C public_key", HexStr(vchCSecret.GetPubKey())));
-    result.push_back(Pair("C wallet_address", CBitcoinAddress(keyCID).ToString()));
+    result.push_back(Pair("C wallet_address", EncodeDestination(keyCID).ToString()));
     result.push_back(Pair("C wallet_private_key", CBitcoinSecret(vchCSecret).ToString()));
     return result;
 }
+
