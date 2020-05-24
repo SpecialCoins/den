@@ -5364,7 +5364,6 @@ bool static ProcessMessage(CNode* pfrom, std::string strCommand, CDataStream& vR
         if (found) {
             //probably one the extensions
             mnodeman.ProcessMessage(pfrom, strCommand, vRecv);
-            budget.ProcessMessage(pfrom, strCommand, vRecv);
             masternodePayments.ProcessMessageMasternodePayments(pfrom, strCommand, vRecv);
             ProcessMessageSwiftTX(pfrom, strCommand, vRecv);
             sporkManager.ProcessSpork(pfrom, strCommand, vRecv);
