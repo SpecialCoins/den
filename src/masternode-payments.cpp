@@ -278,7 +278,7 @@ bool IsBlockPayeeValid(const CBlock& block, int nBlockHeight)
 
 void FillBlockPayee(CMutableTransaction& txNew, CAmount nFees, bool fProofOfStake)
 {
-    masternodePayments.FillBlockPayee(txNew, nFees, fProofOfStake, fZPIVStake);
+    masternodePayments.FillBlockPayee(txNew, nFees, fProofOfStake);
 }
 
 std::string GetRequiredPaymentsString(int nBlockHeight)
