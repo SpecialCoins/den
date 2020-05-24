@@ -1,7 +1,7 @@
 // Copyright (c) 2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2020 The BCZ developers
+// Copyright (c) 2020 The BCZ developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -85,7 +85,7 @@ std::string AccountFromValue(const UniValue& value)
     return strAccount;
 }
 
-CBitcoinAddress GetNewAddressFromAccount(const std::string purpose, const UniValue &params,
+CTxDestination GetNewAddressFromAccount(const std::string purpose, const UniValue &params,
         const CChainParams::Base58Type addrType = CChainParams::PUBKEY_ADDRESS)
 {
     LOCK2(cs_main, pwalletMain->cs_wallet);
@@ -94,7 +94,7 @@ CBitcoinAddress GetNewAddressFromAccount(const std::string purpose, const UniVal
     if (!params.isNull() && params.size() > 0)
         strAccount = AccountFromValue(params[0]);
 
-    CBitcoinAddress address;
+    CTxDestination address;
     PairResult r = pwalletMain->getNewAddress(address, strAccount, purpose, addrType);
     if(!r.result)
         throw JSONRPCError(RPC_WALLET_KEYPOOL_RAN_OUT, *r.status);
@@ -133,7 +133,7 @@ UniValue getaddressinfo(const UniValue& params, bool fHelp)
     if (fHelp || params.size() > 1)
         throw std::runtime_error(
                 "getaddressinfo ( \"address\" )\n"
-                "\nReturn information about the given address.\n"
+                "\nReturn information about the given BCZ address.\n"
                 "Some of the information will only be present if the address is in the active wallet.\n"
                 "{Result:\n"
                 "  \"address\" : \"address\",              (string) The bitcoin address validated.\n"
@@ -180,20 +180,20 @@ UniValue getaddressinfo(const UniValue& params, bool fHelp)
     LOCK(pwallet->cs_wallet);
 
     UniValue ret(UniValue::VOBJ);
-    CBitcoinAddress address(params[0].get_str());
+
+    CTxDestination dest = DecodeDestination(params[0].get_str());
     // Make sure the destination is valid
-    if (!address.IsValid()) {
+    if (!IsValidDestination(dest)) {
         throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid address");
     }
-    CTxDestination dest = address.Get();
 
-    std::string currentAddress = address.ToString();
+    std::string currentAddress = params[0].get_str();
     ret.pushKV("address", currentAddress);
 
     CScript scriptPubKey = GetScriptForDestination(dest);
     ret.pushKV("scriptPubKey", HexStr(scriptPubKey.begin(), scriptPubKey.end()));
 
-    isminetype mine = IsMine(*pwallet, address.Get());
+    isminetype mine = IsMine(*pwallet, dest);
     ret.pushKV("ismine", bool(mine & ISMINE_SPENDABLE_ALL));
     ret.pushKV("iswatchonly", bool(mine & ISMINE_WATCH_ONLY));
 
@@ -209,9 +209,9 @@ UniValue getaddressinfo(const UniValue& params, bool fHelp)
 
     ScriptPubKeyMan* spk_man = pwallet->GetScriptPubKeyMan();
     if (spk_man) {
-        CKeyID keyID;
-        if (address.GetKeyID(keyID)) {
-            std::map<CKeyID, CKeyMetadata>::iterator it = pwallet->mapKeyMetadata.find(keyID);
+        CKeyID* keyID = boost::get<CKeyID>(&dest);
+        if (keyID) {
+            std::map<CKeyID, CKeyMetadata>::iterator it = pwallet->mapKeyMetadata.find(*keyID);
             if(it != pwallet->mapKeyMetadata.end()) {
                 const CKeyMetadata& meta = it->second;
                 ret.pushKV("timestamp", meta.nCreateTime);
@@ -365,7 +365,7 @@ UniValue getnewaddress(const UniValue& params, bool fHelp)
             "\nExamples:\n" +
             HelpExampleCli("getnewaddress", "") + HelpExampleRpc("getnewaddress", ""));
 
-    return GetNewAddressFromAccount(AddressBook::AddressBookPurpose::RECEIVE, params).ToString();
+    return EncodeDestination(GetNewAddressFromAccount(AddressBook::AddressBookPurpose::RECEIVE, params));
 }
 
 UniValue getnewstakingaddress(const UniValue& params, bool fHelp)
@@ -386,7 +386,7 @@ UniValue getnewstakingaddress(const UniValue& params, bool fHelp)
             "\nExamples:\n" +
             HelpExampleCli("getnewstakingaddress", "") + HelpExampleRpc("getnewstakingaddress", ""));
 
-    return GetNewAddressFromAccount("coldstaking", params, CChainParams::STAKING_ADDRESS).ToString();
+    return EncodeDestination(GetNewAddressFromAccount("coldstaking", params, CChainParams::STAKING_ADDRESS), CChainParams::STAKING_ADDRESS);
 }
 
 UniValue delegatoradd(const UniValue& params, bool fHelp)
@@ -409,14 +409,16 @@ UniValue delegatoradd(const UniValue& params, bool fHelp)
             HelpExampleRpc("delegatoradd", "\"DMJRSsuU9zfyrvxVaAEFQqK4MxZg6vgeS6\"") +
             HelpExampleRpc("delegatoradd", "\"DMJRSsuU9zfyrvxVaAEFQqK4MxZg6vgeS6\" \"myPaperWallet\""));
 
-    CBitcoinAddress address(params[0].get_str());
-    if (!address.IsValid() || address.IsStakingAddress())
+
+    bool isStakingAddress = false;
+    CTxDestination dest = DecodeDestination(params[0].get_str(), isStakingAddress);
+    if (boost::get<CNoDestination>(&dest) || isStakingAddress)
         throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid BCZ address");
 
     const std::string strLabel = (params.size() > 1 ? params[1].get_str() : "");
 
-    CKeyID keyID;
-    if (!address.GetKeyID(keyID))
+    CKeyID keyID = boost::get<CKeyID>(DecodeDestination(params[0].get_str()));
+    if (!keyID)
         throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Unable to get KeyID from BCZ address");
 
     return pwalletMain->SetAddressBook(keyID, strLabel, AddressBook::AddressBookPurpose::DELEGATOR);
@@ -440,12 +442,13 @@ UniValue delegatorremove(const UniValue& params, bool fHelp)
             HelpExampleCli("delegatorremove", "DMJRSsuU9zfyrvxVaAEFQqK4MxZg6vgeS6") +
             HelpExampleRpc("delegatorremove", "\"DMJRSsuU9zfyrvxVaAEFQqK4MxZg6vgeS6\""));
 
-    CBitcoinAddress address(params[0].get_str());
-    if (!address.IsValid() || address.IsStakingAddress())
+    bool isStakingAddress = false;
+    CTxDestination dest = DecodeDestination(params[0].get_str(), isStakingAddress);
+    if (boost::get<CNoDestination>(&dest) || isStakingAddress)
         throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid BCZ address");
 
-    CKeyID keyID;
-    if (!address.GetKeyID(keyID))
+    CKeyID keyID = *boost::get<CKeyID>(&dest);
+    if (!keyID)
         throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Unable to get KeyID from BCZ address");
 
     if (!pwalletMain->HasAddressBook(keyID))
@@ -454,7 +457,7 @@ UniValue delegatorremove(const UniValue& params, bool fHelp)
     std::string label = "";
     {
         LOCK(pwalletMain->cs_wallet);
-        std::map<CTxDestination, AddressBook::CAddressBookData>::iterator mi = pwalletMain->mapAddressBook.find(address.Get());
+        std::map<CTxDestination, AddressBook::CAddressBookData>::iterator mi = pwalletMain->mapAddressBook.find(dest);
         if (mi != pwalletMain->mapAddressBook.end()) {
             label = mi->second.name;
         }
@@ -476,7 +479,7 @@ UniValue ListaddressesForPurpose(const std::string strPurpose)
             if (addr.second.purpose != strPurpose) continue;
             UniValue entry(UniValue::VOBJ);
             entry.push_back(Pair("label", addr.second.name));
-            entry.push_back(Pair("address", CBitcoinAddress(addr.first, addrType).ToString()));
+            entry.push_back(Pair("address", EncodeDestination(addr.first, addrType)));
             ret.push_back(entry);
         }
     }
@@ -537,7 +540,7 @@ UniValue liststakingaddresses(const UniValue& params, bool fHelp)
     return ListaddressesForPurpose(AddressBook::AddressBookPurpose::COLD_STAKING);
 }
 
-CBitcoinAddress GetAccountAddress(std::string strAccount, bool bForceNew = false)
+CTxDestination GetAccountAddress(std::string strAccount, bool bForceNew = false)
 {
     CWalletDB walletdb(pwalletMain->strWalletFile);
 
@@ -568,7 +571,7 @@ CBitcoinAddress GetAccountAddress(std::string strAccount, bool bForceNew = false
         walletdb.WriteAccount(strAccount, account);
     }
 
-    return CBitcoinAddress(account.vchPubKey.GetID());
+    return account.vchPubKey.GetID();
 }
 
 UniValue getaccountaddress(const UniValue& params, bool fHelp)
@@ -595,7 +598,7 @@ UniValue getaccountaddress(const UniValue& params, bool fHelp)
 
     UniValue ret(UniValue::VSTR);
 
-    ret = GetAccountAddress(strAccount).ToString();
+    ret = EncodeDestination(GetAccountAddress(strAccount));
     return ret;
 }
 
@@ -628,7 +631,7 @@ UniValue getrawchangeaddress(const UniValue& params, bool fHelp)
 
     CKeyID keyID = vchPubKey.GetID();
 
-    return CBitcoinAddress(keyID).ToString();
+    return EncodeDestination(keyID);
 }
 
 
@@ -648,8 +651,8 @@ UniValue setaccount(const UniValue& params, bool fHelp)
 
     LOCK2(cs_main, pwalletMain->cs_wallet);
 
-    CBitcoinAddress address(params[0].get_str());
-    if (!address.IsValid())
+    CTxDestination address = DecodeDestination(params[0].get_str());
+    if (!IsValidDestination(address))
         throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid BCZ address");
 
 
@@ -658,14 +661,14 @@ UniValue setaccount(const UniValue& params, bool fHelp)
         strAccount = AccountFromValue(params[1]);
 
     // Only add the account if the address is yours.
-    if (IsMine(*pwalletMain, address.Get())) {
+    if (IsMine(*pwalletMain, address)) {
         // Detect when changing the account of an address that is the 'unused current key' of another account:
-        if (pwalletMain->mapAddressBook.count(address.Get())) {
-            std::string strOldAccount = pwalletMain->mapAddressBook[address.Get()].name;
+        if (pwalletMain->mapAddressBook.count(address)) {
+            std::string strOldAccount = pwalletMain->mapAddressBook[address].name;
             if (address == GetAccountAddress(strOldAccount))
                 GetAccountAddress(strOldAccount, true);
         }
-        pwalletMain->SetAddressBook(address.Get(), strAccount, AddressBook::AddressBookPurpose::RECEIVE);
+        pwalletMain->SetAddressBook(address, strAccount, AddressBook::AddressBookPurpose::RECEIVE);
     } else
         throw JSONRPCError(RPC_MISC_ERROR, "setaccount can only be used with own address");
 
@@ -691,12 +694,12 @@ UniValue getaccount(const UniValue& params, bool fHelp)
 
     LOCK2(cs_main, pwalletMain->cs_wallet);
 
-    CBitcoinAddress address(params[0].get_str());
-    if (!address.IsValid())
+    CTxDestination address = DecodeDestination(params[0].get_str());
+    if (!IsValidDestination(address))
         throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid BCZ address");
 
     std::string strAccount;
-    std::map<CTxDestination, AddressBook::CAddressBookData>::iterator mi = pwalletMain->mapAddressBook.find(address.Get());
+    std::map<CTxDestination, AddressBook::CAddressBookData>::iterator mi = pwalletMain->mapAddressBook.find(address);
     if (mi != pwalletMain->mapAddressBook.end() && !(*mi).second.name.empty())
         strAccount = (*mi).second.name;
     return strAccount;
@@ -765,7 +768,7 @@ void SendMoney(const CTxDestination& address, CAmount nValue, CWalletTx& wtxNew,
         LogPrintf("SendMoney() : %s\n", strError);
         throw JSONRPCError(RPC_WALLET_ERROR, strError);
     }
-    if (!pwalletMain->CommitTransaction(wtxNew, reservekey, (!fUseIX ? "tx" : "ix")))
+    if (!pwalletMain->CommitTransaction(wtxNew, reservekey, (!fUseIX ? NetMsgType::TX : NetMsgType::IX)))
         throw JSONRPCError(RPC_WALLET_ERROR, "Error: The transaction was rejected! This might happen if some of the coins in your wallet were already spent, such as if you used a copy of wallet.dat and coins were spent in the copy but not marked as spent here.");
 }
 
@@ -827,7 +830,7 @@ UniValue CreateColdStakeDelegation(const UniValue& params, CWalletTx& wtxNew, CR
         fForceNotEnabled = params[5].get_bool();
 
     if (!sporkManager.IsSporkActive(SPORK_26_COLDSTAKING_ENFORCEMENT) && !fForceNotEnabled) {
-        std::string errMsg = "Cold Staking disabled with SPORK 13.\n"
+        std::string errMsg = "Cold Staking disabled with SPORK.\n"
                 "You may force the stake delegation setting fForceNotEnabled to true.\n"
                 "WARNING: If relayed before activation, this tx will be rejected resulting in a ban.\n";
         throw JSONRPCError(RPC_WALLET_ERROR, errMsg);
@@ -861,14 +864,16 @@ UniValue CreateColdStakeDelegation(const UniValue& params, CWalletTx& wtxNew, CR
     EnsureWalletIsUnlocked();
 
     // Get Owner Address
-    CBitcoinAddress ownerAddr;
+    std::string ownerAddressStr;
     CKeyID ownerKey;
     if (params.size() > 2 && !params[2].isNull() && !params[2].get_str().empty()) {
         // Address provided
-        ownerAddr.SetString(params[2].get_str());
-        if (!ownerAddr.IsValid() || ownerAddr.IsStakingAddress())
+        bool isStaking = false;
+        CTxDestination dest = DecodeDestination(params[2].get_str(), isStaking);
+        if (boost::get<CNoDestination>(&dest) || isStaking)
             throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid BCZ spending address");
-        if (!ownerAddr.GetKeyID(ownerKey))
+        ownerKey = *boost::get<CKeyID>(&dest);
+        if (!ownerKey)
             throw JSONRPCError(RPC_WALLET_ERROR, "Unable to get spend pubkey hash from owneraddress");
         // Check that the owner address belongs to this wallet, or fForceExternalAddr is true
         bool fForceExternalAddr = params.size() > 3 && !params[3].isNull() ? params[3].get_bool() : false;
@@ -877,15 +882,17 @@ UniValue CreateColdStakeDelegation(const UniValue& params, CWalletTx& wtxNew, CR
                     "Set 'fExternalOwner' argument to true, in order to force the stake delegation to an external owner address.\n"
                     "e.g. delegatestake stakingaddress amount owneraddress true.\n"
                     "WARNING: Only the owner of the key to owneraddress will be allowed to spend these coins after the delegation.",
-                    ownerAddr.ToString());
+                    params[2].get_str());
             throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, errMsg);
         }
-
+        ownerAddressStr = params[2].get_str();
     } else {
         // Get new owner address from keypool
-        ownerAddr = GetNewAddressFromAccount("delegated", NullUniValue);
-        if (!ownerAddr.GetKeyID(ownerKey))
+        CTxDestination ownerAddr = GetNewAddressFromAccount("delegated", NullUniValue);
+        ownerKey = *boost::get<CKeyID>(&ownerAddr);
+        if (!ownerKey)
             throw JSONRPCError(RPC_WALLET_ERROR, "Unable to get spend pubkey hash from owneraddress");
+        ownerAddressStr = EncodeDestination(ownerAddr);
     }
 
     // Get P2CS script for addresses
@@ -901,7 +908,7 @@ UniValue CreateColdStakeDelegation(const UniValue& params, CWalletTx& wtxNew, CR
     }
 
     UniValue result(UniValue::VOBJ);
-    result.push_back(Pair("owner_address", ownerAddr.ToString()));
+    result.push_back(Pair("owner_address", ownerAddressStr));
     result.push_back(Pair("staker_address", stakeAddr.ToString()));
     return result;
 }
@@ -942,7 +949,7 @@ UniValue delegatestake(const UniValue& params, bool fHelp)
     CReserveKey reservekey(pwalletMain);
     UniValue ret = CreateColdStakeDelegation(params, wtx, reservekey);
 
-    if (!pwalletMain->CommitTransaction(wtx, reservekey, "tx"))
+    if (!pwalletMain->CommitTransaction(wtx, reservekey, NetMsgType::TX))
         throw JSONRPCError(RPC_WALLET_ERROR, "Error: The transaction was rejected! This might happen if some of the coins in your wallet were already spent, such as if you used a copy of wallet.dat and coins were spent in the copy but not marked as spent here.");
 
     ret.push_back(Pair("txid", wtx.GetHash().GetHex()));
@@ -1340,7 +1347,7 @@ UniValue getbalance(const UniValue& params, bool fHelp)
     if (fHelp || params.size() > 4)
         throw std::runtime_error(
             "getbalance ( \"account\" minconf includeWatchonly includeDelegated )\n"
-            "\nIf account is not specified, returns the server's total available balance.\n"
+            "\nIf account is not specified, returns the server's total available balance (excluding zerocoins).\n"
             "If account is specified (DEPRECATED), returns the balance in the account.\n"
             "Note that the account \"\" is not the same as leaving the parameter out.\n"
             "The server total may be different to the balance in the default \"\" account.\n"
@@ -2553,14 +2560,14 @@ UniValue walletpassphrase(const UniValue& params, bool fHelp)
 {
     if (pwalletMain->IsCrypted() && (fHelp || params.size() < 2 || params.size() > 3))
         throw std::runtime_error(
-            "walletpassphrase \"passphrase\" timeout ( anonymizeonly )\n"
+            "walletpassphrase \"passphrase\" timeout ( stakingonly )\n"
             "\nStores the wallet decryption key in memory for 'timeout' seconds.\n"
             "This is needed prior to performing transactions related to private keys such as sending BCZs\n"
 
             "\nArguments:\n"
             "1. \"passphrase\"     (string, required) The wallet passphrase\n"
             "2. timeout            (numeric, required) The time to keep the decryption key in seconds.\n"
-            "3. anonymizeonly      (boolean, optional, default=false) If is true sending functions are disabled."
+            "3. stakingonly        (boolean, optional, default=false) If is true sending functions are disabled."
 
             "\nNote:\n"
             "Issuing the walletpassphrase command while the wallet is already unlocked will set a new unlock\n"
@@ -3011,7 +3018,7 @@ UniValue getwalletinfo(const UniValue& params, bool fHelp)
     return obj;
 }
 
-// ppcoin: reserve balance from being staked for network protection
+-// ppcoin: reserve balance from being staked for network protection
 UniValue reservebalance(const UniValue& params, bool fHelp)
 {
     if (fHelp || params.size() > 2)
@@ -3056,36 +3063,34 @@ UniValue reservebalance(const UniValue& params, bool fHelp)
     return result;
 }
 
-// presstab  
 UniValue setstakesplitthreshold(const UniValue& params, bool fHelp)
 {
     if (fHelp || params.size() != 1)
         throw std::runtime_error(
-            "setstakesplitthreshold value\n"
-            "\nThis will set the output size of your stakes to never be below this number\n" +
-            HelpRequiringPassphrase() + "\n"
+            "setstakesplitthreshold value\n\n"
+            "This will set the stake-split threshold value.\n"
+            "Whenever a successful stake is found, the stake amount is split across as many outputs (each with a value\n"
+            "higher than the threshold) as possible.\n"
+            "E.g. If the coinstake input + the block reward is 2000, and the split threshold is 499, the corresponding\n"
+            "coinstake transaction will have 4 outputs (of 500 BCZ each)."
+            + HelpRequiringPassphrase() + "\n"
 
             "\nArguments:\n"
-            "1. value   (numeric, required) Threshold value between 1 and 999999 or 0 to disable stake-splitting\n"
+            "1. value                   (numeric, required) Threshold value (in BCZ).\n"
+            "                                               Set to 0 to disable stake-splitting\n"
 
             "\nResult:\n"
             "{\n"
-            "  \"threshold\": n,    (numeric) Threshold value set\n"
+            "  \"threshold\": n,        (numeric) Threshold value set\n"
             "  \"saved\": true|false    (boolean) 'true' if successfully saved to the wallet file\n"
             "}\n"
 
             "\nExamples:\n" +
-            HelpExampleCli("setstakesplitthreshold", "5000") + HelpExampleRpc("setstakesplitthreshold", "5000"));
+            HelpExampleCli("setstakesplitthreshold", "500.12") + HelpExampleRpc("setstakesplitthreshold", "500.12"));
 
     EnsureWalletIsUnlocked();
 
-    uint64_t nStakeSplitThreshold = params[0].get_int();
-
-    if (nStakeSplitThreshold < 0)
-        throw std::runtime_error("Value out of range, min allowed is 0");
-
-    if (nStakeSplitThreshold > 999999)
-        throw std::runtime_error("Value out of range, max allowed is 999999");
+    CAmount nStakeSplitThreshold = AmountFromValue(params[0]);
 
     CWalletDB walletdb(pwalletMain->strWalletFile);
     LOCK(pwalletMain->cs_wallet);
@@ -3094,7 +3099,7 @@ UniValue setstakesplitthreshold(const UniValue& params, bool fHelp)
 
         UniValue result(UniValue::VOBJ);
         pwalletMain->nStakeSplitThreshold = nStakeSplitThreshold;
-        result.push_back(Pair("threshold", int(pwalletMain->nStakeSplitThreshold)));
+        result.push_back(Pair("threshold", ValueFromAmount(pwalletMain->nStakeSplitThreshold)));
         if (fFileBacked) {
             walletdb.WriteStakeSplitThreshold(nStakeSplitThreshold);
             result.push_back(Pair("saved", "true"));
@@ -3105,7 +3110,6 @@ UniValue setstakesplitthreshold(const UniValue& params, bool fHelp)
     }
 }
 
-// presstab  
 UniValue getstakesplitthreshold(const UniValue& params, bool fHelp)
 {
     if (fHelp || params.size() != 0)
@@ -3223,6 +3227,8 @@ unsigned int sumMultiSend()
 
 UniValue multisend(const UniValue& params, bool fHelp)
 {
+    throw std::runtime_error("Multisend is disabled in this wallet version");
+    /* disable multisend
     CWalletDB walletdb(pwalletMain->strWalletFile);
     bool fFileBacked;
     //MultiSend Commands
@@ -3330,31 +3336,6 @@ UniValue multisend(const UniValue& params, bool fHelp)
         }
     }
 
-    //if no commands are used
-    if (fHelp || params.size() != 2)
-        throw std::runtime_error(
-            "multisend <command>\n"
-            "****************************************************************\n"
-            "WHAT IS MULTISEND?\n"
-            "MultiSend allows a user to automatically send a percent of their stake reward to as many addresses as you would like\n"
-            "The MultiSend transaction is sent when the staked coins mature (100 confirmations)\n"
-            "****************************************************************\n"
-            "TO CREATE OR ADD TO THE MULTISEND VECTOR:\n"
-            "multisend <BCZ Address> <percent>\n"
-            "This will add a new address to the MultiSend vector\n"
-            "Percent is a whole number 1 to 100.\n"
-            "****************************************************************\n"
-            "MULTISEND COMMANDS (usage: multisend <command>)\n"
-            " print - displays the current MultiSend vector \n"
-            " clear - deletes the current MultiSend vector \n"
-            " enablestake/activatestake - activates the current MultiSend vector to be activated on stake rewards\n"
-            " enablemasternode/activatemasternode - activates the current MultiSend vector to be activated on masternode rewards\n"
-            " disable/deactivate - disables the current MultiSend vector \n"
-            " delete <Address #> - deletes an address from the MultiSend vector \n"
-            " disable <address> - prevents a specific address from sending MultiSend transactions\n"
-            " enableall - enables all addresses to be eligible to send MultiSend transactions\n"
-            "****************************************************************\n");
-
     //if the user is entering a new MultiSend item
     std::string strAddress = params[0].get_str();
     CBitcoinAddress address(strAddress);
@@ -3396,4 +3377,5 @@ UniValue multisend(const UniValue& params, bool fHelp)
         }
     }
     return printMultiSend();
+    */
 }
