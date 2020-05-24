@@ -631,10 +631,10 @@ UniValue makekeypair(const UniValue& params, bool fHelp)
     UniValue result(UniValue::VOBJ);
     result.push_back(Pair("private_key", HexStr<CPrivKey::iterator>(vchPrivKey.begin(), vchPrivKey.end())));
     result.push_back(Pair("U public_key", HexStr(key.GetPubKey())));
-    result.push_back(Pair("U wallet_address", EncodeDestination(keyID).ToString()));
+    result.push_back(Pair("U wallet_address", EncodeDestination(keyID)));
     result.push_back(Pair("U wallet_private_key", CBitcoinSecret(vchSecret).ToString()));
     result.push_back(Pair("C public_key", HexStr(vchCSecret.GetPubKey())));
-    result.push_back(Pair("C wallet_address", EncodeDestination(keyCID).ToString()));
+    result.push_back(Pair("C wallet_address", EncodeDestination(keyCID)));
     result.push_back(Pair("C wallet_private_key", CBitcoinSecret(vchCSecret).ToString()));
     return result;
 }
