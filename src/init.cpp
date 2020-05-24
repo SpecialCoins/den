@@ -1435,7 +1435,6 @@ bool AppInit2()
     boost::filesystem::create_directories(GetDataDir() / "blocks");
 
     // cache size calculations
-    size_t nTotalCache = (GetArg("-dbcache", nDefaultDbCache) << 20);
     int64_t nTotalCache = (GetArg("-dbcache", nDefaultDbCache) << 20);
     nTotalCache = std::max(nTotalCache, nMinDbCache << 20); // total cache cannot be less than nMinDbCache
     nTotalCache = std::min(nTotalCache, nMaxDbCache << 20); // total cache cannot be greater than nMaxDbcache
