@@ -138,7 +138,6 @@ protected:
     CBaseChainParams::Network networkID;
     std::string strNetworkID;
     CBlock genesis;
-    std::vector<SeedSpec6> vFixedSeeds;
     bool fMiningRequiresPeers;
     bool fAllowMinDifficultyBlocks;
     bool fDefaultConsistencyChecks;
