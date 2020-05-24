@@ -1,5 +1,5 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2014 The Bitcoin developers
+// Copyright (c) 2009-2015 The Bitcoin developers
 // Copyright (c) 2020 The BCZ developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
@@ -64,10 +64,14 @@ static const bool DEFAULT_UPNP = false;
 #endif
 /** The maximum number of entries in mapAskFor */
 static const size_t MAPASKFOR_MAX_SZ = MAX_INV_SZ;
+/** The maximum number of peer connections to maintain. */
+static const unsigned int DEFAULT_MAX_PEER_CONNECTIONS = 125;
 /** Disconnected peers are added to setOffsetDisconnectedPeers only if node has less than ENOUGH_CONNECTIONS */
 #define ENOUGH_CONNECTIONS 2
 /** Maximum number of peers added to setOffsetDisconnectedPeers before triggering a warning */
 #define MAX_TIMEOFFSET_DISCONNECTIONS 16
+
+static const ServiceFlags REQUIRED_SERVICES = NODE_NETWORK;
 
 unsigned int ReceiveFloodSize();
 unsigned int SendBufferSize();
@@ -130,9 +134,10 @@ bool IsReachable(const CNetAddr& addr);
 CAddress GetLocalAddress(const CNetAddr* paddrPeer = NULL);
 bool validateMasternodeIP(const std::string& addrStr);          // valid, reachable and routable address
 
+
 extern bool fDiscover;
 extern bool fListen;
-extern uint64_t nLocalServices;
+extern ServiceFlags nLocalServices;
 extern uint64_t nLocalHostNonce;
 extern CAddrMan addrman;
 extern int nMaxConnections;
@@ -165,7 +170,7 @@ class CNodeStats
 {
 public:
     NodeId nodeid;
-    uint64_t nServices;
+    ServiceFlags nServices;
     int64_t nLastSend;
     int64_t nLastRecv;
     int64_t nTimeConnected;
@@ -292,7 +297,8 @@ class CNode
 {
 public:
     // socket
-    uint64_t nServices;
+    ServiceFlags nServices;
+    ServiceFlags nServicesExpected;
     SOCKET hSocket;
     CDataStream ssSend;
     size_t nSendSize;   // total size of all vSendMsg entries
