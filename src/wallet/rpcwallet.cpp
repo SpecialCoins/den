@@ -3018,7 +3018,7 @@ UniValue getwalletinfo(const UniValue& params, bool fHelp)
     return obj;
 }
 
--// ppcoin: reserve balance from being staked for network protection
+// ppcoin: reserve balance from being staked for network protection
 UniValue reservebalance(const UniValue& params, bool fHelp)
 {
     if (fHelp || params.size() > 2)
