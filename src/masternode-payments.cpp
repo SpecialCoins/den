@@ -271,6 +271,8 @@ bool IsBlockPayeeValid(const CBlock& block, int nBlockHeight)
         {
             LogPrintf("Masternode payment enforcement is disabled, accepting block\n");
             return true;
+        }
+    }
 }
 
 
