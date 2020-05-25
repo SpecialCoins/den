@@ -127,7 +127,7 @@ public:
                         CChainParams::STAKING_ADDRESS : CChainParams::PUBKEY_ADDRESS;
                 const CTxDestination& address = item.first;
 
-                bool fMine = IsMine(*wallet, address.Get);
+                bool fMine = IsMine(*wallet, address);
                 AddressTableEntry::Type addressType = translateTransactionType(
                     QString::fromStdString(item.second.purpose), fMine);
                 const std::string& strName = item.second.name;
