@@ -4,10 +4,10 @@
 
 #include "qt/bcz/masternodeswidget.h"
 #include "qt/bcz/forms/ui_masternodeswidget.h"
+
 #include "qt/bcz/qtutils.h"
 #include "qt/bcz/mnrow.h"
 #include "qt/bcz/mninfodialog.h"
-
 #include "qt/bcz/masternodewizarddialog.h"
 
 #include "activemasternode.h"
@@ -179,6 +179,7 @@ void MasterNodesWidget::onMNClicked(const QModelIndex &index)
         this->menu->setEditBtnText(tr("Start"));
         this->menu->setDeleteBtnText(tr("Delete"));
         this->menu->setCopyBtnText(tr("Info"));
+        connect(this->menu, &TooltipMenu::message, this, &AddressesWidget::message);
         connect(this->menu, &TooltipMenu::onEditClicked, this, &MasterNodesWidget::onEditMNClicked);
         connect(this->menu, &TooltipMenu::onDeleteClicked, this, &MasterNodesWidget::onDeleteMNClicked);
         connect(this->menu, &TooltipMenu::onCopyClicked, this, &MasterNodesWidget::onInfoMNClicked);
@@ -261,7 +262,8 @@ bool MasterNodesWidget::startMN(CMasternodeConfig::CMasternodeEntry mne, std::st
 
 void MasterNodesWidget::onStartAllClicked(int type)
 {
-    if (!checkMNsNetwork()) return;
+    if (!checkMNsNetwork()) return;     // skip on RegNet: so we can test even if tier two not synced
+
     if (isLoading) {
         inform(tr("Background task is being executed, please wait"));
     } else {
