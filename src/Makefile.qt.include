@@ -319,9 +319,6 @@ BITCOIN_QT_H = \
 RES_ICONS = \
   qt/res/icons/bitcoin.ico \
   qt/res/icons/bitcoin.png \
-  qt/res/icons/browse.png \
-  qt/res/icons/lock_closed.png \
-  qt/res/icons/lock_open.png \
   qt/res/icons/ic-transaction-received.svg \
   qt/res/icons/ic-transaction-mint.svg \
   qt/res/icons/ic-transaction-sent.svg \
