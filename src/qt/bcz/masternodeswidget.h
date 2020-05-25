@@ -5,14 +5,16 @@
 #ifndef MASTERNODESWIDGET_H
 #define MASTERNODESWIDGET_H
 
-#include <QWidget>
 #include "qt/bcz/pwidget.h"
 #include "qt/bcz/furabstractlistitemdelegate.h"
 #include "qt/bcz/mnmodel.h"
 #include "qt/bcz/tooltipmenu.h"
 #include "walletmodel.h"
-#include <QTimer>
+
 #include <atomic>
+
+#include <QTimer>
+#include <QWidget>
 
 class BCZGUI;
 
