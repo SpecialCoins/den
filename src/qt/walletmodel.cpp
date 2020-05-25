@@ -452,6 +452,7 @@ WalletModel::SendCoinsReturn WalletModel::prepareTransaction(WalletModelTransact
 
         if (recipients[0].useSwiftTX && total > sporkManager.GetSporkValue(SPORK_5_MAX_VALUE) * COIN) {
             Q_EMIT message(tr("Send Coins"), tr("SwiftX doesn't support sending values that high yet. Transactions are currently limited to %1 %2.").arg(sporkManager.GetSporkValue(SPORK_5_MAX_VALUE)).arg(CURRENCY_UNIT.c_str()),
+                CClientUIInterface::MSG_ERROR);
             return TransactionCreationFailed;
         }
 
