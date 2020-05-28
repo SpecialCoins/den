@@ -80,14 +80,14 @@
          <item>
           <widget class="QLabel" name="labelName">
            <property name="text">
-            <string> notr="true">N/A</string>
+            <string notr="true">N/A</string>
            </property>
           </widget>
          </item>
          <item>
           <widget class="QLabel" name="labelAddress">
            <property name="text">
-            <string> notr="true">N/A</string>
+            <string notr="true">N/A</string>
            </property>
           </widget>
          </item>
@@ -110,7 +110,7 @@
       <item>
        <widget class="QLabel" name="labelDate">
         <property name="text">
-         <string> notr="true">N/A</string>
+         <string notr="true">N/A</string>
         </property>
        </widget>
       </item>
