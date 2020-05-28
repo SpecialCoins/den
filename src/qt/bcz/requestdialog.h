@@ -6,9 +6,10 @@
 #define REQUESTDIALOG_H
 
 #include "qt/bcz/focuseddialog.h"
-#include <QPixmap>
-#include "walletmodel.h"
 #include "qt/bcz/snackbar.h"
+#include "walletmodel.h"
+
+#include <QPixmap>
 
 class WalletModel;
 class BCZGUI;
@@ -31,7 +32,7 @@ public:
     int res = -1;
 
 private Q_SLOTS:
-    void onNextClicked();
+    void accept() override;
     void onCopyClicked();
     void onCopyUriClicked();
 
