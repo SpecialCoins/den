@@ -642,10 +642,10 @@ bool ConnectSocketByName(CService& addr, SOCKET& hSocketRet, const char* pszDest
     GetNameProxy(nameProxy);
 
     CService addrResolved;
-    if (Lookup(strDest.c_str(), addrResolved, port, fNameLookup && !HaveNameProxy())) {
-        if (addrResolved.IsValid()) {
-            addr = addrResolved;
-            return ConnectSocket(addr, hSocketRet, nTimeout);
+    std::vector<CService> addrResolved;
+    if (Lookup(strDest.c_str(), addrResolved, port, fNameLookup && !HaveNameProxy(), 256)) {
+        if (addrResolved.size() > 0) {
+            addr = addrResolved[GetRand(addrResolved.size())];
         }
     }
 
