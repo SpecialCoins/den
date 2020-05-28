@@ -190,7 +190,7 @@ void AskPassphraseDialog::accept()
         );
         if (ret) {
             newpassCache = newpass1;
-            BCZGUI* window = static_cast<PIVXGUI*>(parentWidget());
+            BCZGUI* window = static_cast<BCZGUI*>(parentWidget());
             LoadingDialog *dialog = new LoadingDialog(window);
             dialog->execute(this, 1);
             openDialogWithOpaqueBackgroundFullScreen(dialog, window);
@@ -310,7 +310,7 @@ bool AskPassphraseDialog::eventFilter(QObject* object, QEvent* event)
 
 bool AskPassphraseDialog::openStandardDialog(QString title, QString body, QString okBtn, QString cancelBtn)
 {
-    PIVXGUI* gui = static_cast<BCZGUI*>(parentWidget());
+    BCZGUI* gui = static_cast<BCZGUI*>(parentWidget());
     DefaultDialog *confirmDialog = new DefaultDialog(gui);
     confirmDialog->setText(title, body, okBtn, cancelBtn);
     confirmDialog->adjustSize();
