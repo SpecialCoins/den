@@ -44,43 +44,72 @@ QString BitcoinUnits::id(int unit)
 {
     switch (unit) {
     case BCZ:
-        return QString("bcz");
+        return QString("pivx");
     case mBCZ:
-        return QString("mbcz");
+        return QString("mpivx");
     case uBCZ:
-        return QString::fromUtf8("ubcz");
+        return QString::fromUtf8("upivx");
     default:
         return QString("???");
     }
 }
 
-QString BitcoinUnits::name(int unit)
+QString BitcoinUnits::name(int unit, bool isZpiv)
 {
+    const QString CURR_UNIT = QString(CURRENCY_UNIT.c_str());
+    QString z = "";
+    if(isZpiv) z = "z";
+    if (Params().NetworkID() == CBaseChainParams::MAIN) {
         switch (unit) {
         case BCZ:
-            return QString("BCZ");
+            return z + CURR_UNIT;
         case mBCZ:
-            return QString("mBCZ");
+            return z + QString("m") + CURR_UNIT;
         case uBCZ:
-            return QString::fromUtf8("μBCZ");
+            return z + QString::fromUtf8("μ") + CURR_UNIT;
         default:
             return QString("???");
         }
-
+    } else {
+        switch (unit) {
+        case BCZ:
+            return z + QString("t") + CURR_UNIT;
+        case mBCZ:
+            return z + QString("mt") + CURR_UNIT;
+        case uBCZ:
+            return z + QString::fromUtf8("μt") + CURR_UNIT;
+        default:
+            return QString("???");
+        }
+    }
 }
 
 QString BitcoinUnits::description(int unit)
 {
+    const QString CURR_UNIT = QString(CURRENCY_UNIT.c_str());
+    if (Params().NetworkID() == CBaseChainParams::MAIN) {
         switch (unit) {
         case BCZ:
-            return QString("BCZ");
+            return CURR_UNIT;
         case mBCZ:
-            return QString("Milli-BCZ (1 / 1" THIN_SP_UTF8 "000)");
+            return QString("Milli-") + CURR_UNIT + QString(" (1 / 1" THIN_SP_UTF8 "000)");
         case uBCZ:
-            return QString("Micro-BCZ (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
+            return QString("Micro-") + CURR_UNIT + QString(" (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
         default:
             return QString("???");
         }
+    } else {
+        switch (unit) {
+        case BCZ:
+            return QString("Test") + CURR_UNIT;
+        case mBCZ:
+            return QString("Milli-Test") + CURR_UNIT + QString(" (1 / 1" THIN_SP_UTF8 "000)");
+        case uBCZ:
+            return QString("Micro-Test") + CURR_UNIT + QString(" (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
+        default:
+            return QString("???");
+        }
+    }
 }
 
 qint64 BitcoinUnits::factor(int unit)
