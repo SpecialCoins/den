@@ -54,34 +54,19 @@ QString BitcoinUnits::id(int unit)
     }
 }
 
-QString BitcoinUnits::name(int unit, bool isZpiv)
+QString BitcoinUnits::name(int unit)
 {
     const QString CURR_UNIT = QString(CURRENCY_UNIT.c_str());
-    QString z = "";
-    if(isZpiv) z = "z";
-    if (Params().NetworkID() == CBaseChainParams::MAIN) {
         switch (unit) {
         case BCZ:
-            return z + CURR_UNIT;
+            return QString("t") + CURR_UNIT;
         case mBCZ:
-            return z + QString("m") + CURR_UNIT;
+            return QString("mt") + CURR_UNIT;
         case uBCZ:
-            return z + QString::fromUtf8("μ") + CURR_UNIT;
+            return QString::fromUtf8("μt") + CURR_UNIT;
         default:
             return QString("???");
         }
-    } else {
-        switch (unit) {
-        case BCZ:
-            return z + QString("t") + CURR_UNIT;
-        case mBCZ:
-            return z + QString("mt") + CURR_UNIT;
-        case uBCZ:
-            return z + QString::fromUtf8("μt") + CURR_UNIT;
-        default:
-            return QString("???");
-        }
-    }
 }
 
 QString BitcoinUnits::description(int unit)
