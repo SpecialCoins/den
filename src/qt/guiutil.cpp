@@ -83,6 +83,7 @@ extern double NSAppKitVersionNumber;
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 
 #include <CoreServices/CoreServices.h>
+#include <QProcess>
 
 void ForceActivation();
 #endif
@@ -129,8 +130,9 @@ CAmount parseValue(const QString& text, int displayUnit, bool* valid_out)
     return valid ? val : 0;
 }
 
-QString formatBalance(CAmount amount, int nDisplayUnit){
-    return (amount == 0) ? ("0.00 " + BitcoinUnits::name(nDisplayUnit)) : BitcoinUnits::floorHtmlWithUnit(nDisplayUnit, amount, false, BitcoinUnits::separatorAlways, true);
+QString formatBalance(CAmount amount, int nDisplayUnit)
+{
+    return (amount == 0) ? ("0.00 " + BitcoinUnits::name(nDisplayUnit, isZpiv)) : BitcoinUnits::floorHtmlWithUnit(nDisplayUnit, amount, false, BitcoinUnits::separatorAlways, true);
 }
 
 void setupAddressWidget(QValidatedLineEdit* widget, QWidget* parent)
@@ -140,7 +142,7 @@ void setupAddressWidget(QValidatedLineEdit* widget, QWidget* parent)
     widget->setFont(bitcoinAddressFont());
     // We don't want translators to use own addresses in translations
     // and this is the only place, where this address is supplied.
-    widget->setPlaceholderText(QObject::tr("Enter BCZ address (e.g. %1)").arg("B52EagiPxecjS9zwyebbCZz3x3QuYBNezo"));
+    widget->setPlaceholderText(QObject::tr("Enter BCZ address (e.g. %1)").arg("D7VFR83SQbiezrW72hjcWJtcfip5krte2Z"));
     widget->setValidator(new BitcoinAddressEntryValidator(parent));
     widget->setCheckValidator(new BitcoinAddressCheckValidator(parent));
 }
@@ -249,7 +251,7 @@ QString formatBitcoinURI(const SendCoinsRecipient& info)
 
 bool isDust(const QString& address, const CAmount& amount)
 {
-    CTxDestination dest = CBitcoinAddress(address.toStdString()).Get();
+    CTxDestination dest = DecodeDestination(address.toStdString());
     CScript script = GetScriptForDestination(dest);
     CTxOut txOut(amount, script);
     return txOut.IsDust(::minRelayTxFee);
@@ -401,44 +403,40 @@ void bringToFront(QWidget* w)
     }
 }
 
+/* Open file with the associated application */
+bool openFile(boost::filesystem::path path, bool isTextFile)
+{
+    bool ret = false;
+    if (boost::filesystem::exists(path)) {
+        ret = QDesktopServices::openUrl(QUrl::fromLocalFile(boostPathToQString(path)));
+#ifdef Q_OS_MAC
+        // Workaround for macOS-specific behavior; see btc@15409.
+        if (isTextFile && !ret) {
+            ret = QProcess::startDetached("/usr/bin/open", QStringList{"-t", boostPathToQString(path)});
+        }
+#endif
+    }
+    return ret;
+}
+
 bool openDebugLogfile()
 {
-    boost::filesystem::path pathDebug = GetDataDir() / "debug.log";
-
-    /* Open debug.log with the associated application */
-    if (boost::filesystem::exists(pathDebug))
-        return QDesktopServices::openUrl(QUrl::fromLocalFile(boostPathToQString(pathDebug)));
-    return false;
+    return openFile(GetDataDir() / "debug.log", true);
 }
 
 bool openConfigfile()
 {
-    boost::filesystem::path pathConfig = GetConfigFile();
-
-    /* Open bcz.conf with the associated application */
-    if (boost::filesystem::exists(pathConfig))
-        return QDesktopServices::openUrl(QUrl::fromLocalFile(boostPathToQString(pathConfig)));
-    return false;
+    return openFile(GetConfigFile(), true);
 }
 
 bool openMNConfigfile()
 {
-    boost::filesystem::path pathConfig = GetMasternodeConfigFile();
-
-    /* Open masternode.conf with the associated application */
-    if (boost::filesystem::exists(pathConfig))
-        return QDesktopServices::openUrl(QUrl::fromLocalFile(boostPathToQString(pathConfig)));
-    return false;
+    return openFile(GetMasternodeConfigFile(), true);
 }
 
 bool showBackups()
 {
-    boost::filesystem::path pathBackups = GetDataDir() / "backups";
-
-    /* Open folder with default browser */
-    if (boost::filesystem::exists(pathBackups))
-        return QDesktopServices::openUrl(QUrl::fromLocalFile(boostPathToQString(pathBackups)));
-    return false;
+    return openFile(GetDataDir() / "backups", false);
 }
 
 void SubstituteFonts(const QString& language)
