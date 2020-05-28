@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>send</class>
  <widget class="QWidget" name="send">
@@ -81,7 +81,7 @@
             <item>
              <widget class="QLabel" name="labelSubtitle1">
               <property name="text">
-               <string>TextLabel</string>
+               <string>You can transfer public coins (BCZ)</string>
               </property>
              </widget>
             </item>
@@ -147,40 +147,9 @@
                   <enum>Qt::NoFocus</enum>
                  </property>
                  <property name="text">
-                  <string/>
+                  <string>BCZ</string>
                  </property>
                  <property name="checkable">
-                  <bool>true</bool>
-                 </property>
-                 <property name="autoExclusive">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QPushButton" name="pushRight">
-                 <property name="minimumSize">
-                  <size>
-                   <width>120</width>
-                   <height>30</height>
-                  </size>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>120</width>
-                   <height>30</height>
-                  </size>
-                 </property>
-                 <property name="focusPolicy">
-                  <enum>Qt::NoFocus</enum>
-                 </property>
-                 <property name="text">
-                  <string/>
-                 </property>
-                 <property name="checkable">
-                  <bool>true</bool>
-                 </property>
-                 <property name="checked">
                   <bool>true</bool>
                  </property>
                  <property name="autoExclusive">
@@ -194,7 +163,7 @@
             <item>
              <widget class="QLabel" name="labelSubtitle2">
               <property name="text">
-               <string>TextLabel</string>
+               <string>Select coin type to spend</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -244,7 +213,7 @@
              <string notr="true">margin-left:8px;</string>
             </property>
             <property name="text">
-             <string>TextLabel</string>
+             <string>BCZ address or contact label</string>
             </property>
            </widget>
           </item>
@@ -267,7 +236,7 @@
           <item>
            <widget class="QLabel" name="labelSubtitleAmount">
             <property name="text">
-             <string>TextLabel</string>
+             <string>Amount</string>
             </property>
            </widget>
           </item>
@@ -401,7 +370,7 @@
              <enum>Qt::NoFocus</enum>
             </property>
             <property name="text">
-             <string>PushButton</string>
+             <string>Customize fee</string>
             </property>
            </widget>
           </item>
@@ -430,7 +399,7 @@
              <enum>Qt::RightToLeft</enum>
             </property>
             <property name="text">
-             <string>PushButton</string>
+             <string>Clear all</string>
             </property>
            </widget>
           </item>
@@ -456,7 +425,7 @@
              <enum>Qt::NoFocus</enum>
             </property>
             <property name="text">
-             <string>PushButton</string>
+             <string>Add recipient</string>
             </property>
            </widget>
           </item>
@@ -560,14 +529,14 @@
                      <item>
                       <widget class="QLabel" name="labelTitleTotalSend">
                        <property name="text">
-                        <string>TextLabel</string>
+                        <string>Total to send</string>
                        </property>
                       </widget>
                      </item>
                      <item>
                       <widget class="QLabel" name="labelAmountSend">
                        <property name="text">
-                        <string>TextLabel</string>
+                        <string notr="true">0.00 BCZ</string>
                        </property>
                       </widget>
                      </item>
@@ -632,14 +601,14 @@
                      <item>
                       <widget class="QLabel" name="labelTitleTotalRemaining">
                        <property name="text">
-                        <string>TextLabel</string>
+                        <string notr="true">N/A</string>
                        </property>
                       </widget>
                      </item>
                      <item>
                       <widget class="QLabel" name="labelAmountRemaining">
                        <property name="text">
-                        <string>TextLabel</string>
+                        <string notr="true">N/A</string>
                        </property>
                       </widget>
                      </item>
@@ -796,7 +765,7 @@
              <enum>Qt::NoFocus</enum>
             </property>
             <property name="text">
-             <string>PushButton</string>
+             <string>Reset to default</string>
             </property>
            </widget>
           </item>
