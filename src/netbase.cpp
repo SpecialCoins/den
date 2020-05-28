@@ -641,11 +641,11 @@ bool ConnectSocketByName(CService& addr, SOCKET& hSocketRet, const char* pszDest
     proxyType nameProxy;
     GetNameProxy(nameProxy);
 
-    CService addrResolved;
     std::vector<CService> addrResolved;
     if (Lookup(strDest.c_str(), addrResolved, port, fNameLookup && !HaveNameProxy(), 256)) {
         if (addrResolved.size() > 0) {
             addr = addrResolved[GetRand(addrResolved.size())];
+            return ConnectSocket(addr, hSocketRet, nTimeout);
         }
     }
 
