@@ -44,11 +44,11 @@ QString BitcoinUnits::id(int unit)
 {
     switch (unit) {
     case BCZ:
-        return QString("pivx");
+        return QString("bcz");
     case mBCZ:
-        return QString("mpivx");
+        return QString("mbcz");
     case uBCZ:
-        return QString::fromUtf8("upivx");
+        return QString::fromUtf8("ubcz");
     default:
         return QString("???");
     }
