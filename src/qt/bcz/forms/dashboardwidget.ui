@@ -707,6 +707,8 @@
                   </property>
                  </widget>
                 </item>
+			   </layout>
+              </item>
               <item>
                <widget class="QWidget" name="chartContainer2" native="true">
                 <property name="minimumSize">
