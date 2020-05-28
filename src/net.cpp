@@ -394,16 +394,9 @@ CNode* FindNode(const std::string& addrName)
 CNode* FindNode(const CService& addr)
 {
     LOCK(cs_vNodes);
-    const bool isRegTestNet = Params().IsRegTestNet();
     for (CNode* pnode : vNodes) {
-        if (isRegTestNet) {
-            //if using regtest, just check the IP
-            if ((CNetAddr)pnode->addr == (CNetAddr)addr)
-                return (pnode);
-        } else {
             if (pnode->addr == addr)
                 return (pnode);
-        }
     }
     return NULL;
 }
