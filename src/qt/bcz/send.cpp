@@ -45,7 +45,6 @@ SendWidget::SendWidget(BCZGUI* parent) :
     /* Button Group */
     setCssProperty(ui->pushLeft, "btn-check-left");
     ui->pushLeft->setChecked(true);
-    setCssProperty(ui->pushRight, "btn-check-right");
 
     /* Subtitle */
     setCssProperty({ui->labelSubtitle1, ui->labelSubtitle2}, "text-subtitle");
