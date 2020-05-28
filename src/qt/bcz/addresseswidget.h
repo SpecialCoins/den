@@ -46,8 +46,8 @@ private Q_SLOTS:
     void onAddContactShowHideClicked();
     void onSortChanged(int idx);
     void onSortOrderChanged(int idx);
-    void changeTheme(bool isLightTheme, QString &theme) override;
 
+    void changeTheme(bool isLightTheme, QString &theme) override;
 private:
     Ui::AddressesWidget *ui;
 
