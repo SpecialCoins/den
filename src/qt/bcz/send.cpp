@@ -121,7 +121,7 @@ SendWidget::SendWidget(BCZGUI* parent) :
 
 void SendWidget::refreshView()
 {
-    ui->pushButtonSave->setText(tr("Send ") + QString(CURRENCY_UNIT.c_str());
+    ui->pushButtonSave->setText(tr("Send ") + QString(CURRENCY_UNIT.c_str()));
     ui->pushButtonAddRecipient->setVisible(true);
     refreshAmounts();
 }
