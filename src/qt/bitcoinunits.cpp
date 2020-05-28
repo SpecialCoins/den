@@ -59,11 +59,11 @@ QString BitcoinUnits::name(int unit)
     const QString CURR_UNIT = QString(CURRENCY_UNIT.c_str());
         switch (unit) {
         case BCZ:
-            return QString("t") + CURR_UNIT;
+            return CURR_UNIT;
         case mBCZ:
-            return QString("mt") + CURR_UNIT;
+            return QString("m") + CURR_UNIT;
         case uBCZ:
-            return QString::fromUtf8("μt") + CURR_UNIT;
+            return QString::fromUtf8("μ") + CURR_UNIT;
         default:
             return QString("???");
         }
