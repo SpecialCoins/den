@@ -5,7 +5,7 @@
 #ifndef REQUESTDIALOG_H
 #define REQUESTDIALOG_H
 
-#include <QDialog>
+#include "qt/bcz/focuseddialog.h"
 #include <QPixmap>
 #include "walletmodel.h"
 #include "qt/bcz/snackbar.h"
@@ -17,7 +17,7 @@ namespace Ui {
 class RequestDialog;
 }
 
-class RequestDialog : public QDialog
+class RequestDialog : public FocusedDialog
 {
     Q_OBJECT
 
