@@ -43,7 +43,7 @@ SendWidget::SendWidget(BCZGUI* parent) :
     ui->labelTitle->setFont(fontLight);
 
     /* Subtitle */
-    setCssProperty({ui->labelSubtitle1, ui->labelSubtitle2}, "text-subtitle");
+    setCssProperty({ui->labelSubtitle1}, "text-subtitle");
 
     /* Address - Amount*/
     setCssProperty({ui->labelSubtitleAddress, ui->labelSubtitleAmount}, "text-title");
