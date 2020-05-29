@@ -42,10 +42,6 @@ SendWidget::SendWidget(BCZGUI* parent) :
     setCssProperty(ui->labelTitle, "text-title-screen");
     ui->labelTitle->setFont(fontLight);
 
-    /* Button Group */
-    setCssProperty(ui->pushLeft, "btn-check-left");
-    ui->pushLeft->setChecked(true);
-
     /* Subtitle */
     setCssProperty({ui->labelSubtitle1, ui->labelSubtitle2}, "text-subtitle");
 
@@ -112,7 +108,6 @@ SendWidget::SendWidget(BCZGUI* parent) :
     setCustomFeeSelected(false);
 
     // Connect
-    connect(ui->pushLeft, &QPushButton::clicked, [this](){onBCZSelected();});
     connect(ui->pushButtonSave, &QPushButton::clicked, this, &SendWidget::onSendClicked);
     connect(ui->pushButtonAddRecipient, &QPushButton::clicked, this, &SendWidget::onAddEntryClicked);
     connect(ui->pushButtonClear, &QPushButton::clicked, [this](){clearAll(true);});
@@ -346,7 +341,7 @@ void SendWidget::onSendClicked()
         return;
     }
 
-    bool sendBcz = ui->pushLeft->isChecked();
+    bool sendBcz = true;
 
     WalletModel::UnlockContext ctx(walletModel->requestUnlock());
     if (!ctx.isValid()) {
