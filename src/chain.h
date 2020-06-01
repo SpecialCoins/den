@@ -173,9 +173,6 @@ public:
     //! pointer to the index of some further predecessor of this block
     CBlockIndex* pskip;
 
-    //ppcoin: trust score of block chain
-    uint256 bnChainTrust;
-
     //! height of the entry in the chain. The genesis block has height 0
     int nHeight;
 
