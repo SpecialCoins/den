@@ -170,9 +170,6 @@ public:
     //! pointer to the index of the predecessor of this block
     CBlockIndex* pprev;
 
-    //! pointer to the index of the next block
-    CBlockIndex* pnext;
-
     //! pointer to the index of some further predecessor of this block
     CBlockIndex* pskip;
 
@@ -217,7 +214,6 @@ public:
     // proof-of-stake specific fields
     uint256 GetBlockTrust() const;
     uint64_t nStakeModifier;             // hash modifier for proof-of-stake
-    unsigned int nStakeModifierChecksum; // checksum of index; in-memeory only
     COutPoint prevoutStake;
     unsigned int nStakeTime;
     uint256 hashProofOfStake;
@@ -256,7 +252,6 @@ public:
         nFlags = 0;
         nStakeModifier = 0;
         nStakeModifierV2 = uint256();
-        nStakeModifierChecksum = 0;
         prevoutStake.SetNull();
         nStakeTime = 0;
 

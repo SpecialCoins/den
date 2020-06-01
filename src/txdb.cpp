@@ -225,7 +225,6 @@ bool CBlockTreeDB::LoadBlockIndexGuts()
                 // Construct block index object
                 CBlockIndex* pindexNew = InsertBlockIndex(diskindex.GetBlockHash());
                 pindexNew->pprev = InsertBlockIndex(diskindex.hashPrev);
-                pindexNew->pnext = InsertBlockIndex(diskindex.hashNext);
                 pindexNew->nHeight = diskindex.nHeight;
                 pindexNew->nFile = diskindex.nFile;
                 pindexNew->nDataPos = diskindex.nDataPos;
@@ -241,17 +240,12 @@ bool CBlockTreeDB::LoadBlockIndexGuts()
                 pindexNew->nAccumulatorCheckpoint = diskindex.nAccumulatorCheckpoint;
 
                 //Proof Of Stake
-                pindexNew->nMint = diskindex.nMint;
-                pindexNew->nMoneySupply = diskindex.nMoneySupply;
                 pindexNew->nFlags = diskindex.nFlags;
                 if (!Params().IsStakeModifierV2(pindexNew->nHeight)) {
                     pindexNew->nStakeModifier = diskindex.nStakeModifier;
                 } else {
                     pindexNew->nStakeModifierV2 = diskindex.nStakeModifierV2;
                 }
-                pindexNew->prevoutStake = diskindex.prevoutStake;
-                pindexNew->nStakeTime = diskindex.nStakeTime;
-                pindexNew->hashProofOfStake = diskindex.hashProofOfStake;
 
                 pcursor->Next();
             } else {
