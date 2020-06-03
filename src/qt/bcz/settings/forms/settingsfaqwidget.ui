@@ -831,7 +831,7 @@
                            zBCZ is an optional privacy-centric method of coin mixing on the
                            BCZ blockchain. Basically all your transactions cannot be tracked
                            on to any block explorer. You can read more about the technicals in the
-                           &lt;a style='color: #0be0cb' href='https://BCZ.org/zbcz/'&gt;
+                           &lt;a style='color: #20d4c2' href='https://BCZ.org/zbcz/'&gt;
                            &quot;BCZ Zerocoin (zBCZ) Technical Paper&quot;&lt;/a&gt;.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
                          </string>
@@ -1032,7 +1032,7 @@
                            marks and restart your wallet to disable automint.&lt;/p&gt;
                            &lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;
                            You can read more about zBCZ in the
-                           &lt;a style='color: #0be0cb' href='https://BCZ.org/zbcz/'&gt; &quot;BCZ Zerocoin (zBCZ) Technical Paper&quot;&lt;/a&gt;.
+                           &lt;a style='color: #20d4c2' href='https://BCZ.org/zbcz/'&gt; &quot;BCZ Zerocoin (zBCZ) Technical Paper&quot;&lt;/a&gt;.
                            If you would like to keep and stake your zBCZ, please read the &quot;How do I stake&quot;
                            section of the FAQ below.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
@@ -1346,10 +1346,10 @@
                          <string>
                            &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;justify&quot;&gt;
                            We have support channels in most of our official chat groups, for example
-                           &lt;a style='color: #0be0cb' href='https://discord.BCZ.org'&gt;
+                           &lt;a style='color: #20d4c2' href='https://discord.BCZ.org'&gt;
                            #support in our Discord&lt;/a&gt;.
                            If you prefer to submit a ticket, One can be
-                           &lt;a style='color: #0be0cb' href='https://BCZ.freshdesk.com'&gt;
+                           &lt;a style='color: #20d4c2' href='https://BCZ.freshdesk.com'&gt;
                            our Freshdesk support site&lt;/a&gt;.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
                          </string>
