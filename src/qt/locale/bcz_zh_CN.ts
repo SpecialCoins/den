@@ -3911,7 +3911,7 @@ BCZ使用了一个股权证明(PoS)一致系统算法，
                            zBCZ is an optional privacy-centric method of coin mixing on the
                            BCZ blockchain. Basically all your transactions cannot be tracked
                            on to any block explorer. You can read more about the technicals in the
-                           &lt;a style='color: #20d4c2' href='https://BCZ.org/zbcz/'&gt;
+                           &lt;a style='color: #09bdab' href='https://BCZ.org/zbcz/'&gt;
                            "BCZ Zerocoin (zBCZ) Technical Paper"&lt;/a&gt;.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
                          </source>
@@ -3919,7 +3919,7 @@ BCZ使用了一个股权证明(PoS)一致系统算法，
 &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;
 zBCZ是一种可选的以隐私为中心的隐私币
 它是BCZ区块链的一员，基本上在任何块资源管理器
-所有的交易都不能被跟踪&lt;a style='color: #20d4c2' href='https://BCZ.org/zbcz/'&gt;
+所有的交易都不能被跟踪&lt;a style='color: #09bdab' href='https://BCZ.org/zbcz/'&gt;
 
 你可以阅读更多关于技术方面的文章&lt;/a&gt;
 
@@ -4059,19 +4059,19 @@ BCZ零币(zBCZ)技术文件
         <source>
                            &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;
                            We have support channels in most of our official chat groups, for example
-                           &lt;a style='color: #20d4c2' href='https://Discord.BCZ.com'&gt;
+                           &lt;a style='color: #09bdab' href='https://Discord.BCZ.com'&gt;
                            #support in our Discord&lt;/a&gt;.
                            If you prefer to submit a ticket, One can be
-                           &lt;a style='color: #20d4c2' href='https://BCZ.FreshDesk.com'&gt;
+                           &lt;a style='color: #09bdab' href='https://BCZ.FreshDesk.com'&gt;
                            our Freshdesk support site&lt;/a&gt;.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
                          </source>
         <translation>
 &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;
 例如，我们在大多数官方聊天组中都有支持频道
-&lt;a style='color: #20d4c2' href='https://Discord.BCZ.com'&gt;
+&lt;a style='color: #09bdab' href='https://Discord.BCZ.com'&gt;
 #在&lt;/a&gt;Discord支持我们
-如果您想订票&lt;a style='color: #20d4c2' href='https://BCZ.FreshDesk.com'&gt;，我们可以为您提供前台支持&lt;/a&gt;
+如果您想订票&lt;a style='color: #09bdab' href='https://BCZ.FreshDesk.com'&gt;，我们可以为您提供前台支持&lt;/a&gt;
 &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
