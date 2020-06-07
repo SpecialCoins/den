@@ -127,7 +127,8 @@ int64_t CBlockIndex::MinPastBlockTime() const
 {
     const Consensus::Params& consensus = Params().GetConsensus();
     // Time Protocol v1: pindexPrev->MedianTimePast + 1
-    if (false)
+    //if (!consensus.IsTimeProtocolV2(nHeight+1))
+        if (true)
         return GetMedianTimePast();
 
     // on the transition from Time Protocol v1 to v2
@@ -139,6 +140,7 @@ int64_t CBlockIndex::MinPastBlockTime() const
     // Time Protocol v2: pindexPrev->nTime
     return GetBlockTime();
 }
+
 
 enum { nMedianTimeSpan = 11 };
 
