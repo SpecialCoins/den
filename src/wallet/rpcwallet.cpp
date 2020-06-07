@@ -1347,7 +1347,7 @@ UniValue getbalance(const UniValue& params, bool fHelp)
     if (fHelp || params.size() > 4)
         throw std::runtime_error(
             "getbalance ( \"account\" minconf includeWatchonly includeDelegated )\n"
-            "\nIf account is not specified, returns the server's total available balance (excluding zerocoins).\n"
+            "\nIf account is not specified, returns the server's total available balance.\n"
             "If account is specified (DEPRECATED), returns the balance in the account.\n"
             "Note that the account \"\" is not the same as leaving the parameter out.\n"
             "The server total may be different to the balance in the default \"\" account.\n"
