@@ -125,7 +125,7 @@ bool Stake(const CBlockIndex* pindexPrev, CStakeInput* stakeInput, unsigned int 
     if (!stakeInput || !stakeInput->ContextCheck(nHeightTx, nTimeTx)) return false;
 
     nTimeTx = (GetCurrentTimeSlot());
-    if (nTimeTx <= pindexPrev->nTime && !fRegTest) return false;
+    if (nTimeTx <= pindexPrev->nTime) return false;
 
     // Verify Proof Of Stake
     CStakeKernel stakeKernel(pindexPrev, stakeInput, nBits, nTimeTx);
