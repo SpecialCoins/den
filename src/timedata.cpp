@@ -95,7 +95,7 @@ void AddTimeData(const CNetAddr& ip, int64_t nOffsetSample, int nOffsetLimit)
 // Timestamp for time protocol V2: slot duration 30 seconds
 int64_t GetTimeSlot(const int64_t nTime)
 {
-    const int slotLen = Params().TimeSlotLength;
+    const int slotLen = Params().GetConsensus().nTimeSlotLength;
     return (nTime / slotLen) * slotLen;
 }
 
