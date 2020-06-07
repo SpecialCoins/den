@@ -3200,7 +3200,7 @@ bool CheckBlockTime(const CBlockHeader& block, CValidationState& state, CBlockIn
         return state.DoS(50, error("%s : block timestamp too old", __func__), REJECT_INVALID, "time-too-old");
 
     // Check blocktime mask
-    if (!consensus.IsValidBlockTimeStamp(blockTime, blockHeight))
+    if (!Params().GetConsensus().IsValidBlockTimeStamp(blockTime, blockHeight))
         return state.DoS(100, error("%s : block timestamp mask not valid", __func__), REJECT_INVALID, "invalid-time-mask");
 
     // All good
@@ -4677,7 +4677,7 @@ bool static ProcessMessage(CNode* pfrom, std::string strCommand, CDataStream& vR
 
         int64_t nTimeOffset = nTime - GetTime();
         pfrom->nTimeOffset = nTimeOffset;
-        const int nTimeSlotLength = Params().TimeSlotLength();
+        const int nTimeSlotLength = Params().GetConsensus().nTimeSlotLength;
         if (abs64(nTimeOffset) < 3 * nTimeSlotLength) {
             pfrom->fSuccessfullyConnected = true;
             AddTimeData(pfrom->addr, nTimeOffset, nTimeSlotLength);
