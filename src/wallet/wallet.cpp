@@ -10,7 +10,6 @@
 #include "base58.h"
 #include "checkpoints.h"
 #include "coincontrol.h"
-#include "kernel.h"
 #include "net.h"
 #include "primitives/transaction.h"
 #include "script/script.h"
