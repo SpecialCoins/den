@@ -195,7 +195,7 @@ void CBlockIndex::SetNewStakeModifier()
         LogPrintf("%s : SetStakeEntropyBit() failed\n", __func__);
     uint64_t nStakeModifier = 0;
     bool fGeneratedStakeModifier = false;
-    if (!ComputeNextStakeModifier(pprev, nStakeModifier, fGeneratedStakeModifier))
+    //if (!ComputeNextStakeModifier(pprev, nStakeModifier, fGeneratedStakeModifier))
         LogPrintf("%s : ComputeNextStakeModifier() failed \n",  __func__);
     return SetStakeModifier(nStakeModifier, fGeneratedStakeModifier);
 }
