@@ -69,14 +69,13 @@ static const Checkpoints::CCheckpointData dataRegtest = {
     0,
     100};
 
-bool CChainParams::HasStakeMinAgeOrDepth(const int contextHeight, const uint32_t contextTime,
+bool HasStakeMinAgeOrDepth(const int contextHeight, const uint32_t contextTime,
         const int utxoFromBlockHeight, const uint32_t utxoFromBlockTime) const
 {
-    // before stake modifier V2, the age required was 60 * 60 (1 hour) / not required on regtest
-    if (!IsStakeModifierV2(contextHeight))
-        return (NetworkID() == CBaseChainParams::REGTEST || (utxoFromBlockTime + 3600 <= contextTime));
-
-    // after stake modifier V2, we require the utxo to be nStakeMinDepth deep in the chain
+    // before stake modifier V2, we require the utxo to be nStakeMinAge old
+    if (contextHeight < height_start_StakeModifierV2)
+        return (utxoFromBlockTime + nStakeMinAge <= contextTime);
+    // with stake modifier V2+, we require the utxo to be nStakeMinDepth deep in the chain
     return (contextHeight - utxoFromBlockHeight >= nStakeMinDepth);
 }
 
@@ -112,7 +111,7 @@ public:
 
         /** Height or Time Based Activations **/
         nLastPOWBlock = 50000;
-        nBlockStakeModifierlV2 = 66555;
+        nheight_start_StakeModifierV2 = 66555;
 
         // New P2P messages signatures
         nBlockEnforceNewMessageSignatures = 162000;

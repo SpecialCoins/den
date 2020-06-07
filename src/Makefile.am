@@ -116,6 +116,7 @@ BITCOIN_CORE_H = \
   init.h \
   invalid.h \
   invalid_outpoints.json.h \
+  legacy/stakemodifier.h \
   kernel.h \
   swifttx.h \
   key.h \
@@ -261,6 +262,7 @@ libbitcoin_wallet_a_SOURCES = \
   messagesigner.cpp \
   wallet/rpcdump.cpp \
   wallet/rpcwallet.cpp \
+  legacy/stakemodifier.h \
   kernel.cpp \
   wallet/hdchain.cpp \
   wallet/scriptpubkeyman.cpp \

@@ -107,6 +107,7 @@ UniValue blockToJSON(const CBlock& block, const CBlockIndex* blockindex, bool tx
     result.push_back(Pair("height", blockindex->nHeight));
     result.push_back(Pair("version", block.nVersion));
     result.push_back(Pair("merkleroot", block.hashMerkleRoot.GetHex()));
+    result.push_back(Pair("acc_checkpoint", block.nAccumulatorCheckpoint.GetHex()));
     UniValue txs(UniValue::VARR);
     for (const CTransaction& tx : block.vtx) {
         if (txDetails) {
@@ -134,20 +135,13 @@ UniValue blockToJSON(const CBlock& block, const CBlockIndex* blockindex, bool tx
     ////////// Coin stake data ////////////////
     /////////
     if (block.IsProofOfStake()) {
-        // First grab it
         uint256 hashProofOfStakeRet;
-        std::unique_ptr <CStakeInput> stake;
-        // Initialize the stake object (we should look for this in some other place and not initialize it every time..)
-        if (!initStakeInput(block, stake, blockindex->nHeight - 1))
-            throw JSONRPCError(RPC_INTERNAL_ERROR, "Cannot initialize stake input");
-
-        unsigned int nTxTime = block.nTime;
-        // todo: Add the debug as param..
-        if (!GetHashProofOfStake(blockindex->pprev, stake.get(), nTxTime, false, hashProofOfStakeRet))
+        if (!GetStakeKernelHash(hashProofOfStakeRet, block, blockindex->pprev))
             throw JSONRPCError(RPC_INTERNAL_ERROR, "Cannot get proof of stake hash");
-        std::string stakeModifier = (Params().IsStakeModifierV2(blockindex->nHeight) ?
-                                     blockindex->nStakeModifierV2.GetHex() :
-                                     strprintf("%016x", blockindex->nStakeModifier));
+
+        std::string stakeModifier = (blockindex->nHeight >= Params().height_start_StakeModifierV2 ?
+                                     blockindex->GetStakeModifierV2().GetHex() :
+                                     strprintf("%016x", blockindex->GetStakeModifierV1()));
         result.push_back(Pair("stakeModifier", stakeModifier));
         result.push_back(Pair("hashProofOfStake", hashProofOfStakeRet.GetHex()));
     }

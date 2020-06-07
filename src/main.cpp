@@ -2820,26 +2820,13 @@ CBlockIndex* AddToBlockIndex(const CBlock& block)
         pindexNew->nHeight = pindexNew->pprev->nHeight + 1;
         pindexNew->BuildSkip();
 
-        // ppcoin: compute stake entropy bit for stake modifier
-        if (!pindexNew->SetStakeEntropyBit(pindexNew->GetStakeEntropyBit()))
-            LogPrintf("AddToBlockIndex() : SetStakeEntropyBit() failed \n");
+        if (pindexNew->nHeight < Params().height_start_StakeModifierV2) {
+            // compute and set new V1 stake modifier (entropy bits)
+            pindexNew->SetNewStakeModifier();
 
-        // ppcoin: record proof-of-stake hash value
-        if (pindexNew->IsProofOfStake()) {
-            if (!mapProofOfStake.count(hash))
-                LogPrintf("AddToBlockIndex() : hashProofOfStake not found in map \n");
-            pindexNew->hashProofOfStake = mapProofOfStake[hash];
-        }
-
-        if (!Params().IsStakeModifierV2(pindexNew->nHeight)) {
-            uint64_t nStakeModifier = 0;
-            bool fGeneratedStakeModifier = false;
-            if (!ComputeNextStakeModifier(pindexNew->pprev, nStakeModifier, fGeneratedStakeModifier))
-                LogPrintf("AddToBlockIndex() : ComputeNextStakeModifier() failed \n");
-            pindexNew->SetStakeModifier(nStakeModifier, fGeneratedStakeModifier);
         } else {
-            // compute v2 stake modifier
-            pindexNew->nStakeModifierV2 = ComputeStakeModifier(pindexNew->pprev, block.vtx[1].vin[0].prevout.hash);
+            // compute and set new V2 stake modifier (hash of prevout and prevModifier)
+            pindexNew->SetNewStakeModifier(block.vtx[1].vin[0].prevout.hash);
         }
     }
     pindexNew->nChainWork = (pindexNew->pprev ? pindexNew->pprev->nChainWork : 0) + GetBlockProof(*pindexNew);
