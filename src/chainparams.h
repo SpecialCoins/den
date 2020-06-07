@@ -52,6 +52,7 @@ public:
         MAX_BASE58_TYPES
     };
 
+    const Consensus::Params& GetConsensus() const { return consensus; }
     const uint256& HashGenesisBlock() const { return hashGenesisBlock; }
     const MessageStartChars& MessageStart() const { return pchMessageStart; }
     const std::vector<unsigned char>& AlertKey() const { return vAlertPubKey; }
