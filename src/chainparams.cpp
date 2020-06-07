@@ -69,24 +69,6 @@ static const Checkpoints::CCheckpointData dataRegtest = {
     0,
     100};
 
-bool HasStakeMinAgeOrDepth(const int contextHeight, const uint32_t contextTime,
-        const int utxoFromBlockHeight, const uint32_t utxoFromBlockTime) const
-{
-    // before stake modifier V2, we require the utxo to be nStakeMinAge old
-    if (contextHeight < height_start_StakeModifierV2)
-        return (utxoFromBlockTime + nStakeMinAge <= contextTime);
-    // with stake modifier V2+, we require the utxo to be nStakeMinDepth deep in the chain
-    return (contextHeight - utxoFromBlockHeight >= nStakeMinDepth);
-}
-
-int FutureBlockTimeDrift(const int nHeight) const
-{
-    // PoS (TimeV2)
-    if (IsTimeProtocolV2(nHeight)) return nTimeSlotLength - 1;
-    // PoS (TimeV1)
-    return (nFutureTimeDrift);
-}
-
 class CMainParams : public CChainParams
 {
 public:
