@@ -43,7 +43,7 @@ struct Params {
     {
         // before stake modifier V2, we require the utxo to be nStakeMinAge old
         if (contextHeight < height_start_StakeModifierV2)
-            return (utxoFromBlockTime + nStakeMinAge <= contextTime);
+			return (utxoFromBlockTime + 3600 <= contextTime));
         // with stake modifier V2+, we require the utxo to be nStakeMinDepth deep in the chain
         return (contextHeight - utxoFromBlockHeight >= nStakeMinDepth);
     }
