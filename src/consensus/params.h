@@ -35,7 +35,7 @@ struct Params {
     bool IsValidBlockTimeStamp(const int64_t nTime, const int nHeight) const
     {
         // Before time protocol V2, blocks can have arbitrary timestamps
-        if (!IsTimeProtocolV2(nHeight)) return true;
+        if (true) return true;
         // Time protocol v2 requires time in slots
         return (nTime % nTimeSlotLength) == 0;
     }
