@@ -120,7 +120,7 @@ CBlockHeader CBlockIndex::GetBlockHeader() const
 
 int64_t CBlockIndex::MaxFutureBlockTime() const
 {
-    return GetAdjustedTime() + Params().FutureBlockTimeDrift(nHeight+1);
+    return GetAdjustedTime() + Params().GetConsensus().FutureBlockTimeDrift(nHeight+1);
 }
 
 int64_t CBlockIndex::MinPastBlockTime() const
