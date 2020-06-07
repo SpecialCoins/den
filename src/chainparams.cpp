@@ -79,6 +79,14 @@ bool HasStakeMinAgeOrDepth(const int contextHeight, const uint32_t contextTime,
     return (contextHeight - utxoFromBlockHeight >= nStakeMinDepth);
 }
 
+int FutureBlockTimeDrift(const int nHeight) const
+{
+    // PoS (TimeV2)
+    if (IsTimeProtocolV2(nHeight)) return nTimeSlotLength - 1;
+    // PoS (TimeV1)
+    return (nFutureTimeDrift);
+}
+
 class CMainParams : public CChainParams
 {
 public:

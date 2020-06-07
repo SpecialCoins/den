@@ -84,9 +84,10 @@ public:
     /** returns the coinstake maturity (min depth required) **/
     int COINSTAKE_MIN_DEPTH() const { return nStakeMinDepth; }
     bool HasStakeMinAgeOrDepth(const int contextHeight, const uint32_t contextTime, const int utxoFromBlockHeight, const uint32_t utxoFromBlockTime) const;
+    int FutureBlockTimeDrift(const int nHeight) const;
     int TimeSlotLength() const { return nTimeSlotLength; }
     int FutureTimeDrift() const { return nFutureTimeDrift; }
-    uint32_t MaxFutureTime(uint32_t time) const { return time + FutureTimeDrift(); }
+
 
     /** Make miner stop after a block is found. In RPC, don't return until nGenProcLimit blocks are generated */
     bool MineBlocksOnDemand() const { return fMineBlocksOnDemand; }

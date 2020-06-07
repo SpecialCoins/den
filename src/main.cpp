@@ -3191,7 +3191,7 @@ bool CheckBlockTime(const CBlockHeader& block, CValidationState& state, CBlockIn
     const int64_t blockTime = block.GetBlockTime();
 
     // Check blocktime against future drift (WANT: blk_time <= Now + MaxDrift)
-    if (block.GetBlockTime() > Params().MaxFutureTime(GetAdjustedTime()))
+    if (blockTime > pindexPrev->MaxFutureBlockTime())
         return state.Invalid(error("%s : block timestamp too far in the future", __func__), REJECT_INVALID, "time-too-new");
 
     // Check blocktime against prev (WANT: blk_time > MinPastBlockTime)
