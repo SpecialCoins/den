@@ -127,14 +127,14 @@ int64_t CBlockIndex::MinPastBlockTime() const
 {
     const Consensus::Params& consensus = Params().GetConsensus();
     // Time Protocol v1: pindexPrev->MedianTimePast + 1
-    if (!consensus.IsTimeProtocolV2(nHeight+1))
+    if (false)
         return GetMedianTimePast();
 
     // on the transition from Time Protocol v1 to v2
     // pindexPrev->nTime might be in the future (up to the allowed drift)
     // so we allow the nBlockTimeProtocolV2 to be at most (180-14) seconds earlier than previous block
-    if (nHeight + 1 == consensus.height_start_TimeProtoV2)
-        return GetBlockTime() - consensus.FutureBlockTimeDrift(nHeight) + consensus.FutureBlockTimeDrift(nHeight + 1);
+    //if (nHeight + 1 == consensus.height_start_TimeProtoV2)
+        //return GetBlockTime() - consensus.FutureBlockTimeDrift(nHeight) + consensus.FutureBlockTimeDrift(nHeight + 1);
 
     // Time Protocol v2: pindexPrev->nTime
     return GetBlockTime();
