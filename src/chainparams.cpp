@@ -101,7 +101,7 @@ public:
 
         /** Height or Time Based Activations **/
         nLastPOWBlock = 50000;
-        consensus.nheight_start_StakeModifierV2 = 66555;
+        consensus.height_start_StakeModifierV2 = 66555;
 
         // New P2P messages signatures
         nBlockEnforceNewMessageSignatures = 162000;

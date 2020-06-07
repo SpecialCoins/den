@@ -31,7 +31,7 @@ CStakeKernel::CStakeKernel(const CBlockIndex* const pindexPrev, CStakeInput* sta
     stakeValue(stakeInput->GetValue())
 {
     // Set kernel stake modifier
-    if (pindexPrev->nHeight + 1 < Params().height_start_StakeModifierV2) {
+    if (pindexPrev->nHeight + 1 < Params().GetConsensus().height_start_StakeModifierV2) {
         uint64_t nStakeModifier = 0;
         if (!GetOldStakeModifier(stakeInput, nStakeModifier))
             LogPrintf("%s : ERROR: Failed to get kernel stake modifier\n", __func__);
