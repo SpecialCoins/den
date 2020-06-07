@@ -104,7 +104,6 @@ public:
 
     /** Height or Time Based Activations **/
     int LAST_POW_BLOCK() const { return nLastPOWBlock; }
-    int height_start_StakeModifierV2() const { return nheight_start_StakeModifierV2; }
     int ColdStart() const { return nColdStart; }
 
 protected:
@@ -122,7 +121,6 @@ protected:
     int nRejectBlockOutdatedMajority;
     int nToCheckBlockUpgradeMajority;
     int nLastPOWBlock;
-    int nheight_start_StakeModifierV2;
     int nMaturity;
 
     int nMinerThreads;
