@@ -93,14 +93,15 @@ public:
         nRejectBlockOutdatedMajority = 10260; // 95%
         nToCheckBlockUpgradeMajority = 10800; // Approximate expected amount of blocks in 7 days (1440*7.5)
         nMinerThreads = 0;
-        nTimeSlotLength = 30;
+        consensus.nTimeSlotLength = 30;
         nMaturity = 100;
-        nFutureTimeDrift = 180;
+        consensus.nStakeMinDepth = 120;
+        consensus.nFutureTimeDrift = 180;
         nMinColdStakingAmount = 100 * COIN;
 
         /** Height or Time Based Activations **/
         nLastPOWBlock = 50000;
-        nheight_start_StakeModifierV2 = 66555;
+        consensus.nheight_start_StakeModifierV2 = 66555;
 
         // New P2P messages signatures
         nBlockEnforceNewMessageSignatures = 162000;
