@@ -104,7 +104,7 @@ bool LoadStakeInput(const CBlock& block, const CBlockIndex* pindexPrev, std::uni
 
     // Construct the stakeinput object
     const CTxIn& txin = block.vtx[1].vin[0];
-    stake = std::unique_ptr<CStakeInput>(new CPivStake());
+    stake = std::unique_ptr<CStakeInput>(new CBCZStake());
 
     return stake->InitFromTxIn(txin);
 }
@@ -124,9 +124,7 @@ bool Stake(const CBlockIndex* pindexPrev, CStakeInput* stakeInput, unsigned int 
     const int nHeightTx = pindexPrev->nHeight + 1;
     if (!stakeInput || !stakeInput->ContextCheck(nHeightTx, nTimeTx)) return false;
 
-    // Get the new time slot (and verify it's not the same as previous block)
-    const bool fRegTest = Params().IsRegTestNet();
-    nTimeTx = (fRegTest ? GetAdjustedTime() : GetCurrentTimeSlot());
+    nTimeTx = (GetCurrentTimeSlot());
     if (nTimeTx <= pindexPrev->nTime && !fRegTest) return false;
 
     // Verify Proof Of Stake
@@ -166,9 +164,6 @@ bool CheckProofOfStake(const CBlock& block, std::string& strError, const CBlockI
         strError = "kernel hash check fails";
         return false;
     }
-
-    // zPoS disabled (ContextCheck) before blocks V7, and the tx input signature is in CoinSpend
-    if (stakeInput->IsZPIV()) return true;
 
     // Verify tx input signature
     CTxOut stakePrevout;
