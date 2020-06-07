@@ -95,7 +95,6 @@ public:
         nMinerThreads = 0;
         nTimeSlotLength = 30;
         nMaturity = 100;
-        nStakeMinDepth = 120;
         nFutureTimeDrift = 180;
         nMinColdStakingAmount = 100 * COIN;
 

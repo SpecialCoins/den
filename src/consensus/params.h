@@ -19,6 +19,7 @@ namespace Consensus {
 struct Params {
     int nFutureTimeDrift;
     int nTimeSlotLength;
+	int nStakeMinDepth;
 
     //bool IsTimeProtocolV2(const int nHeight) const { return nHeight >= height_start_TimeProtoV2; }
 

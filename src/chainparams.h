@@ -83,9 +83,6 @@ public:
     /** returns the coinbase maturity **/
     int COINBASE_MATURITY() const { return nMaturity; }
 
-    /** returns the coinstake maturity (min depth required) **/
-    int COINSTAKE_MIN_DEPTH() const { return nStakeMinDepth; }
-
     /** Make miner stop after a block is found. In RPC, don't return until nGenProcLimit blocks are generated */
     bool MineBlocksOnDemand() const { return fMineBlocksOnDemand; }
     /** In the future use NetworkIDString() for RPC fields */
@@ -127,7 +124,6 @@ protected:
     int nLastPOWBlock;
     int nheight_start_StakeModifierV2;
     int nMaturity;
-    int nStakeMinDepth;
 
     int nMinerThreads;
     std::vector<CDNSSeedData> vSeeds;
