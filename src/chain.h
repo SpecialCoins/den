@@ -312,7 +312,7 @@ public:
             READWRITE(nTime);
             READWRITE(nBits);
             READWRITE(nNonce);
-            if(this->nVersion > 3 && this->nVersion < 7)
+            if(this->nVersion > 3 && this->nVersion < 5)
                 READWRITE(nAccumulatorCheckpoint);
     }
 
@@ -416,8 +416,6 @@ public:
     /** Find the last common block between this chain and a block index entry. */
     const CBlockIndex* FindFork(const CBlockIndex* pindex) const;
 
-    /** Check if new message signatures are active **/
-    bool NewSigsActive() { return Params().GetConsensus().IsMessSigV2(Height()); }
 };
 
 #endif // BITCOIN_CHAIN_H

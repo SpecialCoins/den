@@ -102,9 +102,6 @@ public:
         /** Height or Time Based Activations **/
         nLastPOWBlock = 50000;
         consensus.height_start_StakeModifierV2 = 66555;
-
-        // New P2P messages signatures
-        nBlockEnforceNewMessageSignatures = 162000;
         nColdStart = 165000;  //cold rescan
 
         const char* pszTimestamp = "BCZ BORN";

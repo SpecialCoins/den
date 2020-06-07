@@ -140,7 +140,6 @@ protected:
     bool fHeadersFirstSyncingActive;
     int nPoolMaxTransactions;
     std::string strSporkPubKey;
-    int nBlockEnforceNewMessageSignatures;
     int nColdStart;
     int nBlockStakeModifierlV2;
     CAmount nMinColdStakingAmount;
