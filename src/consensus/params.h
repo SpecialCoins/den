@@ -37,7 +37,7 @@ struct Params {
         // Time protocol v2 requires time in slots
         return (nTime % nTimeSlotLength) == 0;
     }
-z
+
     bool HasStakeMinAgeOrDepth(const int contextHeight, const uint32_t contextTime,
             const int utxoFromBlockHeight, const uint32_t utxoFromBlockTime) const
     {
