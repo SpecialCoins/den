@@ -4675,7 +4675,7 @@ bool static ProcessMessage(CNode* pfrom, std::string strCommand, CDataStream& vR
         int64_t nTimeOffset = nTime - GetTime();
         pfrom->nTimeOffset = nTimeOffset;
         const int nTimeSlotLength = Params().TimeSlotLength();
-        if (abs64(nTimeOffset) < 2 * nTimeSlotLength) {
+        if (abs64(nTimeOffset) < 3 * nTimeSlotLength) {
             pfrom->fSuccessfullyConnected = true;
             AddTimeData(pfrom->addr, nTimeOffset, nTimeSlotLength);
         } else {
