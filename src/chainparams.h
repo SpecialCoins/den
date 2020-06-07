@@ -141,7 +141,6 @@ protected:
     int nPoolMaxTransactions;
     std::string strSporkPubKey;
     int nColdStart;
-    int nBlockStakeModifierlV2;
     CAmount nMinColdStakingAmount;
 
 };
