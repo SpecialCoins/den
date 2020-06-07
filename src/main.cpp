@@ -3379,7 +3379,7 @@ bool AcceptBlock(CBlock& block, CValidationState& state, CBlockIndex** ppindex, 
         }
     }
 
-    if (block.GetHash() != Params().GetConsensus().hashGenesisBlock && !CheckWork(block, pindexPrev))
+    if (block.GetHash() != Params().hashGenesisBlock && !CheckWork(block, pindexPrev))
         return false;
 
     bool isPoS = block.IsProofOfStake();
