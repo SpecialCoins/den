@@ -6,31 +6,22 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "wallet/wallet.h"
-#include "amount.h"
-#include "base58.h"
-#include "checkpoints.h"
+
 #include "coincontrol.h"
-#include "net.h"
-#include "primitives/transaction.h"
-#include "script/script.h"
-#include "script/sign.h"
-#include "spork.h"
-#include "stakeinput.h"
-#include "swifttx.h"
-#include "timedata.h"
-#include "txdb.h"
-#include "util.h"
 #include "init.h"
-#include "utilmoneystr.h"
 #include "guiinterfaceutil.h"
 #include "masternode-payments.h"
+#include "script/sign.h"
+#include "spork.h"
+#include "swifttx.h"    // mapTxLockReq
+#include "util.h"
+#include "utilmoneystr.h"
 
 #include <assert.h>
 
 #include <boost/algorithm/string/replace.hpp>
 #include <boost/thread.hpp>
-#include <boost/filesystem/operations.hpp>
-#include <boost/date_time/posix_time/posix_time.hpp>
+
 
 CWallet* pwalletMain = nullptr;
 /**
