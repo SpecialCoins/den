@@ -7,7 +7,6 @@
 #define BITCOIN_CONSENSUS_PARAMS_H
 
 #include "amount.h"
-#include "libzerocoin/Params.h"
 #include "uint256.h"
 #include <map>
 #include <string>
@@ -21,12 +20,12 @@ struct Params {
     int nFutureTimeDrift;
     int nTimeSlotLength;
 
-    bool IsTimeProtocolV2(const int nHeight) const { return nHeight >= height_start_TimeProtoV2; }
+    //bool IsTimeProtocolV2(const int nHeight) const { return nHeight >= height_start_TimeProtoV2; }
 
     int FutureBlockTimeDrift(const int nHeight) const
     {
         // PoS (TimeV2):
-        if (IsTimeProtocolV2(nHeight)) return nTimeSlotLength - 1;
+        if (false) return nTimeSlotLength - 1;
         // PoS (TimeV1:
         return (nHeight > nFutureTimeDrift);
     }
