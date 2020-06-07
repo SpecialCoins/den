@@ -3188,16 +3188,23 @@ bool CheckBlock(const CBlock& block, CValidationState& state, bool fCheckPOW, bo
 
 bool CheckBlockTime(const CBlockHeader& block, CValidationState& state, CBlockIndex* const pindexPrev)
 {
+
     const int64_t blockTime = block.GetBlockTime();
+    const int blockHeight = pindexPrev->nHeight + 1;
 
     // Check blocktime against future drift (WANT: blk_time <= Now + MaxDrift)
     if (blockTime > pindexPrev->MaxFutureBlockTime())
         return state.Invalid(error("%s : block timestamp too far in the future", __func__), REJECT_INVALID, "time-too-new");
 
     // Check blocktime against prev (WANT: blk_time > MinPastBlockTime)
-    if (blockTime <= pindexPrev->GetMedianTimePast())
+    if (blockTime <= pindexPrev->MinPastBlockTime())
         return state.DoS(50, error("%s : block timestamp too old", __func__), REJECT_INVALID, "time-too-old");
 
+    // Check blocktime mask
+    if (!Params().GetConsensus().IsValidBlockTimeStamp(blockTime, blockHeight))
+        return state.DoS(100, error("%s : block timestamp mask not valid", __func__), REJECT_INVALID, "invalid-time-mask");
+
+    // All good
     return true;
 }
 
