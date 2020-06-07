@@ -224,7 +224,7 @@ void CBlockIndex::SetNewStakeModifier(const uint256& prevoutId)
 // Returns V1 stake modifier (uint64_t)
 uint64_t CBlockIndex::GetStakeModifierV1() const
 {
-    if (vStakeModifier.empty() || nHeight >= Params().height_start_StakeModifierV2)
+    if (vStakeModifier.empty() || nHeight >= Params().GetConsensus().height_start_StakeModifierV2)
         return 0;
     uint64_t nStakeModifier;
     std::memcpy(&nStakeModifier, vStakeModifier.data(), vStakeModifier.size());
@@ -234,7 +234,7 @@ uint64_t CBlockIndex::GetStakeModifierV1() const
 // Returns V2 stake modifier (uint256)
 uint256 CBlockIndex::GetStakeModifierV2() const
 {
-    if (vStakeModifier.empty() || nHeight < Params().height_start_StakeModifierV2)
+    if (vStakeModifier.empty() || nHeight < Params().GetConsensus().height_start_StakeModifierV2)
         return UINT256_ZERO;
     uint256 nStakeModifier;
     std::memcpy(nStakeModifier.begin(), vStakeModifier.data(), vStakeModifier.size());
