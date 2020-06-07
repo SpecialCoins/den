@@ -496,14 +496,14 @@ void POSMiner(CWallet* pwallet, bool fProofOfStake)
             if (!fStakeableCoins) CheckForCoins(pwallet, 1);
         }
 
-        if (mapHashedBlocks.count(chainActive.Tip()->nHeight)) //search our map of hashed blocks, see if bestblock has been hashed yet
-        {
-            if (GetTime() - mapHashedBlocks[chainActive.Tip()->nHeight] < std::max(pwallet->nHashInterval, (unsigned int)1)) // wait half of the nHashDrift with max wait of 3 minutes
-            {
-                MilliSleep(5000);
-                continue;
-            }
+        //search our map of hashed blocks, see if bestblock has been hashed yet
+        if (pwallet->pStakerStatus &&
+                pwallet->pStakerStatus->GetLastHash() == pindexPrev->GetBlockHash() &&
+                pwallet->pStakerStatus->GetLastTime() >= GetCurrentTimeSlot()) {
+            MilliSleep(2000);
+            continue;
         }
+
 
         //
         // Create new block
