@@ -2494,7 +2494,7 @@ bool CWallet::CreateCoinStake(
         const CBlockIndex* pindexPrev,
         unsigned int nBits,
         CMutableTransaction& txNew,
-        unsigned int& nTxNewTime
+        int64_t& nTxNewTime
         )
 {
     // Get the list of stakable utxos
@@ -2512,6 +2512,8 @@ bool CWallet::CreateCoinStake(
         listInputs.emplace_back(std::move(input));
     }
 
+    const Consensus::Params& consensus = Params().GetConsensus();
+
     // Mark coin stake transaction
     txNew.vin.clear();
     txNew.vout.clear();
@@ -2525,25 +2527,17 @@ bool CWallet::CreateCoinStake(
     CAmount nCredit;
     bool fKernelFound = false;
     int nAttempts = 0;
-
-    // Block time.
-    nTxNewTime = GetAdjustedTime();
-    // If the block time is in the future, then starts there.
-    if (pindexPrev->nTime > nTxNewTime) {
-        nTxNewTime = pindexPrev->nTime;
-    }
-
     for (std::unique_ptr<CStakeInput>& stakeInput : listInputs) {
         //new block came in, move on
         if (chainActive.Height() != pindexPrev->nHeight) return false;
+
         // Make sure the wallet is unlocked and shutdown hasn't been requested
         if (IsLocked() || ShutdownRequested()) return false;
 
         nCredit = 0;
-        uint256 hashProofOfStake;
 
         nAttempts++;
-        fKernelFound = Stake(pindexPrev, stakeInput.get(), nBits, nTxNewTime, hashProofOfStake);
+        fKernelFound = Stake(pindexPrev, stakeInput.get(), nBits, nTxNewTime);
 
         // update staker status (time, attempts)
         pStakerStatus->SetLastTime(nTxNewTime);
@@ -2569,29 +2563,27 @@ bool CWallet::CreateCoinStake(
         txNew.vout.insert(txNew.vout.end(), vout.begin(), vout.end());
 
         CAmount nMinFee = 0;
-        if (true) {
-            // Set output amount
-            int outputs = txNew.vout.size() - 1;
-            CAmount nRemaining = nCredit - nMinFee;
-            if (outputs > 1) {
-                // Split the stake across the outputs
-                CAmount nShare = nRemaining / outputs;
-                for (int i = 1; i < outputs; i++) {
-                    // loop through all but the last one.
-                    txNew.vout[i].nValue = nShare;
-                    nRemaining -= nShare;
-                }
+        // Set output amount
+        int outputs = txNew.vout.size() - 1;
+        CAmount nRemaining = nCredit - nMinFee;
+        if (outputs > 1) {
+            // Split the stake across the outputs
+            CAmount nShare = nRemaining / outputs;
+            for (int i = 1; i < outputs; i++) {
+                // loop through all but the last one.
+                txNew.vout[i].nValue = nShare;
+                nRemaining -= nShare;
             }
-            // put the remaining on the last output (which all into the first if only one output)
-            txNew.vout[outputs].nValue += nRemaining;
         }
+        // put the remaining on the last output (which all into the first if only one output)
+        txNew.vout[outputs].nValue += nRemaining;
 
         // Limit size
         unsigned int nBytes = ::GetSerializeSize(txNew, SER_NETWORK, PROTOCOL_VERSION);
         if (nBytes >= DEFAULT_BLOCK_MAX_SIZE / 5)
             return error("CreateCoinStake : exceeded coinstake size limit");
 
-        //Masternode payment
+        // Masternode payment
         FillBlockPayee(txNew, nMinFee, true);
 
         uint256 hashTxOut = txNew.GetHash();
@@ -2622,6 +2614,7 @@ bool CWallet::CreateCoinStake(
     // Successfully generated coinstake
     return true;
 }
+
 
 /**
  * Call after CreateTransaction unless you want to abort
