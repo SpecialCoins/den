@@ -20,6 +20,7 @@ struct Params {
     int nFutureTimeDrift;
     int nTimeSlotLength;
 	int nStakeMinDepth;
+	int nTargetSpacing;
 	int height_start_StakeModifierV2;
 
     //bool IsTimeProtocolV2(const int nHeight) const { return nHeight >= height_start_TimeProtoV2; }
