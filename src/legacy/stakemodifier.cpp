@@ -58,7 +58,7 @@ static bool SelectBlockFromCandidates(
 
         //if the lowest block height (vSortedByTimestamp[0]) is >= switch height, use new modifier calc
         if (fFirstRun){
-            fModifierV2 = pindex->nHeight >= Params().GetConsensus().height_start_StakeModifierNewSelection;
+            fModifierV2 = pindex->nHeight >= Params().GetConsensus().height_start_StakeModifierV2;
             fFirstRun = false;
         }
 
