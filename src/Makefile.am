@@ -263,7 +263,7 @@ libbitcoin_wallet_a_SOURCES = \
   messagesigner.cpp \
   wallet/rpcdump.cpp \
   wallet/rpcwallet.cpp \
-  legacy/stakemodifier.h \
+  legacy/stakemodifier.cpp \
   kernel.cpp \
   wallet/hdchain.cpp \
   wallet/scriptpubkeyman.cpp \
