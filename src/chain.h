@@ -209,13 +209,8 @@ public:
 
 
     // proof-of-stake specific fields
-    uint256 GetBlockTrust() const;
     uint64_t nStakeModifier;             // hash modifier for proof-of-stake
-    COutPoint prevoutStake;
-    unsigned int nStakeTime;
     uint256 hashProofOfStake;
-    int64_t nMint;
-    int64_t nMoneySupply;
     uint256 nStakeModifierV2;
 
     //! block header
@@ -243,15 +238,9 @@ public:
         nChainTx = 0;
         nStatus = 0;
         nSequenceId = 0;
-
-        nMint = 0;
-        nMoneySupply = 0;
         nFlags = 0;
         nStakeModifier = 0;
         nStakeModifierV2 = uint256();
-        prevoutStake.SetNull();
-        nStakeTime = 0;
-
         nVersion = 0;
         hashMerkleRoot = uint256();
         nTime = 0;
@@ -279,8 +268,6 @@ public:
 
         if (block.IsProofOfStake()) {
             SetProofOfStake();
-            prevoutStake = block.vtx[1].vin[0].prevout;
-            nStakeTime = block.nTime;
         }
     }
 
@@ -315,7 +302,9 @@ public:
         block.nTime = nTime;
         block.nBits = nBits;
         block.nNonce = nNonce;
-        block.nAccumulatorCheckpoint = nAccumulatorCheckpoint;
+        if(block.nVersion > 3 && block.nVersion < 5)
+            block.nAccumulatorCheckpoint = nAccumulatorCheckpoint;
+
         return block;
     }
 
@@ -433,12 +422,10 @@ class CDiskBlockIndex : public CBlockIndex
 {
 public:
     uint256 hashPrev;
-    uint256 hashNext;
 
     CDiskBlockIndex()
     {
         hashPrev = uint256();
-        hashNext = uint256();
     }
 
     explicit CDiskBlockIndex(const CBlockIndex* pindex) : CBlockIndex(*pindex)
@@ -464,9 +451,6 @@ public:
         if (nStatus & BLOCK_HAVE_UNDO)
             READWRITE(VARINT(nUndoPos));
 
-
-        READWRITE(nMint);
-        READWRITE(nMoneySupply);
         READWRITE(nFlags);
 
         // v1/v2 modifier selection.
@@ -477,19 +461,14 @@ public:
         }
 
         if (IsProofOfStake()) {
-            READWRITE(prevoutStake);
-            READWRITE(nStakeTime);
             READWRITE(hashProofOfStake);
         } else {
-            const_cast<CDiskBlockIndex*>(this)->prevoutStake.SetNull();
-            const_cast<CDiskBlockIndex*>(this)->nStakeTime = 0;
             const_cast<CDiskBlockIndex*>(this)->hashProofOfStake = uint256();
         }
 
         // block header
         READWRITE(this->nVersion);
         READWRITE(hashPrev);
-        READWRITE(hashNext);
         READWRITE(hashMerkleRoot);
         READWRITE(nTime);
         READWRITE(nBits);
