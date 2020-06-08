@@ -97,6 +97,7 @@ public:
         nMaturity = 100;
         consensus.nStakeMinDepth = 120;
         consensus.nFutureTimeDrift = 180;
+        consensus.nTargetSpacing = 150;
         nMinColdStakingAmount = 100 * COIN;
 
         /** Height or Time Based Activations **/
