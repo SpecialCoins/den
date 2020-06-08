@@ -460,6 +460,12 @@ public:
             READWRITE(nStakeModifierV2);
         }
 
+        if (IsProofOfStake()) {
+            READWRITE(hashProofOfStake);
+        } else {
+            const_cast<CDiskBlockIndex*>(this)->hashProofOfStake = uint256();
+        }
+
         // block header
         READWRITE(this->nVersion);
         READWRITE(hashPrev);
