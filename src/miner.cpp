@@ -134,7 +134,7 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
         boost::this_thread::interruption_point();
         pblock->nBits = GetNextWorkRequired(pindexPrev);
         CMutableTransaction txCoinStake;
-        int64_t nTxNewTime = 0;
+        unsigned int nTxNewTime = 0;
         if (!pwallet->CreateCoinStake(*pwallet, pindexPrev, pblock->nBits, txCoinStake, nTxNewTime)) {
             LogPrint(BCLog::STAKING, "%s : stake not found\n", __func__);
             return nullptr;
@@ -496,14 +496,14 @@ void POSMiner(CWallet* pwallet, bool fProofOfStake)
             if (!fStakeableCoins) CheckForCoins(pwallet, 1);
         }
 
-        //search our map of hashed blocks, see if bestblock has been hashed yet
-        if (pwallet->pStakerStatus &&
-                pwallet->pStakerStatus->GetLastHash() == pindexPrev->GetBlockHash() &&
-                pwallet->pStakerStatus->GetLastTime() >= GetCurrentTimeSlot()) {
-            MilliSleep(2000);
-            continue;
+        if (mapHashedBlocks.count(chainActive.Tip()->nHeight)) //search our map of hashed blocks, see if bestblock has been hashed yet
+        {
+            if (GetTime() - mapHashedBlocks[chainActive.Tip()->nHeight] < std::max(pwallet->nHashInterval, (unsigned int)1)) // wait half of the nHashDrift with max wait of 3 minutes
+            {
+                MilliSleep(5000);
+                continue;
+            }
         }
-
 
         //
         // Create new block

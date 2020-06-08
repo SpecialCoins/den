@@ -10,7 +10,6 @@
 
 #include "chainparamsbase.h"
 #include "checkpoints.h"
-#include "consensus/params.h"
 #include "primitives/block.h"
 #include "protocol.h"
 #include "uint256.h"
@@ -52,7 +51,6 @@ public:
         MAX_BASE58_TYPES
     };
 
-    const Consensus::Params& GetConsensus() const { return consensus; }
     const uint256& HashGenesisBlock() const { return hashGenesisBlock; }
     const MessageStartChars& MessageStart() const { return pchMessageStart; }
     const std::vector<unsigned char>& AlertKey() const { return vAlertPubKey; }
@@ -83,6 +81,13 @@ public:
     /** returns the coinbase maturity **/
     int COINBASE_MATURITY() const { return nMaturity; }
 
+    /** returns the coinstake maturity (min depth required) **/
+    int COINSTAKE_MIN_DEPTH() const { return nStakeMinDepth; }
+    bool HasStakeMinAgeOrDepth(const int contextHeight, const uint32_t contextTime, const int utxoFromBlockHeight, const uint32_t utxoFromBlockTime) const;
+    int TimeSlotLength() const { return nTimeSlotLength; }
+    int FutureTimeDrift() const { return nFutureTimeDrift; }
+    uint32_t MaxFutureTime(uint32_t time) const { return time + FutureTimeDrift(); }
+
     /** Make miner stop after a block is found. In RPC, don't return until nGenProcLimit blocks are generated */
     bool MineBlocksOnDemand() const { return fMineBlocksOnDemand; }
     /** In the future use NetworkIDString() for RPC fields */
@@ -104,13 +109,13 @@ public:
 
     /** Height or Time Based Activations **/
     int LAST_POW_BLOCK() const { return nLastPOWBlock; }
+    bool IsStakeModifierV2(const int nHeight) const { return nHeight >= nBlockStakeModifierlV2; }
     int ColdStart() const { return nColdStart; }
 
 protected:
     CChainParams() {}
 
     uint256 hashGenesisBlock;
-    Consensus::Params consensus;
     MessageStartChars pchMessageStart;
     //! Raw pub key bytes for the broadcast alert signing key.
     std::vector<unsigned char> vAlertPubKey;
@@ -122,6 +127,9 @@ protected:
     int nToCheckBlockUpgradeMajority;
     int nLastPOWBlock;
     int nMaturity;
+    int nStakeMinDepth;
+    int nFutureTimeDrift;
+    int nTimeSlotLength;
 
     int nMinerThreads;
     std::vector<CDNSSeedData> vSeeds;
@@ -140,7 +148,9 @@ protected:
     bool fHeadersFirstSyncingActive;
     int nPoolMaxTransactions;
     std::string strSporkPubKey;
+    int nBlockEnforceNewMessageSignatures;
     int nColdStart;
+    int nBlockStakeModifierlV2;
     CAmount nMinColdStakingAmount;
 
 };

@@ -103,7 +103,6 @@ BITCOIN_CORE_H = \
   consensus/merkle.h \
   consensus/validation.h \
   consensus/tx_verify.h \
-  consensus/params.h \
   primitives/block.h \
   primitives/transaction.h \
   core_io.h \
@@ -117,7 +116,6 @@ BITCOIN_CORE_H = \
   init.h \
   invalid.h \
   invalid_outpoints.json.h \
-  legacy/stakemodifier.h \
   kernel.h \
   swifttx.h \
   key.h \
@@ -371,7 +369,6 @@ libbitcoin_util_a_SOURCES = \
   random.cpp \
   rpc/protocol.cpp \
   support/cleanse.cpp \
-  legacy/stakemodifier.cpp \
   sync.cpp \
   uint256.cpp \
   blob_uint256.cpp \

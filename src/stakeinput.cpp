@@ -1,16 +1,17 @@
-// Copyright (c) 2020 The BCZ developers
+// Copyright (c) 2020 The BCZ Core Developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include "stakeinput.h"
-
 #include "chain.h"
 #include "main.h"
-#include "txdb.h"
+#include "stakeinput.h"
 #include "wallet/wallet.h"
+
+//Normal Stake
 
 bool CBczStake::InitFromTxIn(const CTxIn& txin)
 {
+
     // Find the previous transaction in database
     uint256 hashBlock;
     CTransaction txPrev;
@@ -40,8 +41,6 @@ bool CBczStake::SetPrevout(CTransaction txPrev, unsigned int n)
 
 bool CBczStake::GetTxFrom(CTransaction& tx) const
 {
-    if (txFrom.IsNull())
-        return false;
     tx = txFrom;
     return true;
 }
@@ -94,7 +93,6 @@ bool CBczStake::CreateTxOuts(CWallet* pwallet, std::vector<CTxOut>& vout, CAmoun
         // keep the same script
         scriptPubKey = scriptPubKeyKernel;
     }
-
     vout.emplace_back(CTxOut(0, scriptPubKey));
 
     // Calculate if we need to split the output
@@ -112,6 +110,22 @@ bool CBczStake::CreateTxOuts(CWallet* pwallet, std::vector<CTxOut>& vout, CAmoun
         }
     }
 
+    return true;
+}
+
+
+bool CBczStake::GetModifier(uint64_t& nStakeModifier)
+{
+    if (this->nStakeModifier == 0) {
+        // look for the modifier
+        GetIndexFrom();
+        if (!pindexFrom)
+            return error("%s: failed to get index from", __func__);
+        // TODO: This method must be removed from here in the short terms.. it's a call to an static method in kernel.cpp when this class method is only called from kernel.cpp, no comments..
+        if (!GetKernelStakeModifier(pindexFrom->GetBlockHash(), this->nStakeModifier, this->nStakeModifierHeight, this->nStakeModifierTime, false))
+            return false;
+    }
+    nStakeModifier = this->nStakeModifier;
     return true;
 }
 
@@ -147,7 +161,6 @@ CBlockIndex* CBczStake::GetIndexFrom()
 // Verify stake contextual checks
 bool CBczStake::ContextCheck(int nHeight, uint32_t nTime)
 {
-    const Consensus::Params& consensus = Params().GetConsensus();
     // Get Stake input block time/height
     CBlockIndex* pindexFrom = GetIndexFrom();
     if (!pindexFrom)
@@ -156,10 +169,9 @@ bool CBczStake::ContextCheck(int nHeight, uint32_t nTime)
     const uint32_t nTimeBlockFrom = pindexFrom->nTime;
 
     // Check that the stake has the required depth/age
-    if (!consensus.HasStakeMinAgeOrDepth(nHeight, nTime, nHeightBlockFrom, nTimeBlockFrom))
+    if (!Params().HasStakeMinAgeOrDepth(nHeight, nTime, nHeightBlockFrom, nTimeBlockFrom))
         return error("%s : min age violation - height=%d - time=%d, nHeightBlockFrom=%d, nTimeBlockFrom=%d",
                          __func__, nHeight, nTime, nHeightBlockFrom, nTimeBlockFrom);
     // All good
     return true;
 }
-
