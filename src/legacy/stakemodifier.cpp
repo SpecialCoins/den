@@ -15,6 +15,14 @@
 static const unsigned int MODIFIER_INTERVAL = 150;
 static const int MODIFIER_INTERVAL_RATIO = 3;
 
+// Get selection interval section (in seconds)
+static int64_t GetStakeModifierSelectionIntervalSection(int nSection)
+{
+    assert(nSection >= 0 && nSection < 64);
+    int64_t a = MODIFIER_INTERVAL * 63 / (63 + ((63 - nSection) * (MODIFIER_INTERVAL_RATIO - 1)));
+    return a;
+}
+
 // Get stake modifier selection interval (in seconds)
 static int64_t GetStakeModifierSelectionInterval()
 {
