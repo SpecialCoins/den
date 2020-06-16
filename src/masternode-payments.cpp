@@ -6,13 +6,14 @@
 #include "masternode-payments.h"
 #include "addrman.h"
 #include "chainparams.h"
+#include "fs.h"
 #include "masternode-sync.h"
 #include "masternodeman.h"
 #include "spork.h"
 #include "sync.h"
 #include "util.h"
 #include "utilmoneystr.h"
-#include <boost/filesystem.hpp>
+
 
 /** Object for who's going to get paid on which blocks */
 CMasternodePayments masternodePayments;
@@ -44,7 +45,7 @@ bool CMasternodePaymentDB::Write(const CMasternodePayments& objToSave)
     ssObj << hash;
 
     // open output file, and associate with CAutoFile
-    FILE* file = fopen(pathDB.string().c_str(), "wb");
+    FILE* file = fsbridge::fopen(pathDB, "wb");
     CAutoFile fileout(file, SER_DISK, CLIENT_VERSION);
     if (fileout.IsNull())
         return error("%s : Failed to open file %s", __func__, pathDB.string());
@@ -66,7 +67,7 @@ CMasternodePaymentDB::ReadResult CMasternodePaymentDB::Read(CMasternodePayments&
 {
     int64_t nStart = GetTimeMillis();
     // open input file, and associate with CAutoFile
-    FILE* file = fopen(pathDB.string().c_str(), "rb");
+    FILE* file = fsbridge::fopen(pathDB, "rb");
     CAutoFile filein(file, SER_DISK, CLIENT_VERSION);
     if (filein.IsNull()) {
         error("%s : Failed to open file %s", __func__, pathDB.string());
@@ -74,7 +75,7 @@ CMasternodePaymentDB::ReadResult CMasternodePaymentDB::Read(CMasternodePayments&
     }
 
     // use file size to size memory buffer
-    int fileSize = boost::filesystem::file_size(pathDB);
+    int fileSize = fs::file_size(pathDB);
     int dataSize = fileSize - sizeof(uint256);
     // Don't try to resize to a negative number if file is small
     if (dataSize < 0)
@@ -155,7 +156,7 @@ uint256 CMasternodePaymentWinner::GetHash() const
 
 std::string CMasternodePaymentWinner::GetStrMessage() const
 {
-    return vinMasternode.prevout.ToStringShort() + std::to_string(nBlockHeight) + payee.ToString();
+    return vinMasternode.prevout.ToStringShort() + std::to_string(nBlockHeight) + HexStr(payee);
 }
 
 bool CMasternodePaymentWinner::IsValid(CNode* pnode, std::string& strError)
@@ -243,7 +244,7 @@ bool IsBlockValueValid(const CBlock& block, CAmount nExpectedValue, CAmount nMin
     }
 
     if (nMinted > nExpectedValue) {
-        return false;
+    return false;
     }
 
     return true;
@@ -341,7 +342,7 @@ void CMasternodePayments::FillBlockPayee(CMutableTransaction& txNew, int64_t nFe
 int CMasternodePayments::GetMinMasternodePaymentsProto()
 {
     int minProtocol = (sporkManager.IsSporkActive(SPORK_29_NODE_V_NEW2)) ? PROTOCOL_VERSION : MIN_PEER_PROTO_VERSION;
-    return minProtocol;
+        return minProtocol;
 }
 
 void CMasternodePayments::ProcessMessageMasternodePayments(CNode* pfrom, std::string& strCommand, CDataStream& vRecv)
