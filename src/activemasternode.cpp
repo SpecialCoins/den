@@ -4,14 +4,15 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "activemasternode.h"
+
 #include "addrman.h"
 #include "masternode-sync.h"
 #include "masternode.h"
 #include "masternodeconfig.h"
 #include "masternodeman.h"
 #include "messagesigner.h"
+#include "netbase.h"
 #include "protocol.h"
-#include "spork.h"
 
 //
 // Bootup the Masternode, look for a 5000 BCZ input and register on the network
@@ -66,16 +67,19 @@ void CActiveMasternode::ManageStatus()
                 return;
             }
         } else {
-            service = CService(strMasterNodeAddr);
+            int nPort;
+            std::string strHost;
+            SplitHostPort(strMasterNodeAddr, nPort, strHost);
+            service = LookupNumeric(strHost.c_str(), nPort);
         }
 
         // The service needs the correct default port to work properly
-        if(!CMasternodeBroadcast::CheckDefaultPort(strMasterNodeAddr, errorMessage, "CActiveMasternode::ManageStatus()"))
+        if (!CMasternodeBroadcast::CheckDefaultPort(service, errorMessage, "CActiveMasternode::ManageStatus()"))
             return;
 
         LogPrintf("CActiveMasternode::ManageStatus() - Checking inbound connection to '%s'\n", service.ToString());
 
-         CNode* pnode = ConnectNode(CAddress(service, NODE_NETWORK), NULL, true);
+        CNode* pnode = ConnectNode(CAddress(service, NODE_NETWORK), NULL, true);
         if (!pnode) {
             notCapableReason = "Could not connect to " + service.ToString();
             LogPrintf("CActiveMasternode::ManageStatus() - not capable: %s\n", notCapableReason);
@@ -193,8 +197,8 @@ bool CActiveMasternode::SendMasternodePing(std::string& errorMessage)
         if (mnodeman.mapSeenMasternodeBroadcast.count(hash)) mnodeman.mapSeenMasternodeBroadcast[hash].lastPing = mnp;
 
         mnp.Relay();
-
         return true;
+
     } else {
         // Seems like we are trying to send a ping while the Masternode is not registered in the network
         errorMessage = "Masternode List doesn't include our Masternode, shutting down Masternode pinging service! " + vin.ToString();
@@ -231,15 +235,16 @@ bool CActiveMasternode::CreateBroadcast(std::string strService, std::string strK
         return false;
     }
 
-    CService service = CService(strService);
+    int nPort;
+    std::string strHost;
+    SplitHostPort(strService, nPort, strHost);
+    CService _service(LookupNumeric(strHost.c_str(), nPort));
 
     // The service needs the correct default port to work properly
-    if(!CMasternodeBroadcast::CheckDefaultPort(strService, errorMessage, "CActiveMasternode::CreateBroadcast()"))
+    if (!CMasternodeBroadcast::CheckDefaultPort(_service, errorMessage, "CActiveMasternode::CreateBroadcast()"))
         return false;
 
-    addrman.Add(CAddress(service, NODE_NETWORK), CNetAddr("127.0.0.1"), 2 * 60 * 60);
-
-    return CreateBroadcast(vin, CService(strService), keyCollateralAddress, pubKeyCollateralAddress, keyMasternode, pubKeyMasternode, errorMessage, mnb);
+    return CreateBroadcast(vin, _service, keyCollateralAddress, pubKeyCollateralAddress, keyMasternode, pubKeyMasternode, errorMessage, mnb);
 }
 
 bool CActiveMasternode::CreateBroadcast(CTxIn vin, CService service, CKey keyCollateralAddress, CPubKey pubKeyCollateralAddress, CKey keyMasternode, CPubKey pubKeyMasternode, std::string& errorMessage, CMasternodeBroadcast &mnb)
