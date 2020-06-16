@@ -110,6 +110,7 @@ BITCOIN_CORE_H = \
   pairresult.h \
   addressbook.h \
   wallet/db.h \
+  fs.h \
   hash.h \
   httprpc.h \
   httpserver.h \
@@ -135,9 +136,11 @@ BITCOIN_CORE_H = \
   messagesigner.h \
   miner.h \
   mruset.h \
-  netbase.h \
   net.h \
+  netaddress.h \
+  netbase.h \
   noui.h \
+  policy/fees.h \
   pow.h \
   prevector.h \
   protocol.h \
@@ -214,6 +217,7 @@ libbitcoin_server_a_SOURCES = \
   miner.cpp \
   net.cpp \
   noui.cpp \
+  policy/fees.cpp \
   pow.cpp \
   rest.cpp \
   rpc/blockchain.cpp \
@@ -339,7 +343,7 @@ libbitcoin_common_a_SOURCES = \
   invalid.cpp \
   key.cpp \
   keystore.cpp \
-  netbase.cpp \
+  netaddress.cpp \
   protocol.cpp \
   pubkey.cpp \
   scheduler.cpp \
@@ -365,6 +369,7 @@ libbitcoin_util_a_SOURCES = \
   compat/glibc_sanity.cpp \
   compat/glibcxx_sanity.cpp \
   compat/strnlen.cpp \
+  fs.cpp \
   logging.cpp \
   random.cpp \
   rpc/protocol.cpp \
