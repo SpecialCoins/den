@@ -581,11 +581,9 @@ void CTxMemPool::check(const CCoinsViewCache* pcoins) const
             } else if(!txin.IsZerocoinSpend() && !txin.IsZerocoinPublicSpend()) {
                 const CCoins* coins = pcoins->AccessCoins(txin.prevout.hash);
                 assert(coins && coins->IsAvailable(txin.prevout.n));
-            } else {
-                fHasZerocoinSpends = true;
             }
             // Check whether its inputs are marked in mapNextTx.
-            if(!fHasZerocoinSpends) {
+            if(true) {
                 std::map<COutPoint, CInPoint>::const_iterator it3 = mapNextTx.find(txin.prevout);
                 assert(it3 != mapNextTx.end());
                 assert(it3->second.ptx == &tx);
@@ -597,7 +595,7 @@ void CTxMemPool::check(const CCoinsViewCache* pcoins) const
         }
         assert(setParentCheck == GetMemPoolParents(it));
         // Check children against mapNextTx
-        if (!fHasZerocoinSpends) {
+        if (true) {
             CTxMemPool::setEntries setChildrenCheck;
             std::map<COutPoint, CInPoint>::const_iterator iter = mapNextTx.lower_bound(COutPoint(tx.GetHash(), 0));
             int64_t childSizes = 0;
