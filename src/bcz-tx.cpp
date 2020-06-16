@@ -45,7 +45,7 @@ static bool AppInitRawTx(int argc, char* argv[])
 
     if (argc < 2 || mapArgs.count("-?") || mapArgs.count("-help")) {
         // First part of help message is specific to this utility
-        std::string strUsage = _("BCZ core bcz-tx utility version") + " " + FormatFullVersion() + "\n\n" +
+        std::string strUsage = _("BCZ Core bcz-tx utility version") + " " + FormatFullVersion() + "\n\n" +
                                _("Usage:") + "\n" +
                                "  bcz-tx [options] <hex-tx> [commands]  " + _("Update hex-encoded bcz transaction") + "\n" +
                                "  bcz-tx [options] -create [commands]   " + _("Create hex-encoded bcz transaction") + "\n" +
@@ -223,7 +223,6 @@ static void MutateTxAddOutAddr(CMutableTransaction& tx, const std::string& strIn
     CTxDestination destination = DecodeDestination(strAddr);
     if (!IsValidDestination(destination)) {
         throw std::runtime_error("invalid TX output address");
-
     }
     CScript scriptPubKey = GetScriptForDestination(destination);
 
@@ -388,8 +387,8 @@ static void MutateTxSign(CMutableTransaction& tx, const std::string& flagStr)
                 CCoinsModifier coins = view.ModifyCoins(txid);
                 if (coins->IsAvailable(nOut) && coins->vout[nOut].scriptPubKey != scriptPubKey) {
                     std::string err("Previous output scriptPubKey mismatch:\n");
-                    err = err + coins->vout[nOut].scriptPubKey.ToString() + "\nvs:\n" +
-                          scriptPubKey.ToString();
+                    err = err + ScriptToAsmStr(coins->vout[nOut].scriptPubKey) + "\nvs:\n"+
+                        ScriptToAsmStr(scriptPubKey);
                     throw std::runtime_error(err);
                 }
                 if ((unsigned int)nOut >= coins->vout.size())
