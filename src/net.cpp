@@ -2414,7 +2414,7 @@ bool validateMasternodeIP(const std::string& addrStr)
     CNetAddr resolved;
     if (LookupHost(addrStr.c_str(), resolved, false)) {
         return ((IsReachable(resolved) && resolved.IsRoutable()) ||
-                (Params().IsRegTestNet() && resolved.IsValid()));
+                (Params().NetworkID() == CBaseChainParams::REGTEST && resolved.IsValid()));
     }
     return false;
 }
