@@ -12,14 +12,12 @@
 #include "init.h"
 #include "key_io.h"
 #include "net.h"
-#include "netbase.h"
 #include "rpc/server.h"
 #include "timedata.h"
 #include "util.h"
 #include "utilmoneystr.h"
 #include "wallet.h"
 #include "walletdb.h"
-
 #include <stdint.h>
 
 #include "spork.h"
@@ -929,7 +927,7 @@ UniValue delegatestake(const UniValue& params, bool fHelp)
             "4. \"fExternalOwner\"      (boolean, optional, default = false) use the provided 'owneraddress' anyway, even if not present in this wallet.\n"
             "                               WARNING: The owner of the keys to 'owneraddress' will be the only one allowed to spend these coins.\n"
             "5. \"fUseDelegated\"       (boolean, optional, default = false) include already delegated inputs if needed."
-            "6. \"fForceNotEnabled\"    (boolean, optional, default = false) force the creation even if SPORK 17 is disabled (for tests)."
+            "6. \"fForceNotEnabled\"    (boolean, optional, default = false) force the creation even if SPORK 26 is disabled (for tests)."
 
             "\nResult:\n"
             "{\n"
@@ -994,7 +992,7 @@ UniValue rawdelegatestake(const UniValue& params, bool fHelp)
             "  ],\n"
             "  \"vout\" : [              (array of json objects)\n"
             "     {\n"
-            "       \"value\" : x.xxx,            (numeric) The value in btc\n"
+            "       \"value\" : x.xxx,            (numeric) The value in bcz\n"
             "       \"n\" : n,                    (numeric) index\n"
             "       \"scriptPubKey\" : {          (json object)\n"
             "         \"asm\" : \"asm\",          (string) the asm\n"
@@ -3077,7 +3075,8 @@ UniValue setstakesplitthreshold(const UniValue& params, bool fHelp)
 
             "\nArguments:\n"
             "1. value                   (numeric, required) Threshold value (in BCZ).\n"
-            "                                               Set to 0 to disable stake-splitting\n"
+            "                                     Set to 0 to disable stake-splitting\n"
+            "                                     If > 0, it must be >= " + FormatMoney(CWallet::minStakeSplitThreshold) + "\n"
 
             "\nResult:\n"
             "{\n"
@@ -3088,9 +3087,12 @@ UniValue setstakesplitthreshold(const UniValue& params, bool fHelp)
             "\nExamples:\n" +
             HelpExampleCli("setstakesplitthreshold", "500.12") + HelpExampleRpc("setstakesplitthreshold", "500.12"));
 
-    EnsureWalletIsUnlocked();
-
     CAmount nStakeSplitThreshold = AmountFromValue(params[0]);
+    if (nStakeSplitThreshold > 0 && nStakeSplitThreshold < CWallet::minStakeSplitThreshold)
+        throw JSONRPCError(RPC_INVALID_PARAMETER, strprintf(_("The threshold value cannot be less than %s"),
+                FormatMoney(CWallet::minStakeSplitThreshold)));
+
+    EnsureWalletIsUnlocked();
 
     CWalletDB walletdb(pwalletMain->strWalletFile);
     LOCK(pwalletMain->cs_wallet);
