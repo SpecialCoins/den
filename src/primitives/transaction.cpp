@@ -54,7 +54,7 @@ std::string CTxIn::ToString() const
     if (prevout.IsNull())
         str += strprintf(", coinbase %s", HexStr(scriptSig));
     else
-        str += strprintf(", scriptSig=%s", scriptSig.ToString().substr(0,24));
+        str += strprintf(", scriptSig=%s", HexStr(scriptSig).substr(0, 24));
     if (nSequence != std::numeric_limits<unsigned int>::max())
         str += strprintf(", nSequence=%u", nSequence);
     str += ")";
@@ -92,7 +92,7 @@ bool CTxOut::GetKeyIDFromUTXO(CKeyID& keyIDRet) const
 
 std::string CTxOut::ToString() const
 {
-    return strprintf("CTxOut(nValue=%d.%08d, scriptPubKey=%s)", nValue / COIN, nValue % COIN, scriptPubKey.ToString().substr(0,30));
+    return strprintf("CTxOut(nValue=%d.%08d, scriptPubKey=%s)", nValue / COIN, nValue % COIN, HexStr(scriptPubKey).substr(0,30));
 }
 
 CMutableTransaction::CMutableTransaction() : nVersion(CTransaction::CURRENT_VERSION), nLockTime(0) {}
@@ -123,7 +123,12 @@ void CTransaction::UpdateHash() const
     *const_cast<uint256*>(&hash) = SerializeHash(*this);
 }
 
-CTransaction::CTransaction() : hash(), nVersion(CTransaction::CURRENT_VERSION), vin(), vout(), nLockTime(0) { }
+size_t CTransaction::DynamicMemoryUsage() const
+{
+    return memusage::RecursiveDynamicUsage(vin) + memusage::RecursiveDynamicUsage(vout);
+}
+
+CTransaction::CTransaction() : nVersion(CTransaction::CURRENT_VERSION), vin(), vout(), nLockTime(0) { }
 
 CTransaction::CTransaction(const CMutableTransaction &tx) : nVersion(tx.nVersion), vin(tx.vin), vout(tx.vout), nLockTime(tx.nLockTime) {
     UpdateHash();
