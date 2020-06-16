@@ -62,6 +62,8 @@ static const CAmount nHighTransactionMaxFeeWarning = 100 * nHighTransactionFeeWa
 static const unsigned int MAX_FREE_TRANSACTION_CREATE_SIZE = 1000;
 //! -custombackupthreshold default
 static const int DEFAULT_CUSTOMBACKUPTHRESHOLD = 1;
+//! -minstakesplit default
+static const CAmount DEFAULT_MIN_STAKE_SPLIT_THRESHOLD = 110 * COIN;
 
 class CAccountingEntry;
 class CCoinControl;
@@ -128,9 +130,10 @@ public:
     ADD_SERIALIZE_METHODS;
 
     template <typename Stream, typename Operation>
-    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion)
+    inline void SerializationOp(Stream& s, Operation ser_action)
     {
-        if (!(nType & SER_GETHASH))
+        int nVersion = s.GetVersion();
+        if (!(s.GetType() & SER_GETHASH))
             READWRITE(nVersion);
         READWRITE(nTime);
         READWRITE(vchPubKey);
@@ -189,8 +192,6 @@ public:
     bool IsActive() const { return (nTime + 150) >= GetTime(); }
 };
 
-
-
 /**
  * A CWallet is an extension of a keystore, which also maintains a set of transactions and balances,
  * and provides the ability to create new transactions.
@@ -198,7 +199,6 @@ public:
 class CWallet : public CCryptoKeyStore, public CValidationInterface
 {
 private:
-
     CWalletDB* pwalletdbEncryption;
     //! keeps track of whether Unlock has run a thorough check before
     bool fDecryptionThoroughlyChecked{false};
@@ -246,6 +246,13 @@ public:
     //! Get spkm
     ScriptPubKeyMan* GetScriptPubKeyMan() const;
 
+    /*
+     * Main wallet lock.
+     * This lock protects all the fields added by CWallet
+     *   except for:
+     *      fFileBacked (immutable after instantiation)
+     *      strWalletFile (immutable after instantiation)
+     */
     mutable RecursiveMutex cs_wallet;
 
     bool fFileBacked;
@@ -258,9 +265,10 @@ public:
     MasterKeyMap mapMasterKeys;
     unsigned int nMasterKeyMaxID;
 
-    // Stake Settings
-    unsigned int nHashInterval;
+    // Stake split threshold
     CAmount nStakeSplitThreshold;
+    // minimum value allowed for nStakeSplitThreshold (customizable with -minstakesplit flag)
+    static CAmount minStakeSplitThreshold;
     // Staker status (last hashed block and time)
     CStakerStatus* pStakerStatus = nullptr;
 
@@ -382,12 +390,6 @@ public:
     //! Adds a watch-only address to the store, without saving it to disk (used by LoadWallet)
     bool LoadWatchOnly(const CScript& dest);
 
-    //! Adds a MultiSig address to the store, and saves it to disk.
-    bool AddMultiSig(const CScript& dest);
-    bool RemoveMultiSig(const CScript& dest);
-    //! Adds a MultiSig address to the store, without saving it to disk (used by LoadWallet)
-    bool LoadMultiSig(const CScript& dest);
-
     //! Lock Wallet
     bool Lock();
     bool Unlock(const SecureString& strWalletPassphrase, bool anonimizeOnly = false);
@@ -453,7 +455,16 @@ public:
     void AutoCombineDust();
 
     static CFeeRate minTxFee;
+    /**
+     * Estimate the minimum fee considering user set parameters
+     * and the required fee
+     */
     static CAmount GetMinimumFee(unsigned int nTxBytes, unsigned int nConfirmTarget, const CTxMemPool& pool);
+    /**
+     * Return the minimum required fee taking into account the
+     * floating relay fee and user set minimum transaction fee
+     */
+    static CAmount GetRequiredFee(unsigned int nTxBytes);
 
     size_t KeypoolCountExternalKeys();
     bool TopUpKeyPool(unsigned int kpSize = 0);
@@ -535,9 +546,6 @@ public:
     /** Watch-only address added */
     boost::signals2::signal<void(bool fHaveWatchOnly)> NotifyWatchonlyChanged;
 
-    /** MultiSig address added */
-    boost::signals2::signal<void(bool fHaveMultiSig)> NotifyMultiSigChanged;
-
     /** notify wallet file backed up */
     boost::signals2::signal<void (const bool& fSuccess, const std::string& filename)> NotifyWalletBacked;
 
@@ -576,7 +584,7 @@ public:
 typedef std::map<std::string, std::string> mapValue_t;
 
 
-static void ReadOrderPos(int64_t& nOrderPos, mapValue_t& mapValue)
+static inline void ReadOrderPos(int64_t& nOrderPos, mapValue_t& mapValue)
 {
     if (!mapValue.count("n")) {
         nOrderPos = -1; // TODO: calculate elsewhere
@@ -586,7 +594,7 @@ static void ReadOrderPos(int64_t& nOrderPos, mapValue_t& mapValue)
 }
 
 
-static void WriteOrderPos(const int64_t& nOrderPos, mapValue_t& mapValue)
+static inline void WriteOrderPos(const int64_t& nOrderPos, mapValue_t& mapValue)
 {
     if (nOrderPos == -1)
         return;
@@ -634,11 +642,10 @@ public:
     ADD_SERIALIZE_METHODS;
 
     template <typename Stream, typename Operation>
-    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion)
+    inline void SerializationOp(Stream& s, Operation ser_action)
     {
         std::vector<uint256> vMerkleBranch; // For compatibility with older versions.
         READWRITE(*(CTransaction*)this);
-        nVersion = this->nVersion;
         READWRITE(hashBlock);
         READWRITE(vMerkleBranch);
         READWRITE(nIndex);
@@ -680,6 +687,10 @@ public:
     std::vector<std::pair<std::string, std::string> > vOrderForm;
     unsigned int fTimeReceivedIsTxTime;
     unsigned int nTimeReceived; //! time received by this node
+    /**
+     * Stable timestamp representing the block time, for a transaction included in a block,
+     * or else the time when the transaction was received if it isn't yet part of a block.
+     */
     unsigned int nTimeSmart;
     char fFromMe;
     std::string strFromAccount;
@@ -723,7 +734,7 @@ public:
     ADD_SERIALIZE_METHODS;
 
     template <typename Stream, typename Operation>
-    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion)
+    inline void SerializationOp(Stream& s, Operation ser_action)
     {
         if (ser_action.ForRead())
             Init(NULL);
@@ -819,7 +830,7 @@ public:
     int64_t GetTxTime() const;
     void UpdateTimeSmart();
     int GetRequestCount() const;
-    bool RelayWalletTransaction(std::string strCommand = "tx");
+    void RelayWalletTransaction(std::string strCommand = NetMsgType::TX);
     std::set<uint256> GetConflicts() const;
 };
 
@@ -865,9 +876,10 @@ public:
     ADD_SERIALIZE_METHODS;
 
     template <typename Stream, typename Operation>
-    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion)
+    inline void SerializationOp(Stream& s, Operation ser_action)
     {
-        if (!(nType & SER_GETHASH))
+        int nVersion = s.GetVersion();
+        if (!(s.GetType() & SER_GETHASH))
             READWRITE(nVersion);
         READWRITE(vchPrivKey);
         READWRITE(nTimeCreated);
@@ -899,9 +911,10 @@ public:
     ADD_SERIALIZE_METHODS;
 
     template <typename Stream, typename Operation>
-    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion)
+    inline void SerializationOp(Stream& s, Operation ser_action)
     {
-        if (!(nType & SER_GETHASH))
+        int nVersion = s.GetVersion();
+        if (!(s.GetType() & SER_GETHASH))
             READWRITE(nVersion);
         READWRITE(vchPubKey);
     }
@@ -943,9 +956,10 @@ public:
     ADD_SERIALIZE_METHODS;
 
     template <typename Stream, typename Operation>
-    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion)
+    inline void SerializationOp(Stream& s, Operation ser_action)
     {
-        if (!(nType & SER_GETHASH))
+        int nVersion = s.GetVersion();
+        if (!(s.GetType() & SER_GETHASH))
             READWRITE(nVersion);
         //! Note: strAccount is serialized as part of the key, not here.
         READWRITE(nCreditDebit);
@@ -956,7 +970,7 @@ public:
             WriteOrderPos(nOrderPos, mapValue);
 
             if (!(mapValue.empty() && _ssExtra.empty())) {
-                CDataStream ss(nType, nVersion);
+                CDataStream ss(s.GetType(), s.GetVersion());
                 ss.insert(ss.begin(), '\0');
                 ss << mapValue;
                 ss.insert(ss.end(), _ssExtra.begin(), _ssExtra.end());
@@ -970,7 +984,7 @@ public:
         if (ser_action.ForRead()) {
             mapValue.clear();
             if (std::string::npos != nSepPos) {
-                CDataStream ss(std::vector<char>(strComment.begin() + nSepPos + 1, strComment.end()), nType, nVersion);
+                CDataStream ss(std::vector<char>(strComment.begin() + nSepPos + 1, strComment.end()), s.GetType(), s.GetVersion());
                 ss >> mapValue;
                 _ssExtra = std::vector<char>(ss.begin(), ss.end());
             }
