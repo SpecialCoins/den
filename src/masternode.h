@@ -49,7 +49,7 @@ public:
     ADD_SERIALIZE_METHODS;
 
     template <typename Stream, typename Operation>
-    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion)
+    inline void SerializationOp(Stream& s, Operation ser_action)
     {
         READWRITE(vin);
         READWRITE(blockHash);
@@ -137,9 +137,9 @@ public:
     int64_t sigTime; //mnb message time
     int cacheInputAge;
     int cacheInputAgeBlock;
+    int nActiveState;
     bool allowFreeTx;
     int protocolVersion;
-    int nActiveState;
     int64_t nLastDsq; //the dsq count from the last dsq broadcast of this node
     int nScanningErrorCount;
     int nLastScanningErrorBlockHeight;
@@ -198,7 +198,7 @@ public:
     ADD_SERIALIZE_METHODS;
 
     template <typename Stream, typename Operation>
-    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion)
+    inline void SerializationOp(Stream& s, Operation ser_action)
     {
         LOCK(cs);
 
@@ -260,8 +260,6 @@ public:
         return cacheInputAge + (chainActive.Tip()->nHeight - cacheInputAgeBlock);
     }
 
-    std::string GetStatus();
-
     std::string Status()
     {
         std::string strStatus = "ACTIVE";
@@ -310,7 +308,7 @@ public:
     ADD_SERIALIZE_METHODS;
 
     template <typename Stream, typename Operation>
-    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion)
+    inline void SerializationOp(Stream& s, Operation ser_action)
     {
         READWRITE(vin);
         READWRITE(addr);
@@ -328,7 +326,7 @@ public:
     /// Create Masternode broadcast, needs to be relayed manually after that
     static bool Create(CTxIn vin, CService service, CKey keyCollateralAddressNew, CPubKey pubKeyCollateralAddressNew, CKey keyMasternodeNew, CPubKey pubKeyMasternodeNew, std::string& strErrorRet, CMasternodeBroadcast& mnbRet);
     static bool Create(std::string strService, std::string strKey, std::string strTxHash, std::string strOutputIndex, std::string& strErrorRet, CMasternodeBroadcast& mnbRet, bool fOffline = false);
-    static bool CheckDefaultPort(std::string strService, std::string& strErrorRet, std::string strContext);
+    static bool CheckDefaultPort(CService service, std::string& strErrorRet, const std::string& strContext);
 };
 
 #endif
