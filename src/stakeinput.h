@@ -1,4 +1,4 @@
-// Copyright (c) 2020 The BCZ Core Developers
+// Copyright (c) 2020 The BCZ developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 

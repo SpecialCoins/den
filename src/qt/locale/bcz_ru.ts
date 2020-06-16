@@ -4608,7 +4608,7 @@ Are you sure?
         <translation>Разработчики Dash Core</translation>
     </message>
     <message>
-        <source>The BCZ Core developers</source>
+        <source>The BCZ developers</source>
         <translation>Разработчики BCZ Core</translation>
     </message>
     <message>
@@ -5727,7 +5727,7 @@ BCZ Core Wallet</source>
         <translation>Copyright (C) 2014-%i Разработчики Dash Core</translation>
     </message>
     <message>
-        <source>Copyright (C) 2015-%i The BCZ Core Developers</source>
+        <source>Copyright (C) 2015-%i The BCZ developers</source>
         <translation>Copyright (C) 2015-%i Разработчики BCZ Core</translation>
     </message>
     <message>

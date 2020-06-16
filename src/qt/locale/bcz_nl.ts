@@ -4608,7 +4608,7 @@ Weet je zeker dat?
         <translation>De Dash Kernontwikkelaars</translation>
     </message>
     <message>
-        <source>The BCZ Core developers</source>
+        <source>The BCZ developers</source>
         <translation>De BCZ Kernontwikkelaars</translation>
     </message>
     <message>
@@ -5759,7 +5759,7 @@ BCZ Core Portemonnee</translation>
         <translation>Copyright (C) 2014-%i The Dash Kernontwikkelaars</translation>
     </message>
     <message>
-        <source>Copyright (C) 2015-%i The BCZ Core Developers</source>
+        <source>Copyright (C) 2015-%i The BCZ developers</source>
         <translation>Copyright (C) 2015-%i The BCZ Kernontwikkelaars</translation>
     </message>
     <message>

@@ -287,7 +287,7 @@ QT_TRANSLATE_NOOP("bcz-core", "Connect to a node to retrieve peer addresses, and
 QT_TRANSLATE_NOOP("bcz-core", "Connection options:"),
 QT_TRANSLATE_NOOP("bcz-core", "Copyright (C) 2009-%i The Bitcoin Core Developers"),
 QT_TRANSLATE_NOOP("bcz-core", "Copyright (C) 2014-%i The Dash Core Developers"),
-QT_TRANSLATE_NOOP("bcz-core", "Copyright (C) 2015-%i The BCZ Core Developers"),
+QT_TRANSLATE_NOOP("bcz-core", "Copyright (C) 2015-%i The BCZ developers"),
 QT_TRANSLATE_NOOP("bcz-core", "Corrupted block database detected"),
 QT_TRANSLATE_NOOP("bcz-core", "Could not parse masternode.conf"),
 QT_TRANSLATE_NOOP("bcz-core", "Couldn't generate the accumulator witness"),

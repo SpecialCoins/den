@@ -4610,7 +4610,7 @@ Sei sicuro?
         <translation>Gli sviluppatori di Dash Core</translation>
     </message>
     <message>
-        <source>The BCZ Core developers</source>
+        <source>The BCZ developers</source>
         <translation>Gli sviluppatori di BCZ Core</translation>
     </message>
     <message>
@@ -5761,7 +5761,7 @@ Portafoglio BCZ Core.</translation>
         <translation>Copyright (C) 2014-%i Gli sviluppatori di Dash Core</translation>
     </message>
     <message>
-        <source>Copyright (C) 2015-%i The BCZ Core Developers</source>
+        <source>Copyright (C) 2015-%i The BCZ developers</source>
         <translation>Copyright (C) 2015-%i Gli sviluppatori di BCZ Core</translation>
     </message>
     <message>

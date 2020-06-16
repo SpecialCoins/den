@@ -3292,8 +3292,8 @@ https://www.transifex.com/bcz-project/bcz-project-translations</translation>
         <translation>The Dash Core developers</translation>
     </message>
     <message>
-        <source>The BCZ Core developers</source>
-        <translation>The BCZ Core developers</translation>
+        <source>The BCZ developers</source>
+        <translation>The BCZ developers</translation>
     </message>
     <message>
         <source>[testnet]</source>
@@ -4282,8 +4282,8 @@ for example: alertnotify=echo %%s | mail -s "BCZ Alert" admin@foo.com
         <translation>Copyright (C) 2014-%i The Dash Core Developers</translation>
     </message>
     <message>
-        <source>Copyright (C) 2015-%i The BCZ Core Developers</source>
-        <translation>Copyright (C) 2015-%i The BCZ Core Developers</translation>
+        <source>Copyright (C) 2015-%i The BCZ developers</source>
+        <translation>Copyright (C) 2015-%i The BCZ developers</translation>
     </message>
     <message>
         <source>Corrupted block database detected</source>

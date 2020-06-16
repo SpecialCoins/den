@@ -2422,7 +2422,7 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
         <translation>Dash Core programeri</translation>
     </message>
     <message>
-        <source>The BCZ Core developers</source>
+        <source>The BCZ developers</source>
         <translation>BCZ Core programeri</translation>
     </message>
     <message>
@@ -3207,8 +3207,8 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
         <translation>Autorska prava (C) 2014-%i The Dash Core Developers</translation>
     </message>
     <message>
-        <source>Copyright (C) 2015-%i The BCZ Core Developers</source>
-        <translation>Autorska prava (C) 2015-%i The BCZ Core Developers</translation>
+        <source>Copyright (C) 2015-%i The BCZ developers</source>
+        <translation>Autorska prava (C) 2015-%i The BCZ developers</translation>
     </message>
     <message>
         <source>Corrupted block database detected</source>

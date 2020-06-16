@@ -3022,7 +3022,7 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
         <translation>Dash Core 개발자</translation>
     </message>
     <message>
-        <source>The BCZ Core developers</source>
+        <source>The BCZ developers</source>
         <translation>BCZ Core 개발자</translation>
     </message>
     <message>
@@ -3832,7 +3832,7 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
         <translation>Copyright (C) 2014-%i The Dash Core 개발자들</translation>
     </message>
     <message>
-        <source>Copyright (C) 2015-%i The BCZ Core Developers</source>
+        <source>Copyright (C) 2015-%i The BCZ developers</source>
         <translation>Copyright (C) 2015-%i The BCZ Core 개발자</translation>
     </message>
     <message>

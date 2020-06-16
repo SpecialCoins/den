@@ -1595,7 +1595,7 @@
         <translation>Dash Core kehittäjät</translation>
     </message>
     <message>
-        <source>The BCZ Core developers</source>
+        <source>The BCZ developers</source>
         <translation>BCZ core kehittäjät</translation>
     </message>
     <message>

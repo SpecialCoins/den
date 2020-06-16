@@ -5024,7 +5024,7 @@ Are you sure?
         <translation>达世币核心开发者</translation>
     </message>
     <message>
-        <source>The BCZ Core developers</source>
+        <source>The BCZ developers</source>
         <translation>BCZ 核心开发者</translation>
     </message>
     <message>
@@ -6175,7 +6175,7 @@ BCZ核心钱包</translation>
         <translation>版权所有(C) 2014-%i的达世核心开发者</translation>
     </message>
     <message>
-        <source>Copyright (C) 2015-%i The BCZ Core Developers</source>
+        <source>Copyright (C) 2015-%i The BCZ developers</source>
         <translation>版权所有(C) 2015-%i BCZ核心开发者</translation>
     </message>
     <message>

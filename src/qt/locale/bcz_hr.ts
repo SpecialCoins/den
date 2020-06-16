@@ -2213,7 +2213,7 @@
         <translation>Dash Core developeri</translation>
     </message>
     <message>
-        <source>The BCZ Core developers</source>
+        <source>The BCZ developers</source>
         <translation>BCZ Core developeri</translation>
     </message>
     <message>

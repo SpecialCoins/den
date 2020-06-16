@@ -1637,7 +1637,7 @@ Adreso: %4
         <translation>La Dash kerno programistoj</translation>
     </message>
     <message>
-        <source>The BCZ Core developers</source>
+        <source>The BCZ developers</source>
         <translation>La BCZ kerno programistoj</translation>
     </message>
     </context>

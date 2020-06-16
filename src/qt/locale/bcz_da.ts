@@ -2963,7 +2963,7 @@ Enten mint højere nomineringer (så færre input er nødvendige) eller reducere
         <translation>DASH "core" udviklerne</translation>
     </message>
     <message>
-        <source>The BCZ Core developers</source>
+        <source>The BCZ developers</source>
         <translation>BCZ "core" udviklerne</translation>
     </message>
     <message>
@@ -3785,8 +3785,8 @@ Enten mint højere nomineringer (så færre input er nødvendige) eller reducere
         <translation>Copyright (C) 2014-%i The Dash Core Developers </translation>
     </message>
     <message>
-        <source>Copyright (C) 2015-%i The BCZ Core Developers</source>
-        <translation>Copyright (C) 2015-%i The BCZ Core Developers</translation>
+        <source>Copyright (C) 2015-%i The BCZ developers</source>
+        <translation>Copyright (C) 2015-%i The BCZ developers</translation>
     </message>
     <message>
         <source>Corrupted block database detected</source>

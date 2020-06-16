@@ -2425,7 +2425,7 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
         <translation>Dash Core разработчици</translation>
     </message>
     <message>
-        <source>The BCZ Core developers</source>
+        <source>The BCZ developers</source>
         <translation>BCZ Core разработчици</translation>
     </message>
     <message>
@@ -3210,7 +3210,7 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
         <translation>Всички права запазени (c) 2014-%i Dash Core разработчици</translation>
     </message>
     <message>
-        <source>Copyright (C) 2015-%i The BCZ Core Developers</source>
+        <source>Copyright (C) 2015-%i The BCZ developers</source>
         <translation>Всички права запазени (c) 2015-%i BCZ Core разработчици</translation>
     </message>
     <message>

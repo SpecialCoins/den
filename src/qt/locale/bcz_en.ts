@@ -5701,7 +5701,7 @@ Are you sure?
     </message>
     <message>
         <location line="+1"/>
-        <source>The BCZ Core developers</source>
+        <source>The BCZ developers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7179,7 +7179,7 @@ BCZ Core Wallet</source>
     </message>
     <message>
         <location line="+1"/>
-        <source>Copyright (C) 2015-%i The BCZ Core Developers</source>
+        <source>Copyright (C) 2015-%i The BCZ developers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

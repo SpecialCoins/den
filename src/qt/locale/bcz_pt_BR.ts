@@ -2926,7 +2926,7 @@ Endereço: %4
         <translation>Os desenvolvedores do Dash Core</translation>
     </message>
     <message>
-        <source>The BCZ Core developers</source>
+        <source>The BCZ developers</source>
         <translation>Os desenvolvedores do BCZ Core</translation>
     </message>
     <message>
@@ -3491,7 +3491,7 @@ Endereço: %4
         <translation>Todos os direitos reservados (C) 2014-%i aos Desenvolvedores do Dash Core</translation>
     </message>
     <message>
-        <source>Copyright (C) 2015-%i The BCZ Core Developers</source>
+        <source>Copyright (C) 2015-%i The BCZ developers</source>
         <translation>Todos os direitos reservados (C) 2015-%i aos Desenvolvedores do BCZ Core</translation>
     </message>
     <message>
