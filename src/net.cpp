@@ -1,7 +1,7 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2015 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2020 The BCZ developers
+// Copyright (c) 2020 The BCZ developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -19,6 +19,7 @@
 #include "main.h"
 #include "miner.h"
 #include "primitives/transaction.h"
+#include "netbase.h"
 #include "scheduler.h"
 
 #ifdef WIN32
@@ -34,7 +35,6 @@
 #include <miniupnpc/upnperrors.h>
 #endif
 
-#include <boost/filesystem.hpp>
 #include <boost/thread.hpp>
 
 // Dump addresses to peers.dat and banlist.dat every 15 minutes (900s)
@@ -174,7 +174,7 @@ static std::vector<CAddress> convertSeed6(const std::vector<SeedSpec6>& vSeedsIn
 // one by discovery.
 CAddress GetLocalAddress(const CNetAddr* paddrPeer)
 {
-    CAddress ret(CService("0.0.0.0", GetListenPort()), NODE_NONE);
+    CAddress ret(CService(CNetAddr(), GetListenPort()), NODE_NONE);
     CService addr;
     if (GetLocal(addr, paddrPeer)) {
         ret = CAddress(addr, nLocalServices);
@@ -394,10 +394,9 @@ CNode* FindNode(const std::string& addrName)
 CNode* FindNode(const CService& addr)
 {
     LOCK(cs_vNodes);
-    for (CNode* pnode : vNodes) {
-            if (pnode->addr == addr)
-                return (pnode);
-    }
+    for (CNode* pnode : vNodes)
+        if (pnode->addr == addr)
+            return (pnode);
     return NULL;
 }
 
@@ -489,7 +488,7 @@ void CNode::PushVersion()
 
     /// when NTP implemented, change to just nTime = GetAdjustedTime()
     int64_t nTime = (fInbound ? GetAdjustedTime() : GetTime());
-    CAddress addrYou = (addr.IsRoutable() && !IsProxy(addr) ? addr : CAddress(CService("0.0.0.0", 0), addr.nServices));
+    CAddress addrYou = (addr.IsRoutable() && !IsProxy(addr) ? addr : CAddress(CService(), addr.nServices));
     CAddress addrMe = GetLocalAddress(&addr);
     GetRandBytes((unsigned char*)&nLocalHostNonce, sizeof(nLocalHostNonce));
     if (fLogIPs)
@@ -1198,8 +1197,11 @@ void ThreadMapPort()
                 LogPrintf("UPnP: GetExternalIPAddress() returned %d\n", r);
             else {
                 if (externalIPAddress[0]) {
-                    LogPrintf("UPnP: ExternalIPAddress = %s\n", externalIPAddress);
-                    AddLocal(CNetAddr(externalIPAddress), LOCAL_UPNP);
+                    CNetAddr resolved;
+                    if (LookupHost(externalIPAddress, resolved, false)) {
+                        LogPrintf("UPnP: ExternalIPAddress = %s\n", resolved.ToString().c_str());
+                        AddLocal(resolved, LOCAL_UPNP);
+                    }
                 } else
                     LogPrintf("UPnP: GetExternalIPAddress failed.\n");
             }
@@ -1400,7 +1402,9 @@ void ThreadOpenConnections()
             static bool done = false;
             if (!done) {
                 LogPrintf("Adding fixed seed nodes as DNS doesn't seem to be available.\n");
-                addrman.Add(convertSeed6(Params().FixedSeeds()), CNetAddr("127.0.0.1"));
+                CNetAddr local;
+                LookupHost("127.0.0.1", local, false);
+                addrman.Add(convertSeed6(Params().FixedSeeds()), local);
                 done = true;
             }
         }
@@ -1494,7 +1498,7 @@ std::vector<AddedNodeInfo> GetAddedNodeInfo()
     }
 
     for (std::string& strAddNode : lAddresses) {
-        CService service(strAddNode, Params().GetDefaultPort());
+        CService service(LookupNumeric(strAddNode.c_str(), Params().GetDefaultPort()));
         if (service.IsValid()) {
             // strAddNode is an IP:port
             auto it = mapConnected.find(service);
@@ -1531,7 +1535,7 @@ void ThreadOpenAddedConnections()
                 CSemaphoreGrant grant(*semOutbound);
                 // If strAddedNode is an IP/port, decode it immediately, so
                 // OpenNetworkConnection can detect existing connections to that IP/port.
-                CService service(info.strAddedNode, Params().GetDefaultPort());
+                CService service(LookupNumeric(info.strAddedNode.c_str(), Params().GetDefaultPort()));
                 OpenNetworkConnection(CAddress(service, NODE_NONE), false, &grant, info.strAddedNode.c_str(), false);
                 MilliSleep(500);
             }
@@ -1812,8 +1816,11 @@ void StartNode(boost::thread_group& threadGroup, CScheduler& scheduler)
         semOutbound = new CSemaphore(nMaxOutbound);
     }
 
-    if (pnodeLocalHost == NULL)
-        pnodeLocalHost = new CNode(INVALID_SOCKET, CAddress(CService("127.0.0.1", 0), nLocalServices));
+    if (pnodeLocalHost == nullptr) {
+        CNetAddr local;
+        LookupHost("127.0.0.1", local, false);
+        pnodeLocalHost = new CNode(INVALID_SOCKET, CAddress(CService(local, 0), nLocalServices));
+    }
 
     Discover(threadGroup);
 
@@ -2048,8 +2055,8 @@ bool CAddrDB::Write(const CAddrMan& addr)
     ssPeers << hash;
 
     // open output file, and associate with CAutoFile
-    boost::filesystem::path pathAddr = GetDataDir() / "peers.dat";
-    FILE* file = fopen(pathAddr.string().c_str(), "wb");
+    fs::path pathAddr = GetDataDir() / "peers.dat";
+    FILE* file = fsbridge::fopen(pathAddr, "wb");
     CAutoFile fileout(file, SER_DISK, CLIENT_VERSION);
     if (fileout.IsNull())
         return error("%s : Failed to open file %s", __func__, pathAddr.string());
@@ -2069,13 +2076,13 @@ bool CAddrDB::Write(const CAddrMan& addr)
 bool CAddrDB::Read(CAddrMan& addr)
 {
     // open input file, and associate with CAutoFile
-    FILE* file = fopen(pathAddr.string().c_str(), "rb");
+    FILE* file = fsbridge::fopen(pathAddr, "rb");
     CAutoFile filein(file, SER_DISK, CLIENT_VERSION);
     if (filein.IsNull())
         return error("%s : Failed to open file %s", __func__, pathAddr.string());
 
     // use file size to size memory buffer
-    uint64_t fileSize = boost::filesystem::file_size(pathAddr);
+    uint64_t fileSize = fs::file_size(pathAddr);
     uint64_t dataSize = fileSize - sizeof(uint256);
     // Don't try to resize to a negative number if file is small
     if (fileSize >= sizeof(uint256))
@@ -2305,8 +2312,8 @@ bool CBanDB::Write(const banmap_t& banSet)
     ssBanlist << hash;
 
     // open temp output file, and associate with CAutoFile
-    boost::filesystem::path pathTmp = GetDataDir() / tmpfn;
-    FILE *file = fopen(pathTmp.string().c_str(), "wb");
+    fs::path pathTmp = GetDataDir() / tmpfn;
+    FILE *file = fsbridge::fopen(pathTmp, "wb");
     CAutoFile fileout(file, SER_DISK, CLIENT_VERSION);
     if (fileout.IsNull())
         return error("%s: Failed to open file %s", __func__, pathTmp.string());
@@ -2331,13 +2338,13 @@ bool CBanDB::Write(const banmap_t& banSet)
 bool CBanDB::Read(banmap_t& banSet)
 {
     // open input file, and associate with CAutoFile
-    FILE *file = fopen(pathBanlist.string().c_str(), "rb");
+    FILE *file = fsbridge::fopen(pathBanlist, "rb");
     CAutoFile filein(file, SER_DISK, CLIENT_VERSION);
     if (filein.IsNull())
         return error("%s: Failed to open file %s", __func__, pathBanlist.string());
 
     // use file size to size memory buffer
-    uint64_t fileSize = boost::filesystem::file_size(pathBanlist);
+    uint64_t fileSize = fs::file_size(pathBanlist);
     uint64_t dataSize = 0;
     // Don't try to resize to a negative number if file is small
     if (fileSize >= sizeof(uint256))
@@ -2404,6 +2411,10 @@ void DumpBanlist()
 // valid, reachable and routable address (except for RegTest)
 bool validateMasternodeIP(const std::string& addrStr)
 {
-    CNetAddr netAddr(addrStr.c_str());
-    return ((IsReachable(netAddr) && netAddr.IsRoutable()));
+    CNetAddr resolved;
+    if (LookupHost(addrStr.c_str(), resolved, false)) {
+        return ((IsReachable(resolved) && resolved.IsRoutable()) ||
+                (Params().IsRegTestNet() && resolved.IsValid()));
+    }
+    return false;
 }
