@@ -12,7 +12,7 @@
 #ifndef BITCOIN_PROTOCOL_H
 #define BITCOIN_PROTOCOL_H
 
-#include "netbase.h"
+#include "netaddress.h"
 #include "serialize.h"
 #include "uint256.h"
 #include "version.h"
@@ -40,7 +40,7 @@ public:
     ADD_SERIALIZE_METHODS;
 
     template <typename Stream, typename Operation>
-    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion)
+    inline void SerializationOp(Stream& s, Operation ser_action)
     {
         READWRITE(FLATDATA(pchMessageStart));
         READWRITE(FLATDATA(pchCommand));
@@ -254,6 +254,10 @@ extern const char* MNWINNER;
  */
 extern const char* GETMNWINNERS;
 /**
+* The dseg message is used to request the Masternode list or an specific entry
+*/
+extern const char* GETMNLIST;
+/**
  * The budgetproposal message is used to broadcast or relay budget proposal metadata to connected peers
  */
 extern const char* BUDGETPROPOSAL;
@@ -321,14 +325,15 @@ public:
     ADD_SERIALIZE_METHODS;
 
     template <typename Stream, typename Operation>
-    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion)
+    inline void SerializationOp(Stream& s, Operation ser_action)
     {
         if (ser_action.ForRead())
             Init();
-        if (nType & SER_DISK)
+        int nVersion = s.GetVersion();
+        if (s.GetType() & SER_DISK)
             READWRITE(nVersion);
-        if ((nType & SER_DISK) ||
-            (nVersion >= CADDR_TIME_VERSION && !(nType & SER_GETHASH)))
+        if ((s.GetType() & SER_DISK) ||
+            (nVersion >= CADDR_TIME_VERSION && !(s.GetType() & SER_GETHASH)))
             READWRITE(nTime);
         uint64_t nServicesInt = nServices;
         READWRITE(nServicesInt);
@@ -355,7 +360,7 @@ public:
     ADD_SERIALIZE_METHODS;
 
     template <typename Stream, typename Operation>
-    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion)
+    inline void SerializationOp(Stream& s, Operation ser_action)
     {
         READWRITE(type);
         READWRITE(hash);
