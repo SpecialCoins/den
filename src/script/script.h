@@ -19,6 +19,7 @@
 #include <vector>
 
 #include "crypto/common.h"
+#include "memusage.h"
 #include "prevector.h"
 
 typedef std::vector<unsigned char> valtype;
@@ -638,13 +639,14 @@ public:
         return (size() > 0 && *begin() == OP_RETURN) || (size() > MAX_SCRIPT_SIZE);
     }
 
-    std::string ToString() const;
     void clear()
     {
         // The default prevector::clear() does not release memory
         CScriptBase::clear();
         shrink_to_fit();
     }
+
+    size_t DynamicMemoryUsage() const;
 };
 
 #endif // BITCOIN_SCRIPT_SCRIPT_H
