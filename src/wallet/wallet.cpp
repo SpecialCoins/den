@@ -1694,7 +1694,7 @@ bool CWalletTx::InMempool() const
     return false;
 }
 
-bool CWalletTx::RelayWalletTransaction(std::string strCommand)
+void CWalletTx::RelayWalletTransaction(std::string strCommand)
 {
     LOCK(cs_main);
     if (!IsCoinBase() && !IsCoinStake()) {
