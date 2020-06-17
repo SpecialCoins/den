@@ -444,8 +444,6 @@ void ColdStakingWidget::onSendClicked()
 
 
     bool isStakingAddressFromThisWallet = walletModel->isMine(dest.address);
-    bool isOwnerAddressFromThisWallet = isOwnerEmpty;
-
     bool isOwnerAddressFromThisWallet = isOwnerEmpty || walletModel->isMine(inputOwner);
 
     // Warn the user if the owner address is not from this wallet
