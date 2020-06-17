@@ -1103,7 +1103,7 @@ bool AppInit2()
     std::string strDataDir = GetDataDir().string();
 #ifdef ENABLE_WALLET
     // Wallet file must be a plain filename without a directory
-    if (strWalletFile != fs::basename(strWalletFile) + fs::extension(strWalletFile)
+    if (strWalletFile != fs::basename(strWalletFile) + fs::extension(strWalletFile))
         return UIError(strprintf(_("Wallet %s resides outside data directory %s"), strWalletFile, strDataDir));
 #endif
     // Make sure only a single BCZ process is using the data directory.
