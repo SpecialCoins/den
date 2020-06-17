@@ -25,12 +25,9 @@ public:
 
 private Q_SLOTS:
     void setNumConnections(int count);
-    void setMasternodeCount(const QString& strMasternodes);
-    void setMnRoiCount(const QString& strMnRoi);
-    void setMempoolSize(long numberOfTxs, size_t dynUsage);
     void setNumBlocks(int count);
+    void setMasternodeCount(const QString& strMasternodes);
     void openNetworkMonitor();
-    void updateTrafficStats(quint64 totalBytesIn, quint64 totalBytesOut);
 
 private:
     Ui::SettingsInformationWidget *ui;
