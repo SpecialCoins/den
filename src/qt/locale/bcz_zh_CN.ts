@@ -1572,7 +1572,7 @@ It will start automatically as soon as the wallet has enough confirmations on an
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A transaction of 5,000 BCZ will be made&lt;/p&gt;&lt;p&gt;to a new empty address in your wallet.&lt;/p&gt;&lt;p&gt;The Address is labeled under the master node's name.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;将进行10,000 BCZ的交易&lt;/p&gt;&lt;p&gt;到您的钱包空地址&lt;/p&gt;&lt;p&gt;地址被标记在主节点的名称之下&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;将进行5,000 BCZ的交易&lt;/p&gt;&lt;p&gt;到您的钱包空地址&lt;/p&gt;&lt;p&gt;地址被标记在主节点的名称之下&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Set Master Node’s IP and port</source>
@@ -1805,7 +1805,7 @@ Are you sure?</source>
     </message>
     <message>
         <source>Not enough balance to create a masternode, 5,000 BCZ required.</source>
-        <translation>没有足够的余额创建主节点，需要10,000 BCZ。</translation>
+        <translation>没有足够的余额创建主节点，需要5,000 BCZ。</translation>
     </message>
     <message>
         <source>Error creating masternode</source>
@@ -4128,7 +4128,7 @@ BCZ零币(zBCZ)技术文件
         <translation>
 &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;
 主节点是运行完整节点BCZ核心钱包的计算机
-需要10,000个BCZ作抵押以提供额外服务
+需要5,000个BCZ作抵押以提供额外服务
 到网络，会收到一部分的区块奖励作为定期
 回报
 这些服务包括:
@@ -4160,7 +4160,7 @@ BCZ零币(zBCZ)技术文件
 要求：
 &lt;/p&gt;&lt;p align="justify"&gt;
 &lt;ul&gt;
-&lt;li&gt;每个主节点实例有10,000 BCZ&lt;/li&gt;
+&lt;li&gt;每个主节点实例有5,000 BCZ&lt;/li&gt;
 &lt;li&gt;必须存储在核心钱包&lt;/li&gt;
 &lt;li&gt;需要专用IP地址&lt;/li&gt;
 主节点钱包保持在线&lt;li&gt;
@@ -4179,7 +4179,7 @@ BCZ零币(zBCZ)技术文件
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;A Masternode Controller wallet is where the 5,000 BCZ collateral can reside during a Controller-Remote masternode setup. It is a wallet that can activate the remote masternode wallet/s and allows you to keep your collateral coins offline while the remote masternode remains online. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;主节点控制器钱包是在控制器-远程主节点设置期间10,000 BCZ附属品可以驻留的地方。这是一个可以激活远程主节点钱包的钱包/s，远程主节点保持在线的时候，可以让你的抵押品硬币离线。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;主节点控制器钱包是在控制器-远程主节点设置期间5,000 BCZ附属品可以驻留的地方。这是一个可以激活远程主节点钱包的钱包/s，远程主节点保持在线的时候，可以让你的抵押品硬币离线。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Frequently Asked Questions</source>
