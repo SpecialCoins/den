@@ -59,14 +59,12 @@ protected:
     void showEvent(QShowEvent *event) override;
 
 private Q_SLOTS:
-    void onBCZSelected();
     void onSendClicked();
     void onContactsClicked(SendMultiRow* entry);
     void onMenuClicked(SendMultiRow* entry);
     void onAddEntryClicked();
     void clearEntries();
     void clearAll(bool fClearSettings = true);
-    void refreshView();
     void onCheckBoxChanged();
     void onContactMultiClicked();
     void onDeleteClicked();
@@ -100,7 +98,7 @@ private:
     void showHideCheckBoxDelegations();
     void updateEntryLabels(QList<SendCoinsRecipient> recipients);
     void setCustomFeeSelected(bool isSelected, const CAmount& customFee = DEFAULT_TRANSACTION_FEE);
-
+    void setCoinControlPayAmounts();
 };
 
 #endif // SEND_H
