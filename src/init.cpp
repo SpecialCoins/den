@@ -1868,9 +1868,21 @@ bool AppInit2()
         LogPrintf(" addr %s\n", strMasterNodeAddr.c_str());
 
         if (!strMasterNodeAddr.empty()) {
-            CService addrTest = CService(strMasterNodeAddr);
+            int nPort;
+            int nDefaultPort = Params().GetDefaultPort();
+            std::string strHost;
+            SplitHostPort(strMasterNodeAddr, nPort, strHost);
+
+            // Allow for the port number to be omitted here and just double check
+            // that if a port is supplied, it matches the required default port.
+            if (nPort == 0) nPort = nDefaultPort;
+            if (nPort != nDefaultPort) {
+                return UIError(strprintf(_("Invalid -masternodeaddr port %d, only %d is supported on %s-net."),
+                    nPort, nDefaultPort, Params().NetworkIDString()));
+            }
+            CService addrTest(LookupNumeric(strHost.c_str(), nPort));
             if (!addrTest.IsValid()) {
-                return UIError("Invalid -masternodeaddr address: " + strMasterNodeAddr);
+                return UIError(strprintf(_("Invalid -masternodeaddr address: %s"), strMasterNodeAddr));
             }
         }
 
