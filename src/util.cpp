@@ -1,12 +1,12 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2020 The BCZ developers
+// Copyright (c) 2015-2020 The PIVX developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #if defined(HAVE_CONFIG_H)
-#include "config/bcz-config.h"
+#include "config/pivx-config.h"
 #endif
 
 #include "util.h"
@@ -84,7 +84,7 @@
 #include <openssl/rand.h>
 
 
-// BCZ only features
+// PIVX only features
 // Masternode
 bool fMasterNode = false;
 std::string strMasterNodePrivKey = "";
@@ -94,7 +94,10 @@ bool fLiteMode = false;
 bool fEnableSwiftTX = true;
 int nSwiftTXDepth = 5;
 
+/** Spork enforcement enabled time */
+int64_t enforceMasternodePaymentsTime = 4085657524;
 bool fSucessfullyLoaded = false;
+std::string strBudgetMode = "";
 
 std::map<std::string, std::string> mapArgs;
 std::map<std::string, std::vector<std::string> > mapMultiArgs;
@@ -261,7 +264,7 @@ static std::string FormatException(const std::exception* pex, const char* pszThr
     char pszModule[MAX_PATH] = "";
     GetModuleFileNameA(NULL, pszModule, sizeof(pszModule));
 #else
-    const char* pszModule = "bcz";
+    const char* pszModule = "pivx";
 #endif
     if (pex)
         return strprintf(
@@ -281,13 +284,13 @@ void PrintExceptionContinue(const std::exception* pex, const char* pszThread)
 
 fs::path GetDefaultDataDir()
 {
-// Windows < Vista: C:\Documents and Settings\Username\Application Data\BCZ
-// Windows >= Vista: C:\Users\Username\AppData\Roaming\BCZ
-// Mac: ~/Library/Application Support/BCZ
-// Unix: ~/.bcz
+// Windows < Vista: C:\Documents and Settings\Username\Application Data\PIVX
+// Windows >= Vista: C:\Users\Username\AppData\Roaming\PIVX
+// Mac: ~/Library/Application Support/PIVX
+// Unix: ~/.pivx
 #ifdef WIN32
     // Windows
-    return GetSpecialFolderPath(CSIDL_APPDATA) / "BCZ";
+    return GetSpecialFolderPath(CSIDL_APPDATA) / "PIVX";
 #else
     fs::path pathRet;
     char* pszHome = getenv("HOME");
@@ -299,10 +302,10 @@ fs::path GetDefaultDataDir()
     // Mac
     pathRet /= "Library/Application Support";
     TryCreateDirectory(pathRet);
-    return pathRet / "BCZ";
+    return pathRet / "PIVX";
 #else
     // Unix
-    return pathRet / ".bcz";
+    return pathRet / ".pivx";
 #endif
 #endif
 }
@@ -347,7 +350,7 @@ void ClearDatadirCache()
 
 fs::path GetConfigFile()
 {
-    fs::path pathConfigFile(GetArg("-conf", "bcz.conf"));
+    fs::path pathConfigFile(GetArg("-conf", "pivx.conf"));
     if (!pathConfigFile.is_complete())
         pathConfigFile = GetDataDir(false) / pathConfigFile;
 
@@ -365,33 +368,19 @@ void ReadConfigFile(std::map<std::string, std::string>& mapSettingsRet,
     std::map<std::string, std::vector<std::string> >& mapMultiSettingsRet)
 {
     fs::ifstream streamConfig(GetConfigFile());
-    if (!streamConfig.good())
-    {
+    if (!streamConfig.good()) {
+        // Create empty pivx.conf if it does not exist
         FILE* configFile = fsbridge::fopen(GetConfigFile(), "a");
         if (configFile != NULL)
-        {
-            std::string strHeader =
-                    "#listen=1\n"
-                    "#maxconnections=\n"
-                    "#connect=\n"
-                    "#addnode=\n"
-                    "#addnode=\n"
-                    "#addnode=\n"
-                    "#masternode=1\n"
-                    "#masternodeprivkey=\n"
-                    "#externalip=\n";
-
-            fwrite(strHeader.c_str(), std::strlen(strHeader.c_str()), 1, configFile);
             fclose(configFile);
-        }
-        return;
+        return; // Nothing to read, so just return
     }
 
     std::set<std::string> setOptions;
     setOptions.insert("*");
 
     for (boost::program_options::detail::config_file_iterator it(streamConfig, setOptions), end; it != end; ++it) {
-        // Don't overwrite existing settings so command line settings override bcz.conf
+        // Don't overwrite existing settings so command line settings override pivx.conf
         std::string strKey = std::string("-") + it->string_key;
         std::string strValue = it->value[0];
         InterpretNegativeSetting(strKey, strValue);
@@ -414,7 +403,7 @@ fs::path AbsPathForConfigVal(const fs::path& path, bool net_specific)
 #ifndef WIN32
 fs::path GetPidFile()
 {
-    fs::path pathPidFile(GetArg("-pid", "bczd.pid"));
+    fs::path pathPidFile(GetArg("-pid", "pivxd.pid"));
     if (!pathPidFile.is_complete()) pathPidFile = GetDataDir() / pathPidFile;
     return pathPidFile;
 }

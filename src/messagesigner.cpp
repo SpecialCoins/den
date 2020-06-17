@@ -1,5 +1,5 @@
 // Copyright (c) 2014-2018 The Dash Core developers
-// Copyright (c) 2020 The BCZ developers
+// Copyright (c) 2018-2020 The PIVX developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -78,25 +78,39 @@ bool CHashSigner::VerifyHash(const uint256& hash, const CKeyID& keyID, const std
  *  Functions inherited by network signed-messages
  */
 
-bool CSignedMessage::Sign(const CKey& key, const CPubKey& pubKey)
+bool CSignedMessage::Sign(const CKey& key, const CPubKey& pubKey, const bool fNewSigs)
 {
     std::string strError = "";
 
-    nMessVersion = MessageVersion::MESS_VER_HASH;
-    uint256 hash = GetSignatureHash();
+    if (fNewSigs) {
+        nMessVersion = MessageVersion::MESS_VER_HASH;
+        uint256 hash = GetSignatureHash();
 
-    if(!CHashSigner::SignHash(hash, key, vchSig)) {
-        return error("%s : SignHash() failed", __func__);
-    }
+        if(!CHashSigner::SignHash(hash, key, vchSig)) {
+            return error("%s : SignHash() failed", __func__);
+        }
 
-    if (!CHashSigner::VerifyHash(hash, pubKey, vchSig, strError)) {
-        return error("%s : VerifyHash() failed, error: %s", __func__, strError);
+        if (!CHashSigner::VerifyHash(hash, pubKey, vchSig, strError)) {
+            return error("%s : VerifyHash() failed, error: %s", __func__, strError);
+        }
+
+    } else {
+        nMessVersion = MessageVersion::MESS_VER_STRMESS;
+        std::string strMessage = GetStrMessage();
+
+        if (!CMessageSigner::SignMessage(strMessage, vchSig, key)) {
+            return error("%s : SignMessage() failed", __func__);
+        }
+
+        if (!CMessageSigner::VerifyMessage(pubKey, vchSig, strMessage, strError)) {
+            return error("%s : VerifyMessage() failed, error: %s\n", __func__, strError);
+        }
     }
 
     return true;
 }
 
-bool CSignedMessage::Sign(const std::string strSignKey)
+bool CSignedMessage::Sign(const std::string strSignKey, const bool fNewSigs)
 {
     CKey key;
     CPubKey pubkey;
@@ -105,7 +119,7 @@ bool CSignedMessage::Sign(const std::string strSignKey)
         return error("%s : Invalid strSignKey", __func__);
     }
 
-    return Sign(key, pubkey);
+    return Sign(key, pubkey, fNewSigs);
 }
 
 bool CSignedMessage::CheckSignature(const CPubKey& pubKey) const

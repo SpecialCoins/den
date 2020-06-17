@@ -1,11 +1,11 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
-// Copyright (c) 2020 The BCZ developers
+// Copyright (c) 2016-2018 The PIVX developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BCZ_PUBKEY_H
-#define BCZ_PUBKEY_H
+#ifndef PIVX_PUBKEY_H
+#define PIVX_PUBKEY_H
 
 #include "hash.h"
 #include "serialize.h"
@@ -259,4 +259,4 @@ public:
     ~ECCVerifyHandle();
 };
 
-#endif // BCZ_PUBKEY_H
+#endif // PIVX_PUBKEY_H
