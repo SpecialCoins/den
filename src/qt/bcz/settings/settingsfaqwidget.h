@@ -27,7 +27,7 @@ public Q_SLOTS:
    void windowResizeEvent(QResizeEvent* event);
    void setSection(int num);
 private Q_SLOTS:
-    void onFaqClicked();
+    void onFaqClicked(const QWidget* const widget);
 private:
     Ui::SettingsFaqWidget *ui;
     int pos = 0;
