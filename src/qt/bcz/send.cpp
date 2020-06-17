@@ -43,7 +43,7 @@ SendWidget::SendWidget(BCZGUI* parent) :
     ui->labelTitle->setFont(fontLight);
 
     /* Subtitle */
-    setCssProperty({ui->labelSubtitle1}, "text-subtitle");
+    setCssProperty(ui->labelSubtitle1, "text-subtitle");
 
     /* Address - Amount*/
     setCssProperty({ui->labelSubtitleAddress, ui->labelSubtitleAmount}, "text-title");
@@ -113,13 +113,6 @@ SendWidget::SendWidget(BCZGUI* parent) :
     connect(ui->pushButtonClear, &QPushButton::clicked, [this](){clearAll(true);});
 }
 
-void SendWidget::refreshView()
-{
-    ui->pushButtonSave->setText(tr("Send ") + QString(CURRENCY_UNIT.c_str()));
-    ui->pushButtonAddRecipient->setVisible(true);
-    refreshAmounts();
-}
-
 void SendWidget::refreshAmounts()
 {
     CAmount total = 0;
@@ -142,7 +135,7 @@ void SendWidget::refreshAmounts()
         ui->labelTitleTotalRemaining->setText(tr("Total remaining from the selected UTXO"));
     } else {
         // Wallet's balance
-        totalAmount = (walletModel->getBalance(nullptr, fDelegationsChecked)) - total;
+        totalAmount = walletModel->getBalance(nullptr, fDelegationsChecked) - total;
         ui->labelTitleTotalRemaining->setText(tr("Total remaining"));
     }
     ui->labelAmountRemaining->setText(
@@ -185,8 +178,8 @@ void SendWidget::loadWalletModel()
             setCustomFeeSelected(true, nCustomFee);
         }
 
-        // Refresh view
-        refreshView();
+        // Refresh
+        refreshAmounts();
 
         // TODO: This only happen when the coin control features are modified in other screen, check before do this if the wallet has another screen modifying it.
         // Coin Control
@@ -304,8 +297,8 @@ void SendWidget::setFocusOnLastEntry()
 
 void SendWidget::showHideCheckBoxDelegations()
 {
-    // Show checkbox only when there is any available owned delegation,
-    // coincontrol is not selected
+    // Show checkbox only when there is any available owned delegation and
+    // coincontrol is not selected.
     const bool isCControl = CoinControlDialog::coinControl->HasSelected();
     const bool hasDel = cachedDelegatedBalance > 0;
 
@@ -340,8 +333,6 @@ void SendWidget::onSendClicked()
         inform(tr("No set recipients"));
         return;
     }
-
-    bool sendBcz = true;
 
     WalletModel::UnlockContext ctx(walletModel->requestUnlock());
     if (!ctx.isValid()) {
@@ -521,19 +512,30 @@ void SendWidget::onChangeCustomFeeClicked()
 
 void SendWidget::onCoinControlClicked()
 {
-        if (walletModel->getBalance() > 0) {
-            if (!coinControlDialog) {
-                coinControlDialog = new CoinControlDialog();
-                coinControlDialog->setModel(walletModel);
-            } else {
-                coinControlDialog->refreshDialog();
-            }
-            coinControlDialog->exec();
-            ui->btnCoinControl->setActive(CoinControlDialog::coinControl->HasSelected());
-            refreshAmounts();
+    if (walletModel->getBalance() > 0) {
+        if (!coinControlDialog) {
+            coinControlDialog = new CoinControlDialog();
+            coinControlDialog->setModel(walletModel);
         } else {
-            inform(tr("You don't have any %1 to select.").arg(CURRENCY_UNIT.c_str()));
+            coinControlDialog->refreshDialog();
         }
+        setCoinControlPayAmounts();
+        coinControlDialog->exec();
+        ui->btnCoinControl->setActive(CoinControlDialog::coinControl->HasSelected());
+        refreshAmounts();
+    } else {
+        inform(tr("You don't have any %1 to select.").arg(CURRENCY_UNIT.c_str()));
+    }
+}
+
+void SendWidget::setCoinControlPayAmounts()
+{
+    if (!coinControlDialog) return;
+    coinControlDialog->clearPayAmounts();
+    QMutableListIterator<SendMultiRow*> it(entries);
+    while (it.hasNext()) {
+        coinControlDialog->addPayAmount(it.next()->getAmountValue());
+    }
 }
 
 void SendWidget::onValueChanged()
@@ -548,13 +550,6 @@ void SendWidget::onCheckBoxChanged()
         fDelegationsChecked = checked;
         refreshAmounts();
     }
-}
-
-void SendWidget::onBCZSelected()
-{
-    setCssProperty(coinIcon, "coin-icon");
-    refreshView();
-    updateStyle(coinIcon);
 }
 
 void SendWidget::onContactsClicked(SendMultiRow* entry)
