@@ -42,7 +42,7 @@
     <number>0</number>
    </property>
    <item>
-    <widget class="PFBorderImage" name="containerTop" native="true">
+    <widget class="PFBorderImage" name="containerTop">
      <layout class="QVBoxLayout" name="verticalLayout_11">
       <property name="spacing">
        <number>0</number>
@@ -120,30 +120,6 @@
               </property>
               <property name="text">
                <string notr="true">480.0685 BCZ</string>
-              </property>
-             </widget>
-            </item>
-            <item alignment="Qt::AlignVCenter">
-             <widget class="QLabel" name="typeSpacerTop">
-              <property name="minimumSize">
-               <size>
-                <width>1</width>
-                <height>30</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>1</width>
-                <height>30</height>
-               </size>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">background-color:white;
-padding:0px;
-border:none;</string>
-              </property>
-              <property name="text">
-               <string/>
               </property>
              </widget>
             </item>
@@ -430,31 +406,7 @@ border:none;</string>
              </item>
             </layout>
            </item>
-           <item>
-            <widget class="QLabel" name="typeSpacerExpanded">
-             <property name="minimumSize">
-              <size>
-               <width>1</width>
-               <height>100</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>1</width>
-               <height>16777215</height>
-              </size>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">background-color:white;
-padding:0px;
-border:none;</string>
-             </property>
-             <property name="text">
-              <string/>
-             </property>
-            </widget>
-           </item>
-		  </layout>
+          </layout>
          </item>
          <item>
           <spacer name="horizontalSpacer_2">
