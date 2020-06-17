@@ -633,11 +633,8 @@ void TopBar::updateBalances(const CAmount& balance, const CAmount& unconfirmedBa
     }
     ui->labelTitle1->setText(nLockedBalance > 0 ? tr("Available (Locked included)") : tr("Available"));
 
-    // BCZ Total
-    CAmount bczAvailableBalance = balance;
-
     // Set
-    QString totalBcz = GUIUtil::formatBalance(bczAvailableBalance, nDisplayUnit);
+    QString totalBcz = GUIUtil::formatBalance(balance, nDisplayUnit);
 
     // BCZ
     // Top
