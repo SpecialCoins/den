@@ -144,6 +144,7 @@ UniValue importprivkey(const UniValue& params, bool fHelp)
         pwalletMain->nTimeFirstKey = 1; // 0 would be considered 'no value'
 
         if (fRescan) {
+            CBlockIndex *pindex = chainActive.Genesis();
             if (fStakingAddress && Params().NetworkID() != CBaseChainParams::REGTEST) {
                 // cold staking, no need to scan the whole chain
                 pindex = chainActive[Params().ColdStart()];
