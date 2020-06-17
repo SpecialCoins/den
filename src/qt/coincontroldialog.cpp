@@ -32,8 +32,6 @@
 #include <QString>
 #include <QTreeWidget>
 
-QList<CAmount> CoinControlDialog::payAmounts;
-int CoinControlDialog::nSplitBlockDummy;
 CCoinControl* CoinControlDialog::coinControl = new CCoinControl();
 
 
@@ -45,9 +43,10 @@ bool CCoinControlWidgetItem::operator<(const QTreeWidgetItem &other) const {
 }
 
 
-CoinControlDialog::CoinControlDialog(QWidget* parent, bool fMultisigEnabled) : QDialog(parent, Qt::WindowSystemMenuHint | Qt::WindowTitleHint | Qt::WindowCloseButtonHint),
+CoinControlDialog::CoinControlDialog(QWidget* parent, bool _forDelegation) : QDialog(parent, Qt::WindowSystemMenuHint | Qt::WindowTitleHint | Qt::WindowCloseButtonHint),
                                                         ui(new Ui::CoinControlDialog),
-                                                        model(0)
+                                                        model(0),
+                                                        forDelegation(_forDelegation)
 {
     ui->setupUi(this);
 
@@ -93,8 +92,6 @@ CoinControlDialog::CoinControlDialog(QWidget* parent, bool fMultisigEnabled) : Q
     // Buttons
     setCssProperty({ui->pushButtonSelectAll, ui->pushButtonToggleLock}, "btn-check");
     ui->pushButtonOk->setProperty("cssClass", "btn-primary");
-
-    this->fMultisigEnabled = fMultisigEnabled;
 
     // context menu actions
     QAction* copyAddressAction = new QAction(tr("Copy address"), this);
@@ -217,7 +214,7 @@ void CoinControlDialog::setModel(WalletModel* model)
     if (model && model->getOptionsModel() && model->getAddressTableModel()) {
         updateView();
         updateLabelLocked();
-        CoinControlDialog::updateLabels(model, this);
+        updateLabels();
         updateDialogLabels();
     }
 }
@@ -240,7 +237,7 @@ void CoinControlDialog::buttonSelectAllClicked()
         ui->pushButtonSelectAll->setText(tr("Unselect all"));
     }
     fSelectAllToggled = !fSelectAllToggled;
-    CoinControlDialog::updateLabels(model, this);
+    updateLabels();
     updateDialogLabels();
 }
 
@@ -271,7 +268,7 @@ void CoinControlDialog::buttonToggleLockClicked()
             updateLabelLocked();
         }
         ui->treeWidget->setEnabled(true);
-        CoinControlDialog::updateLabels(model, this);
+        updateLabels();
         updateDialogLabels();
     } else {
         QMessageBox msgBox;
@@ -475,7 +472,7 @@ void CoinControlDialog::viewItemChanged(QTreeWidgetItem* item, int column)
 
         // selection changed -> update labels
         if (ui->treeWidget->isEnabled()){ // do not update on every click for (un)select all
-            CoinControlDialog::updateLabels(model, this);
+            updateLabels();
             updateDialogLabels();
         }
     }
@@ -533,7 +530,7 @@ void CoinControlDialog::updateDialogLabels()
 {
 
     if (this->parentWidget() == nullptr) {
-        CoinControlDialog::updateLabels(model, this);
+        updateLabels();
         return;
     }
 
@@ -562,7 +559,7 @@ void CoinControlDialog::updateDialogLabels()
     }
 }
 
-void CoinControlDialog::updateLabels(WalletModel* model, QDialog* dialog)
+void CoinControlDialog::updateLabels()
 {
     if (!model)
         return;
@@ -570,13 +567,10 @@ void CoinControlDialog::updateLabels(WalletModel* model, QDialog* dialog)
     // nPayAmount
     CAmount nPayAmount = 0;
     bool fDust = false;
-    CMutableTransaction txDummy;
-    Q_FOREACH (const CAmount& amount, CoinControlDialog::payAmounts) {
+    Q_FOREACH (const CAmount& amount, payAmounts) {
         nPayAmount += amount;
-
         if (amount > 0) {
             CTxOut txout(amount, (CScript)std::vector<unsigned char>(24, 0));
-            txDummy.vout.push_back(txout);
             if (txout.IsDust(::minRelayTxFee))
                 fDust = true;
         }
@@ -632,12 +626,22 @@ void CoinControlDialog::updateLabels(WalletModel* model, QDialog* dialog)
                 nBytesInputs += 148; // in all error cases, simply assume 148 here
         } else
             nBytesInputs += 148;
+
+        // Additional byte for P2CS
+        if (out.tx->vout[out.i].scriptPubKey.IsPayToColdStaking())
+            nBytesInputs++;
     }
 
     // calculation
+    const int P2PKH_OUT_SIZE = 34;
+    const int P2CS_OUT_SIZE = 61;
     if (nQuantity > 0) {
-        // Bytes
-        nBytes = nBytesInputs + ((CoinControlDialog::payAmounts.size() > 0 ? CoinControlDialog::payAmounts.size() + std::max(1, CoinControlDialog::nSplitBlockDummy) : 2) * 34) + 10; // always assume +1 output for change here
+        // Bytes: nBytesInputs + (num_of_outputs * bytes_per_output)
+        nBytes = nBytesInputs + std::max(1, payAmounts.size()) * (forDelegation ? P2CS_OUT_SIZE : P2PKH_OUT_SIZE);
+        // always assume +1 (p2pkh) output for change here
+        nBytes += P2PKH_OUT_SIZE;
+        // nVersion, nLockTime and vin/vout len sizes
+        nBytes += 10;
 
         // Priority
         double mempoolEstimatePriority = mempool.estimatePriority(nTxConfirmTarget);
@@ -672,7 +676,7 @@ void CoinControlDialog::updateLabels(WalletModel* model, QDialog* dialog)
             }
 
             if (nChange == 0)
-                nBytes -= 34;
+                nBytes -= P2PKH_OUT_SIZE;
         }
 
         // after fee
@@ -686,71 +690,64 @@ void CoinControlDialog::updateLabels(WalletModel* model, QDialog* dialog)
     if (model && model->getOptionsModel())
         nDisplayUnit = model->getOptionsModel()->getDisplayUnit();
 
-    QLabel* l1 = dialog->findChild<QLabel*>("labelCoinControlQuantity");
-    QLabel* l2 = dialog->findChild<QLabel*>("labelCoinControlAmount");
-    QLabel* l3 = dialog->findChild<QLabel*>("labelCoinControlFee");
-    QLabel* l4 = dialog->findChild<QLabel*>("labelCoinControlAfterFee");
-    QLabel* l5 = dialog->findChild<QLabel*>("labelCoinControlBytes");
-    QLabel* l7 = dialog->findChild<QLabel*>("labelCoinControlLowOutput");
-    QLabel* l8 = dialog->findChild<QLabel*>("labelCoinControlChange");
-
     // enable/disable "dust" and "change"
-    dialog->findChild<QLabel*>("labelCoinControlLowOutputText")->setEnabled(nPayAmount > 0);
-    dialog->findChild<QLabel*>("labelCoinControlLowOutput")->setEnabled(nPayAmount > 0);
-    dialog->findChild<QLabel*>("labelCoinControlChangeText")->setEnabled(nPayAmount > 0);
-    dialog->findChild<QLabel*>("labelCoinControlChange")->setEnabled(nPayAmount > 0);
+    const bool hasPayAmount = nPayAmount > 0;
+    ui->labelCoinControlLowOutputText->setEnabled(hasPayAmount);
+    ui->labelCoinControlLowOutput->setEnabled(hasPayAmount);
+    ui->labelCoinControlChangeText->setEnabled(hasPayAmount);
+    ui->labelCoinControlChange->setEnabled(hasPayAmount);
 
     // stats
-    l1->setText(QString::number(nQuantity));                            // Quantity
-    l2->setText(BitcoinUnits::formatWithUnit(nDisplayUnit, nAmount));   // Amount
-    l3->setText(BitcoinUnits::formatWithUnit(nDisplayUnit, nPayFee));   // Fee
-    l4->setText(BitcoinUnits::formatWithUnit(nDisplayUnit, nAfterFee)); // After Fee
-    l5->setText(((nBytes > 0) ? "~" : "") + QString::number(nBytes));   // Bytes
-    l7->setText(fDust ? tr("yes") : tr("no"));                          // Dust
-    l8->setText(BitcoinUnits::formatWithUnit(nDisplayUnit, nChange));   // Change
+    ui->labelCoinControlQuantity->setText(QString::number(nQuantity));
+    ui->labelCoinControlAmount->setText(BitcoinUnits::formatWithUnit(nDisplayUnit, nAmount));
+    ui->labelCoinControlFee->setText(BitcoinUnits::formatWithUnit(nDisplayUnit, nPayFee));
+    ui->labelCoinControlAfterFee->setText(BitcoinUnits::formatWithUnit(nDisplayUnit, nAfterFee));
+    ui->labelCoinControlBytes->setText(((nBytes > 0) ? "~" : "") + QString::number(nBytes));
+    ui->labelCoinControlLowOutput->setText(fDust ? tr("yes") : tr("no"));
+    ui->labelCoinControlChange->setText(BitcoinUnits::formatWithUnit(nDisplayUnit, nChange));
     if (nPayFee > 0 && !(payTxFee.GetFeePerK() > 0 && fPayAtLeastCustomFee && nBytes < 1000)) {
-        l3->setText("~" + l3->text());
-        l4->setText("~" + l4->text());
+        ui->labelCoinControlFee->setText("~" + ui->labelCoinControlFee->text());
+        ui->labelCoinControlAfterFee->setText("~" + ui->labelCoinControlAfterFee->text());
         if (nChange > 0)
-            l8->setText("~" + l8->text());
+            ui->labelCoinControlChange->setText("~" + ui->labelCoinControlChange->text());
     }
 
     // turn labels "red"
-    l5->setStyleSheet((nBytes >= MAX_FREE_TRANSACTION_CREATE_SIZE) ? "color:red;" : ""); // Bytes >= 1000
-    l7->setStyleSheet((fDust) ? "color:red;" : "");                                      // Dust = "yes"
+    ui->labelCoinControlBytes->setStyleSheet((nBytes >= MAX_FREE_TRANSACTION_CREATE_SIZE) ? "color:red;" : "");     // Bytes >= 1000
+    ui->labelCoinControlLowOutput->setStyleSheet((fDust) ? "color:red;" : "");                                      // Dust = "yes"
 
     // tool tips
     QString toolTip1 = tr("This label turns red, if the transaction size is greater than 1000 bytes.") + "<br /><br />";
-    toolTip1 += tr("This means a fee of at least %1 per kB is required.").arg(BitcoinUnits::formatWithUnit(nDisplayUnit, CWallet::minTxFee.GetFeePerK())) + "<br /><br />";
+    toolTip1 += tr("This means a fee of at least %1 per kB is required.").arg(BitcoinUnits::formatWithUnit(nDisplayUnit, CWallet::GetRequiredFee(1000))) + "<br /><br />";
     toolTip1 += tr("Can vary +/- 1 byte per input.");
 
     QString toolTip2 = tr("Transactions with higher priority are more likely to get included into a block.") + "<br /><br />";
     toolTip2 += tr("This label turns red, if the priority is smaller than \"medium\".") + "<br /><br />";
-    toolTip2 += tr("This means a fee of at least %1 per kB is required.").arg(BitcoinUnits::formatWithUnit(nDisplayUnit, CWallet::minTxFee.GetFeePerK()));
+    toolTip2 += tr("This means a fee of at least %1 per kB is required.").arg(BitcoinUnits::formatWithUnit(nDisplayUnit, CWallet::GetRequiredFee(1000)));
 
     QString toolTip3 = tr("This label turns red, if any recipient receives an amount smaller than %1.").arg(BitcoinUnits::formatWithUnit(nDisplayUnit, ::minRelayTxFee.GetFee(546)));
 
     // how many satoshis the estimated fee can vary per byte we guess wrong
     double dFeeVary;
     if (payTxFee.GetFeePerK() > 0)
-        dFeeVary = (double)std::max(CWallet::minTxFee.GetFeePerK(), payTxFee.GetFeePerK()) / 1000;
+        dFeeVary = (double)std::max(CWallet::GetRequiredFee(1000), payTxFee.GetFeePerK()) / 1000;
     else
-        dFeeVary = (double)std::max(CWallet::minTxFee.GetFeePerK(), mempool.estimateFee(nTxConfirmTarget).GetFeePerK()) / 1000;
-    QString toolTip4 = tr("Can vary +/- %1 ubcz per input.").arg(dFeeVary);
+        dFeeVary = (double)std::max(CWallet::GetRequiredFee(1000), mempool.estimateFee(nTxConfirmTarget).GetFeePerK()) / 1000;
+    QString toolTip4 = tr("Can vary +/- %1 u%2 per input.").arg(dFeeVary).arg(CURRENCY_UNIT.c_str());
 
-    l3->setToolTip(toolTip4);
-    l4->setToolTip(toolTip4);
-    l5->setToolTip(toolTip1);
-    l7->setToolTip(toolTip3);
-    l8->setToolTip(toolTip4);
-    dialog->findChild<QLabel*>("labelCoinControlFeeText")->setToolTip(l3->toolTip());
-    dialog->findChild<QLabel*>("labelCoinControlAfterFeeText")->setToolTip(l4->toolTip());
-    dialog->findChild<QLabel*>("labelCoinControlBytesText")->setToolTip(l5->toolTip());
-    dialog->findChild<QLabel*>("labelCoinControlLowOutputText")->setToolTip(l7->toolTip());
-    dialog->findChild<QLabel*>("labelCoinControlChangeText")->setToolTip(l8->toolTip());
+    ui->labelCoinControlFee->setToolTip(toolTip4);
+    ui->labelCoinControlAfterFee->setToolTip(toolTip4);
+    ui->labelCoinControlBytes->setToolTip(toolTip1);
+    ui->labelCoinControlLowOutput->setToolTip(toolTip3);
+    ui->labelCoinControlChange->setToolTip(toolTip4);
+    ui->labelCoinControlFeeText->setToolTip(ui->labelCoinControlFee->toolTip());
+    ui->labelCoinControlAfterFeeText->setToolTip(ui->labelCoinControlAfterFee->toolTip());
+    ui->labelCoinControlBytesText->setToolTip(ui->labelCoinControlBytes->toolTip());
+    ui->labelCoinControlLowOutputText->setToolTip(ui->labelCoinControlLowOutput->toolTip());
+    ui->labelCoinControlChangeText->setToolTip(ui->labelCoinControlChange->toolTip());
 
     // Insufficient funds
-    QLabel* label = dialog->findChild<QLabel*>("labelCoinControlInsuffFunds");
+    QLabel* label = findChild<QLabel*>("labelCoinControlInsuffFunds");
     if (label)
         label->setVisible(nChange < 0);
 }
@@ -809,10 +806,6 @@ void CoinControlDialog::updateView()
         int nInputSum = 0;
         for(const COutput& out: coins.second) {
             isminetype mine = pwalletMain->IsMine(out.tx->vout[out.i]);
-            bool fMultiSigUTXO = (mine & ISMINE_MULTISIG);
-            // when multisig is enabled, it will only display outputs from multisig addresses
-            if (fMultisigEnabled && !fMultiSigUTXO)
-                continue;
             int nInputSize = 0;
             nSum += out.tx->vout[out.i].nValue;
             nChildren++;
@@ -824,17 +817,6 @@ void CoinControlDialog::updateView()
                 itemOutput = new CCoinControlWidgetItem(ui->treeWidget);
             itemOutput->setFlags(flgCheckbox);
             itemOutput->setCheckState(COLUMN_CHECKBOX, Qt::Unchecked);
-
-            //MultiSig
-            if (fMultiSigUTXO) {
-
-                if (!fMultisigEnabled) {
-                    COutPoint outpt(out.tx->GetHash(), out.i);
-                    coinControl->UnSelect(outpt); // just to be sure
-                    itemOutput->setDisabled(true);
-                    itemOutput->setIcon(COLUMN_CHECKBOX, QIcon(":/icons/lock_closed"));
-                }
-            }
 
             // address
             const bool fDelegated = (bool)(mine & ISMINE_SPENDABLE_DELEGATED);
@@ -957,7 +939,7 @@ void CoinControlDialog::refreshDialog()
 {
     updateView();
     updateLabelLocked();
-    CoinControlDialog::updateLabels(model, this);
+    updateLabels();
     updateDialogLabels();
 }
 
@@ -967,4 +949,14 @@ void CoinControlDialog::inform(const QString& text)
     snackBar->setText(text);
     snackBar->resize(this->width(), snackBar->height());
     openDialog(snackBar, this);
+}
+
+void CoinControlDialog::clearPayAmounts()
+{
+    payAmounts.clear();
+}
+
+void CoinControlDialog::addPayAmount(const CAmount& amount)
+{
+    payAmounts.push_back(amount);
 }
