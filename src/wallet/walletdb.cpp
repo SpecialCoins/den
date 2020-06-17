@@ -937,12 +937,7 @@ bool BackupWallet(const CWallet& wallet, const fs::path& strDest, bool fEnableCu
     } else if(fEnableCustom) {
         pathWithFile = GetArg("-backuppath", "");
         if(!pathWithFile.empty()) {
-            if(!pathWithFile.has_extension()) {
-                pathCustom = pathWithFile;
-                pathWithFile /= wallet.GetUniqueWalletBackupName();
-            } else {
-                pathCustom = pathWithFile.parent_path();
-            }
+            pathCustom = pathWithFile.parent_path();
             try {
                 fs::create_directories(pathCustom);
             } catch (const fs::filesystem_error& e) {
