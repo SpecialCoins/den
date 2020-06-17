@@ -297,6 +297,7 @@ extern UniValue getchaintips(const UniValue& params, bool fHelp);
 extern UniValue invalidateblock(const UniValue& params, bool fHelp);
 extern UniValue reconsiderblock(const UniValue& params, bool fHelp);
 extern UniValue getblockindexstats(const UniValue& params, bool fHelp);
+extern void validaterange(const UniValue& params, int& heightStart, int& heightEnd, int minHeightStart=1);
 
 extern UniValue listmasternodes(const UniValue& params, bool fHelp);
 extern UniValue getmasternodecount(const UniValue& params, bool fHelp);
