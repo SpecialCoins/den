@@ -31,7 +31,7 @@ public:
     ADD_SERIALIZE_METHODS;
 
     template <typename Stream, typename Operation>
-    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion)
+    inline void SerializationOp(Stream& s, Operation ser_action)
     {
         READWRITE(VARINT(nBlocks));
         READWRITE(VARINT(nSize));
@@ -82,7 +82,7 @@ struct CDiskBlockPos {
     ADD_SERIALIZE_METHODS;
 
     template <typename Stream, typename Operation>
-    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion)
+    inline void SerializationOp(Stream& s, Operation ser_action)
     {
         READWRITE(VARINT(nFile));
         READWRITE(VARINT(nPos));
@@ -436,10 +436,11 @@ public:
     ADD_SERIALIZE_METHODS;
 
     template <typename Stream, typename Operation>
-    inline void SerializationOp(Stream& s, Operation ser_action, int nType, int nVersion)
+    inline void SerializationOp(Stream& s, Operation ser_action)
     {
-        if (!(nType & SER_GETHASH))
-            READWRITE(VARINT(nVersion));
+        int nSerVersion = s.GetVersion();
+        if (!(s.GetType() & SER_GETHASH))
+            READWRITE(VARINT(nSerVersion));
 
         READWRITE(VARINT(nHeight));
         READWRITE(VARINT(nStatus));
