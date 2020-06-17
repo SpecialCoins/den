@@ -322,13 +322,6 @@ crypto_libbitcoin_crypto_a_SOURCES = \
   crypto/Lyra2Z/sph_types.h \
   crypto/Lyra2Z/Sponge.c \
   crypto/Lyra2Z/Sponge.h
-if USE_NUM_GMP
-  crypto_libbitcoin_crypto_a_SOURCES += bignum/bignum_gmp.cpp
-endif
-if USE_NUM_OPENSSL
-  crypto_libbitcoin_crypto_aa_SOURCES += bignum/bignum_openssl.cpp
-endif
-
 
 # common: shared between bczd, and bcz-qt and non-server tools
 libbitcoin_common_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
@@ -371,7 +364,6 @@ libbitcoin_util_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 libbitcoin_util_a_SOURCES = \
   arith_uint256.cpp \
   allocators.cpp \
-  bignum/bignum.cpp \
   chainparamsbase.cpp \
   clientversion.cpp \
   compat/glibc_sanity.cpp \
