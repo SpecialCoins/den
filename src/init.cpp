@@ -19,6 +19,7 @@
 #include "amount.h"
 #include "checkpoints.h"
 #include "compat/sanity.h"
+#include "fs.h"
 #include "httpserver.h"
 #include "httprpc.h"
 #include "invalid.h"
@@ -29,6 +30,7 @@
 #include "masternodeman.h"
 #include "messagesigner.h"
 #include "miner.h"
+#include "netbase.h"
 #include "net.h"
 #include "rpc/server.h"
 #include "script/standard.h"
@@ -61,7 +63,6 @@
 
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/algorithm/string/replace.hpp>
-#include <boost/filesystem.hpp>
 #include <boost/interprocess/sync/file_lock.hpp>
 #include <boost/thread.hpp>
 #include <boost/foreach.hpp>
@@ -216,8 +217,8 @@ void PrepareShutdown()
     threadGroup.join_all();
 
     if (fFeeEstimatesInitialized) {
-        boost::filesystem::path est_path = GetDataDir() / FEE_ESTIMATES_FILENAME;
-        CAutoFile est_fileout(fopen(est_path.string().c_str(), "wb"), SER_DISK, CLIENT_VERSION);
+        fs::path est_path = GetDataDir() / FEE_ESTIMATES_FILENAME;
+            CAutoFile est_fileout(fsbridge::fopen(est_path, "wb"), SER_DISK, CLIENT_VERSION);
         if (!est_fileout.IsNull())
             mempool.WriteFeeEstimates(est_fileout);
         else
@@ -262,8 +263,8 @@ void PrepareShutdown()
 
 #ifndef WIN32
     try {
-        boost::filesystem::remove(GetPidFile());
-    } catch (const boost::filesystem::filesystem_error& e) {
+        fs::remove(GetPidFile());
+    } catch (const fs::filesystem_error& e) {
         LogPrintf("%s: Unable to remove pidfile: %s\n", __func__, e.what());
     }
 #endif
@@ -289,16 +290,16 @@ void Shutdown()
 #ifdef ENABLE_WALLET
     if (!fDisableWallet)
     {
-        boost::filesystem::path backupDir = GetDataDir() / "backups";
+        fs::path backupDir = GetDataDir() / "backups";
         if (nBackups > 0)
         {
-            if (!boost::filesystem::exists(backupDir))
+            if (!fs::exists(backupDir))
             {
                 // Always create backup folder to not confuse the operating system's file browser
-                boost::filesystem::create_directories(backupDir);
+                fs::create_directories(backupDir);
             }
 
-                if (boost::filesystem::exists(backupDir))
+                if (fs::exists(backupDir))
 
                 {   std::string strWalletFile = GetArg("-wallet", "wallet.dat");
                     // Create backup of the wallet
@@ -307,17 +308,17 @@ void Shutdown()
                     backupPathStr += "/" + strWalletFile;
                     std::string sourcePathStr = GetDataDir().string();
                     sourcePathStr += "/" + strWalletFile;
-                    boost::filesystem::path sourceFile = sourcePathStr;
-                    boost::filesystem::path backupFile = backupPathStr + dateTimeStr;
+                    fs::path sourceFile = sourcePathStr;
+                    fs::path backupFile = backupPathStr + dateTimeStr;
                     sourceFile.make_preferred();
                     backupFile.make_preferred();
-                    if (boost::filesystem::exists(sourceFile))
+                    if (fs::exists(sourceFile))
                     {
                         try
                         {
-                            boost::filesystem::copy_file(sourceFile, backupFile);
+                            fs::copy_file(sourceFile, backupFile);
                             LogPrintf("Creating backup of %s -> %s\n", sourceFile, backupFile);
-                        } catch (boost::filesystem::filesystem_error& error)
+                        } catch (bs::filesystem_error& error)
                         {
                             LogPrintf("Failed to create backup %s\n", error.what());
                         }
@@ -422,7 +423,9 @@ std::string HelpMessage(HelpMessageMode mode)
     strUsage += HelpMessageOpt("-loadblock=<file>", _("Imports blocks from external blk000??.dat file") + " " + _("on startup"));
     strUsage += HelpMessageOpt("-maxreorg=<n>", strprintf(_("Set the Maximum reorg depth (default: %u)"), Params(CBaseChainParams::MAIN).MaxReorganizationDepth()));
     strUsage += HelpMessageOpt("-maxorphantx=<n>", strprintf(_("Keep at most <n> unconnectable transactions in memory (default: %u)"), DEFAULT_MAX_ORPHAN_TRANSACTIONS));
-    strUsage += HelpMessageOpt("-par=<n>", strprintf(_("Set the number of script verification threads (%u to %d, 0 = auto, <0 = leave that many cores free, default: %d)"), -(int)boost::thread::hardware_concurrency(), MAX_SCRIPTCHECK_THREADS, DEFAULT_SCRIPTCHECK_THREADS));
+    strUsage += HelpMessageOpt("-maxmempool=<n>", strprintf(_("Keep the transaction memory pool below <n> megabytes (default: %u)"), DEFAULT_MAX_MEMPOOL_SIZE));
+    strUsage += HelpMessageOpt("-mempoolexpiry=<n>", strprintf(_("Do not keep transactions in the mempool longer than <n> hours (default: %u)"), DEFAULT_MEMPOOL_EXPIRY));
+    strUsage += HelpMessageOpt("-par=<n>", strprintf(_("Set the number of script verification threads (%u to %d, 0 = auto, <0 = leave that many cores free, default: %d)"), -GetNumCores(), MAX_SCRIPTCHECK_THREADS, DEFAULT_SCRIPTCHECK_THREADS));
 #ifndef WIN32
     strUsage += HelpMessageOpt("-pid=<file>", strprintf(_("Specify pid file (default: %s)"), "bczd.pid"));
 #endif
@@ -526,6 +529,10 @@ std::string HelpMessage(HelpMessageMode mode)
         strUsage += HelpMessageOpt("-flushwallet", strprintf(_("Run a thread to flush wallet periodically (default: %u)"), 1));
         strUsage += HelpMessageOpt("-maxreorg", strprintf(_("Use a custom max chain reorganization depth (default: %u)"), 100));
         strUsage += HelpMessageOpt("-stopafterblockimport", strprintf(_("Stop running after importing blocks from disk (default: %u)"), 0));
+        strUsage += HelpMessageOpt("-limitancestorcount=<n>", strprintf(_("Do not accept transactions if number of in-mempool ancestors is <n> or more (default: %u)"), DEFAULT_ANCESTOR_LIMIT));
+        strUsage += HelpMessageOpt("-limitancestorsize=<n>", strprintf(_("Do not accept transactions whose size with all in-mempool ancestors exceeds <n> kilobytes (default: %u)"), DEFAULT_ANCESTOR_SIZE_LIMIT));
+        strUsage += HelpMessageOpt("-limitdescendantcount=<n>", strprintf(_("Do not accept transactions if any ancestor would have <n> or more in-mempool descendants (default: %u)"), DEFAULT_DESCENDANT_LIMIT));
+        strUsage += HelpMessageOpt("-limitdescendantsize=<n>", strprintf(_("Do not accept transactions if any ancestor would have more than <n> kilobytes of in-mempool descendants (default: %u)."), DEFAULT_DESCENDANT_SIZE_LIMIT));
         strUsage += HelpMessageOpt("-sporkkey=<privkey>", _("Enable spork administration functionality with the appropriate private key."));
     }
     strUsage += HelpMessageOpt("-debug=<category>", strprintf(_("Output debugging information (default: %u, supplying <category> is optional)"), 0) + ". " +
@@ -547,7 +554,7 @@ std::string HelpMessage(HelpMessageMode mode)
         strUsage += HelpMessageOpt("-maxsigcachesize=<n>", strprintf(_("Limit size of signature cache to <n> entries (default: %u)"), 50000));
     }
     strUsage += HelpMessageOpt("-maxtipage=<n>", strprintf("Maximum tip age in seconds to consider node in initial block download (default: %u)", DEFAULT_MAX_TIP_AGE));
-    strUsage += HelpMessageOpt("-minrelaytxfee=<amt>", strprintf(_("Fees (in %s/Kb) smaller than this are considered zero fee for relaying (default: %s)"), CURRENCY_UNIT, FormatMoney(::minRelayTxFee.GetFeePerK())));
+    strUsage += HelpMessageOpt("-minrelaytxfee=<amt>", strprintf(_("Fees (in %s/Kb) smaller than this are considered zero fee for relaying, mining and transaction creation (default: %s)"), CURRENCY_UNIT, FormatMoney(::minRelayTxFee.GetFeePerK())));
     strUsage += HelpMessageOpt("-printtoconsole", strprintf(_("Send trace/debug info to console instead of debug.log file (default: %u)"), 0));
     if (GetBoolArg("-help-debug", false)) {
         strUsage += HelpMessageOpt("-printpriority", strprintf(_("Log transaction priority and fee per kB when mining blocks (default: %u)"), 0));
@@ -564,6 +571,8 @@ std::string HelpMessage(HelpMessageMode mode)
     strUsage += HelpMessageGroup(_("Staking options:"));
     strUsage += HelpMessageOpt("-coldstaking=<n>", strprintf(_("Enable cold staking functionality (0-1, default: %u). Disabled if staking=0"), 1));
     strUsage += HelpMessageOpt("-reservebalance=<amt>", _("Keep the specified amount available for spending at all times (default: 0)"));
+    strUsage += HelpMessageOpt("-minstakesplit=<amt>", strprintf(_("Minimum positive amount (in PIV) allowed by GUI and RPC for the stake split threshold (default: %s)"),
+                        FormatMoney(DEFAULT_MIN_STAKE_SPLIT_THRESHOLD)));
     if (GetBoolArg("-help-debug", false)) {
         strUsage += HelpMessageOpt("-printstakemodifier", _("Display the stake modifier calculations in the debug.log file."));
         strUsage += HelpMessageOpt("-printcoinstake", _("Display verbose coin stake messages in the debug.log file."));
@@ -684,7 +693,7 @@ struct CImportingNow {
     }
 };
 
-void ThreadImport(std::vector<boost::filesystem::path> vImportFiles)
+void ThreadImport(std::vector<fs::path> vImportFiles)
 {
     util::ThreadRename("bcz-loadblk");
 
@@ -694,7 +703,7 @@ void ThreadImport(std::vector<boost::filesystem::path> vImportFiles)
         int nFile = 0;
         while (true) {
             CDiskBlockPos pos(nFile, 0);
-            if (!boost::filesystem::exists(GetBlockPosFilename(pos, "blk")))
+            if (!fs::exists(GetBlockPosFilename(pos, "blk")))
                 break; // No block files left to reindex
             FILE* file = OpenBlockFile(pos, true);
             if (!file)
@@ -711,12 +720,12 @@ void ThreadImport(std::vector<boost::filesystem::path> vImportFiles)
     }
 
     // hardcoded $DATADIR/bootstrap.dat
-    boost::filesystem::path pathBootstrap = GetDataDir() / "bootstrap.dat";
-    if (boost::filesystem::exists(pathBootstrap)) {
-        FILE* file = fopen(pathBootstrap.string().c_str(), "rb");
+    fs::path pathBootstrap = GetDataDir() / "bootstrap.dat";
+    if (fs::exists(pathBootstrap)) {
+        FILE* file = fsbridge::fopen(pathBootstrap, "rb");
         if (file) {
             CImportingNow imp;
-            boost::filesystem::path pathBootstrapOld = GetDataDir() / "bootstrap.dat.old";
+            fs::path pathBootstrapOld = GetDataDir() / "bootstrap.dat.old";
             LogPrintf("Importing bootstrap.dat...\n");
             LoadExternalBlockFile(file);
             RenameOver(pathBootstrap, pathBootstrapOld);
@@ -726,8 +735,8 @@ void ThreadImport(std::vector<boost::filesystem::path> vImportFiles)
     }
 
     // -loadblock=
-    for (boost::filesystem::path& path : vImportFiles) {
-        FILE* file = fopen(path.string().c_str(), "rb");
+    for (fs::path& path : vImportFiles) {
+        FILE* file = fsbridge::fopen(path, "rb");
         if (file) {
             CImportingNow imp;
             LogPrintf("Importing blocks file %s...\n", path.string());
@@ -1002,18 +1011,34 @@ bool AppInit2()
     // Check level must be 4
     if (mapArgs.count("-checklevel"))
         return UIError(_("Error: Unsupported argument -checklevel found. Checklevel must be level 4."));
+    // Exit early if -masternode=1 and -listen=0
+    if (GetBoolArg("-masternode", false) && !GetBoolArg("-listen", true))
+        return UIError(_("Error: -listen must be true if -masternode is set."));
+    // Exit early if -masternode=1 and -port is not the default port
+    if (GetBoolArg("-masternode", false) && GetListenPort() != Params().GetDefaultPort())
+        return UIError(strprintf(_("Error: Invalid port %d for running a masternode."), GetListenPort()) + "\n\n" +
+                       strprintf(_("Masternodes are required to run on port %d for %s-net"), Params().GetDefaultPort(), Params().NetworkIDString()));
     if (GetBoolArg("-benchmark", false))
         UIWarning(_("Warning: Unsupported argument -benchmark ignored, use -debug=bench."));
 
     // Checkmempool and checkblockindex default to true in regtest mode
-    mempool.setSanityCheck(GetBoolArg("-checkmempool", Params().DefaultConsistencyChecks()));
+    int ratio = std::min<int>(std::max<int>(GetArg("-checkmempool", Params().DefaultConsistencyChecks() ? 1 : 0), 0), 1000000);
+    if (ratio != 0) {
+        mempool.setSanityCheck(1.0 / ratio);
+    }
     fCheckBlockIndex = GetBoolArg("-checkblockindex", Params().DefaultConsistencyChecks());
     Checkpoints::fEnabled = GetBoolArg("-checkpoints", true);
+
+    // -mempoollimit limits
+    int64_t nMempoolSizeLimit = GetArg("-maxmempool", DEFAULT_MAX_MEMPOOL_SIZE) * 1000000;
+    int64_t nMempoolDescendantSizeLimit = GetArg("-limitdescendantsize", DEFAULT_DESCENDANT_SIZE_LIMIT) * 1000;
+    if (nMempoolSizeLimit < 0 || nMempoolSizeLimit < nMempoolDescendantSizeLimit * 40)
+        return UIError(strprintf(_("Error: -maxmempool must be at least %d MB"), GetArg("-limitdescendantsize", DEFAULT_DESCENDANT_SIZE_LIMIT) / 25));
 
     // -par=0 means autodetect, but nScriptCheckThreads==0 means no concurrency
     nScriptCheckThreads = GetArg("-par", DEFAULT_SCRIPTCHECK_THREADS);
     if (nScriptCheckThreads <= 0)
-        nScriptCheckThreads += boost::thread::hardware_concurrency();
+        nScriptCheckThreads += GetNumCores();
     if (nScriptCheckThreads <= 1)
         nScriptCheckThreads = 0;
     else if (nScriptCheckThreads > MAX_SCRIPTCHECK_THREADS)
@@ -1078,12 +1103,12 @@ bool AppInit2()
     std::string strDataDir = GetDataDir().string();
 #ifdef ENABLE_WALLET
     // Wallet file must be a plain filename without a directory
-    if (strWalletFile != boost::filesystem::basename(strWalletFile) + boost::filesystem::extension(strWalletFile))
+    if (strWalletFile != fs::basename(strWalletFile) + fs::extension(strWalletFile)
         return UIError(strprintf(_("Wallet %s resides outside data directory %s"), strWalletFile, strDataDir));
 #endif
     // Make sure only a single BCZ process is using the data directory.
-    boost::filesystem::path pathLockFile = GetDataDir() / ".lock";
-    FILE* file = fopen(pathLockFile.string().c_str(), "a"); // empty lock file; created if it doesn't exist.
+    fs::path pathLockFile = GetDataDir() / ".lock";
+    FILE* file = fsbridge::fopen(pathLockFile, "a"); // empty lock file; created if it doesn't exist.
     if (file) fclose(file);
     static boost::interprocess::file_lock lock(pathLockFile.string().c_str());
 
@@ -1143,16 +1168,16 @@ bool AppInit2()
     if (!fDisableWallet)
     {
 
-        boost::filesystem::path backupDir = GetDataDir() / "backups";
+        fs::path backupDir = GetDataDir() / "backups";
 
         if (nBackups > 0)
         {
-        if (!boost::filesystem::exists(backupDir))
+        if (!fs::exists(backupDir))
         {
             // Always create backup folder to not confuse the operating system's file browser
-            boost::filesystem::create_directories(backupDir);
+            fs::create_directories(backupDir);
         }
-            if (boost::filesystem::exists(backupDir))
+            if (fs::exists(backupDir))
 
             {   std::string strWalletFile = GetArg("-wallet", "wallet.dat");
                 // Create backup of the wallet
@@ -1161,50 +1186,50 @@ bool AppInit2()
                 backupPathStr += "/" + strWalletFile;
                 std::string sourcePathStr = GetDataDir().string();
                 sourcePathStr += "/" + strWalletFile;
-                boost::filesystem::path sourceFile = sourcePathStr;
-                boost::filesystem::path backupFile = backupPathStr + dateTimeStr;
+                fs::path sourceFile = sourcePathStr;
+                fs::path backupFile = backupPathStr + dateTimeStr;
                 sourceFile.make_preferred();
                 backupFile.make_preferred();
-                if (boost::filesystem::exists(sourceFile))
+                if (fs::exists(sourceFile))
                 {
                     try
                     {
-                        boost::filesystem::copy_file(sourceFile, backupFile);
+                        fs::copy_file(sourceFile, backupFile);
                         LogPrintf("Creating backup of %s -> %s\n", sourceFile, backupFile);
-                    } catch (boost::filesystem::filesystem_error& error)
+                    } catch (fs::filesystem_error& error)
                     {
                         LogPrintf("Failed to create backup %s\n", error.what());
                     }
                 }
 
                 // Keep only the last 25 backups, including the new one of course
-                typedef std::multimap<std::time_t, boost::filesystem::path> folder_set_t;
+                typedef std::multimap<std::time_t, fs::path> folder_set_t;
                 folder_set_t folder_set;
-                boost::filesystem::directory_iterator end_iter;
-                boost::filesystem::path backupFolder = backupDir.string();
+                fs::directory_iterator end_iter;
+                fs::path backupFolder = backupDir.string();
                 backupFolder.make_preferred();
                 // Build map of backup files for current(!) wallet sorted by last write time
-                boost::filesystem::path currentFile;
-                for (boost::filesystem::directory_iterator dir_iter(backupFolder); dir_iter != end_iter; ++dir_iter) {
+                fs::path currentFile;
+                for (fs::directory_iterator dir_iter(backupFolder); dir_iter != end_iter; ++dir_iter) {
                     // Only check regular files
-                    if (boost::filesystem::is_regular_file(dir_iter->status())) {
+                    if (fs::is_regular_file(dir_iter->status())) {
                         currentFile = dir_iter->path().filename();
                         // Only add the backups for the current wallet, e.g. wallet.dat.*
                         if (dir_iter->path().stem().string() == strWalletFile) {
-                            folder_set.insert(folder_set_t::value_type(boost::filesystem::last_write_time(dir_iter->path()), *dir_iter));
+                            folder_set.insert(folder_set_t::value_type(fs::last_write_time(dir_iter->path()), *dir_iter));
                         }
                     }
                 }
                 // Loop backward through backup files and keep the N newest ones (1 <= N <= 10)
                 int counter = 0;
-                BOOST_REVERSE_FOREACH (PAIRTYPE(const std::time_t, boost::filesystem::path) file, folder_set) {
+                BOOST_REVERSE_FOREACH (PAIRTYPE(const std::time_t, fs::path) file, folder_set) {
                     counter++;
                     if (counter > nBackups) {
                         // More than nBackups backups: delete oldest one(s)
                         try {
-                            boost::filesystem::remove(file.second);
+                            fs::remove(file.second);
                             LogPrintf("Old backup deleted: %s\n", file.second);
-                        } catch (boost::filesystem::filesystem_error& error) {
+                        } catch (fs::filesystem_error& error) {
                             LogPrintf("Failed to delete backup %s\n", error.what());
                         }
                     }
@@ -1215,29 +1240,29 @@ bool AppInit2()
             if (GetBoolArg("-resync", false)) {
                 uiInterface.InitMessage(_("Preparing for resync..."));
                 // Delete the local blockchain folders to force a resync from scratch to get a consitent blockchain-state
-                boost::filesystem::path blocksDir = GetDataDir() / "blocks";
-                boost::filesystem::path chainstateDir = GetDataDir() / "chainstate";
-                boost::filesystem::path sporksDir = GetDataDir() / "sporks";
+                fs::path blocksDir = GetDataDir() / "blocks";
+                fs::path chainstateDir = GetDataDir() / "chainstate";
+                fs::path sporksDir = GetDataDir() / "sporks";
 
                 LogPrintf("Deleting blockchain folders blocks, chainstate, sporks\n");
                 // We delete in 4 individual steps in case one of the folder is missing already
                 try {
-                    if (boost::filesystem::exists(blocksDir)){
-                        boost::filesystem::remove_all(blocksDir);
+                    if (fs::exists(blocksDir)){
+                        fs::remove_all(blocksDir);
                         LogPrintf("-resync: folder deleted: %s\n", blocksDir.string().c_str());
                     }
 
-                    if (boost::filesystem::exists(chainstateDir)){
-                        boost::filesystem::remove_all(chainstateDir);
+                    if (fs::exists(chainstateDir)){
+                        fs::remove_all(chainstateDir);
                         LogPrintf("-resync: folder deleted: %s\n", chainstateDir.string().c_str());
                     }
 
-                    if (boost::filesystem::exists(sporksDir)){
-                        boost::filesystem::remove_all(sporksDir);
+                    if (fs::exists(sporksDir)){
+                        fs::remove_all(sporksDir);
                         LogPrintf("-resync: folder deleted: %s\n", sporksDir.string().c_str());
                     }
 
-                } catch (const boost::filesystem::filesystem_error& error) {
+                } catch (const fs::filesystem_error& error) {
                     LogPrintf("Failed to delete blockchain folders %s\n", error.what());
                 }
             }
@@ -1247,12 +1272,12 @@ bool AppInit2()
 
         if (!bitdb.Open(GetDataDir())) {
             // try moving the database env out of the way
-            boost::filesystem::path pathDatabase = GetDataDir() / "database";
-            boost::filesystem::path pathDatabaseBak = GetDataDir() / strprintf("database.%d.bak", GetTime());
+            fs::path pathDatabase = GetDataDir() / "database";
+            fs::path pathDatabaseBak = GetDataDir() / strprintf("database.%d.bak", GetTime());
             try {
-                boost::filesystem::rename(pathDatabase, pathDatabaseBak);
+                fs::rename(pathDatabase, pathDatabaseBak);
                 LogPrintf("Moved old %s to %s. Retrying.\n", pathDatabase.string(), pathDatabaseBak.string());
-            } catch (const boost::filesystem::filesystem_error& error) {
+            } catch (const fs::filesystem_error& error) {
                 // failure is ok (well, not really, but it's not worse than what we started with)
             }
 
@@ -1270,7 +1295,7 @@ bool AppInit2()
                 return false;
         }
 
-        if (boost::filesystem::exists(GetDataDir() / strWalletFile)) {
+        if (fs::exists(GetDataDir() / strWalletFile)) {
             CDBEnv::VerifyResult r = bitdb.Verify(strWalletFile, CWalletDB::Recover);
             if (r == CDBEnv::RECOVER_OK) {
                 std::string msg = strprintf(_("Warning: wallet.dat corrupt, data salvaged!"
@@ -1323,7 +1348,8 @@ bool AppInit2()
 
     if (mapArgs.count("-whitelist")) {
         for (const std::string& net : mapMultiArgs["-whitelist"]) {
-            CSubNet subnet(net);
+            CSubNet subnet;
+                LookupSubNet(net.c_str(), subnet);
             if (!subnet.IsValid())
                 return UIError(strprintf(_("Invalid netmask specified in -whitelist: '%s'"), net));
             CNode::AddWhitelistedRange(subnet);
@@ -1432,7 +1458,7 @@ bool AppInit2()
     fReindex = GetBoolArg("-reindex", false);
 
     // Create blocks directory if it doesn't already exist
-    boost::filesystem::create_directories(GetDataDir() / "blocks");
+    fs::create_directories(GetDataDir() / "blocks");
 
     // cache size calculations
     int64_t nTotalCache = (GetArg("-dbcache", nDefaultDbCache) << 20);
@@ -1578,8 +1604,8 @@ bool AppInit2()
         return false;
     }
 
-    boost::filesystem::path est_path = GetDataDir() / FEE_ESTIMATES_FILENAME;
-    CAutoFile est_filein(fopen(est_path.string().c_str(), "rb"), SER_DISK, CLIENT_VERSION);
+            fs::path est_path = GetDataDir() / FEE_ESTIMATES_FILENAME;
+                CAutoFile est_filein(fsbridge::fopen(est_path, "rb"), SER_DISK, CLIENT_VERSION);
     // Allowed to fail as this file IS missing on first startup.
     if (!est_filein.IsNull())
         mempool.ReadFeeEstimates(est_filein);
@@ -1779,7 +1805,7 @@ bool AppInit2()
         }
     }
 
-    std::vector<boost::filesystem::path> vImportFiles;
+    std::vector<fs::path> vImportFiles;
     if (mapArgs.count("-loadblock")) {
         for (std::string strFile : mapMultiArgs["-loadblock"])
             vImportFiles.push_back(strFile);
