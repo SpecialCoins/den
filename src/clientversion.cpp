@@ -37,11 +37,6 @@ const std::string CLIENT_NAME("PIVX Core");
  * finally CLIENT_VERSION_SUFFIX is added
  */
 
-//! First, include build.h if requested
-#ifdef HAVE_BUILD_INFO
-#include "obj/build.h"
-#endif
-
 //! git will put "#define GIT_ARCHIVE 1" on the next line inside archives. 
 #define GIT_ARCHIVE 1
 #ifdef GIT_ARCHIVE
