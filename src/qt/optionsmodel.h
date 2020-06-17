@@ -68,6 +68,8 @@ public:
     void setDisplayUnit(const QVariant& value);
     /* Update StakeSplitThreshold's value in wallet */
     void setStakeSplitThreshold(const CAmount value);
+    double getSSTMinimum() const;
+    bool isSSTValid();
     /* Update Custom Fee value in wallet */
     void setUseCustomFee(bool fUse);
     void setCustomFeeValue(const CAmount& value);
@@ -85,6 +87,8 @@ public:
     /* Restart flag helper */
     void setRestartRequired(bool fRequired);
     bool isRestartRequired();
+    void setSSTChanged(bool fChanged);
+    bool isSSTChanged();
     bool resetSettings;
 
     bool isColdStakingScreenEnabled() { return showColdStakingScreen; }
@@ -124,10 +128,6 @@ private:
 
 Q_SIGNALS:
     void displayUnitChanged(int unit);
-    void zeromintEnableChanged(bool);
-    void zeromintAddressesChanged(bool);
-    void zeromintPercentageChanged(int);
-    void preferredDenomChanged(int);
     void coinControlFeaturesChanged(bool);
     void showHideColdStakingScreen(bool);
     void hideChartsChanged(bool);
