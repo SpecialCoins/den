@@ -318,7 +318,7 @@ void Shutdown()
                         {
                             fs::copy_file(sourceFile, backupFile);
                             LogPrintf("Creating backup of %s -> %s\n", sourceFile, backupFile);
-                        } catch (bs::filesystem_error& error)
+                        } catch (fs::filesystem_error& error)
                         {
                             LogPrintf("Failed to create backup %s\n", error.what());
                         }
