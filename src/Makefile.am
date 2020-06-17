@@ -344,6 +344,7 @@ libbitcoin_common_a_SOURCES = \
   key.cpp \
   keystore.cpp \
   netaddress.cpp \
+  netbase.cpp \
   protocol.cpp \
   pubkey.cpp \
   scheduler.cpp \
