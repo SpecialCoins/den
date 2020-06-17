@@ -265,7 +265,6 @@ public:
     MasterKeyMap mapMasterKeys;
     unsigned int nMasterKeyMaxID;
 
-
     // Stake Settings
     unsigned int nHashInterval;
     // Stake split threshold
