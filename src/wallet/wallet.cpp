@@ -2619,7 +2619,7 @@ std::string CWallet::CommitResult::ToString() const
  */
 CWallet::CommitResult CWallet::CommitTransaction(CWalletTx& wtxNew, CReserveKey& reservekey, std::string strCommand)
 {
-    CommitResult res
+    CommitResult res;
     {
         LOCK2(cs_main, cs_wallet);
         LogPrintf("%s:\n%s", __func__, wtxNew.ToString());
