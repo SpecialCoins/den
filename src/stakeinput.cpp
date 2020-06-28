@@ -164,7 +164,7 @@ bool CBczStake::ContextCheck(int nHeight, uint32_t nTime)
     // Get Stake input block time/height
     CBlockIndex* pindexFrom = GetIndexFrom();
     if (!pindexFrom)
-        return error("%s: unable to get previous index for stake input");
+        return error("%s: unable to get previous index for stake input", __func__);
     const int nHeightBlockFrom = pindexFrom->nHeight;
     const uint32_t nTimeBlockFrom = pindexFrom->nTime;
 
