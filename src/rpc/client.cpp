@@ -127,7 +127,6 @@ static const CRPCConvertParam vRPCConvertParams[] =
         {"setban", 2},
         {"setban", 3},
         {"spork", 1},
-        {"makekeypair", 2},
         // disabled until removal of the legacy 'masternode' command
         //{"startmasternode", 1},
         {"mnvoteraw", 1},
