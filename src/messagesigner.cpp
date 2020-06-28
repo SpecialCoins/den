@@ -13,13 +13,11 @@
 
 bool CMessageSigner::GetKeysFromSecret(const std::string& strSecret, CKey& keyRet, CPubKey& pubkeyRet)
 {
-    CBitcoinSecret vchSecret;
+    keyRet = DecodeSecret(strSecret);
+    if (!keyRet.IsValid())
+        return false;
 
-    if(!vchSecret.SetString(strSecret)) return false;
-
-    keyRet = vchSecret.GetKey();
     pubkeyRet = keyRet.GetPubKey();
-
     return true;
 }
 
@@ -80,9 +78,8 @@ bool CHashSigner::VerifyHash(const uint256& hash, const CKeyID& keyID, const std
 
 bool CSignedMessage::Sign(const CKey& key, const CPubKey& pubKey)
 {
-    std::string strError = "";
-
     nMessVersion = MessageVersion::MESS_VER_HASH;
+    std::string strError = "";
     uint256 hash = GetSignatureHash();
 
     if(!CHashSigner::SignHash(hash, key, vchSig)) {
