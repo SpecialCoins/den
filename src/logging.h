@@ -1,6 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2018 The Bitcoin developers
-// Copyright (c) 2015-2020 The PIVX developers
+// Copyright (c) 2020 The BCZ developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -11,7 +11,6 @@
 #ifndef BITCOIN_LOGGING_H
 #define BITCOIN_LOGGING_H
 
-#include "fs.h"
 #include "tinyformat.h"
 
 #include <atomic>
@@ -20,6 +19,7 @@
 #include <mutex>
 #include <vector>
 
+#include <boost/filesystem.hpp>
 
 static const bool DEFAULT_LOGTIMEMICROS = false;
 static const bool DEFAULT_LOGIPS        = false;
@@ -91,7 +91,7 @@ namespace BCLog {
         bool m_log_timestamps = DEFAULT_LOGTIMESTAMPS;
         bool m_log_time_micros = DEFAULT_LOGTIMEMICROS;
 
-        fs::path m_file_path;
+        boost::filesystem::path m_file_path;
         std::atomic<bool> m_reopen_file{false};
 
         /** Send a string to the log output */
@@ -147,10 +147,7 @@ template<typename... Args> std::string FormatStringFromLogArgs(const char *fmt, 
         try {                                                                       \
             _log_msg_ = tfm::format(__VA_ARGS__);                                   \
         } catch (tinyformat::format_error &e) {                                     \
-            /* Original format string will have newline so don't add one here */    \
-            _log_msg_ = "Error \"" + std::string(e.what()) +                        \
-                        "\" while formatting log message: " +                       \
-                        FormatStringFromLogArgs(__VA_ARGS__);                       \
+                    \
         }                                                                           \
         g_logger->LogPrintStr(_log_msg_);                                           \
     }                                                                               \

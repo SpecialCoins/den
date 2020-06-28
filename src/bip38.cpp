@@ -1,4 +1,4 @@
-// Copyright (c) 2017-2020 The PIVX developers
+// Copyright (c) 2020 The BCZ developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -34,7 +34,7 @@ void DecryptAES(uint256 encryptedIn, uint256 decryptionKey, uint256& output)
 void ComputePreFactor(std::string strPassphrase, std::string strSalt, uint256& prefactor)
 {
     //passfactor is the scrypt hash of passphrase and ownersalt (NOTE this needs to handle alt cases too in the future)
-    uint64_t s = uint256S(ReverseEndianString(strSalt)).GetCheapHash();
+    uint64_t s = uint256(ReverseEndianString(strSalt)).Get64();
     scrypt_hash(strPassphrase.c_str(), strPassphrase.size(), BEGIN(s), strSalt.size() / 2, BEGIN(prefactor), 16384, 8, 8, 32);
 }
 

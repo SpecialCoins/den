@@ -20,7 +20,7 @@ Net Parameters
 ----------------
 * P2P Port: 29500
 * RPC Port: 29501
-* Client core: BCZ 4.1.99
+* Client core: PIVX 4.1.99
 * Client name: bcz.qt
 * Conf file: bcz.conf
 

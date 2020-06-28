@@ -22,7 +22,7 @@
    </font>
   </property>
   <property name="windowTitle">
-   <string notr="true">PIVX Core - Command-line options</string>
+   <string notr="true">BCZ Core - Command-line options</string>
   </property>
   <property name="styleSheet">
    <string notr="true">#HelpMessageDialog {
@@ -116,7 +116,7 @@
           <property name="styleSheet">
            <string notr="true">#helpMessage {
 background-color:#FFFFFF;
-	color:#707070;
+	color:#908c96;
 }</string>
           </property>
           <property name="readOnly">
@@ -166,7 +166,7 @@ background-color:#FFFFFF;
               <property name="styleSheet">
                <string notr="true">#aboutMessage {
 background-color:#FFFFFF;
-	color:#707070;
+	color:#908c96;
 }</string>
               </property>
               <property name="textFormat">

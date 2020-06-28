@@ -1,5 +1,5 @@
 // Copyright (c) 2014-2016 The Dash developers
-// Copyright (c) 2016-2020 The PIVX developers
+// Copyright (c) 2020 The BCZ developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -8,10 +8,10 @@
 #include "activemasternode.h"
 #include "base58.h"
 #include "key.h"
-#include "masternode-sync.h"
 #include "masternodeman.h"
 #include "messagesigner.h"
 #include "net.h"
+#include "masternode-sync.h"
 #include "protocol.h"
 #include "spork.h"
 #include "sync.h"
@@ -60,7 +60,7 @@ void ProcessMessageSwiftTX(CNode* pfrom, std::string& strCommand, CDataStream& v
         }
 
         for (const CTxOut &o : tx.vout) {
-            // IX supports normal scripts and unspendable scripts (used in DS collateral and Budget collateral).
+            // IX supports normal scripts and unspendable scripts (used in DS collateral collateral).
             // TODO: Look into other script types that are normal and can be included
             if (!o.scriptPubKey.IsNormalPaymentScript() && !o.scriptPubKey.IsUnspendable()) {
                 LogPrintf("%s : Invalid Script %s\n", __func__, tx.ToString().c_str());
@@ -285,12 +285,8 @@ void DoConsensusVote(CTransaction& tx, int64_t nBlockHeight)
     ctx.vinMasternode = activeMasternode.vin;
     ctx.txHash = tx.GetHash();
     ctx.nBlockHeight = nBlockHeight;
-    bool fNewSigs = false;
-    {
-        LOCK(cs_main);
-        fNewSigs = chainActive.NewSigsActive();
-    }
-    if (!ctx.Sign(strMasterNodePrivKey, fNewSigs)) {
+
+    if (!ctx.Sign(strMasterNodePrivKey)) {
         LogPrintf("%s : Failed to sign consensus vote\n", __func__);
         return;
     }

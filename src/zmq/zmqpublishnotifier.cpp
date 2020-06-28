@@ -88,7 +88,6 @@ bool CZMQAbstractPublishNotifier::Initialize(void *pcontext)
     else
     {
         LogPrint(BCLog::ZMQ, "Reusing socket for address %s\n", address);
-
         psocket = i->second->psocket;
         mapPublishNotifiers.insert(std::make_pair(address, this));
 

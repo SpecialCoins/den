@@ -1,6 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
-// Copyright (c) 2016-2020 The PIVX developers
+// Copyright (c) 2020 The BCZ developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -35,8 +35,8 @@ void UpdateTime(CBlockHeader* block, const CBlockIndex* pindexPrev);
     /** Generate a new block, without valid proof-of-work */
     CBlockTemplate* CreateNewBlockWithKey(CReserveKey& reservekey, CWallet* pwallet);
 
-    void BitcoinMiner(CWallet* pwallet, bool fProofOfStake);
-    void ThreadStakeMinter();
+    void PosMiner(CWallet* pwallet, bool fProofOfStake);
+    void StakeBCZ(bool fStake_BCZ, CWallet* pwallet);
 #endif // ENABLE_WALLET
 
 extern double dHashesPerSec;

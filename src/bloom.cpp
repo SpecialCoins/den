@@ -1,5 +1,5 @@
 // Copyright (c) 2012-2014 The Bitcoin developers
-// Copyright (c) 2017-2019 The PIVX developers
+// Copyright (c) 2020 The BCZ developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -8,8 +8,7 @@
 
 #include "chainparams.h"
 #include "hash.h"
-#include "libzerocoin/bignum.h"
-#include "libzerocoin/CoinSpend.h"
+#include "bignum/bignum.h"
 #include "primitives/transaction.h"
 #include "script/script.h"
 #include "script/standard.h"
@@ -124,7 +123,7 @@ bool CBloomFilter::IsWithinSizeConstraints() const
 }
 
 /**
- * Returns true if this filter will match anything. See {@link org.pivxj.core.BloomFilter#setMatchAll()}
+ * Returns true if this filter will match anything. See {@link org.bczj.core.BloomFilter#setMatchAll()}
  * for when this can be a useful thing to do.
  */
 bool CBloomFilter::MatchesAll() const {
@@ -182,10 +181,6 @@ bool CBloomFilter::IsRelevantAndUpdate(const CTransaction& tx)
                 break;
             }
 
-            if (txout.IsZerocoinMint()){
-                data = std::vector<unsigned char>(txout.scriptPubKey.begin() + 6, txout.scriptPubKey.begin() + txout.scriptPubKey.size());
-            }
-
             if (data.size() != 0 && contains(data)) {
                 fFound = true;
                 if ((nFlags & BLOOM_UPDATE_MASK) == BLOOM_UPDATE_ALL)
@@ -217,12 +212,6 @@ bool CBloomFilter::IsRelevantAndUpdate(const CTransaction& tx)
             opcodetype opcode;
             if (!txin.scriptSig.GetOp(pc, opcode, data))
                 break;
-            if (txin.IsZerocoinSpend()) {
-                CDataStream s(std::vector<unsigned char>(txin.scriptSig.begin() + 44, txin.scriptSig.end()),
-                        SER_NETWORK, PROTOCOL_VERSION);
-
-                data = libzerocoin::CoinSpend::ParseSerial(s);
-            }
             if (data.size() != 0 && contains(data)) {
                 return true;
             }

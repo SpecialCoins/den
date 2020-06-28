@@ -1,6 +1,6 @@
 // Copyright (c) 2011-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2020 The PIVX developers
+// Copyright (c) 2020 The BCZ developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -21,9 +21,7 @@
 
 const QString AddressTableModel::Send = "S";
 const QString AddressTableModel::Receive = "R";
-const QString AddressTableModel::Zerocoin = "X";
-const QString AddressTableModel::Delegator = "D";
-const QString AddressTableModel::Delegable = "E";
+const QString AddressTableModel::Delegators = "D";
 const QString AddressTableModel::ColdStaking = "C";
 const QString AddressTableModel::ColdStakingSend = "T";
 
@@ -31,9 +29,7 @@ struct AddressTableEntry {
     enum Type {
         Sending,
         Receiving,
-        Zerocoin,
-        Delegator,
-        Delegable,
+        Delegators,
         ColdStaking,
         ColdStakingSend,
         Hidden /* QSortFilterProxyModel will filter these out */
@@ -46,7 +42,6 @@ struct AddressTableEntry {
     uint creationTime;
 
     AddressTableEntry() {}
-    AddressTableEntry(Type type, const QString &pubcoin):    type(type), pubcoin(pubcoin) {}
     AddressTableEntry(Type type, const QString& label, const QString& address, const uint _creationTime) : type(type), label(label), address(address), creationTime(_creationTime) {}
 };
 
@@ -74,10 +69,9 @@ static AddressTableEntry::Type translateTransactionType(const QString& strPurpos
         addressType = AddressTableEntry::Sending;
     else if (strPurpose ==  QString::fromStdString(AddressBook::AddressBookPurpose::RECEIVE))
         addressType = AddressTableEntry::Receiving;
-    else if (strPurpose == QString::fromStdString(AddressBook::AddressBookPurpose::DELEGATOR))
-        addressType = AddressTableEntry::Delegator;
-    else if (strPurpose == QString::fromStdString(AddressBook::AddressBookPurpose::DELEGABLE))
-        addressType = AddressTableEntry::Delegable;
+    else if (strPurpose == QString::fromStdString(AddressBook::AddressBookPurpose::DELEGATOR)
+            || strPurpose == QString::fromStdString(AddressBook::AddressBookPurpose::DELEGABLE))
+        addressType = AddressTableEntry::Delegators;
     else if (strPurpose == QString::fromStdString(AddressBook::AddressBookPurpose::COLD_STAKING))
         addressType = AddressTableEntry::ColdStaking;
     else if (strPurpose == QString::fromStdString(AddressBook::AddressBookPurpose::COLD_STAKING_SEND))
@@ -94,10 +88,8 @@ static QString translateTypeToString(AddressTableEntry::Type type)
             return QObject::tr("Contact");
         case AddressTableEntry::Receiving:
             return QObject::tr("Receiving");
-        case AddressTableEntry::Delegator:
+        case AddressTableEntry::Delegators:
             return QObject::tr("Delegator");
-        case AddressTableEntry::Delegable:
-            return QObject::tr("Delegable");
         case AddressTableEntry::ColdStaking:
             return QObject::tr("Cold Staking");
         case AddressTableEntry::ColdStakingSend:
@@ -234,44 +226,26 @@ public:
         }
     }
 
-    void updateEntry(const QString &pubCoin, const QString &isUsed, int status)
+    int size()
     {
-        // Find address / label in model
-        QList<AddressTableEntry>::iterator lower = std::lower_bound(
-            cachedAddressTable.begin(), cachedAddressTable.end(), pubCoin, AddressTableEntryLessThan());
-        QList<AddressTableEntry>::iterator upper = std::upper_bound(
-            cachedAddressTable.begin(), cachedAddressTable.end(), pubCoin, AddressTableEntryLessThan());
-        int lowerIndex = (lower - cachedAddressTable.begin());
-        bool inModel = (lower != upper);
-        AddressTableEntry::Type newEntryType = AddressTableEntry::Zerocoin;
-
-        switch(status)
-        {
-            case CT_NEW:
-                if (inModel) {
-                    qWarning() << "AddressTablePriv_ZC::updateEntry : Warning: Got CT_NEW, but entry is already in model";
-                }
-                parent->beginInsertRows(QModelIndex(), lowerIndex, lowerIndex);
-                cachedAddressTable.insert(lowerIndex, AddressTableEntry(newEntryType, isUsed, pubCoin, 0));
-                parent->endInsertRows();
-                break;
-            case CT_UPDATED:
-                if (!inModel) {
-                    qWarning() << "AddressTablePriv_ZC::updateEntry : Warning: Got CT_UPDATED, but entry is not in model";
-                    break;
-                }
-                lower->type = newEntryType;
-                lower->label = isUsed;
-                parent->emitDataChanged(lowerIndex);
-                break;
-        }
+        return cachedAddressTable.size();
     }
 
-    int size() { return cachedAddressTable.size(); }
-    int sizeSend() { return sendNum; }
-    int sizeRecv() { return recvNum; }
-    int sizeDell() { return dellNum; }
-    int SizeColdSend() { return coldSendNum; }
+    int sizeSend(){
+        return sendNum;
+    }
+
+    int sizeRecv(){
+        return recvNum;
+    }
+
+    int sizeDell(){
+        return dellNum;
+    }
+
+    int SizeColdSend() {
+        return coldSendNum;
+    }
 
     AddressTableEntry* index(int idx)
     {
@@ -346,10 +320,8 @@ QVariant AddressTableModel::data(const QModelIndex& index, int role) const
                 return Send;
             case AddressTableEntry::Receiving:
                 return Receive;
-            case AddressTableEntry::Delegator:
-                return Delegator;
-            case AddressTableEntry::Delegable:
-                return Delegable;
+            case AddressTableEntry::Delegators:
+                return Delegators;
             case AddressTableEntry::ColdStaking:
                 return ColdStaking;
             case AddressTableEntry::ColdStakingSend:
@@ -455,18 +427,9 @@ void AddressTableModel::updateEntry(const QString& address,
     const QString& purpose,
     int status)
 {
-    // Update address book model from Pivx core
+    // Update address book model from BCZ core
     priv->updateEntry(address, label, isMine, purpose, status);
 }
-
-
-void AddressTableModel::updateEntry(const QString &pubCoin, const QString &isUsed, int status)
-{
-    // Update stealth address book model from Bitcoin core
-    priv->updateEntry(pubCoin, isUsed, status);
-}
-
-
 
 QString AddressTableModel::addRow(const QString& type, const QString& label, const QString& address)
 {

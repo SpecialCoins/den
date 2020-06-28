@@ -1,5 +1,5 @@
 // Copyright (c) 2014-2017 The Bitcoin developers
-// Copyright (c) 2017-2020 The PIVX developers
+// Copyright (c) 2020 The BCZ developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -43,7 +43,7 @@ void AddTimeData(const CNetAddr& ip, int64_t nOffsetSample, int nOffsetLimit)
     static std::set<CNetAddr> setKnown;
     if (setKnown.size() == BITCOIN_TIMEDATA_MAX_SAMPLES)
         return;
-    if (!Params().IsRegTestNet() && !setKnown.insert(ip).second)
+    if (!setKnown.insert(ip).second && Params().NetworkID() != CBaseChainParams::REGTEST)
         return;
 
     // Add data
@@ -77,7 +77,7 @@ void AddTimeData(const CNetAddr& ip, int64_t nOffsetSample, int nOffsetLimit)
             strMiscWarning = "";
         } else {
             nTimeOffset = (nMedian > 0 ? 1 : -1) * nOffsetLimit;
-            std::string strMessage = _("Warning: Please check that your computer's date and time are correct! If your clock is wrong PIVX Core will not work properly.");
+            std::string strMessage = _("Warning: Please check that your computer's date and time are correct! If your clock is wrong BCZ Core will not work properly.");
             strMiscWarning = strMessage;
             LogPrintf("*** %s\n", strMessage);
             uiInterface.ThreadSafeMessageBox(strMessage, "", CClientUIInterface::MSG_ERROR);
@@ -89,17 +89,4 @@ void AddTimeData(const CNetAddr& ip, int64_t nOffsetSample, int nOffsetLimit)
         }
         LogPrintf("nTimeOffset = %+d\n", nTimeOffset);
     }
-}
-
-// Time Protocol V2
-// Timestamp for time protocol V2: slot duration 15 seconds
-int64_t GetTimeSlot(const int64_t nTime)
-{
-    const int slotLen = Params().GetConsensus().nTimeSlotLength;
-    return (nTime / slotLen) * slotLen;
-}
-
-int64_t GetCurrentTimeSlot()
-{
-    return GetTimeSlot(GetAdjustedTime());
 }

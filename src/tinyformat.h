@@ -604,10 +604,6 @@ inline const char* streamStateFromFormat(std::ostream& out, bool& spacePadPositi
                                          const detail::FormatArg* formatters,
                                          int& argIndex, int numFormatters)
 {
-    if (*fmtStart != '%') {
-        TINYFORMAT_ERROR("tinyformat: Not enough conversion specifiers in format string");
-        return fmtStart;
-    }
     // Reset stream state to defaults.
     out.width(0);
     out.precision(6);

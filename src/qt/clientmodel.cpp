@@ -1,6 +1,6 @@
 // Copyright (c) 2011-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2020 The PIVX developers
+// Copyright (c) 2020 The BCZ developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -83,6 +83,15 @@ QString ClientModel::getMasternodeCountString() const
     return tr("Total: %1 (IPv4: %2 / IPv6: %3 / Tor: %4 / Unknown: %5)").arg(QString::number((int)mnodeman.size())).arg(QString::number((int)ipv4)).arg(QString::number((int)ipv6)).arg(QString::number((int)onion)).arg(QString::number((int)nUnknown));
 }
 
+QString ClientModel::getMnRoiCountString() const
+{
+    int ipv4 = 0, ipv6 = 0, onion = 0;
+    mnodeman.CountNetworks(ActiveProtocol(), ipv4, ipv6, onion);
+    int value = mnodeman.size();
+    int roi = 4204.8 / value;
+    return tr("%1 % / Year").arg(roi);
+}
+
 int ClientModel::getNumBlocks()
 {
     if (!cacheTip) {
@@ -120,6 +129,17 @@ QString ClientModel::getLastBlockHash() const
     return QString::fromStdString(nHash.GetHex());
 }
 
+long ClientModel::getMempoolSize() const
+{
+    return mempool.size();
+}
+
+size_t ClientModel::getMempoolDynamicUsage() const
+{
+    return mempool.GetTotalTxSize();
+}
+
+
 double ClientModel::getVerificationProgress() const
 {
     return Checkpoints::GuessVerificationProgress(cacheTip);
@@ -131,6 +151,7 @@ void ClientModel::updateTimer()
     // periodical polls if the core is holding the locks for a longer time -
     // for example, during a wallet rescan.
     Q_EMIT bytesChanged(getTotalBytesRecv(), getTotalBytesSent());
+    Q_EMIT mempoolSizeChanged(getMempoolSize(), getMempoolDynamicUsage());
 }
 
 void ClientModel::updateMnTimer()
@@ -143,10 +164,20 @@ void ClientModel::updateMnTimer()
         return;
     QString newMasternodeCountString = getMasternodeCountString();
 
-    if (cachedMasternodeCountString != newMasternodeCountString) {
+    if (cachedMasternodeCountString != newMasternodeCountString)
+    {
         cachedMasternodeCountString = newMasternodeCountString;
 
         Q_EMIT strMasternodesChanged(cachedMasternodeCountString);
+    }
+
+    QString newMnRoiCountString = getMnRoiCountString();
+
+    if (cachedMnRoiCountString != newMnRoiCountString)
+    {
+        cachedMnRoiCountString = newMnRoiCountString;
+
+        Q_EMIT strMnRoiChanged(cachedMnRoiCountString);
     }
 }
 
