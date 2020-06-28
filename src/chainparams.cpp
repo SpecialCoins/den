@@ -69,17 +69,6 @@ static const Checkpoints::CCheckpointData dataRegtest = {
     0,
     100};
 
-bool CChainParams::HasStakeMinAgeOrDepth(const int contextHeight, const uint32_t contextTime,
-        const int utxoFromBlockHeight, const uint32_t utxoFromBlockTime) const
-{
-    // before stake modifier V2, the age required was 60 * 60 (1 hour) / not required on regtest
-    if (!IsStakeModifierV2(contextHeight))
-        return (NetworkID() == CBaseChainParams::REGTEST || (utxoFromBlockTime + 3600 <= contextTime));
-
-    // after stake modifier V2, we require the utxo to be nStakeMinDepth deep in the chain
-    return (contextHeight - utxoFromBlockHeight >= nStakeMinDepth);
-}
-
 class CMainParams : public CChainParams
 {
 public:
@@ -105,7 +94,6 @@ public:
         nToCheckBlockUpgradeMajority = 10800; // Approximate expected amount of blocks in 7 days (1440*7.5)
         nMinerThreads = 0;
         nTimeSlotLength = 150;
-        nMaturity = 100;
         nStakeMinDepth = 120;
         nFutureTimeDrift = 180;
         nMinColdStakingAmount = 100 * COIN;
@@ -117,6 +105,8 @@ public:
         // New P2P messages signatures
         nBlockEnforceNewMessageSignatures = 162000;
         nColdStart = 165000;  //cold rescan
+
+        consensus.nCoinbaseMaturity = 100;
 
         const char* pszTimestamp = "BCZ BORN";
         CMutableTransaction txNew;
