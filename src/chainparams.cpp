@@ -100,7 +100,6 @@ public:
 
         /** Height or Time Based Activations **/
         nLastPOWBlock = 50000;
-        nBlockStakeModifierlV2 = 66555;
 
         // New P2P messages signatures
         nBlockEnforceNewMessageSignatures = 162000;
@@ -108,6 +107,7 @@ public:
 
         consensus.nCoinbaseMaturity = 100;
         consensus.nMaxMoneyOut = 21000000 * COIN;
+        consensus.nBlockStakeModifierlV2 = 66555;
 
         const char* pszTimestamp = "BCZ BORN";
         CMutableTransaction txNew;

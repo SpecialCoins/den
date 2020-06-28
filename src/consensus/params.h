@@ -18,9 +18,12 @@ namespace Consensus {
  */
 struct Params {
     int nCoinbaseMaturity;
+    int nBlockStakeModifierlV2;
 	CAmount nMaxMoneyOut;
 	
 	bool MoneyRange(const CAmount& nValue) const { return (nValue >= 0 && nValue <= nMaxMoneyOut); }
+
+    bool IsStakeModifierV2(const int nHeight) const { return nHeight >= nBlockStakeModifierlV2; }
 
     bool HasStakeMinAgeOrDepth(const int contextHeight, const uint32_t contextTime,
             const int utxoFromBlockHeight, const uint32_t utxoFromBlockTime) const

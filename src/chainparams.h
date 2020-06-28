@@ -107,7 +107,6 @@ public:
 
     /** Height or Time Based Activations **/
     int LAST_POW_BLOCK() const { return nLastPOWBlock; }
-    bool IsStakeModifierV2(const int nHeight) const { return nHeight >= nBlockStakeModifierlV2; }
     int ColdStart() const { return nColdStart; }
 
 protected:
@@ -148,7 +147,6 @@ protected:
     std::string strSporkPubKey;
     int nBlockEnforceNewMessageSignatures;
     int nColdStart;
-    int nBlockStakeModifierlV2;
     CAmount nMinColdStakingAmount;
 
 };
