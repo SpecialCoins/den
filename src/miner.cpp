@@ -31,6 +31,7 @@
 #include "blocksignature.h"
 #include "spork.h"
 #include "invalid.h"
+#include "policy/policy.h"
 
 #include <boost/thread.hpp>
 #include <boost/tuple/tuple.hpp>
