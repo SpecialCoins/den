@@ -1213,7 +1213,7 @@ bool AcceptableInputs(CTxMemPool& pool, CValidationState& state, const CTransact
         //        if (!CheckInputs(tx, state, view, false, MANDATORY_SCRIPT_VERIFY_FLAGS, true))
         //        {
         //            return error("%s: BUG! PLEASE REPORT THIS! ConnectInputs failed against MANDATORY but not STANDARD flags %s, %s",
-        __func__, hash.ToString(), FormatStateMessage(state));
+        //__func__, hash.ToString(), FormatStateMessage(state));
         //        }
 
         // Store transaction in memory
@@ -1583,6 +1583,13 @@ bool ValidOutPoint(const COutPoint& out, int nHeight)
 {
     bool isInvalid = invalid_out::ContainsOutPoint(out);
     return !isInvalid;
+}
+
+int GetSpendHeight(const CCoinsViewCache& inputs)
+{
+    LOCK(cs_main);
+    CBlockIndex* pindexPrev = mapBlockIndex.find(inputs.GetBestBlock())->second;
+    return pindexPrev->nHeight + 1;
 }
 
 bool CheckInputs(const CTransaction& tx, CValidationState& state, const CCoinsViewCache& inputs, bool fScriptChecks, unsigned int flags, bool cacheStore, std::vector<CScriptCheck>* pvChecks)
