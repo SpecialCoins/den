@@ -107,6 +107,7 @@ public:
         nColdStart = 165000;  //cold rescan
 
         consensus.nCoinbaseMaturity = 100;
+        consensus.nMaxMoneyOut = 21000000 * COIN;
 
         const char* pszTimestamp = "BCZ BORN";
         CMutableTransaction txNew;

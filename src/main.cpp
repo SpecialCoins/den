@@ -790,8 +790,8 @@ CAmount GetMinRelayFee(const CTransaction& tx, const CTxMemPool& pool, unsigned 
             nMinFee = 0;
     }
 
-    if (!MoneyRange(nMinFee))
-        nMinFee = MAX_MONEY_OUT;
+    if (!Params().GetConsensus().MoneyRange(nMinFee))
+        nMinFee = Params().GetConsensus().nMaxMoneyOut;
     return nMinFee;
 }
 
