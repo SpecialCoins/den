@@ -14,6 +14,7 @@
 #include "stakeinput.h"
 #include "spork.h"
 #include "masternode-sync.h"
+#include "policy/policy.h"
 
 // Get the last stake modifier and its generation time from a given block
 static bool GetLastStakeModifier(const CBlockIndex* pindex, uint64_t& nStakeModifier, int64_t& nModifierTime)
