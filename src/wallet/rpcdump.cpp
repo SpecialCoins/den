@@ -279,7 +279,6 @@ UniValue importwallet(const UniValue& params, bool fHelp)
         CKey key = DecodeSecret(vstr[0]);
         if (!key.IsValid())
             continue;
-        CKey key = vchSecret.GetKey();
         CPubKey pubkey = key.GetPubKey();
         assert(key.VerifyPubKey(pubkey));
         CKeyID keyid = pubkey.GetID();
