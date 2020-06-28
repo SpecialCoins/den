@@ -94,7 +94,6 @@ public:
         nToCheckBlockUpgradeMajority = 10800; // Approximate expected amount of blocks in 7 days (1440*7.5)
         nMinerThreads = 0;
         nTimeSlotLength = 150;
-        nStakeMinDepth = 120;
         nFutureTimeDrift = 180;
         nMinColdStakingAmount = 100 * COIN;
 
@@ -106,6 +105,7 @@ public:
         nColdStart = 165000;  //cold rescan
 
         consensus.nCoinbaseMaturity = 100;
+        consensus.nStakeMinDepth = 120;
         consensus.nMaxMoneyOut = 21000000 * COIN;
         consensus.nBlockStakeModifierlV2 = 66555;
 

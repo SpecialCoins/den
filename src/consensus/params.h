@@ -18,6 +18,7 @@ namespace Consensus {
  */
 struct Params {
     int nCoinbaseMaturity;
+    int nStakeMinDepth;
     int nBlockStakeModifierlV2;
 	CAmount nMaxMoneyOut;
 	
