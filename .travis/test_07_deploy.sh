@@ -26,7 +26,7 @@ elif [[ $HOST = "aarch64-linux-gnu" ]]; then
 elif [[ $HOST = "x86_64-apple-darwin16" ]]; then
     ARCHIVE_NAME+="osx.zip"
 fi
-cp $TRAVIS_BUILD_DIR/build/pivx-$HOST/src/qt/pivx-qt $OUTDIR/bin/ || cp $TRAVIS_BUILD_DIR/build/pivx-$HOST/src/qt/pivx-qt.exe $OUTDIR/bin/ || echo "no QT Wallet"
+cp $TRAVIS_BUILD_DIR/build/bcz-$HOST/src/qt/bcz-qt $OUTDIR/bin/ || cp $TRAVIS_BUILD_DIR/build/bcz-$HOST/src/qt/bcz-qt.exe $OUTDIR/bin/ || echo "no QT Wallet"
 cp $TRAVIS_BUILD_DIR/build/bcz-$HOST/src/bczd $OUTDIR/bin/ || cp $TRAVIS_BUILD_DIR/build/bcz-$HOST/src/bczd.exe $OUTDIR/bin/ || echo "no Daemon"
 cp $TRAVIS_BUILD_DIR/build/bcz-$HOST/src/bcz-cli $OUTDIR/bin/ || cp $TRAVIS_BUILD_DIR/build/bcz-$HOST/src/bcz-cli.exe $OUTDIR/bin/ || echo "no Cli"
 cp $TRAVIS_BUILD_DIR/build/bcz-$HOST/src/bcz-tx $OUTDIR/bin/ || cp $TRAVIS_BUILD_DIR/build/bcz-$HOST/src/bcz-tx.exe $OUTDIR/bin/ || echo "no TX"
