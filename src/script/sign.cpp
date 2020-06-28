@@ -6,10 +6,9 @@
 
 #include "script/sign.h"
 
+#include "primitives/transaction.h"
 #include "key.h"
 #include "keystore.h"
-#include "policy/policy.h"
-#include "primitives/transaction.h"
 #include "script/standard.h"
 #include "uint256.h"
 #include "util.h"

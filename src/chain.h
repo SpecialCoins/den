@@ -455,7 +455,7 @@ public:
         READWRITE(nFlags);
 
         // v1/v2 modifier selection.
-        if (!Params().GetConsensus().IsStakeModifierV2(nHeight)) {
+        if (!Params().IsStakeModifierV2(nHeight)) {
             READWRITE(nStakeModifier);
         } else {
             READWRITE(nStakeModifierV2);
@@ -497,10 +497,12 @@ public:
 
     std::string ToString() const
     {
-        return strprintf("CDiskBlockIndex(%s\n                hashBlock=%s, hashPrev=%s)",
-                CBlockIndex::ToString(),
-                GetBlockHash().ToString(),
-                hashPrev.ToString());
+        std::string str = "CDiskBlockIndex(";
+        str += CBlockIndex::ToString();
+        str += strprintf("\n                hashBlock=%s, hashPrev=%s)",
+            GetBlockHash().ToString(),
+            hashPrev.ToString());
+        return str;
     }
 };
 

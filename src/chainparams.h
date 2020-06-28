@@ -10,7 +10,6 @@
 
 #include "chainparamsbase.h"
 #include "checkpoints.h"
-#include "consensus/params.h"
 #include "primitives/block.h"
 #include "protocol.h"
 #include "uint256.h"
@@ -52,7 +51,6 @@ public:
         MAX_BASE58_TYPES
     };
 
-    const Consensus::Params& GetConsensus() const { return consensus; }
     const uint256& HashGenesisBlock() const { return hashGenesisBlock; }
     const MessageStartChars& MessageStart() const { return pchMessageStart; }
     const std::vector<unsigned char>& AlertKey() const { return vAlertPubKey; }
@@ -77,7 +75,15 @@ public:
     bool AllowMinDifficultyBlocks() const { return fAllowMinDifficultyBlocks; }
     /** Skip proof-of-work check: allow mining of any difficulty block */
     bool SkipProofOfWorkCheck() const { return fSkipProofOfWorkCheck; }
+    /** Make standard checks */
+    bool RequireStandard() const { return fRequireStandard; }
 
+    /** returns the coinbase maturity **/
+    int COINBASE_MATURITY() const { return nMaturity; }
+
+    /** returns the coinstake maturity (min depth required) **/
+    int COINSTAKE_MIN_DEPTH() const { return nStakeMinDepth; }
+    bool HasStakeMinAgeOrDepth(const int contextHeight, const uint32_t contextTime, const int utxoFromBlockHeight, const uint32_t utxoFromBlockTime) const;
     int TimeSlotLength() const { return nTimeSlotLength; }
     int FutureTimeDrift() const { return nFutureTimeDrift; }
     uint32_t MaxFutureTime(uint32_t time) const { return time + FutureTimeDrift(); }
@@ -103,12 +109,12 @@ public:
 
     /** Height or Time Based Activations **/
     int LAST_POW_BLOCK() const { return nLastPOWBlock; }
+    bool IsStakeModifierV2(const int nHeight) const { return nHeight >= nBlockStakeModifierlV2; }
     int ColdStart() const { return nColdStart; }
 
 protected:
     CChainParams() {}
 
-    Consensus::Params consensus;
     uint256 hashGenesisBlock;
     MessageStartChars pchMessageStart;
     //! Raw pub key bytes for the broadcast alert signing key.
@@ -120,6 +126,8 @@ protected:
     int nRejectBlockOutdatedMajority;
     int nToCheckBlockUpgradeMajority;
     int nLastPOWBlock;
+    int nMaturity;
+    int nStakeMinDepth;
     int nFutureTimeDrift;
     int nTimeSlotLength;
 
@@ -133,6 +141,7 @@ protected:
     bool fMiningRequiresPeers;
     bool fAllowMinDifficultyBlocks;
     bool fDefaultConsistencyChecks;
+    bool fRequireStandard;
     bool fMineBlocksOnDemand;
     bool fSkipProofOfWorkCheck;
     bool fTestnetToBeDeprecatedFieldRPC;
@@ -141,6 +150,7 @@ protected:
     std::string strSporkPubKey;
     int nBlockEnforceNewMessageSignatures;
     int nColdStart;
+    int nBlockStakeModifierlV2;
     CAmount nMinColdStakingAmount;
 
 };

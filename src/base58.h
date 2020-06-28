@@ -137,8 +137,21 @@ public:
     }
 };
 
-CKey DecodeSecret(const std::string& str);
-std::string EncodeSecret(const CKey& key);
+/**
+ * A base58-encoded secret key
+ */
+class CBitcoinSecret : public CBase58Data
+{
+public:
+    void SetKey(const CKey& vchSecret);
+    CKey GetKey();
+    bool IsValid() const;
+    bool SetString(const char* pszSecret);
+    bool SetString(const std::string& strSecret);
+
+    CBitcoinSecret(const CKey& vchSecret) { SetKey(vchSecret); }
+    CBitcoinSecret() {}
+};
 
 template <typename K, int Size, CChainParams::Base58Type Type>
 class CBitcoinExtKeyBase : public CBase58Data
@@ -154,10 +167,7 @@ public:
     K GetKey()
     {
         K ret;
-        if (vchData.size() == Size) {
-            //if base58 encouded data not holds a ext key, return a !IsValid() key
-            ret.Decode(&vchData[0]);
-        }
+        ret.Decode(&vchData[0], &vchData[Size]);
         return ret;
     }
 
@@ -166,19 +176,13 @@ public:
         SetKey(key);
     }
 
-    CBitcoinExtKeyBase(const std::string& strBase58c) {
-        SetString(strBase58c.c_str(), Params().Base58Prefix(Type).size());
-    }
-
     CBitcoinExtKeyBase() {}
 };
 
-typedef CBitcoinExtKeyBase<CExtKey, BIP32_EXTKEY_SIZE, CChainParams::EXT_SECRET_KEY> CBitcoinExtKey;
-typedef CBitcoinExtKeyBase<CExtPubKey, BIP32_EXTKEY_SIZE, CChainParams::EXT_PUBLIC_KEY> CBitcoinExtPubKey;
-
+typedef CBitcoinExtKeyBase<CExtKey, 74, CChainParams::EXT_SECRET_KEY> CBitcoinExtKey;
+typedef CBitcoinExtKeyBase<CExtPubKey, 74, CChainParams::EXT_PUBLIC_KEY> CBitcoinExtPubKey;
 
 CTxDestination DestinationFor(const CKeyID& keyID, const CChainParams::Base58Type addrType);
-std::string EncodeDestination(const CTxDestination& dest, bool isStaking);
 std::string EncodeDestination(const CTxDestination& dest, const CChainParams::Base58Type addrType = CChainParams::PUBKEY_ADDRESS);
 // DecodeDestinationisStaking flag is set to true when the string arg is from an staking address
 CTxDestination DecodeDestination(const std::string& str, bool& isStaking);

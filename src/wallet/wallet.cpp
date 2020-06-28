@@ -11,7 +11,6 @@
 #include "init.h"
 #include "guiinterfaceutil.h"
 #include "masternode-payments.h"
-#include "policy/policy.h"
 #include "script/sign.h"
 #include "spork.h"
 #include "swifttx.h"    // mapTxLockReq
@@ -1384,7 +1383,7 @@ CAmount CWalletTx::GetUnlockedCredit() const
         if (fMasterNode && vout[i].nValue == 5000 * COIN) continue; // do not count MN-like outputs
 
         nCredit += pwallet->GetCredit(txout, ISMINE_SPENDABLE);
-        if (!Params().GetConsensus().MoneyRange(nCredit))
+        if (!MoneyRange(nCredit))
             throw std::runtime_error("CWalletTx::GetUnlockedCredit() : value out of range");
     }
 
@@ -1419,7 +1418,7 @@ CAmount CWalletTx::GetLockedCredit() const
             nCredit += pwallet->GetCredit(txout, ISMINE_SPENDABLE);
         }
 
-        if (!Params().GetConsensus().MoneyRange(nCredit))
+        if (!MoneyRange(nCredit))
             throw std::runtime_error("CWalletTx::GetLockedCredit() : value out of range");
     }
 
@@ -1457,7 +1456,7 @@ CAmount CWalletTx::GetAvailableWatchOnlyCredit(const bool& fUseCache) const
         if (!pwallet->IsSpent(GetHash(), i)) {
             const CTxOut& txout = vout[i];
             nCredit += pwallet->GetCredit(txout, ISMINE_WATCH_ONLY);
-            if (!Params().GetConsensus().MoneyRange(nCredit))
+            if (!MoneyRange(nCredit))
                 throw std::runtime_error("CWalletTx::GetAvailableCredit() : value out of range");
         }
     }
@@ -1494,7 +1493,7 @@ CAmount CWalletTx::GetLockedWatchOnlyCredit() const
             nCredit += pwallet->GetCredit(txout, ISMINE_WATCH_ONLY);
         }
 
-        if (!Params().GetConsensus().MoneyRange(nCredit))
+        if (!MoneyRange(nCredit))
             throw std::runtime_error("CWalletTx::GetLockedCredit() : value out of range");
     }
 
@@ -1812,7 +1811,7 @@ CAmount CWallet::GetStakingBalance(const bool fIncludeColdStaking) const
 {
     return std::max(CAmount(0), loopTxsBalance(
             [fIncludeColdStaking](const uint256& id, const CWalletTx& pcoin, CAmount& nTotal) {
-        if (pcoin.IsTrusted() && pcoin.GetDepthInMainChain() >= Params().GetConsensus().nStakeMinDepth) {
+        if (pcoin.IsTrusted() && pcoin.GetDepthInMainChain() >= Params().COINSTAKE_MIN_DEPTH()) {
             nTotal += pcoin.GetAvailableCredit();       // available coins
             nTotal -= pcoin.GetStakeDelegationCredit(); // minus delegated coins, if any
             nTotal -= pcoin.GetLockedCredit();          // minus locked coins, if any
@@ -1984,7 +1983,7 @@ bool CWallet::AvailableCoins(std::vector<COutput>* pCoins,      // --> populates
             if (nDepth == 0 && !pcoin->InMempool()) continue;
 
             // Check min depth requirement for stake inputs
-            if (nCoinType == STAKEABLE_COINS && nDepth < Params().GetConsensus().nStakeMinDepth) continue;
+            if (nCoinType == STAKEABLE_COINS && nDepth < Params().COINSTAKE_MIN_DEPTH()) continue;
 
             for (unsigned int i = 0; i < pcoin->vout.size(); i++) {
                 bool found = false;
@@ -2559,7 +2558,7 @@ bool CWallet::CreateCoinStake(
         // Limit size
         unsigned int nBytes = ::GetSerializeSize(txNew, SER_NETWORK, PROTOCOL_VERSION);
         if (nBytes >= DEFAULT_BLOCK_MAX_SIZE / 5)
-            return error("%s : exceeded coinstake size limit", __func__);
+            return error("CreateCoinStake : exceeded coinstake size limit");
 
         // Masternode payment
         FillBlockPayee(txNew, nMinFee, true);
@@ -2593,36 +2592,14 @@ bool CWallet::CreateCoinStake(
     return true;
 }
 
-std::string CWallet::CommitResult::ToString() const
-{
-    std::string strErrRet = strprintf(_("Failed to accept tx in the memory pool (reason: %s)\n"), FormatStateMessage(state));
-
-    switch (status) {
-        case CWallet::CommitStatus::OK:
-            return _("No error");
-        case CWallet::CommitStatus::Abandoned:
-            strErrRet += _("Transaction canceled.");
-            break;
-        case CWallet::CommitStatus::NotAccepted:
-            strErrRet += strprintf(_("WARNING: The transaction has been signed and recorded, so the wallet will try to re-send it. "
-                    "Use 'abandontransaction' to cancel it. (txid: %s)"), hashTx.ToString());
-            break;
-        default:
-            return _("Invalid status error.");
-    }
-
-    return strErrRet;
-}
-
 /**
  * Call after CreateTransaction unless you want to abort
  */
-CWallet::CommitResult CWallet::CommitTransaction(CWalletTx& wtxNew, CReserveKey& reservekey, std::string strCommand)
+bool CWallet::CommitTransaction(CWalletTx& wtxNew, CReserveKey& reservekey, std::string strCommand)
 {
-    CommitResult res;
     {
         LOCK2(cs_main, cs_wallet);
-        LogPrintf("%s:\n%s", __func__, wtxNew.ToString());
+        LogPrintf("CommitTransaction:\n%s", wtxNew.ToString());
         {
             // This is only to keep the database open to defeat the auto-flush for the
             // duration of this scope.  This is the only place where this optimization
@@ -2652,32 +2629,18 @@ CWallet::CommitResult CWallet::CommitTransaction(CWalletTx& wtxNew, CReserveKey&
                 delete pwalletdb;
         }
 
-        res.hashTx = wtxNew.GetHash();
-
-        // Try ATMP. This must not fail. The transaction has already been signed and recorded.
-        CValidationState state;
-        if (!AcceptToMemoryPool(mempool, state, wtxNew, false, nullptr, false, true, false)) {
-            res.state = state;
-            // Abandon the transaction
-            if (AbandonTransaction(res.hashTx)) {
-                res.status = CWallet::CommitStatus::Abandoned;
-                // Return the change key
-                reservekey.ReturnKey();
-            }
-
-            LogPrintf("%s: ERROR: %s\n", __func__, res.ToString());
-            return res;
-        }
-
-        res.status = CWallet::CommitStatus::OK;
-
         // Track how many getdata requests our transaction gets
-        mapRequestCount[res.hashTx] = 0;
+        mapRequestCount[wtxNew.GetHash()] = 0;
 
         // Broadcast
+        if (!wtxNew.AcceptToMemoryPool(false)) {
+            // This must not fail. The transaction has already been signed and recorded.
+            LogPrintf("CommitTransaction() : Error: Transaction not valid\n");
+            return false;
+        }
         wtxNew.RelayWalletTransaction(strCommand);
     }
-    return res;
+    return true;
 }
 
 bool CWallet::AddAccountingEntry(const CAccountingEntry& acentry, CWalletDB & pwalletdb)
@@ -3274,7 +3237,7 @@ void CWallet::AutoCombineDust()
             if (!out.fSpendable)
                 continue;
             //no coins should get this far if they dont have proper maturity, this is double checking
-            if (out.tx->IsCoinStake() && out.tx->GetDepthInMainChain() < Params().GetConsensus().nCoinbaseMaturity + 1)
+            if (out.tx->IsCoinStake() && out.tx->GetDepthInMainChain() < Params().COINBASE_MATURITY() + 1)
                 continue;
 
             // no p2cs accepted, those coins are "locked"
@@ -3336,8 +3299,7 @@ void CWallet::AutoCombineDust()
         if (!maxSize && nTotalRewardsValue < nAutoCombineThreshold * COIN && nFeeRet > 0)
             continue;
 
-        const CWallet::CommitResult& res = CommitTransaction(wtx, keyChange);
-        if (res.status != CWallet::CommitStatus::OK) {
+        if (!CommitTransaction(wtx, keyChange)) {
             LogPrintf("AutoCombineDust transaction commit failed\n");
             continue;
         }
@@ -3372,7 +3334,7 @@ bool CWallet::MultiSend()
     for (const COutput& out : vCoins) {
 
         //need output with precise confirm count - this is how we identify which is the output to send
-        if (out.tx->GetDepthInMainChain() != Params().GetConsensus().nCoinbaseMaturity + 1)
+        if (out.tx->GetDepthInMainChain() != Params().COINBASE_MATURITY() + 1)
             continue;
 
         bool isCoinStake = out.tx->IsCoinStake();
@@ -3440,8 +3402,7 @@ bool CWallet::MultiSend()
             return false;
         }
 
-        const CWallet::CommitResult& res = CommitTransaction(wtx, keyChange);
-        if (res.status != CWallet::CommitStatus::OK) {
+        if (!CommitTransaction(wtx, keyChange)) {
             LogPrintf("MultiSend transaction commit failed\n");
             return false;
         } else
@@ -3555,7 +3516,7 @@ int CMerkleTx::GetBlocksToMaturity() const
     LOCK(cs_main);
     if (!(IsCoinBase() || IsCoinStake()))
         return 0;
-    return std::max(0, (Params().GetConsensus().nCoinbaseMaturity + 1) - GetDepthInMainChain());
+    return std::max(0, (Params().COINBASE_MATURITY() + 1) - GetDepthInMainChain());
 }
 
 bool CMerkleTx::IsInMainChain() const
@@ -3567,7 +3528,7 @@ bool CMerkleTx::IsInMainChainImmature() const
 {
     if (!IsCoinBase() && !IsCoinStake()) return false;
     const int depth = GetDepthInMainChain(false);
-    return (depth > 0 && depth <= Params().GetConsensus().nCoinbaseMaturity);
+    return (depth > 0 && depth <= Params().COINBASE_MATURITY());
 }
 
 
@@ -3700,14 +3661,14 @@ isminetype CWallet::IsMine(const CTxOut& txout) const
 
 CAmount CWallet::GetCredit(const CTxOut& txout, const isminefilter& filter) const
 {
-    if (!Params().GetConsensus().MoneyRange(txout.nValue))
+    if (!MoneyRange(txout.nValue))
         throw std::runtime_error("CWallet::GetCredit() : value out of range");
     return ((IsMine(txout) & filter) ? txout.nValue : 0);
 }
 
 CAmount CWallet::GetChange(const CTxOut& txout) const
 {
-    if (!Params().GetConsensus().MoneyRange(txout.nValue))
+    if (!MoneyRange(txout.nValue))
         throw std::runtime_error("CWallet::GetChange() : value out of range");
     return (IsChange(txout) ? txout.nValue : 0);
 }
@@ -3730,7 +3691,7 @@ CAmount CWallet::GetDebit(const CTransaction& tx, const isminefilter& filter) co
     CAmount nDebit = 0;
     for (const CTxIn& txin : tx.vin) {
         nDebit += GetDebit(txin, filter);
-        if (!Params().GetConsensus().MoneyRange(nDebit))
+        if (!MoneyRange(nDebit))
             throw std::runtime_error("CWallet::GetDebit() : value out of range");
     }
     return nDebit;
@@ -3743,7 +3704,7 @@ CAmount CWallet::GetCredit(const CTransaction& tx, const isminefilter& filter, c
         if (fUnspent && IsSpent(tx.GetHash(), i)) continue;
         nCredit += GetCredit(tx.vout[i], filter);
     }
-    if (!Params().GetConsensus().MoneyRange(nCredit))
+    if (!MoneyRange(nCredit))
         throw std::runtime_error("CWallet::GetCredit() : value out of range");
     return nCredit;
 }
@@ -3753,7 +3714,7 @@ CAmount CWallet::GetChange(const CTransaction& tx) const
     CAmount nChange = 0;
     for (const CTxOut& txout : tx.vout) {
         nChange += GetChange(txout);
-        if (!Params().GetConsensus().MoneyRange(nChange))
+        if (!MoneyRange(nChange))
             throw std::runtime_error("CWallet::GetChange() : value out of range");
     }
     return nChange;

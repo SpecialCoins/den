@@ -101,7 +101,6 @@ BITCOIN_CORE_H = \
   compressor.h \
   consensus/consensus.h \
   consensus/merkle.h \
-  consensus/params.h \
   consensus/validation.h \
   consensus/tx_verify.h \
   primitives/block.h \
@@ -142,7 +141,6 @@ BITCOIN_CORE_H = \
   netbase.h \
   noui.h \
   policy/fees.h \
-  policy/policy.h \
   pow.h \
   prevector.h \
   protocol.h \
@@ -220,7 +218,6 @@ libbitcoin_server_a_SOURCES = \
   net.cpp \
   noui.cpp \
   policy/fees.cpp \
-  policy/policy.cpp \
   pow.cpp \
   rest.cpp \
   rpc/blockchain.cpp \

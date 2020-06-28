@@ -110,8 +110,13 @@ UniValue importprivkey(const UniValue& params, bool fHelp)
     const bool fRescan = (params.size() > 2 ? params[2].get_bool() : true);
     const bool fStakingAddress = (params.size() > 3 ? params[3].get_bool() : false);
 
-    CKey key = DecodeSecret(strSecret);
-    if (!key.IsValid()) throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid private key encoding");
+    CBitcoinSecret vchSecret;
+    if (!vchSecret.SetString(strSecret))
+        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid private key encoding");
+
+    CKey key = vchSecret.GetKey();
+    if (!key.IsValid())
+        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Private key outside allowed range");
 
     CPubKey pubkey = key.GetPubKey();
     assert(key.VerifyPubKey(pubkey));
@@ -276,9 +281,10 @@ UniValue importwallet(const UniValue& params, bool fHelp)
         boost::split(vstr, line, boost::is_any_of(" "));
         if (vstr.size() < 2)
             continue;
-        CKey key = DecodeSecret(vstr[0]);
-        if (!key.IsValid())
+        CBitcoinSecret vchSecret;
+        if (!vchSecret.SetString(vstr[0]))
             continue;
+        CKey key = vchSecret.GetKey();
         CPubKey pubkey = key.GetPubKey();
         assert(key.VerifyPubKey(pubkey));
         CKeyID keyid = pubkey.GetID();
@@ -366,7 +372,7 @@ UniValue dumpprivkey(const UniValue& params, bool fHelp)
     CKey vchSecret;
     if (!pwalletMain->GetKey(keyID, vchSecret))
         throw JSONRPCError(RPC_WALLET_ERROR, "Private key for address " + strAddress + " is not known");
-    return EncodeSecret(vchSecret);
+    return CBitcoinSecret(vchSecret).ToString();
 }
 
 UniValue dumpwallet(const UniValue& params, bool fHelp)
@@ -591,3 +597,45 @@ UniValue bip38decrypt(const UniValue& params, bool fHelp)
 
     return result;
 }
+
+UniValue makekeypair(const UniValue& params, bool fHelp)
+{
+    if (fHelp || params.size() > 1)
+        throw std::runtime_error(
+            "makekeypair [prefix]\n"
+            "Make a public/private key pair.\n"
+            "[prefix] is optional preferred prefix for the public key.\n");
+
+    std::string strPrefix = "";
+    if (params.size() > 0)
+        strPrefix = params[0].get_str();
+
+    CKey key;
+    int nCount = 0;
+    do
+    {
+        key.MakeNewKey(false);
+        nCount++;
+    } while (nCount < 10000 && strPrefix != HexStr(key.GetPubKey()).substr(0, strPrefix.size()));
+
+    if (strPrefix != HexStr(key.GetPubKey()).substr(0, strPrefix.size()))
+        return NullUniValue;
+
+    CPrivKey vchPrivKey = key.GetPrivKey();
+    CKeyID keyID = key.GetPubKey().GetID();
+    CKey vchSecret = CKey();
+    vchSecret.SetPrivKey(vchPrivKey, false);
+    CKey vchCSecret = CKey();
+    vchCSecret.SetPrivKey(vchPrivKey, true);
+    CKeyID keyCID = vchCSecret.GetPubKey().GetID();
+    UniValue result(UniValue::VOBJ);
+    result.push_back(Pair("private_key", HexStr<CPrivKey::iterator>(vchPrivKey.begin(), vchPrivKey.end())));
+    result.push_back(Pair("U public_key", HexStr(key.GetPubKey())));
+    result.push_back(Pair("U wallet_address", EncodeDestination(keyID)));
+    result.push_back(Pair("U wallet_private_key", CBitcoinSecret(vchSecret).ToString()));
+    result.push_back(Pair("C public_key", HexStr(vchCSecret.GetPubKey())));
+    result.push_back(Pair("C wallet_address", EncodeDestination(keyCID)));
+    result.push_back(Pair("C wallet_private_key", CBitcoinSecret(vchCSecret).ToString()));
+    return result;
+}
+

@@ -419,9 +419,10 @@ bool CMasternodeBroadcast::Create(CTxIn txin, CService service, CKey keyCollater
 bool CMasternodeBroadcast::Sign(const CKey& key, const CPubKey& pubKey)
 {
     std::string strError = "";
+    std::string strMessage;
 
     nMessVersion = MessageVersion::MESS_VER_STRMESS;
-    const std::string strMessage = GetSignatureHash().GetHex();
+    strMessage = GetStrMessage();
 
     if (!CMessageSigner::SignMessage(strMessage, vchSig, key)) {
         return error("%s : SignMessage() (nMessVersion=%d) failed", __func__, nMessVersion);

@@ -97,6 +97,16 @@ enum AvailableCoinsType {
     STAKEABLE_COINS = 6                             // UTXO's that are valid for staking
 };
 
+struct CompactTallyItem {
+    CBitcoinAddress address;
+    CAmount nAmount;
+    std::vector<CTxIn> vecTxIn;
+    CompactTallyItem()
+    {
+        nAmount = 0;
+    }
+};
+
 /** A key pool entry */
 class CKeyPool
 {
@@ -440,24 +450,7 @@ public:
         CAmount nFeePay = 0,
         bool fIncludeDelegated = false);
     bool CreateTransaction(CScript scriptPubKey, const CAmount& nValue, CWalletTx& wtxNew, CReserveKey& reservekey, CAmount& nFeeRet, std::string& strFailReason, const CCoinControl* coinControl = NULL, AvailableCoinsType coin_type = ALL_COINS, bool useIX = false, CAmount nFeePay = 0, bool fIncludeDelegated = false);
-
-    // enumeration for CommitResult (return status of CommitTransaction)
-    enum CommitStatus
-    {
-        OK,
-        Abandoned,              // Failed to accept to memory pool. Successfully removed from the wallet.
-        NotAccepted,            // Failed to accept to memory pool. Unable to abandon.
-    };
-    struct CommitResult
-    {
-        CommitResult(): status(CommitStatus::NotAccepted) {}
-        CWallet::CommitStatus status;
-        CValidationState state;
-        uint256 hashTx = UINT256_ZERO;
-        // converts CommitResult in human-readable format
-        std::string ToString() const;
-    };
-    CWallet::CommitResult CommitTransaction(CWalletTx& wtxNew, CReserveKey& reservekey, std::string strCommand = NetMsgType::TX);
+    bool CommitTransaction(CWalletTx& wtxNew, CReserveKey& reservekey, std::string strCommand = NetMsgType::TX);
     bool AddAccountingEntry(const CAccountingEntry&, CWalletDB & pwalletdb);
     bool CreateCoinStake(const CKeyStore& keystore, const CBlockIndex* pindexPrev, unsigned int nBits, CMutableTransaction& txNew, unsigned int& nTxNewTime);
     bool MultiSend();
