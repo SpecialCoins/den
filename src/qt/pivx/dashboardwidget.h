@@ -19,7 +19,7 @@
 #include <QMap>
 
 #if defined(HAVE_CONFIG_H)
-#include "config/bcz-config.h" /* for USE_QTCHARTS */
+#include "config/pivx-config.h" /* for USE_QTCHARTS */
 #endif
 
 #ifdef USE_QTCHARTS
