@@ -169,7 +169,7 @@ bool CBczStake::ContextCheck(int nHeight, uint32_t nTime)
     const uint32_t nTimeBlockFrom = pindexFrom->nTime;
 
     // Check that the stake has the required depth/age
-    if (!consensus.HasStakeMinAgeOrDepth(nHeight, nTime, nHeightBlockFrom, nTimeBlockFrom))
+    if (!Params().GetConsensus().HasStakeMinAgeOrDepth(nHeight, nTime, nHeightBlockFrom, nTimeBlockFrom))
         return error("%s : min age violation - height=%d - time=%d, nHeightBlockFrom=%d, nTimeBlockFrom=%d",
                          __func__, nHeight, nTime, nHeightBlockFrom, nTimeBlockFrom);
     // All good
