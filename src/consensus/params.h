@@ -27,10 +27,7 @@ enum UpgradeIndex : uint32_t {
     UPGRADE_TESTDUMMY,
     UPGRADE_POS,
     UPGRADE_POS_V2,
-    UPGRADE_ZC,
-    UPGRADE_ZC_V2,
     UPGRADE_BIP65,
-    UPGRADE_ZC_PUBLIC,
     UPGRADE_V3_4,
     UPGRADE_V4_0,
     UPGRADE_V5_DUMMY,
@@ -111,18 +108,6 @@ struct Params {
     int64_t nTime_EnforceNewSporkKey;
     int64_t nTime_RejectOldSporkKey;
 
-    // height-based activations
-    int height_last_ZC_AccumCheckpoint;
-    int height_last_ZC_WrappedSerials;
-    int height_start_InvalidUTXOsCheck;
-    int height_start_ZC_InvalidSerials;
-    int height_start_ZC_SerialRangeCheck;
-    int height_ZC_RecalcAccumulators;
-
-    // validation by-pass
-    int64_t nBCZBadBlockTime;
-    unsigned int nBCZBadBlockBits;
-
     // Map with network updates
     NetworkUpgrade vUpgrades[MAX_NETWORK_UPGRADES];
 
@@ -155,17 +140,6 @@ struct Params {
             return (utxoFromBlockTime + nStakeMinAge <= contextTime);
         // with stake modifier V2+, we require the utxo to be nStakeMinDepth deep in the chain
         return (contextHeight - utxoFromBlockHeight >= nStakeMinDepth);
-    }
-
-    libzerocoin::ZerocoinParams* Zerocoin_Params(bool useModulusV1) const
-    {
-        static CBigNum bnHexModulus = 0;
-        if (!bnHexModulus) bnHexModulus.SetHex(ZC_Modulus);
-        static libzerocoin::ZerocoinParams ZCParamsHex = libzerocoin::ZerocoinParams(bnHexModulus);
-        static CBigNum bnDecModulus = 0;
-        if (!bnDecModulus) bnDecModulus.SetDec(ZC_Modulus);
-        static libzerocoin::ZerocoinParams ZCParamsDec = libzerocoin::ZerocoinParams(bnDecModulus);
-        return (useModulusV1 ? &ZCParamsHex : &ZCParamsDec);
     }
 
     /**
