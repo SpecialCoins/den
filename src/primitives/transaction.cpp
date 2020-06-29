@@ -169,34 +169,6 @@ CTransaction& CTransaction::operator=(const CTransaction &tx) {
     return *this;
 }
 
-bool CTransaction::HasZerocoinSpendInputs() const
-{
-    for (const CTxIn& txin: vin) {
-        if (txin.IsZerocoinSpend() || txin.IsZerocoinPublicSpend())
-            return true;
-    }
-    return false;
-}
-
-bool CTransaction::HasZerocoinMintOutputs() const
-{
-    for(const CTxOut& txout : vout) {
-        if (txout.IsZerocoinMint())
-            return true;
-    }
-    return false;
-}
-
-bool CTransaction::HasZerocoinPublicSpendInputs() const
-{
-    // The wallet only allows publicSpend inputs in the same tx and not a combination between bcz and zbcz
-    for(const CTxIn& txin : vin) {
-        if (txin.IsZerocoinPublicSpend())
-            return true;
-    }
-    return false;
-}
-
 bool CTransaction::IsCoinStake() const
 {
     if (vin.empty())

@@ -14,8 +14,6 @@
 #include "policy/policy.h"
 #include "stakeinput.h"
 #include "utilmoneystr.h"
-#include "zbczchain.h"
-#include "zbcz/zpos.h"
 
 #include <boost/assign/list_of.hpp>
 
@@ -169,9 +167,6 @@ bool CheckProofOfStake(const CBlock& block, std::string& strError, const CBlockI
         strError = "kernel hash check fails";
         return false;
     }
-
-    // zPoS disabled (ContextCheck) before blocks V7, and the tx input signature is in CoinSpend
-    if (stakeInput->IsZBCZ()) return true;
 
     // Verify tx input signature
     CTxOut stakePrevout;

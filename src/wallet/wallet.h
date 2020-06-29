@@ -20,7 +20,6 @@
 #include "pairresult.h"
 #include "primitives/block.h"
 #include "primitives/transaction.h"
-#include "zbcz/zerocoin.h"
 #include "guiinterface.h"
 #include "util.h"
 #include "util/memory.h"
@@ -28,9 +27,6 @@
 #include "wallet/wallet_ismine.h"
 #include "wallet/scriptpubkeyman.h"
 #include "wallet/walletdb.h"
-#include "zbcz/zbczmodule.h"
-#include "zbcz/zbczwallet.h"
-#include "zbcz/zbcztracker.h"
 
 #include <algorithm>
 #include <map>
@@ -99,27 +95,6 @@ enum AvailableCoinsType {
     ALL_COINS = 1,
     ONLY_10000 = 5,                                 // find masternode outputs including locked ones (use with caution)
     STAKEABLE_COINS = 6                             // UTXO's that are valid for staking
-};
-
-// Possible states for zBCZ send
-enum ZerocoinSpendStatus {
-    ZBCZ_SPEND_OKAY = 0,                            // No error
-    ZBCZ_SPEND_ERROR = 1,                           // Unspecified class of errors, more details are (hopefully) in the returning text
-    ZBCZ_WALLET_LOCKED = 2,                         // Wallet was locked
-    ZBCZ_COMMIT_FAILED = 3,                         // Commit failed, reset status
-    ZBCZ_ERASE_SPENDS_FAILED = 4,                   // Erasing spends during reset failed
-    ZBCZ_ERASE_NEW_MINTS_FAILED = 5,                // Erasing new mints during reset failed
-    ZBCZ_TRX_FUNDS_PROBLEMS = 6,                    // Everything related to available funds
-    ZBCZ_TRX_CREATE = 7,                            // Everything related to create the transaction
-    ZBCZ_TRX_CHANGE = 8,                            // Everything related to transaction change
-    ZBCZ_TXMINT_GENERAL = 9,                        // General errors in MintsToInputVectorPublicSpend
-    ZBCZ_INVALID_COIN = 10,                         // Selected mint coin is not valid
-    ZBCZ_FAILED_ACCUMULATOR_INITIALIZATION = 11,    // Failed to initialize witness
-    ZBCZ_INVALID_WITNESS = 12,                      // Spend coin transaction did not verify
-    ZBCZ_BAD_SERIALIZATION = 13,                    // Transaction verification failed
-    ZBCZ_SPENT_USED_ZBCZ = 14,                      // Coin has already been spend
-    ZBCZ_TX_TOO_LARGE = 15,                         // The transaction is larger than the max tx size
-    ZBCZ_SPEND_V1_SEC_LEVEL                         // Spend is V1 and security level is not set to 100
 };
 
 /** A key pool entry */
@@ -599,63 +574,6 @@ public:
 
     /** notify wallet file backed up */
     boost::signals2::signal<void (const bool& fSuccess, const std::string& filename)> NotifyWalletBacked;
-
-
-    /* Legacy ZC - implementations in wallet_zerocoin.cpp */
-
-    bool GetDeterministicSeed(const uint256& hashSeed, uint256& seed);
-    bool AddDeterministicSeed(const uint256& seed);
-
-    //- ZC Mints (Only for regtest)
-    std::string MintZerocoin(CAmount nValue, CWalletTx& wtxNew, std::vector<CDeterministicMint>& vDMints, const CCoinControl* coinControl = NULL);
-    std::string MintZerocoinFromOutPoint(CAmount nValue, CWalletTx& wtxNew, std::vector<CDeterministicMint>& vDMints, const std::vector<COutPoint> vOutpts);
-    bool CreateZBCZOutPut(libzerocoin::CoinDenomination denomination, CTxOut& outMint, CDeterministicMint& dMint);
-    bool CreateZerocoinMintTransaction(const CAmount nValue,
-            CMutableTransaction& txNew,
-            std::vector<CDeterministicMint>& vDMints,
-            CReserveKey* reservekey,
-            std::string& strFailReason,
-            const CCoinControl* coinControl = NULL);
-
-    // - ZC PublicSpends
-    bool SpendZerocoin(CAmount nAmount, CWalletTx& wtxNew, CZerocoinSpendReceipt& receipt, std::vector<CZerocoinMint>& vMintsSelected, std::list<std::pair<CTxDestination,CAmount>> addressesTo, CBitcoinAddress* changeAddress = nullptr);
-    bool MintsToInputVectorPublicSpend(std::map<CBigNum, CZerocoinMint>& mapMintsSelected, const uint256& hashTxOut, std::vector<CTxIn>& vin, CZerocoinSpendReceipt& receipt, libzerocoin::SpendType spendType, CBlockIndex* pindexCheckpoint = nullptr);
-    bool CreateZCPublicSpendTransaction(
-            CAmount nValue,
-            CWalletTx& wtxNew,
-            CReserveKey& reserveKey,
-            CZerocoinSpendReceipt& receipt,
-            std::vector<CZerocoinMint>& vSelectedMints,
-            std::vector<CDeterministicMint>& vNewMints,
-            std::list<std::pair<CTxDestination,CAmount>> addressesTo,
-            CBitcoinAddress* changeAddress = nullptr);
-
-    // - ZC Balances
-    CAmount GetZerocoinBalance(bool fMatureOnly) const;
-    CAmount GetUnconfirmedZerocoinBalance() const;
-    CAmount GetImmatureZerocoinBalance() const;
-    std::map<libzerocoin::CoinDenomination, CAmount> GetMyZerocoinDistribution() const;
-
-    // zBCZ wallet
-    CzBCZWallet* zwalletMain{nullptr};
-    std::unique_ptr<CzBCZTracker> zbczTracker{nullptr};
-    void setZWallet(CzBCZWallet* zwallet);
-    CzBCZWallet* getZWallet();
-    bool IsMyZerocoinSpend(const CBigNum& bnSerial) const;
-    bool IsMyMint(const CBigNum& bnValue) const;
-    std::string ResetMintZerocoin();
-    std::string ResetSpentZerocoin();
-    void ReconsiderZerocoins(std::list<CZerocoinMint>& listMintsRestored, std::list<CDeterministicMint>& listDMintsRestored);
-    bool GetZerocoinKey(const CBigNum& bnSerial, CKey& key);
-    bool GetMint(const uint256& hashSerial, CZerocoinMint& mint);
-    bool GetMintFromStakeHash(const uint256& hashStake, CZerocoinMint& mint);
-    bool DatabaseMint(CDeterministicMint& dMint);
-    bool SetMintUnspent(const CBigNum& bnSerial);
-    bool UpdateMint(const CBigNum& bnValue, const int& nHeight, const uint256& txid, const libzerocoin::CoinDenomination& denom);
-    // Zerocoin entry changed. (called with lock cs_wallet held)
-    boost::signals2::signal<void(CWallet* wallet, const std::string& pubCoin, const std::string& isUsed, ChangeType status)> NotifyZerocoinChanged;
-    // zBCZ reset
-    boost::signals2::signal<void()> NotifyzBCZReset;
 
     /* Wallets parameter interaction */
     static bool ParameterInteraction();

@@ -13,7 +13,6 @@
 #include "net.h"
 #include "policy/policy.h"
 #include "primitives/transaction.h"
-#include "zbcz/deterministicmint.h"
 #include "rpc/server.h"
 #include "script/script.h"
 #include "script/script_error.h"
@@ -22,7 +21,6 @@
 #include "swifttx.h"
 #include "uint256.h"
 #include "utilmoneystr.h"
-#include "zbczchain.h"
 #ifdef ENABLE_WALLET
 #include "wallet/wallet.h"
 #endif
@@ -1026,70 +1024,3 @@ UniValue getspentzerocoinamount(const UniValue& params, bool fHelp)
     CAmount nValue = libzerocoin::ZerocoinDenominationToAmount(spend.getDenomination());
     return FormatMoney(nValue);
 }
-
-#ifdef ENABLE_WALLET
-
-UniValue createrawzerocoinspend(const UniValue& params, bool fHelp)
-{
-    if (fHelp || params.size() < 1 || params.size() > 3)
-        throw std::runtime_error(
-            "createrawzerocoinspend mint_input ( \"address\" )\n"
-            "\nCreates raw zBCZ public spend.\n" +
-            HelpRequiringPassphrase() + "\n"
-
-            "\nArguments:\n"
-            "1. mint_input      (hex string, required) serial hash of the mint used as input\n"
-            "2. \"address\"     (string, optional, default=change) Send to specified address or to a new change address.\n"
-
-
-            "\nResult:\n"
-            "{\n"
-            "   \"hex\": \"xxx\",           (hex string) raw public spend signed transaction\n"
-            "}\n"
-            "\nExamples\n" +
-            HelpExampleCli("createrawzerocoinspend", "0d8c16eee7737e3cc1e4e70dc006634182b175e039700931283b202715a0818f") +
-            HelpExampleRpc("createrawzerocoinspend", "0d8c16eee7737e3cc1e4e70dc006634182b175e039700931283b202715a0818f"));
-
-    const std::string serial_hash = params[0].get_str();
-    const std::string address_str = (params.size() > 1 ? params[1].get_str() : "");
-
-    if (!IsHex(serial_hash))
-        throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid parameter, expected hex serial hash");
-
-    CTxDestination dest{CNoDestination()};
-    if (address_str != "") {
-        dest = DecodeDestination(address_str);
-        if(!IsValidDestination(dest))
-            throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid BCZ address");
-    }
-
-    assert(pwalletMain != NULL);
-    EnsureWalletIsUnlocked();
-    LOCK2(cs_main, pwalletMain->cs_wallet);
-
-    uint256 hashSerial(uint256S(serial_hash));
-    CZerocoinMint input_mint;
-    if (!pwalletMain->GetMint(hashSerial, input_mint)) {
-        std::string strErr = "Failed to fetch mint associated with serial hash " + serial_hash;
-        throw JSONRPCError(RPC_WALLET_ERROR, strErr);
-    }
-    CAmount nAmount = input_mint.GetDenominationAsAmount();
-    std::vector<CZerocoinMint> vMintsSelected = std::vector<CZerocoinMint>(1,input_mint);
-
-    // create the spend
-    CWalletTx rawTx;
-    CZerocoinSpendReceipt receipt;
-    CReserveKey reserveKey(pwalletMain);
-    std::vector<CDeterministicMint> vNewMints;
-    std::list<std::pair<CTxDestination, CAmount>> outputs;
-    if (IsValidDestination(dest)) {
-        outputs.push_back(std::pair<CTxDestination, CAmount>(dest, nAmount));
-    }
-    if (!pwalletMain->CreateZCPublicSpendTransaction(nAmount, rawTx, reserveKey, receipt, vMintsSelected, vNewMints, outputs, nullptr))
-        throw JSONRPCError(RPC_WALLET_ERROR, receipt.GetStatusMessage());
-
-    // output the raw transaction
-    return EncodeHexTx(rawTx);
-}
-#endif
-

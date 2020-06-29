@@ -64,7 +64,6 @@ private:
     size_t nModSize;      //! ... and modified size for priority
     size_t nUsageSize;    //! ... and total memory usage
     CFeeRate feeRate;     //! ... and fee per kB
-    bool hasZerocoins{false}; //! ... and checking if it contains zBCZ (mints/spends)
     int64_t nTime;        //! Local time when entering the mempool
     double dPriority;     //! Priority when entering the mempool
     unsigned int nHeight; //! Chain height when entering the mempool

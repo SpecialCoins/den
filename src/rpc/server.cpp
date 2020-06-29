@@ -466,28 +466,6 @@ static const CRPCCommand vRPCCommands[] =
         {"wallet", "delegatoradd", &delegatoradd, true, false, true},
         {"wallet", "delegatorremove", &delegatorremove, true, false, true},
 
-        {"zerocoin", "createrawzerocoinspend", &createrawzerocoinspend, false, false, true},
-        {"zerocoin", "getzerocoinbalance", &getzerocoinbalance, false, false, true},
-        {"zerocoin", "listmintedzerocoins", &listmintedzerocoins, false, false, true},
-        {"zerocoin", "listspentzerocoins", &listspentzerocoins, false, false, true},
-        {"zerocoin", "listzerocoinamounts", &listzerocoinamounts, false, false, true},
-        {"zerocoin", "mintzerocoin", &mintzerocoin, false, false, true},
-        {"zerocoin", "spendzerocoin", &spendzerocoin, false, false, true},
-        {"zerocoin", "spendrawzerocoin", &spendrawzerocoin, true, false, false},
-        {"zerocoin", "spendzerocoinmints", &spendzerocoinmints, false, false, true},
-        {"zerocoin", "resetmintzerocoin", &resetmintzerocoin, false, false, true},
-        {"zerocoin", "resetspentzerocoin", &resetspentzerocoin, false, false, true},
-        {"zerocoin", "getarchivedzerocoin", &getarchivedzerocoin, false, false, true},
-        {"zerocoin", "importzerocoins", &importzerocoins, false, false, true},
-        {"zerocoin", "exportzerocoins", &exportzerocoins, false, false, true},
-        {"zerocoin", "reconsiderzerocoins", &reconsiderzerocoins, false, false, true},
-        {"zerocoin", "getspentzerocoinamount", &getspentzerocoinamount, false, false, false},
-        {"zerocoin", "getzbczseed", &getzbczseed, false, false, true},
-        {"zerocoin", "setzbczseed", &setzbczseed, false, false, true},
-        {"zerocoin", "generatemintlist", &generatemintlist, false, false, true},
-        {"zerocoin", "searchdzbcz", &searchdzbcz, false, false, true},
-        {"zerocoin", "dzbczstate", &dzbczstate, false, false, true},
-
 #endif // ENABLE_WALLET
 };
 

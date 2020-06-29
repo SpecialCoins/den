@@ -18,7 +18,6 @@
 #include "swifttx.h"    // mapTxLockReq
 #include "util.h"
 #include "utilmoneystr.h"
-#include "zbczchain.h"
 
 #include <boost/algorithm/string/replace.hpp>
 #include <boost/thread.hpp>
@@ -346,17 +345,6 @@ bool CWallet::Unlock(const CKeyingMaterial& vMasterKeyIn)
             return false;
         vMasterKey = vMasterKeyIn;
         fDecryptionThoroughlyChecked = true;
-
-        if (zwalletMain) {
-            uint256 hashSeed;
-            if (CWalletDB(strWalletFile).ReadCurrentSeedHash(hashSeed)) {
-                uint256 nSeed;
-                if (!GetDeterministicSeed(hashSeed, nSeed)) {
-                    return error("Failed to read zBCZ seed from DB. Wallet is probably corrupt.");
-                }
-                zwalletMain->SetMasterSeed(nSeed, false);
-            }
-        }
     }
 
     NotifyStatusChanged(this);
@@ -1631,9 +1619,6 @@ int CWallet::ScanForWalletTransactions(CBlockIndex* pindexStart, bool fUpdate, b
 {
     int ret = 0;
     int64_t nNow = GetTime();
-    bool fCheckZBCZ = GetBoolArg("-zapwallettxes", false);
-    if (fCheckZBCZ)
-        zbczTracker->Init();
 
     const Consensus::Params& consensus = Params().GetConsensus();
 
@@ -1664,53 +1649,6 @@ int CWallet::ScanForWalletTransactions(CBlockIndex* pindexStart, bool fUpdate, b
             for (CTransaction& tx : block.vtx) {
                 if (AddToWalletIfInvolvingMe(tx, &block, fUpdate))
                     ret++;
-            }
-
-            //If this is a zapwallettx, need to readd zbcz
-            if (fCheckZBCZ && consensus.NetworkUpgradeActive(pindex->nHeight, Consensus::UPGRADE_ZC)) {
-                std::list<CZerocoinMint> listMints;
-                BlockToZerocoinMintList(block, listMints, true);
-                CWalletDB walletdb(strWalletFile);
-
-                for (auto& m : listMints) {
-                    if (IsMyMint(m.GetValue())) {
-                        LogPrint(BCLog::LEGACYZC, "%s: found mint\n", __func__);
-                        UpdateMint(m.GetValue(), pindex->nHeight, m.GetTxHash(), m.GetDenomination());
-
-                        // Add the transaction to the wallet
-                        for (auto& tx : block.vtx) {
-                            uint256 txid = tx.GetHash();
-                            if (setAddedToWallet.count(txid) || mapWallet.count(txid))
-                                continue;
-                            if (txid == m.GetTxHash()) {
-                                CWalletTx wtx(this, tx);
-                                wtx.nTimeReceived = block.GetBlockTime();
-                                wtx.SetMerkleBranch(block);
-                                AddToWallet(wtx, false, &walletdb);
-                                setAddedToWallet.insert(txid);
-                            }
-                        }
-
-                        //Check if the mint was ever spent
-                        int nHeightSpend = 0;
-                        uint256 txidSpend;
-                        CTransaction txSpend;
-                        if (IsSerialInBlockchain(GetSerialHash(m.GetSerialNumber()), nHeightSpend, txidSpend, txSpend)) {
-                            if (setAddedToWallet.count(txidSpend) || mapWallet.count(txidSpend))
-                                continue;
-
-                            CWalletTx wtx(this, txSpend);
-                            CBlockIndex* pindexSpend = chainActive[nHeightSpend];
-                            CBlock blockSpend;
-                            if (ReadBlockFromDisk(blockSpend, pindexSpend))
-                                wtx.SetMerkleBranch(blockSpend);
-
-                            wtx.nTimeReceived = pindexSpend->nTime;
-                            AddToWallet(wtx, false, &walletdb);
-                            setAddedToWallet.emplace(txidSpend);
-                        }
-                    }
-                }
             }
 
             pindex = chainActive.Next(pindex);
@@ -2740,12 +2678,6 @@ bool CWallet::CreateCoinStake(
         // Make sure the wallet is unlocked and shutdown hasn't been requested
         if (IsLocked() || ShutdownRequested()) return false;
 
-        // This should never happen
-        if (stakeInput->IsZBCZ()) {
-            LogPrintf("%s: ERROR - zPOS is disabled\n", __func__);
-            continue;
-        }
-
         nCredit = 0;
 
         nAttempts++;
@@ -2822,27 +2754,6 @@ bool CWallet::CreateCoinStake(
             const CWalletTx *wtx = GetWalletTx(txIn.prevout.hash);
             if (!SignSignature(*this, *wtx, txNew, nIn++, SIGHASH_ALL, true))
                 return error("CreateCoinStake : failed to sign coinstake");
-        }
-    } else {
-        //Update the mint database with tx hash and height
-        for (const CTxOut& out : txNew.vout) {
-            if (!out.IsZerocoinMint())
-                continue;
-
-            libzerocoin::PublicCoin pubcoin(consensus.Zerocoin_Params(false));
-            CValidationState state;
-            if (!TxOutToPublicCoin(out, pubcoin, state))
-                return error("%s: extracting pubcoin from txout failed", __func__);
-
-            uint256 hashPubcoin = GetPubCoinHash(pubcoin.getValue());
-            if (!zbczTracker->HasPubcoinHash(hashPubcoin))
-                return error("%s: could not find pubcoinhash %s in tracker", __func__, hashPubcoin.GetHex());
-
-            CMintMeta meta = zbczTracker->GetMetaFromPubcoin(hashPubcoin);
-            meta.txid = txNew.GetHash();
-            meta.nHeight = chainActive.Height() + 1;
-            if (!zbczTracker->UpdateState(meta))
-                return error("%s: failed to update metadata in tracker", __func__);
         }
     }
 

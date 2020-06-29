@@ -24,8 +24,6 @@
 #include "pow.h"
 #include "primitives/block.h"
 #include "primitives/transaction.h"
-#include "zbcz/zerocoin.h"
-#include "zbcz/zbczmodule.h"
 #include "script/script.h"
 #include "script/sigcache.h"
 #include "script/standard.h"

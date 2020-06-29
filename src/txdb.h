@@ -9,7 +9,6 @@
 
 #include "dbwrapper.h"
 #include "main.h"
-#include "zbcz/zerocoin.h"
 
 #include <map>
 #include <string>
@@ -95,41 +94,6 @@ public:
     bool ReadInt(const std::string& name, int& nValue);
     bool LoadBlockIndexGuts();
     bool ReadLegacyBlockIndex(const uint256& blockHash, CLegacyBlockIndex& biRet);
-    bool WriteMoneySupply(const int64_t& nSupply);
-    bool ReadMoneySupply(int64_t& nSupply) const;
-};
-
-/** Zerocoin database (zerocoin/) */
-class CZerocoinDB : public CDBWrapper
-{
-public:
-    CZerocoinDB(size_t nCacheSize, bool fMemory = false, bool fWipe = false);
-
-private:
-    CZerocoinDB(const CZerocoinDB&);
-    void operator=(const CZerocoinDB&);
-
-public:
-    /** Write zBCZ mints to the zerocoinDB in a batch */
-    bool WriteCoinMintBatch(const std::vector<std::pair<libzerocoin::PublicCoin, uint256> >& mintInfo);
-    bool ReadCoinMint(const CBigNum& bnPubcoin, uint256& txHash);
-    bool ReadCoinMint(const uint256& hashPubcoin, uint256& hashTx);
-    /** Write zBCZ spends to the zerocoinDB in a batch */
-    bool WriteCoinSpendBatch(const std::vector<std::pair<libzerocoin::CoinSpend, uint256> >& spendInfo);
-    bool ReadCoinSpend(const CBigNum& bnSerial, uint256& txHash);
-    bool ReadCoinSpend(const uint256& hashSerial, uint256 &txHash);
-    bool EraseCoinMint(const CBigNum& bnPubcoin);
-    bool EraseCoinSpend(const CBigNum& bnSerial);
-    bool WipeCoins(std::string strType);
-
-    /** Map supply [denom] --> supply     */
-    bool WriteZCSupply(const std::map<libzerocoin::CoinDenomination, int64_t>& mapZCS);
-    bool ReadZCSupply(std::map<libzerocoin::CoinDenomination, int64_t>& mapZCS) const;
-    /** Accumulators (only for zPoS IBD): [checksum, denom] --> block height **/
-    bool WriteAccChecksum(const uint32_t& nChecksum, const libzerocoin::CoinDenomination denom, const int nHeight);
-    bool ReadAccChecksum(const uint32_t& nChecksum, const libzerocoin::CoinDenomination denom, int& nHeightRet);
-    bool EraseAccChecksum(const uint32_t& nChecksum, const libzerocoin::CoinDenomination denom);
-    bool WipeAccChecksums();
 };
 
 #endif // BITCOIN_TXDB_H

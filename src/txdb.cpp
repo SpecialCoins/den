@@ -150,16 +150,6 @@ bool CCoinsViewDB::GetStats(CCoinsStats& stats) const
     return true;
 }
 
-bool CBlockTreeDB::WriteMoneySupply(const int64_t& nSupply)
-{
-    return Write(DB_MONEY_SUPPLY, nSupply);
-}
-
-bool CBlockTreeDB::ReadMoneySupply(int64_t& nSupply) const
-{
-    return Read(DB_MONEY_SUPPLY, nSupply);
-}
-
 bool CBlockTreeDB::WriteBatchSync(const std::vector<std::pair<int, const CBlockFileInfo*> >& fileInfo, int nLastFile, const std::vector<const CBlockIndex*>& blockinfo) {
     CDBBatch batch;
     for (std::vector<std::pair<int, const CBlockFileInfo*> >::const_iterator it=fileInfo.begin(); it != fileInfo.end(); it++) {

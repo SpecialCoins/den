@@ -7,7 +7,6 @@
 #include "chain.h"
 #include "main.h"
 #include "txdb.h"
-#include "zbcz/deterministicmint.h"
 #include "wallet/wallet.h"
 
 bool CBczStake::InitFromTxIn(const CTxIn& txin)

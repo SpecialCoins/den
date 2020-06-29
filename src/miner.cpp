@@ -32,8 +32,6 @@
 #include "spork.h"
 #include "invalid.h"
 #include "policy/policy.h"
-#include "zbczchain.h"
-
 
 #include <boost/thread.hpp>
 #include <boost/tuple/tuple.hpp>
@@ -244,7 +242,7 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
 
                 int nConf = nHeight - coins->nHeight;
 
-                // zBCZ spends can have very large priority, use non-overflowing safe functions
+                // spends can have very large priority, use non-overflowing safe functions
                 dPriority = double_safe_addition(dPriority, ((double)nValueIn * nConf));
 
             }
@@ -317,47 +315,6 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
             if (!view.HaveInputs(tx))
                 continue;
 
-            // double check that there are no double spent zBCZ spends in this block or tx
-            if (tx.HasZerocoinSpendInputs()) {
-                int nHeightTx = 0;
-                if (IsTransactionInChain(tx.GetHash(), nHeightTx))
-                    continue;
-
-                bool fDoubleSerial = false;
-                for (const CTxIn& txIn : tx.vin) {
-                    bool isPublicSpend = txIn.IsZerocoinPublicSpend();
-                    if (txIn.IsZerocoinSpend() || isPublicSpend) {
-                        libzerocoin::CoinSpend* spend;
-                        if (isPublicSpend) {
-                            libzerocoin::ZerocoinParams* params = consensus.Zerocoin_Params(false);
-                            PublicCoinSpend publicSpend(params);
-                            CValidationState state;
-                            if (!ZBCZModule::ParseZerocoinPublicSpend(txIn, tx, state, publicSpend)){
-                                throw std::runtime_error("Invalid public spend parse");
-                            }
-                            spend = &publicSpend;
-                        } else {
-                            libzerocoin::CoinSpend spendObj = TxInToZerocoinSpend(txIn);
-                            spend = &spendObj;
-                        }
-
-                        bool fUseV1Params = spend->getCoinVersion() < libzerocoin::PrivateCoin::PUBKEY_VERSION;
-                        if (!spend->HasValidSerial(consensus.Zerocoin_Params(fUseV1Params)))
-                            fDoubleSerial = true;
-                        if (std::count(vBlockSerials.begin(), vBlockSerials.end(), spend->getCoinSerialNumber()))
-                            fDoubleSerial = true;
-                        if (std::count(vTxSerials.begin(), vTxSerials.end(), spend->getCoinSerialNumber()))
-                            fDoubleSerial = true;
-                        if (fDoubleSerial)
-                            break;
-                        vTxSerials.emplace_back(spend->getCoinSerialNumber());
-                    }
-                }
-                //This zBCZ serial has already been included in the block, do not add this tx.
-                if (fDoubleSerial)
-                    continue;
-            }
-
             CAmount nTxFees = view.GetValueIn(tx) - tx.GetValueOut();
 
             nTxSigOps += GetP2SHSigOpCount(tx, view);
@@ -383,9 +340,6 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
             ++nBlockTx;
             nBlockSigOps += nTxSigOps;
             nFees += nTxFees;
-
-            for (const CBigNum& bnSerial : vTxSerials)
-                vBlockSerials.emplace_back(bnSerial);
 
             if (fPrintPriority) {
                 LogPrintf("priority %.1f fee %s txid %s\n",

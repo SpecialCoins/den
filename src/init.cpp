@@ -49,7 +49,6 @@
 #include "utilmoneystr.h"
 #include "util/threadnames.h"
 #include "validationinterface.h"
-#include "zbczchain.h"
 
 #ifdef ENABLE_WALLET
 #include "wallet/db.h"
@@ -78,7 +77,6 @@
 
 
 #ifdef ENABLE_WALLET
-CzBCZWallet* zwalletMain = NULL;
 int nWalletBackups = 10;
 #endif
 volatile bool fFeeEstimatesInitialized = false;
@@ -1528,68 +1526,6 @@ bool AppInit2()
 
                 // Populate list of invalid/fraudulent outpoints that are banned from the chain
                 invalid_out::LoadOutpoints();
-                invalid_out::LoadSerials();
-
-                bool fReindexZerocoin = GetBoolArg("-reindexzerocoin", false);
-                bool fReindexMoneySupply = GetBoolArg("-reindexmoneysupply", false);
-
-                int chainHeight;
-                {
-                    LOCK(cs_main);
-                    chainHeight = chainActive.Height();
-
-                    // initialize BCZ and zBCZ supply to 0
-                    mapZerocoinSupply.clear();
-                    for (auto& denom : libzerocoin::zerocoinDenomList) mapZerocoinSupply.insert(std::make_pair(denom, 0));
-                    nMoneySupply = 0;
-
-                    // Load BCZ and zBCZ supply from DB
-                    if (chainHeight >= 0) {
-                        const uint256& tipHash = chainActive[chainHeight]->GetBlockHash();
-                        CLegacyBlockIndex bi;
-
-                        // Load zBCZ supply map
-                        if (!fReindexZerocoin && consensus.NetworkUpgradeActive(chainHeight, Consensus::UPGRADE_ZC) &&
-                                !zerocoinDB->ReadZCSupply(mapZerocoinSupply)) {
-                            // try first reading legacy block index from DB
-                            if (pblocktree->ReadLegacyBlockIndex(tipHash, bi) && !bi.mapZerocoinSupply.empty()) {
-                                mapZerocoinSupply = bi.mapZerocoinSupply;
-                            } else {
-                                // reindex from disk
-                                fReindexZerocoin = true;
-                            }
-                        }
-
-                        // Load BCZ supply amount
-                        if (!fReindexMoneySupply && !pblocktree->ReadMoneySupply(nMoneySupply)) {
-                            // try first reading legacy block index from DB
-                            if (pblocktree->ReadLegacyBlockIndex(tipHash, bi)) {
-                                nMoneySupply = bi.nMoneySupply;
-                            } else {
-                                // reindex from disk
-                                fReindexMoneySupply = true;
-                            }
-                        }
-                    }
-                }
-
-                // Drop all information from the zerocoinDB and repopulate
-                if (fReindexZerocoin && consensus.NetworkUpgradeActive(chainHeight, Consensus::UPGRADE_ZC)) {
-                    LOCK(cs_main);
-                    uiInterface.InitMessage(_("Reindexing zerocoin database..."));
-                    std::string strError = ReindexZerocoinDB();
-                    if (strError != "") {
-                        strLoadError = strError;
-                        break;
-                    }
-                }
-
-                // Recalculate money supply
-                if (fReindexMoneySupply) {
-                    LOCK(cs_main);
-                    // Skip zbcz if already reindexed
-                    RecalculateBCZSupply(1, fReindexZerocoin);
-                }
 
                 if (!fReindex) {
                     uiInterface.InitMessage(_("Verifying blocks..."));
@@ -1782,8 +1718,6 @@ bool AppInit2()
 
         LogPrintf("Init errors: %s\n", strErrors.str());
         LogPrintf("Wallet completed loading in %15dms\n", GetTimeMillis() - nWalletStartTime);
-        zwalletMain = new CzBCZWallet(pwalletMain);
-        pwalletMain->setZWallet(zwalletMain);
 
         RegisterValidationInterface(pwalletMain);
 
@@ -1832,15 +1766,6 @@ bool AppInit2()
         }
         fVerifyingBlocks = false;
 
-        if (!zwalletMain->GetMasterSeed().IsNull()) {
-            //Inititalize zBCZWallet
-            uiInterface.InitMessage(_("Syncing zBCZ wallet..."));
-
-            //Load zerocoin mint hashes to memory
-            pwalletMain->zbczTracker->Init();
-            zwalletMain->LoadMintPoolFromDB();
-            zwalletMain->SyncWithChain();
-        }
     }  // (!fDisableWallet)
 #else  // ENABLE_WALLET
     LogPrintf("No wallet compiled in!\n");
