@@ -8,8 +8,7 @@
 
 #include "chainparams.h"
 #include "hash.h"
-#include "libzerocoin/bignum.h"
-#include "libzerocoin/CoinSpend.h"
+#include "bignum/bignum.h"
 #include "primitives/transaction.h"
 #include "script/script.h"
 #include "script/standard.h"
