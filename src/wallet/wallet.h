@@ -122,16 +122,6 @@ enum ZerocoinSpendStatus {
     ZPIV_SPEND_V1_SEC_LEVEL                         // Spend is V1 and security level is not set to 100
 };
 
-struct CompactTallyItem {
-    CBitcoinAddress address;
-    CAmount nAmount;
-    std::vector<CTxIn> vecTxIn;
-    CompactTallyItem()
-    {
-        nAmount = 0;
-    }
-};
-
 /** A key pool entry */
 class CKeyPool
 {
@@ -216,6 +206,14 @@ public:
     // Check whether staking status is active (last attempt earlier than 30 seconds ago)
     bool IsActive() const { return (nTime + 30) >= GetTime(); }
 };
+
+struct CRecipient
+{
+    CScript scriptPubKey;
+    CAmount nAmount;
+    bool fSubtractFeeFromAmount;
+};
+
 
 /**
  * A CWallet is an extension of a keystore, which also maintains a set of transactions and balances,
@@ -462,18 +460,43 @@ public:
     CAmount GetUnconfirmedWatchOnlyBalance() const;
     CAmount GetImmatureWatchOnlyBalance() const;
     CAmount GetLockedWatchOnlyBalance() const;
-    bool CreateTransaction(const std::vector<std::pair<CScript, CAmount> >& vecSend,
+    bool FundTransaction(CMutableTransaction& tx, CAmount &nFeeRet, bool overrideEstimatedFeeRate, const CFeeRate& specificFeeRate, int& nChangePosInOut, std::string& strFailReason, bool includeWatching, bool lockUnspents, const CTxDestination& destChange = CNoDestination());
+    /**
+     * Create a new transaction paying the recipients with a set of coins
+     * selected by SelectCoins(); Also create the change output, when needed
+     * @note passing nChangePosInOut as -1 will result in setting a random position
+     */
+    bool CreateTransaction(const std::vector<CRecipient>& vecSend,
         CWalletTx& wtxNew,
         CReserveKey& reservekey,
         CAmount& nFeeRet,
+        int& nChangePosInOut,
         std::string& strFailReason,
         const CCoinControl* coinControl = NULL,
         AvailableCoinsType coin_type = ALL_COINS,
+        bool sign = true,
         bool useIX = false,
         CAmount nFeePay = 0,
         bool fIncludeDelegated = false);
     bool CreateTransaction(CScript scriptPubKey, const CAmount& nValue, CWalletTx& wtxNew, CReserveKey& reservekey, CAmount& nFeeRet, std::string& strFailReason, const CCoinControl* coinControl = NULL, AvailableCoinsType coin_type = ALL_COINS, bool useIX = false, CAmount nFeePay = 0, bool fIncludeDelegated = false);
-    bool CommitTransaction(CWalletTx& wtxNew, CReserveKey& reservekey, std::string strCommand = NetMsgType::TX);
+
+    // enumeration for CommitResult (return status of CommitTransaction)
+    enum CommitStatus
+    {
+        OK,
+        Abandoned,              // Failed to accept to memory pool. Successfully removed from the wallet.
+        NotAccepted,            // Failed to accept to memory pool. Unable to abandon.
+    };
+    struct CommitResult
+    {
+        CommitResult(): status(CommitStatus::NotAccepted) {}
+        CWallet::CommitStatus status;
+        CValidationState state;
+        uint256 hashTx = UINT256_ZERO;
+        // converts CommitResult in human-readable format
+        std::string ToString() const;
+    };
+    CWallet::CommitResult CommitTransaction(CWalletTx& wtxNew, CReserveKey& reservekey, std::string strCommand = NetMsgType::TX);
     bool AddAccountingEntry(const CAccountingEntry&, CWalletDB & pwalletdb);
     bool CreateCoinStake(const CKeyStore& keystore, const CBlockIndex* pindexPrev, unsigned int nBits, CMutableTransaction& txNew, int64_t& nTxNewTime);
     bool MultiSend();
@@ -637,7 +660,6 @@ public:
     /* Wallets parameter interaction */
     static bool ParameterInteraction();
 };
-
 
 /** A key allocated from the key pool. */
 class CReserveKey

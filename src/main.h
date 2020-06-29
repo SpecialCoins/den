@@ -74,16 +74,9 @@ static const unsigned int DEFAULT_DESCENDANT_SIZE_LIMIT = 101;
 static const unsigned int DEFAULT_MAX_MEMPOOL_SIZE = 300;
 /** Default for -mempoolexpiry, expiration time for mempool transactions in hours */
 static const unsigned int DEFAULT_MEMPOOL_EXPIRY = 72;
-/** Default for -blockmaxsize and -blockminsize, which control the range of sizes the mining code will create **/
-static const unsigned int DEFAULT_BLOCK_MAX_SIZE = 750000;
-static const unsigned int DEFAULT_BLOCK_MIN_SIZE = 0;
-/** Default for -blockprioritysize, maximum space for zero/low-fee transactions **/
-static const unsigned int DEFAULT_BLOCK_PRIORITY_SIZE = 50000;
 /** The maximum size for transactions we're willing to relay/mine */
 static const unsigned int MAX_STANDARD_TX_SIZE = 100000;
 static const unsigned int MAX_ZEROCOIN_TX_SIZE = 150000;
-/** Maximum number of signature check operations in an IsStandard() P2SH script */
-static const unsigned int MAX_P2SH_SIGOPS = 15;
 /** Default for -maxorphantx, maximum number of orphan transactions kept in memory */
 static const unsigned int DEFAULT_MAX_ORPHAN_TRANSACTIONS = 100;
 /** The maximum size of a blk?????.dat file (since 0.8) */
@@ -253,6 +246,9 @@ bool AcceptableInputs(CTxMemPool& pool, CValidationState& state, const CTransact
 int GetInputAge(CTxIn& vin);
 int GetIXConfirmations(uint256 nTXHash);
 
+/** Convert CValidationState to a human-readable message for logging */
+std::string FormatStateMessage(const CValidationState &state);
+
 struct CNodeStateStats {
     int nMisbehavior;
     int nSyncHeight;
@@ -273,13 +269,6 @@ CAmount GetMinRelayFee(const CTransaction& tx, const CTxMemPool& pool, unsigned 
  * expensive-to-check-upon-redemption script like:
  *   DUP CHECKSIG DROP ... repeated 100 times... OP_1
  */
-
-/**
- * Check for standard transaction types
- * @param[in] mapInputs    Map of previous transactions that have outputs we're spending
- * @return True if all inputs (scriptSigs) use only standard transaction forms
- */
-bool AreInputsStandard(const CTransaction& tx, const CCoinsViewCache& mapInputs);
 
 /**
  * Check whether all inputs of this transaction are valid (no double spends, scripts & sigs, amounts)
@@ -304,11 +293,6 @@ bool ValidOutPoint(const COutPoint& out, int nHeight);
  * See consensus/consensus.h for flag definitions.
  */
 bool CheckFinalTx(const CTransaction& tx, int flags = -1);
-
-/** Check for standard transaction types
- * @return True if all outputs (scriptPubKeys) use only standard transaction forms
- */
-bool IsStandardTx(const CTransaction& tx, std::string& reason);
 
 /**
  * Closure representing one script verification
@@ -422,5 +406,17 @@ extern CSporkDB* pSporkDB;
  * This is also true for mempool checks.
  */
 int GetSpendHeight(const CCoinsViewCache& inputs);
+
+/** Reject codes greater or equal to this can be returned by AcceptToMemPool
+ * for transactions, to signal internal conditions. They cannot and should not
+ * be sent over the P2P network.
+ */
+static const unsigned int REJECT_INTERNAL = 0x100;
+/** Too high fee. Can not be triggered by P2P transactions */
+static const unsigned int REJECT_HIGHFEE = 0x100;
+/** Transaction is already known (either in mempool or blockchain) */
+static const unsigned int REJECT_ALREADY_KNOWN = 0x101;
+/** Transaction conflicts with a transaction already known */
+static const unsigned int REJECT_CONFLICT = 0x102;
 
 #endif // BITCOIN_MAIN_H

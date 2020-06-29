@@ -155,7 +155,9 @@ UniValue preparebudget(const UniValue& params, bool fHelp)
     // make our change address
     CReserveKey reservekey(pwalletMain);
     //send the tx to the network
-    pwalletMain->CommitTransaction(wtx, reservekey, useIX ? NetMsgType::IX : NetMsgType::TX);
+    const CWallet::CommitResult& res = pwalletMain->CommitTransaction(wtx, reservekey, useIX ? NetMsgType::IX : NetMsgType::TX);
+    if (res.status != CWallet::CommitStatus::OK)
+        throw JSONRPCError(RPC_WALLET_ERROR, res.ToString());
 
     return wtx.GetHash().ToString();
 }
@@ -274,12 +276,6 @@ UniValue mnbudgetvote(const UniValue& params, bool fHelp)
     int success = 0;
     int failed = 0;
 
-    bool fNewSigs = false;
-    {
-        LOCK(cs_main);
-        fNewSigs = chainActive.NewSigsActive();
-    }
-
     UniValue resultsObj(UniValue::VARR);
 
     if (strCommand == "local") {
@@ -309,7 +305,7 @@ UniValue mnbudgetvote(const UniValue& params, bool fHelp)
             }
 
             CBudgetVote vote(activeMasternode.vin, hash, nVote);
-            if (!vote.Sign(keyMasternode, pubKeyMasternode, fNewSigs)) {
+            if (!vote.Sign(keyMasternode, pubKeyMasternode)) {
                 failed++;
                 statusObj.push_back(Pair("node", "local"));
                 statusObj.push_back(Pair("result", "failed"));
@@ -375,7 +371,7 @@ UniValue mnbudgetvote(const UniValue& params, bool fHelp)
             }
 
             CBudgetVote vote(pmn->vin, hash, nVote);
-            if (!vote.Sign(keyMasternode, pubKeyMasternode, fNewSigs)) {
+            if (!vote.Sign(keyMasternode, pubKeyMasternode)) {
                 failed++;
                 statusObj.push_back(Pair("node", mne.getAlias()));
                 statusObj.push_back(Pair("result", "failed"));
@@ -449,7 +445,7 @@ UniValue mnbudgetvote(const UniValue& params, bool fHelp)
             }
 
             CBudgetVote vote(pmn->vin, hash, nVote);
-            if(!vote.Sign(keyMasternode, pubKeyMasternode, fNewSigs)){
+            if(!vote.Sign(keyMasternode, pubKeyMasternode)){
                 failed++;
                 statusObj.push_back(Pair("node", mne.getAlias()));
                 statusObj.push_back(Pair("result", "failed"));
@@ -766,12 +762,6 @@ UniValue mnfinalbudget(const UniValue& params, bool fHelp)
             "  show        - Show existing finalized budgets\n"
             "  getvotes     - Get vote information for each finalized budget\n");
 
-    bool fNewSigs = false;
-    {
-        LOCK(cs_main);
-        fNewSigs = chainActive.NewSigsActive();
-    }
-
     if (strCommand == "vote-many") {
         if (params.size() != 2)
             throw std::runtime_error("Correct usage is 'mnfinalbudget vote-many BUDGET_HASH'");
@@ -814,7 +804,7 @@ UniValue mnfinalbudget(const UniValue& params, bool fHelp)
 
 
             CFinalizedBudgetVote vote(pmn->vin, hash);
-            if (!vote.Sign(keyMasternode, pubKeyMasternode, fNewSigs)) {
+            if (!vote.Sign(keyMasternode, pubKeyMasternode)) {
                 failed++;
                 statusObj.push_back(Pair("result", "failed"));
                 statusObj.push_back(Pair("errorMessage", "Failure to sign."));
@@ -862,7 +852,7 @@ UniValue mnfinalbudget(const UniValue& params, bool fHelp)
         }
 
         CFinalizedBudgetVote vote(activeMasternode.vin, hash);
-        if (!vote.Sign(keyMasternode, pubKeyMasternode, fNewSigs)) {
+        if (!vote.Sign(keyMasternode, pubKeyMasternode)) {
             return "Failure to sign.";
         }
 

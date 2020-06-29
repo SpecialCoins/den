@@ -284,7 +284,8 @@ bool IsBlockPayeeValid(const CBlock& block, int nBlockHeight)
         return true;
     }
 
-    const CTransaction& txNew = (nBlockHeight > Params().GetConsensus().height_last_PoW ? block.vtx[1] : block.vtx[0]);
+    const bool isPoSActive = Params().GetConsensus().NetworkUpgradeActive(nBlockHeight, Consensus::UPGRADE_POS);
+    const CTransaction& txNew = (isPoSActive ? block.vtx[1] : block.vtx[0]);
 
     //check if it's a budget block
     if (sporkManager.IsSporkActive(SPORK_13_ENABLE_SUPERBLOCKS)) {
@@ -463,9 +464,9 @@ void CMasternodePayments::ProcessMessageMasternodePayments(CNode* pfrom, std::st
             return;
         }
 
-        // reject old signatures 6000 blocks after hard-fork
-        if (winner.nMessVersion != MessageVersion::MESS_VER_HASH && Params().GetConsensus().IsMessSigV2(winner.nBlockHeight - 6000)) {
-            LogPrintf("%s : nMessVersion=%d not accepted anymore at block %d\n", __func__, winner.nMessVersion, nHeight);
+        // reject old signature version
+        if (winner.nMessVersion != MessageVersion::MESS_VER_HASH) {
+            LogPrint(BCLog::MASTERNODE, "mnw - rejecting old message version %d\n", winner.nMessVersion);
             return;
         }
 
@@ -740,10 +741,8 @@ bool CMasternodePayments::ProcessBlock(int nBlockHeight)
         return false;
     }
 
-    const bool fNewSigs = Params().GetConsensus().IsMessSigV2(nBlockHeight - 20);
-
     LogPrint(BCLog::MASTERNODE,"CMasternodePayments::ProcessBlock() - Signing Winner\n");
-    if (newWinner.Sign(keyMasternode, pubKeyMasternode, fNewSigs)) {
+    if (newWinner.Sign(keyMasternode, pubKeyMasternode)) {
         LogPrint(BCLog::MASTERNODE,"CMasternodePayments::ProcessBlock() - AddWinningMasternode\n");
 
         if (AddWinningMasternode(newWinner)) {

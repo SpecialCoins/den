@@ -1,5 +1,4 @@
 src
-src/bench
 src/compat
 src/consensus
 src/crypto
@@ -18,7 +17,6 @@ src/primitives
 src/qt
 src/qt/pivx
 src/qt/pivx/settings
-src/qt/test
 src/rpc
 src/script
 src/secp256k1/contrib
@@ -28,11 +26,9 @@ src/secp256k1/src/java
 src/secp256k1/src/modules/ecdh
 src/secp256k1/src/modules/recovery
 src/support
-src/test
 src/univalue/include
 src/univalue/lib
 src/util
 src/wallet
-src/wallet/test
 src/zmq
 src/zpiv

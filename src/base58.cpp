@@ -27,12 +27,14 @@ bool DecodeBase58(const char* psz, std::vector<unsigned char>& vch)
         psz++;
     // Skip and count leading '1's.
     int zeroes = 0;
+    int length = 0;
     while (*psz == '1') {
         zeroes++;
         psz++;
     }
     // Allocate enough space in big-endian base256 representation.
-    std::vector<unsigned char> b256(strlen(psz) * 733 / 1000 + 1); // log(58) / log(256), rounded up.
+    int size = strlen(psz) * 733 /1000 + 1; // log(58) / log(256), rounded up.
+    std::vector<unsigned char> b256(size);
     // Process the characters.
     while (*psz && !isspace(*psz)) {
         // Decode base58 character
@@ -41,12 +43,14 @@ bool DecodeBase58(const char* psz, std::vector<unsigned char>& vch)
             return false;
         // Apply "b256 = b256 * 58 + ch".
         int carry = ch - pszBase58;
-        for (std::vector<unsigned char>::reverse_iterator it = b256.rbegin(); it != b256.rend(); it++) {
+        int i = 0;
+        for (std::vector<unsigned char>::reverse_iterator it = b256.rbegin(); (carry != 0 || i < length) && (it != b256.rend()); ++it, ++i) {
             carry += 58 * (*it);
             *it = carry % 256;
             carry /= 256;
         }
         assert(carry == 0);
+        length = i;
         psz++;
     }
     // Skip trailing spaces.
@@ -55,7 +59,7 @@ bool DecodeBase58(const char* psz, std::vector<unsigned char>& vch)
     if (*psz != 0)
         return false;
     // Skip leading zeroes in b256.
-    std::vector<unsigned char>::iterator it = b256.begin();
+    std::vector<unsigned char>::iterator it = b256.begin() + (size - length);
     while (it != b256.end() && *it == 0)
         it++;
     // Copy result into output vector.
@@ -85,26 +89,31 @@ std::string EncodeBase58(const unsigned char* pbegin, const unsigned char* pend)
 {
     // Skip & count leading zeroes.
     int zeroes = 0;
+    int length = 0;
     while (pbegin != pend && *pbegin == 0) {
         pbegin++;
         zeroes++;
     }
     // Allocate enough space in big-endian base58 representation.
-    std::vector<unsigned char> b58((pend - pbegin) * 138 / 100 + 1); // log(256) / log(58), rounded up.
+    int size = (pend - pbegin) * 138 / 100 + 1; // log(256) / log(58), rounded up.
+    std::vector<unsigned char> b58(size);
     // Process the bytes.
     while (pbegin != pend) {
         int carry = *pbegin;
+        int i = 0;
         // Apply "b58 = b58 * 256 + ch".
-        for (std::vector<unsigned char>::reverse_iterator it = b58.rbegin(); it != b58.rend(); it++) {
+        for (std::vector<unsigned char>::reverse_iterator it = b58.rbegin(); (carry != 0 || i < length) && (it != b58.rend()); it++, i++) {
             carry += 256 * (*it);
             *it = carry % 58;
             carry /= 58;
         }
+
         assert(carry == 0);
+        length = i;
         pbegin++;
     }
     // Skip leading zeroes in base58 result.
-    std::vector<unsigned char>::iterator it = b58.begin();
+    std::vector<unsigned char>::iterator it = b58.begin() + (size - length);
     while (it != b58.end() && *it == 0)
         it++;
     // Translate the result into a string.
@@ -144,7 +153,7 @@ bool DecodeBase58Check(const char* psz, std::vector<unsigned char>& vchRet)
     }
     // re-calculate the checksum, insure it matches the included 4-byte checksum
     uint256 hash = Hash(vchRet.begin(), vchRet.end() - 4);
-    if (memcmp(&hash, &vchRet.end()[-4], 4) != 0) {
+    if (memcmp(&hash, &vchRet[vchRet.size() - 4], 4) != 0) {
         vchRet.clear();
         return false;
     }
@@ -189,7 +198,7 @@ bool CBase58Data::SetString(const char* psz, unsigned int nVersionBytes)
     vchData.resize(vchTemp.size() - nVersionBytes);
     if (!vchData.empty())
         memcpy(&vchData[0], &vchTemp[nVersionBytes], vchData.size());
-    memory_cleanse(&vchTemp[0], vchData.size());
+    memory_cleanse(&vchTemp[0], vchTemp.size());
     return true;
 }
 
@@ -311,37 +320,33 @@ bool CBitcoinAddress::IsStakingAddress() const
     return fCorrectSize && vchVersion == Params().Base58Prefix(CChainParams::STAKING_ADDRESS);
 }
 
-void CBitcoinSecret::SetKey(const CKey& vchSecret)
+CKey DecodeSecret(const std::string& str)
 {
-    assert(vchSecret.IsValid());
-    SetData(Params().Base58Prefix(CChainParams::SECRET_KEY), vchSecret.begin(), vchSecret.size());
-    if (vchSecret.IsCompressed())
-        vchData.push_back(1);
+    CKey key;
+    std::vector<unsigned char> data;
+    if (DecodeBase58Check(str, data)) {
+        const std::vector<unsigned char>& privkey_prefix = Params().Base58Prefix(CChainParams::SECRET_KEY);
+        if ((data.size() == 32 + privkey_prefix.size() || (data.size() == 33 + privkey_prefix.size() && data.back() == 1)) &&
+            std::equal(privkey_prefix.begin(), privkey_prefix.end(), data.begin())) {
+            bool compressed = data.size() == 33 + privkey_prefix.size();
+            key.Set(data.begin() + privkey_prefix.size(), data.begin() + privkey_prefix.size() + 32, compressed);
+        }
+    }
+    memory_cleanse(data.data(), data.size());
+    return key;
 }
 
-CKey CBitcoinSecret::GetKey()
+std::string EncodeSecret(const CKey& key)
 {
-    CKey ret;
-    assert(vchData.size() >= 32);
-    ret.Set(vchData.begin(), vchData.begin() + 32, vchData.size() > 32 && vchData[32] == 1);
+    assert(key.IsValid());
+    std::vector<unsigned char> data = Params().Base58Prefix(CChainParams::SECRET_KEY);
+    data.insert(data.end(), key.begin(), key.end());
+    if (key.IsCompressed()) {
+        data.push_back(1);
+    }
+    std::string ret = EncodeBase58Check(data);
+    memory_cleanse(data.data(), data.size());
     return ret;
-}
-
-bool CBitcoinSecret::IsValid() const
-{
-    bool fExpectedFormat = vchData.size() == 32 || (vchData.size() == 33 && vchData[32] == 1);
-    bool fCorrectVersion = vchVersion == Params().Base58Prefix(CChainParams::SECRET_KEY);
-    return fExpectedFormat && fCorrectVersion;
-}
-
-bool CBitcoinSecret::SetString(const char* pszSecret)
-{
-    return CBase58Data::SetString(pszSecret) && IsValid();
-}
-
-bool CBitcoinSecret::SetString(const std::string& strSecret)
-{
-    return SetString(strSecret.c_str());
 }
 
 CTxDestination DestinationFor(const CKeyID& keyID, const CChainParams::Base58Type addrType)
@@ -349,6 +354,11 @@ CTxDestination DestinationFor(const CKeyID& keyID, const CChainParams::Base58Typ
     CBitcoinAddress addr(keyID, addrType);
     if (!addr.IsValid()) throw std::runtime_error("Error, trying to decode an invalid keyID");
     return addr.Get();
+}
+
+std::string EncodeDestination(const CTxDestination& dest, bool isStaking)
+{
+    return EncodeDestination(dest, isStaking ? CChainParams::STAKING_ADDRESS : CChainParams::PUBKEY_ADDRESS);
 }
 
 std::string EncodeDestination(const CTxDestination& dest, const CChainParams::Base58Type addrType)

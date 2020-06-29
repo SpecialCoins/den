@@ -502,9 +502,21 @@ void PIVXGUI::goToSettings(){
     showTop(settingsWidget);
 }
 
+void PIVXGUI::goToSettingsInfo()
+{
+    navMenu->selectSettings();
+    settingsWidget->showInformation();
+    goToSettings();
+}
+
 void PIVXGUI::goToReceive()
 {
     showTop(receiveWidget);
+}
+
+void PIVXGUI::openNetworkMonitor()
+{
+    settingsWidget->openNetworkMonitor();
 }
 
 void PIVXGUI::showTop(QWidget* view)
@@ -607,6 +619,7 @@ bool PIVXGUI::addWallet(const QString& name, WalletModel* walletModel)
     // Connect actions..
     connect(walletModel, &WalletModel::message, this, &PIVXGUI::message);
     connect(masterNodesWidget, &MasterNodesWidget::message, this, &PIVXGUI::message);
+    connect(coldStakingWidget, &ColdStakingWidget::message, this, &PIVXGUI::message);
     connect(topBar, &TopBar::message, this, &PIVXGUI::message);
     connect(sendWidget, &SendWidget::message,this, &PIVXGUI::message);
     connect(receiveWidget, &ReceiveWidget::message,this, &PIVXGUI::message);
