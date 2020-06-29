@@ -58,7 +58,7 @@ QT_TRANSLATE_NOOP("bcz-core", ""
 QT_TRANSLATE_NOOP("bcz-core", ""
 "Enable cold staking functionality (0-1, default: %u). Disabled if staking=0"),
 QT_TRANSLATE_NOOP("bcz-core", ""
-"Enable or disable staking functionality for PIV inputs (0-1, default: %u)"),
+"Enable or disable staking functionality for BCZ inputs (0-1, default: %u)"),
 QT_TRANSLATE_NOOP("bcz-core", ""
 "Enable or disable staking functionality for zBCZ inputs (0-1, default: %u)"),
 QT_TRANSLATE_NOOP("bcz-core", ""
@@ -98,10 +98,10 @@ QT_TRANSLATE_NOOP("bcz-core", ""
 QT_TRANSLATE_NOOP("bcz-core", ""
 "Failed to find coin set amongst held coins with less than maxNumber of Spends"),
 QT_TRANSLATE_NOOP("bcz-core", ""
-"Fees (in PIV/Kb) smaller than this are considered zero fee for relaying "
+"Fees (in BCZ/Kb) smaller than this are considered zero fee for relaying "
 "(default: %s)"),
 QT_TRANSLATE_NOOP("bcz-core", ""
-"Fees (in PIV/Kb) smaller than this are considered zero fee for transaction "
+"Fees (in BCZ/Kb) smaller than this are considered zero fee for transaction "
 "creation (default: %s)"),
 QT_TRANSLATE_NOOP("bcz-core", ""
 "Flush database activity from memory pool to disk log every <n> megabytes "
@@ -302,7 +302,7 @@ QT_TRANSLATE_NOOP("bcz-core", "Failed to read block"),
 QT_TRANSLATE_NOOP("bcz-core", "Failed to select a zerocoin"),
 QT_TRANSLATE_NOOP("bcz-core", "Failed to wipe zerocoinDB"),
 QT_TRANSLATE_NOOP("bcz-core", "Failed to write coin serial number into wallet"),
-QT_TRANSLATE_NOOP("bcz-core", "Fee (in PIV/kB) to add to transactions you send (default: %s)"),
+QT_TRANSLATE_NOOP("bcz-core", "Fee (in BCZ/kB) to add to transactions you send (default: %s)"),
 QT_TRANSLATE_NOOP("bcz-core", "Force safe mode (default: %u)"),
 QT_TRANSLATE_NOOP("bcz-core", "Generate coins (default: %u)"),
 QT_TRANSLATE_NOOP("bcz-core", "How many blocks to check at startup (default: %u, 0 = all)"),
@@ -364,8 +364,8 @@ QT_TRANSLATE_NOOP("bcz-core", "RPC server options:"),
 QT_TRANSLATE_NOOP("bcz-core", "Randomly drop 1 of every <n> network messages"),
 QT_TRANSLATE_NOOP("bcz-core", "Randomly fuzz 1 of every <n> network messages"),
 QT_TRANSLATE_NOOP("bcz-core", "Rebuild block chain index from current blk000??.dat files"),
-QT_TRANSLATE_NOOP("bcz-core", "Recalculating PIV supply..."),
-QT_TRANSLATE_NOOP("bcz-core", "Reindex the PIV and zBCZ money supply statistics"),
+QT_TRANSLATE_NOOP("bcz-core", "Recalculating BCZ supply..."),
+QT_TRANSLATE_NOOP("bcz-core", "Reindex the BCZ and zBCZ money supply statistics"),
 QT_TRANSLATE_NOOP("bcz-core", "Reindexing zerocoin database..."),
 QT_TRANSLATE_NOOP("bcz-core", "Reindexing zerocoin failed"),
 QT_TRANSLATE_NOOP("bcz-core", "Relay and mine data carrier transactions (default: %u)"),

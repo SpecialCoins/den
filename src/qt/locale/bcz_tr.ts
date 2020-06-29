@@ -376,8 +376,8 @@ Stake için kaldırın</translation>
         <translation>İPTAL</translation>
     </message>
     <message>
-        <source>BCZ will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your PIVs from being stolen by malware infecting your computer.</source>
-        <translation>BCZ şifreleme işlemini tamamlamak için şimdi kapanacaktır. Cüzdanınızı şifrelemenin, PIV'lerinizi bilgisayarınıza bulaşan kötücül yazılımlar tarafından çalınmasına tamamen engelleyemediğini unutmayın</translation>
+        <source>BCZ will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your BCZs from being stolen by malware infecting your computer.</source>
+        <translation>BCZ şifreleme işlemini tamamlamak için şimdi kapanacaktır. Cüzdanınızı şifrelemenin, BCZ'lerinizi bilgisayarınıza bulaşan kötücül yazılımlar tarafından çalınmasına tamamen engelleyemediğini unutmayın</translation>
     </message>
     <message>
         <source>Are you sure you wish to encrypt your wallet?</source>
@@ -446,8 +446,8 @@ Stake için kaldırın</translation>
         <translation>Birikimler</translation>
     </message>
     <message>
-        <source>0,00 PIV</source>
-        <translation>0,00 PIV</translation>
+        <source>0,00 BCZ</source>
+        <translation>0,00 BCZ</translation>
     </message>
     <message>
         <source>address</source>
@@ -512,8 +512,8 @@ Stake için kaldırın</translation>
         <translation>Miktar</translation>
     </message>
     <message>
-        <source>0.00 PIV</source>
-        <translation>0.00 PIV</translation>
+        <source>0.00 BCZ</source>
+        <translation>0.00 BCZ</translation>
     </message>
     <message>
         <source>0</source>
@@ -664,8 +664,8 @@ Stake için kaldırın</translation>
         <translation>Herhangi bir alıcı %1 'den küçük bir miktar alırsa, bu etiket kırmızıya döner.</translation>
     </message>
     <message>
-        <source>Can vary +/- %1 upiv per input.</source>
-        <translation>Her giriş için +/- %1 upiv farkedebilir.</translation>
+        <source>Can vary +/- %1 ubcz per input.</source>
+        <translation>Her giriş için +/- %1 ubcz farkedebilir.</translation>
     </message>
     <message>
         <source>(no label)</source>
@@ -787,8 +787,8 @@ Devam etmek istiyor musunuz?</translation>
         <translation>Koinler delege edildi</translation>
     </message>
     <message>
-        <source>You don't have any PIV to select.</source>
-        <translation>Seçebileceğiniz PIV'iniz bulunmuyor</translation>
+        <source>You don't have any BCZ to select.</source>
+        <translation>Seçebileceğiniz BCZ'iniz bulunmuyor</translation>
     </message>
     <message>
         <source>URI copied to clipboard</source>
@@ -915,8 +915,8 @@ kopyala</translation>
         <translation>Stake İstatistikleri</translation>
     </message>
     <message>
-        <source>PIV</source>
-        <translation>PIV</translation>
+        <source>BCZ</source>
+        <translation>BCZ</translation>
     </message>
     <message>
         <source>zBCZ</source>
@@ -951,8 +951,8 @@ kopyala</translation>
         <translation>Hesap geçmişinizde görebilirsiniz</translation>
     </message>
     <message>
-        <source>Amount of PIV and zBCZ staked.</source>
-        <translation>Stake edilmiş PIV ve zBCZ miktarı</translation>
+        <source>Amount of BCZ and zBCZ staked.</source>
+        <translation>Stake edilmiş BCZ ve zBCZ miktarı</translation>
     </message>
     <message>
         <source>Please wait until the wallet is fully synced to see your correct balance</source>
@@ -963,8 +963,8 @@ kopyala</translation>
         <translation>İşlem bulunmuyor</translation>
     </message>
     <message>
-        <source>How to get PIV or zBCZ</source>
-        <translation>PIV veya zBCZ nasıl alınır</translation>
+        <source>How to get BCZ or zBCZ</source>
+        <translation>BCZ veya zBCZ nasıl alınır</translation>
     </message>
     <message>
         <source>You can verify the staking activity in the status bar at the top right of the wallet.
@@ -1299,8 +1299,8 @@ Cüzdanınız senkronize olduktan ve harcanmamış bakiyeniz yeterli miktarda on
         <translation>Bu miktarda koininizin olduğundan emin olunuz.</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A transaction of 10,000 PIV will be made&lt;/p&gt;&lt;p&gt;to a new empty address in your wallet.&lt;/p&gt;&lt;p&gt;The Address is labeled under the master node's name.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;10.000 PIV'lik bir transfer &lt;/p&gt;&lt;p&gt;yeni ve boş bir adrese yapılacaktır.&lt;/p&gt;&lt;p&gt;Adres Masternode'unuz ismi ile etiketlenecektir.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A transaction of 10,000 BCZ will be made&lt;/p&gt;&lt;p&gt;to a new empty address in your wallet.&lt;/p&gt;&lt;p&gt;The Address is labeled under the master node's name.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;10.000 BCZ'lik bir transfer &lt;/p&gt;&lt;p&gt;yeni ve boş bir adrese yapılacaktır.&lt;/p&gt;&lt;p&gt;Adres Masternode'unuz ismi ile etiketlenecektir.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Address of the node that must always be online running the actual master node.</source>
@@ -1453,8 +1453,8 @@ Emin misiniz?</translation>
         <translation> masternode.conf dosyası bulunamadı</translation>
     </message>
     <message>
-        <source>Not enough balance to create a masternode, 10,000 PIV required.</source>
-        <translation>Masternode yaratmak için yetersiz bakiye, 10,000 PIV gerekmektedir.</translation>
+        <source>Not enough balance to create a masternode, 10,000 BCZ required.</source>
+        <translation>Masternode yaratmak için yetersiz bakiye, 10,000 BCZ gerekmektedir.</translation>
     </message>
     <message>
         <source>Error creating masternode</source>
@@ -1693,8 +1693,8 @@ https://www.transifex.com/bcz-project/bcz-project-translations</translation>
         <translation>Map port using &amp;UPnP</translation>
     </message>
     <message>
-        <source>Enable automatic minting of PIV units to zBCZ</source>
-        <translation>PIV birimlerinin zBCZ'e otomatik basımını ektinleştir</translation>
+        <source>Enable automatic minting of BCZ units to zBCZ</source>
+        <translation>BCZ birimlerinin zBCZ'e otomatik basımını ektinleştir</translation>
     </message>
     <message>
         <source>Enable zBCZ Automint</source>
@@ -1709,16 +1709,16 @@ https://www.transifex.com/bcz-project/bcz-project-translations</translation>
         <translation>Automint adreslerini etkinleştir</translation>
     </message>
     <message>
-        <source>Percentage of incoming PIV which get automatically converted to zBCZ via Zerocoin Protocol (min: 10%)</source>
-        <translation>Zerocoin Protokolü üzerinden otomatik olarak zBCZ'ye dönüştürülen gelen PIV yüzdesi (dakika: 10%)</translation>
+        <source>Percentage of incoming BCZ which get automatically converted to zBCZ via Zerocoin Protocol (min: 10%)</source>
+        <translation>Zerocoin Protokolü üzerinden otomatik olarak zBCZ'ye dönüştürülen gelen BCZ yüzdesi (dakika: 10%)</translation>
     </message>
     <message>
         <source>Percentage of autominted zBCZ</source>
         <translation>Otomatikleştirilmiş zBCZ yüzdesi</translation>
     </message>
     <message>
-        <source>Wait with automatic conversion to Zerocoin until enough PIV for this denomination is available</source>
-        <translation>Bu bölen için yeterli PIV bulunana kadar Zerocoin'e otomatik dönüştürmede kalın</translation>
+        <source>Wait with automatic conversion to Zerocoin until enough BCZ for this denomination is available</source>
+        <translation>Bu bölen için yeterli BCZ bulunana kadar Zerocoin'e otomatik dönüştürmede kalın</translation>
     </message>
     <message>
         <source>Preferred Automint zBCZ Denomination</source>
@@ -2093,13 +2093,13 @@ Adres: %4
         <translation>Mint</translation>
     </message>
     <message>
-        <source>Minting zBCZ anonymizes your PIV by removing any
+        <source>Minting zBCZ anonymizes your BCZ by removing any
 transaction history, making transactions untraceable </source>
-        <translation>zBCZ mintleme işlemi PIV'lerinizin işlem geçmişini siler, işlemleri takip edilemez yapar</translation>
+        <translation>zBCZ mintleme işlemi BCZ'lerinizin işlem geçmişini siler, işlemleri takip edilemez yapar</translation>
     </message>
     <message>
-        <source>Mint new zBCZ or convert back to PIV</source>
-        <translation>Yeni zBCZ mintle veya PIV'e geri dönüştür</translation>
+        <source>Mint new zBCZ or convert back to BCZ</source>
+        <translation>Yeni zBCZ mintle veya BCZ'e geri dönüştür</translation>
     </message>
     <message>
         <source>No transactions yet</source>
@@ -2110,16 +2110,16 @@ transaction history, making transactions untraceable </source>
         <translation>Mint ZBCZ</translation>
     </message>
     <message>
-        <source>Enter amount of PIV to mint into zBCZ</source>
-        <translation>zBCZ'e mintlenmek için dönüştürülecek PIV miktarını gir</translation>
+        <source>Enter amount of BCZ to mint into zBCZ</source>
+        <translation>zBCZ'e mintlenmek için dönüştürülecek BCZ miktarını gir</translation>
     </message>
     <message>
-        <source>Convert back to PIV</source>
-        <translation>PIV'e geri dönüştür</translation>
+        <source>Convert back to BCZ</source>
+        <translation>BCZ'e geri dönüştür</translation>
     </message>
     <message>
-        <source>Enter amount of zBCZ to convert back into PIV</source>
-        <translation>PIV'e geri dönüştürülecek zBCZ miktarını gir</translation>
+        <source>Enter amount of zBCZ to convert back into BCZ</source>
+        <translation>BCZ'e geri dönüştürülecek zBCZ miktarını gir</translation>
     </message>
     <message>
         <source>Zerocoin</source>
@@ -2150,12 +2150,12 @@ transaction history, making transactions untraceable </source>
         <translation>zBCZ minting başarılı</translation>
     </message>
     <message>
-        <source>zBCZ converted back to PIV</source>
-        <translation>zBCZ PIV'e dönüştürüldü</translation>
+        <source>zBCZ converted back to BCZ</source>
+        <translation>zBCZ BCZ'e dönüştürüldü</translation>
     </message>
     <message>
-        <source>You don't have any PIV to select.</source>
-        <translation>Seçebileceğiniz PIV'iniz bulunmuyor</translation>
+        <source>You don't have any BCZ to select.</source>
+        <translation>Seçebileceğiniz BCZ'iniz bulunmuyor</translation>
     </message>
     <message>
         <source>Rescan Mints</source>
@@ -2762,7 +2762,7 @@ transaction history, making transactions untraceable </source>
         <translation>Al</translation>
     </message>
     <message>
-        <source>Scan the QR code or copy the address to receive PIV.</source>
+        <source>Scan the QR code or copy the address to receive BCZ.</source>
         <translation>BCZ almak için QR kodunu okutun veya adresi kopyalayın</translation>
     </message>
     <message>
@@ -2864,8 +2864,8 @@ transaction history, making transactions untraceable </source>
         <translation>Miktar</translation>
     </message>
     <message>
-        <source>PIV</source>
-        <translation>PIV</translation>
+        <source>BCZ</source>
+        <translation>BCZ</translation>
     </message>
     <message>
         <source>TextLabel</source>
@@ -2944,7 +2944,7 @@ transaction history, making transactions untraceable </source>
     </message>
     <message>
         <source>The remainder of the value resultant from the inputs minus the outputs value goes to the "change" BCZ address</source>
-        <translation>Giriş ve çıkış değerleri arasındaki kalan tutar "fark" PIV adresine gider</translation>
+        <translation>Giriş ve çıkış değerleri arasındaki kalan tutar "fark" BCZ adresine gider</translation>
     </message>
     <message>
         <source>SAVE</source>
@@ -3032,8 +3032,8 @@ transaction history, making transactions untraceable </source>
         <translation>Gönder</translation>
     </message>
     <message>
-        <source>You can transfer public coins (PIV) or private coins (zBCZ)</source>
-        <translation>Açık koin PIV veya gizli koin zBCZ transfer edebilirsiniz</translation>
+        <source>You can transfer public coins (BCZ) or private coins (zBCZ)</source>
+        <translation>Açık koin BCZ veya gizli koin zBCZ transfer edebilirsiniz</translation>
     </message>
     <message>
         <source>Select coin type to spend</source>
@@ -3064,8 +3064,8 @@ transaction history, making transactions untraceable </source>
         <translation>Gönderilecek toplam</translation>
     </message>
     <message>
-        <source>Send PIV</source>
-        <translation>PIV Gönder</translation>
+        <source>Send BCZ</source>
+        <translation>BCZ Gönder</translation>
     </message>
     <message>
         <source>Send zBCZ</source>
@@ -3184,8 +3184,8 @@ Ya daha yüksek mezhepleri daraltın (daha az girdi gereklidir) veya harcama mik
         <translation>Belirlenmiş masraf %1</translation>
     </message>
     <message>
-        <source>You don't have any PIV to select.</source>
-        <translation>Seçebileceğiniz PIV'iniz bulunmuyor</translation>
+        <source>You don't have any BCZ to select.</source>
+        <translation>Seçebileceğiniz BCZ'iniz bulunmuyor</translation>
     </message>
     <message>
         <source>You don't have any zBCZ in your balance to select.</source>
@@ -3606,8 +3606,8 @@ Verify that you have installed a predetermined text editor.</source>
         <translation>1)BCZ nedir?</translation>
     </message>
     <message>
-        <source>2) Why are my PIV unspendable?</source>
-        <translation>2) PIV'lerim neden harcanabilir değil?</translation>
+        <source>2) Why are my BCZ unspendable?</source>
+        <translation>2) BCZ'lerim neden harcanabilir değil?</translation>
     </message>
     <message>
         <source>3) BCZ privacy? What is Zerocoin (zBCZ)?</source>
@@ -3624,12 +3624,12 @@ Verify that you have installed a predetermined text editor.</source>
 zBCZ'e dönüştürdü?</translation>
     </message>
     <message>
-        <source>6) How do I receive PIV/zBCZ?</source>
-        <translation>6) Nasıl PIV/zBCZ alabilirim?</translation>
+        <source>6) How do I receive BCZ/zBCZ?</source>
+        <translation>6) Nasıl BCZ/zBCZ alabilirim?</translation>
     </message>
     <message>
-        <source>7) How do I stake PIV/zBCZ?</source>
-        <translation>7) Nasıl PIV/zBCZ staking yapabilirim?</translation>
+        <source>7) How do I stake BCZ/zBCZ?</source>
+        <translation>7) Nasıl BCZ/zBCZ staking yapabilirim?</translation>
     </message>
     <message>
         <source>8) Where I should go if I need support?</source>
@@ -3678,8 +3678,8 @@ bu sayede BCZ sahipleri blok ödülü kazanımına katılabilmektedir
         <translation>2</translation>
     </message>
     <message>
-        <source>Why are my PIV unspendable?</source>
-        <translation>PIV'lerim neden harcanabilir değil?</translation>
+        <source>Why are my BCZ unspendable?</source>
+        <translation>BCZ'lerim neden harcanabilir değil?</translation>
     </message>
     <message>
         <source>
@@ -3765,7 +3765,7 @@ gizlilik-odaklı opsiyonel bir metoddur. Temel olarak işlemleriniz
     <message>
         <source>
                            &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;
-                           By default the BCZ wallet will convert 10% of your entire PIV
+                           By default the BCZ wallet will convert 10% of your entire BCZ
                            balance to zBCZ to assist the network. If you do not wish to
                            stake zBCZ or take advantage of the privacy benefit it brings,
                            you can disable the automatic minting in your BCZ wallet by
@@ -3782,7 +3782,7 @@ gizlilik-odaklı opsiyonel bir metoddur. Temel olarak işlemleriniz
                          </source>
         <translation>
                            &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;
-                           BCZ cüzdanınız ağa destek olmak için varsayılan olarak tüm PIV bakiyenizin 10% 'unu zBCZ'e dönüştürecektir. Getirdiği gizlilik avantajını istemiyor veya zBCZ stakelemek istemiyorsanız cüzdanınızın otomint özelliğini Ayarlar-&gt;Seçenekler içindeki “zBCZ Otomint etkin” seçeneğini değiştirerek devredışı bırakabilirsiniz. BCZQT veya GUI kullanmıyorsanız, bcz.conf dosyası içine  &lt;i&gt;enablezeromint=0&lt;/i&gt; ifadesini tırnak işareti olmadan girerek devredışı bırakabilirsiniz. &lt;/p&gt;
+                           BCZ cüzdanınız ağa destek olmak için varsayılan olarak tüm BCZ bakiyenizin 10% 'unu zBCZ'e dönüştürecektir. Getirdiği gizlilik avantajını istemiyor veya zBCZ stakelemek istemiyorsanız cüzdanınızın otomint özelliğini Ayarlar-&gt;Seçenekler içindeki “zBCZ Otomint etkin” seçeneğini değiştirerek devredışı bırakabilirsiniz. BCZQT veya GUI kullanmıyorsanız, bcz.conf dosyası içine  &lt;i&gt;enablezeromint=0&lt;/i&gt; ifadesini tırnak işareti olmadan girerek devredışı bırakabilirsiniz. &lt;/p&gt;
                            &lt;/p&gt;&lt;p align="justify"&gt;
                            Teknik detayları hakkında daha çok bilgi almak için
                            &lt;a style='color: #b088ff' href='https://BCZ.org/zbcz/'&gt; "BCZ Zerocoin (zBCZ) Teknik Makalesi"&lt;/a&gt;.
@@ -3796,8 +3796,8 @@ kısmını okuyunuz.
         <translation>6</translation>
     </message>
     <message>
-        <source>How do I receive PIV/zBCZ?</source>
-        <translation>Nasıl PIV/zBCZ alabilirim?</translation>
+        <source>How do I receive BCZ/zBCZ?</source>
+        <translation>Nasıl BCZ/zBCZ alabilirim?</translation>
     </message>
     <message>
         <source>
@@ -3823,8 +3823,8 @@ zBCZ Protokolü ile anonimleştirilmiş olacaktır.
         <translation>7</translation>
     </message>
     <message>
-        <source>How do I stake PIV/zBCZ?</source>
-        <translation>Nasıl PIV/zBCZ staking yapabilirim?</translation>
+        <source>How do I stake BCZ/zBCZ?</source>
+        <translation>Nasıl BCZ/zBCZ staking yapabilirim?</translation>
     </message>
     <message>
         <source>What is a Masternode?</source>
@@ -3842,7 +3842,7 @@ zBCZ Protokolü ile anonimleştirilmiş olacaktır.
         <source>
                            &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;
                            A masternode is a computer running a full node BCZ core wallet with a
-                           requirement of 10,000 PIV secured collateral to provide extra services
+                           requirement of 10,000 BCZ secured collateral to provide extra services
                            to the network and in return, receive a portion of the block reward
                            regularly.  These services include:
                            &lt;/p&gt;&lt;p align="justify"&gt;
@@ -3874,7 +3874,7 @@ zBCZ Protokolü ile anonimleştirilmiş olacaktır.
                            Requirements:
                            &lt;/p&gt;&lt;p align="justify"&gt;
                            &lt;ul&gt;
-                           &lt;li&gt;10,000 PIV per single Masternode instance&lt;/li&gt;
+                           &lt;li&gt;10,000 BCZ per single Masternode instance&lt;/li&gt;
                            &lt;li&gt;Must be stored in a core wallet&lt;/li&gt;
                            &lt;li&gt;Need dedicated IP address&lt;/li&gt;
                            &lt;li&gt;Masternode wallet to remain online&lt;/li&gt;
@@ -3883,7 +3883,7 @@ zBCZ Protokolü ile anonimleştirilmiş olacaktır.
                          </source>
         <translation>
                            &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;
-                           Tam düğüm BCZ core cüzdanını çalıştıran, gereken 10,000 PIV
+                           Tam düğüm BCZ core cüzdanını çalıştıran, gereken 10,000 BCZ
                            teminat bakiyesini barındırarak ağa ekstra hizmetler sunan ve
                            karşılığında da her blok ödülünden düzenli olarak pay alan bir
                            bilgisayardır.Bu hizmetler aşağıdaki gibidir:
@@ -3916,7 +3916,7 @@ işletim maliyetleri sonrası pasif bir gelir sunar.
                            Gereksinimler:
                            &lt;/p&gt;&lt;p align="justify"&gt;
                            &lt;ul&gt;
-                           &lt;li&gt;Her Masternod için ayrı 10,000 PIV
+                           &lt;li&gt;Her Masternod için ayrı 10,000 BCZ
                            &lt;li&gt;Core cüzdan içinde saklanmalıdır.&lt;/li&gt;
                            &lt;li&gt;Atanmış IP adresi gerekmektedir. &lt;/li&gt;
                            &lt;li&gt;Masternode cüzdanının online olması&lt;/li&gt;
@@ -5034,40 +5034,40 @@ Emin misiniz?
         <translation>Tarafından alındı</translation>
     </message>
     <message>
-        <source>PIV Stake</source>
-        <translation>PIV Stake</translation>
+        <source>BCZ Stake</source>
+        <translation>BCZ Stake</translation>
     </message>
     <message>
         <source>zBCZ Stake</source>
         <translation>zBCZ Stake</translation>
     </message>
     <message>
-        <source>PIV Cold Stake</source>
-        <translation>PIV Soğuk Stake</translation>
+        <source>BCZ Cold Stake</source>
+        <translation>BCZ Soğuk Stake</translation>
     </message>
     <message>
         <source>Stake delegation</source>
         <translation>Stake delegasyonu</translation>
     </message>
     <message>
-        <source>Converted PIV to zBCZ</source>
-        <translation>PIV'den zBCZ'e dönüştürülen</translation>
+        <source>Converted BCZ to zBCZ</source>
+        <translation>BCZ'den zBCZ'e dönüştürülen</translation>
     </message>
     <message>
         <source>Spent zBCZ</source>
         <translation>zBCZ Harca</translation>
     </message>
     <message>
-        <source>Received PIV from zBCZ</source>
-        <translation>zBCZ'den PIV olarak alınan</translation>
+        <source>Received BCZ from zBCZ</source>
+        <translation>zBCZ'den BCZ olarak alınan</translation>
     </message>
     <message>
         <source>Minted Change as zBCZ from zBCZ Spend</source>
         <translation>zBCZ harcamasından kaynaklanan zBCZ mint farkı</translation>
     </message>
     <message>
-        <source>Converted zBCZ to PIV</source>
-        <translation>zBCZ'den PIV' dönüştürülen</translation>
+        <source>Converted zBCZ to BCZ</source>
+        <translation>zBCZ'den BCZ' dönüştürülen</translation>
     </message>
     <message>
         <source>Sent to</source>
@@ -5220,8 +5220,8 @@ Emin misiniz?
         <translation>18/05/18</translation>
     </message>
     <message>
-        <source>+0.000585 PIV</source>
-        <translation>+0.000585 PIV</translation>
+        <source>+0.000585 BCZ</source>
+        <translation>+0.000585 BCZ</translation>
     </message>
 </context>
 <context>
@@ -5231,8 +5231,8 @@ Emin misiniz?
         <translation>Koinleri göder</translation>
     </message>
     <message>
-        <source>SwiftX doesn't support sending values that high yet. Transactions are currently limited to %1 PIV.</source>
-        <translation>SwiftX yüksek değerler göndermeyi desteklemiyor. İşlemler şu anda %1 PIV ile sınırlıdır.</translation>
+        <source>SwiftX doesn't support sending values that high yet. Transactions are currently limited to %1 BCZ.</source>
+        <translation>SwiftX yüksek değerler göndermeyi desteklemiyor. İşlemler şu anda %1 BCZ ile sınırlıdır.</translation>
     </message>
 </context>
 <context>
@@ -5402,8 +5402,8 @@ Hoşgeldiniz</translation>
         <translation>Soğuk stakeleme fonksiyonunu etkinleştirin (0-1, varsayılan: %u). Staking=0 ise etkin değildir</translation>
     </message>
     <message>
-        <source>Enable or disable staking functionality for PIV inputs (0-1, default: %u)</source>
-        <translation>PIV girişleri için stake fonksiyonunu aç veya kapat (0-1, varsayılan: %u)</translation>
+        <source>Enable or disable staking functionality for BCZ inputs (0-1, default: %u)</source>
+        <translation>BCZ girişleri için stake fonksiyonunu aç veya kapat (0-1, varsayılan: %u)</translation>
     </message>
     <message>
         <source>Enable or disable staking functionality for zBCZ inputs (0-1, default: %u)</source>
@@ -5442,12 +5442,12 @@ Hoşgeldiniz</translation>
         <translation>En iyi blok değiştirildiğinde komutu yürütün (cmd'deki %s yerine blok karması verilir)</translation>
     </message>
     <message>
-        <source>Fees (in PIV/Kb) smaller than this are considered zero fee for relaying (default: %s)</source>
-        <translation>Bundan daha küçük ücretler (PIV / Kb cinsinden), aktarma için sıfır ücret olarak kabul edilir (varsayılan: %s)</translation>
+        <source>Fees (in BCZ/Kb) smaller than this are considered zero fee for relaying (default: %s)</source>
+        <translation>Bundan daha küçük ücretler (BCZ / Kb cinsinden), aktarma için sıfır ücret olarak kabul edilir (varsayılan: %s)</translation>
     </message>
     <message>
-        <source>Fees (in PIV/Kb) smaller than this are considered zero fee for transaction creation (default: %s)</source>
-        <translation>Bundan daha küçük ücretler (PIV / Kb cinsinden), işlem yaratmada sıfır ücret olarak kabul edilir (varsayılan: %s)</translation>
+        <source>Fees (in BCZ/Kb) smaller than this are considered zero fee for transaction creation (default: %s)</source>
+        <translation>Bundan daha küçük ücretler (BCZ / Kb cinsinden), işlem yaratmada sıfır ücret olarak kabul edilir (varsayılan: %s)</translation>
     </message>
     <message>
         <source>Flush database activity from memory pool to disk log every &lt;n&gt; megabytes (default: %u)</source>
@@ -5810,8 +5810,8 @@ Hoşgeldiniz</translation>
         <translation>Blok okuma hatası</translation>
     </message>
     <message>
-        <source>Fee (in PIV/kB) to add to transactions you send (default: %s)</source>
-        <translation>Gönderdiğiniz transfere (PIV/kb cinsinden) bir masraf ekleyin (varsayılan: %s) </translation>
+        <source>Fee (in BCZ/kB) to add to transactions you send (default: %s)</source>
+        <translation>Gönderdiğiniz transfere (BCZ/kb cinsinden) bir masraf ekleyin (varsayılan: %s) </translation>
     </message>
     <message>
         <source>Force safe mode (default: %u)</source>
@@ -5886,12 +5886,12 @@ Hoşgeldiniz</translation>
         <translation>masternode.conf dosyasında geçersiz port tespit edildi</translation>
     </message>
     <message>
-        <source>Recalculating PIV supply...</source>
-        <translation>PIV tedariği tekrar hesaplanıyor...</translation>
+        <source>Recalculating BCZ supply...</source>
+        <translation>BCZ tedariği tekrar hesaplanıyor...</translation>
     </message>
     <message>
-        <source>Reindex the PIV and zBCZ money supply statistics</source>
-        <translation>PIV ve zBCZ para tedarik istatistiklerini tekrar endeksle</translation>
+        <source>Reindex the BCZ and zBCZ money supply statistics</source>
+        <translation>BCZ ve zBCZ para tedarik istatistiklerini tekrar endeksle</translation>
     </message>
     <message>
         <source>Reindexing zerocoin database...</source>

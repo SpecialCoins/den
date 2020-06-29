@@ -381,8 +381,8 @@ do stakingu</translation>
         <translation>Jeśli zaszyfrujesz swój portfel i zgubisz hasło, zrobisz to</translation>
     </message>
     <message>
-        <source>LOSE ALL OF YOUR PIV</source>
-        <translation>UTRACIE SWOJE PIV</translation>
+        <source>LOSE ALL OF YOUR BCZ</source>
+        <translation>UTRACIE SWOJE BCZ</translation>
     </message>
     <message>
         <source>ENCRYPT</source>
@@ -397,8 +397,8 @@ do stakingu</translation>
         <translation>OSTRZEŻENIE: Klawisz Caps Lock jest włączony!</translation>
     </message>
     <message>
-        <source>BCZ will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your PIVs from being stolen by malware infecting your computer.</source>
-        <translation>BCZ zamknie się teraz, aby zakończyć proces szyfrowania. Pamiętaj, że zaszyfrowanie portfela nie chroni w pełni Twoich PIV przed kradzieżą przez złośliwe oprogramowanie infekujące Twój komputer.</translation>
+        <source>BCZ will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your BCZs from being stolen by malware infecting your computer.</source>
+        <translation>BCZ zamknie się teraz, aby zakończyć proces szyfrowania. Pamiętaj, że zaszyfrowanie portfela nie chroni w pełni Twoich BCZ przed kradzieżą przez złośliwe oprogramowanie infekujące Twój komputer.</translation>
     </message>
     <message>
         <source>Are you sure you wish to encrypt your wallet?</source>
@@ -467,8 +467,8 @@ do stakingu</translation>
         <translation>oszczędności</translation>
     </message>
     <message>
-        <source>0,00 PIV</source>
-        <translation>0,00 PIV</translation>
+        <source>0,00 BCZ</source>
+        <translation>0,00 BCZ</translation>
     </message>
     <message>
         <source>address</source>
@@ -509,8 +509,8 @@ do stakingu</translation>
         <translation>Wybór monet</translation>
     </message>
     <message>
-        <source>Select PIV Outputs to Spend</source>
-        <translation>Wybierz adres wyjściowy PIV do wydania</translation>
+        <source>Select BCZ Outputs to Spend</source>
+        <translation>Wybierz adres wyjściowy BCZ do wydania</translation>
     </message>
     <message>
         <source>Dust:</source>
@@ -537,8 +537,8 @@ do stakingu</translation>
         <translation>Ilość</translation>
     </message>
     <message>
-        <source>0.00 PIV</source>
-        <translation>0.00 PIV</translation>
+        <source>0.00 BCZ</source>
+        <translation>0.00 BCZ</translation>
     </message>
     <message>
         <source>0</source>
@@ -717,8 +717,8 @@ do stakingu</translation>
         <translation>Ta etykieta zmienia kolor na czerwony, jeśli odbiorca otrzymuje mniej niż %1.</translation>
     </message>
     <message>
-        <source>Can vary +/- %1 upiv per input.</source>
-        <translation>Zmienia się +/- %1 upiv</translation>
+        <source>Can vary +/- %1 ubcz per input.</source>
+        <translation>Zmienia się +/- %1 ubcz</translation>
     </message>
     <message>
         <source>(no label)</source>
@@ -800,9 +800,9 @@ do stakingu</translation>
         <translation>Błąd ładowania delegacji: %1</translation>
     </message>
     <message>
-        <source>You can delegate your PIVs, letting a hot node (24/7 online node)
+        <source>You can delegate your BCZs, letting a hot node (24/7 online node)
 stake on your behalf, while you keep the keys securely offline.</source>
-        <translation>Możesz delegować swoje PIV, używając gorącego węzła (węzeł online 24/7)
+        <translation>Możesz delegować swoje BCZ, używając gorącego węzła (węzeł online 24/7)
 stake w Twoim imieniu, podczas gdy klucze są bezpiecznie offline.</translation>
     </message>
     <message>
@@ -810,8 +810,8 @@ stake w Twoim imieniu, podczas gdy klucze są bezpiecznie offline.</translation>
         <translation>Wpisz adres właściciela</translation>
     </message>
     <message>
-        <source>Accept PIV delegation / Delegate PIV</source>
-        <translation>Zaakceptuj delegację PIV / Deleguj PIV</translation>
+        <source>Accept BCZ delegation / Delegate BCZ</source>
+        <translation>Zaakceptuj delegację BCZ / Deleguj BCZ</translation>
     </message>
     <message>
         <source>Cold Staking address</source>
@@ -874,8 +874,8 @@ Czy chcesz kontynuować?</translation>
         <translation>Monety przekazane</translation>
     </message>
     <message>
-        <source>You don't have any PIV to select.</source>
-        <translation>Nie masz żadnych PIV-ów do wyboru.</translation>
+        <source>You don't have any BCZ to select.</source>
+        <translation>Nie masz żadnych BCZ-ów do wyboru.</translation>
     </message>
     <message>
         <source>Cannot perform operation, wallet locked</source>
@@ -1006,8 +1006,8 @@ adres</translation>
         <translation>Staking statystyka</translation>
     </message>
     <message>
-        <source>PIV</source>
-        <translation>PIV</translation>
+        <source>BCZ</source>
+        <translation>BCZ</translation>
     </message>
     <message>
         <source>zBCZ</source>
@@ -1042,8 +1042,8 @@ adres</translation>
         <translation>Możesz zobaczyć historię swojego konta</translation>
     </message>
     <message>
-        <source>Amount of PIV and zBCZ staked.</source>
-        <translation>Ilość PIV i zBCZ staked.</translation>
+        <source>Amount of BCZ and zBCZ staked.</source>
+        <translation>Ilość BCZ i zBCZ staked.</translation>
     </message>
     <message>
         <source>Please wait until the wallet is fully synced to see your correct balance</source>
@@ -1054,8 +1054,8 @@ adres</translation>
         <translation>Brak transakcji</translation>
     </message>
     <message>
-        <source>How to get PIV or zBCZ</source>
-        <translation>Jak zdobyć PIV lub zBCZ</translation>
+        <source>How to get BCZ or zBCZ</source>
+        <translation>Jak zdobyć BCZ lub zBCZ</translation>
     </message>
     <message>
         <source>You can verify the staking activity in the status bar at the top right of the wallet.
@@ -1391,8 +1391,8 @@ Rozpocznie się automatycznie, gdy portfel będzie miał wystarczającą liczbę
         <translation>Utwórz nowy kontroler Masternode</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;To create a BCZ Masternode you must dedicate 10,000 PIV (the unit of BCZ) to the network (however, these coins are still yours and will never leave your possession). &lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;You can deactivate the node and unlock the coins at any time.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Aby utworzyć Masternode BCZ, musisz przeznaczyć 10.000 PIV (jednostkę BCZ) na sieć (jednak monety te są nadal twoje i nigdy nie zmienią swojego właściciela).&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Możesz dezaktywować węzeł i odblokować monety w dowolnym momencie.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;To create a BCZ Masternode you must dedicate 10,000 BCZ (the unit of BCZ) to the network (however, these coins are still yours and will never leave your possession). &lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;You can deactivate the node and unlock the coins at any time.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Aby utworzyć Masternode BCZ, musisz przeznaczyć 10.000 BCZ (jednostkę BCZ) na sieć (jednak monety te są nadal twoje i nigdy nie zmienią swojego właściciela).&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Możesz dezaktywować węzeł i odblokować monety w dowolnym momencie.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Set Masternode Name</source>
@@ -1411,8 +1411,8 @@ Rozpocznie się automatycznie, gdy portfel będzie miał wystarczającą liczbę
         <translation>Upewnij się, że masz taką liczbę monet.</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A transaction of 10,000 PIV will be made&lt;/p&gt;&lt;p&gt;to a new empty address in your wallet.&lt;/p&gt;&lt;p&gt;The Address is labeled under the master node's name.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Dokonana zostanie transakcja 10 000 PIV&lt;/p&gt;&lt;p&gt;na nowy pusty adres w portfelu.&lt;/p&gt;&lt;p&gt;Adres jest oznaczony pod nazwą węzła głównego.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A transaction of 10,000 BCZ will be made&lt;/p&gt;&lt;p&gt;to a new empty address in your wallet.&lt;/p&gt;&lt;p&gt;The Address is labeled under the master node's name.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Dokonana zostanie transakcja 10 000 BCZ&lt;/p&gt;&lt;p&gt;na nowy pusty adres w portfelu.&lt;/p&gt;&lt;p&gt;Adres jest oznaczony pod nazwą węzła głównego.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Address of the node that must always be online running the actual master node.</source>
@@ -1628,8 +1628,8 @@ Jesteś pewny?</translation>
         <translation>plik masternode.conf nie istnieje</translation>
     </message>
     <message>
-        <source>Not enough balance to create a masternode, 10,000 PIV required.</source>
-        <translation>Nie wystarczające saldo do utworzenia masternode, wymagane 10000 PIV.</translation>
+        <source>Not enough balance to create a masternode, 10,000 BCZ required.</source>
+        <translation>Nie wystarczające saldo do utworzenia masternode, wymagane 10000 BCZ.</translation>
     </message>
     <message>
         <source>Error creating masternode</source>
@@ -1876,8 +1876,8 @@ https://www.transifex.com/bcz-project/bcz-project-translations </translation>
         <translation>Mapuj port za pomocą &amp;UPnP</translation>
     </message>
     <message>
-        <source>Enable automatic minting of PIV units to zBCZ</source>
-        <translation>Włącz automatyczny minting PIV do zBCZ</translation>
+        <source>Enable automatic minting of BCZ units to zBCZ</source>
+        <translation>Włącz automatyczny minting BCZ do zBCZ</translation>
     </message>
     <message>
         <source>Enable zBCZ Automint</source>
@@ -1892,16 +1892,16 @@ https://www.transifex.com/bcz-project/bcz-project-translations </translation>
         <translation>Włącz adresy Automint</translation>
     </message>
     <message>
-        <source>Percentage of incoming PIV which get automatically converted to zBCZ via Zerocoin Protocol (min: 10%)</source>
-        <translation>Procent PIV, które są automatycznie konwertowane na zBCZ za pomocą protokołu Zerocoin (min: 10%)</translation>
+        <source>Percentage of incoming BCZ which get automatically converted to zBCZ via Zerocoin Protocol (min: 10%)</source>
+        <translation>Procent BCZ, które są automatycznie konwertowane na zBCZ za pomocą protokołu Zerocoin (min: 10%)</translation>
     </message>
     <message>
         <source>Percentage of autominted zBCZ</source>
         <translation>Procent automint zBCZ</translation>
     </message>
     <message>
-        <source>Wait with automatic conversion to Zerocoin until enough PIV for this denomination is available</source>
-        <translation>Zaczekaj z automatyczną konwersją na Zerocoin, aż będzie dostępna wystarczająca wartość PIV dla tego nominału</translation>
+        <source>Wait with automatic conversion to Zerocoin until enough BCZ for this denomination is available</source>
+        <translation>Zaczekaj z automatyczną konwersją na Zerocoin, aż będzie dostępna wystarczająca wartość BCZ dla tego nominału</translation>
     </message>
     <message>
         <source>Preferred Automint zBCZ Denomination</source>
@@ -2276,14 +2276,14 @@ Adres: %4
         <translation>Mint</translation>
     </message>
     <message>
-        <source>Minting zBCZ anonymizes your PIV by removing any
+        <source>Minting zBCZ anonymizes your BCZ by removing any
 transaction history, making transactions untraceable </source>
-        <translation>Minting zBCZ anonimizuje Twój PIV, usuwając
+        <translation>Minting zBCZ anonimizuje Twój BCZ, usuwając
 historie transakcji, dzięki czemu transakcje są niemożliwe do śledzenia</translation>
     </message>
     <message>
-        <source>Mint new zBCZ or convert back to PIV</source>
-        <translation>Utwórz nowy zBCZ lub przekonwertuj z powrotem na PIV</translation>
+        <source>Mint new zBCZ or convert back to BCZ</source>
+        <translation>Utwórz nowy zBCZ lub przekonwertuj z powrotem na BCZ</translation>
     </message>
     <message>
         <source>Last zBCZ Movements</source>
@@ -2298,16 +2298,16 @@ historie transakcji, dzięki czemu transakcje są niemożliwe do śledzenia</tra
         <translation>Mint zBCZ</translation>
     </message>
     <message>
-        <source>Enter amount of PIV to mint into zBCZ</source>
-        <translation>Wprowadź ilość PIV do konwersji na zBCZ</translation>
+        <source>Enter amount of BCZ to mint into zBCZ</source>
+        <translation>Wprowadź ilość BCZ do konwersji na zBCZ</translation>
     </message>
     <message>
-        <source>Convert back to PIV</source>
-        <translation>Powróć do PIV</translation>
+        <source>Convert back to BCZ</source>
+        <translation>Powróć do BCZ</translation>
     </message>
     <message>
-        <source>Enter amount of zBCZ to convert back into PIV</source>
-        <translation>Wprowadź kwotę zBCZ, aby ponownie zamienić na PIV</translation>
+        <source>Enter amount of zBCZ to convert back into BCZ</source>
+        <translation>Wprowadź kwotę zBCZ, aby ponownie zamienić na BCZ</translation>
     </message>
     <message>
         <source>Zerocoin</source>
@@ -2338,12 +2338,12 @@ historie transakcji, dzięki czemu transakcje są niemożliwe do śledzenia</tra
         <translation>ZBCZ udało się wybić</translation>
     </message>
     <message>
-        <source>zBCZ converted back to PIV</source>
-        <translation>zBCZ ponownie przekonwertowany na PIV</translation>
+        <source>zBCZ converted back to BCZ</source>
+        <translation>zBCZ ponownie przekonwertowany na BCZ</translation>
     </message>
     <message>
-        <source>You don't have any PIV to select.</source>
-        <translation>Nie masz żadnych PIV-ów do wyboru.</translation>
+        <source>You don't have any BCZ to select.</source>
+        <translation>Nie masz żadnych BCZ-ów do wyboru.</translation>
     </message>
     <message>
         <source>Rescan Mints</source>
@@ -2974,8 +2974,8 @@ historie transakcji, dzięki czemu transakcje są niemożliwe do śledzenia</tra
         <translation>Otrzymaj</translation>
     </message>
     <message>
-        <source>Scan the QR code or copy the address to receive PIV.</source>
-        <translation>Zeskanuj kod QR lub skopiuj adres, aby otrzymać PIV.</translation>
+        <source>Scan the QR code or copy the address to receive BCZ.</source>
+        <translation>Zeskanuj kod QR lub skopiuj adres, aby otrzymać BCZ.</translation>
     </message>
     <message>
         <source>No address </source>
@@ -3084,8 +3084,8 @@ historie transakcji, dzięki czemu transakcje są niemożliwe do śledzenia</tra
         <translation>Ilość</translation>
     </message>
     <message>
-        <source>PIV</source>
-        <translation>PIV</translation>
+        <source>BCZ</source>
+        <translation>BCZ</translation>
     </message>
     <message>
         <source>TextLabel</source>
@@ -3276,8 +3276,8 @@ historie transakcji, dzięki czemu transakcje są niemożliwe do śledzenia</tra
         <translation>Wyślij</translation>
     </message>
     <message>
-        <source>You can transfer public coins (PIV) or private coins (zBCZ)</source>
-        <translation>Możesz przelewać monety publiczne (PIV) lub monety prywatne (zBCZ)</translation>
+        <source>You can transfer public coins (BCZ) or private coins (zBCZ)</source>
+        <translation>Możesz przelewać monety publiczne (BCZ) lub monety prywatne (zBCZ)</translation>
     </message>
     <message>
         <source>Select coin type to spend</source>
@@ -3308,8 +3308,8 @@ historie transakcji, dzięki czemu transakcje są niemożliwe do śledzenia</tra
         <translation>Łącznie do wysłania</translation>
     </message>
     <message>
-        <source>Send PIV</source>
-        <translation>Wyślij PIV</translation>
+        <source>Send BCZ</source>
+        <translation>Wyślij BCZ</translation>
     </message>
     <message>
         <source>Send zBCZ</source>
@@ -3436,8 +3436,8 @@ Albo wybierz wyższe nominały (potrzeba mniej wejść) albo zmniejsz kwotę do 
         <translation>Ustawiona Opłata %1</translation>
     </message>
     <message>
-        <source>You don't have any PIV to select.</source>
-        <translation>Nie masz żadnych PIV-ów do wyboru.</translation>
+        <source>You don't have any BCZ to select.</source>
+        <translation>Nie masz żadnych BCZ-ów do wyboru.</translation>
     </message>
     <message>
         <source>You don't have any zBCZ in your balance to select.</source>
@@ -3888,8 +3888,8 @@ Sprawdź, czy zainstalowałeś określony edytor tekstu.</translation>
         <translation>1) Co to jest BCZ?</translation>
     </message>
     <message>
-        <source>2) Why are my PIV unspendable?</source>
-        <translation>2) Dlaczego mojego PIV nie można wydać?</translation>
+        <source>2) Why are my BCZ unspendable?</source>
+        <translation>2) Dlaczego mojego BCZ nie można wydać?</translation>
     </message>
     <message>
         <source>3) BCZ privacy? What is Zerocoin (zBCZ)?</source>
@@ -3906,12 +3906,12 @@ Sprawdź, czy zainstalowałeś określony edytor tekstu.</translation>
 do zBCZ automatycznie?</translation>
     </message>
     <message>
-        <source>6) How do I receive PIV/zBCZ?</source>
-        <translation>6) Jak otrzymać PIV / zBCZ?</translation>
+        <source>6) How do I receive BCZ/zBCZ?</source>
+        <translation>6) Jak otrzymać BCZ / zBCZ?</translation>
     </message>
     <message>
-        <source>7) How do I stake PIV/zBCZ?</source>
-        <translation>7) Jak robić stake PIV / zBCZ?</translation>
+        <source>7) How do I stake BCZ/zBCZ?</source>
+        <translation>7) Jak robić stake BCZ / zBCZ?</translation>
     </message>
     <message>
         <source>8) Where I should go if I need support?</source>
@@ -3938,8 +3938,8 @@ do zBCZ automatycznie?</translation>
         <translation>2</translation>
     </message>
     <message>
-        <source>Why are my PIV unspendable?</source>
-        <translation>Dlaczego mojego PIV nie można wydać?</translation>
+        <source>Why are my BCZ unspendable?</source>
+        <translation>Dlaczego mojego BCZ nie można wydać?</translation>
     </message>
     <message>
         <source>3</source>
@@ -3970,16 +3970,16 @@ do zBCZ automatycznie?</translation>
         <translation>6</translation>
     </message>
     <message>
-        <source>How do I receive PIV/zBCZ?</source>
-        <translation>Jak otrzymać PIV / zBCZ?</translation>
+        <source>How do I receive BCZ/zBCZ?</source>
+        <translation>Jak otrzymać BCZ / zBCZ?</translation>
     </message>
     <message>
         <source>7</source>
         <translation>7</translation>
     </message>
     <message>
-        <source>How do I stake PIV/zBCZ?</source>
-        <translation>Jak robić stake PIV / zBCZ?</translation>
+        <source>How do I stake BCZ/zBCZ?</source>
+        <translation>Jak robić stake BCZ / zBCZ?</translation>
     </message>
     <message>
         <source>Where should I go if I need support?</source>
@@ -5219,40 +5219,40 @@ Jesteś pewny?
         <translation>Otrzymane od</translation>
     </message>
     <message>
-        <source>PIV Stake</source>
-        <translation>PIV Stake</translation>
+        <source>BCZ Stake</source>
+        <translation>BCZ Stake</translation>
     </message>
     <message>
         <source>zBCZ Stake</source>
         <translation>zBCZ Stake</translation>
     </message>
     <message>
-        <source>PIV Cold Stake</source>
-        <translation>PIV Cold Stake</translation>
+        <source>BCZ Cold Stake</source>
+        <translation>BCZ Cold Stake</translation>
     </message>
     <message>
         <source>Stake delegation</source>
         <translation>Delegacja Stake</translation>
     </message>
     <message>
-        <source>Converted PIV to zBCZ</source>
-        <translation>przekonwertowany PIV to zBCZ</translation>
+        <source>Converted BCZ to zBCZ</source>
+        <translation>przekonwertowany BCZ to zBCZ</translation>
     </message>
     <message>
         <source>Spent zBCZ</source>
         <translation>Wydaj zBCZ</translation>
     </message>
     <message>
-        <source>Received PIV from zBCZ</source>
-        <translation>Otrzymano PIV z zBCZ</translation>
+        <source>Received BCZ from zBCZ</source>
+        <translation>Otrzymano BCZ z zBCZ</translation>
     </message>
     <message>
         <source>Minted Change as zBCZ from zBCZ Spend</source>
         <translation>Reszta Minted jako zBCZ z Wysyłki zBCZ</translation>
     </message>
     <message>
-        <source>Converted zBCZ to PIV</source>
-        <translation>przekonwertowany zBCZ to PIV</translation>
+        <source>Converted zBCZ to BCZ</source>
+        <translation>przekonwertowany zBCZ to BCZ</translation>
     </message>
     <message>
         <source>Sent to</source>
@@ -5267,8 +5267,8 @@ Jesteś pewny?
         <translation>Zapłata dla siebie</translation>
     </message>
     <message>
-        <source>PIV Stake on behalf of</source>
-        <translation>PIV Stake w imieniu</translation>
+        <source>BCZ Stake on behalf of</source>
+        <translation>BCZ Stake w imieniu</translation>
     </message>
     <message>
         <source>Mined</source>
@@ -5429,8 +5429,8 @@ Jesteś pewny?
         <translation>18/05/18</translation>
     </message>
     <message>
-        <source>+0.000585 PIV</source>
-        <translation>+0.000585 PIV</translation>
+        <source>+0.000585 BCZ</source>
+        <translation>+0.000585 BCZ</translation>
     </message>
 </context>
 <context>
@@ -5440,8 +5440,8 @@ Jesteś pewny?
         <translation>Wyślij monety</translation>
     </message>
     <message>
-        <source>SwiftX doesn't support sending values that high yet. Transactions are currently limited to %1 PIV.</source>
-        <translation>SwiftX nie obsługuje wysyłania wysokich wartości. Transakcje są obecnie ograniczone do %1 PIV.</translation>
+        <source>SwiftX doesn't support sending values that high yet. Transactions are currently limited to %1 BCZ.</source>
+        <translation>SwiftX nie obsługuje wysyłania wysokich wartości. Transakcje są obecnie ograniczone do %1 BCZ.</translation>
     </message>
 </context>
 <context>
@@ -5607,8 +5607,8 @@ Portfel BCZ Core</translation>
         <translation>Włącz funkcję cold staking (0-1, domyślnie: %u). Wyłączone jeśli staking=0</translation>
     </message>
     <message>
-        <source>Enable or disable staking functionality for PIV inputs (0-1, default: %u)</source>
-        <translation>Włączanie lub wyłączanie funkcji stake dla przychodzących PIV (0-1, domyślnie:%u)</translation>
+        <source>Enable or disable staking functionality for BCZ inputs (0-1, default: %u)</source>
+        <translation>Włączanie lub wyłączanie funkcji stake dla przychodzących BCZ (0-1, domyślnie:%u)</translation>
     </message>
     <message>
         <source>Enable or disable staking functionality for zBCZ inputs (0-1, default: %u)</source>
@@ -5647,12 +5647,12 @@ Portfel BCZ Core</translation>
         <translation>Wykonaj polecenie, gdy najlepszy blok zostanie zmieniony ( %s w cmd zostanie zastąpione hash blokiem)</translation>
     </message>
     <message>
-        <source>Fees (in PIV/Kb) smaller than this are considered zero fee for relaying (default: %s)</source>
-        <translation>Opłaty za przekazywanie (w PIV/Kb) mniejsze od tej są uznawane za opłaty zerowe (domyślnie: %s)</translation>
+        <source>Fees (in BCZ/Kb) smaller than this are considered zero fee for relaying (default: %s)</source>
+        <translation>Opłaty za przekazywanie (w BCZ/Kb) mniejsze od tej są uznawane za opłaty zerowe (domyślnie: %s)</translation>
     </message>
     <message>
-        <source>Fees (in PIV/Kb) smaller than this are considered zero fee for transaction creation (default: %s)</source>
-        <translation>Opłaty za tworzenie transakcji (w PIV/Kb) mniejsze od tej są uznawane za opłaty zerowe (domyślnie: %s)</translation>
+        <source>Fees (in BCZ/Kb) smaller than this are considered zero fee for transaction creation (default: %s)</source>
+        <translation>Opłaty za tworzenie transakcji (w BCZ/Kb) mniejsze od tej są uznawane za opłaty zerowe (domyślnie: %s)</translation>
     </message>
     <message>
         <source>Flush database activity from memory pool to disk log every &lt;n&gt; megabytes (default: %u)</source>
@@ -6019,8 +6019,8 @@ Portfel BCZ Core</translation>
         <translation>Nie można odczytać bloku</translation>
     </message>
     <message>
-        <source>Fee (in PIV/kB) to add to transactions you send (default: %s)</source>
-        <translation>Opłata (w PIV/kB) dodawana do wysyłanych transakcji (domyślnie: %s)</translation>
+        <source>Fee (in BCZ/kB) to add to transactions you send (default: %s)</source>
+        <translation>Opłata (w BCZ/kB) dodawana do wysyłanych transakcji (domyślnie: %s)</translation>
     </message>
     <message>
         <source>Force safe mode (default: %u)</source>
@@ -6095,12 +6095,12 @@ Portfel BCZ Core</translation>
         <translation>Nieprawidłowy port wykryty w masternode.conf</translation>
     </message>
     <message>
-        <source>Recalculating PIV supply...</source>
-        <translation>Przeliczanie podaży PIV ...</translation>
+        <source>Recalculating BCZ supply...</source>
+        <translation>Przeliczanie podaży BCZ ...</translation>
     </message>
     <message>
-        <source>Reindex the PIV and zBCZ money supply statistics</source>
-        <translation>Ponownie oblicz statystyki podaży pieniądza PIV i zBCZ</translation>
+        <source>Reindex the BCZ and zBCZ money supply statistics</source>
+        <translation>Ponownie oblicz statystyki podaży pieniądza BCZ i zBCZ</translation>
     </message>
     <message>
         <source>Reindexing zerocoin database...</source>

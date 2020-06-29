@@ -90,7 +90,7 @@
         <file alias="ic-clear-purple">bcz/res/img/ic-clear-purple.svg</file>
         <file alias="ic-close-white">bcz/res/img/ic-close-white.svg</file>
         <file alias="ic-close">bcz/res/img/ic-close.svg</file>
-        <file alias="ic-coin-piv">bcz/res/img/ic-coin-piv.svg</file>
+        <file alias="ic-coin-bcz">bcz/res/img/ic-coin-bcz.svg</file>
         <file alias="ic-coin-zbcz">bcz/res/img/ic-coin-zbcz.svg</file>
         <file alias="ic-combo-box">bcz/res/img/ic-combo-box.svg</file>
         <file alias="ic-connect">bcz/res/img/ic-connect.svg</file>

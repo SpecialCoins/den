@@ -52,9 +52,9 @@ DashboardWidget::DashboardWidget(BCZGUI* parent) :
 
     // Staking Information
     setCssSubtitleScreen(ui->labelMessage);
-    setCssProperty(ui->labelSquarePiv, "square-chart-piv");
+    setCssProperty(ui->labelSquareBcz, "square-chart-bcz");
     setCssProperty(ui->labelSquarezBcz, "square-chart-zbcz");
-    setCssProperty(ui->labelPiv, "text-chart-piv");
+    setCssProperty(ui->labelBcz, "text-chart-bcz");
     setCssProperty(ui->labelZbcz, "text-chart-zbcz");
 
     // Staking Amount
@@ -62,7 +62,7 @@ DashboardWidget::DashboardWidget(BCZGUI* parent) :
     fontBold.setWeight(QFont::Bold);
 
     setCssProperty(ui->labelChart, "legend-chart");
-    setCssProperty(ui->labelAmountPiv, "text-stake-piv-disable");
+    setCssProperty(ui->labelAmountBcz, "text-stake-bcz-disable");
     setCssProperty(ui->labelAmountZbcz, "text-stake-zbcz-disable");
 
     setCssProperty({ui->pushButtonAll,  ui->pushButtonMonth, ui->pushButtonYear}, "btn-check-time");
@@ -212,7 +212,7 @@ void DashboardWidget::loadWalletModel()
         connect(walletModel->getOptionsModel(), &OptionsModel::hideChartsChanged, this, &DashboardWidget::onHideChartsChanged);
 #endif
     }
-    // update the display unit, to not use the default ("PIV")
+    // update the display unit, to not use the default ("BCZ")
     updateDisplayUnit();
 }
 
@@ -490,7 +490,7 @@ void DashboardWidget::updateStakeFilter()
     }
 }
 
-// pair PIV, zBCZ
+// pair BCZ, zBCZ
 const QMap<int, std::pair<qint64, qint64>> DashboardWidget::getAmountBy()
 {
     updateStakeFilter();
@@ -501,7 +501,7 @@ const QMap<int, std::pair<qint64, qint64>> DashboardWidget::getAmountBy()
         QModelIndex modelIndex = stakesFilter->index(i, TransactionTableModel::ToAddress);
         qint64 amount = llabs(modelIndex.data(TransactionTableModel::AmountRole).toLongLong());
         QDate date = modelIndex.data(TransactionTableModel::DateRole).toDateTime().date();
-        bool isPiv = modelIndex.data(TransactionTableModel::TypeRole).toInt() != TransactionRecord::StakeZBCZ;
+        bool isBcz = modelIndex.data(TransactionTableModel::TypeRole).toInt() != TransactionRecord::StakeZBCZ;
 
         int time = 0;
         switch (chartShow) {
@@ -522,12 +522,12 @@ const QMap<int, std::pair<qint64, qint64>> DashboardWidget::getAmountBy()
                 return amountBy;
         }
         if (amountBy.contains(time)) {
-            if (isPiv) {
+            if (isBcz) {
                 amountBy[time].first += amount;
             } else
                 amountBy[time].second += amount;
         } else {
-            if (isPiv) {
+            if (isBcz) {
                 amountBy[time] = std::make_pair(amount, 0);
             } else {
                 amountBy[time] = std::make_pair(0, amount);
@@ -546,7 +546,7 @@ bool DashboardWidget::loadChartData(bool withMonthNames)
     }
 
     chartData = new ChartData();
-    chartData->amountsByCache = getAmountBy(); // pair PIV, zBCZ
+    chartData->amountsByCache = getAmountBy(); // pair BCZ, zBCZ
 
     std::pair<int,int> range = getChartRange(chartData->amountsByCache);
     if (range.first == 0 && range.second == 0) {
@@ -559,22 +559,22 @@ bool DashboardWidget::loadChartData(bool withMonthNames)
 
     for (int j = range.first; j < range.second; j++) {
         int num = (isOrderedByMonth && j > daysInMonth) ? (j % daysInMonth) : j;
-        qreal piv = 0;
+        qreal bcz = 0;
         qreal zbcz = 0;
         if (chartData->amountsByCache.contains(num)) {
             std::pair <qint64, qint64> pair = chartData->amountsByCache[num];
-            piv = (pair.first != 0) ? pair.first / 100000000 : 0;
+            bcz = (pair.first != 0) ? pair.first / 100000000 : 0;
             zbcz = (pair.second != 0) ? pair.second / 100000000 : 0;
-            chartData->totalPiv += pair.first;
+            chartData->totalBcz += pair.first;
             chartData->totalZbcz += pair.second;
         }
 
         chartData->xLabels << ((withMonthNames) ? monthsNames[num - 1] : QString::number(num));
 
-        chartData->valuesPiv.append(piv);
+        chartData->valuesBcz.append(bcz);
         chartData->valueszBcz.append(zbcz);
 
-        int max = std::max(piv, zbcz);
+        int max = std::max(bcz, zbcz);
         if (max > chartData->maxValue) {
             chartData->maxValue = max;
         }
@@ -643,20 +643,20 @@ void DashboardWidget::onChartRefreshed()
     series->attachAxis(axisX);
     series->attachAxis(axisY);
 
-    set0->append(chartData->valuesPiv);
+    set0->append(chartData->valuesBcz);
     set1->append(chartData->valueszBcz);
 
     // Total
     nDisplayUnit = walletModel->getOptionsModel()->getDisplayUnit();
-    if (chartData->totalPiv > 0 || chartData->totalZbcz > 0) {
-        setCssProperty(ui->labelAmountPiv, "text-stake-piv");
+    if (chartData->totalBcz > 0 || chartData->totalZbcz > 0) {
+        setCssProperty(ui->labelAmountBcz, "text-stake-bcz");
         setCssProperty(ui->labelAmountZbcz, "text-stake-zbcz");
     } else {
-        setCssProperty(ui->labelAmountPiv, "text-stake-piv-disable");
+        setCssProperty(ui->labelAmountBcz, "text-stake-bcz-disable");
         setCssProperty(ui->labelAmountZbcz, "text-stake-zbcz-disable");
     }
-    forceUpdateStyle({ui->labelAmountPiv, ui->labelAmountZbcz});
-    ui->labelAmountPiv->setText(GUIUtil::formatBalance(chartData->totalPiv, nDisplayUnit));
+    forceUpdateStyle({ui->labelAmountBcz, ui->labelAmountZbcz});
+    ui->labelAmountBcz->setText(GUIUtil::formatBalance(chartData->totalBcz, nDisplayUnit));
     ui->labelAmountZbcz->setText(GUIUtil::formatBalance(chartData->totalZbcz, nDisplayUnit, true));
 
     series->append(set0);

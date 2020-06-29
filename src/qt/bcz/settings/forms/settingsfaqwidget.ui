@@ -177,7 +177,7 @@
                     </widget>
                    </item>
                    <item>
-                    <widget class="QPushButton" name="pushButton_UnspendablePIV">
+                    <widget class="QPushButton" name="pushButton_UnspendableBCZ">
                      <property name="minimumSize">
                       <size>
                        <width>0</width>
@@ -194,7 +194,7 @@
                       <enum>Qt::NoFocus</enum>
                      </property>
                      <property name="text">
-                      <string>2) Why are my PIV unspendable?</string>
+                      <string>2) Why are my BCZ unspendable?</string>
                      </property>
                      <property name="checkable">
                       <bool>true</bool>
@@ -216,7 +216,7 @@
                       <enum>Qt::NoFocus</enum>
                      </property>
                      <property name="text">
-                      <string>3) How do I stake PIV?</string>
+                      <string>3) How do I stake BCZ?</string>
                      </property>
                      <property name="checkable">
                       <bool>true</bool>
@@ -563,10 +563,10 @@
                   </widget>
                  </item>
                  <item>
-                  <widget class="QWidget" name="widget_UnspendablePIV" native="true">
-                   <layout class="QHBoxLayout" name="horizontalPage_UnspendablePIV" stretch="0,1">
+                  <widget class="QWidget" name="widget_UnspendableBCZ" native="true">
+                   <layout class="QHBoxLayout" name="horizontalPage_UnspendableBCZ" stretch="0,1">
                     <item alignment="Qt::AlignTop">
-                     <widget class="QLabel" name="labelNumber_UnspendablePIV">
+                     <widget class="QLabel" name="labelNumber_UnspendableBCZ">
                       <property name="minimumSize">
                        <size>
                         <width>24</width>
@@ -588,7 +588,7 @@
                      </widget>
                     </item>
                     <item>
-                     <layout class="QVBoxLayout" name="verticalLayout_UnspendablePIV">
+                     <layout class="QVBoxLayout" name="verticalLayout_UnspendableBCZ">
                       <property name="spacing">
                        <number>0</number>
                       </property>
@@ -599,9 +599,9 @@
                        <number>20</number>
                       </property>
                       <item>
-                       <widget class="QLabel" name="labelSubtitle_UnspendablePIV">
+                       <widget class="QLabel" name="labelSubtitle_UnspendableBCZ">
                         <property name="text">
-                         <string>Why are my PIV unspendable?</string>
+                         <string>Why are my BCZ unspendable?</string>
                         </property>
                         <property name="wordWrap">
                          <bool>true</bool>
@@ -609,7 +609,7 @@
                        </widget>
                       </item>
                       <item>
-                       <spacer name="verticalSpacer1_UnspendablePIV">
+                       <spacer name="verticalSpacer1_UnspendableBCZ">
                         <property name="orientation">
                          <enum>Qt::Vertical</enum>
                         </property>
@@ -625,7 +625,7 @@
                        </spacer>
                       </item>
                       <item>
-                       <widget class="QLabel" name="labelContent_UnspendablePIV">
+                       <widget class="QLabel" name="labelContent_UnspendableBCZ">
                         <property name="text">
                          <string>
                            &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;justify&quot;&gt;
@@ -646,7 +646,7 @@
                        </widget>
                       </item>
                       <item>
-                       <spacer name="verticalSpacer2_UnspendablePIV">
+                       <spacer name="verticalSpacer2_UnspendableBCZ">
                         <property name="orientation">
                          <enum>Qt::Vertical</enum>
                         </property>
@@ -699,7 +699,7 @@
                       <item>
                        <widget class="QLabel" name="labelSubtitle_Stake">
                         <property name="text">
-                         <string>How do I stake PIV?</string>
+                         <string>How do I stake BCZ?</string>
                         </property>
                         <property name="wordWrap">
                          <bool>true</bool>
@@ -917,7 +917,7 @@
                          <string>
                            &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;justify&quot;&gt;
                            A masternode is a computer running a full node BCZ core wallet with a
-                           requirement of 10,000 PIV secured collateral to provide extra services
+                           requirement of 10,000 BCZ secured collateral to provide extra services
                            to the network and in return, receive a portion of the block reward
                            regularly.  These services include:
                            &lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;
@@ -949,7 +949,7 @@
                            Requirements:
                            &lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;
                            &lt;ul&gt;
-                           &lt;li&gt;10,000 PIV per single Masternode instance&lt;/li&gt;
+                           &lt;li&gt;10,000 BCZ per single Masternode instance&lt;/li&gt;
                            &lt;li&gt;Must be stored in a core wallet&lt;/li&gt;
                            &lt;li&gt;Need dedicated IP address&lt;/li&gt;
                            &lt;li&gt;Masternode wallet to remain online&lt;/li&gt;
@@ -1045,7 +1045,7 @@
                       <item>
                        <widget class="QLabel" name="labelContent_MNController">
                         <property name="text">
-                         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;justify&quot;&gt;A Masternode Controller wallet is where the 10,000 PIV collateral can reside during a Controller-Remote masternode setup. It is a wallet that can activate the remote masternode wallet(s) and allows you to keep your collateral coins offline while the remote masternode remains online. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;justify&quot;&gt;A Masternode Controller wallet is where the 10,000 BCZ collateral can reside during a Controller-Remote masternode setup. It is a wallet that can activate the remote masternode wallet(s) and allows you to keep your collateral coins offline while the remote masternode remains online. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                         </property>
                         <property name="alignment">
                          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>

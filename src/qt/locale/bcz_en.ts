@@ -470,7 +470,7 @@ for staking</source>
     </message>
     <message>
         <location line="+1"/>
-        <source>LOSE ALL OF YOUR PIV</source>
+        <source>LOSE ALL OF YOUR BCZ</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -491,7 +491,7 @@ for staking</source>
     </message>
     <message>
         <location line="+31"/>
-        <source>BCZ will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your PIVs from being stolen by malware infecting your computer.</source>
+        <source>BCZ will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your BCZs from being stolen by malware infecting your computer.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -586,7 +586,7 @@ for staking</source>
     </message>
     <message>
         <location line="+20"/>
-        <source>0,00 PIV</source>
+        <source>0,00 BCZ</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -637,7 +637,7 @@ for staking</source>
     </message>
     <message>
         <location line="+81"/>
-        <source>Select PIV Outputs to Spend</source>
+        <source>Select BCZ Outputs to Spend</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -675,7 +675,7 @@ for staking</source>
         <location line="-393"/>
         <location line="+124"/>
         <location line="+461"/>
-        <source>0.00 PIV</source>
+        <source>0.00 BCZ</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -912,7 +912,7 @@ for staking</source>
     </message>
     <message>
         <location line="+8"/>
-        <source>Can vary +/- %1 upiv per input.</source>
+        <source>Can vary +/- %1 ubcz per input.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1017,7 +1017,7 @@ for staking</source>
     </message>
     <message>
         <location line="-193"/>
-        <source>You can delegate your PIVs, letting a hot node (24/7 online node)
+        <source>You can delegate your BCZs, letting a hot node (24/7 online node)
 stake on your behalf, while you keep the keys securely offline.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1028,7 +1028,7 @@ stake on your behalf, while you keep the keys securely offline.</source>
     </message>
     <message>
         <location line="+6"/>
-        <source>Accept PIV delegation / Delegate PIV</source>
+        <source>Accept BCZ delegation / Delegate BCZ</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1104,7 +1104,7 @@ Do you wish to proceed?</source>
     </message>
     <message>
         <location line="+30"/>
-        <source>You don&apos;t have any PIV to select.</source>
+        <source>You don&apos;t have any BCZ to select.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1270,7 +1270,7 @@ address</source>
     </message>
     <message>
         <location line="+39"/>
-        <source>PIV</source>
+        <source>BCZ</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1315,7 +1315,7 @@ address</source>
     </message>
     <message>
         <location line="+4"/>
-        <source>Amount of PIV and zBCZ staked.</source>
+        <source>Amount of BCZ and zBCZ staked.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1330,7 +1330,7 @@ address</source>
     </message>
     <message>
         <location line="+5"/>
-        <source>How to get PIV or zBCZ</source>
+        <source>How to get BCZ or zBCZ</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1751,7 +1751,7 @@ It will start automatically as soon as the wallet has enough confirmations on an
     </message>
     <message>
         <location line="+23"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;To create a BCZ Masternode you must dedicate 10,000 PIV (the unit of BCZ) to the network (however, these coins are still yours and will never leave your possession). &lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;You can deactivate the node and unlock the coins at any time.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;To create a BCZ Masternode you must dedicate 10,000 BCZ (the unit of BCZ) to the network (however, these coins are still yours and will never leave your possession). &lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;You can deactivate the node and unlock the coins at any time.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1776,7 +1776,7 @@ It will start automatically as soon as the wallet has enough confirmations on an
     </message>
     <message>
         <location line="+93"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A transaction of 10,000 PIV will be made&lt;/p&gt;&lt;p&gt;to a new empty address in your wallet.&lt;/p&gt;&lt;p&gt;The Address is labeled under the master node&apos;s name.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A transaction of 10,000 BCZ will be made&lt;/p&gt;&lt;p&gt;to a new empty address in your wallet.&lt;/p&gt;&lt;p&gt;The Address is labeled under the master node&apos;s name.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2053,7 +2053,7 @@ Are you sure?</source>
     </message>
     <message>
         <location line="+5"/>
-        <source>Not enough balance to create a masternode, 10,000 PIV required.</source>
+        <source>Not enough balance to create a masternode, 10,000 BCZ required.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2359,7 +2359,7 @@ https://www.transifex.com/bcz-project/bcz-project-translations</source>
     </message>
     <message>
         <location line="-187"/>
-        <source>Enable automatic minting of PIV units to zBCZ</source>
+        <source>Enable automatic minting of BCZ units to zBCZ</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2379,7 +2379,7 @@ https://www.transifex.com/bcz-project/bcz-project-translations</source>
     </message>
     <message>
         <location line="+11"/>
-        <source>Percentage of incoming PIV which get automatically converted to zBCZ via Zerocoin Protocol (min: 10%)</source>
+        <source>Percentage of incoming BCZ which get automatically converted to zBCZ via Zerocoin Protocol (min: 10%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2390,7 +2390,7 @@ https://www.transifex.com/bcz-project/bcz-project-translations</source>
     <message>
         <location line="+30"/>
         <location line="+16"/>
-        <source>Wait with automatic conversion to Zerocoin until enough PIV for this denomination is available</source>
+        <source>Wait with automatic conversion to Zerocoin until enough BCZ for this denomination is available</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2890,13 +2890,13 @@ Address: %4
     </message>
     <message>
         <location line="+4"/>
-        <source>Minting zBCZ anonymizes your PIV by removing any
+        <source>Minting zBCZ anonymizes your BCZ by removing any
 transaction history, making transactions untraceable </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+3"/>
-        <source>Mint new zBCZ or convert back to PIV</source>
+        <source>Mint new zBCZ or convert back to BCZ</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2916,17 +2916,17 @@ transaction history, making transactions untraceable </source>
     </message>
     <message>
         <location line="+2"/>
-        <source>Enter amount of PIV to mint into zBCZ</source>
+        <source>Enter amount of BCZ to mint into zBCZ</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+2"/>
-        <source>Convert back to PIV</source>
+        <source>Convert back to BCZ</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+2"/>
-        <source>Enter amount of zBCZ to convert back into PIV</source>
+        <source>Enter amount of zBCZ to convert back into BCZ</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2966,12 +2966,12 @@ transaction history, making transactions untraceable </source>
     </message>
     <message>
         <location line="+19"/>
-        <source>zBCZ converted back to PIV</source>
+        <source>zBCZ converted back to BCZ</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+20"/>
-        <source>You don&apos;t have any PIV to select.</source>
+        <source>You don&apos;t have any BCZ to select.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3861,7 +3861,7 @@ transaction history, making transactions untraceable </source>
     </message>
     <message>
         <location line="+1"/>
-        <source>Scan the QR code or copy the address to receive PIV.</source>
+        <source>Scan the QR code or copy the address to receive BCZ.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4000,7 +4000,7 @@ transaction history, making transactions untraceable </source>
     </message>
     <message>
         <location line="+71"/>
-        <source>PIV</source>
+        <source>BCZ</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4168,7 +4168,7 @@ transaction history, making transactions untraceable </source>
     </message>
     <message>
         <location line="+82"/>
-        <source>PIV/kilobyte</source>
+        <source>BCZ/kilobyte</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4264,7 +4264,7 @@ transaction history, making transactions untraceable </source>
     </message>
     <message>
         <location line="+12"/>
-        <source>You can transfer public coins (PIV) or private coins (zBCZ)</source>
+        <source>You can transfer public coins (BCZ) or private coins (zBCZ)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4304,7 +4304,7 @@ transaction history, making transactions untraceable </source>
     </message>
     <message>
         <location line="+43"/>
-        <source>Send PIV</source>
+        <source>Send BCZ</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4468,7 +4468,7 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
     </message>
     <message>
         <location line="-210"/>
-        <source>You don&apos;t have any PIV to select.</source>
+        <source>You don&apos;t have any BCZ to select.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5118,7 +5118,7 @@ There was an error trying to save the address list to %1. Please try again.</sou
     </message>
     <message>
         <location line="+31"/>
-        <source>2) Why are my PIV unspendable?</source>
+        <source>2) Why are my BCZ unspendable?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5139,12 +5139,12 @@ There was an error trying to save the address list to %1. Please try again.</sou
     </message>
     <message>
         <location line="+23"/>
-        <source>6) How do I receive PIV/zBCZ?</source>
+        <source>6) How do I receive BCZ/zBCZ?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+22"/>
-        <source>7) How do I stake PIV/zBCZ?</source>
+        <source>7) How do I stake BCZ/zBCZ?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5197,7 +5197,7 @@ There was an error trying to save the address list to %1. Please try again.</sou
     </message>
     <message>
         <location line="+21"/>
-        <source>Why are my PIV unspendable?</source>
+        <source>Why are my BCZ unspendable?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5271,7 +5271,7 @@ There was an error trying to save the address list to %1. Please try again.</sou
         <location line="+26"/>
         <source>
                            &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;justify&quot;&gt;
-                           By default the BCZ wallet will convert 10% of your entire PIV
+                           By default the BCZ wallet will convert 10% of your entire BCZ
                            balance to zBCZ to assist the network. If you do not wish to
                            stake zBCZ or take advantage of the privacy benefit it brings,
                            you can disable the automatic minting in your BCZ wallet by
@@ -5295,7 +5295,7 @@ There was an error trying to save the address list to %1. Please try again.</sou
     </message>
     <message>
         <location line="+21"/>
-        <source>How do I receive PIV/zBCZ?</source>
+        <source>How do I receive BCZ/zBCZ?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5317,7 +5317,7 @@ There was an error trying to save the address list to %1. Please try again.</sou
     </message>
     <message>
         <location line="+18"/>
-        <source>How do I stake PIV/zBCZ?</source>
+        <source>How do I stake BCZ/zBCZ?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5369,7 +5369,7 @@ There was an error trying to save the address list to %1. Please try again.</sou
     </message>
     <message>
         <location line="+26"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;justify&quot;&gt;A Masternode Controller wallet is where the 10,000 PIV collateral can reside during a Controller-Remote masternode setup. It is a wallet that can activate the remote masternode wallet(s) and allows you to keep your collateral coins offline while the remote masternode remains online. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;justify&quot;&gt;A Masternode Controller wallet is where the 10,000 BCZ collateral can reside during a Controller-Remote masternode setup. It is a wallet that can activate the remote masternode wallet(s) and allows you to keep your collateral coins offline while the remote masternode remains online. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5401,7 +5401,7 @@ There was an error trying to save the address list to %1. Please try again.</sou
         <source>
                            &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;justify&quot;&gt;
                            A masternode is a computer running a full node BCZ core wallet with a
-                           requirement of 10,000 PIV secured collateral to provide extra services
+                           requirement of 10,000 BCZ secured collateral to provide extra services
                            to the network and in return, receive a portion of the block reward
                            regularly.  These services include:
                            &lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;
@@ -5433,7 +5433,7 @@ There was an error trying to save the address list to %1. Please try again.</sou
                            Requirements:
                            &lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;
                            &lt;ul&gt;
-                           &lt;li&gt;10,000 PIV per single Masternode instance&lt;/li&gt;
+                           &lt;li&gt;10,000 BCZ per single Masternode instance&lt;/li&gt;
                            &lt;li&gt;Must be stored in a core wallet&lt;/li&gt;
                            &lt;li&gt;Need dedicated IP address&lt;/li&gt;
                            &lt;li&gt;Masternode wallet to remain online&lt;/li&gt;
@@ -7105,7 +7105,7 @@ backup will be created.
     </message>
     <message>
         <location line="+7"/>
-        <source>PIV Stake</source>
+        <source>BCZ Stake</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7115,7 +7115,7 @@ backup will be created.
     </message>
     <message>
         <location line="+2"/>
-        <source>PIV Cold Stake</source>
+        <source>BCZ Cold Stake</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7125,7 +7125,7 @@ backup will be created.
     </message>
     <message>
         <location line="+7"/>
-        <source>Converted PIV to zBCZ</source>
+        <source>Converted BCZ to zBCZ</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7135,7 +7135,7 @@ backup will be created.
     </message>
     <message>
         <location line="+2"/>
-        <source>Received PIV from zBCZ</source>
+        <source>Received BCZ from zBCZ</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7145,7 +7145,7 @@ backup will be created.
     </message>
     <message>
         <location line="+2"/>
-        <source>Converted zBCZ to PIV</source>
+        <source>Converted zBCZ to BCZ</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7165,7 +7165,7 @@ backup will be created.
     </message>
     <message>
         <location line="+8"/>
-        <source>PIV Stake on behalf of</source>
+        <source>BCZ Stake on behalf of</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7372,7 +7372,7 @@ backup will be created.
     </message>
     <message>
         <location line="+15"/>
-        <source>+0.000585 PIV</source>
+        <source>+0.000585 BCZ</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7388,7 +7388,7 @@ backup will be created.
     <message>
         <location line="-27"/>
         <location line="+18"/>
-        <source>SwiftX doesn&apos;t support sending values that high yet. Transactions are currently limited to %1 PIV.</source>
+        <source>SwiftX doesn&apos;t support sending values that high yet. Transactions are currently limited to %1 BCZ.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7598,7 +7598,7 @@ BCZ Core Wallet</source>
     </message>
     <message>
         <location line="+2"/>
-        <source>Enable or disable staking functionality for PIV inputs (0-1, default: %u)</source>
+        <source>Enable or disable staking functionality for BCZ inputs (0-1, default: %u)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7653,12 +7653,12 @@ BCZ Core Wallet</source>
     </message>
     <message>
         <location line="+8"/>
-        <source>Fees (in PIV/Kb) smaller than this are considered zero fee for relaying (default: %s)</source>
+        <source>Fees (in BCZ/Kb) smaller than this are considered zero fee for relaying (default: %s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+3"/>
-        <source>Fees (in PIV/Kb) smaller than this are considered zero fee for transaction creation (default: %s)</source>
+        <source>Fees (in BCZ/Kb) smaller than this are considered zero fee for transaction creation (default: %s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -8118,7 +8118,7 @@ BCZ Core Wallet</source>
     </message>
     <message>
         <location line="+4"/>
-        <source>Fee (in PIV/kB) to add to transactions you send (default: %s)</source>
+        <source>Fee (in BCZ/kB) to add to transactions you send (default: %s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -8213,12 +8213,12 @@ BCZ Core Wallet</source>
     </message>
     <message>
         <location line="+43"/>
-        <source>Recalculating PIV supply...</source>
+        <source>Recalculating BCZ supply...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>Reindex the PIV and zBCZ money supply statistics</source>
+        <source>Reindex the BCZ and zBCZ money supply statistics</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

@@ -21,18 +21,18 @@ BitcoinUnits::BitcoinUnits(QObject* parent) : QAbstractListModel(parent),
 QList<BitcoinUnits::Unit> BitcoinUnits::availableUnits()
 {
     QList<BitcoinUnits::Unit> unitlist;
-    unitlist.append(PIV);
-    unitlist.append(mPIV);
-    unitlist.append(uPIV);
+    unitlist.append(BCZ);
+    unitlist.append(mBCZ);
+    unitlist.append(uBCZ);
     return unitlist;
 }
 
 bool BitcoinUnits::valid(int unit)
 {
     switch (unit) {
-    case PIV:
-    case mPIV:
-    case uPIV:
+    case BCZ:
+    case mBCZ:
+    case uBCZ:
         return true;
     default:
         return false;
@@ -42,11 +42,11 @@ bool BitcoinUnits::valid(int unit)
 QString BitcoinUnits::id(int unit)
 {
     switch (unit) {
-    case PIV:
+    case BCZ:
         return QString("bcz");
-    case mPIV:
+    case mBCZ:
         return QString("mbcz");
-    case uPIV:
+    case uBCZ:
         return QString::fromUtf8("ubcz");
     default:
         return QString("???");
@@ -60,22 +60,22 @@ QString BitcoinUnits::name(int unit, bool isZbcz)
     if(isZbcz) z = "z";
     if (Params().NetworkID() == CBaseChainParams::MAIN) {
         switch (unit) {
-        case PIV:
+        case BCZ:
             return z + CURR_UNIT;
-        case mPIV:
+        case mBCZ:
             return z + QString("m") + CURR_UNIT;
-        case uPIV:
+        case uBCZ:
             return z + QString::fromUtf8("μ") + CURR_UNIT;
         default:
             return QString("???");
         }
     } else {
         switch (unit) {
-        case PIV:
+        case BCZ:
             return z + QString("t") + CURR_UNIT;
-        case mPIV:
+        case mBCZ:
             return z + QString("mt") + CURR_UNIT;
-        case uPIV:
+        case uBCZ:
             return z + QString::fromUtf8("μt") + CURR_UNIT;
         default:
             return QString("???");
@@ -88,22 +88,22 @@ QString BitcoinUnits::description(int unit)
     const QString CURR_UNIT = QString(CURRENCY_UNIT.c_str());
     if (Params().NetworkID() == CBaseChainParams::MAIN) {
         switch (unit) {
-        case PIV:
+        case BCZ:
             return CURR_UNIT;
-        case mPIV:
+        case mBCZ:
             return QString("Milli-") + CURR_UNIT + QString(" (1 / 1" THIN_SP_UTF8 "000)");
-        case uPIV:
+        case uBCZ:
             return QString("Micro-") + CURR_UNIT + QString(" (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
         default:
             return QString("???");
         }
     } else {
         switch (unit) {
-        case PIV:
+        case BCZ:
             return QString("Test") + CURR_UNIT;
-        case mPIV:
+        case mBCZ:
             return QString("Milli-Test") + CURR_UNIT + QString(" (1 / 1" THIN_SP_UTF8 "000)");
-        case uPIV:
+        case uBCZ:
             return QString("Micro-Test") + CURR_UNIT + QString(" (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
         default:
             return QString("???");
@@ -114,11 +114,11 @@ QString BitcoinUnits::description(int unit)
 qint64 BitcoinUnits::factor(int unit)
 {
     switch (unit) {
-    case PIV:
+    case BCZ:
         return 100000000;
-    case mPIV:
+    case mBCZ:
         return 100000;
-    case uPIV:
+    case uBCZ:
         return 100;
     default:
         return 100000000;
@@ -128,11 +128,11 @@ qint64 BitcoinUnits::factor(int unit)
 int BitcoinUnits::decimals(int unit)
 {
     switch (unit) {
-    case PIV:
+    case BCZ:
         return 8;
-    case mPIV:
+    case mBCZ:
         return 5;
-    case uPIV:
+    case uBCZ:
         return 2;
     default:
         return 0;
