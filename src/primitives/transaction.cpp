@@ -148,8 +148,7 @@ bool CTransaction::IsCoinStake() const
     if (vin.empty())
         return false;
 
-    bool fAllowNull = vin[0].IsZerocoinSpend();
-    if (vin[0].prevout.IsNull() && !fAllowNull)
+    if (vin[0].prevout.IsNull()
         return false;
 
     return (vout.size() >= 2 && vout[0].IsEmpty());
@@ -206,16 +205,6 @@ CAmount CTransaction::GetValueOut() const
     return nValueOut;
 }
 
-CAmount CTransaction::GetZerocoinMinted() const
-{
-    CAmount nValueOut = 0;
-    for (const CTxOut& txOut : vout) {
-        nValueOut += txOut.GetZerocoinMinted();
-    }
-
-    return  nValueOut;
-}
-
 bool CTransaction::UsesUTXO(const COutPoint out)
 {
     for (const CTxIn& in : vin) {
@@ -233,29 +222,6 @@ std::list<COutPoint> CTransaction::GetOutPoints() const
     for (unsigned int i = 0; i < vout.size(); i++)
         listOutPoints.emplace_back(COutPoint(txHash, i));
     return listOutPoints;
-}
-
-CAmount CTransaction::GetZerocoinSpent() const
-{
-    CAmount nValueOut = 0;
-    for (const CTxIn& txin : vin) {
-        if(!txin.IsZerocoinSpend())
-            continue;
-
-        nValueOut += txin.nSequence * COIN;
-    }
-
-    return nValueOut;
-}
-
-int CTransaction::GetZerocoinMintCount() const
-{
-    int nCount = 0;
-    for (const CTxOut& out : vout) {
-        if (out.IsZerocoinMint())
-            nCount++;
-    }
-    return nCount;
 }
 
 double CTransaction::ComputePriority(double dPriorityInputs, unsigned int nTxSize) const

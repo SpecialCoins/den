@@ -196,17 +196,11 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
             if (tx.IsCoinBase() || tx.IsCoinStake() || !IsFinalTx(tx, nHeight)){
                 continue;
             }
-            if(sporkManager.IsSporkActive(SPORK_16_ZEROCOIN_MAINTENANCE_MODE) && tx.ContainsZerocoins()){
-                continue;
-            }
 
             COrphan* porphan = NULL;
             double dPriority = 0;
             CAmount nTotalIn = 0;
             bool fMissingInputs = false;
-            bool hasZerocoinSpends = tx.HasZerocoinSpendInputs();
-            if (hasZerocoinSpends)
-                nTotalIn = tx.GetZerocoinSpent();
 
             for (const CTxIn& txin : tx.vin) {
                 // Read prev transaction
@@ -300,7 +294,7 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
             double dPriorityDelta = 0;
             CAmount nFeeDelta = 0;
             mempool.ApplyDeltas(hash, dPriorityDelta, nFeeDelta);
-            if (!tx.HasZerocoinSpendInputs() && fSortedByFee && (dPriorityDelta <= 0) && (nFeeDelta <= 0) && (feeRate < ::minRelayTxFee) && (nBlockSize + nTxSize >= nBlockMinSize))
+            if (fSortedByFee && (dPriorityDelta <= 0) && (nFeeDelta <= 0) && (feeRate < ::minRelayTxFee) && (nBlockSize + nTxSize >= nBlockMinSize))
                 continue;
 
             // Prioritise by fee once past the priority size or we run out of high-priority

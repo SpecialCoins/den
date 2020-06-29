@@ -981,7 +981,7 @@ bool AppInit2()
     // Check for -tor - as this is a privacy risk to continue, exit here
     if (GetBoolArg("-tor", false))
         return UIError(_("Error: Unsupported argument -tor found, use -onion."));
-    // Check level must be 4 for zerocoin checks
+    // Check level must be 4
     if (mapArgs.count("-checklevel"))
         return UIError(_("Error: Unsupported argument -checklevel found. Checklevel must be level 4."));
     // Exit early if -masternode=1 and -listen=0
@@ -1214,9 +1214,8 @@ bool AppInit2()
             fs::path blocksDir = GetDataDir() / "blocks";
             fs::path chainstateDir = GetDataDir() / "chainstate";
             fs::path sporksDir = GetDataDir() / "sporks";
-            fs::path zerocoinDir = GetDataDir() / "zerocoin";
 
-            LogPrintf("Deleting blockchain folders blocks, chainstate, sporks and zerocoin\n");
+            LogPrintf("Deleting blockchain folders blocks, chainstate, sporks\n");
             // We delete in 4 individual steps in case one of the folder is missing already
             try {
                 if (fs::exists(blocksDir)){
@@ -1234,10 +1233,6 @@ bool AppInit2()
                     LogPrintf("-resync: folder deleted: %s\n", sporksDir.string().c_str());
                 }
 
-                if (fs::exists(zerocoinDir)){
-                    fs::remove_all(zerocoinDir);
-                    LogPrintf("-resync: folder deleted: %s\n", zerocoinDir.string().c_str());
-                }
             } catch (const fs::filesystem_error& error) {
                 LogPrintf("Failed to delete blockchain folders %s\n", error.what());
             }
@@ -1468,11 +1463,9 @@ bool AppInit2()
                 delete pcoinsdbview;
                 delete pcoinscatcher;
                 delete pblocktree;
-                delete zerocoinDB;
-                delete pSporkDB;
+                 delete pSporkDB;
 
-                //BCZ specific: zerocoin and spork DB's
-                zerocoinDB = new CZerocoinDB(0, false, fReindex);
+                //BCZ specific: spork DB's
                 pSporkDB = new CSporkDB(0, false, false);
 
                 pblocktree = new CBlockTreeDB(nBlockTreeDBCache, false, fReindex);
@@ -1539,7 +1532,7 @@ bool AppInit2()
                         }
                     }
 
-                    // Zerocoin must check at level 4
+                    // must check at level 4
                     if (!CVerifyDB().VerifyDB(pcoinsdbview, 4, GetArg("-checkblocks", 10))) {
                         strLoadError = _("Corrupted block database detected");
                         fVerifyingBlocks = false;

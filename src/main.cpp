@@ -20,7 +20,6 @@
 #include "consensus/merkle.h"
 #include "consensus/tx_verify.h"
 #include "consensus/validation.h"
-#include "consensus/zerocoin_verify.h"
 #include "fs.h"
 #include "init.h"
 #include "kernel.h"
@@ -623,7 +622,6 @@ CBlockIndex* FindForkInGlobalIndex(const CChain& chain, const CBlockLocator& loc
 
 CCoinsViewCache* pcoinsTip = NULL;
 CBlockTreeDB* pblocktree = NULL;
-CZerocoinDB* zerocoinDB = NULL;
 CSporkDB* pSporkDB = NULL;
 
 //////////////////////////////////////////////////////////////////////////////
@@ -811,11 +809,6 @@ bool AcceptToMemoryPool(CTxMemPool& pool, CValidationState& state, const CTransa
     if (pfMissingInputs)
         *pfMissingInputs = false;
 
-    //Temporarily disable zerocoin for maintenance
-    if (sporkManager.IsSporkActive(SPORK_16_ZEROCOIN_MAINTENANCE_MODE) && tx.ContainsZerocoins())
-        return state.DoS(10, error("%s : Zerocoin transactions are temporarily disabled for maintenance",
-                __func__), REJECT_INVALID, "bad-tx");
-
     const Consensus::Params& consensus = Params().GetConsensus();
 
     // Check transaction
@@ -859,10 +852,7 @@ bool AcceptToMemoryPool(CTxMemPool& pool, CValidationState& state, const CTransa
         }
     }
 
-    bool hasZcSpendInputs = tx.HasZerocoinSpendInputs();
-
-    // Check for conflicts with in-memory transactions
-    if (!hasZcSpendInputs) {
+     // Check for conflicts with in-memory transactions
         LOCK(pool.cs); // protect pool.mapNextTx
         for (const auto &in : tx.vin) {
             COutPoint outpoint = in.prevout;
@@ -871,7 +861,6 @@ bool AcceptToMemoryPool(CTxMemPool& pool, CValidationState& state, const CTransa
                 return state.Invalid(false, REJECT_CONFLICT, "txn-mempool-conflict");
             }
         }
-    }
 
 
     {
@@ -924,20 +913,17 @@ bool AcceptToMemoryPool(CTxMemPool& pool, CValidationState& state, const CTransa
         // itself can contain sigops MAX_TX_SIGOPS is less than
         // MAX_BLOCK_SIGOPS; we still consider this an invalid rather than
         // merely non-standard transaction.
-        if (!hasZcSpendInputs) {
             unsigned int nSigOps = GetLegacySigOpCount(tx);
             unsigned int nMaxSigOps = MAX_TX_SIGOPS_CURRENT;
             nSigOps += GetP2SHSigOpCount(tx, view);
             if(nSigOps > nMaxSigOps)
                 return state.DoS(0, false, REJECT_NONSTANDARD, "bad-txns-too-many-sigops", false,
                     strprintf("%d > %d", nSigOps, nMaxSigOps));
-        }
 
         CAmount nValueOut = tx.GetValueOut();
         CAmount nFees = nValueIn - nValueOut;
         double dPriority = 0;
-        if (!hasZcSpendInputs)
-            dPriority = view.GetPriority(tx, chainHeight);
+        dPriority = view.GetPriority(tx, chainHeight);
 
         CTxMemPoolEntry entry(tx, nFees, GetTime(), dPriority, chainHeight, pool.HasNoInputsOf(tx));
         unsigned int nSize = entry.GetTxSize();
@@ -945,19 +931,19 @@ bool AcceptToMemoryPool(CTxMemPool& pool, CValidationState& state, const CTransa
         // Don't accept it if it can't get into a block
         if (!ignoreFees) {
             CAmount txMinFee = GetMinRelayFee(tx, pool, nSize, true);
-            if (fLimitFree && nFees < txMinFee && !hasZcSpendInputs)
+            if (fLimitFree && nFees < txMinFee)
                 return state.DoS(0, false, REJECT_INSUFFICIENTFEE, "insufficient fee", false,
                     strprintf("%d < %d", nFees, txMinFee));
 
             // Require that free transactions have sufficient priority to be mined in the next block.
-            if (!hasZcSpendInputs && GetBoolArg("-relaypriority", true) && nFees < ::minRelayTxFee.GetFee(nSize) && !AllowFree(view.GetPriority(tx, chainHeight + 1))) {
+            if (GetBoolArg("-relaypriority", true) && nFees < ::minRelayTxFee.GetFee(nSize) && !AllowFree(view.GetPriority(tx, chainHeight + 1))) {
                 return state.DoS(0, false, REJECT_INSUFFICIENTFEE, "insufficient priority");
             }
 
             // Continuously rate-limit free (really, very-low-fee) transactions
             // This mitigates 'penny-flooding' -- sending thousands of free transactions just to
             // be annoying or make others' transactions take longer to confirm.
-            if (fLimitFree && nFees < ::minRelayTxFee.GetFee(nSize) && !hasZcSpendInputs) {
+            if (fLimitFree && nFees < ::minRelayTxFee.GetFee(nSize)) {
                 static RecursiveMutex csFreeLimiter;
                 static double dFreeCount;
                 static int64_t nLastTime;
@@ -985,7 +971,7 @@ bool AcceptToMemoryPool(CTxMemPool& pool, CValidationState& state, const CTransa
         // As zero fee transactions are not going to be accepted in the near future (4.0) and the code will be fully refactored soon.
         // This is just a quick inline towards that goal, the mempool by default will not accept them. Blocking
         // any subsequent network relay.
-        if (!Params().IsRegTestNet() && nFees == 0 && !hasZcSpendInputs) {
+        if (!Params().IsRegTestNet() && nFees == 0) {
             return error("%s : zero fees not accepted %s, %d > %d",
                     __func__, hash.ToString(), nFees, ::minRelayTxFee.GetFee(nSize) * 10000);
         }
@@ -1088,7 +1074,6 @@ bool AcceptableInputs(CTxMemPool& pool, CValidationState& state, const CTransact
     }
 
     // Check for conflicts with in-memory transactions
-    if (!tx.HasZerocoinSpendInputs()) {
         LOCK(pool.cs); // protect pool.mapNextTx
         for (const auto &in : tx.vin) {
             COutPoint outpoint = in.prevout;
@@ -1097,7 +1082,6 @@ bool AcceptableInputs(CTxMemPool& pool, CValidationState& state, const CTransact
                 return false;
             }
         }
-    }
 
 
     {
@@ -1172,7 +1156,7 @@ bool AcceptableInputs(CTxMemPool& pool, CValidationState& state, const CTransact
             mempool.PrioritiseTransaction(hash, hash.ToString(), 1000, 0.1 * COIN);
         } else { // same as !ignoreFees for AcceptToMemoryPool
             CAmount txMinFee = GetMinRelayFee(tx, pool, nSize, true);
-            if (fLimitFree && nFees < txMinFee && !tx.HasZerocoinSpendInputs())
+            if (fLimitFree && nFees < txMinFee)
                 return state.DoS(0, error("AcceptableInputs : not enough fees %s, %d < %d", hash.ToString(), nFees, txMinFee),
                     REJECT_INSUFFICIENTFEE, "insufficient fee");
 
@@ -1189,7 +1173,7 @@ bool AcceptableInputs(CTxMemPool& pool, CValidationState& state, const CTransact
             // Continuously rate-limit free (really, very-low-fee) transactions
             // This mitigates 'penny-flooding' -- sending thousands of free transactions just to
             // be annoying or make others' transactions take longer to confirm.
-            if (fLimitFree && nFees < ::minRelayTxFee.GetFee(nSize) && !tx.HasZerocoinSpendInputs()) {
+            if (fLimitFree && nFees < ::minRelayTxFee.GetFee(nSize)) {
                 static RecursiveMutex csFreeLimiter;
                 static double dFreeCount;
                 static int64_t nLastTime;
@@ -1634,7 +1618,7 @@ void static InvalidBlockFound(CBlockIndex* pindex, const CValidationState& state
 void UpdateCoins(const CTransaction& tx, CCoinsViewCache& inputs, CTxUndo& txundo, int nHeight)
 {
     // mark inputs spent
-    if (!tx.IsCoinBase() && !tx.HasZerocoinSpendInputs()) {
+    if (!tx.IsCoinBase()) {
         txundo.vprevout.reserve(tx.vin.size());
         for (const CTxIn& txin : tx.vin) {
             txundo.vprevout.push_back(CTxInUndo());
@@ -1714,7 +1698,7 @@ bool CheckTxInputs(const CTransaction& tx, CValidationState& state, const CCoins
 
 bool CheckInputs(const CTransaction& tx, CValidationState &state, const CCoinsViewCache &inputs, bool fScriptChecks, unsigned int flags, bool cacheStore, std::vector<CScriptCheck> *pvChecks)
 {
-    if (!tx.IsCoinBase() && !tx.HasZerocoinSpendInputs()) {
+    if (!tx.IsCoinBase()) {
 
         if (!Consensus::CheckTxInputs(tx, state, inputs, GetSpendHeight(inputs)))
             return false;
@@ -1845,7 +1829,7 @@ bool DisconnectBlock(CBlock& block, CValidationState& state, CBlockIndex* pindex
         }
 
         // restore inputs
-        if (!tx.IsCoinBase() && !tx.HasZerocoinSpendInputs()) { // not coinbases or zerocoinspend because they dont have traditional inputs
+        if (!tx.IsCoinBase()) { // not coinbases or zerocoinspend because they dont have traditional inputs
             const CTxUndo& txundo = blockUndo.vtxundo[i - 1];
             if (txundo.vprevout.size() != tx.vin.size())
                 return error("DisconnectBlock() : transaction and undo data inconsistent - txundo.vprevout.siz=%d tx.vin.siz=%d", txundo.vprevout.size(), tx.vin.size());

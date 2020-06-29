@@ -346,7 +346,7 @@ bool CTxMemPool::addUnchecked(const uint256& hash, const CTxMemPoolEntry &entry,
 
     const CTransaction& tx = newit->GetTx();
     std::set<uint256> setParentTransactions;
-    if(!tx.HasZerocoinSpendInputs()) {
+    if(true) {
         for (unsigned int i = 0; i < tx.vin.size(); i++) {
             mapNextTx[tx.vin[i].prevout] = CInPoint(&tx, i);
             setParentTransactions.insert(tx.vin[i].prevout.hash);
@@ -572,7 +572,6 @@ void CTxMemPool::check(const CCoinsViewCache* pcoins) const
         innerUsage += memusage::DynamicUsage(links.parents) + memusage::DynamicUsage(links.children);
         bool fDependsWait = false;
         setEntries setParentCheck;
-        bool fHasZerocoinSpends = false;
         for (const CTxIn& txin : tx.vin) {
             // Check that every mempool transaction's inputs refer to available coins, or other mempool tx's.
             indexed_transaction_set::const_iterator it2 = mapTx.find(txin.prevout.hash);
