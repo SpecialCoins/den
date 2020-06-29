@@ -45,7 +45,7 @@ TopBar::TopBar(PIVXGUI* _mainWindow, QWidget *parent) :
 #endif
 
     std::initializer_list<QWidget*> lblTitles = {ui->labelTitle1, ui->labelTitle3, ui->labelTitle4};
-    setCssProperty(lblTitles, "text-title-topbar");
+    setCssProperty(lblTitles, "text-title-topbar1");
     QFont font;
     font.setWeight(QFont::Light);
     Q_FOREACH (QWidget* w, lblTitles) { w->setFont(font); }
