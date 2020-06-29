@@ -234,11 +234,6 @@ static CScript CombineSignatures(const CScript& scriptPubKey, const BaseSignatur
     {
     case TX_NONSTANDARD:
     case TX_NULL_DATA:
-    case TX_ZEROCOINMINT:
-        // Don't know anything about this, assume bigger one is correct:
-        if (sigs1.size() >= sigs2.size())
-            return PushAll(sigs1);
-        return PushAll(sigs2);
     case TX_PUBKEY:
     case TX_PUBKEYHASH:
     case TX_COLDSTAKE:

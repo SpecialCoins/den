@@ -3014,7 +3014,7 @@ bool CheckBlockHeader(const CBlockHeader& block, CValidationState& state, bool f
     if (Params().IsRegTestNet()) return true;
 
     // Version 4 header must be used after
-    if (block.GetBlockTime() > Params().GetConsensus().xxxxx) {
+    if (block.GetBlockTime() > Params().GetConsensus().xxxxx) {//xxxxx
         if(block.nVersion < 4)
             return state.DoS(50,false, REJECT_INVALID, "block-version", "must be above 4");
     } else {

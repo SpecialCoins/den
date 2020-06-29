@@ -343,11 +343,6 @@ bool CBlockPolicyEstimator::isPriDataPoint(const CFeeRate &fee, double pri)
 
 void CBlockPolicyEstimator::processTransaction(const CTxMemPoolEntry& entry, bool fCurrentEstimate)
 {
-    if(entry.HasZerocoins()) {
-        // Zerocoin spends/mints had fixed fee/priority. Skip them for the estimates.
-        return;
-    }
-
     unsigned int txHeight = entry.GetHeight();
     uint256 hash = entry.GetTx().GetHash();
     if (mapMemPoolTxs[hash].stats != nullptr) {
@@ -401,11 +396,6 @@ void CBlockPolicyEstimator::processTransaction(const CTxMemPoolEntry& entry, boo
 
 void CBlockPolicyEstimator::processBlockTx(unsigned int nBlockHeight, const CTxMemPoolEntry& entry)
 {
-    if(entry.HasZerocoins()) {
-        // Zerocoin spends/mints had fixed fee/priority. Skip them for the estimates.
-        return;
-    }
-
     if (!entry.WasClearAtEntry()) {
         // This transaction depended on other transactions in the mempool to
         // be included in a block before it was able to be included, so

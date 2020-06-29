@@ -11,9 +11,6 @@
 
 bool CBczStake::InitFromTxIn(const CTxIn& txin)
 {
-    if (txin.IsZerocoinSpend())
-        return error("%s: unable to initialize CBczStake from zerocoin spend", __func__);
-
     // Find the previous transaction in database
     uint256 hashBlock;
     CTransaction txPrev;
