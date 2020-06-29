@@ -49,7 +49,6 @@ enum txnouttype
     TX_SCRIPTHASH,
     TX_MULTISIG,
     TX_NULL_DATA,
-    TX_ZEROCOINMINT,
     TX_COLDSTAKE
 };
 
