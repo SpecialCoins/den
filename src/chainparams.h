@@ -1,7 +1,7 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2014 The Bitcoin developers
+// Copyright (c) 2009-2015 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2020 The BCZ developers
+// Copyright (c) 2015-2020 The PIVX developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -10,6 +10,7 @@
 
 #include "chainparamsbase.h"
 #include "checkpoints.h"
+#include "consensus/params.h"
 #include "primitives/block.h"
 #include "protocol.h"
 #include "uint256.h"
@@ -31,7 +32,7 @@ struct SeedSpec6 {
 
 /**
  * CChainParams defines various tweakable parameters of a given instance of the
- * BCZ system. There are three: the main network on which people trade goods
+ * PIVX system. There are three: the main network on which people trade goods
  * and services, the public test network which gets reset from time to time and
  * a regression test mode which is intended for private networks only. It has
  * minimal difficulty to ensure that blocks can be found instantly.
@@ -51,108 +52,42 @@ public:
         MAX_BASE58_TYPES
     };
 
-    const uint256& HashGenesisBlock() const { return hashGenesisBlock; }
+    const Consensus::Params& GetConsensus() const { return consensus; }
     const MessageStartChars& MessageStart() const { return pchMessageStart; }
-    const std::vector<unsigned char>& AlertKey() const { return vAlertPubKey; }
     int GetDefaultPort() const { return nDefaultPort; }
-    const uint256& ProofOfWorkLimit() const { return bnProofOfWorkLimit; }
-    /** Used to check majorities for block version upgrade */
-    int EnforceBlockUpgradeMajority() const { return nEnforceBlockUpgradeMajority; }
-    int RejectBlockOutdatedMajority() const { return nRejectBlockOutdatedMajority; }
-    int ToCheckBlockUpgradeMajority() const { return nToCheckBlockUpgradeMajority; }
-    int MaxReorganizationDepth() const { return nMaxReorganizationDepth; }
 
-    /** Used if GenerateBitcoins is called with a negative number of threads */
-    int DefaultMinerThreads() const { return nMinerThreads; }
     const CBlock& GenesisBlock() const { return genesis; }
+
     /** Make miner wait to have peers to avoid wasting work */
-    bool MiningRequiresPeers() const { return fMiningRequiresPeers; }
+    bool MiningRequiresPeers() const { return !IsRegTestNet(); }
     /** Headers first syncing is disabled */
-    bool HeadersFirstSyncingActive() const { return fHeadersFirstSyncingActive; }
+    bool HeadersFirstSyncingActive() const { return false; };
     /** Default value for -checkmempool and -checkblockindex argument */
-    bool DefaultConsistencyChecks() const { return fDefaultConsistencyChecks; }
-    /** Allow mining of a min-difficulty block */
-    bool AllowMinDifficultyBlocks() const { return fAllowMinDifficultyBlocks; }
-    /** Skip proof-of-work check: allow mining of any difficulty block */
-    bool SkipProofOfWorkCheck() const { return fSkipProofOfWorkCheck; }
-    /** Make standard checks */
-    bool RequireStandard() const { return fRequireStandard; }
+    bool DefaultConsistencyChecks() const { return IsRegTestNet(); }
 
-    /** returns the coinbase maturity **/
-    int COINBASE_MATURITY() const { return nMaturity; }
-
-    /** returns the coinstake maturity (min depth required) **/
-    int COINSTAKE_MIN_DEPTH() const { return nStakeMinDepth; }
-    bool HasStakeMinAgeOrDepth(const int contextHeight, const uint32_t contextTime, const int utxoFromBlockHeight, const uint32_t utxoFromBlockTime) const;
-    int TimeSlotLength() const { return nTimeSlotLength; }
-    int FutureTimeDrift() const { return nFutureTimeDrift; }
-    uint32_t MaxFutureTime(uint32_t time) const { return time + FutureTimeDrift(); }
-
-    /** Make miner stop after a block is found. In RPC, don't return until nGenProcLimit blocks are generated */
-    bool MineBlocksOnDemand() const { return fMineBlocksOnDemand; }
-    /** In the future use NetworkIDString() for RPC fields */
-    bool TestnetToBeDeprecatedFieldRPC() const { return fTestnetToBeDeprecatedFieldRPC; }
     /** Return the BIP70 network string (main, test or regtest) */
     std::string NetworkIDString() const { return strNetworkID; }
     const std::vector<CDNSSeedData>& DNSSeeds() const { return vSeeds; }
     const std::vector<unsigned char>& Base58Prefix(Base58Type type) const { return base58Prefixes[type]; }
     const std::vector<SeedSpec6>& FixedSeeds() const { return vFixedSeeds; }
     virtual const Checkpoints::CCheckpointData& Checkpoints() const = 0;
-    int PoolMaxTransactions() const { return nPoolMaxTransactions; }
-
-    CAmount GetMinColdStakingAmount() const { return nMinColdStakingAmount; }
-
-    /** Spork key and Masternode Handling **/
-    std::string SporkPubKey() const { return strSporkPubKey; }
 
     CBaseChainParams::Network NetworkID() const { return networkID; }
+    bool IsRegTestNet() const { return NetworkID() == CBaseChainParams::REGTEST; }
 
-    /** Height or Time Based Activations **/
-    int LAST_POW_BLOCK() const { return nLastPOWBlock; }
-    bool IsStakeModifierV2(const int nHeight) const { return nHeight >= nBlockStakeModifierlV2; }
-    int ColdStart() const { return nColdStart; }
 
 protected:
     CChainParams() {}
 
-    uint256 hashGenesisBlock;
-    MessageStartChars pchMessageStart;
-    //! Raw pub key bytes for the broadcast alert signing key.
-    std::vector<unsigned char> vAlertPubKey;
-    int nDefaultPort;
-    uint256 bnProofOfWorkLimit;
-    int nMaxReorganizationDepth;
-    int nEnforceBlockUpgradeMajority;
-    int nRejectBlockOutdatedMajority;
-    int nToCheckBlockUpgradeMajority;
-    int nLastPOWBlock;
-    int nMaturity;
-    int nStakeMinDepth;
-    int nFutureTimeDrift;
-    int nTimeSlotLength;
-
-    int nMinerThreads;
-    std::vector<CDNSSeedData> vSeeds;
-    std::vector<unsigned char> base58Prefixes[MAX_BASE58_TYPES];
-    std::vector<SeedSpec6> vFixedSeeds;
     CBaseChainParams::Network networkID;
     std::string strNetworkID;
     CBlock genesis;
-    bool fMiningRequiresPeers;
-    bool fAllowMinDifficultyBlocks;
-    bool fDefaultConsistencyChecks;
-    bool fRequireStandard;
-    bool fMineBlocksOnDemand;
-    bool fSkipProofOfWorkCheck;
-    bool fTestnetToBeDeprecatedFieldRPC;
-    bool fHeadersFirstSyncingActive;
-    int nPoolMaxTransactions;
-    std::string strSporkPubKey;
-    int nBlockEnforceNewMessageSignatures;
-    int nColdStart;
-    int nBlockStakeModifierlV2;
-    CAmount nMinColdStakingAmount;
-
+    Consensus::Params consensus;
+    MessageStartChars pchMessageStart;
+    int nDefaultPort;
+    std::vector<CDNSSeedData> vSeeds;
+    std::vector<unsigned char> base58Prefixes[MAX_BASE58_TYPES];
+    std::vector<SeedSpec6> vFixedSeeds;
 };
 
 /**
@@ -172,5 +107,10 @@ void SelectParams(CBaseChainParams::Network network);
  * Returns false if an invalid combination is given.
  */
 bool SelectParamsFromCommandLine();
+
+/**
+ * Allows modifying the network upgrade regtest parameters.
+ */
+void UpdateNetworkUpgradeParameters(Consensus::UpgradeIndex idx, int nActivationHeight);
 
 #endif // BITCOIN_CHAINPARAMS_H

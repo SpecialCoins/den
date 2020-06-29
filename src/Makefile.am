@@ -30,6 +30,7 @@ LIBBITCOIN_COMMON=libbitcoin_common.a
 LIBBITCOIN_CLI=libbitcoin_cli.a
 LIBBITCOIN_UTIL=libbitcoin_util.a
 LIBBITCOIN_CRYPTO=crypto/libbitcoin_crypto.a
+LIBBITCOIN_ZEROCOIN=libzerocoin/libbitcoin_zerocoin.a
 LIBBITCOINQT=qt/libbitcoinqt.a
 LIBSECP256K1=secp256k1/libsecp256k1.la
 
@@ -52,6 +53,7 @@ EXTRA_LIBRARIES += \
   $(LIBBITCOIN_CRYPTO) \
   $(LIBBITCOIN_UTIL) \
   $(LIBBITCOIN_COMMON) \
+  $(LIBBITCOIN_ZEROCOIN) \
   $(LIBBITCOIN_SERVER) \
   $(LIBBITCOIN_CLI) \
   $(LIBBITCOIN_WALLET) \
@@ -65,22 +67,21 @@ TESTS =
 BENCHMARKS =
 
 if BUILD_BITCOIND
-  bin_PROGRAMS += bczd
+  bin_PROGRAMS += pivxd
 endif
 
 if BUILD_BITCOIN_UTILS
-  bin_PROGRAMS += bcz-cli bcz-tx
+  bin_PROGRAMS += pivx-cli pivx-tx
 endif
 
 .PHONY: FORCE check-symbols check-security
-# bcz core #
+# pivx core #
 BITCOIN_CORE_H = \
   activemasternode.h \
   addrman.h \
   allocators.h \
   arith_uint256.h \
   amount.h \
-  bignum/bignum.h \
   base58.h \
   bip38.h \
   bloom.h \
@@ -103,12 +104,16 @@ BITCOIN_CORE_H = \
   consensus/merkle.h \
   consensus/validation.h \
   consensus/tx_verify.h \
+  consensus/zerocoin_verify.h \
+  consensus/params.h \
+  consensus/upgrades.h \
   primitives/block.h \
   primitives/transaction.h \
   core_io.h \
   crypter.h \
   pairresult.h \
   addressbook.h \
+  denomination_functions.h \
   wallet/db.h \
   fs.h \
   hash.h \
@@ -117,6 +122,8 @@ BITCOIN_CORE_H = \
   init.h \
   invalid.h \
   invalid_outpoints.json.h \
+  invalid_serials.json.h \
+  legacy/stakemodifier.h \
   kernel.h \
   swifttx.h \
   key.h \
@@ -129,6 +136,7 @@ BITCOIN_CORE_H = \
   memusage.h \
   masternode.h \
   masternode-payments.h \
+  masternode-budget.h \
   masternode-sync.h \
   masternodeman.h \
   masternodeconfig.h \
@@ -141,6 +149,7 @@ BITCOIN_CORE_H = \
   netbase.h \
   noui.h \
   policy/fees.h \
+  optional.h \
   pow.h \
   prevector.h \
   protocol.h \
@@ -193,12 +202,22 @@ BITCOIN_CORE_H = \
   wallet/wallet.h \
   wallet/wallet_ismine.h \
   wallet/walletdb.h \
+  zpivchain.h \
+  zpiv/deterministicmint.h \
+  zpiv/mintpool.h \
+  zpiv/zerocoin.h \
+  zpiv/zpivtracker.h \
+  zpiv/zpivwallet.h \
+  zpiv/zpivmodule.h \
+  zpiv/zpos.h \
   zmq/zmqabstractnotifier.h \
   zmq/zmqconfig.h \
   zmq/zmqnotificationinterface.h \
   zmq/zmqpublishnotifier.h
 
-# server: shared between bczd and bcz-qt
+
+
+# server: shared between pivxd and pivx-qt
 libbitcoin_server_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(MINIUPNPC_CPPFLAGS) $(EVENT_CFLAGS) $(EVENT_PTHREADS_CFLAGS)
 libbitcoin_server_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 libbitcoin_server_a_SOURCES = \
@@ -207,7 +226,9 @@ libbitcoin_server_a_SOURCES = \
   blocksignature.cpp \
   chain.cpp \
   checkpoints.cpp \
+  consensus/params.cpp \
   consensus/tx_verify.cpp \
+  consensus/zerocoin_verify.cpp \
   httprpc.cpp \
   httpserver.cpp \
   init.cpp \
@@ -222,6 +243,7 @@ libbitcoin_server_a_SOURCES = \
   rest.cpp \
   rpc/blockchain.cpp \
   rpc/masternode.cpp \
+  rpc/budget.cpp \
   rpc/mining.cpp \
   rpc/misc.cpp \
   rpc/net.cpp \
@@ -234,6 +256,7 @@ libbitcoin_server_a_SOURCES = \
   txdb.cpp \
   txmempool.cpp \
   validationinterface.cpp \
+  zpivchain.cpp \
   $(BITCOIN_CORE_H)
 
 if ENABLE_ZMQ
@@ -245,33 +268,44 @@ libbitcoin_zmq_a_SOURCES = \
   zmq/zmqpublishnotifier.cpp
 endif
 
-# wallet: shared between bczd and bcz-qt, but only linked
+# wallet: shared between pivxd and pivx-qt, but only linked
 # when wallet enabled
 libbitcoin_wallet_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
 libbitcoin_wallet_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 libbitcoin_wallet_a_SOURCES = \
   activemasternode.cpp \
   bip38.cpp \
-  wallet/db.cpp \
+  denomination_functions.cpp \
   addressbook.cpp \
   crypter.cpp \
   key_io.cpp \
   swifttx.cpp \
   masternode.cpp \
+  masternode-budget.cpp \
   masternode-payments.cpp \
   masternode-sync.cpp \
   masternodeconfig.cpp \
   masternodeman.cpp \
   messagesigner.cpp \
+  legacy/stakemodifier.cpp \
+  kernel.cpp \
+  wallet/db.cpp \
   wallet/rpcdump.cpp \
   wallet/rpcwallet.cpp \
-  kernel.cpp \
   wallet/hdchain.cpp \
   wallet/scriptpubkeyman.cpp \
   wallet/wallet.cpp \
   wallet/wallet_ismine.cpp \
+  wallet/wallet_zerocoin.cpp \
   wallet/walletdb.cpp \
+  zpiv/deterministicmint.cpp \
+  zpiv/zerocoin.cpp \
+  zpiv/mintpool.cpp \
+  zpiv/zpivwallet.cpp \
+  zpiv/zpivtracker.cpp \
   stakeinput.cpp \
+  zpiv/zpivmodule.cpp \
+  zpiv/zpos.cpp \
   $(BITCOIN_CORE_H)
 
 # crypto primitives library
@@ -312,18 +346,39 @@ crypto_libbitcoin_crypto_a_SOURCES = \
   crypto/sph_jh.h \
   crypto/sph_keccak.h \
   crypto/sph_skein.h \
-  crypto/sph_types.h \
-  crypto/Lyra2Z/Lyra2.h \
-  crypto/Lyra2Z/Lyra2.c \
-  crypto/Lyra2Z/Lyra2Z.h \
-  crypto/Lyra2Z/Lyra2Z.c \
-  crypto/Lyra2Z/blake.c \
-  crypto/Lyra2Z/sph_blake.h \
-  crypto/Lyra2Z/sph_types.h \
-  crypto/Lyra2Z/Sponge.c \
-  crypto/Lyra2Z/Sponge.h
+  crypto/sph_types.h
 
-# common: shared between bczd, and bcz-qt and non-server tools
+# libzerocoin library
+libzerocoin_libbitcoin_zerocoin_a_CPPFLAGS = $(AM_CPPFLAGS) $(BOOST_CPPFLAGS)
+libzerocoin_libbitcoin_zerocoin_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libzerocoin_libbitcoin_zerocoin_a_SOURCES = \
+  libzerocoin/Accumulator.h \
+  libzerocoin/bignum.h \
+  libzerocoin/Coin.h \
+  libzerocoin/CoinRandomnessSchnorrSignature.h \
+  libzerocoin/CoinSpend.h \
+  libzerocoin/Commitment.h \
+  libzerocoin/Denominations.h \
+  libzerocoin/ParamGeneration.h \
+  libzerocoin/Params.h \
+  libzerocoin/SpendType.h \
+  libzerocoin/ZerocoinDefines.h \
+  libzerocoin/bignum.cpp \
+  libzerocoin/Accumulator.cpp \
+  libzerocoin/Coin.cpp \
+  libzerocoin/CoinRandomnessSchnorrSignature.cpp \
+  libzerocoin/CoinSpend.cpp \
+  libzerocoin/Denominations.cpp \
+  libzerocoin/ParamGeneration.cpp \
+  libzerocoin/Params.cpp
+if USE_NUM_GMP
+  libzerocoin_libbitcoin_zerocoin_a_SOURCES += libzerocoin/bignum_gmp.cpp
+endif
+if USE_NUM_OPENSSL
+  libzerocoin_libbitcoin_zerocoin_a_SOURCES += libzerocoin/bignum_openssl.cpp
+endif
+
+# common: shared between pivxd, and pivx-qt and non-server tools
 libbitcoin_common_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
 libbitcoin_common_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 libbitcoin_common_a_SOURCES = \
@@ -332,11 +387,14 @@ libbitcoin_common_a_SOURCES = \
   base58.cpp \
   bip38.cpp \
   chainparams.cpp \
+  consensus/upgrades.cpp \
   coins.cpp \
   compressor.cpp \
   consensus/merkle.cpp \
   primitives/block.cpp \
+  zpiv/deterministicmint.cpp \
   primitives/transaction.cpp \
+  zpiv/zerocoin.cpp \
   core_read.cpp \
   core_write.cpp \
   hash.cpp \
@@ -380,8 +438,8 @@ libbitcoin_util_a_SOURCES = \
   blob_uint256.cpp \
   util.cpp \
   utilmoneystr.cpp \
-  utilstrencodings.cpp \
   util/threadnames.cpp \
+  utilstrencodings.cpp \
   utiltime.cpp \
   $(BITCOIN_CORE_H)
 
@@ -390,28 +448,31 @@ libbitcoin_util_a_SOURCES += compat/glibc_compat.cpp
 AM_LDFLAGS += $(COMPAT_LDFLAGS)
 endif
 
-# cli: shared between bcz-cli and bcz-qt
+# cli: shared between pivx-cli and pivx-qt
 libbitcoin_cli_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
 libbitcoin_cli_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 libbitcoin_cli_a_SOURCES = \
   rpc/client.cpp \
   $(BITCOIN_CORE_H)
 
+nodist_libbitcoin_util_a_SOURCES = $(srcdir)/obj/build.h
+#
 
-# bczd binary #
-bczd_SOURCES = bczd.cpp
-bczd_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
-bczd_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-bczd_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+# pivxd binary #
+pivxd_SOURCES = pivxd.cpp
+pivxd_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
+pivxd_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+pivxd_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if TARGET_WINDOWS
-bczd_SOURCES += bczd-res.rc
+pivxd_SOURCES += pivxd-res.rc
 endif
-bczd_LDADD = \
+pivxd_LDADD = \
   $(LIBBITCOIN_SERVER) \
   $(LIBBITCOIN_WALLET) \
   $(LIBBITCOIN_COMMON) \
   $(LIBUNIVALUE) \
+  $(LIBBITCOIN_ZEROCOIN) \
   $(LIBBITCOIN_UTIL) \
   $(LIBBITCOIN_ZMQ) \
   $(LIBBITCOIN_CRYPTO) \
@@ -420,45 +481,46 @@ bczd_LDADD = \
   $(LIBMEMENV) \
   $(LIBSECP256K1)
 
-bczd_LDADD += $(BOOST_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS) $(ZMQ_LIBS)
+pivxd_LDADD += $(BOOST_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS) $(ZMQ_LIBS)
 
-# bcz-cli binary #
-bcz_cli_SOURCES = bcz-cli.cpp
-bcz_cli_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(EVENT_CFLAGS)
-bcz_cli_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-bcz_cli_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+# pivx-cli binary #
+pivx_cli_SOURCES = pivx-cli.cpp
+pivx_cli_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(EVENT_CFLAGS)
+pivx_cli_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+pivx_cli_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if TARGET_WINDOWS
-bcz_cli_SOURCES += bcz-cli-res.rc
+pivx_cli_SOURCES += pivx-cli-res.rc
 endif
 
-bcz_cli_LDADD = \
+pivx_cli_LDADD = \
   $(LIBBITCOIN_CLI) \
   $(LIBUNIVALUE) \
   $(LIBBITCOIN_UTIL) \
   $(LIBBITCOIN_CRYPTO)
 
-bcz_cli_LDADD += $(BOOST_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(EVENT_LIBS)
+pivx_cli_LDADD += $(BOOST_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(EVENT_LIBS)
 #
 
-# bcz-tx binary #
-bcz_tx_SOURCES = bcz-tx.cpp
-bcz_tx_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
-bcz_tx_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-bcz_tx_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+# pivx-tx binary #
+pivx_tx_SOURCES = pivx-tx.cpp
+pivx_tx_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
+pivx_tx_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+pivx_tx_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if TARGET_WINDOWS
-bcz_tx_SOURCES += bcz-tx-res.rc
+pivx_tx_SOURCES += pivx-tx-res.rc
 endif
 
-bcz_tx_LDADD = \
+pivx_tx_LDADD = \
   $(LIBUNIVALUE) \
   $(LIBBITCOIN_COMMON) \
+  $(LIBBITCOIN_ZEROCOIN) \
   $(LIBBITCOIN_UTIL) \
   $(LIBBITCOIN_CRYPTO) \
   $(LIBSECP256K1)
 
-bcz_tx_LDADD += $(BOOST_LIBS) $(CRYPTO_LIBS)
+pivx_tx_LDADD += $(BOOST_LIBS) $(CRYPTO_LIBS)
 #
 
 # bitcoinconsensus library #
@@ -499,14 +561,19 @@ CLEANFILES = $(EXTRA_LIBRARIES)
 
 CLEANFILES += *.gcda *.gcno
 CLEANFILES += compat/*.gcda compat/*.gcno
+CLEANFILES += consensus/*.gcda consensus/*.gcno
 CLEANFILES += crypto/*.gcda crypto/*.gcno
+CLEANFILES += libzerocoin/*.gcda libzerocoin/*.gcno
 CLEANFILES += primitives/*.gcda primitives/*.gcno
 CLEANFILES += rpc/*.gcda rpc/*.gcno
 CLEANFILES += script/*.gcda script/*.gcno
 CLEANFILES += support/*.gcda support/*.gcno
 CLEANFILES += univalue/*.gcda univalue/*.gcno
 CLEANFILES += wallet/*.gcda wallet/*.gcno
+CLEANFILES += wallet/test/*.gcda wallet/test/*.gcno
 CLEANFILES += zmq/*.gcda zmq/*.gcno
+CLEANFILES += zpiv/*.gcda zpiv/*.gcno
+CLEANFILES += obj/build.h
 
 CTAES_DIST =  crypto/ctaes/bench.c
 CTAES_DIST += crypto/ctaes/ctaes.c
@@ -515,6 +582,7 @@ CTAES_DIST += crypto/ctaes/README.md
 CTAES_DIST += crypto/ctaes/test.c
 
 EXTRA_DIST = $(CTAES_DIST)
+
 
 config/bcz-config.h: config/stamp-h1
 	@$(MAKE) -C $(top_builddir) $(subdir)/$(@)
@@ -528,6 +596,7 @@ clean-local:
 	-$(MAKE) -C univalue clean
 	-rm -f leveldb/*/*.gcda leveldb/*/*.gcno leveldb/helpers/memenv/*.gcda leveldb/helpers/memenv/*.gcno
 	-rm -f config.h
+	-rm -rf test/__pycache__
 
 .rc.o:
 	@test -f $(WINDRES)
@@ -557,3 +626,4 @@ endif
 if ENABLE_QT
 include Makefile.qt.include
 endif
+

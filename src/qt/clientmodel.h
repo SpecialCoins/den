@@ -1,6 +1,6 @@
 // Copyright (c) 2011-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2020 The BCZ developers
+// Copyright (c) 2015-2020 The PIVX developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -39,7 +39,7 @@ enum NumConnections {
     CONNECTIONS_ALL = (CONNECTIONS_IN | CONNECTIONS_OUT),
 };
 
-/** Model for BCZ network client. */
+/** Model for PIVX network client. */
 class ClientModel : public QObject
 {
     Q_OBJECT
@@ -55,19 +55,12 @@ public:
     //! Return number of connections, default is in- and outbound (total)
     int getNumConnections(unsigned int flags = CONNECTIONS_ALL) const;
     int getNumBlocksAtStartup();
-    QString getMasternodeCountString() const;
-    QString getMnRoiCountString() const;
 
     // from cached block index
     int getNumBlocks();
     QDateTime getLastBlockDate() const;
     QString getLastBlockHash() const;
     double getVerificationProgress() const;
-
-    //! Return number of transactions in the mempool
-    long getMempoolSize() const;
-    //! Return the dynamic memory usage of the mempool
-    size_t getMempoolDynamicUsage() const;
 
     quint64 getTotalBytesRecv() const;
     quint64 getTotalBytesSent() const;
@@ -94,14 +87,13 @@ public:
     bool getTorInfo(std::string& ip_port) const;
 
 private:
-
+    QString getMasternodeCountString() const;
     OptionsModel* optionsModel;
     PeerTableModel* peerTableModel;
     BanTableModel *banTableModel;
 
     const CBlockIndex* cacheTip{nullptr};
     QString cachedMasternodeCountString;
-    QString cachedMnRoiCountString;
     bool cachedReindexing;
     bool cachedImporting;
     bool cachedInitialSync;
@@ -118,10 +110,8 @@ Q_SIGNALS:
     void numConnectionsChanged(int count);
     void numBlocksChanged(int count);
     void strMasternodesChanged(const QString& strMasternodes);
-    void strMnRoiChanged(const QString& strMnRoi);
     void alertsChanged(const QString& warnings);
     void bytesChanged(quint64 totalBytesIn, quint64 totalBytesOut);
-    void mempoolSizeChanged(long count, size_t mempoolSizeInBytes);
 
     //! Fired when a message should be reported to the user
     void message(const QString& title, const QString& message, unsigned int style, bool* ret = nullptr);

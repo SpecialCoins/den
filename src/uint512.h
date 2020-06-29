@@ -1,9 +1,9 @@
-// Copyright (c) 2020 The BCZ developers
+// Copyright (c) 2017-2020 The PIVX developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BCZ_UINT512_H
-#define BCZ_UINT512_H
+#ifndef PIVX_UINT512_H
+#define PIVX_UINT512_H
 
 #include "arith_uint256.h"
 #include "blob_uint256.h"
@@ -39,4 +39,4 @@ inline blob_uint512 blob_uint512S(const char* str)
     return rv;
 }
 
-#endif // BCZ_UINT512_H
+#endif // PIVX_UINT512_H

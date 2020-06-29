@@ -4,7 +4,7 @@
 // Copyright (c) 2011-2013 The PPCoin developers
 // Copyright (c) 2013-2014 The NovaCoin Developers
 // Copyright (c) 2014-2018 The BlackCoin Developers
-// Copyright (c) 2020 The BCZ developers
+// Copyright (c) 2015-2020 The PIVX developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -24,6 +24,8 @@
 #include "pow.h"
 #include "primitives/block.h"
 #include "primitives/transaction.h"
+#include "zpiv/zerocoin.h"
+#include "zpiv/zpivmodule.h"
 #include "script/script.h"
 #include "script/sigcache.h"
 #include "script/standard.h"
@@ -43,10 +45,13 @@
 #include <utility>
 #include <vector>
 
+#include "libzerocoin/CoinSpend.h"
+
 #include <boost/unordered_map.hpp>
 
 class CBlockIndex;
 class CBlockTreeDB;
+class CZerocoinDB;
 class CSporkDB;
 class CBloomFilter;
 class CInv;
@@ -56,8 +61,6 @@ class CValidationState;
 
 struct CBlockTemplate;
 struct CNodeStateStats;
-
-#define UTXOF 77
 
 /** Default for -limitancestorcount, max number of in-mempool ancestors */
 static const unsigned int DEFAULT_ANCESTOR_LIMIT = 25;
@@ -72,12 +75,13 @@ static const unsigned int DEFAULT_MAX_MEMPOOL_SIZE = 300;
 /** Default for -mempoolexpiry, expiration time for mempool transactions in hours */
 static const unsigned int DEFAULT_MEMPOOL_EXPIRY = 72;
 /** Default for -blockmaxsize and -blockminsize, which control the range of sizes the mining code will create **/
-static const unsigned int DEFAULT_BLOCK_MAX_SIZE = 1000000;
+static const unsigned int DEFAULT_BLOCK_MAX_SIZE = 750000;
 static const unsigned int DEFAULT_BLOCK_MIN_SIZE = 0;
 /** Default for -blockprioritysize, maximum space for zero/low-fee transactions **/
 static const unsigned int DEFAULT_BLOCK_PRIORITY_SIZE = 50000;
 /** The maximum size for transactions we're willing to relay/mine */
-static const unsigned int MAX_STANDARD_TX_SIZE = 800000;
+static const unsigned int MAX_STANDARD_TX_SIZE = 100000;
+static const unsigned int MAX_ZEROCOIN_TX_SIZE = 150000;
 /** Maximum number of signature check operations in an IsStandard() P2SH script */
 static const unsigned int MAX_P2SH_SIGOPS = 15;
 /** Default for -maxorphantx, maximum number of orphan transactions kept in memory */
@@ -93,7 +97,7 @@ static const int MAX_SCRIPTCHECK_THREADS = 16;
 /** -par default (number of script-checking threads, 0 = auto) */
 static const int DEFAULT_SCRIPTCHECK_THREADS = 0;
 /** Number of blocks that can be requested at any given time from a single peer. */
-static const int MAX_BLOCKS_IN_TRANSIT_PER_PEER = 1024;
+static const int MAX_BLOCKS_IN_TRANSIT_PER_PEER = 16;
 /** Timeout in seconds during which a peer must stall block download progress before being disconnected. */
 static const unsigned int BLOCK_STALLING_TIMEOUT = 2;
 /** Number of headers sent in one getheaders result. We rely on the assumption that if a peer sends
@@ -115,7 +119,7 @@ static const unsigned int MAX_REJECT_MESSAGE_LENGTH = 111;
  static const bool DEFAULT_PEERBLOOMFILTERS = true;
 
 /** If the tip is older than this (in seconds), the node is considered to be in initial block download. */
-static const int64_t DEFAULT_MAX_TIP_AGE = 3 * 60 * 60;
+static const int64_t DEFAULT_MAX_TIP_AGE = 24 * 60 * 60;
 
 /** Default for -blockspamfilter, use header spam filter */
 static const bool DEFAULT_BLOCK_SPAM_FILTER = true;
@@ -137,6 +141,7 @@ extern uint64_t nLastBlockTx;
 extern uint64_t nLastBlockSize;
 extern const std::string strMessageMagic;
 extern int64_t nTimeBestReceived;
+extern int64_t nMoneySupply;
 
 // Best block section
 extern Mutex g_best_block_mutex;
@@ -157,10 +162,8 @@ extern bool fVerifyingBlocks;
 extern bool fLargeWorkForkFound;
 extern bool fLargeWorkInvalidChainFound;
 
-extern int64_t nReserveBalance;
-
 extern std::map<uint256, int64_t> mapRejectedBlocks;
-extern std::map<unsigned int, unsigned int> mapHashedBlocks;
+
 /** Best header we've seen so far (used for getheaders queries' starting points). */
 extern CBlockIndex* pindexBestHeader;
 
@@ -224,7 +227,10 @@ bool GetTransaction(const uint256& hash, CTransaction& tx, uint256& hashBlock, b
 bool GetOutput(const uint256& hash, unsigned int index, CValidationState& state, CTxOut& out);
 /** Find the best known block, and make it the tip of the block chain */
 
+// ***TODO***
+double ConvertBitsToDouble(unsigned int nBits);
 int64_t GetMasternodePayment();
+unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHeader* pblock, bool fProofOfStake);
 
 bool ActivateBestChain(CValidationState& state, CBlock* pblock = NULL, bool fAlreadyChecked = false);
 CAmount GetBlockValue(int nHeight);
@@ -242,7 +248,7 @@ void FlushStateToDisk();
 /** (try to) add transaction to memory pool **/
 bool AcceptToMemoryPool(CTxMemPool& pool, CValidationState& state, const CTransaction& tx, bool fLimitFree, bool* pfMissingInputs, bool fOverrideMempoolLimit = false, bool fRejectInsaneFee = false, bool ignoreFees = false);
 
-bool AcceptableInputs(CTxMemPool& pool, CValidationState& state, const CTransaction& tx, bool fLimitFree, bool* pfMissingInputs, bool fRejectInsaneFee = false);
+bool AcceptableInputs(CTxMemPool& pool, CValidationState& state, const CTransaction& tx, bool fLimitFree, bool* pfMissingInputs, bool fRejectInsaneFee = false, bool isDSTX = false);
 
 int GetInputAge(CTxIn& vin);
 int GetIXConfirmations(uint256 nTXHash);
@@ -285,8 +291,9 @@ bool CheckInputs(const CTransaction& tx, CValidationState& state, const CCoinsVi
 /** Apply the effects of this transaction on the UTXO set represented by view */
 void UpdateCoins(const CTransaction& tx, CCoinsViewCache& inputs, CTxUndo& txundo, int nHeight);
 
-/** Context-independent validity checks */
-bool CheckFInputs(const CTransaction &tx, CValidationState &state, int nHeight);
+bool IsTransactionInChain(const uint256& txId, int& nHeightTx, CTransaction& tx);
+bool IsTransactionInChain(const uint256& txId, int& nHeightTx);
+bool IsBlockHashInChain(const uint256& hashBlock);
 bool ValidOutPoint(const COutPoint& out, int nHeight);
 
 /**
@@ -362,6 +369,7 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
 /** Context-independent validity checks */
 bool CheckBlockHeader(const CBlockHeader& block, CValidationState& state, bool fCheckPOW = true);
 bool CheckBlock(const CBlock& block, CValidationState& state, bool fCheckPOW = true, bool fCheckMerkleRoot = true, bool fCheckSig = true);
+bool CheckWork(const CBlock block, CBlockIndex* const pindexPrev);
 
 /** Context-dependent validity checks */
 bool ContextualCheckBlockHeader(const CBlockHeader& block, CValidationState& state, CBlockIndex* pindexPrev);
@@ -373,6 +381,7 @@ bool TestBlockValidity(CValidationState& state, const CBlock& block, CBlockIndex
 /** Store block on disk. If dbp is provided, the file is known to already reside on disk */
 bool AcceptBlock(CBlock& block, CValidationState& state, CBlockIndex** pindex, CDiskBlockPos* dbp = NULL, bool fAlreadyCheckedBlock = false);
 bool AcceptBlockHeader(const CBlockHeader& block, CValidationState& state, CBlockIndex** ppindex = NULL);
+
 
 /** RAII wrapper for VerifyDB: Verify consistency of the block and coin databases */
 class CVerifyDB
@@ -401,7 +410,17 @@ extern CCoinsViewCache* pcoinsTip;
 /** Global variable that points to the active block tree (protected by cs_main) */
 extern CBlockTreeDB* pblocktree;
 
+/** Global variable that points to the zerocoin database (protected by cs_main) */
+extern CZerocoinDB* zerocoinDB;
+
 /** Global variable that points to the spork database (protected by cs_main) */
 extern CSporkDB* pSporkDB;
+
+/**
+ * Return the spend height, which is one more than the inputs.GetBestBlock().
+ * While checking, GetBestBlock() refers to the parent block. (protected by cs_main)
+ * This is also true for mempool checks.
+ */
+int GetSpendHeight(const CCoinsViewCache& inputs);
 
 #endif // BITCOIN_MAIN_H

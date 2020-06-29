@@ -1,7 +1,7 @@
 // Copyright (c) 2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2020 The BCZ developers
+// Copyright (c) 2015-2020 The PIVX developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -14,7 +14,6 @@
 #include "miner.h"
 #include "net.h"
 #include "pow.h"
-#include "spork.h"
 #include "rpc/server.h"
 #include "util.h"
 #include "validationinterface.h"
@@ -96,45 +95,170 @@ UniValue getnetworkhashps(const UniValue& params, bool fHelp)
 }
 
 #ifdef ENABLE_WALLET
-UniValue getstake(const UniValue& params, bool fHelp)
+UniValue getgenerate(const UniValue& params, bool fHelp)
 {
     if (fHelp || params.size() != 0)
         throw std::runtime_error(
-            "getstake\n"
-            "\nReturn if the server is set to stake coins or not. The default is false.\n"
-            "It is set with the command line argument -stake (or bcz.conf setting stake)\n"
-            "It can also be set with the setstake call.\n"
+            "getgenerate\n"
+            "\nReturn if the server is set to generate coins or not. The default is false.\n"
+            "It is set with the command line argument -gen (or pivx.conf setting gen)\n"
+            "It can also be set with the setgenerate call.\n"
 
             "\nResult\n"
-            "true|false      (boolean) If the server is set to stake coins or not\n"
+            "true|false      (boolean) If the server is set to generate coins or not\n"
 
             "\nExamples:\n" +
-            HelpExampleCli("getstake", "") + HelpExampleRpc("getstake", ""));
+            HelpExampleCli("getgenerate", "") + HelpExampleRpc("getgenerate", ""));
 
     LOCK(cs_main);
-    return GetBoolArg("-stake", false);
+    return GetBoolArg("-gen", false);
 }
 
-UniValue setstake(const UniValue& params, bool fHelp)
+UniValue generate(const UniValue& params, bool fHelp)
+{
+    if (fHelp || params.size() < 1 || params.size() > 1)
+        throw std::runtime_error(
+            "generate numblocks\n"
+            "\nMine blocks immediately (before the RPC call returns)\n"
+            "\nNote: this function can only be used on the regtest network\n"
+
+            "\nArguments:\n"
+            "1. numblocks    (numeric, required) How many blocks to generate.\n"
+
+            "\nResult\n"
+            "[ blockhashes ]     (array) hashes of blocks generated\n"
+
+            "\nExamples:\n"
+            "\nGenerate 11 blocks\n"
+            + HelpExampleCli("generate", "11")
+        );
+
+    if (!Params().IsRegTestNet())
+        throw JSONRPCError(RPC_METHOD_NOT_FOUND, "This method can only be used on regtest");
+
+    const int nGenerate = params[0].get_int();
+    int nHeightEnd = 0;
+    int nHeight = 0;
+
+    {   // Don't keep cs_main locked
+        LOCK(cs_main);
+        nHeight = chainActive.Height();
+        nHeightEnd = nHeight + nGenerate;
+    }
+
+    const int last_pow_block = Params().GetConsensus().height_last_PoW;
+    bool fPoS = nHeight >= last_pow_block;
+    if (fPoS) {
+        // If we are in PoS, wallet must be unlocked.
+        EnsureWalletIsUnlocked();
+    }
+
+    UniValue blockHashes(UniValue::VARR);
+    CReserveKey reservekey(pwalletMain);
+    unsigned int nExtraNonce = 0;
+    while (nHeight < nHeightEnd && !ShutdownRequested())
+    {
+        std::unique_ptr<CBlockTemplate> pblocktemplate(fPoS ?
+                                                       CreateNewBlock(CScript(), pwalletMain, fPoS) :
+                                                       CreateNewBlockWithKey(reservekey, pwalletMain));
+        if (!pblocktemplate.get()) break;
+        CBlock *pblock = &pblocktemplate->block;
+
+        if(!fPoS) {
+            {
+                LOCK(cs_main);
+                IncrementExtraNonce(pblock, chainActive.Tip(), nExtraNonce);
+            }
+            while (pblock->nNonce < std::numeric_limits<uint32_t>::max() &&
+                    !CheckProofOfWork(pblock->GetHash(), pblock->nBits)) {
+                ++pblock->nNonce;
+            }
+            if (ShutdownRequested()) break;
+            if (pblock->nNonce == std::numeric_limits<uint32_t>::max()) continue;
+        }
+
+        CValidationState state;
+        if (!ProcessNewBlock(state, nullptr, pblock))
+            throw JSONRPCError(RPC_INTERNAL_ERROR, "ProcessNewBlock, block not accepted");
+
+        ++nHeight;
+        blockHashes.push_back(pblock->GetHash().GetHex());
+
+        // Check PoS if needed.
+        if (!fPoS) fPoS = (nHeight >= last_pow_block);
+    }
+
+    const int nGenerated = blockHashes.size();
+    if (nGenerated == 0 || (!fPoS && nGenerated < nGenerate))
+        throw JSONRPCError(RPC_INTERNAL_ERROR, "Couldn't create new blocks");
+
+    return blockHashes;
+}
+
+UniValue setgenerate(const UniValue& params, bool fHelp)
 {
     if (fHelp || params.size() < 1 || params.size() > 2)
         throw std::runtime_error(
-            "\nCheck the setting\n" + HelpExampleCli("getstake", "") +
-            "\nTurn on setstake\n" + HelpExampleCli("setstake", "true") +
-            "\nTurn off setstake\n" + HelpExampleCli("setstake", "false") +
-            "\nUsing json rpc\n" + HelpExampleRpc("setstake", "true"));
+            "setgenerate generate ( genproclimit )\n"
+            "\nSet 'generate' true or false to turn generation on or off.\n"
+            "Generation is limited to 'genproclimit' processors, -1 is unlimited.\n"
+            "See the getgenerate call for the current setting.\n"
+
+            "\nArguments:\n"
+            "1. generate         (boolean, required) Set to true to turn on generation, false to turn off.\n"
+            "2. genproclimit     (numeric, optional) Set the processor limit for when generation is on. Can be -1 for unlimited.\n"
+
+            "\nExamples:\n"
+            "\nSet the generation on with a limit of one processor\n" +
+            HelpExampleCli("setgenerate", "true 1") +
+            "\nCheck the setting\n" + HelpExampleCli("getgenerate", "") +
+            "\nTurn off generation\n" + HelpExampleCli("setgenerate", "false") +
+            "\nUsing json rpc\n" + HelpExampleRpc("setgenerate", "true, 1"));
 
     if (pwalletMain == NULL)
         throw JSONRPCError(RPC_METHOD_NOT_FOUND, "Method not found (disabled)");
 
+    if (Params().IsRegTestNet())
+        throw JSONRPCError(RPC_INVALID_REQUEST, "Use the generate method instead of setgenerate on regtest");
+
+    bool fGenerate = true;
     if (params.size() > 0)
-        fStake_BCZ = params[0].get_bool();
+        fGenerate = params[0].get_bool();
 
+    if (fGenerate && (chainActive.Height() >= Params().GetConsensus().height_last_PoW))
+        throw JSONRPCError(RPC_INVALID_REQUEST, "Proof of Work phase has already ended");
 
-        mapArgs["-stake"] = (fStake_BCZ ? "1" : "0");
-        StakeBCZ(fStake_BCZ, pwalletMain);
+    int nGenProcLimit = -1;
+    if (params.size() > 1) {
+        nGenProcLimit = params[1].get_int();
+        if (nGenProcLimit == 0)
+            fGenerate = false;
+    }
+
+    mapArgs["-gen"] = (fGenerate ? "1" : "0");
+    mapArgs["-genproclimit"] = itostr(nGenProcLimit);
+    GenerateBitcoins(fGenerate, pwalletMain, nGenProcLimit);
 
     return NullUniValue;
+}
+
+UniValue gethashespersec(const UniValue& params, bool fHelp)
+{
+    if (fHelp || params.size() != 0)
+        throw std::runtime_error(
+            "gethashespersec\n"
+            "\nReturns a recent hashes per second performance measurement while generating.\n"
+            "See the getgenerate and setgenerate calls to turn generation on and off.\n"
+
+            "\nResult:\n"
+            "n            (numeric) The recent hashes per second when generation is on (will return 0 if generation is off)\n"
+
+            "\nExamples:\n" +
+            HelpExampleCli("gethashespersec", "") + HelpExampleRpc("gethashespersec", ""));
+
+    if (GetTimeMillis() - nHPSTimerStart > 8000)
+        return (int64_t)0;
+    return (int64_t)dHashesPerSec;
 }
 #endif
 
@@ -153,6 +277,9 @@ UniValue getmininginfo(const UniValue& params, bool fHelp)
             "  \"currentblocktx\": nnn,     (numeric) The last block transaction\n"
             "  \"difficulty\": xxx.xxxxx    (numeric) The current difficulty\n"
             "  \"errors\": \"...\"          (string) Current errors\n"
+            "  \"generate\": true|false     (boolean) If the generation is on or off (see getgenerate or setgenerate calls)\n"
+            "  \"genproclimit\": n          (numeric) The processor limit for generation. -1 if no generation. (see getgenerate or setgenerate calls)\n"
+            "  \"hashespersec\": n          (numeric) The hashes per second of the generation, or 0 if no generation.\n"
             "  \"pooledtx\": n              (numeric) The size of the mem pool\n"
             "  \"testnet\": true|false      (boolean) If using testnet or not\n"
             "  \"chain\": \"xxxx\",         (string) current network name as defined in BIP70 (main, test, regtest)\n"
@@ -172,8 +299,12 @@ UniValue getmininginfo(const UniValue& params, bool fHelp)
     obj.push_back(Pair("genproclimit", (int)GetArg("-genproclimit", -1)));
     obj.push_back(Pair("networkhashps", getnetworkhashps(params, false)));
     obj.push_back(Pair("pooledtx", (uint64_t)mempool.size()));
-    obj.push_back(Pair("testnet", Params().TestnetToBeDeprecatedFieldRPC()));
+    obj.push_back(Pair("testnet", Params().NetworkID() == CBaseChainParams::TESTNET));
     obj.push_back(Pair("chain", Params().NetworkIDString()));
+#ifdef ENABLE_WALLET
+    obj.push_back(Pair("generate", getgenerate(params, false)));
+    obj.push_back(Pair("hashespersec", gethashespersec(params, false)));
+#endif
     return obj;
 }
 
@@ -190,8 +321,8 @@ UniValue prioritisetransaction(const UniValue& params, bool fHelp)
             "1. \"txid\"       (string, required) The transaction id.\n"
             "2. priority delta (numeric, required) The priority to add or subtract.\n"
             "                  The transaction selection algorithm considers the tx as it would have a higher priority.\n"
-            "                  (priority of a transaction is calculated: coinage * value_in_ubcz / txsize) \n"
-            "3. fee delta      (numeric, required) The fee value (in ubcz) to add (or subtract, if negative).\n"
+            "                  (priority of a transaction is calculated: coinage * value_in_upiv / txsize) \n"
+            "3. fee delta      (numeric, required) The fee value (in upiv) to add (or subtract, if negative).\n"
             "                  The fee is not actually paid, only the algorithm for selecting transactions into a block\n"
             "                  considers the transaction as it would have paid a higher (or lower) fee.\n"
 
@@ -261,7 +392,7 @@ UniValue getblocktemplate(const UniValue& params, bool fHelp)
             "             n                        (numeric) transactions before this one (by 1-based index in 'transactions' list) that must be present in the final block if this one is\n"
             "             ,...\n"
             "         ],\n"
-            "         \"fee\": n,                   (numeric) difference in value between transaction inputs and outputs (in ubcz); for coinbase transactions, this is a negative Number of the total collected block fees (ie, not including the block subsidy); if key is not present, fee is unknown and clients MUST NOT assume there isn't one\n"
+            "         \"fee\": n,                   (numeric) difference in value between transaction inputs and outputs (in upiv); for coinbase transactions, this is a negative Number of the total collected block fees (ie, not including the block subsidy); if key is not present, fee is unknown and clients MUST NOT assume there isn't one\n"
             "         \"sigops\" : n,               (numeric) total number of SigOps, as counted for purposes of block limits; if key is not present, sigop count is unknown and clients MUST NOT assume there aren't any\n"
             "         \"required\" : true|false     (boolean) if provided and true, this transaction must be in the final block\n"
             "      }\n"
@@ -270,7 +401,7 @@ UniValue getblocktemplate(const UniValue& params, bool fHelp)
             "  \"coinbaseaux\" : {                  (json object) data that should be included in the coinbase's scriptSig content\n"
             "      \"flags\" : \"flags\"            (string) \n"
             "  },\n"
-            "  \"coinbasevalue\" : n,               (numeric) maximum allowable input to coinbase transaction, including the generation award and transaction fees (in ubcz)\n"
+            "  \"coinbasevalue\" : n,               (numeric) maximum allowable input to coinbase transaction, including the generation award and transaction fees (in upiv)\n"
             "  \"coinbasetxn\" : { ... },           (json object) information for coinbase transaction\n"
             "  \"target\" : \"xxxx\",               (string) The hash target\n"
             "  \"mintime\" : xxx,                   (numeric) The minimum timestamp appropriate for next block time in seconds since epoch (Jan 1 1970 GMT)\n"
@@ -290,7 +421,6 @@ UniValue getblocktemplate(const UniValue& params, bool fHelp)
             "        { ... }                       (json object) vote candidate\n"
             "        ,...\n"
             "  ],\n"
-            "  \"masternode_payments\" : true|false,         (boolean) true, if masternode payments are enabled\n"
             "  \"enforce_masternode_payments\" : true|false  (boolean) true, if masternode payments are enforced\n"
             "}\n"
 
@@ -346,10 +476,10 @@ UniValue getblocktemplate(const UniValue& params, bool fHelp)
         throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid mode");
 
     if (vNodes.empty())
-        throw JSONRPCError(RPC_CLIENT_NOT_CONNECTED, "BCZ is not connected!");
+        throw JSONRPCError(RPC_CLIENT_NOT_CONNECTED, "PIVX is not connected!");
 
     if (IsInitialBlockDownload())
-        throw JSONRPCError(RPC_CLIENT_IN_INITIAL_DOWNLOAD, "BCZ is downloading blocks...");
+        throw JSONRPCError(RPC_CLIENT_IN_INITIAL_DOWNLOAD, "PIVX is downloading blocks...");
 
     static unsigned int nTransactionsUpdatedLast;
 
@@ -503,8 +633,7 @@ UniValue getblocktemplate(const UniValue& params, bool fHelp)
         result.push_back(Pair("payee_amount", ""));
     }
 
-    result.push_back(Pair("masternode_payments", (sporkManager.IsSporkActive(SPORK_22_MASTERNODE_PAYMENT))));
-    result.push_back(Pair("enforce_masternode_payments", (sporkManager.IsSporkActive(SPORK_21_MASTERNODE_PAYMENT_ENFORCEMENT))));
+    result.push_back(Pair("enforce_masternode_payments", true));
 
     return result;
 }

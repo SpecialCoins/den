@@ -1,5 +1,5 @@
 // Copyright (c) 2011-2013 The Bitcoin developers
-// Copyright (c) 2020 The BCZ developers
+// Copyright (c) 2017-2019 The PIVX developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -59,6 +59,9 @@ public:
     /** Set whether to hide orphan stakes. */
     void setHideOrphans(bool fHide);
 
+    /** Only zc txes **/
+    void setShowZcTxes(bool fOnlyZc);
+
     /** Only stakes txes **/
     void setOnlyStakes(bool fOnlyStakes);
 
@@ -83,9 +86,11 @@ private:
     int limitRows;
     bool showInactive;
     bool fHideOrphans = true;
+    bool fOnlyZc = false;
     bool fOnlyStakes = false;
     bool fOnlyColdStaking = false;
 
+    bool isZcTx(int type) const;
     bool isStakeTx(int type) const;
     bool isColdStake(int type) const;
 };
