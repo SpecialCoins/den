@@ -12,6 +12,7 @@
 #include <list>
 #include <string>
 
+
 class CBlock;
 class CBlockIndex;
 class CBigNum;
