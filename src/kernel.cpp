@@ -107,9 +107,7 @@ bool LoadStakeInput(const CBlock& block, const CBlockIndex* pindexPrev, std::uni
 
     // Construct the stakeinput object
     const CTxIn& txin = block.vtx[1].vin[0];
-    stake = txin.IsZerocoinSpend() ?
-            std::unique_ptr<CStakeInput>(new CLegacyZBczStake()) :
-            std::unique_ptr<CStakeInput>(new CBczStake());
+    stake = std::unique_ptr<CStakeInput>(new CBczStake());
 
     return stake->InitFromTxIn(txin);
 }
