@@ -1016,8 +1016,8 @@ address</source>
         <translation>PIV</translation>
     </message>
     <message>
-        <source>zPIV</source>
-        <translation>zPIV</translation>
+        <source>zBCZ</source>
+        <translation>zBCZ</translation>
     </message>
     <message>
         <source>Sort by</source>
@@ -1048,8 +1048,8 @@ address</source>
         <translation>U kunt de geschiedenis van uw account bekijken</translation>
     </message>
     <message>
-        <source>Amount of PIV and zPIV staked.</source>
-        <translation>Hoeveelheid aan gestaked PIV en zPIV.</translation>
+        <source>Amount of PIV and zBCZ staked.</source>
+        <translation>Hoeveelheid aan gestaked PIV en zBCZ.</translation>
     </message>
     <message>
         <source>Please wait until the wallet is fully synced to see your correct balance</source>
@@ -1060,8 +1060,8 @@ address</source>
         <translation>Nog geen transacties</translation>
     </message>
     <message>
-        <source>How to get PIV or zPIV</source>
-        <translation>Hoe PIV of zPIV verkrijgen</translation>
+        <source>How to get PIV or zBCZ</source>
+        <translation>Hoe PIV of zBCZ verkrijgen</translation>
     </message>
     <message>
         <source>You can verify the staking activity in the status bar at the top right of the wallet.
@@ -1911,36 +1911,36 @@ https://www.transifex.com/bcz-project/bcz-project-translations</translation>
         <translation>Map poort gebruikt &amp;UPnP</translation>
     </message>
     <message>
-        <source>Enable automatic minting of PIV units to zPIV</source>
-        <translation>Schakel automatisch slaan van PIV-eenheden in op zPIV</translation>
+        <source>Enable automatic minting of PIV units to zBCZ</source>
+        <translation>Schakel automatisch slaan van PIV-eenheden in op zBCZ</translation>
     </message>
     <message>
-        <source>Enable zPIV Automint</source>
-        <translation>Schakel zPIV Automint in</translation>
+        <source>Enable zBCZ Automint</source>
+        <translation>Schakel zBCZ Automint in</translation>
     </message>
     <message>
-        <source>Enable automatic zPIV minting from specific addresses</source>
-        <translation>Automatische zPIV munting inschakelen vanuit specifiek adres</translation>
+        <source>Enable automatic zBCZ minting from specific addresses</source>
+        <translation>Automatische zBCZ munting inschakelen vanuit specifiek adres</translation>
     </message>
     <message>
         <source>Enable Automint Addresses</source>
         <translation>Automint Adressen Inschakelen</translation>
     </message>
     <message>
-        <source>Percentage of incoming PIV which get automatically converted to zPIV via Zerocoin Protocol (min: 10%)</source>
-        <translation>Percentage inkomende PIV die automatisch wordt omgezet naar zPIV via Zerocoin Protocol (min: 10%)</translation>
+        <source>Percentage of incoming PIV which get automatically converted to zBCZ via Zerocoin Protocol (min: 10%)</source>
+        <translation>Percentage inkomende PIV die automatisch wordt omgezet naar zBCZ via Zerocoin Protocol (min: 10%)</translation>
     </message>
     <message>
-        <source>Percentage of autominted zPIV</source>
-        <translation>Percentage autominted zPIV</translation>
+        <source>Percentage of autominted zBCZ</source>
+        <translation>Percentage autominted zBCZ</translation>
     </message>
     <message>
         <source>Wait with automatic conversion to Zerocoin until enough PIV for this denomination is available</source>
         <translation>Wacht met automatische omzetting naar Zerocoin totdat er genoeg PIV voor deze denominatie beschikbaar is</translation>
     </message>
     <message>
-        <source>Preferred Automint zPIV Denomination</source>
-        <translation>Gewenste Automint zPIV denominatie</translation>
+        <source>Preferred Automint zBCZ Denomination</source>
+        <translation>Gewenste Automint zBCZ denominatie</translation>
     </message>
     <message>
         <source>Stake split threshold:</source>
@@ -2311,50 +2311,50 @@ Adres: %4
         <translation>Munt</translation>
     </message>
     <message>
-        <source>Minting zPIV anonymizes your PIV by removing any
+        <source>Minting zBCZ anonymizes your PIV by removing any
 transaction history, making transactions untraceable </source>
-        <translation>Munten van zPIV anonimiseert uw PIV door het verwijderen van eender welke
+        <translation>Munten van zBCZ anonimiseert uw PIV door het verwijderen van eender welke
 transactiegeschiedenis, waardoor transacties niet meer te traceren zijn</translation>
     </message>
     <message>
-        <source>Mint new zPIV or convert back to PIV</source>
-        <translation>Munt nieuwe zPIV of converteer deze terug in PIV</translation>
+        <source>Mint new zBCZ or convert back to PIV</source>
+        <translation>Munt nieuwe zBCZ of converteer deze terug in PIV</translation>
     </message>
     <message>
-        <source>Last zPIV Movements</source>
-        <translation>Laatste zPIV Bewegingen</translation>
+        <source>Last zBCZ Movements</source>
+        <translation>Laatste zBCZ Bewegingen</translation>
     </message>
     <message>
         <source>No transactions yet</source>
         <translation>Nog geen transacties</translation>
     </message>
     <message>
-        <source>Mint zPIV</source>
-        <translation>Munt zPIV</translation>
+        <source>Mint zBCZ</source>
+        <translation>Munt zBCZ</translation>
     </message>
     <message>
-        <source>Enter amount of PIV to mint into zPIV</source>
-        <translation>Vul de hoeveelheid PIV in die u omslaan in zPIV</translation>
+        <source>Enter amount of PIV to mint into zBCZ</source>
+        <translation>Vul de hoeveelheid PIV in die u omslaan in zBCZ</translation>
     </message>
     <message>
         <source>Convert back to PIV</source>
         <translation>Converteer terug naar PIV</translation>
     </message>
     <message>
-        <source>Enter amount of zPIV to convert back into PIV</source>
-        <translation>Voer de hoeveelheed zPIV in om terug te converteren naar PIV</translation>
+        <source>Enter amount of zBCZ to convert back into PIV</source>
+        <translation>Voer de hoeveelheed zBCZ in om terug te converteren naar PIV</translation>
     </message>
     <message>
         <source>Zerocoin</source>
         <translation>Zerocoin</translation>
     </message>
     <message>
-        <source>zPIV is currently undergoing maintenance</source>
-        <translation>zPIV ondergaat momenteel onderhoud</translation>
+        <source>zBCZ is currently undergoing maintenance</source>
+        <translation>zBCZ ondergaat momenteel onderhoud</translation>
     </message>
     <message>
-        <source>You need to unlock the wallet to be able to %1 zPIV</source>
-        <translation>Je moet de portemonnee ontgrendelen om in staat zijn om %1 zPIV</translation>
+        <source>You need to unlock the wallet to be able to %1 zBCZ</source>
+        <translation>Je moet de portemonnee ontgrendelen om in staat zijn om %1 zBCZ</translation>
     </message>
     <message>
         <source>convert</source>
@@ -2369,12 +2369,12 @@ transactiegeschiedenis, waardoor transacties niet meer te traceren zijn</transla
         <translation>Ongeldige waarde</translation>
     </message>
     <message>
-        <source>zPIV minted successfully</source>
-        <translation>zPIV munting succesvol</translation>
+        <source>zBCZ minted successfully</source>
+        <translation>zBCZ munting succesvol</translation>
     </message>
     <message>
-        <source>zPIV converted back to PIV</source>
-        <translation>zPIV terug geconverteerd naar PIV</translation>
+        <source>zBCZ converted back to PIV</source>
+        <translation>zBCZ terug geconverteerd naar PIV</translation>
     </message>
     <message>
         <source>You don't have any PIV to select.</source>
@@ -2389,8 +2389,8 @@ transactiegeschiedenis, waardoor transacties niet meer te traceren zijn</transla
         <translation>Uw zerocoin muntingen zullen van de blockchain vanaf nul worden gescanned</translation>
     </message>
     <message>
-        <source>Reset Spent zPIV</source>
-        <translation>Reset Besteedde zPIV</translation>
+        <source>Reset Spent zBCZ</source>
+        <translation>Reset Besteedde zBCZ</translation>
     </message>
     <message>
         <source>Your zerocoin spends are going to be scanned from the blockchain from scratch</source>
@@ -2803,8 +2803,8 @@ transactiegeschiedenis, waardoor transacties niet meer te traceren zijn</transla
         <translation>Aangepast back-up pad:</translation>
     </message>
     <message>
-        <source>Custom zPIV Backup Path:</source>
-        <translation>Aangepast zPIV back-up pad:</translation>
+        <source>Custom zBCZ Backup Path:</source>
+        <translation>Aangepast zBCZ back-up pad:</translation>
     </message>
     <message>
         <source>Custom Backups Threshold:</source>
@@ -3363,8 +3363,8 @@ transactiegeschiedenis, waardoor transacties niet meer te traceren zijn</transla
         <translation>Zenden</translation>
     </message>
     <message>
-        <source>You can transfer public coins (PIV) or private coins (zPIV)</source>
-        <translation>Je kan publieke munten (PIV) of private munten (zPIV) overdragen</translation>
+        <source>You can transfer public coins (PIV) or private coins (zBCZ)</source>
+        <translation>Je kan publieke munten (PIV) of private munten (zBCZ) overdragen</translation>
     </message>
     <message>
         <source>Select coin type to spend</source>
@@ -3399,8 +3399,8 @@ transactiegeschiedenis, waardoor transacties niet meer te traceren zijn</transla
         <translation>PIV Versturen</translation>
     </message>
     <message>
-        <source>Send zPIV</source>
-        <translation>zPIV Versturen</translation>
+        <source>Send zBCZ</source>
+        <translation>zBCZ Versturen</translation>
     </message>
     <message>
         <source>Total remaining from the selected UTXO</source>
@@ -3475,8 +3475,8 @@ Deze munten zullen niet langer cold-staked zijn.</translation>
         <translation>Besteed Zerocoin</translation>
     </message>
     <message>
-        <source>zPIV is currently undergoing maintenance.</source>
-        <translation>zPIV wordt momenteel onderhouden.</translation>
+        <source>zBCZ is currently undergoing maintenance.</source>
+        <translation>zBCZ wordt momenteel onderhouden.</translation>
     </message>
     <message>
         <source>Coin control mint not found</source>
@@ -3495,12 +3495,12 @@ Deze munten zullen niet langer cold-staked zijn.</translation>
 %2</translation>
     </message>
     <message>
-        <source>zPIV transaction sent!</source>
-        <translation>zPIV transactie verzonden!</translation>
+        <source>zBCZ transaction sent!</source>
+        <translation>zBCZ transactie verzonden!</translation>
     </message>
     <message>
-        <source>Version 1 zPIV require a security level of 100 to successfully spend.</source>
-        <translation>Versie 1 zPIV vereist een beveiligingsniveau van 100 om succesvol te besteden.</translation>
+        <source>Version 1 zBCZ require a security level of 100 to successfully spend.</source>
+        <translation>Versie 1 zBCZ vereist een beveiligingsniveau van 100 om succesvol te besteden.</translation>
     </message>
     <message>
         <source>Too much inputs (</source>
@@ -3539,8 +3539,8 @@ Ofwel het munten van hogere denominaties (dus minder invoer nodig) of het te bes
         <translation>Je hebt geen PIV om te selecteren</translation>
     </message>
     <message>
-        <source>You don't have any zPIV in your balance to select.</source>
-        <translation>Je hebt geen zPIV in je balans om te selecteren.</translation>
+        <source>You don't have any zBCZ in your balance to select.</source>
+        <translation>Je hebt geen zBCZ in je balans om te selecteren.</translation>
     </message>
     <message>
         <source>No contacts available, you can go to the contacts screen and add some there!</source>
@@ -4047,26 +4047,26 @@ Er was een fout opgetreden tijdens het opslaan van deze adreslijst naar %1. Prob
         <translation>2) Waarom is mijn PIV niet besteedbaar?</translation>
     </message>
     <message>
-        <source>3) BCZ privacy? What is Zerocoin (zPIV)?</source>
-        <translation>3) BCZ privacy? Wat is Zerocoin (zPIV)?</translation>
+        <source>3) BCZ privacy? What is Zerocoin (zBCZ)?</source>
+        <translation>3) BCZ privacy? Wat is Zerocoin (zBCZ)?</translation>
     </message>
     <message>
-        <source>4) Why are my zPIV unspendable?</source>
-        <translation>4) Waarom is mijn zPIV niet besteedbaar?</translation>
+        <source>4) Why are my zBCZ unspendable?</source>
+        <translation>4) Waarom is mijn zBCZ niet besteedbaar?</translation>
     </message>
     <message>
         <source>5) Why did my wallet convert the balance
-    into zPIV automatically?</source>
+    into zBCZ automatically?</source>
         <translation>5) Waarom heeft mijn portemonnee mijn balans
-    automatisch naar zPIV geconverteerd?</translation>
+    automatisch naar zBCZ geconverteerd?</translation>
     </message>
     <message>
-        <source>6) How do I receive PIV/zPIV?</source>
-        <translation>6) Hoe ontvang ik PIV/zPIV?</translation>
+        <source>6) How do I receive PIV/zBCZ?</source>
+        <translation>6) Hoe ontvang ik PIV/zBCZ?</translation>
     </message>
     <message>
-        <source>7) How do I stake PIV/zPIV?</source>
-        <translation>7) Hoe stake ik PIV/zPIV?</translation>
+        <source>7) How do I stake PIV/zBCZ?</source>
+        <translation>7) Hoe stake ik PIV/zBCZ?</translation>
     </message>
     <message>
         <source>8) Where I should go if I need support?</source>
@@ -4095,7 +4095,7 @@ Er was een fout opgetreden tijdens het opslaan van deze adreslijst naar %1. Prob
                            that can be easily transferred globally, instantly, and with near
                            zero fees.  BCZ incorporates market leading security &amp;
                            privacy and is also the first PoS (Proof of Stake) Cryptocurrency
-                           to implement ZeroCoin(zPIV) and Zerocoin staking.
+                           to implement ZeroCoin(zBCZ) and Zerocoin staking.
                            &lt;/p&gt;&lt;p align="justify"&gt;
                            BCZ utilizes a Proof of Stake (PoS) consensus system algorithm,
                            allowing all owners of BCZ to participate in earning block rewards
@@ -4109,7 +4109,7 @@ Er was een fout opgetreden tijdens het opslaan van deze adreslijst naar %1. Prob
                            die gemakkelijk wereldwijd kan worden overgebracht, onmiddellijk en met bijna
                            geen kosten.  BCZ omvat marktleidende beveiliging &amp;
                            privacy en is ook de eerste PoS (Proof of Stake) Cryptovaluta
-                           om ZeroCoin (zPIV) en Zerocoin staking te implementeren.
+                           om ZeroCoin (zBCZ) en Zerocoin staking te implementeren.
                            &lt;/p&gt;&lt;p align="justify"&gt;
                            BCZ gebruikt een Proof of Stake (PoS) consensussysteemalgoritme,
                            waardoor alle eigenaren van BCZ kunnen deelnemen aan het verdienen van blokbeloningen
@@ -4151,26 +4151,26 @@ Er was een fout opgetreden tijdens het opslaan van deze adreslijst naar %1. Prob
         <translation>3</translation>
     </message>
     <message>
-        <source>BCZ privacy? What is Zerocoin (zPIV)?</source>
-        <translation>BCZ privacy? Wat is Zerocoin (zPIV)?</translation>
+        <source>BCZ privacy? What is Zerocoin (zBCZ)?</source>
+        <translation>BCZ privacy? Wat is Zerocoin (zBCZ)?</translation>
     </message>
     <message>
         <source>
                            &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;
-                           zPIV is an optional privacy-centric method of coin mixing on the
+                           zBCZ is an optional privacy-centric method of coin mixing on the
                            BCZ blockchain. Basically all your transactions cannot be tracked
                            on to any block explorer. You can read more about the technicals in the
                            &lt;a style='color: #b088ff' href='https://BCZ.org/zbcz/'&gt;
-                           "BCZ Zerocoin (zPIV) Technical Paper"&lt;/a&gt;.
+                           "BCZ Zerocoin (zBCZ) Technical Paper"&lt;/a&gt;.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
                          </source>
         <translation>
                            &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;
-                           zPIV is een optionele privacy-gerichte methode om munten te mengen op de
+                           zBCZ is een optionele privacy-gerichte methode om munten te mengen op de
                            BCZ blockchain. In principe kunnen al uw transacties niet worden gevolgd
                            op enige block explorer. U kunt meer lezen over de technische gegevens in de
                            &lt;a style='color: #b088ff' href='https://BCZ.org/zbcz/'&gt;
-                           "BCZ Zerocoin (zPIV) Technische Paper"&lt;/a&gt;.
+                           "BCZ Zerocoin (zBCZ) Technische Paper"&lt;/a&gt;.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
                          </translation>
     </message>
@@ -4179,20 +4179,20 @@ Er was een fout opgetreden tijdens het opslaan van deze adreslijst naar %1. Prob
         <translation>4</translation>
     </message>
     <message>
-        <source>Why are my zPIV unspendable?</source>
-        <translation>Waarom is mijn zPIV niet besteedbaar?</translation>
+        <source>Why are my zBCZ unspendable?</source>
+        <translation>Waarom is mijn zBCZ niet besteedbaar?</translation>
     </message>
     <message>
         <source>
                            &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;
-                           After minting, zPIV will require 20 confirmations as well as 1
+                           After minting, zBCZ will require 20 confirmations as well as 1
                            additional mint of the same denomination on the network to
                            become eligible for spending.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
                          </source>
         <translation>
                            &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;
-                           Na het muntenheeft zPIV 20 bevestigingen nodig, evenals 1
+                           Na het muntenheeft zBCZ 20 bevestigingen nodig, evenals 1
                           extra munt van dezelfde denominatie op het netwerk om
                            in aanmerking komen voor uitgaven.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
@@ -4203,41 +4203,41 @@ Er was een fout opgetreden tijdens het opslaan van deze adreslijst naar %1. Prob
         <translation>5</translation>
     </message>
     <message>
-        <source>Why did my wallet convert the balance into zPIV automatically?</source>
-        <translation>Waarom heeft mijn portemonnee mijn balans automatisch naar zPIV geconverteerd?</translation>
+        <source>Why did my wallet convert the balance into zBCZ automatically?</source>
+        <translation>Waarom heeft mijn portemonnee mijn balans automatisch naar zBCZ geconverteerd?</translation>
     </message>
     <message>
         <source>
                            &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;
                            By default the BCZ wallet will convert 10% of your entire PIV
-                           balance to zPIV to assist the network. If you do not wish to
-                           stake zPIV or take advantage of the privacy benefit it brings,
+                           balance to zBCZ to assist the network. If you do not wish to
+                           stake zBCZ or take advantage of the privacy benefit it brings,
                            you can disable the automatic minting in your BCZ wallet by
-                           going to Settings-&gt;Options and deselecting “Enable zPIV Automint”.
+                           going to Settings-&gt;Options and deselecting “Enable zBCZ Automint”.
                            If you are not making use of the BCZ-QT or GUI you can simply open
                            your bcz.conf file and add &lt;i&gt;enablezeromint=0&lt;/i&gt; Without the quotation
                            marks and restart your wallet to disable automint.&lt;/p&gt;
                            &lt;/p&gt;&lt;p align="justify"&gt;
-                           You can read more about zPIV in the
-                           &lt;a style='color: #b088ff' href='https://BCZ.org/zbcz/'&gt; "BCZ Zerocoin (zPIV) Technical Paper"&lt;/a&gt;.
-                           If you would like to keep and stake your zPIV, please read the "How do I stake"
+                           You can read more about zBCZ in the
+                           &lt;a style='color: #b088ff' href='https://BCZ.org/zbcz/'&gt; "BCZ Zerocoin (zBCZ) Technical Paper"&lt;/a&gt;.
+                           If you would like to keep and stake your zBCZ, please read the "How do I stake"
                            section of the FAQ below.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
                          </source>
         <translation>
                            &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;
                            Standaard zal de BCZ portemonnee 10% van uw gehele PIV-balans omzetten
-                          naar zPIV om het netwerk te helpen. Als u niet wenst om
-                           zPIV te staken of voordeel te halen uit het privacyvoordeel dat dit oplevert,
+                          naar zBCZ om het netwerk te helpen. Als u niet wenst om
+                           zBCZ te staken of voordeel te halen uit het privacyvoordeel dat dit oplevert,
                            kan je deze automatische omzetting uitschakelen in je BCZ portemonnee door
-                           naar Instellingen &gt; Opties te gaan en dan “Schakel zPIV Automuntering in” te deselecteren.
+                           naar Instellingen &gt; Opties te gaan en dan “Schakel zBCZ Automuntering in” te deselecteren.
                            Als je geen gebruik maakt van de BCZ-QT of GUI kan je simpelweg
                            je bcz.conf bestand openen en er &lt;i&gt;"enablezeromint=0" aan toevoegen&lt;/i&gt; Zonder de aanhaling
                            en je portemonnee herstarten om automuntering uit te schakelen.&lt;/p&gt;
                            &lt;/p&gt;&lt;p align="justify"&gt;
-                           Je kan meer lezen over zPIV in de
-                           &lt;a style='color: #b088ff' href='https://BCZ.org/zbcz/'&gt; "BCZ Zerocoin (zPIV) Technische Paper"&lt;/a&gt;.
-                           Als u uw zPIV wilt behouden en staken, lees dan de "Hoe stake ik"
+                           Je kan meer lezen over zBCZ in de
+                           &lt;a style='color: #b088ff' href='https://BCZ.org/zbcz/'&gt; "BCZ Zerocoin (zBCZ) Technische Paper"&lt;/a&gt;.
+                           Als u uw zBCZ wilt behouden en staken, lees dan de "Hoe stake ik"
                            sectie in onderstaande FAQ.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
                          </translation>
@@ -4247,24 +4247,24 @@ Er was een fout opgetreden tijdens het opslaan van deze adreslijst naar %1. Prob
         <translation>6</translation>
     </message>
     <message>
-        <source>How do I receive PIV/zPIV?</source>
-        <translation>Hoe ontvang ik PIV/zPIV?</translation>
+        <source>How do I receive PIV/zBCZ?</source>
+        <translation>Hoe ontvang ik PIV/zBCZ?</translation>
     </message>
     <message>
         <source>
                            &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;
-                           zPIV can be spent and sent to any BCZ address. The receiver will
-                           receive standard BCZ but the origin of the BCZ is anonymized by the zPIV Protocol.
+                           zBCZ can be spent and sent to any BCZ address. The receiver will
+                           receive standard BCZ but the origin of the BCZ is anonymized by the zBCZ Protocol.
                            &lt;/p&gt;&lt;p align="justify"&gt;
-                           If you want more zPIV you will need to mint your balance in the “Privacy” tab.
+                           If you want more zBCZ you will need to mint your balance in the “Privacy” tab.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
                          </source>
         <translation>
                            &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;
-                           zPIV kan worden uitgegeven en verzonden naar elk BCZ-adres. De ontvanger zal
-                           gewone BCZ ontvangen, maar de oorsprong van de BCZ is geanonimiseerd door het zPIV-protocol
+                           zBCZ kan worden uitgegeven en verzonden naar elk BCZ-adres. De ontvanger zal
+                           gewone BCZ ontvangen, maar de oorsprong van de BCZ is geanonimiseerd door het zBCZ-protocol
                            &lt;/p&gt;&lt;p align="justify"&gt;
-                           Als u meer zPIV wilt, moet u uw balans op mint zetten in de "Privacy" tab.
+                           Als u meer zBCZ wilt, moet u uw balans op mint zetten in de "Privacy" tab.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
                          </translation>
     </message>
@@ -4273,8 +4273,8 @@ Er was een fout opgetreden tijdens het opslaan van deze adreslijst naar %1. Prob
         <translation>7</translation>
     </message>
     <message>
-        <source>How do I stake PIV/zPIV?</source>
-        <translation>Hoe stake ik PIV/zPIV?</translation>
+        <source>How do I stake PIV/zBCZ?</source>
+        <translation>Hoe stake ik PIV/zBCZ?</translation>
     </message>
     <message>
         <source>
@@ -4293,12 +4293,12 @@ Er was een fout opgetreden tijdens het opslaan van deze adreslijst naar %1. Prob
                            You can see the status of staking in the wallet by mousing over the package icon in the row on the top left of the wallet interface. There package will be lit up and will state "Staking Enabled" to indicate it is staking.  Using the command line interface (bcz-cli); the command &lt;i&gt;getstakingstatus&lt;/i&gt; will confirm that staking is active.
                            &lt;/li&gt;&lt;/ol&gt;
                            &lt;/p&gt;&lt;p align="justify"&gt;
-                           To Stake zPIV:
+                           To Stake zBCZ:
                            &lt;/p&gt;&lt;p align="justify"&gt;
                            &lt;ol&gt;&lt;li&gt;
                            Make sure your wallet is completely synchronized and you are using the latest release.
                            &lt;li&gt;
-                           Your newly minted or existing zPIV balance must have a minimum of 200 confirmations.
+                           Your newly minted or existing zBCZ balance must have a minimum of 200 confirmations.
                            &lt;li&gt;
                            Your wallet must stay online and be unlocked for anonymization and staking purposes.
                            Staking should now be enabled.
@@ -4321,12 +4321,12 @@ Er was een fout opgetreden tijdens het opslaan van deze adreslijst naar %1. Prob
                            U kunt de status van de staking in de portemonnee zien door op het pictogram in de rij linksboven in de portemonnee-interface te bewegen. Het pakket zal oplichten en zal "Staking Ingeschakeld" aangeven om aan te geven dat het pakket in de portemonnee is geplaatst. Met behulp van de opdrachtregel-interface (bcz-cli); het commando &lt;i&gt;getstakingstatus&lt;/i&gt; zal bevestigen dat de staking actief is.
                            &lt;/li&gt;&lt;/ol&gt;
                            &lt;/p&gt;&lt;p align="justify"&gt;
-                           Om zPIV te Staken:
+                           Om zBCZ te Staken:
                            &lt;/p&gt;&lt;p align="justify"&gt;
                            &lt;ol&gt;&lt;li&gt;
                             Zorg ervoor dat uw portemonnee volledig gesynchroniseerd is en dat u de laatste versie gebruikt.
                            &lt;li&gt;
-                           Uw nieuw gemunte of bestaande zPIV balans moet minimaal 200 bevestigingen hebben.
+                           Uw nieuw gemunte of bestaande zBCZ balans moet minimaal 200 bevestigingen hebben.
                            &lt;li&gt;
                            Uw portemonnee moet online blijven en worden ontgrendeld voor anonimisering en staking-doeleinden.
                            Het Staken zou nu ingeschakeld moeten zijn
@@ -5756,8 +5756,8 @@ nieuwe back-up aangemaakt worden.
         <translation>PIV Stake</translation>
     </message>
     <message>
-        <source>zPIV Stake</source>
-        <translation>zPIV Stake</translation>
+        <source>zBCZ Stake</source>
+        <translation>zBCZ Stake</translation>
     </message>
     <message>
         <source>PIV Cold Stake</source>
@@ -5768,24 +5768,24 @@ nieuwe back-up aangemaakt worden.
         <translation>Stake delegatie</translation>
     </message>
     <message>
-        <source>Converted PIV to zPIV</source>
-        <translation>Geconverteerde PIV naar zPIV</translation>
+        <source>Converted PIV to zBCZ</source>
+        <translation>Geconverteerde PIV naar zBCZ</translation>
     </message>
     <message>
-        <source>Spent zPIV</source>
-        <translation>Bestede zPIV</translation>
+        <source>Spent zBCZ</source>
+        <translation>Bestede zBCZ</translation>
     </message>
     <message>
-        <source>Received PIV from zPIV</source>
-        <translation>Ontvangen PIV van zPIV</translation>
+        <source>Received PIV from zBCZ</source>
+        <translation>Ontvangen PIV van zBCZ</translation>
     </message>
     <message>
-        <source>Minted Change as zPIV from zPIV Spend</source>
-        <translation>Gemint wisselgeld als zPIV van bestede zPIV</translation>
+        <source>Minted Change as zBCZ from zBCZ Spend</source>
+        <translation>Gemint wisselgeld als zBCZ van bestede zBCZ</translation>
     </message>
     <message>
-        <source>Converted zPIV to PIV</source>
-        <translation>Geconverteerde zPIV naar PIV</translation>
+        <source>Converted zBCZ to PIV</source>
+        <translation>Geconverteerde zBCZ naar PIV</translation>
     </message>
     <message>
         <source>Sent to</source>
@@ -6051,10 +6051,10 @@ BCZ Core Portemonnee</translation>
     </message>
 </context>
 <context>
-    <name>ZPivControlDialog</name>
+    <name>ZBczControlDialog</name>
     <message>
-        <source>Select zPIV to Spend</source>
-        <translation>Selecteer zPIV om te besteden</translation>
+        <source>Select zBCZ to Spend</source>
+        <translation>Selecteer zBCZ om te besteden</translation>
     </message>
     <message>
         <source>Coin Control</source>
@@ -6065,8 +6065,8 @@ BCZ Core Portemonnee</translation>
         <translation>Druk Knop</translation>
     </message>
     <message>
-        <source>zPiv</source>
-        <translation>zPiv</translation>
+        <source>zBcz</source>
+        <translation>zBcz</translation>
     </message>
     <message>
         <source>0.00 </source>
@@ -6089,8 +6089,8 @@ BCZ Core Portemonnee</translation>
         <translation>Selecteer/Deselecteer Alles</translation>
     </message>
     <message>
-        <source>Select zPIV Denominations to Spend</source>
-        <translation>Selecteer zPIV Denominaties om te Besteden</translation>
+        <source>Select zBCZ Denominations to Spend</source>
+        <translation>Selecteer zBCZ Denominaties om te Besteden</translation>
     </message>
 </context>
 <context>
@@ -6152,8 +6152,8 @@ BCZ Core Portemonnee</translation>
         <translation>In- of uitschakelen staking functionaliteit voor PIV inputs (0-1, standaard: %u)</translation>
     </message>
     <message>
-        <source>Enable or disable staking functionality for zPIV inputs (0-1, default: %u)</source>
-        <translation>In- of uitschakelen staking functionaliteit voor zPIV inputs (0-1, standaard: %u)</translation>
+        <source>Enable or disable staking functionality for zBCZ inputs (0-1, default: %u)</source>
+        <translation>In- of uitschakelen staking functionaliteit voor zBCZ inputs (0-1, standaard: %u)</translation>
     </message>
     <message>
         <source>Enable spork administration functionality with the appropriate private key.</source>
@@ -6644,8 +6644,8 @@ BCZ Core Portemonnee</translation>
         <translation>Hercalculatie van PIV aanbod...</translation>
     </message>
     <message>
-        <source>Reindex the PIV and zPIV money supply statistics</source>
-        <translation>Indexeer de PIV- en zPIV-geldvoorraadstatistieken opnieuw</translation>
+        <source>Reindex the PIV and zBCZ money supply statistics</source>
+        <translation>Indexeer de PIV- en zBCZ-geldvoorraadstatistieken opnieuw</translation>
     </message>
     <message>
         <source>Reindexing zerocoin database...</source>
@@ -7144,8 +7144,8 @@ BCZ Core Portemonnee</translation>
         <translation>Synchroniseren sporks...</translation>
     </message>
     <message>
-        <source>Syncing zPIV wallet...</source>
-        <translation>Synchroniseren zPIV portemonnee...</translation>
+        <source>Syncing zBCZ wallet...</source>
+        <translation>Synchroniseren zBCZ portemonnee...</translation>
     </message>
     <message>
         <source>This help message</source>
@@ -7260,8 +7260,8 @@ BCZ Core Portemonnee</translation>
         <translation>Gebruikersnaam voor JSON-RPC verbindingen</translation>
     </message>
     <message>
-        <source>Value is below the smallest available denomination (= 1) of zPIV</source>
-        <translation>Waarde is minder dan de kleinst beschikbare denominatie (=1) van zPIV</translation>
+        <source>Value is below the smallest available denomination (= 1) of zBCZ</source>
+        <translation>Waarde is minder dan de kleinst beschikbare denominatie (=1) van zBCZ</translation>
     </message>
     <message>
         <source>Verifying blocks...</source>

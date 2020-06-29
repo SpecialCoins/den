@@ -1012,8 +1012,8 @@ address</source>
         <translation>PIV</translation>
     </message>
     <message>
-        <source>zPIV</source>
-        <translation>zPIV</translation>
+        <source>zBCZ</source>
+        <translation>zBCZ</translation>
     </message>
     <message>
         <source>Sort by</source>
@@ -1044,8 +1044,8 @@ address</source>
         <translation>당신의 입출금 이력을 확인할 수 있습니다.</translation>
     </message>
     <message>
-        <source>Amount of PIV and zPIV staked.</source>
-        <translation>스테이킹 된 PIV와 zPIV 양</translation>
+        <source>Amount of PIV and zBCZ staked.</source>
+        <translation>스테이킹 된 PIV와 zBCZ 양</translation>
     </message>
     <message>
         <source>Please wait until the wallet is fully synced to see your correct balance</source>
@@ -1056,8 +1056,8 @@ address</source>
         <translation>아직 전송기록 없음</translation>
     </message>
     <message>
-        <source>How to get PIV or zPIV</source>
-        <translation>PIV 혹은 zPIV를 얻는 법</translation>
+        <source>How to get PIV or zBCZ</source>
+        <translation>PIV 혹은 zBCZ를 얻는 법</translation>
     </message>
     <message>
         <source>You can verify the staking activity in the status bar at the top right of the wallet.
@@ -1904,36 +1904,36 @@ https://www.transifex.com/bcz-project/bcz-project-translations</translation>
         <translation>&amp;UPnp를 사용하여 포트 매핑</translation>
     </message>
     <message>
-        <source>Enable automatic minting of PIV units to zPIV</source>
-        <translation>보상받은 PIV를 zPIV로 자동변환 활성화</translation>
+        <source>Enable automatic minting of PIV units to zBCZ</source>
+        <translation>보상받은 PIV를 zBCZ로 자동변환 활성화</translation>
     </message>
     <message>
-        <source>Enable zPIV Automint</source>
-        <translation>zPIV 자동생성 활성화</translation>
+        <source>Enable zBCZ Automint</source>
+        <translation>zBCZ 자동생성 활성화</translation>
     </message>
     <message>
-        <source>Enable automatic zPIV minting from specific addresses</source>
-        <translation>특정 주소들로부터 자동으로 zPIV 민트되는 것을 허용</translation>
+        <source>Enable automatic zBCZ minting from specific addresses</source>
+        <translation>특정 주소들로부터 자동으로 zBCZ 민트되는 것을 허용</translation>
     </message>
     <message>
         <source>Enable Automint Addresses</source>
         <translation>Automint 주소 사용</translation>
     </message>
     <message>
-        <source>Percentage of incoming PIV which get automatically converted to zPIV via Zerocoin Protocol (min: 10%)</source>
-        <translation>PIV수신시 자동변환 zPIV 비율 (최소값:10%)</translation>
+        <source>Percentage of incoming PIV which get automatically converted to zBCZ via Zerocoin Protocol (min: 10%)</source>
+        <translation>PIV수신시 자동변환 zBCZ 비율 (최소값:10%)</translation>
     </message>
     <message>
-        <source>Percentage of autominted zPIV</source>
-        <translation>자동 변환되는 zPIV 비율</translation>
+        <source>Percentage of autominted zBCZ</source>
+        <translation>자동 변환되는 zBCZ 비율</translation>
     </message>
     <message>
         <source>Wait with automatic conversion to Zerocoin until enough PIV for this denomination is available</source>
         <translation>이 디노미네이션의 PIV가 충분해질 때까지 Zerocoin으로 자동전환은 보류됩니다.</translation>
     </message>
     <message>
-        <source>Preferred Automint zPIV Denomination</source>
-        <translation>선호하는 자동생성 zPIV 디노미네이션 </translation>
+        <source>Preferred Automint zBCZ Denomination</source>
+        <translation>선호하는 자동생성 zBCZ 디노미네이션 </translation>
     </message>
     <message>
         <source>Stake split threshold:</source>
@@ -2308,28 +2308,28 @@ Address: %4
         <translation>아직 전송기록 없음</translation>
     </message>
     <message>
-        <source>Mint zPIV</source>
-        <translation>zPIV 생성</translation>
+        <source>Mint zBCZ</source>
+        <translation>zBCZ 생성</translation>
     </message>
     <message>
-        <source>Enter amount of PIV to mint into zPIV</source>
-        <translation>zPIV 로 바꿀 PIV의 양을 넣으세요.</translation>
+        <source>Enter amount of PIV to mint into zBCZ</source>
+        <translation>zBCZ 로 바꿀 PIV의 양을 넣으세요.</translation>
     </message>
     <message>
         <source>Convert back to PIV</source>
         <translation>PIV 로 재변환</translation>
     </message>
     <message>
-        <source>Enter amount of zPIV to convert back into PIV</source>
-        <translation>PIV로 바꿀 zPIV의 양을 넣으세요.</translation>
+        <source>Enter amount of zBCZ to convert back into PIV</source>
+        <translation>PIV로 바꿀 zBCZ의 양을 넣으세요.</translation>
     </message>
     <message>
         <source>Zerocoin</source>
         <translation>제로코인</translation>
     </message>
     <message>
-        <source>zPIV is currently undergoing maintenance</source>
-        <translation>zPIV는 현재 점검중입니다</translation>
+        <source>zBCZ is currently undergoing maintenance</source>
+        <translation>zBCZ는 현재 점검중입니다</translation>
     </message>
     <message>
         <source>convert</source>
@@ -2344,12 +2344,12 @@ Address: %4
         <translation>유효하지 않은 값</translation>
     </message>
     <message>
-        <source>zPIV minted successfully</source>
-        <translation>zPIV 생성 성공</translation>
+        <source>zBCZ minted successfully</source>
+        <translation>zBCZ 생성 성공</translation>
     </message>
     <message>
-        <source>zPIV converted back to PIV</source>
-        <translation>PIV 로 zPIV 변환됨</translation>
+        <source>zBCZ converted back to PIV</source>
+        <translation>PIV 로 zBCZ 변환됨</translation>
     </message>
     <message>
         <source>You don't have any PIV to select.</source>
@@ -2360,8 +2360,8 @@ Address: %4
         <translation>민트를 재탐색</translation>
     </message>
     <message>
-        <source>Reset Spent zPIV</source>
-        <translation>전송된 zPIV 초기화</translation>
+        <source>Reset Spent zBCZ</source>
+        <translation>전송된 zBCZ 초기화</translation>
     </message>
     <message>
         <source>Total %1</source>
@@ -2730,8 +2730,8 @@ Address: %4
         <translation>맞춤 백업 경로 :</translation>
     </message>
     <message>
-        <source>Custom zPIV Backup Path:</source>
-        <translation>맞춤 zPIV 백업 경로 :</translation>
+        <source>Custom zBCZ Backup Path:</source>
+        <translation>맞춤 zBCZ 백업 경로 :</translation>
     </message>
     <message>
         <source>Custom Backups Threshold:</source>
@@ -3295,8 +3295,8 @@ Address: %4
         <translation>PIV 보내기</translation>
     </message>
     <message>
-        <source>Send zPIV</source>
-        <translation>zPIV 전송하기</translation>
+        <source>Send zBCZ</source>
+        <translation>zBCZ 전송하기</translation>
     </message>
     <message>
         <source>Total remaining from the selected UTXO</source>
@@ -3351,8 +3351,8 @@ Cold-staking 중인 코인을 사용하여 전송하며, 무효화됩니다.
         <translation>제로코인 보내기</translation>
     </message>
     <message>
-        <source>zPIV is currently undergoing maintenance.</source>
-        <translation>zPIV는 현재 점검중입니다.</translation>
+        <source>zBCZ is currently undergoing maintenance.</source>
+        <translation>zBCZ는 현재 점검중입니다.</translation>
     </message>
     <message>
         <source>Sending %1 to address %2
@@ -3367,12 +3367,12 @@ Cold-staking 중인 코인을 사용하여 전송하며, 무효화됩니다.
 %2</translation>
     </message>
     <message>
-        <source>zPIV transaction sent!</source>
+        <source>zBCZ transaction sent!</source>
         <translation>zBCZ 전송 완료!</translation>
     </message>
     <message>
-        <source>Version 1 zPIV require a security level of 100 to successfully spend.</source>
-        <translation>zPIV 버전 1은 성공적으로 보내기 위해서 100 시큐리티 레벨이 필요합니다.</translation>
+        <source>Version 1 zBCZ require a security level of 100 to successfully spend.</source>
+        <translation>zBCZ 버전 1은 성공적으로 보내기 위해서 100 시큐리티 레벨이 필요합니다.</translation>
     </message>
     <message>
         <source>Too much inputs (</source>
@@ -5104,8 +5104,8 @@ NOTE: 업그레이드 이후에는
         <translation>PIV stake</translation>
     </message>
     <message>
-        <source>zPIV Stake</source>
-        <translation>zPIV stake</translation>
+        <source>zBCZ Stake</source>
+        <translation>zBCZ stake</translation>
     </message>
     <message>
         <source>PIV Cold Stake</source>
@@ -5116,24 +5116,24 @@ NOTE: 업그레이드 이후에는
         <translation>Stake delegation</translation>
     </message>
     <message>
-        <source>Converted PIV to zPIV</source>
-        <translation>PIV를 zPIV로 변환</translation>
+        <source>Converted PIV to zBCZ</source>
+        <translation>PIV를 zBCZ로 변환</translation>
     </message>
     <message>
-        <source>Spent zPIV</source>
-        <translation>zPIV 사용</translation>
+        <source>Spent zBCZ</source>
+        <translation>zBCZ 사용</translation>
     </message>
     <message>
-        <source>Received PIV from zPIV</source>
-        <translation>zPIV를 PIV로 받음</translation>
+        <source>Received PIV from zBCZ</source>
+        <translation>zBCZ를 PIV로 받음</translation>
     </message>
     <message>
-        <source>Minted Change as zPIV from zPIV Spend</source>
-        <translation>zPIV 전송후 남은 zPIV로 잔돈 생성</translation>
+        <source>Minted Change as zBCZ from zBCZ Spend</source>
+        <translation>zBCZ 전송후 남은 zBCZ로 잔돈 생성</translation>
     </message>
     <message>
-        <source>Converted zPIV to PIV</source>
-        <translation>zPIV를 PIV로 변환</translation>
+        <source>Converted zBCZ to PIV</source>
+        <translation>zBCZ를 PIV로 변환</translation>
     </message>
     <message>
         <source>Sent to</source>
@@ -5375,10 +5375,10 @@ BCZ Core Wallet</translation>
     </message>
 </context>
 <context>
-    <name>ZPivControlDialog</name>
+    <name>ZBczControlDialog</name>
     <message>
-        <source>Select zPIV to Spend</source>
-        <translation>사용할 zPIV 선택</translation>
+        <source>Select zBCZ to Spend</source>
+        <translation>사용할 zBCZ 선택</translation>
     </message>
     <message>
         <source>Coin Control</source>
@@ -5389,8 +5389,8 @@ BCZ Core Wallet</translation>
         <translation>누르기</translation>
     </message>
     <message>
-        <source>zPiv</source>
-        <translation>zPiv</translation>
+        <source>zBcz</source>
+        <translation>zBcz</translation>
     </message>
     <message>
         <source>0.00 </source>
@@ -5468,8 +5468,8 @@ BCZ Core Wallet</translation>
         <translation>Enable or disable staking functionality for PIV inputs (0-1, default: %u)</translation>
     </message>
     <message>
-        <source>Enable or disable staking functionality for zPIV inputs (0-1, default: %u)</source>
-        <translation>Enable or disable staking functionality for zPIV inputs (0-1, default: %u)</translation>
+        <source>Enable or disable staking functionality for zBCZ inputs (0-1, default: %u)</source>
+        <translation>Enable or disable staking functionality for zBCZ inputs (0-1, default: %u)</translation>
     </message>
     <message>
         <source>Enable spork administration functionality with the appropriate private key.</source>
@@ -5936,8 +5936,8 @@ BCZ Core Wallet</translation>
         <translation>PIV 공급 재계산중...</translation>
     </message>
     <message>
-        <source>Reindex the PIV and zPIV money supply statistics</source>
-        <translation>PIV 및 zPIV 공급량 다시 색인</translation>
+        <source>Reindex the PIV and zBCZ money supply statistics</source>
+        <translation>PIV 및 zBCZ 공급량 다시 색인</translation>
     </message>
     <message>
         <source>Reindexing zerocoin database...</source>
@@ -6404,8 +6404,8 @@ BCZ Core Wallet</translation>
         <translation>sporks와 동기화 중입니다...</translation>
     </message>
     <message>
-        <source>Syncing zPIV wallet...</source>
-        <translation>zPIV 지갑 동기화중...</translation>
+        <source>Syncing zBCZ wallet...</source>
+        <translation>zBCZ 지갑 동기화중...</translation>
     </message>
     <message>
         <source>This help message</source>
@@ -6512,8 +6512,8 @@ BCZ Core Wallet</translation>
         <translation>JSON-RPC 연결 사용자 이름</translation>
     </message>
     <message>
-        <source>Value is below the smallest available denomination (= 1) of zPIV</source>
-        <translation>Value is below the smallest available denomination (= 1) of zPIV</translation>
+        <source>Value is below the smallest available denomination (= 1) of zBCZ</source>
+        <translation>Value is below the smallest available denomination (= 1) of zBCZ</translation>
     </message>
     <message>
         <source>Verifying blocks...</source>
@@ -6557,7 +6557,7 @@ BCZ Core Wallet</translation>
     </message>
     <message>
         <source>You don't have enough Zerocoins in your wallet</source>
-        <translation>지갑에 zPIV 가 부족합니다.</translation>
+        <translation>지갑에 zBCZ 가 부족합니다.</translation>
     </message>
     <message>
         <source>You need to rebuild the database using -reindex to change -txindex</source>
