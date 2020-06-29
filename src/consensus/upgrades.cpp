@@ -1,5 +1,5 @@
 // Copyright (c) 2018 The Zcash developers
-// Copyright (c) 2020 The PIVX developers
+// Copyright (c) 2020 The BCZ developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -12,7 +12,7 @@
 const struct NUInfo NetworkUpgradeInfo[Consensus::MAX_NETWORK_UPGRADES] = {
         {
                 /*.strName =*/ "Base",
-                /*.strInfo =*/ "PIVX network",
+                /*.strInfo =*/ "BCZ network",
         },
         {
                 /*.strName =*/ "PoS",
@@ -39,16 +39,16 @@ const struct NUInfo NetworkUpgradeInfo[Consensus::MAX_NETWORK_UPGRADES] = {
                 /*.strInfo =*/ "activation of zerocoin public spends (spend v3)",
         },
         {
-                /*.strName =*/ "PIVX v3.4",
+                /*.strName =*/ "BCZ v3.4",
                 /*.strInfo =*/ "new 256-bit stake modifier - start block v6",
         },
         {
-                /*.strName =*/ "PIVX v4.0",
+                /*.strName =*/ "BCZ v4.0",
                 /*.strInfo =*/ "new message sigs - start block v7 - time protocol - zc spend v4",
         },
         {
                 /*.strName =*/ "v5 dummy",
-                /*.strInfo =*/ "Placeholder for future PIVX version 5.0 upgrade",
+                /*.strInfo =*/ "Placeholder for future BCZ version 5.0 upgrade",
         },
         {
                 /*.strName =*/ "Test dummy",
