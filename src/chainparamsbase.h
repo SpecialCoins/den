@@ -11,7 +11,7 @@
 
 /**
  * CBaseChainParams defines the base parameters (shared between bcz-cli and bczd)
- * of a given instance of the Pivx system.
+ * of a given instance of the BCZ system.
  */
 class CBaseChainParams
 {

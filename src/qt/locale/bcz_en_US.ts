@@ -1620,7 +1620,7 @@ Please wait few more minutes (masternode collaterals require %1 confirmations).<
 on a remote server to your clipboard.
 
 
-You will only have to paste the data in the pivx.conf file
+You will only have to paste the data in the bcz.conf file
 of your remote server and start it, then start the Masternode using
 this controller wallet (select the Masternode in the list and press "start").
 </source>
@@ -1628,7 +1628,7 @@ this controller wallet (select the Masternode in the list and press "start").
 on a remote server to your clipboard.
 
 
-You will only have to paste the data in the pivx.conf file
+You will only have to paste the data in the bcz.conf file
 of your remote server and start it, then start the Masternode using
 this controller wallet (select the Masternode in the list and press "start").
 </translation>
@@ -1796,8 +1796,8 @@ Are you sure?</translation>
         <translation>Parsed data too large</translation>
     </message>
     <message>
-        <source>Invalid URI, not starting with "pivx" prefix</source>
-        <translation>Invalid URI, not starting with "pivx" prefix</translation>
+        <source>Invalid URI, not starting with "bcz" prefix</source>
+        <translation>Invalid URI, not starting with "bcz" prefix</translation>
     </message>
 </context>
 <context>
@@ -1903,9 +1903,9 @@ Are you sure?</translation>
     </message>
     <message>
         <source>Language missing or translation incomplete? Help contributing translations here:
-https://www.transifex.com/pivx-project/pivx-project-translations</source>
+https://www.transifex.com/bcz-project/bcz-project-translations</source>
         <translation>Language missing or translation incomplete? Help contributing translations here:
-https://www.transifex.com/pivx-project/pivx-project-translations</translation>
+https://www.transifex.com/bcz-project/bcz-project-translations</translation>
     </message>
     <message>
         <source>Map port using &amp;UPnP</source>
@@ -2194,8 +2194,8 @@ Address: %4
         <translation>Invalid payment address %1</translation>
     </message>
     <message>
-        <source>Cannot start pivx: click-to-pay handler</source>
-        <translation>Cannot start pivx: click-to-pay handler</translation>
+        <source>Cannot start bcz: click-to-pay handler</source>
+        <translation>Cannot start bcz: click-to-pay handler</translation>
     </message>
     <message>
         <source>URI cannot be parsed! This can be caused by an invalid BCZ address or malformed URI parameters.</source>
@@ -4169,7 +4169,7 @@ There was an error trying to save the address list to %1. Please try again.</tra
                            zPIV is an optional privacy-centric method of coin mixing on the
                            BCZ blockchain. Basically all your transactions cannot be tracked
                            on to any block explorer. You can read more about the technicals in the
-                           &lt;a style='color: #b088ff' href='https://BCZ.org/zpiv/'&gt;
+                           &lt;a style='color: #b088ff' href='https://BCZ.org/zbcz/'&gt;
                            "BCZ Zerocoin (zPIV) Technical Paper"&lt;/a&gt;.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
                          </source>
@@ -4178,7 +4178,7 @@ There was an error trying to save the address list to %1. Please try again.</tra
                            zPIV is an optional privacy-centric method of coin mixing on the
                            BCZ blockchain. Basically all your transactions cannot be tracked
                            on to any block explorer. You can read more about the technicals in the
-                           &lt;a style='color: #b088ff' href='https://BCZ.org/zpiv/'&gt;
+                           &lt;a style='color: #b088ff' href='https://BCZ.org/zbcz/'&gt;
                            "BCZ Zerocoin (zPIV) Technical Paper"&lt;/a&gt;.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
                          </translation>
@@ -4224,11 +4224,11 @@ There was an error trying to save the address list to %1. Please try again.</tra
                            you can disable the automatic minting in your BCZ wallet by
                            going to Settings-&gt;Options and deselecting “Enable zPIV Automint”.
                            If you are not making use of the BCZ-QT or GUI you can simply open
-                           your pivx.conf file and add &lt;i&gt;enablezeromint=0&lt;/i&gt; Without the quotation
+                           your bcz.conf file and add &lt;i&gt;enablezeromint=0&lt;/i&gt; Without the quotation
                            marks and restart your wallet to disable automint.&lt;/p&gt;
                            &lt;/p&gt;&lt;p align="justify"&gt;
                            You can read more about zPIV in the
-                           &lt;a style='color: #b088ff' href='https://BCZ.org/zpiv/'&gt; "BCZ Zerocoin (zPIV) Technical Paper"&lt;/a&gt;.
+                           &lt;a style='color: #b088ff' href='https://BCZ.org/zbcz/'&gt; "BCZ Zerocoin (zPIV) Technical Paper"&lt;/a&gt;.
                            If you would like to keep and stake your zPIV, please read the "How do I stake"
                            section of the FAQ below.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
@@ -4241,11 +4241,11 @@ There was an error trying to save the address list to %1. Please try again.</tra
                            you can disable the automatic minting in your BCZ wallet by
                            going to Settings-&gt;Options and deselecting “Enable zPIV Automint”.
                            If you are not making use of the BCZ-QT or GUI you can simply open
-                           your pivx.conf file and add &lt;i&gt;enablezeromint=0&lt;/i&gt; Without the quotation
+                           your bcz.conf file and add &lt;i&gt;enablezeromint=0&lt;/i&gt; Without the quotation
                            marks and restart your wallet to disable automint.&lt;/p&gt;
                            &lt;/p&gt;&lt;p align="justify"&gt;
                            You can read more about zPIV in the
-                           &lt;a style='color: #b088ff' href='https://BCZ.org/zpiv/'&gt; "BCZ Zerocoin (zPIV) Technical Paper"&lt;/a&gt;.
+                           &lt;a style='color: #b088ff' href='https://BCZ.org/zbcz/'&gt; "BCZ Zerocoin (zPIV) Technical Paper"&lt;/a&gt;.
                            If you would like to keep and stake your zPIV, please read the "How do I stake"
                            section of the FAQ below.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
@@ -4299,7 +4299,7 @@ There was an error trying to save the address list to %1. Please try again.</tra
                            &lt;li&gt;
                            Once all those steps are followed staking should be enabled.
                            &lt;li&gt;
-                           You can see the status of staking in the wallet by mousing over the package icon in the row on the top left of the wallet interface. There package will be lit up and will state "Staking Enabled" to indicate it is staking.  Using the command line interface (pivx-cli); the command &lt;i&gt;getstakingstatus&lt;/i&gt; will confirm that staking is active.
+                           You can see the status of staking in the wallet by mousing over the package icon in the row on the top left of the wallet interface. There package will be lit up and will state "Staking Enabled" to indicate it is staking.  Using the command line interface (bcz-cli); the command &lt;i&gt;getstakingstatus&lt;/i&gt; will confirm that staking is active.
                            &lt;/li&gt;&lt;/ol&gt;
                            &lt;/p&gt;&lt;p align="justify"&gt;
                            To Stake zPIV:
@@ -4327,7 +4327,7 @@ There was an error trying to save the address list to %1. Please try again.</tra
                            &lt;li&gt;
                            Once all those steps are followed staking should be enabled.
                            &lt;li&gt;
-                           You can see the status of staking in the wallet by mousing over the package icon in the row on the top left of the wallet interface. There package will be lit up and will state "Staking Enabled" to indicate it is staking.  Using the command line interface (pivx-cli); the command &lt;i&gt;getstakingstatus&lt;/i&gt; will confirm that staking is active.
+                           You can see the status of staking in the wallet by mousing over the package icon in the row on the top left of the wallet interface. There package will be lit up and will state "Staking Enabled" to indicate it is staking.  Using the command line interface (bcz-cli); the command &lt;i&gt;getstakingstatus&lt;/i&gt; will confirm that staking is active.
                            &lt;/li&gt;&lt;/ol&gt;
                            &lt;/p&gt;&lt;p align="justify"&gt;
                            To Stake zPIV:
@@ -4591,8 +4591,8 @@ There was an error trying to save the address list to %1. Please try again.</tra
         <translation>Unable to open backups folder</translation>
     </message>
     <message>
-        <source>Unable to open pivx.conf with default application</source>
-        <translation>Unable to open pivx.conf with default application</translation>
+        <source>Unable to open bcz.conf with default application</source>
+        <translation>Unable to open bcz.conf with default application</translation>
     </message>
     <message>
         <source>In:</source>
@@ -6103,7 +6103,7 @@ BCZ Core Wallet</translation>
     </message>
 </context>
 <context>
-    <name>pivx-core</name>
+    <name>bcz-core</name>
     <message>
         <source>(1 = keep tx meta data e.g. account owner and payment request information, 2 = drop tx meta data)</source>
         <translation>(1 = keep tx meta data e.g. account owner and payment request information, 2 = drop tx meta data)</translation>

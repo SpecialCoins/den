@@ -1612,7 +1612,7 @@ Please wait few more minutes (masternode collaterals require %1 confirmations).<
 on a remote server to your clipboard.
 
 
-You will only have to paste the data in the pivx.conf file
+You will only have to paste the data in the bcz.conf file
 of your remote server and start it, then start the Masternode using
 this controller wallet (select the Masternode in the list and press "start").
 </source>
@@ -1620,7 +1620,7 @@ this controller wallet (select the Masternode in the list and press "start").
 на удаленном сервере в буфер обмена.
 
 
-Вам необходимо только вставить данные в файл pivx.conf
+Вам необходимо только вставить данные в файл bcz.conf
 вашего удаленного сервера и запустить его, а затем запустить мастерноду,
 используя этот кошелек контроллера (выберите мастерноду из списка и нажмите «Старт»).
 </translation>
@@ -1788,8 +1788,8 @@ Are you sure?</source>
         <translation>Проанализированные данные слишком большие</translation>
     </message>
     <message>
-        <source>Invalid URI, not starting with "pivx" prefix</source>
-        <translation>Неверный URI, не начинается с префикса "pivx"</translation>
+        <source>Invalid URI, not starting with "bcz" prefix</source>
+        <translation>Неверный URI, не начинается с префикса "bcz"</translation>
     </message>
 </context>
 <context>
@@ -1895,9 +1895,9 @@ Are you sure?</source>
     </message>
     <message>
         <source>Language missing or translation incomplete? Help contributing translations here:
-https://www.transifex.com/pivx-project/pivx-project-translations</source>
+https://www.transifex.com/bcz-project/bcz-project-translations</source>
         <translation>Отсутствует ваш язык или заметили незавершенный перевод? Вы можете помочь нам стать лучше:
-https://www.transifex.com/pivx-project/pivx-project-translations</translation>
+https://www.transifex.com/bcz-project/bcz-project-translations</translation>
     </message>
     <message>
         <source>Map port using &amp;UPnP</source>
@@ -2186,8 +2186,8 @@ Address: %4
         <translation>Неверный адрес оплаты %1</translation>
     </message>
     <message>
-        <source>Cannot start pivx: click-to-pay handler</source>
-        <translation>Не удалось запустить pivx: обработчик click-to-pay </translation>
+        <source>Cannot start bcz: click-to-pay handler</source>
+        <translation>Не удалось запустить bcz: обработчик click-to-pay </translation>
     </message>
     <message>
         <source>URI cannot be parsed! This can be caused by an invalid BCZ address or malformed URI parameters.</source>
@@ -4132,7 +4132,7 @@ BCZ использует консенсус PoS (Proof of Stake), позволя
                            zPIV is an optional privacy-centric method of coin mixing on the
                            BCZ blockchain. Basically all your transactions cannot be tracked
                            on to any block explorer. You can read more about the technicals in the
-                           &lt;a style='color: #b088ff' href='https://BCZ.org/zpiv/'&gt;
+                           &lt;a style='color: #b088ff' href='https://BCZ.org/zbcz/'&gt;
                            "BCZ Zerocoin (zPIV) Technical Paper"&lt;/a&gt;.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
                          </source>
@@ -4141,7 +4141,7 @@ BCZ использует консенсус PoS (Proof of Stake), позволя
 zPIV - это необязательная конфиденциальность, которая возможна при микшировании монет
 в блокчейне BCZ. По сути,ни одна транзакция не может быть отслежена
 ни в одном из обозревателей блоков. Вы можете прочитать больше о технических характеристиках в
-&lt;a style='color: #b088ff' href='https://BCZ.org/zpiv/'&gt;
+&lt;a style='color: #b088ff' href='https://BCZ.org/zbcz/'&gt;
 "Техническом документе BCZ Zerocoin (zPIV)"&lt;/a&gt;.
  &lt;/p&gt;&lt;/body&gt;&lt;/html&gt; </translation>
     </message>
@@ -4185,11 +4185,11 @@ zPIV - это необязательная конфиденциальность,
                            you can disable the automatic minting in your BCZ wallet by
                            going to Settings-&gt;Options and deselecting “Enable zPIV Automint”.
                            If you are not making use of the BCZ-QT or GUI you can simply open
-                           your pivx.conf file and add &lt;i&gt;enablezeromint=0&lt;/i&gt; Without the quotation
+                           your bcz.conf file and add &lt;i&gt;enablezeromint=0&lt;/i&gt; Without the quotation
                            marks and restart your wallet to disable automint.&lt;/p&gt;
                            &lt;/p&gt;&lt;p align="justify"&gt;
                            You can read more about zPIV in the
-                           &lt;a style='color: #b088ff' href='https://BCZ.org/zpiv/'&gt; "BCZ Zerocoin (zPIV) Technical Paper"&lt;/a&gt;.
+                           &lt;a style='color: #b088ff' href='https://BCZ.org/zbcz/'&gt; "BCZ Zerocoin (zPIV) Technical Paper"&lt;/a&gt;.
                            If you would like to keep and stake your zPIV, please read the "How do I stake"
                            section of the FAQ below.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
@@ -4202,9 +4202,9 @@ zPIV - это необязательная конфиденциальность,
 вы можете отключить автоматическую чеканку в своем BCZ-кошельке,
 перейдя в «Настройки-&gt; Параметры» и отменив выбор «Включить авточекунку zPIV».
 Если вы не используете BCZ-QT или GUI, вы можете просто открыть
-свой файл pivx.conf и добавить &lt;i&gt;enablezeromint=0&lt;/i&gt; без кавычек и
+свой файл bcz.conf и добавить &lt;i&gt;enablezeromint=0&lt;/i&gt; без кавычек и
 перезапустите свой кошелек для отключения  автоматической чеканки. &lt;/p&gt; &lt;/p&gt;&lt;p align="justify"&gt; Вы можете прочитать больше о zPIV в
-&lt;a style='color: #b088ff' href='https://BCZ.org/zpiv/'&gt;
+&lt;a style='color: #b088ff' href='https://BCZ.org/zbcz/'&gt;
  "Технический документ BCZ Zerocoin (zPIV)"&lt;/a&gt;.
 Если вы хотите продолжать стекинг zPIV, ознакомьтесь с разделом" Как осуществить стекинг"
 в разделе часто задаваемых вопросов ниже.
@@ -4449,8 +4449,8 @@ zPIV можно потратить и отправить на любой адр�
         <translation>Невозможно открыть папку резервных копий</translation>
     </message>
     <message>
-        <source>Unable to open pivx.conf with default application</source>
-        <translation>Невозможно открыть pivx.conf с приложением по умолчанию</translation>
+        <source>Unable to open bcz.conf with default application</source>
+        <translation>Невозможно открыть bcz.conf с приложением по умолчанию</translation>
     </message>
     <message>
         <source>In:</source>
@@ -5905,7 +5905,7 @@ BCZ Core Wallet</source>
     </message>
 </context>
 <context>
-    <name>pivx-core</name>
+    <name>bcz-core</name>
     <message>
         <source>(1 = keep tx meta data e.g. account owner and payment request information, 2 = drop tx meta data)</source>
         <translation>(1 = сохранить tx метаданные, например, владельца учетной записи и информацию о запросе платежа, 2 = удалить tx метаданные)</translation>

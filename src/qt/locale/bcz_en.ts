@@ -4,7 +4,7 @@
 <context>
     <name>AddNewAddressDialog</name>
     <message>
-        <location filename="../pivx/forms/addnewaddressdialog.ui" line="+14"/>
+        <location filename="../bcz/forms/addnewaddressdialog.ui" line="+14"/>
         <source>Dialog</source>
         <translation type="unfinished"></translation>
     </message>
@@ -37,7 +37,7 @@
 <context>
     <name>AddNewContactDialog</name>
     <message>
-        <location filename="../pivx/forms/addnewcontactdialog.ui" line="+14"/>
+        <location filename="../bcz/forms/addnewcontactdialog.ui" line="+14"/>
         <source>Dialog</source>
         <translation type="unfinished"></translation>
     </message>
@@ -58,7 +58,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pivx/addnewcontactdialog.cpp" line="+20"/>
+        <location filename="../bcz/addnewcontactdialog.cpp" line="+20"/>
         <source>Edit Contact</source>
         <translation type="unfinished"></translation>
     </message>
@@ -210,7 +210,7 @@
 <context>
     <name>AddressLabelRow</name>
     <message>
-        <location filename="../pivx/forms/addresslabelrow.ui" line="+20"/>
+        <location filename="../bcz/forms/addresslabelrow.ui" line="+20"/>
         <source>Form</source>
         <translation type="unfinished">Form</translation>
     </message>
@@ -256,7 +256,7 @@
 <context>
     <name>AddressesWidget</name>
     <message>
-        <location filename="../pivx/forms/addresseswidget.ui" line="+14"/>
+        <location filename="../bcz/forms/addresseswidget.ui" line="+14"/>
         <source>Form</source>
         <translation type="unfinished">Form</translation>
     </message>
@@ -277,7 +277,7 @@
     </message>
     <message>
         <location line="+74"/>
-        <location filename="../pivx/addresseswidget.cpp" line="+119"/>
+        <location filename="../bcz/addresseswidget.cpp" line="+119"/>
         <source>Contact name</source>
         <translation type="unfinished"></translation>
     </message>
@@ -292,7 +292,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pivx/addresseswidget.cpp" line="-38"/>
+        <location filename="../bcz/addresseswidget.cpp" line="-38"/>
         <source>Contacts</source>
         <translation type="unfinished"></translation>
     </message>
@@ -575,7 +575,7 @@ for staking</source>
 <context>
     <name>CSRow</name>
     <message>
-        <location filename="../pivx/forms/csrow.ui" line="+14"/>
+        <location filename="../bcz/forms/csrow.ui" line="+14"/>
         <source>Form</source>
         <translation type="unfinished">Form</translation>
     </message>
@@ -600,7 +600,7 @@ for staking</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pivx/csrow.cpp" line="+27"/>
+        <location filename="../bcz/csrow.cpp" line="+27"/>
         <source>Own delegation</source>
         <translation type="unfinished"></translation>
     </message>
@@ -935,7 +935,7 @@ for staking</source>
 <context>
     <name>ColdStakingWidget</name>
     <message>
-        <location filename="../pivx/forms/coldstakingwidget.ui" line="+14"/>
+        <location filename="../bcz/forms/coldstakingwidget.ui" line="+14"/>
         <source>Form</source>
         <translation type="unfinished">Form</translation>
     </message>
@@ -971,7 +971,7 @@ for staking</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pivx/coldstakingwidget.cpp" line="+93"/>
+        <location filename="../bcz/coldstakingwidget.cpp" line="+93"/>
         <source>Cold Staking</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1207,7 +1207,7 @@ address</source>
 <context>
     <name>ContactDropdownRow</name>
     <message>
-        <location filename="../pivx/forms/contactdropdownrow.ui" line="+20"/>
+        <location filename="../bcz/forms/contactdropdownrow.ui" line="+20"/>
         <source>Form</source>
         <translation type="unfinished">Form</translation>
     </message>
@@ -1225,7 +1225,7 @@ address</source>
 <context>
     <name>DashboardWidget</name>
     <message>
-        <location filename="../pivx/forms/dashboardwidget.ui" line="+14"/>
+        <location filename="../bcz/forms/dashboardwidget.ui" line="+14"/>
         <source>Form</source>
         <translation type="unfinished">Form</translation>
     </message>
@@ -1251,7 +1251,7 @@ address</source>
     </message>
     <message>
         <location line="+93"/>
-        <location filename="../pivx/dashboardwidget.cpp" line="+47"/>
+        <location filename="../bcz/dashboardwidget.cpp" line="+47"/>
         <source>Staking Rewards</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1309,7 +1309,7 @@ address</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pivx/dashboardwidget.cpp" line="+5"/>
+        <location filename="../bcz/dashboardwidget.cpp" line="+5"/>
         <source>You can view your account&apos;s history</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1376,7 +1376,7 @@ It will start automatically as soon as the wallet has enough confirmations on an
 <context>
     <name>DefaultDialog</name>
     <message>
-        <location filename="../pivx/forms/defaultdialog.ui" line="+14"/>
+        <location filename="../bcz/forms/defaultdialog.ui" line="+14"/>
         <source>Form</source>
         <translation type="unfinished">Form</translation>
     </message>
@@ -1472,7 +1472,7 @@ It will start automatically as soon as the wallet has enough confirmations on an
 <context>
     <name>ExpandableButton</name>
     <message>
-        <location filename="../pivx/forms/expandablebutton.ui" line="+26"/>
+        <location filename="../bcz/forms/expandablebutton.ui" line="+26"/>
         <source>Form</source>
         <translation type="unfinished">Form</translation>
     </message>
@@ -1655,7 +1655,7 @@ It will start automatically as soon as the wallet has enough confirmations on an
 <context>
     <name>LoadingDialog</name>
     <message>
-        <location filename="../pivx/forms/loadingdialog.ui" line="+14"/>
+        <location filename="../bcz/forms/loadingdialog.ui" line="+14"/>
         <source>Form</source>
         <translation type="unfinished">Form</translation>
     </message>
@@ -1666,7 +1666,7 @@ It will start automatically as soon as the wallet has enough confirmations on an
     </message>
     <message>
         <location line="+44"/>
-        <location filename="../pivx/loadingdialog.cpp" line="+43"/>
+        <location filename="../bcz/loadingdialog.cpp" line="+43"/>
         <source>Loading</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1679,12 +1679,12 @@ It will start automatically as soon as the wallet has enough confirmations on an
 <context>
     <name>LockUnlock</name>
     <message>
-        <location filename="../pivx/forms/lockunlock.ui" line="+14"/>
+        <location filename="../bcz/forms/lockunlock.ui" line="+14"/>
         <source>Form</source>
         <translation type="unfinished">Form</translation>
     </message>
     <message>
-        <location filename="../pivx/lockunlock.cpp" line="+26"/>
+        <location filename="../bcz/lockunlock.cpp" line="+26"/>
         <source>Unlock Wallet</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1702,7 +1702,7 @@ It will start automatically as soon as the wallet has enough confirmations on an
 <context>
     <name>MNRow</name>
     <message>
-        <location filename="../pivx/forms/mnrow.ui" line="+14"/>
+        <location filename="../bcz/forms/mnrow.ui" line="+14"/>
         <source>Form</source>
         <translation type="unfinished">Form</translation>
     </message>
@@ -1710,7 +1710,7 @@ It will start automatically as soon as the wallet has enough confirmations on an
 <context>
     <name>MasterNodeWizardDialog</name>
     <message>
-        <location filename="../pivx/forms/masternodewizarddialog.ui" line="+14"/>
+        <location filename="../bcz/forms/masternodewizarddialog.ui" line="+14"/>
         <source>Dialog</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1800,7 +1800,7 @@ It will start automatically as soon as the wallet has enough confirmations on an
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pivx/masternodewizarddialog.cpp" line="+56"/>
+        <location filename="../bcz/masternodewizarddialog.cpp" line="+56"/>
         <source>e.g user_masternode</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1873,7 +1873,7 @@ It will start automatically as soon as the wallet has enough confirmations on an
 <context>
     <name>MasterNodesWidget</name>
     <message>
-        <location filename="../pivx/forms/masternodeswidget.ui" line="+14"/>
+        <location filename="../bcz/forms/masternodeswidget.ui" line="+14"/>
         <source>Form</source>
         <translation type="unfinished">Form</translation>
     </message>
@@ -1899,7 +1899,7 @@ It will start automatically as soon as the wallet has enough confirmations on an
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pivx/masternodeswidget.cpp" line="+95"/>
+        <location filename="../bcz/masternodeswidget.cpp" line="+95"/>
         <source>Masternodes</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2012,7 +2012,7 @@ Please wait few more minutes (masternode collaterals require %1 confirmations).<
 on a remote server to your clipboard.
 
 
-You will only have to paste the data in the pivx.conf file
+You will only have to paste the data in the bcz.conf file
 of your remote server and start it, then start the Masternode using
 this controller wallet (select the Masternode in the list and press &quot;start&quot;).
 </source>
@@ -2065,7 +2065,7 @@ Are you sure?</source>
 <context>
     <name>MnInfoDialog</name>
     <message>
-        <location filename="../pivx/forms/mninfodialog.ui" line="+20"/>
+        <location filename="../bcz/forms/mninfodialog.ui" line="+20"/>
         <source>Form</source>
         <translation type="unfinished">Form</translation>
     </message>
@@ -2129,7 +2129,7 @@ Are you sure?</source>
 <context>
     <name>MyAddressRow</name>
     <message>
-        <location filename="../pivx/forms/myaddressrow.ui" line="+14"/>
+        <location filename="../bcz/forms/myaddressrow.ui" line="+14"/>
         <source>Form</source>
         <translation type="unfinished">Form</translation>
     </message>
@@ -2152,7 +2152,7 @@ Are you sure?</source>
 <context>
     <name>NavMenuWidget</name>
     <message>
-        <location filename="../pivx/forms/navmenuwidget.ui" line="+14"/>
+        <location filename="../bcz/forms/navmenuwidget.ui" line="+14"/>
         <source>Form</source>
         <translation type="unfinished">Form</translation>
     </message>
@@ -2162,7 +2162,7 @@ Are you sure?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pivx/navmenuwidget.cpp" line="+23"/>
+        <location filename="../bcz/navmenuwidget.cpp" line="+23"/>
         <source>v%1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2216,14 +2216,14 @@ Are you sure?</source>
     </message>
     <message>
         <location line="+6"/>
-        <source>Invalid URI, not starting with &quot;pivx&quot; prefix</source>
+        <source>Invalid URI, not starting with &quot;bcz&quot; prefix</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>OptionButton</name>
     <message>
-        <location filename="../pivx/forms/optionbutton.ui" line="+14"/>
+        <location filename="../bcz/forms/optionbutton.ui" line="+14"/>
         <source>Form</source>
         <translation type="unfinished">Form</translation>
     </message>
@@ -2349,7 +2349,7 @@ Are you sure?</source>
     <message>
         <location line="+21"/>
         <source>Language missing or translation incomplete? Help contributing translations here:
-https://www.transifex.com/pivx-project/pivx-project-translations</source>
+https://www.transifex.com/bcz-project/bcz-project-translations</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2590,7 +2590,7 @@ https://www.transifex.com/pivx-project/pivx-project-translations</source>
 <context>
     <name>BCZGUI</name>
     <message>
-        <location filename="../pivx/pivxgui.cpp" line="+70"/>
+        <location filename="../bcz/bczgui.cpp" line="+70"/>
         <location line="+292"/>
         <location line="+68"/>
         <source>BCZ Core</source>
@@ -2680,7 +2680,7 @@ Address: %4
 </translation>
     </message>
     <message>
-        <location filename="../pivx.cpp" line="+518"/>
+        <location filename="../bcz.cpp" line="+518"/>
         <source>A fatal error occurred. BCZ can no longer continue safely and will quit.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2721,7 +2721,7 @@ Address: %4
     </message>
     <message>
         <location line="-102"/>
-        <source>Cannot start pivx: click-to-pay handler</source>
+        <source>Cannot start bcz: click-to-pay handler</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2828,7 +2828,7 @@ Address: %4
 <context>
     <name>PrivacyWidget</name>
     <message>
-        <location filename="../pivx/forms/privacywidget.ui" line="+14"/>
+        <location filename="../bcz/forms/privacywidget.ui" line="+14"/>
         <source>Form</source>
         <translation type="unfinished">Form</translation>
     </message>
@@ -2874,7 +2874,7 @@ Address: %4
         <translation type="unfinished">N/A</translation>
     </message>
     <message>
-        <location filename="../pivx/privacywidget.cpp" line="+36"/>
+        <location filename="../bcz/privacywidget.cpp" line="+36"/>
         <source>Privacy</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3064,7 +3064,7 @@ transaction history, making transactions untraceable </source>
         <translation>%1 ms</translation>
     </message>
     <message>
-        <location filename="../pivx.cpp" line="+73"/>
+        <location filename="../bcz.cpp" line="+73"/>
         <location line="+7"/>
         <location line="+13"/>
         <location line="+19"/>
@@ -3103,7 +3103,7 @@ transaction history, making transactions untraceable </source>
     </message>
     <message>
         <location line="+2"/>
-        <location filename="../pivx/qtutils.cpp" line="+136"/>
+        <location filename="../bcz/qtutils.cpp" line="+136"/>
         <source>Receiving</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3114,7 +3114,7 @@ transaction history, making transactions untraceable </source>
     </message>
     <message>
         <location line="+2"/>
-        <location filename="../pivx/qtutils.cpp" line="+2"/>
+        <location filename="../bcz/qtutils.cpp" line="+2"/>
         <source>Cold Staking</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3134,7 +3134,7 @@ transaction history, making transactions untraceable </source>
         <translation type="unfinished">Unknown</translation>
     </message>
     <message>
-        <location filename="../pivx/qtutils.cpp" line="-3"/>
+        <location filename="../bcz/qtutils.cpp" line="-3"/>
         <location line="+21"/>
         <source>All</source>
         <translation type="unfinished">All</translation>
@@ -3790,7 +3790,7 @@ transaction history, making transactions untraceable </source>
 <context>
     <name>ReceiveDialog</name>
     <message>
-        <location filename="../pivx/forms/receivedialog.ui" line="+14"/>
+        <location filename="../bcz/forms/receivedialog.ui" line="+14"/>
         <source>Dialog</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3818,7 +3818,7 @@ transaction history, making transactions untraceable </source>
 <context>
     <name>ReceiveWidget</name>
     <message>
-        <location filename="../pivx/forms/receivewidget.ui" line="+20"/>
+        <location filename="../bcz/forms/receivewidget.ui" line="+20"/>
         <source>Form</source>
         <translation type="unfinished">Form</translation>
     </message>
@@ -3832,30 +3832,30 @@ transaction history, making transactions untraceable </source>
     </message>
     <message>
         <location line="+25"/>
-        <location filename="../pivx/receivewidget.cpp" line="+248"/>
+        <location filename="../bcz/receivewidget.cpp" line="+248"/>
         <source>No address</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+31"/>
-        <location filename="../pivx/receivewidget.cpp" line="-180"/>
+        <location filename="../bcz/receivewidget.cpp" line="-180"/>
         <source>Add Label</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+10"/>
-        <location filename="../pivx/receivewidget.cpp" line="+4"/>
+        <location filename="../bcz/receivewidget.cpp" line="+4"/>
         <source>Generate Address</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+10"/>
-        <location filename="../pivx/receivewidget.cpp" line="+4"/>
+        <location filename="../bcz/receivewidget.cpp" line="+4"/>
         <source>Copy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pivx/receivewidget.cpp" line="-32"/>
+        <location filename="../bcz/receivewidget.cpp" line="-32"/>
         <source>Receive</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3978,7 +3978,7 @@ transaction history, making transactions untraceable </source>
 <context>
     <name>RequestDialog</name>
     <message>
-        <location filename="../pivx/forms/requestdialog.ui" line="+14"/>
+        <location filename="../bcz/forms/requestdialog.ui" line="+14"/>
         <source>Dialog</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3994,7 +3994,7 @@ transaction history, making transactions untraceable </source>
     </message>
     <message>
         <location line="+43"/>
-        <location filename="../pivx/requestdialog.cpp" line="+42"/>
+        <location filename="../bcz/requestdialog.cpp" line="+42"/>
         <source>Amount</source>
         <translation type="unfinished">Amount</translation>
     </message>
@@ -4035,7 +4035,7 @@ transaction history, making transactions untraceable </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pivx/requestdialog.cpp" line="-6"/>
+        <location filename="../bcz/requestdialog.cpp" line="-6"/>
         <source>Label</source>
         <translation type="unfinished">Label</translation>
     </message>
@@ -4093,7 +4093,7 @@ transaction history, making transactions untraceable </source>
 <context>
     <name>SendChangeAddressDialog</name>
     <message>
-        <location filename="../pivx/forms/sendchangeaddressdialog.ui" line="+14"/>
+        <location filename="../bcz/forms/sendchangeaddressdialog.ui" line="+14"/>
         <source>Dialog</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4109,7 +4109,7 @@ transaction history, making transactions untraceable </source>
     </message>
     <message>
         <location line="+82"/>
-        <location filename="../pivx/sendchangeaddressdialog.cpp" line="+68"/>
+        <location filename="../bcz/sendchangeaddressdialog.cpp" line="+68"/>
         <source>CANCEL</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4119,7 +4119,7 @@ transaction history, making transactions untraceable </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pivx/sendchangeaddressdialog.cpp" line="-42"/>
+        <location filename="../bcz/sendchangeaddressdialog.cpp" line="-42"/>
         <source>Custom Change Address</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4147,7 +4147,7 @@ transaction history, making transactions untraceable </source>
 <context>
     <name>SendCustomFeeDialog</name>
     <message>
-        <location filename="../pivx/forms/sendcustomfeedialog.ui" line="+14"/>
+        <location filename="../bcz/forms/sendcustomfeedialog.ui" line="+14"/>
         <source>Form</source>
         <translation type="unfinished">Form</translation>
     </message>
@@ -4192,7 +4192,7 @@ transaction history, making transactions untraceable </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pivx/sendcustomfeedialog.cpp" line="+28"/>
+        <location filename="../bcz/sendcustomfeedialog.cpp" line="+28"/>
         <source>Customize Fee</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4235,7 +4235,7 @@ transaction history, making transactions untraceable </source>
 <context>
     <name>SendMultiRow</name>
     <message>
-        <location filename="../pivx/forms/sendmultirow.ui" line="+26"/>
+        <location filename="../bcz/forms/sendmultirow.ui" line="+26"/>
         <source>Form</source>
         <translation type="unfinished">Form</translation>
     </message>
@@ -4245,7 +4245,7 @@ transaction history, making transactions untraceable </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pivx/sendmultirow.cpp" line="+22"/>
+        <location filename="../bcz/sendmultirow.cpp" line="+22"/>
         <source>Enter address</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4258,7 +4258,7 @@ transaction history, making transactions untraceable </source>
 <context>
     <name>SendWidget</name>
     <message>
-        <location filename="../pivx/send.cpp" line="+44"/>
+        <location filename="../bcz/send.cpp" line="+44"/>
         <source>Send</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4525,7 +4525,7 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
 <context>
     <name>SettingsBackupWallet</name>
     <message>
-        <location filename="../pivx/settings/forms/settingsbackupwallet.ui" line="+14"/>
+        <location filename="../bcz/settings/forms/settingsbackupwallet.ui" line="+14"/>
         <source>Form</source>
         <translation type="unfinished">Form</translation>
     </message>
@@ -4539,7 +4539,7 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pivx/settings/settingsbackupwallet.cpp" line="+26"/>
+        <location filename="../bcz/settings/settingsbackupwallet.cpp" line="+26"/>
         <source>Backup Wallet </source>
         <translation type="unfinished"></translation>
     </message>
@@ -4605,7 +4605,7 @@ This option creates a wallet.dat file that can be used to recover your whole bal
 <context>
     <name>SettingsBitToolWidget</name>
     <message>
-        <location filename="../pivx/settings/forms/settingsbittoolwidget.ui" line="+14"/>
+        <location filename="../bcz/settings/forms/settingsbittoolwidget.ui" line="+14"/>
         <source>Form</source>
         <translation type="unfinished">Form</translation>
     </message>
@@ -4633,7 +4633,7 @@ This option creates a wallet.dat file that can be used to recover your whole bal
     </message>
     <message>
         <location line="+63"/>
-        <location filename="../pivx/settings/settingsbittoolwidget.cpp" line="+74"/>
+        <location filename="../bcz/settings/settingsbittoolwidget.cpp" line="+74"/>
         <source>Import Address</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4644,7 +4644,7 @@ This option creates a wallet.dat file that can be used to recover your whole bal
         <translation type="unfinished">Clear</translation>
     </message>
     <message>
-        <location filename="../pivx/settings/settingsbittoolwidget.cpp" line="-39"/>
+        <location filename="../bcz/settings/settingsbittoolwidget.cpp" line="-39"/>
         <source>BIP38 Tool</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4821,7 +4821,7 @@ This option creates a wallet.dat file that can be used to recover your whole bal
 <context>
     <name>SettingsConsoleWidget</name>
     <message>
-        <location filename="../pivx/settings/forms/settingsconsolewidget.ui" line="+14"/>
+        <location filename="../bcz/settings/forms/settingsconsolewidget.ui" line="+14"/>
         <source>Form</source>
         <translation type="unfinished">Form</translation>
     </message>
@@ -4831,7 +4831,7 @@ This option creates a wallet.dat file that can be used to recover your whole bal
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pivx/settings/settingsconsolewidget.cpp" line="+253"/>
+        <location filename="../bcz/settings/settingsconsolewidget.cpp" line="+253"/>
         <source>Console</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4885,7 +4885,7 @@ Verify that you have installed a predetermined text editor.</source>
 <context>
     <name>SettingsDisplayOptionsWidget</name>
     <message>
-        <location filename="../pivx/settings/forms/settingsdisplayoptionswidget.ui" line="+14"/>
+        <location filename="../bcz/settings/forms/settingsdisplayoptionswidget.ui" line="+14"/>
         <source>Form</source>
         <translation type="unfinished">Form</translation>
     </message>
@@ -4906,7 +4906,7 @@ Verify that you have installed a predetermined text editor.</source>
     </message>
     <message>
         <location line="+91"/>
-        <location filename="../pivx/settings/settingsdisplayoptionswidget.cpp" line="+103"/>
+        <location filename="../bcz/settings/settingsdisplayoptionswidget.cpp" line="+103"/>
         <source>Reset to default</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4916,7 +4916,7 @@ Verify that you have installed a predetermined text editor.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pivx/settings/settingsdisplayoptionswidget.cpp" line="-74"/>
+        <location filename="../bcz/settings/settingsdisplayoptionswidget.cpp" line="-74"/>
         <source>Display</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4969,7 +4969,7 @@ Verify that you have installed a predetermined text editor.</source>
 <context>
     <name>SettingsExportCSV</name>
     <message>
-        <location filename="../pivx/settings/forms/settingsexportcsv.ui" line="+14"/>
+        <location filename="../bcz/settings/forms/settingsexportcsv.ui" line="+14"/>
         <source>Form</source>
         <translation type="unfinished">Form</translation>
     </message>
@@ -4991,7 +4991,7 @@ Verify that you have installed a predetermined text editor.</source>
     <message>
         <location line="+58"/>
         <location line="+115"/>
-        <location filename="../pivx/settings/settingsexportcsv.cpp" line="+70"/>
+        <location filename="../bcz/settings/settingsexportcsv.cpp" line="+70"/>
         <location line="+7"/>
         <source>Select folder...</source>
         <translation type="unfinished"></translation>
@@ -5002,7 +5002,7 @@ Verify that you have installed a predetermined text editor.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pivx/settings/settingsexportcsv.cpp" line="-16"/>
+        <location filename="../bcz/settings/settingsexportcsv.cpp" line="-16"/>
         <source>Export CSV</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5095,7 +5095,7 @@ There was an error trying to save the address list to %1. Please try again.</sou
 <context>
     <name>SettingsFaqWidget</name>
     <message>
-        <location filename="../pivx/settings/forms/settingsfaqwidget.ui" line="+14"/>
+        <location filename="../bcz/settings/forms/settingsfaqwidget.ui" line="+14"/>
         <source>Form</source>
         <translation type="unfinished">Form</translation>
     </message>
@@ -5230,7 +5230,7 @@ There was an error trying to save the address list to %1. Please try again.</sou
                            zPIV is an optional privacy-centric method of coin mixing on the
                            BCZ blockchain. Basically all your transactions cannot be tracked
                            on to any block explorer. You can read more about the technicals in the
-                           &lt;a style=&apos;color: #b088ff&apos; href=&apos;https://BCZ.org/zpiv/&apos;&gt;
+                           &lt;a style=&apos;color: #b088ff&apos; href=&apos;https://BCZ.org/zbcz/&apos;&gt;
                            &quot;BCZ Zerocoin (zPIV) Technical Paper&quot;&lt;/a&gt;.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
                          </source>
@@ -5277,11 +5277,11 @@ There was an error trying to save the address list to %1. Please try again.</sou
                            you can disable the automatic minting in your BCZ wallet by
                            going to Settings-&gt;Options and deselecting “Enable zPIV Automint”.
                            If you are not making use of the BCZ-QT or GUI you can simply open
-                           your pivx.conf file and add &lt;i&gt;enablezeromint=0&lt;/i&gt; Without the quotation
+                           your bcz.conf file and add &lt;i&gt;enablezeromint=0&lt;/i&gt; Without the quotation
                            marks and restart your wallet to disable automint.&lt;/p&gt;
                            &lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;
                            You can read more about zPIV in the
-                           &lt;a style=&apos;color: #b088ff&apos; href=&apos;https://BCZ.org/zpiv/&apos;&gt; &quot;BCZ Zerocoin (zPIV) Technical Paper&quot;&lt;/a&gt;.
+                           &lt;a style=&apos;color: #b088ff&apos; href=&apos;https://BCZ.org/zbcz/&apos;&gt; &quot;BCZ Zerocoin (zPIV) Technical Paper&quot;&lt;/a&gt;.
                            If you would like to keep and stake your zPIV, please read the &quot;How do I stake&quot;
                            section of the FAQ below.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
@@ -5335,7 +5335,7 @@ There was an error trying to save the address list to %1. Please try again.</sou
                            &lt;li&gt;
                            Once all those steps are followed staking should be enabled.
                            &lt;li&gt;
-                           You can see the status of staking in the wallet by mousing over the package icon in the row on the top left of the wallet interface. There package will be lit up and will state &quot;Staking Enabled&quot; to indicate it is staking.  Using the command line interface (pivx-cli); the command &lt;i&gt;getstakingstatus&lt;/i&gt; will confirm that staking is active.
+                           You can see the status of staking in the wallet by mousing over the package icon in the row on the top left of the wallet interface. There package will be lit up and will state &quot;Staking Enabled&quot; to indicate it is staking.  Using the command line interface (bcz-cli); the command &lt;i&gt;getstakingstatus&lt;/i&gt; will confirm that staking is active.
                            &lt;/li&gt;&lt;/ol&gt;
                            &lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;
                            To Stake zPIV:
@@ -5448,7 +5448,7 @@ There was an error trying to save the address list to %1. Please try again.</sou
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pivx/settings/settingsfaqwidget.cpp" line="+19"/>
+        <location filename="../bcz/settings/settingsfaqwidget.cpp" line="+19"/>
         <source>Frequently Asked Questions</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5466,7 +5466,7 @@ There was an error trying to save the address list to %1. Please try again.</sou
 <context>
     <name>SettingsInformationWidget</name>
     <message>
-        <location filename="../pivx/settings/forms/settingsinformationwidget.ui" line="+14"/>
+        <location filename="../bcz/settings/forms/settingsinformationwidget.ui" line="+14"/>
         <source>Form</source>
         <translation type="unfinished">Form</translation>
     </message>
@@ -5561,12 +5561,12 @@ There was an error trying to save the address list to %1. Please try again.</sou
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pivx/settings/settingsinformationwidget.cpp" line="+72"/>
+        <location filename="../bcz/settings/settingsinformationwidget.cpp" line="+72"/>
         <source>Main</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pivx/settings/forms/settingsinformationwidget.ui" line="-587"/>
+        <location filename="../bcz/settings/forms/settingsinformationwidget.ui" line="-587"/>
         <source>Wallet Conf</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5576,7 +5576,7 @@ There was an error trying to save the address list to %1. Please try again.</sou
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pivx/settings/settingsinformationwidget.cpp" line="+22"/>
+        <location filename="../bcz/settings/settingsinformationwidget.cpp" line="+22"/>
         <source>No information</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5587,7 +5587,7 @@ There was an error trying to save the address list to %1. Please try again.</sou
     </message>
     <message>
         <location line="+4"/>
-        <source>Unable to open pivx.conf with default application</source>
+        <source>Unable to open bcz.conf with default application</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5604,7 +5604,7 @@ There was an error trying to save the address list to %1. Please try again.</sou
 <context>
     <name>SettingsMainOptionsWidget</name>
     <message>
-        <location filename="../pivx/settings/forms/settingsmainoptionswidget.ui" line="+14"/>
+        <location filename="../bcz/settings/forms/settingsmainoptionswidget.ui" line="+14"/>
         <source>Form</source>
         <translation type="unfinished">Form</translation>
     </message>
@@ -5634,7 +5634,7 @@ There was an error trying to save the address list to %1. Please try again.</sou
     </message>
     <message>
         <location line="+40"/>
-        <location filename="../pivx/settings/settingsmainoptionswidget.cpp" line="+81"/>
+        <location filename="../bcz/settings/settingsmainoptionswidget.cpp" line="+81"/>
         <source>Reset to default</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5645,12 +5645,12 @@ There was an error trying to save the address list to %1. Please try again.</sou
     </message>
     <message>
         <location line="+38"/>
-        <location filename="../pivx/settings/settingsmainoptionswidget.cpp" line="-1"/>
+        <location filename="../bcz/settings/settingsmainoptionswidget.cpp" line="-1"/>
         <source>SAVE</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pivx/settings/settingsmainoptionswidget.cpp" line="-31"/>
+        <location filename="../bcz/settings/settingsmainoptionswidget.cpp" line="-31"/>
         <source>Main</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5701,7 +5701,7 @@ Are you sure?
 <context>
     <name>SettingsMultisendDialog</name>
     <message>
-        <location filename="../pivx/settings/forms/settingsmultisenddialog.ui" line="+14"/>
+        <location filename="../bcz/settings/forms/settingsmultisenddialog.ui" line="+14"/>
         <source>Form</source>
         <translation type="unfinished">Form</translation>
     </message>
@@ -5728,7 +5728,7 @@ Are you sure?
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pivx/settings/settingsmultisenddialog.cpp" line="+24"/>
+        <location filename="../bcz/settings/settingsmultisenddialog.cpp" line="+24"/>
         <source>New recipient for multisend</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5751,7 +5751,7 @@ Are you sure?
 <context>
     <name>SettingsMultisendWidget</name>
     <message>
-        <location filename="../pivx/settings/forms/settingsmultisendwidget.ui" line="+14"/>
+        <location filename="../bcz/settings/forms/settingsmultisendwidget.ui" line="+14"/>
         <source>Form</source>
         <translation type="unfinished">Form</translation>
     </message>
@@ -5773,7 +5773,7 @@ Are you sure?
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pivx/settings/settingsmultisendwidget.cpp" line="+164"/>
+        <location filename="../bcz/settings/settingsmultisendwidget.cpp" line="+164"/>
         <source>MultiSend allows you to automatically send up to 100% of your stake or masternode reward to a list of other BCZ addresses after it matures.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5893,7 +5893,7 @@ Check one or both of the check boxes to send on stake and/or masternode rewards<
 <context>
     <name>SettingsSignMessageWidgets</name>
     <message>
-        <location filename="../pivx/settings/forms/settingssignmessagewidgets.ui" line="+14"/>
+        <location filename="../bcz/settings/forms/settingssignmessagewidgets.ui" line="+14"/>
         <source>Form</source>
         <translation type="unfinished">Form</translation>
     </message>
@@ -5913,7 +5913,7 @@ Check one or both of the check boxes to send on stake and/or masternode rewards<
         <translation type="unfinished">Clear</translation>
     </message>
     <message>
-        <location filename="../pivx/settings/settingssignmessagewidgets.cpp" line="+35"/>
+        <location filename="../bcz/settings/settingssignmessagewidgets.cpp" line="+35"/>
         <source>Sign/Verify Message</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6059,7 +6059,7 @@ Check one or both of the check boxes to send on stake and/or masternode rewards<
 <context>
     <name>SettingsWalletOptionsWidget</name>
     <message>
-        <location filename="../pivx/settings/forms/settingswalletoptionswidget.ui" line="+14"/>
+        <location filename="../bcz/settings/forms/settingswalletoptionswidget.ui" line="+14"/>
         <source>Form</source>
         <translation type="unfinished">Form</translation>
     </message>
@@ -6088,7 +6088,7 @@ Check one or both of the check boxes to send on stake and/or masternode rewards<
     </message>
     <message>
         <location line="+139"/>
-        <location filename="../pivx/settings/settingswalletoptionswidget.cpp" line="+69"/>
+        <location filename="../bcz/settings/settingswalletoptionswidget.cpp" line="+69"/>
         <source>Reset to default</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6098,7 +6098,7 @@ Check one or both of the check boxes to send on stake and/or masternode rewards<
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pivx/settings/settingswalletoptionswidget.cpp" line="-43"/>
+        <location filename="../bcz/settings/settingswalletoptionswidget.cpp" line="-43"/>
         <source>Wallet</source>
         <translation type="unfinished">Wallet</translation>
     </message>
@@ -6171,7 +6171,7 @@ Check one or both of the check boxes to send on stake and/or masternode rewards<
 <context>
     <name>SettingsWalletRepairWidget</name>
     <message>
-        <location filename="../pivx/settings/forms/settingswalletrepairwidget.ui" line="+14"/>
+        <location filename="../bcz/settings/forms/settingswalletrepairwidget.ui" line="+14"/>
         <source>Form</source>
         <translation type="unfinished">Form</translation>
     </message>
@@ -6189,7 +6189,7 @@ Check one or both of the check boxes to send on stake and/or masternode rewards<
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pivx/settings/settingswalletrepairwidget.cpp" line="+22"/>
+        <location filename="../bcz/settings/settingswalletrepairwidget.cpp" line="+22"/>
         <source>Wallet Repair</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6297,7 +6297,7 @@ Check one or both of the check boxes to send on stake and/or masternode rewards<
 <context>
     <name>SettingsWidget</name>
     <message>
-        <location filename="../pivx/settings/forms/settingswidget.ui" line="+14"/>
+        <location filename="../bcz/settings/forms/settingswidget.ui" line="+14"/>
         <source>Form</source>
         <translation type="unfinished">Form</translation>
     </message>
@@ -6393,7 +6393,7 @@ Check one or both of the check boxes to send on stake and/or masternode rewards<
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pivx/settings/settingswidget.cpp" line="+220"/>
+        <location filename="../bcz/settings/settingswidget.cpp" line="+220"/>
         <source>Confirm options reset</source>
         <translation type="unfinished">Confirm options reset</translation>
     </message>
@@ -6473,7 +6473,7 @@ Are you sure?
 <context>
     <name>SnackBar</name>
     <message>
-        <location filename="../pivx/forms/snackbar.ui" line="+26"/>
+        <location filename="../bcz/forms/snackbar.ui" line="+26"/>
         <source>Form</source>
         <translation type="unfinished">Form</translation>
     </message>
@@ -6486,7 +6486,7 @@ Are you sure?
 <context>
     <name>Splash</name>
     <message>
-        <location filename="../pivx/forms/splash.ui" line="+26"/>
+        <location filename="../bcz/forms/splash.ui" line="+26"/>
         <source>Form</source>
         <translation type="unfinished">Form</translation>
     </message>
@@ -6496,7 +6496,7 @@ Are you sure?
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pivx/splash.cpp" line="+29"/>
+        <location filename="../bcz/splash.cpp" line="+29"/>
         <source>BCZ Core</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6537,7 +6537,7 @@ Are you sure?
 <context>
     <name>TooltipMenu</name>
     <message>
-        <location filename="../pivx/forms/tooltipmenu.ui" line="+26"/>
+        <location filename="../bcz/forms/tooltipmenu.ui" line="+26"/>
         <source>Form</source>
         <translation type="unfinished">Form</translation>
     </message>
@@ -6565,14 +6565,14 @@ Are you sure?
 <context>
     <name>TopBar</name>
     <message>
-        <location filename="../pivx/forms/topbar.ui" line="+26"/>
+        <location filename="../bcz/forms/topbar.ui" line="+26"/>
         <source>Form</source>
         <translation type="unfinished">Form</translation>
     </message>
     <message>
         <location line="+378"/>
         <location line="+121"/>
-        <location filename="../pivx/topbar.cpp" line="+634"/>
+        <location filename="../bcz/topbar.cpp" line="+634"/>
         <source>Available</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6589,7 +6589,7 @@ Are you sure?
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pivx/topbar.cpp" line="-362"/>
+        <location filename="../bcz/topbar.cpp" line="-362"/>
         <source>Wallet Unlocked for staking</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7232,13 +7232,13 @@ backup will be created.
 <context>
     <name>TxDetailDialog</name>
     <message>
-        <location filename="../pivx/forms/sendconfirmdialog.ui" line="+26"/>
+        <location filename="../bcz/forms/sendconfirmdialog.ui" line="+26"/>
         <source>Form</source>
         <translation type="unfinished">Form</translation>
     </message>
     <message>
         <location line="+90"/>
-        <location filename="../pivx/sendconfirmdialog.cpp" line="+73"/>
+        <location filename="../bcz/sendconfirmdialog.cpp" line="+73"/>
         <source>Transaction Details</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7333,7 +7333,7 @@ backup will be created.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pivx/sendconfirmdialog.cpp" line="-21"/>
+        <location filename="../bcz/sendconfirmdialog.cpp" line="-21"/>
         <source>Confirm Your Transaction</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7356,7 +7356,7 @@ backup will be created.
 <context>
     <name>TxRow</name>
     <message>
-        <location filename="../pivx/forms/txrow.ui" line="+20"/>
+        <location filename="../bcz/forms/txrow.ui" line="+20"/>
         <source>Form</source>
         <translation type="unfinished">Form</translation>
     </message>
@@ -7395,7 +7395,7 @@ backup will be created.
 <context>
     <name>WelcomeContentWidget</name>
     <message>
-        <location filename="../pivx/forms/welcomecontentwidget.ui" line="+244"/>
+        <location filename="../bcz/forms/welcomecontentwidget.ui" line="+244"/>
         <source>1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7471,7 +7471,7 @@ BCZ Core Wallet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../pivx/welcomecontentwidget.cpp" line="+178"/>
+        <location filename="../bcz/welcomecontentwidget.cpp" line="+178"/>
         <source>default</source>
         <translation type="unfinished">default</translation>
     </message>
@@ -7479,7 +7479,7 @@ BCZ Core Wallet</source>
 <context>
     <name>ZPivControlDialog</name>
     <message>
-        <location filename="../forms/zpivcontroldialog.ui" line="+20"/>
+        <location filename="../forms/zbczcontroldialog.ui" line="+20"/>
         <source>Select zPIV to Spend</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7524,15 +7524,15 @@ BCZ Core Wallet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../zpivcontroldialog.cpp" line="+38"/>
+        <location filename="../zbczcontroldialog.cpp" line="+38"/>
         <source>Select zPIV Denominations to Spend</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>pivx-core</name>
+    <name>bcz-core</name>
     <message>
-        <location filename="../pivxstrings.cpp" line="+15"/>
+        <location filename="../bczstrings.cpp" line="+15"/>
         <source>(1 = keep tx meta data e.g. account owner and payment request information, 2 = drop tx meta data)</source>
         <translation type="unfinished">(1 = keep tx meta data e.g. account owner and payment request information, 2 = drop tx meta data)</translation>
     </message>
@@ -9082,7 +9082,7 @@ BCZ Core Wallet</source>
 <context>
     <name>send</name>
     <message>
-        <location filename="../pivx/forms/send.ui" line="+14"/>
+        <location filename="../bcz/forms/send.ui" line="+14"/>
         <source>Form</source>
         <translation type="unfinished">Form</translation>
     </message>

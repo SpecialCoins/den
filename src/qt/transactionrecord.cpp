@@ -10,7 +10,7 @@
 #include "swifttx.h"
 #include "timedata.h"
 #include "wallet/wallet.h"
-#include "zpivchain.h"
+#include "zbczchain.h"
 #include "main.h"
 
 #include <algorithm>
@@ -42,7 +42,7 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const CWallet* 
         if (!wtx.HasZerocoinSpendInputs() && !ExtractDestination(wtx.vout[1].scriptPubKey, address))
             return parts;
 
-        if (wtx.HasZerocoinSpendInputs() && (fZSpendFromMe || wallet->zpivTracker->HasMintTx(hash))) {
+        if (wtx.HasZerocoinSpendInputs() && (fZSpendFromMe || wallet->zbczTracker->HasMintTx(hash))) {
             //zPIV stake reward
             sub.involvesWatchAddress = false;
             sub.type = TransactionRecord::StakeZPIV;

@@ -260,7 +260,7 @@
     </message>
     <message>
         <source>Invalid Contact Address</source>
-        <translation>Adresse Pivx incorrecte</translation>
+        <translation>Adresse BCZ incorrecte</translation>
     </message>
     <message>
         <source>Cannot store your own address as contact</source>
@@ -1612,7 +1612,7 @@ and vote on the treasury system receiving a periodic reward.</source>
 on a remote server to your clipboard.
 
 
-You will only have to paste the data in the pivx.conf file
+You will only have to paste the data in the bcz.conf file
 of your remote server and start it, then start the Masternode using
 this controller wallet (select the Masternode in the list and press "start").
 </source>
@@ -1620,7 +1620,7 @@ this controller wallet (select the Masternode in the list and press "start").
 sur un serveur distant vers votre presse-papiers.
 
 
-Il vous suffira de coller les données dans le fichier pivx.conf
+Il vous suffira de coller les données dans le fichier bcz.conf
 de votre serveur distant, le démarrer, puis de lancer le masternode en utilisant
 ce portefeuille (sélectionnez le masternode dans la liste et appuyez sur "Démarrer").</translation>
     </message>
@@ -1786,8 +1786,8 @@ Confirmez-vous?</translation>
         <translation>Données traitées trop grandes</translation>
     </message>
     <message>
-        <source>Invalid URI, not starting with "pivx" prefix</source>
-        <translation>URI invalide, ne commence pas par "pivx"</translation>
+        <source>Invalid URI, not starting with "bcz" prefix</source>
+        <translation>URI invalide, ne commence pas par "bcz"</translation>
     </message>
 </context>
 <context>
@@ -1893,9 +1893,9 @@ Confirmez-vous?</translation>
     </message>
     <message>
         <source>Language missing or translation incomplete? Help contributing translations here:
-https://www.transifex.com/pivx-project/pivx-project-translations</source>
+https://www.transifex.com/bcz-project/bcz-project-translations</source>
         <translation>Langue manquante ou traduction incomplète? Aidez-nous à traduire ce projet ici:
-https://www.transifex.com/pivx-project/pivx-project-translations</translation>
+https://www.transifex.com/bcz-project/bcz-project-translations</translation>
     </message>
     <message>
         <source>Map port using &amp;UPnP</source>
@@ -2184,8 +2184,8 @@ Adresse : %4
         <translation>Adresse de paiement invalide %1</translation>
     </message>
     <message>
-        <source>Cannot start pivx: click-to-pay handler</source>
-        <translation>Impossible de démarrer pivx: gestionnaire click-to-pay</translation>
+        <source>Cannot start bcz: click-to-pay handler</source>
+        <translation>Impossible de démarrer bcz: gestionnaire click-to-pay</translation>
     </message>
     <message>
         <source>URI cannot be parsed! This can be caused by an invalid BCZ address or malformed URI parameters.</source>
@@ -4150,14 +4150,14 @@ pour voir votre solde de monnaie dépensable sur le réseau.
                            zPIV is an optional privacy-centric method of coin mixing on the
                            BCZ blockchain. Basically all your transactions cannot be tracked
                            on to any block explorer. You can read more about the technicals in the
-                           &lt;a style='color: #b088ff' href='https://BCZ.org/zpiv/'&gt;
+                           &lt;a style='color: #b088ff' href='https://BCZ.org/zbcz/'&gt;
                            "BCZ Zerocoin (zPIV) Technical Paper"&lt;/a&gt;.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
                          </source>
         <translation>
 &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;
 zPIV est une méthode optionnelle de fongibilité des pièces sur la blockchain BCZ, axée sur la confidentialité. Basiquement, cela permet rendre vos transactions intraçables par les explorateurs de blocs. Vous pouvez en savoir plus sur les aspects techniques en consultant le document
-&lt;a style='color: #b088ff' href='https://BCZ.org/zpiv/'&gt;
+&lt;a style='color: #b088ff' href='https://BCZ.org/zbcz/'&gt;
  "BCZ Zerocoin (zPIV) Technical Paper".&lt;/a&gt;
 &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
 </translation>
@@ -4203,11 +4203,11 @@ mon solde en zPIV?</translation>
                            you can disable the automatic minting in your BCZ wallet by
                            going to Settings-&gt;Options and deselecting “Enable zPIV Automint”.
                            If you are not making use of the BCZ-QT or GUI you can simply open
-                           your pivx.conf file and add &lt;i&gt;enablezeromint=0&lt;/i&gt; Without the quotation
+                           your bcz.conf file and add &lt;i&gt;enablezeromint=0&lt;/i&gt; Without the quotation
                            marks and restart your wallet to disable automint.&lt;/p&gt;
                            &lt;/p&gt;&lt;p align="justify"&gt;
                            You can read more about zPIV in the
-                           &lt;a style='color: #b088ff' href='https://BCZ.org/zpiv/'&gt; "BCZ Zerocoin (zPIV) Technical Paper"&lt;/a&gt;.
+                           &lt;a style='color: #b088ff' href='https://BCZ.org/zbcz/'&gt; "BCZ Zerocoin (zPIV) Technical Paper"&lt;/a&gt;.
                            If you would like to keep and stake your zPIV, please read the "How do I stake"
                            section of the FAQ below.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
@@ -4219,11 +4219,11 @@ conserver des zPIV ou profiter de ses propriétés en matière de confidentialit
 vous pouvez désactiver cette fonctionnalité dans votre portefeuille BCZ en
 allant dans Paramètres-&gt;Options et décocher “Activer l'atuto-monnayage zPIV”.
 Si vous n'utilisez pas BCZ-QT ou le GUI vous pouvez simplement ouvrir
-votre fichier pivx.conf et ajouter &lt;i&gt; enablezeromint=0&lt;/i&gt; sans guillements
+votre fichier bcz.conf et ajouter &lt;i&gt; enablezeromint=0&lt;/i&gt; sans guillements
 et redémarrer votre portefeuille.&lt;/p&gt;
 &lt;/p&gt;&lt;p align="justify"&gt;
 Vous pouvez en savoir plus sur zPIV dans
-&lt;a style='color: #b088ff' href='https://BCZ.org/zpiv/'&gt; le document "BCZ Zerocoin (zPIV) Technical Paper"&lt;/a&gt;.
+&lt;a style='color: #b088ff' href='https://BCZ.org/zbcz/'&gt; le document "BCZ Zerocoin (zPIV) Technical Paper"&lt;/a&gt;.
 Si vous voulez conserver et mettre en jeu vos zPIV, veuillez lire la section "Comment staker"
 de la FAQ ci-dessous.
 &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
@@ -4276,7 +4276,7 @@ Si vous désirez obtenir plus de zPIV vous devez créer cette monnaie à partir 
                            &lt;li&gt;
                            Once all those steps are followed staking should be enabled.
                            &lt;li&gt;
-                           You can see the status of staking in the wallet by mousing over the package icon in the row on the top left of the wallet interface. There package will be lit up and will state "Staking Enabled" to indicate it is staking.  Using the command line interface (pivx-cli); the command &lt;i&gt;getstakingstatus&lt;/i&gt; will confirm that staking is active.
+                           You can see the status of staking in the wallet by mousing over the package icon in the row on the top left of the wallet interface. There package will be lit up and will state "Staking Enabled" to indicate it is staking.  Using the command line interface (bcz-cli); the command &lt;i&gt;getstakingstatus&lt;/i&gt; will confirm that staking is active.
                            &lt;/li&gt;&lt;/ol&gt;
                            &lt;/p&gt;&lt;p align="justify"&gt;
                            To Stake zPIV:
@@ -4304,7 +4304,7 @@ Votre portefeuille doit rester en ligne et dévérouillé pour le staking.
 &lt;li&gt;
 Une fois ces étapes accomplies le staking devrait être activé.
 &lt;li&gt;
- Vous pouvez voir le statut du staking dans le portefeuille en survolant l'icône du package dans la rangée en haut à gauche de l'interface du portefeuille. Le package sera allumé et indiquera "Staking Enabled" pour confirmer qu'il est effectivement activé. Dans le cas de l'utilisation de l'interface en ligne de commande (pivx-cli); La commande &lt;i&gt;getstakingstatus&lt;/i&gt; confirmera que le staking est actif.
+ Vous pouvez voir le statut du staking dans le portefeuille en survolant l'icône du package dans la rangée en haut à gauche de l'interface du portefeuille. Le package sera allumé et indiquera "Staking Enabled" pour confirmer qu'il est effectivement activé. Dans le cas de l'utilisation de l'interface en ligne de commande (bcz-cli); La commande &lt;i&gt;getstakingstatus&lt;/i&gt; confirmera que le staking est actif.
 &lt;/li&gt;&lt;/ol&gt;
 &lt;/p&gt;&lt;p align="justify"&gt;
 Pour faire du Stake avec vos zPIV:
@@ -4562,8 +4562,8 @@ Exigences:
         <translation>Impossible d'ouvrir le répertoire de backups</translation>
     </message>
     <message>
-        <source>Unable to open pivx.conf with default application</source>
-        <translation>Impossible d'ouvrir pivx.conf avec l'application par défaut</translation>
+        <source>Unable to open bcz.conf with default application</source>
+        <translation>Impossible d'ouvrir bcz.conf avec l'application par défaut</translation>
     </message>
     <message>
         <source>In:</source>
@@ -6074,7 +6074,7 @@ Portefeuille BCZ Core</translation>
     </message>
 </context>
 <context>
-    <name>pivx-core</name>
+    <name>bcz-core</name>
     <message>
         <source>(1 = keep tx meta data e.g. account owner and payment request information, 2 = drop tx meta data)</source>
         <translation>(1 = conserve les métadonnées de transaction, par exemple le propriétaire du compte et les informations de demande de paiement, 2 = supprime les métadonnées)</translation>

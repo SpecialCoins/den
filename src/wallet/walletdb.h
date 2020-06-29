@@ -13,10 +13,10 @@
 #include "key.h"
 #include "keystore.h"
 #include "script/keyorigin.h"
-#include "zpiv/zerocoin.h"
+#include "zbcz/zerocoin.h"
 #include "libzerocoin/Accumulator.h"
 #include "libzerocoin/Denominations.h"
-#include "zpiv/zpivtracker.h"
+#include "zbcz/zbcztracker.h"
 
 #include <list>
 #include <stdint.h>

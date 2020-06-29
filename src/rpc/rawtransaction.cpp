@@ -13,7 +13,7 @@
 #include "net.h"
 #include "policy/policy.h"
 #include "primitives/transaction.h"
-#include "zpiv/deterministicmint.h"
+#include "zbcz/deterministicmint.h"
 #include "rpc/server.h"
 #include "script/script.h"
 #include "script/script_error.h"
@@ -22,7 +22,7 @@
 #include "swifttx.h"
 #include "uint256.h"
 #include "utilmoneystr.h"
-#include "zpivchain.h"
+#include "zbczchain.h"
 #ifdef ENABLE_WALLET
 #include "wallet/wallet.h"
 #endif

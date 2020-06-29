@@ -1607,7 +1607,7 @@ Please wait few more minutes (masternode collaterals require %1 confirmations).<
 on a remote server to your clipboard.
 
 
-You will only have to paste the data in the pivx.conf file
+You will only have to paste the data in the bcz.conf file
 of your remote server and start it, then start the Masternode using
 this controller wallet (select the Masternode in the list and press "start").
 </source>
@@ -1616,8 +1616,8 @@ um einen Masternode auf einem externen Server laufen zu lassen,
 in die Zwischenablage zu kopieren.
 
 
-SIe müssen lediglich die Daten in das pivx.conf-File ihres externen Servers einfügen,
-die Pivx-wallet starten, um dann von der Kontrollwallet aus
+SIe müssen lediglich die Daten in das bcz.conf-File ihres externen Servers einfügen,
+die BCZ-wallet starten, um dann von der Kontrollwallet aus
 ihren Masternode zu starten.
 </translation>
     </message>
@@ -1784,8 +1784,8 @@ Sind sie sicher?</translation>
         <translation>Zu viele Daten zu parsen</translation>
     </message>
     <message>
-        <source>Invalid URI, not starting with "pivx" prefix</source>
-        <translation>Ungültige URI, sie beginnt nicht mit "pivx"-Präfix</translation>
+        <source>Invalid URI, not starting with "bcz" prefix</source>
+        <translation>Ungültige URI, sie beginnt nicht mit "bcz"-Präfix</translation>
     </message>
 </context>
 <context>
@@ -1891,9 +1891,9 @@ Sind sie sicher?</translation>
     </message>
     <message>
         <source>Language missing or translation incomplete? Help contributing translations here:
-https://www.transifex.com/pivx-project/pivx-project-translations</source>
+https://www.transifex.com/bcz-project/bcz-project-translations</source>
         <translation>Sprache fehlt oder ist unvollständig? Helfe mit und trage zur Übersetzung bei unter:
-https://www.transifex.com/pivx-project/pivx-project-translations</translation>
+https://www.transifex.com/bcz-project/bcz-project-translations</translation>
     </message>
     <message>
         <source>Map port using &amp;UPnP</source>
@@ -2181,7 +2181,7 @@ Adresse: %4</translation>
         <translation>Ungültige Zahlungsaufforderungsadresse %1</translation>
     </message>
     <message>
-        <source>Cannot start pivx: click-to-pay handler</source>
+        <source>Cannot start bcz: click-to-pay handler</source>
         <translation>Kann BCZ nicht starten: click-to-pay Handler</translation>
     </message>
     <message>
@@ -4082,14 +4082,14 @@ BCZ nutzt einen PoS Konsensalgorithmus, der es den Besitzern von BCZ erlaubt, an
                            zPIV is an optional privacy-centric method of coin mixing on the
                            BCZ blockchain. Basically all your transactions cannot be tracked
                            on to any block explorer. You can read more about the technicals in the
-                           &lt;a style='color: #b088ff' href='https://BCZ.org/zpiv/'&gt;
+                           &lt;a style='color: #b088ff' href='https://BCZ.org/zbcz/'&gt;
                            "BCZ Zerocoin (zPIV) Technical Paper"&lt;/a&gt;.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
                          </source>
         <translation>
 &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;
 zPIV ist eine optionale Methode zur Mischung von Münzen auf der BCZ Blockchain, deren Fokus auf Privatsphäre liegt. Im Grunde können all Ihre Transaktionen nicht auf einem Blockexplorer verfolgt werden. Hier  finden Sie mehr über die Technik heraus.
-&lt;a style='color: #b088ff' href='https://BCZ.org/zpiv/'&gt;
+&lt;a style='color: #b088ff' href='https://BCZ.org/zbcz/'&gt;
 "BCZ Zerocoin (zPIV) Technical Paper"&lt;/a&gt;
 &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -4271,8 +4271,8 @@ zPIV ist eine optionale Methode zur Mischung von Münzen auf der BCZ Blockchain,
         <translation>Backup-Ordner konnte nicht geöffnet werden</translation>
     </message>
     <message>
-        <source>Unable to open pivx.conf with default application</source>
-        <translation>pivx.conf konnte mit der Standardanwendung nicht geöffnet werden</translation>
+        <source>Unable to open bcz.conf with default application</source>
+        <translation>bcz.conf konnte mit der Standardanwendung nicht geöffnet werden</translation>
     </message>
     <message>
         <source>In:</source>
@@ -5762,7 +5762,7 @@ BCZ Core Wallet</source>
     </message>
 </context>
 <context>
-    <name>pivx-core</name>
+    <name>bcz-core</name>
     <message>
         <source>(1 = keep tx meta data e.g. account owner and payment request information, 2 = drop tx meta data)</source>
         <translation>(1 = behalte Tx-Meta-Daten z.B. Betrag, Besitzer und Zahlungsanforderungsinformationen, 2 = verwerfe Tx-Meta-Daten)</translation>

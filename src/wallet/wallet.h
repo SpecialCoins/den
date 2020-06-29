@@ -20,7 +20,7 @@
 #include "pairresult.h"
 #include "primitives/block.h"
 #include "primitives/transaction.h"
-#include "zpiv/zerocoin.h"
+#include "zbcz/zerocoin.h"
 #include "guiinterface.h"
 #include "util.h"
 #include "util/memory.h"
@@ -28,9 +28,9 @@
 #include "wallet/wallet_ismine.h"
 #include "wallet/scriptpubkeyman.h"
 #include "wallet/walletdb.h"
-#include "zpiv/zpivmodule.h"
-#include "zpiv/zpivwallet.h"
-#include "zpiv/zpivtracker.h"
+#include "zbcz/zbczmodule.h"
+#include "zbcz/zbczwallet.h"
+#include "zbcz/zbcztracker.h"
 
 #include <algorithm>
 #include <map>
@@ -638,7 +638,7 @@ public:
 
     // zPIV wallet
     CzPIVWallet* zwalletMain{nullptr};
-    std::unique_ptr<CzPIVTracker> zpivTracker{nullptr};
+    std::unique_ptr<CzPIVTracker> zbczTracker{nullptr};
     void setZWallet(CzPIVWallet* zwallet);
     CzPIVWallet* getZWallet();
     bool IsMyZerocoinSpend(const CBigNum& bnSerial) const;

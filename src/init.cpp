@@ -49,7 +49,7 @@
 #include "utilmoneystr.h"
 #include "util/threadnames.h"
 #include "validationinterface.h"
-#include "zpivchain.h"
+#include "zbczchain.h"
 
 #ifdef ENABLE_WALLET
 #include "wallet/db.h"
@@ -1587,7 +1587,7 @@ bool AppInit2()
                 // Recalculate money supply
                 if (fReindexMoneySupply) {
                     LOCK(cs_main);
-                    // Skip zpiv if already reindexed
+                    // Skip zbcz if already reindexed
                     RecalculatePIVSupply(1, fReindexZerocoin);
                 }
 
@@ -1837,7 +1837,7 @@ bool AppInit2()
             uiInterface.InitMessage(_("Syncing zPIV wallet..."));
 
             //Load zerocoin mint hashes to memory
-            pwalletMain->zpivTracker->Init();
+            pwalletMain->zbczTracker->Init();
             zwalletMain->LoadMintPoolFromDB();
             zwalletMain->SyncWithChain();
         }

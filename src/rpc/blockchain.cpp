@@ -18,8 +18,8 @@
 #include "utilmoneystr.h"
 #include "utilstrencodings.h"
 #include "wallet/wallet.h"
-#include "zpiv/zpivmodule.h"
-#include "zpivchain.h"
+#include "zbcz/zbczmodule.h"
+#include "zbczchain.h"
 
 #include <stdint.h>
 #include <fstream>

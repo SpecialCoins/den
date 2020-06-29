@@ -394,11 +394,11 @@ RES_ICONS = \
   qt/bcz/res/img/ic-receive-off.svg \
   qt/bcz/res/img/img-empty-staking-on.svg \
   qt/bcz/res/img/ic-arrow-drop-up-white.svg \
-  qt/bcz/res/img/ic-coin-zpiv.png \
+  qt/bcz/res/img/ic-coin-zbcz.png \
   qt/bcz/res/img/ic-receive-on.svg \
   qt/bcz/res/img/img-empty-transactions.svg \
   qt/bcz/res/img/ic-arrow-drop-up.svg \
-  qt/bcz/res/img/ic-coin-zpiv.svg \
+  qt/bcz/res/img/ic-coin-zbcz.svg \
   qt/bcz/res/img/ic-received.svg \
   qt/bcz/res/img/img-logo-bcz.png \
   qt/bcz/res/img/ic-arrow-drop-white-down.svg \

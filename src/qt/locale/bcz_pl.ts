@@ -1588,7 +1588,7 @@ i głosuj na system skarbu otrzymujący okresową nagrodę.</translation>
 on a remote server to your clipboard.
 
 
-You will only have to paste the data in the pivx.conf file
+You will only have to paste the data in the bcz.conf file
 of your remote server and start it, then start the Masternode using
 this controller wallet (select the Masternode in the list and press "start").
 </source>
@@ -1596,7 +1596,7 @@ this controller wallet (select the Masternode in the list and press "start").
 na zdalnym serwerze do twojego schowka.
 
 
-Wystarczy wkleić dane do pliku pivx.conf
+Wystarczy wkleić dane do pliku bcz.conf
 zdalnego serwera i uruchom go, a następnie uruchom Masternode przy użyciu
 portfela kontrolujacego (wybierz Masternode z listy i naciśnij „start”).
 </translation>
@@ -1760,8 +1760,8 @@ Jesteś pewny?</translation>
         <translation>Przetwarzane dane są za duże</translation>
     </message>
     <message>
-        <source>Invalid URI, not starting with "pivx" prefix</source>
-        <translation>Nieprawidłowy identyfikator URI, nie zaczynający się od prefiksu „pivx”</translation>
+        <source>Invalid URI, not starting with "bcz" prefix</source>
+        <translation>Nieprawidłowy identyfikator URI, nie zaczynający się od prefiksu „bcz”</translation>
     </message>
 </context>
 <context>
@@ -1867,9 +1867,9 @@ Jesteś pewny?</translation>
     </message>
     <message>
         <source>Language missing or translation incomplete? Help contributing translations here:
-https://www.transifex.com/pivx-project/pivx-project-translations</source>
+https://www.transifex.com/bcz-project/bcz-project-translations</source>
         <translation>Brakuje języka bądź nieukończona pełnego tłumaczenia? Pomóż w tłumaczeniu tutaj:
-https://www.transifex.com/pivx-project/pivx-project-translations </translation>
+https://www.transifex.com/bcz-project/bcz-project-translations </translation>
     </message>
     <message>
         <source>Map port using &amp;UPnP</source>
@@ -2158,8 +2158,8 @@ Adres: %4
         <translation>Nieprawidłowy adres płatności %1</translation>
     </message>
     <message>
-        <source>Cannot start pivx: click-to-pay handler</source>
-        <translation>Nie można uruchomić pivx: click-to-pay handler</translation>
+        <source>Cannot start bcz: click-to-pay handler</source>
+        <translation>Nie można uruchomić bcz: click-to-pay handler</translation>
     </message>
     <message>
         <source>URI cannot be parsed! This can be caused by an invalid BCZ address or malformed URI parameters.</source>
@@ -4117,8 +4117,8 @@ do zPIV automatycznie?</translation>
         <translation>Nie można otworzyć folderu kopii zapasowych</translation>
     </message>
     <message>
-        <source>Unable to open pivx.conf with default application</source>
-        <translation>Nie można otworzyć pliku pivx.conf w domyślnej aplikacji</translation>
+        <source>Unable to open bcz.conf with default application</source>
+        <translation>Nie można otworzyć pliku bcz.conf w domyślnej aplikacji</translation>
     </message>
     <message>
         <source>In:</source>
@@ -5553,7 +5553,7 @@ Portfel BCZ Core</translation>
     </message>
 </context>
 <context>
-    <name>pivx-core</name>
+    <name>bcz-core</name>
     <message>
         <source>(1 = keep tx meta data e.g. account owner and payment request information, 2 = drop tx meta data)</source>
         <translation>(1 = zachowaj tx meta dane np. Właściciel konta i informacje o żądaniu płatności, 2 = porzuć tx meta dane)</translation>

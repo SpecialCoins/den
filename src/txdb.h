@@ -9,7 +9,7 @@
 
 #include "dbwrapper.h"
 #include "main.h"
-#include "zpiv/zerocoin.h"
+#include "zbcz/zerocoin.h"
 
 #include <map>
 #include <string>
