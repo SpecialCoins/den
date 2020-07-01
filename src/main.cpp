@@ -1969,15 +1969,12 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
     unsigned int nSigOps = 0;
     CDiskTxPos pos(pindex->GetBlockPos(), GetSizeOfCompactSize(block.vtx.size()));
     std::vector<std::pair<uint256, CDiskTxPos> > vPos;
-    std::vector<std::pair<libzerocoin::CoinSpend, uint256> > vSpends;
-    std::vector<std::pair<libzerocoin::PublicCoin, uint256> > vMints;
     vPos.reserve(block.vtx.size());
     CBlockUndo blockundo;
     blockundo.vtxundo.reserve(block.vtx.size() - 1);
     CAmount nValueOut = 0;
     CAmount nValueIn = 0;
     unsigned int nMaxBlockSigOps = MAX_BLOCK_SIGOPS_CURRENT;
-    std::vector<uint256> vSpendsInBlock;
     uint256 hashBlock = block.GetHash();
     for (unsigned int i = 0; i < block.vtx.size(); i++) {
         const CTransaction& tx = block.vtx[i];
@@ -2176,14 +2173,6 @@ bool static FlushStateToDisk(CValidationState& state, FlushStateMode mode)
                 }
                 if (!pblocktree->WriteBatchSync(vFiles, nLastBlockFile, vBlocks)) {
                     return AbortNode(state, "Files to write to block index database");
-                }
-                // Flush zerocoin supply
-                if (!mapZerocoinSupply.empty() && !zerocoinDB->WriteZCSupply(mapZerocoinSupply)) {
-                    return AbortNode(state, "Failed to write zerocoin supply to DB");
-                }
-                // Flush money supply
-                if (!pblocktree->WriteMoneySupply(nMoneySupply)) {
-                    return AbortNode(state, "Failed to write money supply to DB");
                 }
             }
             nLastWrite = nNow;
