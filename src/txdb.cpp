@@ -231,7 +231,7 @@ bool CBlockTreeDB::LoadBlockIndexGuts()
 
                 //Proof Of Stake
                 pindexNew->nFlags = diskindex.nFlags;
-                if (!Params().GetConsensus().NetworkUpgradeActive(pindexPrev->nHeight, Consensus::UPGRADE_V3_4)) {
+                if (!Params().GetConsensus().NetworkUpgradeActive(pindexNew->nHeight, Consensus::UPGRADE_V3_4)) {
                     pindexNew->nStakeModifier = diskindex.nStakeModifier;
                 } else {
                     pindexNew->nStakeModifierV2 = diskindex.nStakeModifierV2;
