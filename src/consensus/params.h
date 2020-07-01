@@ -88,8 +88,7 @@ struct Params {
     int nBudgetCycleBlocks;
     int nBudgetFeeConfirmations;
     int nCoinbaseMaturity;
-    int nFutureTimeDriftPoW;
-    int nFutureTimeDriftPoS;
+    int nFutureTimeDrift;
     int nMasternodeCountDrift;
     CAmount nMaxMoneyOut;
     int nPoolMaxTransactions;
@@ -117,10 +116,7 @@ struct Params {
 
     int FutureBlockTimeDrift(const int nHeight) const
     {
-        // PoS (TimeV2): 14 seconds
-        if (IsTimeProtocolV2(nHeight)) return nTimeSlotLength - 1;
-        // PoS (TimeV1): 3 minutes - PoW: 2 hours
-        return (NetworkUpgradeActive(nHeight, UPGRADE_POS) ? nFutureTimeDriftPoS : nFutureTimeDriftPoW);
+        return nFutureTimeDrift;
     }
 
     bool IsValidBlockTimeStamp(const int64_t nTime, const int nHeight) const
