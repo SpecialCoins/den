@@ -233,11 +233,6 @@ bool CBlockTreeDB::LoadBlockIndexGuts()
                 pindexNew->nFlags = diskindex.nFlags;
                 pindexNew->vStakeModifier = diskindex.vStakeModifier;
 
-                if (!Params().GetConsensus().NetworkUpgradeActive(pindexNew->nHeight, Consensus::UPGRADE_POS)) {
-                    if (!CheckProofOfWork(pindexNew->GetBlockHash(), pindexNew->nBits))
-                        return error("LoadBlockIndex() : CheckProofOfWork failed: %s", pindexNew->ToString());
-                }
-
                 pcursor->Next();
             } else {
                 return error("%s : failed to read value", __func__);
@@ -248,9 +243,4 @@ bool CBlockTreeDB::LoadBlockIndexGuts()
     }
 
     return true;
-}
-
-bool CBlockTreeDB::ReadLegacyBlockIndex(const uint256& blockHash, CLegacyBlockIndex& biRet)
-{
-    return Read(std::make_pair(DB_BLOCK_INDEX, blockHash), biRet);
 }
