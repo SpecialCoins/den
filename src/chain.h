@@ -453,9 +453,8 @@ public:
             READWRITE(VARINT(nUndoPos));
 
         READWRITE(nFlags);
-
         // v1/v2 modifier selection.
-        if (!Params().GetConsensus().IsStakeModifierV2(nHeight)) {
+        if (!consensus.NetworkUpgradeActive(pindexNew->nHeight, Consensus::UPGRADE_V3_4)) {
             READWRITE(nStakeModifier);
         } else {
             READWRITE(nStakeModifierV2);
