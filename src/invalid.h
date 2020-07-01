@@ -19,7 +19,5 @@ namespace invalid_out
     UniValue read_json(const std::string& jsondata);
 
     bool ContainsOutPoint(const COutPoint& out);
-    bool ContainsSerial(const CBigNum& bnSerial);
     bool LoadOutpoints();
-    bool LoadSerials();
 }

@@ -1631,7 +1631,7 @@ bool CScriptCheck::operator()()
 
 bool ValidOutPoint(const COutPoint& out, int nHeight)
 {
-    bool isInvalid = nHeight >= Params().GetConsensus().height_start_InvalidUTXOsCheck && invalid_out::ContainsOutPoint(out);
+    bool isInvalid = invalid_out::ContainsOutPoint(out);
     return !isInvalid;
 }
 
