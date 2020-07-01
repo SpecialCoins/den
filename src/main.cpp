@@ -1793,6 +1793,7 @@ bool DisconnectBlock(CBlock& block, CValidationState& state, CBlockIndex* pindex
 
         uint256 hash = tx.GetHash();
 
+
         // Check that all outputs are available and match the outputs in the block itself
         // exactly. Note that transactions with only provably unspendable outputs won't
         // have outputs available even in the block itself, so we handle that case
@@ -1816,7 +1817,7 @@ bool DisconnectBlock(CBlock& block, CValidationState& state, CBlockIndex* pindex
         }
 
         // restore inputs
-        if (!tx.IsCoinBase()) {
+        if (!tx.IsCoinBase()) { // not coinbases because they dont have traditional inputs
             const CTxUndo& txundo = blockUndo.vtxundo[i - 1];
             if (txundo.vprevout.size() != tx.vin.size())
                 return error("DisconnectBlock() : transaction and undo data inconsistent - txundo.vprevout.siz=%d tx.vin.siz=%d", txundo.vprevout.size(), tx.vin.size());
@@ -1843,6 +1844,7 @@ bool DisconnectBlock(CBlock& block, CValidationState& state, CBlockIndex* pindex
                 coins->vout[out.n] = undo.txout;
             }
         }
+    }
 
     // move best block pointer to prevout block
     view.SetBestBlock(pindex->pprev->GetBlockHash());
