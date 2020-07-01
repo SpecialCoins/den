@@ -575,19 +575,20 @@ void CTxMemPool::check(const CCoinsViewCache* pcoins) const
         for (const CTxIn& txin : tx.vin) {
             // Check that every mempool transaction's inputs refer to available coins, or other mempool tx's.
             indexed_transaction_set::const_iterator it2 = mapTx.find(txin.prevout.hash);
-            if (it2 != mapTx.end()) {
+            if (it2 != mapTx.end())
+            {
                 const CTransaction& tx2 = it2->GetTx();
                 assert(tx2.vout.size() > txin.prevout.n && !tx2.vout[txin.prevout.n].IsNull());
                 fDependsWait = true;
                 setParentCheck.insert(it2);
-            } else if(!txin.IsZerocoinSpend() && !txin.IsZerocoinPublicSpend()) {
+            }
+            else
+            {
                 const CCoins* coins = pcoins->AccessCoins(txin.prevout.hash);
                 assert(coins && coins->IsAvailable(txin.prevout.n));
-            } else {
-                fHasZerocoinSpends = true;
             }
             // Check whether its inputs are marked in mapNextTx.
-            if(!fHasZerocoinSpends) {
+            if(true) {
                 std::map<COutPoint, CInPoint>::const_iterator it3 = mapNextTx.find(txin.prevout);
                 assert(it3 != mapNextTx.end());
                 assert(it3->second.ptx == &tx);
@@ -599,7 +600,7 @@ void CTxMemPool::check(const CCoinsViewCache* pcoins) const
         }
         assert(setParentCheck == GetMemPoolParents(it));
         // Check children against mapNextTx
-        if (!fHasZerocoinSpends) {
+        if (true) {
             CTxMemPool::setEntries setChildrenCheck;
             std::map<COutPoint, CInPoint>::const_iterator iter = mapNextTx.lower_bound(COutPoint(tx.GetHash(), 0));
             int64_t childSizes = 0;
@@ -766,8 +767,6 @@ void CTxMemPool::ClearPrioritisation(const uint256 hash)
 
 bool CTxMemPool::HasNoInputsOf(const CTransaction &tx) const
 {
-    if (tx.HasZerocoinSpendInputs())
-        return true;
     for (unsigned int i = 0; i < tx.vin.size(); i++)
         if (exists(tx.vin[i].prevout.hash))
             return false;
