@@ -1984,10 +1984,9 @@ bool AppInit2()
         // Run a thread to flush wallet periodically
         threadGroup.create_thread(boost::bind(&ThreadFlushWalletDB, boost::ref(pwalletMain->strWalletFile)));
 
-        // StakeMiner thread disabled by default on regtest
-        if (GetBoolArg("-staking", !Params().IsRegTestNet())) {
-            threadGroup.create_thread(boost::bind(&ThreadStakeMinter));
-        }
+        // Generate coins in the background
+        if (pwalletMain)
+            StakeBCZ(GetBoolArg("-stake", false), pwalletMain);
     }
 #endif
 
