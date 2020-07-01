@@ -3396,8 +3396,10 @@ bool AcceptBlock(CBlock& block, CValidationState& state, CBlockIndex** ppindex, 
         return error("%s: %s", __func__, FormatStateMessage(state));
     }
 
-    int nHeight = pindex->nHeight;
     if (isPoS) {
+        uint256 hashProofOfStake;
+        int nHeight = pindex->nHeight;
+
         LOCK(cs_main);
 
         // Blocks arrives in order, so if prev block is not the tip then we are on a fork.
