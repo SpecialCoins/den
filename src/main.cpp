@@ -3417,9 +3417,9 @@ bool AcceptBlock(CBlock& block, CValidationState& state, CBlockIndex** ppindex, 
         return error("%s: %s", __func__, FormatStateMessage(state));
     }
 
-    if (isPoS) {
+    int nHeight = pindex->nHeight;
 
-        int nHeight = pindex->nHeight;
+    if (isPoS) {
 
         LOCK(cs_main);
 
