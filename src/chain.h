@@ -454,7 +454,7 @@ public:
 
         READWRITE(nFlags);
         // v1/v2 modifier selection.
-        if (!consensus.NetworkUpgradeActive(pindexNew->nHeight, Consensus::UPGRADE_V3_4)) {
+        if (!Params().GetConsensus().NetworkUpgradeActive(nHeight, Consensus::UPGRADE_V3_4)) {
             READWRITE(nStakeModifier);
         } else {
             READWRITE(nStakeModifierV2);
