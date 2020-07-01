@@ -107,7 +107,7 @@ struct Params {
     bool MoneyRange(const CAmount& nValue) const { return (nValue >= 0 && nValue <= nMaxMoneyOut); }
     bool IsTimeProtocolV2(const int nHeight) const { return NetworkUpgradeActive(nHeight, UPGRADE_V4_0); }
 
-    int FutureBlockTimeDrift(const int nHeight) const
+    int FutureBlockTimeDrift() const
     {
         return nFutureTimeDrift;
     }
