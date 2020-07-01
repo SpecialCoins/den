@@ -1003,8 +1003,7 @@ bool AcceptToMemoryPool(CTxMemPool& pool, CValidationState& state, const CTransa
         // invalid blocks, however allowing such transactions into the mempool
         // can be exploited as a DoS attack.
         flags = MANDATORY_SCRIPT_VERIFY_FLAGS;
-        if (fCLTVIsActivated)
-            flags |= SCRIPT_VERIFY_CHECKLOCKTIMEVERIFY;
+        flags |= SCRIPT_VERIFY_CHECKLOCKTIMEVERIFY;
         if (!CheckInputs(tx, state, view, true, flags, true)) {
             return error("%s: BUG! PLEASE REPORT THIS! ConnectInputs failed against MANDATORY but not STANDARD flags %s, %s",
                 __func__, hash.ToString(), FormatStateMessage(state));
@@ -1999,8 +1998,7 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
 
             std::vector<CScriptCheck> vChecks;
             unsigned int flags = SCRIPT_VERIFY_P2SH | SCRIPT_VERIFY_DERSIG;
-            if (fCLTVIsActivated)
-                flags |= SCRIPT_VERIFY_CHECKLOCKTIMEVERIFY;
+            flags |= SCRIPT_VERIFY_CHECKLOCKTIMEVERIFY;
 
             bool fCacheResults = fJustCheck; /* Don't cache results if we're actually connecting blocks (still consult the cache, though) */
             if (!CheckInputs(tx, state, view, fScriptChecks, flags, fCacheResults, nScriptCheckThreads ? &vChecks : NULL))

@@ -1517,6 +1517,7 @@ bool AppInit2()
 
                     // Flag sent to validation code to let it know it can skip certain checks
                     fVerifyingBlocks = true;
+
                     int chainHeight;
                     {
                         LOCK(cs_main);
