@@ -82,7 +82,6 @@ struct NetworkUpgrade {
 struct Params {
     uint256 hashGenesisBlock;
     uint256 powLimit;
-    bool fPowAllowMinDifficultyBlocks;
     int nBudgetCycleBlocks;
     int nBudgetFeeConfirmations;
     int nCoinbaseMaturity;
