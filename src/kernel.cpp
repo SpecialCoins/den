@@ -112,7 +112,7 @@ uint256 ComputeStakeModifier(const CBlockIndex* pindexPrev, const uint256& kerne
     ss << kernel;
 
     // switch with old modifier on upgrade block
-    if (!consensus.NetworkUpgradeActive(pindexNew->nHeight + 1, Consensus::UPGRADE_V3_4)) {
+    if (!Params().GetConsensus().NetworkUpgradeActive(pindexPrev->nHeight + 1, Consensus::UPGRADE_V3_4)) {
         ss << pindexPrev->nStakeModifier;
     else
         ss << pindexPrev->nStakeModifierV2;
