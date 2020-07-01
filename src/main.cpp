@@ -1792,11 +1792,7 @@ bool DisconnectBlock(CBlock& block, CValidationState& state, CBlockIndex* pindex
     for (int i = block.vtx.size() - 1; i >= 0; i--) {
         const CTransaction& tx = block.vtx[i];
 
-        }//xxxxx
-        nValueOut += tx.GetValueOut();
-
         uint256 hash = tx.GetHash();
-
 
         // Check that all outputs are available and match the outputs in the block itself
         // exactly. Note that transactions with only provably unspendable outputs won't
