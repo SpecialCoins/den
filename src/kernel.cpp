@@ -331,7 +331,7 @@ bool GetHashProofOfStake(const CBlockIndex* pindexPrev, CStakeInput* stake, cons
     return true;
 }
 
-bool Stake(const CBlockIndex* pindexPrev, CStakeInput* stakeInput, unsigned int nBits, unsigned int& nTimeTx, uint256& hashProofOfStake)
+bool Stake(const CBlockIndex* pindexPrev, CStakeInput* stakeInput, unsigned int nBits, int64_t& nTimeTx, uint256& hashProofOfStake)
 {
     int prevHeight = pindexPrev->nHeight;
 
