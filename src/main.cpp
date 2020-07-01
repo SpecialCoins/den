@@ -5065,14 +5065,6 @@ bool static ProcessMessage(CNode* pfrom, std::string strCommand, CDataStream& vR
 
             for (uint256 hash : vEraseQueue) EraseOrphanTx(hash);
 
-        } else if (AcceptToMemoryPool(mempool, state, tx, true, false, false, ignoreFees)) {
-            //Presstab: ZCoin has a bunch of code commented out here. Is this something that should have more going on?
-            //Also there is nothing that handles fMissingZerocoinInputs. Does there need to be?
-            RelayTransaction(tx);
-            LogPrint(BCLog::MEMPOOL, "AcceptToMemoryPool: Zerocoinspend peer=%d %s : accepted %s (poolsz %u)\n",
-                     pfrom->id, pfrom->cleanSubVer,
-                     tx.GetHash().ToString(),
-                     mempool.mapTx.size());
         } else if (fMissingInputs) {
             AddOrphanTx(tx, pfrom->GetId());
 
