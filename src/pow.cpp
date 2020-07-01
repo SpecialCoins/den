@@ -45,8 +45,8 @@ unsigned int static DarkGravityWave3(const CBlockIndex* pindexLast) {
    bnNew *= nActualTimespan;
    bnNew /= nTargetTimespan;
 
-   if (bnNew > Params().ProofOfWorkLimit()) {
-       bnNew = Params().ProofOfWorkLimit();
+   if (bnNew > consensus.powLimit)) {
+       bnNew = consensus.powLimit;
    }
 
    return bnNew.GetCompact();
@@ -60,7 +60,7 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast)
    }
    else
    {
-       return Params().ProofOfWorkLimit().GetCompact();
+       return consensus.powLimit.GetCompact();
    }
 }
 

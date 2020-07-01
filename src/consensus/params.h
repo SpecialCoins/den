@@ -81,10 +81,8 @@ struct NetworkUpgrade {
  */
 struct Params {
     uint256 hashGenesisBlock;
-    bool fPowAllowMinDifficultyBlocks;
     uint256 powLimit;
-    uint256 posLimitV1;
-    uint256 posLimitV2;
+    bool fPowAllowMinDifficultyBlocks;
     int nBudgetCycleBlocks;
     int nBudgetFeeConfirmations;
     int nCoinbaseMaturity;
@@ -95,9 +93,6 @@ struct Params {
     int64_t nProposalEstablishmentTime;
     int nStakeMinAge;
     int nStakeMinDepth;
-    int64_t nTargetTimespan;
-    int64_t nTargetTimespanV2;
-    int64_t nTargetSpacing;
     int nTimeSlotLength;
 
     // spork keys
@@ -109,8 +104,6 @@ struct Params {
     // Map with network updates
     NetworkUpgrade vUpgrades[MAX_NETWORK_UPGRADES];
 
-    int64_t TargetTimespan(const bool fV2 = true) const { return fV2 ? nTargetTimespanV2 : nTargetTimespan; }
-    uint256 ProofOfStakeLimit(const bool fV2) const { return fV2 ? posLimitV2 : posLimitV1; }
     bool MoneyRange(const CAmount& nValue) const { return (nValue >= 0 && nValue <= nMaxMoneyOut); }
     bool IsTimeProtocolV2(const int nHeight) const { return NetworkUpgradeActive(nHeight, UPGRADE_V4_0); }
 
