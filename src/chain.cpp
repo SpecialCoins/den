@@ -63,3 +63,25 @@ const CBlockIndex* CChain::FindFork(const CBlockIndex* pindex) const
         pindex = pindex->pprev;
     return pindex;
 }
+
+int64_t CBlockIndex::MaxFutureBlockTime() const
+{
+    return GetAdjustedTime() + Params().GetConsensus().FutureBlockTimeDrift(nHeight+1);
+}
+
+int64_t CBlockIndex::MinPastBlockTime() const
+{
+    const Consensus::Params& consensus = Params().GetConsensus();
+    // Time Protocol v1: pindexPrev->MedianTimePast + 1
+    if (!consensus.IsTimeProtocolV2(nHeight+1))
+        return GetMedianTimePast();
+
+    // on the transition from Time Protocol v1 to v2
+    // pindexPrev->nTime might be in the future (up to the allowed drift)
+    // so we allow the nBlockTimeProtocolV2 (PIVX v4.0) to be at most (180-14) seconds earlier than previous block
+    if (nHeight + 1 == consensus.vUpgrades[Consensus::UPGRADE_V4_0].nActivationHeight)
+        return GetBlockTime() - consensus.FutureBlockTimeDrift(nHeight) + consensus.FutureBlockTimeDrift(nHeight + 1);
+
+    // Time Protocol v2: pindexPrev->nTime
+    return GetBlockTime();
+}

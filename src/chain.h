@@ -334,6 +334,9 @@ public:
         return pbegin[(pend - pbegin) / 2];
     }
 
+    int64_t MaxFutureBlockTime() const;
+    int64_t MinPastBlockTime() const;
+
     bool IsProofOfWork() const
     {
         return !(nFlags & BLOCK_PROOF_OF_STAKE);
