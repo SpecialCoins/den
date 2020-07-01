@@ -891,7 +891,7 @@ bool CWallet::AddToWalletIfInvolvingMe(const CTransaction& tx, const CBlock* pbl
     {
         AssertLockHeld(cs_wallet);
 
-        if (pblock && !tx.HasZerocoinSpendInputs() && !tx.IsCoinBase()) {
+        if (pblock && !tx.IsCoinBase()) {
             for (const CTxIn& txin : tx.vin) {
                 std::pair<TxSpends::const_iterator, TxSpends::const_iterator> range = mapTxSpends.equal_range(txin.prevout);
                 while (range.first != range.second) {
@@ -1054,7 +1054,7 @@ void CWallet::SyncTransaction(const CTransaction& tx, const CBlock* pblock)
     // available of the outputs it spends. So force those to be
     // recomputed, also:
     for (const CTxIn& txin : tx.vin) {
-        if (!txin.IsZerocoinSpend() && mapWallet.count(txin.prevout.hash))
+        if (mapWallet.count(txin.prevout.hash))
             mapWallet[txin.prevout.hash].MarkDirty();
     }
 }
@@ -1523,7 +1523,6 @@ void CWalletTx::GetAmounts(std::list<COutputEntry>& listReceived,
     }
 
     // Sent/received.
-    bool hasZerocoinSpends = HasZerocoinSpendInputs();
     for (unsigned int i = 0; i < vout.size(); ++i) {
         const CTxOut& txout = vout[i];
         isminetype fIsMine = pwallet->IsMine(txout);
@@ -1534,15 +1533,13 @@ void CWalletTx::GetAmounts(std::list<COutputEntry>& listReceived,
             // Don't report 'change' txouts
             if (pwallet->IsChange(txout))
                 continue;
-        } else if (!(fIsMine & filter) && !hasZerocoinSpends)
+        } else if (!(fIsMine & filter))
             continue;
 
         // In either case, we need to get the destination address
         const bool fColdStake = (filter & ISMINE_COLD);
         CTxDestination address;
-        if (txout.IsZerocoinMint()) {
-            address = CNoDestination();
-        } else if (!ExtractDestination(txout.scriptPubKey, address, fColdStake)) {
+        if (!ExtractDestination(txout.scriptPubKey, address, fColdStake)) {
             if (!IsCoinStake() && !IsCoinBase()) {
                 LogPrintf("CWalletTx::GetAmounts: Unknown transaction type found, txid %s\n", this->GetHash().ToString());
             }
@@ -1994,7 +1991,6 @@ bool CWallet::AvailableCoins(std::vector<COutput>* pCoins,      // --> populates
                 }
                 if (!found) continue;
 
-                if (nCoinType == STAKEABLE_COINS && pcoin->vout[i].IsZerocoinMint()) continue;
                 if (IsSpent(wtxid, i)) continue;
 
                 isminetype mine = IsMine(pcoin->vout[i]);
@@ -2749,13 +2745,11 @@ bool CWallet::CreateCoinStake(
 
     // Sign for BCZ
     int nIn = 0;
-    if (!txNew.vin[0].scriptSig.IsZerocoinSpend()) {
         for (CTxIn txIn : txNew.vin) {
             const CWalletTx *wtx = GetWalletTx(txIn.prevout.hash);
             if (!SignSignature(*this, *wtx, txNew, nIn++, SIGHASH_ALL, true))
                 return error("CreateCoinStake : failed to sign coinstake");
         }
-    }
 
     // Successfully generated coinstake
     return true;
@@ -2805,7 +2799,6 @@ CWallet::CommitResult CWallet::CommitTransaction(CWalletTx& wtxNew, CReserveKey&
             AddToWallet(wtxNew, false, pwalletdb);
 
             // Notify that old coins are spent
-            if (!wtxNew.HasZerocoinSpendInputs()) {
                 std::set<uint256> updated_hahes;
                 for (const CTxIn& txin : wtxNew.vin) {
                     // notify only once
@@ -2816,7 +2809,6 @@ CWallet::CommitResult CWallet::CommitTransaction(CWalletTx& wtxNew, CReserveKey&
                     NotifyTransactionChanged(this, txin.prevout.hash, CT_UPDATED);
                     updated_hahes.insert(txin.prevout.hash);
                 }
-            }
 
             if (fFileBacked)
                 delete pwalletdb;
