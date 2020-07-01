@@ -298,7 +298,6 @@ bool CWallet::Lock()
     {
         LOCK(cs_KeyStore);
         vMasterKey.clear();
-        if (zwalletMain) zwalletMain->Lock();
     }
 
     NotifyStatusChanged(this);
