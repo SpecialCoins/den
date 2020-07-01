@@ -324,7 +324,6 @@ public:
 
         } else if (nSerVersion > DBI_OLD_SER_VERSION && ser_action.ForRead()) {
             // Serialization with CLIENT_VERSION = 4009901
-            std::map<libzerocoin::CoinDenomination, int64_t> mapZerocoinSupply;
             int64_t nMoneySupply = 0;
             READWRITE(nMoneySupply);
             READWRITE(nFlags);
@@ -371,11 +370,7 @@ public:
             READWRITE(nBits);
             READWRITE(nNonce);
             if(this->nVersion > 3) {
-                std::map<libzerocoin::CoinDenomination, int64_t> mapZerocoinSupply;
-                std::vector<libzerocoin::CoinDenomination> vMintDenominationsInBlock;
                 READWRITE(nAccumulatorCheckpoint);
-                READWRITE(mapZerocoinSupply);
-                READWRITE(vMintDenominationsInBlock);
             }
         }
     }
@@ -410,7 +405,6 @@ public:
 class CLegacyBlockIndex : public CBlockIndex
 {
 public:
-    std::map<libzerocoin::CoinDenomination, int64_t> mapZerocoinSupply{};
     int64_t nMint = 0;
     uint256 hashNext{};
     uint256 hashPrev{};
@@ -418,7 +412,6 @@ public:
     uint256 nStakeModifierV2{};
     COutPoint prevoutStake{};
     unsigned int nStakeTime = 0;
-    std::vector<libzerocoin::CoinDenomination> vMintDenominationsInBlock;
     int64_t nMoneySupply = 0;
 
 
@@ -490,8 +483,6 @@ public:
             READWRITE(nNonce);
             if(this->nVersion > 3) {
                 READWRITE(nAccumulatorCheckpoint);
-                READWRITE(mapZerocoinSupply);
-                READWRITE(vMintDenominationsInBlock);
             }
         }
     }
