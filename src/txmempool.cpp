@@ -346,12 +346,10 @@ bool CTxMemPool::addUnchecked(const uint256& hash, const CTxMemPoolEntry &entry,
 
     const CTransaction& tx = newit->GetTx();
     std::set<uint256> setParentTransactions;
-    if(true) {
         for (unsigned int i = 0; i < tx.vin.size(); i++) {
             mapNextTx[tx.vin[i].prevout] = CInPoint(&tx, i);
             setParentTransactions.insert(tx.vin[i].prevout.hash);
         }
-    }
     // Don't bother worrying about child transactions of this one.
     // Normal case of a new transaction arriving is that there can't be any
     // children, because such children would be orphans.
@@ -588,19 +586,13 @@ void CTxMemPool::check(const CCoinsViewCache* pcoins) const
                 assert(coins && coins->IsAvailable(txin.prevout.n));
             }
             // Check whether its inputs are marked in mapNextTx.
-            if(true) {
-                std::map<COutPoint, CInPoint>::const_iterator it3 = mapNextTx.find(txin.prevout);
-                assert(it3 != mapNextTx.end());
-                assert(it3->second.ptx == &tx);
-                assert(it3->second.n == i);
-            } else {
-                fDependsWait=false;
-            }
+            std::map<COutPoint, CInPoint>::const_iterator it3 = mapNextTx.find(txin.prevout);
+            assert(it3 != mapNextTx.end());
+            assert(it3->second.ptx == &tx);
+            assert(it3->second.n == i);
             i++;
         }
         assert(setParentCheck == GetMemPoolParents(it));
-        // Check children against mapNextTx
-        if (true) {
             CTxMemPool::setEntries setChildrenCheck;
             std::map<COutPoint, CInPoint>::const_iterator iter = mapNextTx.lower_bound(COutPoint(tx.GetHash(), 0));
             int64_t childSizes = 0;
@@ -625,7 +617,6 @@ void CTxMemPool::check(const CCoinsViewCache* pcoins) const
                 assert(it->GetFeesWithDescendants() == it->GetFee());
             }
             assert(it->GetFeesWithDescendants() >= 0);
-        }
 
         if (fDependsWait)
             waitingOnDependants.push_back(&(*it));
