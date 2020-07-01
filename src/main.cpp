@@ -2065,8 +2065,12 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
         setDirtyBlockIndex.insert(pindex);
     }
 
-//xxxxx
+    if (fTxIndex)
+        if (!pblocktree->WriteTxIndex(vPos))
+            return AbortNode(state, "Failed to write transaction index");
 
+    // add this block to the view's block chain
+    view.SetBestBlock(pindex->GetBlockHash());
 
     int64_t nTime3 = GetTimeMicros();
     nTimeIndex += nTime3 - nTime2;
@@ -2963,15 +2967,13 @@ bool CheckBlockHeader(const CBlockHeader& block, CValidationState& state, bool f
 
     if (Params().IsRegTestNet()) return true;
 
-    // Version 4 header must be used after
-    if (block.GetBlockTime() > Params().GetConsensus().xxxxx) {//xxxxx
-        if(block.nVersion < 4)
-            return state.DoS(50,false, REJECT_INVALID, "block-version", "must be above 4");
-    } else {
-        if (block.nVersion >= 4)
-            return state.DoS(50,false, REJECT_INVALID, "block-version", "must be below 4");
-    }
+    if (block.nVersion >= 6)
+        return state.DoS(50, error("CheckBlockHeader() : block version must be below 6"),
+        REJECT_INVALID, "block-version");
 
+    if (block.nVersion <= 4 && block.GetBlockTime() >=1589399021)
+            return state.DoS(50, error("CheckBlockHeader() : block version must be above 4"),
+            REJECT_INVALID, "block-version");
     return true;
 }
 
