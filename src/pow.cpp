@@ -73,7 +73,7 @@ bool CheckProofOfWork(uint256 hash, unsigned int nBits)
    bnTarget.SetCompact(nBits, &fNegative, &fOverflow);
 
    // Check range
-   if (fNegative || bnTarget.IsNull() || fOverflow || bnTarget > Params().ProofOfWorkLimit())
+   if (fNegative || bnTarget.IsNull() || fOverflow || bnTarget > Params().GetConsensus().powLimit)
        return error("CheckProofOfWork() : nBits below minimum work");
 
    // Check proof of work matches claimed amount
