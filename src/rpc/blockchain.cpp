@@ -138,12 +138,13 @@ UniValue blockToJSON(const CBlock& block, const CBlockIndex* blockindex, bool tx
     /////////
     if (block.IsProofOfStake()) {
         uint256 hashProofOfStakeRet;
-        if (!GetStakeKernelHash(hashProofOfStakeRet, block, blockindex->pprev))
-            throw JSONRPCError(RPC_INTERNAL_ERROR, "Cannot get proof of stake hash");
+        if (!initStakeInput(block, stake, blockindex->nHeight - 1))
+            throw JSONRPCError(RPC_INTERNAL_ERROR, "Cannot initialize stake input");
+
 
         std::string stakeModifier = (Params().GetConsensus().NetworkUpgradeActive(blockindex->nHeight, Consensus::UPGRADE_V3_4) ?
-                                     blockindex->GetStakeModifierV2().GetHex() :
-                                     strprintf("%016x", blockindex->GetStakeModifierV1()));
+                                     blockindex->nStakeModifierV2.GetHex() :
+                                     strprintf("%016x", blockindex->nStakeModifier));
         result.push_back(Pair("stakeModifier", stakeModifier));
         result.push_back(Pair("hashProofOfStake", hashProofOfStakeRet.GetHex()));
     }
