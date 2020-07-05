@@ -263,6 +263,9 @@ public:
     MasterKeyMap mapMasterKeys;
     unsigned int nMasterKeyMaxID;
 
+
+    // Stake Settings
+    unsigned int nHashInterval
     // Stake split threshold
     CAmount nStakeSplitThreshold;
     // minimum value allowed for nStakeSplitThreshold (customizable with -minstakesplit flag)
