@@ -54,6 +54,7 @@ unsigned int static DarkGravityWave3(const CBlockIndex* pindexLast) {
 
 unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast)
 {
+   const Consensus::Params& consensus = Params().GetConsensus();
    if (pindexLast->nHeight > 56)
    {
        return DarkGravityWave3(pindexLast);
