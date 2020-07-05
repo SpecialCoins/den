@@ -68,7 +68,7 @@ bool CheckTransaction(const CTransaction& tx, CValidationState& state, bool fCol
 
     // Check for negative or overflow output values
     CAmount nValueOut = 0;
-    const CAmount minColdStakingAmount = Params().GetMinColdStakingAmount();
+    const CAmount minColdStakingAmount = MIN_COLDSTAKING_AMOUNT;
     for (const CTxOut& txout : tx.vout) {
         if (txout.IsEmpty() && !tx.IsCoinBase() && !tx.IsCoinStake())
             return state.DoS(100, false, REJECT_INVALID, "bad-txns-vout-empty");
