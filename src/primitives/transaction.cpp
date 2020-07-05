@@ -148,7 +148,7 @@ bool CTransaction::IsCoinStake() const
     if (vin.empty())
         return false;
 
-    if (vin[0].prevout.IsNull()
+    if (vin[0].prevout.IsNull())
         return false;
 
     return (vout.size() >= 2 && vout[0].IsEmpty());
