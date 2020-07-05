@@ -67,6 +67,7 @@ bool CheckTransaction(const CTransaction& tx, CValidationState& state, bool fCol
         return state.DoS(100, false, REJECT_INVALID, "bad-txns-oversize");
 
     // Check for negative or overflow output values
+    const Consensus::Params& consensus = Params().GetConsensus();
     CAmount nValueOut = 0;
     const CAmount minColdStakingAmount = MIN_COLDSTAKING_AMOUNT;
     for (const CTxOut& txout : tx.vout) {
