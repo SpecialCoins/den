@@ -320,7 +320,16 @@ crypto_libbitcoin_crypto_a_SOURCES = \
   crypto/sph_jh.h \
   crypto/sph_keccak.h \
   crypto/sph_skein.h \
-  crypto/sph_types.h
+  crypto/sph_types.h \
+  crypto/Lyra2Z/Lyra2.h \
+  crypto/Lyra2Z/Lyra2.c \
+  crypto/Lyra2Z/Lyra2Z.h \
+  crypto/Lyra2Z/Lyra2Z.c \
+  crypto/Lyra2Z/blake.c \
+  crypto/Lyra2Z/sph_blake.h \
+  crypto/Lyra2Z/sph_types.h \
+  crypto/Lyra2Z/Sponge.c \
+  crypto/Lyra2Z/Sponge.h
 
 # common: shared between bczd, and bcz-qt and non-server tools
 libbitcoin_common_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
