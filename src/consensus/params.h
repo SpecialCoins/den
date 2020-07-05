@@ -90,7 +90,6 @@ struct Params {
     CAmount nMaxMoneyOut;
     int nPoolMaxTransactions;
     int64_t nProposalEstablishmentTime;
-    int nStakeMinAge;
     int nStakeMinDepth;
 
     // spork keys
@@ -113,9 +112,9 @@ struct Params {
     bool HasStakeMinAgeOrDepth(const int contextHeight, const uint32_t contextTime,
             const int utxoFromBlockHeight, const uint32_t utxoFromBlockTime) const
     {
-        // before stake modifier V2, we require the utxo to be nStakeMinAge old
+        // before stake modifier V2, we require the utxo to be 3600 secs old
         if (!NetworkUpgradeActive(contextHeight, Consensus::UPGRADE_V3_4))
-            return (utxoFromBlockTime + nStakeMinAge <= contextTime);
+            return (utxoFromBlockTime + 3600 <= contextTime);
         // with stake modifier V2+, we require the utxo to be nStakeMinDepth deep in the chain
         return (contextHeight - utxoFromBlockHeight >= nStakeMinDepth);
     }
