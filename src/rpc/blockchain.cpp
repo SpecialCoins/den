@@ -138,6 +138,7 @@ UniValue blockToJSON(const CBlock& block, const CBlockIndex* blockindex, bool tx
     /////////
     if (block.IsProofOfStake()) {
         uint256 hashProofOfStakeRet;
+        std::unique_ptr <CStakeInput> stake;
         if (!initStakeInput(block, stake, blockindex->nHeight - 1))
             throw JSONRPCError(RPC_INTERNAL_ERROR, "Cannot initialize stake input");
 
