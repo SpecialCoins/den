@@ -265,7 +265,7 @@ public:
 
 
     // Stake Settings
-    unsigned int nHashInterval
+    unsigned int nHashInterval;
     // Stake split threshold
     CAmount nStakeSplitThreshold;
     // minimum value allowed for nStakeSplitThreshold (customizable with -minstakesplit flag)
