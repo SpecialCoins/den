@@ -42,6 +42,10 @@ private:
     CTransaction txFrom{CTransaction()};
     unsigned int nPosition{0};
 
+    // cached data
+    uint64_t nStakeModifier = 0;
+    int nStakeModifierHeight = 0;
+
 public:
     CBczStake() {}
 
