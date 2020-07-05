@@ -1964,7 +1964,6 @@ bool AppInit2()
         StartTorControl(threadGroup);
 
     StartNode(threadGroup, scheduler);
-#endif
 
     // ********************************************************* Step 12: finished
 
