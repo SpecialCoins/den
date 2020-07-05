@@ -112,10 +112,14 @@ uint256 ComputeStakeModifier(const CBlockIndex* pindexPrev, const uint256& kerne
     ss << kernel;
 
     // switch with old modifier on upgrade block
-    if (!Params().GetConsensus().NetworkUpgradeActive(pindexPrev->nHeight + 1, Consensus::UPGRADE_V3_4)) {
+    if (!Params().GetConsensus().NetworkUpgradeActive(pindexPrev->nHeight + 1, Consensus::UPGRADE_V3_4))
+    {
         ss << pindexPrev->nStakeModifier;
+    }
     else
+    {
         ss << pindexPrev->nStakeModifierV2;
+    }
 
     return ss.GetHash();
 }
@@ -306,13 +310,16 @@ bool GetHashProofOfStake(const CBlockIndex* pindexPrev, CStakeInput* stake, cons
     CDataStream modifier_ss(SER_GETHASH, 0);
 
     // Hash the modifier
-    if (!Params().GetConsensus().IsStakeModifierV2(pindexPrev->nHeight + 1)) {
+    (!Params().GetConsensus().NetworkUpgradeActive(pindexPrev->nHeight + 1, Consensus::UPGRADE_V3_4))
+    {
         // Modifier v1
         uint64_t nStakeModifier = 0;
         if (!stake->GetModifier(nStakeModifier))
             return error("%s : Failed to get kernel stake modifier", __func__);
         modifier_ss << nStakeModifier;
-    } else {
+    }
+    else
+    {
         // Modifier v2
         modifier_ss << pindexPrev->nStakeModifierV2;
     }
