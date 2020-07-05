@@ -852,6 +852,7 @@ bool AcceptToMemoryPool(CTxMemPool& pool, CValidationState& state, const CTransa
         }
     }
 
+    {
      // Check for conflicts with in-memory transactions
         LOCK(pool.cs); // protect pool.mapNextTx
         for (const auto &in : tx.vin) {
@@ -861,7 +862,7 @@ bool AcceptToMemoryPool(CTxMemPool& pool, CValidationState& state, const CTransa
                 return state.Invalid(false, REJECT_CONFLICT, "txn-mempool-conflict");
             }
         }
-
+    }
 
     {
         CCoinsView dummy;
@@ -1069,6 +1070,7 @@ bool AcceptableInputs(CTxMemPool& pool, CValidationState& state, const CTransact
         }
     }
 
+    {
     // Check for conflicts with in-memory transactions
         LOCK(pool.cs); // protect pool.mapNextTx
         for (const auto &in : tx.vin) {
@@ -1078,6 +1080,7 @@ bool AcceptableInputs(CTxMemPool& pool, CValidationState& state, const CTransact
                 return false;
             }
         }
+    }
 
 
     {
