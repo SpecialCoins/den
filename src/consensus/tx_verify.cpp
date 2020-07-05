@@ -62,6 +62,7 @@ bool CheckTransaction(const CTransaction& tx, CValidationState& state, bool fCol
         return state.DoS(10, false, REJECT_INVALID, "bad-txns-vout-empty");
 
 
+    unsigned int nMaxSize = MAX_STANDARD_TX_SIZE;
     if (::GetSerializeSize(tx, SER_NETWORK, PROTOCOL_VERSION) > nMaxSize)
         return state.DoS(100, false, REJECT_INVALID, "bad-txns-oversize");
 

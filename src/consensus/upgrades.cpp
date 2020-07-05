@@ -23,21 +23,14 @@ const struct NUInfo NetworkUpgradeInfo[Consensus::MAX_NETWORK_UPGRADES] = {
                 /*.strInfo =*/ "New selection for stake modifier",
         },
         {
-                /*.strName =*/ "BIP65",
-                /*.strInfo =*/ "CLTV (BIP65) activation - start block v5",
+                /*.strName =*/ "BCZ v3.4",
+                /*.strInfo =*/ "xxx",
         },
         {
-                /*.strName =*/ "BCZ v3.4",
+                /*.strName =*/ "BCZ v4.4",
                 /*.strInfo =*/ "new 256-bit stake modifier - start block v6",
         },
-        {
-                /*.strName =*/ "v5 dummy",
-                /*.strInfo =*/ "Placeholder for future BCZ version 5.0 upgrade",
-        },
-        {
-                /*.strName =*/ "Test dummy",
-                /*.strInfo =*/ "Test dummy info",
-        },
+
 };
 
 UpgradeState NetworkUpgradeState(
