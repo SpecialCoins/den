@@ -45,7 +45,7 @@ unsigned int static DarkGravityWave3(const CBlockIndex* pindexLast) {
    bnNew *= nActualTimespan;
    bnNew /= nTargetTimespan;
 
-   if (bnNew > consensus.powLimit)) {
+   if (bnNew > consensus.powLimit) {
        bnNew = consensus.powLimit;
    }
 
