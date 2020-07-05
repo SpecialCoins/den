@@ -92,7 +92,6 @@ struct Params {
     int64_t nProposalEstablishmentTime;
     int nStakeMinAge;
     int nStakeMinDepth;
-    int nTimeSlotLength;
 
     // spork keys
     std::string strSporkPubKey;
@@ -109,14 +108,6 @@ struct Params {
     int FutureBlockTimeDrift() const
     {
         return nFutureTimeDrift;
-    }
-
-    bool IsValidBlockTimeStamp(const int64_t nTime, const int nHeight) const
-    {
-        // Before time protocol V2, blocks can have arbitrary timestamps
-        if (!IsTimeProtocolV2(nHeight)) return true;
-        // Time protocol v2 requires time in slots
-        return (nTime % nTimeSlotLength) == 0;
     }
 
     bool HasStakeMinAgeOrDepth(const int contextHeight, const uint32_t contextTime,
