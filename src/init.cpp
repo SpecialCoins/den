@@ -1964,11 +1964,6 @@ bool AppInit2()
         StartTorControl(threadGroup);
 
     StartNode(threadGroup, scheduler);
-
-#ifdef ENABLE_WALLET
-    // Generate coins in the background
-    if (pwalletMain)
-        StakeBCZ(GetBoolArg("-stake", false), pwalletMain);
 #endif
 
     // ********************************************************* Step 12: finished
