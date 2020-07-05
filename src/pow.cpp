@@ -15,8 +15,8 @@
 
 unsigned int static DarkGravityWave3(const CBlockIndex* pindexLast) {
 
+   const Consensus::Params& consensus = Params().GetConsensus();
    int64_t timeblocks = 150;
-
    int64_t nPastBlocks = 24;
    const CBlockIndex *pindex = pindexLast;
    uint256 bnPastTargetAvg;
@@ -69,9 +69,6 @@ bool CheckProofOfWork(uint256 hash, unsigned int nBits)
    bool fNegative;
    bool fOverflow;
    uint256 bnTarget;
-
-   if (Params().SkipProofOfWorkCheck())
-       return true;
 
    bnTarget.SetCompact(nBits, &fNegative, &fOverflow);
 
