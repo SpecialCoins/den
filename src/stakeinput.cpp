@@ -130,6 +130,21 @@ bool CBczStake::GetModifier(uint64_t& nStakeModifier)
     return true;
 }
 
+bool CBczStake::GetModifier(uint64_t& nStakeModifier)
+{
+    if (this->nStakeModifier == 0) {
+        // look for the modifier
+        GetIndexFrom();
+        if (!pindexFrom)
+            return error("%s: failed to get index from", __func__);
+        // TODO: This method must be removed from here in the short terms.. it's a call to an static method in kernel.cpp when this class method is only called from kernel.cpp, no comments..
+        if (!GetKernelStakeModifier(pindexFrom->GetBlockHash(), this->nStakeModifier, this->nStakeModifierHeight, this->nStakeModifierTime, false))
+            return false;
+    }
+    nStakeModifier = this->nStakeModifier;
+    return true;
+}
+
 CDataStream CBczStake::GetUniqueness() const
 {
     //The unique identifier for a BCZ stake is the outpoint
