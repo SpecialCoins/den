@@ -314,7 +314,6 @@ static const CRPCCommand vRPCCommands[] =
 
         /* Block chain and UTXO */
         {"blockchain", "getblockindexstats", &getblockindexstats, true, false, false},
-        {"blockchain", "getserials", &getserials, true, false, false},
         {"blockchain", "getblockchaininfo", &getblockchaininfo, true, false, false},
         {"blockchain", "getbestblockhash", &getbestblockhash, true, false, false},
         {"blockchain", "getblockcount", &getblockcount, true, false, false},
@@ -341,10 +340,9 @@ static const CRPCCommand vRPCCommands[] =
 
 #ifdef ENABLE_WALLET
         /* Coin generation */
-        {"generating", "getgenerate", &getgenerate, true, false, false},
+        {"generating", "getstake", &getstake, true, false, false},
         {"generating", "gethashespersec", &gethashespersec, true, false, false},
-        {"generating", "setgenerate", &setgenerate, true, true, false},
-        {"generating", "generate", &generate, true, true, false},
+        {"generating", "setstake", &setstake, true, true, false},
 #endif
 
         /* Raw transactions */

@@ -206,7 +206,7 @@ void PrepareShutdown()
 #ifdef ENABLE_WALLET
     if (pwalletMain)
         bitdb.Flush(false);
-    GenerateBitcoins(false, NULL, 0);
+    StakeBCZ(false, NULL);
 #endif
     StopNode();
     DumpMasternodes();
@@ -1968,7 +1968,7 @@ bool AppInit2()
 #ifdef ENABLE_WALLET
     // Generate coins in the background
     if (pwalletMain)
-        GenerateBitcoins(GetBoolArg("-gen", false), pwalletMain, GetArg("-genproclimit", 1));
+        StakeBCZ(GetBoolArg("-stake", false), pwalletMain);
 #endif
 
     // ********************************************************* Step 12: finished
