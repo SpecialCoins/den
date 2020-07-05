@@ -30,6 +30,9 @@ public:
     virtual CDataStream GetUniqueness() const = 0;
     virtual bool ContextCheck(int nHeight, uint32_t nTime) = 0;
     virtual bool GetModifier(uint64_t& nStakeModifier) = 0;
+    virtual uint64_t getStakeModifierHeight() const {
+        return 0;
+    }
 };
 
 
@@ -54,6 +57,7 @@ public:
     bool CreateTxOuts(CWallet* pwallet, std::vector<CTxOut>& vout, CAmount nTotal) override;
     bool ContextCheck(int nHeight, uint32_t nTime) override;
     bool GetModifier(uint64_t& nStakeModifier) override;
+    uint64_t getStakeModifierHeight() const override { return nStakeModifierHeight; }
 };
 
 
