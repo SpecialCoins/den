@@ -113,13 +113,9 @@ uint256 ComputeStakeModifier(const CBlockIndex* pindexPrev, const uint256& kerne
 
     // switch with old modifier on upgrade block
     if (!Params().GetConsensus().NetworkUpgradeActive(pindexPrev->nHeight + 1, Consensus::UPGRADE_V3_4))
-    {
         ss << pindexPrev->nStakeModifier;
-    }
     else
-    {
         ss << pindexPrev->nStakeModifierV2;
-    }
 
     return ss.GetHash();
 }
@@ -311,15 +307,12 @@ bool GetHashProofOfStake(const CBlockIndex* pindexPrev, CStakeInput* stake, cons
 
     // Hash the modifier
     if (!Params().GetConsensus().NetworkUpgradeActive(pindexPrev->nHeight + 1, Consensus::UPGRADE_V3_4))
-    {
         // Modifier v1
         uint64_t nStakeModifier = 0;
         if (!stake->GetModifier(nStakeModifier))
             return error("%s : Failed to get kernel stake modifier", __func__);
         modifier_ss << nStakeModifier;
-    }
-    else
-    {
+    } else {
         // Modifier v2
         modifier_ss << pindexPrev->nStakeModifierV2;
     }
@@ -338,7 +331,7 @@ bool GetHashProofOfStake(const CBlockIndex* pindexPrev, CStakeInput* stake, cons
     return true;
 }
 
-bool Stake(const CBlockIndex* pindexPrev, CStakeInput* stakeInput, unsigned int nBits, int64_t& nTimeTx, uint256& hashProofOfStake)
+bool Stake(const CBlockIndex* pindexPrev, CStakeInput* stakeInput, unsigned int nBits, unsigned int& nTimeTx, uint256& hashProofOfStake)
 {
     int prevHeight = pindexPrev->nHeight;
 
@@ -356,11 +349,11 @@ bool Stake(const CBlockIndex* pindexPrev, CStakeInput* stakeInput, unsigned int 
 
     // iterate the hashing
     bool fSuccess = false;
-    const int64_t nHashDrift = 60;
-    int64_t nTryTime = nTimeTx - 1;
+    const unsigned int nHashDrift = 60;
+    unsigned int nTryTime = nTimeTx - 1;
     // iterate from nTimeTx up to nTimeTx + nHashDrift
     // but not after the max allowed future blocktime drift (3 minutes for PoS)
-    const int64_t maxTime = std::min(nTimeTx + nHashDrift, Params().GetConsensus().FutureBlockTimeDrift());
+    const unsigned int maxTime = std::min(nTimeTx + nHashDrift, Params().GetConsensus().FutureBlockTimeDrift());
 
     while (nTryTime < maxTime)
     {
