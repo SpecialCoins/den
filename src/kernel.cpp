@@ -307,12 +307,15 @@ bool GetHashProofOfStake(const CBlockIndex* pindexPrev, CStakeInput* stake, cons
 
     // Hash the modifier
     if (!Params().GetConsensus().NetworkUpgradeActive(pindexPrev->nHeight + 1, Consensus::UPGRADE_V3_4))
+    {
         // Modifier v1
         uint64_t nStakeModifier = 0;
         if (!stake->GetModifier(nStakeModifier))
             return error("%s : Failed to get kernel stake modifier", __func__);
         modifier_ss << nStakeModifier;
-    } else {
+    }
+    else
+    {
         // Modifier v2
         modifier_ss << pindexPrev->nStakeModifierV2;
     }
