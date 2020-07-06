@@ -357,7 +357,7 @@ bool Stake(const CBlockIndex* pindexPrev, CStakeInput* stakeInput, unsigned int 
     // iterate from nTimeTx up to nTimeTx + nHashDrift
     // but not after the max allowed future blocktime drift (3 minutes for PoS)
     const Consensus::Params& consensus = Params().GetConsensus();
-    const unsigned int maxTime = std::min(nTimeTx + nHashDrift, consensus.FutureBlockTimeDrift());
+    const unsigned int maxTime = std::min(nTimeTx + nHashDrift, 150);
 
     while (nTryTime < maxTime)
     {
