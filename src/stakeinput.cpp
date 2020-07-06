@@ -1,16 +1,17 @@
-// Copyright (c) 2017-2020 The BCZ developers
+// Copyright (c) 2020 The BCZ developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include "stakeinput.h"
-
 #include "chain.h"
 #include "main.h"
-#include "txdb.h"
+#include "stakeinput.h"
 #include "wallet/wallet.h"
+
+//Normal Stake
 
 bool CBczStake::InitFromTxIn(const CTxIn& txin)
 {
+
     // Find the previous transaction in database
     uint256 hashBlock;
     CTransaction txPrev;
@@ -42,6 +43,7 @@ bool CBczStake::GetTxFrom(CTransaction& tx) const
 {
     if (txFrom.IsNull())
         return false;
+
     tx = txFrom;
     return true;
 }
@@ -94,7 +96,6 @@ bool CBczStake::CreateTxOuts(CWallet* pwallet, std::vector<CTxOut>& vout, CAmoun
         // keep the same script
         scriptPubKey = scriptPubKeyKernel;
     }
-
     vout.emplace_back(CTxOut(0, scriptPubKey));
 
     // Calculate if we need to split the output
@@ -115,20 +116,6 @@ bool CBczStake::CreateTxOuts(CWallet* pwallet, std::vector<CTxOut>& vout, CAmoun
     return true;
 }
 
-bool CBczStake::GetModifier(uint64_t& nStakeModifier)
-{
-    if (this->nStakeModifier == 0) {
-        // look for the modifier
-        GetIndexFrom();
-        if (!pindexFrom)
-            return error("%s: failed to get index from", __func__);
-        // TODO: This method must be removed from here in the short terms.. it's a call to an static method in kernel.cpp when this class method is only called from kernel.cpp, no comments..
-        if (!GetKernelStakeModifier(pindexFrom->GetBlockHash(), this->nStakeModifier, this->nStakeModifierHeight, this->nStakeModifierTime, false))
-            return false;
-    }
-    nStakeModifier = this->nStakeModifier;
-    return true;
-}
 
 bool CBczStake::GetModifier(uint64_t& nStakeModifier)
 {
@@ -192,4 +179,3 @@ bool CBczStake::ContextCheck(int nHeight, uint32_t nTime)
     // All good
     return true;
 }
-
