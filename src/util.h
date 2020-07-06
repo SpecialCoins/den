@@ -45,6 +45,7 @@ extern int64_t enforceMasternodePaymentsTime;
 extern std::string strMasterNodeAddr;
 extern int keysLoaded;
 extern bool fSucessfullyLoaded;
+extern bool fStake_BCZ;
 extern std::string strBudgetMode;
 
 extern std::map<std::string, std::string> mapArgs;
