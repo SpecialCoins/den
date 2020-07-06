@@ -15,7 +15,7 @@
 #include "protocol.h"
 
 //
-// Bootup the Masternode, look for a 10000 BCZ input and register on the network
+// Bootup the Masternode, look for a 5000 BCZ input and register on the network
 //
 void CActiveMasternode::ManageStatus()
 {
