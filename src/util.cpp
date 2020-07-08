@@ -1,7 +1,7 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2020 The BCZ developers
+// Copyright (c) 2020 The BCZ developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -94,10 +94,7 @@ bool fLiteMode = false;
 bool fEnableSwiftTX = true;
 int nSwiftTXDepth = 5;
 
-/** Spork enforcement enabled time */
-int64_t enforceMasternodePaymentsTime = 4085657524;
 bool fSucessfullyLoaded = false;
-std::string strBudgetMode = "";
 
 std::map<std::string, std::string> mapArgs;
 std::map<std::string, std::vector<std::string> > mapMultiArgs;
@@ -368,12 +365,26 @@ void ReadConfigFile(std::map<std::string, std::string>& mapSettingsRet,
     std::map<std::string, std::vector<std::string> >& mapMultiSettingsRet)
 {
     fs::ifstream streamConfig(GetConfigFile());
-    if (!streamConfig.good()) {
-        // Create empty bcz.conf if it does not exist
+    if (!streamConfig.good())
+    {
         FILE* configFile = fsbridge::fopen(GetConfigFile(), "a");
         if (configFile != NULL)
+        {
+            std::string strHeader =
+                    "#listen=1\n"
+                    "#maxconnections=\n"
+                    "#connect=\n"
+                    "#addnode=\n"
+                    "#addnode=\n"
+                    "#addnode=\n"
+                    "#masternode=1\n"
+                    "#masternodeprivkey=\n"
+                    "#externalip=\n";
+
+            fwrite(strHeader.c_str(), std::strlen(strHeader.c_str()), 1, configFile);
             fclose(configFile);
-        return; // Nothing to read, so just return
+        }
+        return;
     }
 
     std::set<std::string> setOptions;
