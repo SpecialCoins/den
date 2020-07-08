@@ -2662,7 +2662,6 @@ bool CWallet::CreateCoinStake(
 
     // Kernel Search
     CAmount nCredit;
-    CScript scriptPubKeyKernel;
     bool fKernelFound = false;
     int nAttempts = 0;
 
