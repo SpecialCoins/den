@@ -44,6 +44,7 @@ extern int nSwiftTXDepth;
 extern std::string strMasterNodeAddr;
 extern int keysLoaded;
 extern bool fSucessfullyLoaded;
+extern std::string strBudgetMode;
 extern bool fStake_BCZ;
 
 extern std::map<std::string, std::string> mapArgs;

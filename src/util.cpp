@@ -95,6 +95,7 @@ bool fEnableSwiftTX = true;
 int nSwiftTXDepth = 5;
 
 bool fSucessfullyLoaded = false;
+std::string strBudgetMode = "";
 
 std::map<std::string, std::string> mapArgs;
 std::map<std::string, std::vector<std::string> > mapMultiArgs;

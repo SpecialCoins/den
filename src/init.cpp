@@ -1905,6 +1905,9 @@ bool AppInit2()
         }
     }
 
+    //get the mode of budget voting for this masternode
+    strBudgetMode = GetArg("-budgetvotemode", "auto");
+
     if (GetBoolArg("-mnconflock", true) && pwalletMain) {
         LOCK(pwalletMain->cs_wallet);
         LogPrintf("Locking Masternodes:\n");
@@ -1929,6 +1932,8 @@ bool AppInit2()
 
     LogPrintf("fLiteMode %d\n", fLiteMode);
     LogPrintf("nSwiftTXDepth %d\n", nSwiftTXDepth);
+    LogPrintf("Budget Mode %s\n", strBudgetMode.c_str());
+
 
     threadGroup.create_thread(boost::bind(&ThreadCheckMasternodes));
 
