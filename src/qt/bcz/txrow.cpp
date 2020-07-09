@@ -62,7 +62,6 @@ void TxRow::setType(bool isLightTheme, int type, bool isConfirmed)
     bool sameIcon = false;
     switch (type) {
         case TransactionRecord::Generated:
-        case TransactionRecord::StakeZBCZ:
         case TransactionRecord::MNReward:
         case TransactionRecord::StakeMint:
             path = "://ic-transaction-staked";

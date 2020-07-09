@@ -501,7 +501,7 @@ const QMap<int, std::pair<qint64, qint64>> DashboardWidget::getAmountBy()
         QModelIndex modelIndex = stakesFilter->index(i, TransactionTableModel::ToAddress);
         qint64 amount = llabs(modelIndex.data(TransactionTableModel::AmountRole).toLongLong());
         QDate date = modelIndex.data(TransactionTableModel::DateRole).toDateTime().date();
-        bool isBcz = modelIndex.data(TransactionTableModel::TypeRole).toInt() != TransactionRecord::StakeZBCZ;
+        bool isBcz = true;
 
         int time = 0;
         switch (chartShow) {
