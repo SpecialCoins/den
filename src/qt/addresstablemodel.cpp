@@ -21,7 +21,6 @@
 
 const QString AddressTableModel::Send = "S";
 const QString AddressTableModel::Receive = "R";
-const QString AddressTableModel::Zerocoin = "X";
 const QString AddressTableModel::Delegator = "D";
 const QString AddressTableModel::Delegable = "E";
 const QString AddressTableModel::ColdStaking = "C";
@@ -31,7 +30,6 @@ struct AddressTableEntry {
     enum Type {
         Sending,
         Receiving,
-        Zerocoin,
         Delegator,
         Delegable,
         ColdStaking,

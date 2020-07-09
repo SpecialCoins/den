@@ -60,9 +60,7 @@ bool TransactionFilterProxy::filterAcceptsRow(int sourceRow, const QModelIndex& 
     }
     if (amount < minAmount)
         return false;
-    if (fOnlyZc && !isZcTx(type)){
-        return false;
-    }
+
     if (fOnlyStakes && !isStakeTx(type))
         return false;
 
@@ -122,12 +120,6 @@ void TransactionFilterProxy::setHideOrphans(bool fHide)
     invalidateFilter();
 }
 
-void TransactionFilterProxy::setShowZcTxes(bool fOnlyZc)
-{
-    this->fOnlyZc = fOnlyZc;
-    invalidateFilter();
-}
-
 void TransactionFilterProxy::setOnlyStakes(bool fOnlyStakes)
 {
     this->fOnlyStakes = fOnlyStakes;
@@ -154,11 +146,6 @@ bool TransactionFilterProxy::isOrphan(const int status, const int type)
     return ( (type == TransactionRecord::Generated || type == TransactionRecord::StakeMint ||
             type == TransactionRecord::StakeZBCZ || type == TransactionRecord::MNReward)
             && (status == TransactionStatus::Conflicted || status == TransactionStatus::NotAccepted) );
-}
-
-bool TransactionFilterProxy::isZcTx(int type) const {
-    return (type == TransactionRecord::ZerocoinMint || type == TransactionRecord::ZerocoinSpend || type == TransactionRecord::ZerocoinSpend_Change_zBcz
-            || type == TransactionRecord::ZerocoinSpend_FromMe || type == TransactionRecord::RecvFromZerocoinSpend);
 }
 
 bool TransactionFilterProxy::isStakeTx(int type) const {

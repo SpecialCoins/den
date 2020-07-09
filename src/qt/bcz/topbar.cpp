@@ -616,14 +616,12 @@ void TopBar::updateDisplayUnit()
         nDisplayUnit = walletModel->getOptionsModel()->getDisplayUnit();
         if (displayUnitPrev != nDisplayUnit)
             updateBalances(walletModel->getBalance(), walletModel->getUnconfirmedBalance(), walletModel->getImmatureBalance(),
-                           walletModel->getZerocoinBalance(), walletModel->getUnconfirmedZerocoinBalance(), walletModel->getImmatureZerocoinBalance(),
                            walletModel->getWatchBalance(), walletModel->getWatchUnconfirmedBalance(), walletModel->getWatchImmatureBalance(),
                            walletModel->getDelegatedBalance(), walletModel->getColdStakedBalance());
     }
 }
 
 void TopBar::updateBalances(const CAmount& balance, const CAmount& unconfirmedBalance, const CAmount& immatureBalance,
-                            const CAmount& zerocoinBalance, const CAmount& unconfirmedZerocoinBalance, const CAmount& immatureZerocoinBalance,
                             const CAmount& watchOnlyBalance, const CAmount& watchUnconfBalance, const CAmount& watchImmatureBalance,
                             const CAmount& delegatedBalance, const CAmount& coldStakedBalance)
 {
