@@ -77,7 +77,7 @@ public:
         genesis.nBits = 0x1e0fffff;
         genesis.nNonce = 249257;
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(hashGenesisBlock == uint256("0x00000fca55bd94508769f48d6d17c4aa3f9ae40b072036a3691752f1b70ef2dd"));
+        assert(consensus.hashGenesisBlock == uint256("0x00000fca55bd94508769f48d6d17c4aa3f9ae40b072036a3691752f1b70ef2dd"));
         assert(genesis.hashMerkleRoot == uint256("0x0adff40a2ade8baf5c2c311748928ff4d4d727d2042b1f685fe8ca1f70a1021b"));
         consensus.powLimit = ~UINT256_ZERO >> 20;
         consensus.nBudgetCycleBlocks = 43200;       // approx. 1 every 30 days
