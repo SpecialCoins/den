@@ -53,30 +53,18 @@ QString BitcoinUnits::id(int unit)
     }
 }
 
-QString BitcoinUnits::name(int unit, bool isZbcz)
+QString BitcoinUnits::name(int unit)
 {
     const QString CURR_UNIT = QString(CURRENCY_UNIT.c_str());
     QString z = "";
-    if(isZbcz) z = "z";
     if (Params().NetworkID() == CBaseChainParams::MAIN) {
         switch (unit) {
         case BCZ:
-            return z + CURR_UNIT;
+            return CURR_UNIT;
         case mBCZ:
-            return z + QString("m") + CURR_UNIT;
+            return QString("m") + CURR_UNIT;
         case uBCZ:
-            return z + QString::fromUtf8("μ") + CURR_UNIT;
-        default:
-            return QString("???");
-        }
-    } else {
-        switch (unit) {
-        case BCZ:
-            return z + QString("t") + CURR_UNIT;
-        case mBCZ:
-            return z + QString("mt") + CURR_UNIT;
-        case uBCZ:
-            return z + QString::fromUtf8("μt") + CURR_UNIT;
+            return QString::fromUtf8("μ") + CURR_UNIT;
         default:
             return QString("???");
         }
@@ -214,7 +202,7 @@ QString BitcoinUnits::formatHtmlWithUnit(int unit, const CAmount& amount, bool p
     return QString("<span style='white-space: nowrap;'>%1</span>").arg(str);
 }
 
-QString BitcoinUnits::floorWithUnit(int unit, const CAmount& amount, bool plussign, SeparatorStyle separators, bool cleanRemainderZeros, bool isZBCZ)
+QString BitcoinUnits::floorWithUnit(int unit, const CAmount& amount, bool plussign, SeparatorStyle separators, bool cleanRemainderZeros)
 {
     QSettings settings;
     int digits = settings.value("digits").toInt();
@@ -231,12 +219,12 @@ QString BitcoinUnits::floorWithUnit(int unit, const CAmount& amount, bool plussi
         }
     }
 
-    return result + QString(" ") + name(unit, isZBCZ);
+    return result + QString(" ") + name(unit);
 }
 
-QString BitcoinUnits::floorHtmlWithUnit(int unit, const CAmount& amount, bool plussign, SeparatorStyle separators, bool cleanRemainderZeros, bool isZBCZ)
+QString BitcoinUnits::floorHtmlWithUnit(int unit, const CAmount& amount, bool plussign, SeparatorStyle separators, bool cleanRemainderZeros)
 {
-    QString str(floorWithUnit(unit, amount, plussign, separators, cleanRemainderZeros, isZBCZ));
+    QString str(floorWithUnit(unit, amount, plussign, separators, cleanRemainderZeros));
     str.replace(QChar(THIN_SP_CP), QString(COMMA_HTML));
     return QString("<span style='white-space: nowrap;'>%1</span>").arg(str);
 }
