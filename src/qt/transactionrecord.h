@@ -78,7 +78,6 @@ public:
         Other,
         Generated,
         StakeMint,
-        StakeZBCZ,
         SendToAddress,
         SendToOther,
         RecvWithAddress,
