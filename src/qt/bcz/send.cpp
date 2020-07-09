@@ -311,7 +311,7 @@ void SendWidget::showHideCheckBoxDelegations()
     if (showCheckBox)
         ui->checkBoxDelegations->setToolTip(
                 tr("Possibly spend coins delegated for cold-staking (currently available: %1").arg(
-                        GUIUtil::formatBalance(cachedDelegatedBalance, nDisplayUnit, false))
+                        GUIUtil::formatBalance(cachedDelegatedBalance, nDisplayUnit))
         );
 }
 

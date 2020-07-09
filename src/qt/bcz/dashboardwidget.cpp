@@ -657,7 +657,6 @@ void DashboardWidget::onChartRefreshed()
     }
     forceUpdateStyle({ui->labelAmountBcz, ui->labelAmountZbcz});
     ui->labelAmountBcz->setText(GUIUtil::formatBalance(chartData->totalBcz, nDisplayUnit));
-    ui->labelAmountZbcz->setText(GUIUtil::formatBalance(chartData->totalZbcz, nDisplayUnit, true));
 
     series->append(set0);
     if (hasZbczStakes)
