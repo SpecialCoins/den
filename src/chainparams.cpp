@@ -11,6 +11,7 @@
 #include "consensus/merkle.h"
 #include "util.h"
 #include "utilstrencodings.h"
+#include "bignum/bignum.h"
 
 #include <boost/assign/list_of.hpp>
 
