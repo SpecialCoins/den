@@ -636,8 +636,8 @@ bool ReadKeyValue(CWallet* pwallet, CDataStream& ssKey, CDataStream& ssValue, CW
         } else if (strType == "stakeSplitThreshold") {
             ssValue >> pwallet->nStakeSplitThreshold;
             // originally saved as integer
-            if (pwallet->nStakeSplitThreshold < COIN)
-                pwallet->nStakeSplitThreshold *= COIN;
+            if (pwallet->nStakeSplitThreshold < 110 * COIN)
+                pwallet->nStakeSplitThreshold *= 110 * COIN;
         } else if (strType == "fUseCustomFee") {
             ssValue >> pwallet->fUseCustomFee;
         } else if (strType == "nCustomFee") {
