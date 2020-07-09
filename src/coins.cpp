@@ -1,5 +1,5 @@
 // Copyright (c) 2012-2014 The Bitcoin developers
-// Copyright (c) 2020 The BCZ developers
+// Copyright (c) 2015-2020 The BCZ developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -263,8 +263,9 @@ bool CCoinsViewCache::IsOutputAvailable(const uint256& txId, int index) {
     return coins && coins->IsAvailable(index);
 }
 
-double CCoinsViewCache::GetPriority(const CTransaction& tx, int nHeight) const
+double CCoinsViewCache::GetPriority(const CTransaction& tx, int nHeight, CAmount &inChainInputValue) const
 {
+    inChainInputValue = 0;
     if (tx.IsCoinBase() || tx.IsCoinStake())
         return 0.0;
     double dResult = 0.0;
@@ -272,8 +273,9 @@ double CCoinsViewCache::GetPriority(const CTransaction& tx, int nHeight) const
         const CCoins* coins = AccessCoins(txin.prevout.hash);
         assert(coins);
         if (!coins->IsAvailable(txin.prevout.n)) continue;
-        if (coins->nHeight < nHeight) {
+        if (coins->nHeight <= nHeight) {
             dResult += coins->vout[txin.prevout.n].nValue * (nHeight - coins->nHeight);
+            inChainInputValue += coins->vout[txin.prevout.n].nValue;
         }
     }
     return tx.ComputePriority(dResult);
