@@ -85,11 +85,6 @@ public:
         MNReward,
         RecvFromOther,
         SendToSelf,
-        ZerocoinMint,
-        ZerocoinSpend,
-        RecvFromZerocoinSpend,
-        ZerocoinSpend_Change_zBcz,
-        ZerocoinSpend_FromMe,
         StakeDelegated, // Received cold stake (owner)
         StakeHot, // Staked via a delegated P2CS.
         P2CSDelegation, // Non-spendable P2CS, staker side.
