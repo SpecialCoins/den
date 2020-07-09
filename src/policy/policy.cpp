@@ -146,6 +146,9 @@ bool IsStandardTx(const CTransaction& tx, std::string& reason)
 
 bool AreInputsStandard(const CTransaction& tx, const CCoinsViewCache& mapInputs)
 {
+    if (tx.IsCoinBase())
+        return true; // coinbase has no inputs
+
     for (unsigned int i = 0; i < tx.vin.size(); i++) {
         const CTxOut& prev = mapInputs.GetOutputFor(tx.vin[i]);
 
