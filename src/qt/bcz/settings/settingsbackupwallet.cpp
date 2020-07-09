@@ -1,16 +1,16 @@
-// Copyright (c) 2019-2020 The PIVX developers
+// Copyright (c) 2019-2020 The BCZ developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include "qt/pivx/settings/settingsbackupwallet.h"
-#include "qt/pivx/settings/forms/ui_settingsbackupwallet.h"
+#include "qt/bcz/settings/settingsbackupwallet.h"
+#include "qt/bcz/settings/forms/ui_settingsbackupwallet.h"
 #include <QFile>
 #include <QGraphicsDropShadowEffect>
 #include "guiutil.h"
-#include "qt/pivx/qtutils.h"
+#include "qt/bcz/qtutils.h"
 #include "guiinterface.h"
-#include "qt/pivx/qtutils.h"
-SettingsBackupWallet::SettingsBackupWallet(PIVXGUI* _window, QWidget *parent) :
+#include "qt/bcz/qtutils.h"
+SettingsBackupWallet::SettingsBackupWallet(BCZGUI* _window, QWidget *parent) :
     PWidget(_window, parent),
     ui(new Ui::SettingsBackupWallet)
 {

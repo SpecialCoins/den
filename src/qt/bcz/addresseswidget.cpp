@@ -1,17 +1,17 @@
-// Copyright (c) 2019-2020 The PIVX developers
+// Copyright (c) 2019-2020 The BCZ developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include "qt/pivx/addresseswidget.h"
-#include "qt/pivx/forms/ui_addresseswidget.h"
-#include "qt/pivx/addresslabelrow.h"
-#include "qt/pivx/addnewaddressdialog.h"
-#include "qt/pivx/tooltipmenu.h"
+#include "qt/bcz/addresseswidget.h"
+#include "qt/bcz/forms/ui_addresseswidget.h"
+#include "qt/bcz/addresslabelrow.h"
+#include "qt/bcz/addnewaddressdialog.h"
+#include "qt/bcz/tooltipmenu.h"
 
-#include "qt/pivx/addnewcontactdialog.h"
-#include "qt/pivx/pivxgui.h"
+#include "qt/bcz/addnewcontactdialog.h"
+#include "qt/bcz/bczgui.h"
 #include "guiutil.h"
-#include "qt/pivx/qtutils.h"
+#include "qt/bcz/qtutils.h"
 #include "walletmodel.h"
 
 #include <QModelIndex>
@@ -58,7 +58,7 @@ public:
 };
 
 
-AddressesWidget::AddressesWidget(PIVXGUI* parent) :
+AddressesWidget::AddressesWidget(BCZGUI* parent) :
     PWidget(parent),
     ui(new Ui::AddressesWidget)
 {
@@ -188,8 +188,8 @@ void AddressesWidget::onStoreContactClicked()
         }
 
         bool isStakingAddress = false;
-        CTxDestination pivAdd = DecodeDestination(address.toUtf8().constData(), isStakingAddress);
-        if (walletModel->isMine(pivAdd)) {
+        CTxDestination bczAdd = DecodeDestination(address.toUtf8().constData(), isStakingAddress);
+        if (walletModel->isMine(bczAdd)) {
             setCssEditLine(ui->lineEditAddress, false, true);
             inform(tr("Cannot store your own address as contact"));
             return;
@@ -202,7 +202,7 @@ void AddressesWidget::onStoreContactClicked()
             return;
         }
 
-        if (walletModel->updateAddressBookLabels(pivAdd, label.toUtf8().constData(),
+        if (walletModel->updateAddressBookLabels(bczAdd, label.toUtf8().constData(),
                 isStakingAddress ? AddressBook::AddressBookPurpose::COLD_STAKING_SEND : AddressBook::AddressBookPurpose::SEND)
                 ) {
             ui->lineEditAddress->setText("");

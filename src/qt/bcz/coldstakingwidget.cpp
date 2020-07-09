@@ -1,23 +1,23 @@
-// Copyright (c) 2019-2020 The PIVX developers
+// Copyright (c) 2019-2020 The BCZ developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include "qt/pivx/coldstakingwidget.h"
-#include "qt/pivx/forms/ui_coldstakingwidget.h"
-#include "qt/pivx/qtutils.h"
+#include "qt/bcz/coldstakingwidget.h"
+#include "qt/bcz/forms/ui_coldstakingwidget.h"
+#include "qt/bcz/qtutils.h"
 #include "amount.h"
 #include "guiutil.h"
-#include "qt/pivx/requestdialog.h"
-#include "qt/pivx/tooltipmenu.h"
-#include "qt/pivx/furlistrow.h"
-#include "qt/pivx/sendconfirmdialog.h"
-#include "qt/pivx/addnewcontactdialog.h"
-#include "qt/pivx/guitransactionsutils.h"
+#include "qt/bcz/requestdialog.h"
+#include "qt/bcz/tooltipmenu.h"
+#include "qt/bcz/furlistrow.h"
+#include "qt/bcz/sendconfirmdialog.h"
+#include "qt/bcz/addnewcontactdialog.h"
+#include "qt/bcz/guitransactionsutils.h"
 #include "walletmodel.h"
 #include "optionsmodel.h"
 #include "coincontroldialog.h"
 #include "coincontrol.h"
-#include "qt/pivx/csrow.h"
+#include "qt/bcz/csrow.h"
 
 #define DECORATION_SIZE 70
 #define NUM_ITEMS 3
@@ -71,7 +71,7 @@ private:
     CSRow *cachedRow = nullptr;
 };
 
-ColdStakingWidget::ColdStakingWidget(PIVXGUI* parent) :
+ColdStakingWidget::ColdStakingWidget(BCZGUI* parent) :
     PWidget(parent),
     ui(new Ui::ColdStakingWidget),
     isLoading(false)

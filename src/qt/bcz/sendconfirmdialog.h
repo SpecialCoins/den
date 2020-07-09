@@ -1,4 +1,4 @@
-// Copyright (c) 2019-2020 The PIVX developers
+// Copyright (c) 2019-2020 The BCZ developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -6,8 +6,8 @@
 #define SENDCONFIRMDIALOG_H
 
 #include "walletmodeltransaction.h"
-#include "qt/pivx/focuseddialog.h"
-#include "qt/pivx/snackbar.h"
+#include "qt/bcz/focuseddialog.h"
+#include "qt/bcz/snackbar.h"
 
 class WalletModelTransaction;
 class WalletModel;

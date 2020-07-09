@@ -1,16 +1,16 @@
-// Copyright (c) 2019-2020 The PIVX developers
+// Copyright (c) 2019-2020 The BCZ developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include "qt/pivx/send.h"
-#include "qt/pivx/forms/ui_send.h"
-#include "qt/pivx/addnewcontactdialog.h"
-#include "qt/pivx/qtutils.h"
-#include "qt/pivx/sendchangeaddressdialog.h"
-#include "qt/pivx/optionbutton.h"
-#include "qt/pivx/sendconfirmdialog.h"
-#include "qt/pivx/myaddressrow.h"
-#include "qt/pivx/guitransactionsutils.h"
+#include "qt/bcz/send.h"
+#include "qt/bcz/forms/ui_send.h"
+#include "qt/bcz/addnewcontactdialog.h"
+#include "qt/bcz/qtutils.h"
+#include "qt/bcz/sendchangeaddressdialog.h"
+#include "qt/bcz/optionbutton.h"
+#include "qt/bcz/sendconfirmdialog.h"
+#include "qt/bcz/myaddressrow.h"
+#include "qt/bcz/guitransactionsutils.h"
 #include "clientmodel.h"
 #include "optionsmodel.h"
 #include "addresstablemodel.h"
@@ -18,7 +18,7 @@
 #include "script/standard.h"
 #include "openuridialog.h"
 
-SendWidget::SendWidget(PIVXGUI* parent) :
+SendWidget::SendWidget(BCZGUI* parent) :
     PWidget(parent),
     ui(new Ui::send),
     coinIcon(new QPushButton()),
@@ -91,7 +91,7 @@ SendWidget::SendWidget(PIVXGUI* parent) :
     coinIcon->show();
     coinIcon->raise();
 
-    setCssProperty(coinIcon, "coin-icon-piv");
+    setCssProperty(coinIcon, "coin-icon-bcz");
 
     QSize BUTTON_SIZE = QSize(24, 24);
     coinIcon->setMinimumSize(BUTTON_SIZE);
@@ -648,8 +648,8 @@ void SendWidget::onContactMultiClicked()
             inform(tr("Invalid address"));
             return;
         }
-        CTxDestination pivAdd = DecodeDestination(address.toStdString());
-        if (walletModel->isMine(pivAdd)) {
+        CTxDestination bczAdd = DecodeDestination(address.toStdString());
+        if (walletModel->isMine(bczAdd)) {
             inform(tr("Cannot store your own address as contact"));
             return;
         }
@@ -669,7 +669,7 @@ void SendWidget::onContactMultiClicked()
             if (label == dialog->getLabel()) {
                 return;
             }
-            if (walletModel->updateAddressBookLabels(pivAdd, dialog->getLabel().toStdString(),
+            if (walletModel->updateAddressBookLabels(bczAdd, dialog->getLabel().toStdString(),
                     AddressBook::AddressBookPurpose::SEND)) {
                 inform(tr("New Contact Stored"));
             } else {

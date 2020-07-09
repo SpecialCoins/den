@@ -1,4 +1,4 @@
-// Copyright (c) 2019-2020 The PIVX developers
+// Copyright (c) 2019-2020 The BCZ developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -6,7 +6,7 @@
 #define SETTINGSEXPORTCSV_H
 
 #include <QWidget>
-#include "qt/pivx/pwidget.h"
+#include "qt/bcz/pwidget.h"
 #include "transactionfilterproxy.h"
 #include <QSortFilterProxyModel>
 
@@ -19,7 +19,7 @@ class SettingsExportCSV : public PWidget
     Q_OBJECT
 
 public:
-    explicit SettingsExportCSV(PIVXGUI* _window, QWidget *parent = nullptr);
+    explicit SettingsExportCSV(BCZGUI* _window, QWidget *parent = nullptr);
     ~SettingsExportCSV();
 
 private Q_SLOTS:

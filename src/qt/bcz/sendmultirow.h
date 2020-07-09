@@ -1,4 +1,4 @@
-// Copyright (c) 2019 The PIVX developers
+// Copyright (c) 2019 The BCZ developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -10,7 +10,7 @@
 #include <QAction>
 #include "walletmodel.h"
 #include "amount.h"
-#include "qt/pivx/pwidget.h"
+#include "qt/bcz/pwidget.h"
 
 class WalletModel;
 class SendCoinsRecipient;

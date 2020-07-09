@@ -1,4 +1,4 @@
-// Copyright (c) 2019 The PIVX developers
+// Copyright (c) 2019 The BCZ developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -6,7 +6,7 @@
 #define SETTINGSINFORMATIONWIDGET_H
 
 #include <QWidget>
-#include "qt/pivx/pwidget.h"
+#include "qt/bcz/pwidget.h"
 #include "rpcconsole.h"
 
 namespace Ui {
@@ -18,7 +18,7 @@ class SettingsInformationWidget : public PWidget
     Q_OBJECT
 
 public:
-    explicit SettingsInformationWidget(PIVXGUI* _window, QWidget *parent = nullptr);
+    explicit SettingsInformationWidget(BCZGUI* _window, QWidget *parent = nullptr);
     ~SettingsInformationWidget();
 
     void loadClientModel() override;

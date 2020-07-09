@@ -1,9 +1,9 @@
-// Copyright (c) 2019-2020 The PIVX developers
+// Copyright (c) 2019-2020 The BCZ developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include "qt/pivx/lockunlock.h"
-#include "qt/pivx/forms/ui_lockunlock.h"
+#include "qt/bcz/lockunlock.h"
+#include "qt/bcz/forms/ui_lockunlock.h"
 
 LockUnlock::LockUnlock(QWidget *parent) :
     QWidget(parent),

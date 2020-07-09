@@ -1,4 +1,4 @@
-// Copyright (c) 2019 The PIVX developers
+// Copyright (c) 2019 The BCZ developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -6,8 +6,8 @@
 #define SETTINGSSIGNMESSAGEWIDGETS_H
 
 #include <QWidget>
-#include "qt/pivx/pwidget.h"
-#include "qt/pivx/contactsdropdown.h"
+#include "qt/bcz/pwidget.h"
+#include "qt/bcz/contactsdropdown.h"
 
 namespace Ui {
 class SettingsSignMessageWidgets;
@@ -18,7 +18,7 @@ class SettingsSignMessageWidgets : public PWidget
     Q_OBJECT
 
 public:
-    explicit SettingsSignMessageWidgets(PIVXGUI* _window, QWidget *parent = nullptr);
+    explicit SettingsSignMessageWidgets(BCZGUI* _window, QWidget *parent = nullptr);
     ~SettingsSignMessageWidgets();
 
     void setAddress_SM(const QString& address);

@@ -1,13 +1,13 @@
-// Copyright (c) 2019-2020 The PIVX developers
+// Copyright (c) 2019-2020 The BCZ developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include "qt/pivx/topbar.h"
-#include "qt/pivx/forms/ui_topbar.h"
-#include "qt/pivx/lockunlock.h"
-#include "qt/pivx/qtutils.h"
-#include "qt/pivx/receivedialog.h"
-#include "qt/pivx/loadingdialog.h"
+#include "qt/bcz/topbar.h"
+#include "qt/bcz/forms/ui_topbar.h"
+#include "qt/bcz/lockunlock.h"
+#include "qt/bcz/qtutils.h"
+#include "qt/bcz/receivedialog.h"
+#include "qt/bcz/loadingdialog.h"
 #include "askpassphrasedialog.h"
 
 #include "bitcoinunits.h"
@@ -27,7 +27,7 @@
 
 #define REQUEST_UPGRADE_WALLET 1
 
-TopBar::TopBar(PIVXGUI* _mainWindow, QWidget *parent) :
+TopBar::TopBar(BCZGUI* _mainWindow, QWidget *parent) :
     PWidget(_mainWindow, parent),
     ui(new Ui::TopBar)
 {
@@ -52,9 +52,9 @@ TopBar::TopBar(PIVXGUI* _mainWindow, QWidget *parent) :
 
     // Amount information top
     ui->widgetTopAmount->setVisible(false);
-    setCssProperty({ui->labelAmountTopPiv}, "amount-small-topbar");
-    setCssProperty({ui->labelAmountPiv}, "amount-topbar");
-    setCssProperty({ui->labelPendingPiv, ui->labelImmaturePiv}, "amount-small-topbar");
+    setCssProperty({ui->labelAmountTopBcz}, "amount-small-topbar");
+    setCssProperty({ui->labelAmountBcz}, "amount-topbar");
+    setCssProperty({ui->labelPendingBcz, ui->labelImmatureBcz}, "amount-small-topbar");
 
     // Progress Sync
     progressBar = new QProgressBar(ui->layoutSync);
@@ -550,7 +550,7 @@ void TopBar::loadWalletModel()
     connect(walletModel, &WalletModel::encryptionStatusChanged, this, &TopBar::refreshStatus);
     // Ask for passphrase if needed
     connect(walletModel, &WalletModel::requireUnlock, this, &TopBar::unlockWallet);
-    // update the display unit, to not use the default ("PIVX")
+    // update the display unit, to not use the default ("BCZ")
     updateDisplayUnit();
 
     refreshStatus();
@@ -634,16 +634,16 @@ void TopBar::updateBalances(const CAmount& balance, const CAmount& unconfirmedBa
     }
     ui->labelTitle1->setText(nLockedBalance > 0 ? tr("Available (Locked included)") : tr("Available"));
 
-    // PIV Total
-    QString totalPiv = GUIUtil::formatBalance(balance, nDisplayUnit);
+    // BCZ Total
+    QString totalBcz = GUIUtil::formatBalance(balance, nDisplayUnit);
 
-    // PIV
+    // BCZ
     // Top
-    ui->labelAmountTopPiv->setText(totalPiv);
+    ui->labelAmountTopBcz->setText(totalBcz);
     // Expanded
-    ui->labelAmountPiv->setText(totalPiv);
-    ui->labelPendingPiv->setText(GUIUtil::formatBalance(unconfirmedBalance, nDisplayUnit));
-    ui->labelImmaturePiv->setText(GUIUtil::formatBalance(immatureBalance, nDisplayUnit));
+    ui->labelAmountBcz->setText(totalBcz);
+    ui->labelPendingBcz->setText(GUIUtil::formatBalance(unconfirmedBalance, nDisplayUnit));
+    ui->labelImmatureBcz->setText(GUIUtil::formatBalance(immatureBalance, nDisplayUnit));
 }
 
 void TopBar::resizeEvent(QResizeEvent *event)

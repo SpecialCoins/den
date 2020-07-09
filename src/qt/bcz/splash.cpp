@@ -1,9 +1,9 @@
-// Copyright (c) 2019 The PIVX developers
+// Copyright (c) 2019 The BCZ developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include "qt/pivx/splash.h"
-#include "qt/pivx/forms/ui_splash.h"
+#include "qt/bcz/splash.h"
+#include "qt/bcz/forms/ui_splash.h"
 #include "QFile"
 
 #include "init.h"
@@ -26,7 +26,7 @@ Splash::Splash(Qt::WindowFlags f, const NetworkStyle* networkStyle) :
     QWidget(0, f), ui(new Ui::Splash)
 {
     ui->setupUi(this);
-    QString titleText = tr("PIVX Core");
+    QString titleText = tr("BCZ Core");
     QString titleAddText = networkStyle->getTitleAddText();
     setWindowTitle(titleText + " " + titleAddText);
 

@@ -1,11 +1,11 @@
-// Copyright (c) 2019-2020 The PIVX developers
+// Copyright (c) 2019-2020 The BCZ developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #ifndef DEFAULTDIALOG_H
 #define DEFAULTDIALOG_H
 
-#include "qt/pivx/focuseddialog.h"
+#include "qt/bcz/focuseddialog.h"
 
 namespace Ui {
 class DefaultDialog;

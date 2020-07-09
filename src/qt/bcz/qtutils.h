@@ -1,11 +1,11 @@
-// Copyright (c) 2019-2020 The PIVX developers
+// Copyright (c) 2019-2020 The BCZ developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #ifndef QTUTILS_H
 #define QTUTILS_H
 
-#include "qt/pivx/pivxgui.h"
+#include "qt/bcz/bczgui.h"
 
 #include <QAbstractAnimation>
 #include <QColor>
@@ -33,11 +33,11 @@ const QString RESYNC("-resync");
 extern Qt::Modifier SHORT_KEY;
 
 bool openDialog(QDialog* widget, QWidget* gui);
-void closeDialog(QDialog* widget, PIVXGUI* gui);
+void closeDialog(QDialog* widget, BCZGUI* gui);
 void openDialogFullScreen(QWidget* parent, QWidget* dialog);
-bool openDialogWithOpaqueBackgroundY(QDialog* widget, PIVXGUI* gui, double posX = 3, int posY = 5);
-bool openDialogWithOpaqueBackground(QDialog* widget, PIVXGUI* gui, double posX = 3);
-bool openDialogWithOpaqueBackgroundFullScreen(QDialog* widget, PIVXGUI* gui);
+bool openDialogWithOpaqueBackgroundY(QDialog* widget, BCZGUI* gui, double posX = 3, int posY = 5);
+bool openDialogWithOpaqueBackground(QDialog* widget, BCZGUI* gui, double posX = 3);
+bool openDialogWithOpaqueBackgroundFullScreen(QDialog* widget, BCZGUI* gui);
 
 //
 QPixmap encodeToQr(QString str, QString& errorStr, QColor qrColor = Qt::black);

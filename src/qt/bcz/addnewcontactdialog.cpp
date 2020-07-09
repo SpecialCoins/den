@@ -1,10 +1,10 @@
-// Copyright (c) 2019 The PIVX developers
+// Copyright (c) 2019 The BCZ developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include "qt/pivx/addnewcontactdialog.h"
-#include "qt/pivx/forms/ui_addnewcontactdialog.h"
-#include "qt/pivx/qtutils.h"
+#include "qt/bcz/addnewcontactdialog.h"
+#include "qt/bcz/forms/ui_addnewcontactdialog.h"
+#include "qt/bcz/qtutils.h"
 
 AddNewContactDialog::AddNewContactDialog(QWidget *parent) :
     FocusedDialog(parent),

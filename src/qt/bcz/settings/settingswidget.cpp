@@ -1,11 +1,11 @@
-// Copyright (c) 2019-2020 The PIVX developers
+// Copyright (c) 2019-2020 The BCZ developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include "qt/pivx/settings/settingswidget.h"
-#include "qt/pivx/settings/forms/ui_settingswidget.h"
-#include "qt/pivx/qtutils.h"
-#include "qt/pivx/defaultdialog.h"
+#include "qt/bcz/settings/settingswidget.h"
+#include "qt/bcz/settings/forms/ui_settingswidget.h"
+#include "qt/bcz/qtutils.h"
+#include "qt/bcz/defaultdialog.h"
 #include "optionsmodel.h"
 #include "clientmodel.h"
 #include "utilitydialog.h"
@@ -13,7 +13,7 @@
 #include <QScrollBar>
 #include <QDataWidgetMapper>
 
-SettingsWidget::SettingsWidget(PIVXGUI* parent) :
+SettingsWidget::SettingsWidget(BCZGUI* parent) :
     PWidget(parent),
     ui(new Ui::SettingsWidget)
 {
@@ -136,7 +136,7 @@ SettingsWidget::SettingsWidget(PIVXGUI* parent) :
 
     // Help
     connect(ui->pushButtonHelp, &QPushButton::clicked, this, &SettingsWidget::onHelpClicked);
-    connect(ui->pushButtonHelp1, &QPushButton::clicked, window, &PIVXGUI::openFAQ);
+    connect(ui->pushButtonHelp1, &QPushButton::clicked, window, &BCZGUI::openFAQ);
     connect(ui->pushButtonHelp2, &QPushButton::clicked, this, &SettingsWidget::onAboutClicked);
 
     // Get restart command-line parameters and handle restart

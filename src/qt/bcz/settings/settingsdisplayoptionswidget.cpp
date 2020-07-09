@@ -1,9 +1,9 @@
-// Copyright (c) 2019-2020 The PIVX developers
+// Copyright (c) 2019-2020 The BCZ developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include "qt/pivx/settings/settingsdisplayoptionswidget.h"
-#include "qt/pivx/settings/forms/ui_settingsdisplayoptionswidget.h"
+#include "qt/bcz/settings/settingsdisplayoptionswidget.h"
+#include "qt/bcz/settings/forms/ui_settingsdisplayoptionswidget.h"
 #include <QListView>
 #include <QSettings>
 #include <QDir>
@@ -11,9 +11,9 @@
 #include "clientmodel.h"
 #include "optionsmodel.h"
 #include "bitcoinunits.h"
-#include "qt/pivx/qtutils.h"
+#include "qt/bcz/qtutils.h"
 
-SettingsDisplayOptionsWidget::SettingsDisplayOptionsWidget(PIVXGUI* _window, QWidget *parent) :
+SettingsDisplayOptionsWidget::SettingsDisplayOptionsWidget(BCZGUI* _window, QWidget *parent) :
     PWidget(_window,parent),
     ui(new Ui::SettingsDisplayOptionsWidget)
 {

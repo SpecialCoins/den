@@ -130,12 +130,12 @@
         <translation>Receiving addresses</translation>
     </message>
     <message>
-        <source>These are your PIVX addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>These are your PIVX addresses for sending payments. Always check the amount and the receiving address before sending coins.</translation>
+        <source>These are your BCZ addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <translation>These are your BCZ addresses for sending payments. Always check the amount and the receiving address before sending coins.</translation>
     </message>
     <message>
-        <source>These are your PIVX addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation>These are your PIVX addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</translation>
+        <source>These are your BCZ addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
+        <translation>These are your BCZ addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -251,8 +251,8 @@
         <translation>e.g. John Doe</translation>
     </message>
     <message>
-        <source>Enter PIVX address</source>
-        <translation>Enter PIVX address</translation>
+        <source>Enter BCZ address</source>
+        <translation>Enter BCZ address</translation>
     </message>
     <message>
         <source>SAVE</source>
@@ -380,8 +380,8 @@ for staking</translation>
         <translation>If you encrypt your wallet and lose your passphrase, you will</translation>
     </message>
     <message>
-        <source>LOSE ALL OF YOUR PIV</source>
-        <translation>LOSE ALL OF YOUR PIV</translation>
+        <source>LOSE ALL OF YOUR BCZ</source>
+        <translation>LOSE ALL OF YOUR BCZ</translation>
     </message>
     <message>
         <source>ENCRYPT</source>
@@ -396,8 +396,8 @@ for staking</translation>
         <translation>WARNING: The Caps Lock key is on!</translation>
     </message>
     <message>
-        <source>PIVX will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your PIVs from being stolen by malware infecting your computer.</source>
-        <translation>PIVX will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your PIVs from being stolen by malware infecting your computer.</translation>
+        <source>BCZ will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your BCZs from being stolen by malware infecting your computer.</source>
+        <translation>BCZ will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your BCZs from being stolen by malware infecting your computer.</translation>
     </message>
     <message>
         <source>Are you sure you wish to encrypt your wallet?</source>
@@ -466,8 +466,8 @@ for staking</translation>
         <translation>Savings</translation>
     </message>
     <message>
-        <source>0,00 PIV</source>
-        <translation>0,00 PIV</translation>
+        <source>0,00 BCZ</source>
+        <translation>0,00 BCZ</translation>
     </message>
     <message>
         <source>address</source>
@@ -508,8 +508,8 @@ for staking</translation>
         <translation>Coin Selection</translation>
     </message>
     <message>
-        <source>Select PIV Outputs to Spend</source>
-        <translation>Select PIV Outputs to Spend</translation>
+        <source>Select BCZ Outputs to Spend</source>
+        <translation>Select BCZ Outputs to Spend</translation>
     </message>
     <message>
         <source>Dust:</source>
@@ -536,8 +536,8 @@ for staking</translation>
         <translation>Amount</translation>
     </message>
     <message>
-        <source>0.00 PIV</source>
-        <translation>0.00 PIV</translation>
+        <source>0.00 BCZ</source>
+        <translation>0.00 BCZ</translation>
     </message>
     <message>
         <source>0</source>
@@ -720,8 +720,8 @@ for staking</translation>
         <translation>This label turns red, if any recipient receives an amount smaller than %1.</translation>
     </message>
     <message>
-        <source>Can vary +/- %1 upiv per input.</source>
-        <translation>Can vary +/- %1 upiv per input.</translation>
+        <source>Can vary +/- %1 ubcz per input.</source>
+        <translation>Can vary +/- %1 ubcz per input.</translation>
     </message>
     <message>
         <source>(no label)</source>
@@ -803,9 +803,9 @@ for staking</translation>
         <translation>Error loading delegations: %1</translation>
     </message>
     <message>
-        <source>You can delegate your PIVs, letting a hot node (24/7 online node)
+        <source>You can delegate your BCZs, letting a hot node (24/7 online node)
 stake on your behalf, while you keep the keys securely offline.</source>
-        <translation>You can delegate your PIVs, letting a hot node (24/7 online node)
+        <translation>You can delegate your BCZs, letting a hot node (24/7 online node)
 stake on your behalf, while you keep the keys securely offline.</translation>
     </message>
     <message>
@@ -813,8 +813,8 @@ stake on your behalf, while you keep the keys securely offline.</translation>
         <translation>Enter owner address</translation>
     </message>
     <message>
-        <source>Accept PIV delegation / Delegate PIV</source>
-        <translation>Accept PIV delegation / Delegate PIV</translation>
+        <source>Accept BCZ delegation / Delegate BCZ</source>
+        <translation>Accept BCZ delegation / Delegate BCZ</translation>
     </message>
     <message>
         <source>Cold Staking address</source>
@@ -881,8 +881,8 @@ Do you wish to proceed?</translation>
         <translation>Coins delegated</translation>
     </message>
     <message>
-        <source>You don't have any PIV to select.</source>
-        <translation>You don't have any PIV to select.</translation>
+        <source>You don't have any BCZ to select.</source>
+        <translation>You don't have any BCZ to select.</translation>
     </message>
     <message>
         <source>Cannot perform operation, wallet locked</source>
@@ -1013,12 +1013,12 @@ address</translation>
         <translation>Staking statistics</translation>
     </message>
     <message>
-        <source>PIV</source>
-        <translation>PIV</translation>
+        <source>BCZ</source>
+        <translation>BCZ</translation>
     </message>
     <message>
-        <source>zPIV</source>
-        <translation>zPIV</translation>
+        <source>zBCZ</source>
+        <translation>zBCZ</translation>
     </message>
     <message>
         <source>Sort by</source>
@@ -1049,8 +1049,8 @@ address</translation>
         <translation>You can view your account's history</translation>
     </message>
     <message>
-        <source>Amount of PIV and zPIV staked.</source>
-        <translation>Amount of PIV and zPIV staked.</translation>
+        <source>Amount of BCZ and zBCZ staked.</source>
+        <translation>Amount of BCZ and zBCZ staked.</translation>
     </message>
     <message>
         <source>Please wait until the wallet is fully synced to see your correct balance</source>
@@ -1061,8 +1061,8 @@ address</translation>
         <translation>No transactions yet</translation>
     </message>
     <message>
-        <source>How to get PIV or zPIV</source>
-        <translation>How to get PIV or zPIV</translation>
+        <source>How to get BCZ or zBCZ</source>
+        <translation>How to get BCZ or zBCZ</translation>
     </message>
     <message>
         <source>You can verify the staking activity in the status bar at the top right of the wallet.
@@ -1157,8 +1157,8 @@ It will start automatically as soon as the wallet has enough confirmations on an
         <translation>Edit sending address</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid PIVX address.</source>
-        <translation>The entered address "%1" is not a valid PIVX address.</translation>
+        <source>The entered address "%1" is not a valid BCZ address.</source>
+        <translation>The entered address "%1" is not a valid BCZ address.</translation>
     </message>
     <message>
         <source>The entered address "%1" is already in the address book.</source>
@@ -1210,16 +1210,16 @@ It will start automatically as soon as the wallet has enough confirmations on an
         <translation>version</translation>
     </message>
     <message>
-        <source>PIVX Core</source>
-        <translation>PIVX Core</translation>
+        <source>BCZ Core</source>
+        <translation>BCZ Core</translation>
     </message>
     <message>
         <source>(%1-bit)</source>
         <translation>(%1-bit)</translation>
     </message>
     <message>
-        <source>About PIVX Core</source>
-        <translation>About PIVX Core</translation>
+        <source>About BCZ Core</source>
+        <translation>About BCZ Core</translation>
     </message>
     <message>
         <source>Command-line options</source>
@@ -1273,16 +1273,16 @@ It will start automatically as soon as the wallet has enough confirmations on an
         <translation>Welcome</translation>
     </message>
     <message>
-        <source>Welcome to PIVX Core.</source>
-        <translation>Welcome to PIVX Core.</translation>
+        <source>Welcome to BCZ Core.</source>
+        <translation>Welcome to BCZ Core.</translation>
     </message>
     <message>
-        <source>As this is the first time the program is launched, you can choose where PIVX Core will store its data.</source>
-        <translation>As this is the first time the program is launched, you can choose where PIVX Core will store its data.</translation>
+        <source>As this is the first time the program is launched, you can choose where BCZ Core will store its data.</source>
+        <translation>As this is the first time the program is launched, you can choose where BCZ Core will store its data.</translation>
     </message>
     <message>
-        <source>PIVX Core will download and store a copy of the PIVX block chain. At least %1GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</source>
-        <translation>PIVX Core will download and store a copy of the PIVX block chain. At least %1GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</translation>
+        <source>BCZ Core will download and store a copy of the BCZ block chain. At least %1GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</source>
+        <translation>BCZ Core will download and store a copy of the BCZ block chain. At least %1GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</translation>
     </message>
     <message>
         <source>Use the default data directory</source>
@@ -1301,8 +1301,8 @@ It will start automatically as soon as the wallet has enough confirmations on an
         <translation>OK</translation>
     </message>
     <message>
-        <source>PIVX Core</source>
-        <translation>PIVX Core</translation>
+        <source>BCZ Core</source>
+        <translation>BCZ Core</translation>
     </message>
     <message>
         <source>Error: Specified data directory "%1" cannot be created.</source>
@@ -1401,8 +1401,8 @@ It will start automatically as soon as the wallet has enough confirmations on an
         <translation>Create New Masternode Controller</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;To create a PIVX Masternode you must dedicate 10,000 PIV (the unit of PIVX) to the network (however, these coins are still yours and will never leave your possession). &lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;You can deactivate the node and unlock the coins at any time.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;To create a PIVX Masternode you must dedicate 10,000 PIV (the unit of PIVX) to the network (however, these coins are still yours and will never leave your possession). &lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;You can deactivate the node and unlock the coins at any time.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;To create a BCZ Masternode you must dedicate 10,000 BCZ (the unit of BCZ) to the network (however, these coins are still yours and will never leave your possession). &lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;You can deactivate the node and unlock the coins at any time.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;To create a BCZ Masternode you must dedicate 10,000 BCZ (the unit of BCZ) to the network (however, these coins are still yours and will never leave your possession). &lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;You can deactivate the node and unlock the coins at any time.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Set Masternode Name</source>
@@ -1421,8 +1421,8 @@ It will start automatically as soon as the wallet has enough confirmations on an
         <translation>Make sure you have this amount of coins.</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A transaction of 10,000 PIV will be made&lt;/p&gt;&lt;p&gt;to a new empty address in your wallet.&lt;/p&gt;&lt;p&gt;The Address is labeled under the master node's name.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A transaction of 10,000 PIV will be made&lt;/p&gt;&lt;p&gt;to a new empty address in your wallet.&lt;/p&gt;&lt;p&gt;The Address is labeled under the master node's name.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A transaction of 10,000 BCZ will be made&lt;/p&gt;&lt;p&gt;to a new empty address in your wallet.&lt;/p&gt;&lt;p&gt;The Address is labeled under the master node's name.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A transaction of 10,000 BCZ will be made&lt;/p&gt;&lt;p&gt;to a new empty address in your wallet.&lt;/p&gt;&lt;p&gt;The Address is labeled under the master node's name.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Address of the node that must always be online running the actual master node.</source>
@@ -1620,7 +1620,7 @@ Please wait few more minutes (masternode collaterals require %1 confirmations).<
 on a remote server to your clipboard.
 
 
-You will only have to paste the data in the pivx.conf file
+You will only have to paste the data in the bcz.conf file
 of your remote server and start it, then start the Masternode using
 this controller wallet (select the Masternode in the list and press "start").
 </source>
@@ -1628,7 +1628,7 @@ this controller wallet (select the Masternode in the list and press "start").
 on a remote server to your clipboard.
 
 
-You will only have to paste the data in the pivx.conf file
+You will only have to paste the data in the bcz.conf file
 of your remote server and start it, then start the Masternode using
 this controller wallet (select the Masternode in the list and press "start").
 </translation>
@@ -1664,8 +1664,8 @@ Are you sure?</translation>
         <translation>Cannot create Masternode controller, wallet locked</translation>
     </message>
     <message>
-        <source>Not enough balance to create a masternode, 10,000 PIV required.</source>
-        <translation>Not enough balance to create a masternode, 10,000 PIV required.</translation>
+        <source>Not enough balance to create a masternode, 10,000 BCZ required.</source>
+        <translation>Not enough balance to create a masternode, 10,000 BCZ required.</translation>
     </message>
     <message>
         <source>Error creating masternode</source>
@@ -1796,8 +1796,8 @@ Are you sure?</translation>
         <translation>Parsed data too large</translation>
     </message>
     <message>
-        <source>Invalid URI, not starting with "pivx" prefix</source>
-        <translation>Invalid URI, not starting with "pivx" prefix</translation>
+        <source>Invalid URI, not starting with "bcz" prefix</source>
+        <translation>Invalid URI, not starting with "bcz" prefix</translation>
     </message>
 </context>
 <context>
@@ -1846,8 +1846,8 @@ Are you sure?</translation>
         <translation>If you disable the spending of unconfirmed change, the change from a transaction&lt;br/&gt;cannot be used until that transaction has at least one confirmation.&lt;br/&gt;This also affects how your balance is computed.</translation>
     </message>
     <message>
-        <source>Automatically open the PIVX client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation>Automatically open the PIVX client port on the router. This only works when your router supports UPnP and it is enabled.</translation>
+        <source>Automatically open the BCZ client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>Automatically open the BCZ client port on the router. This only works when your router supports UPnP and it is enabled.</translation>
     </message>
     <message>
         <source>Accept connections from outside</source>
@@ -1866,12 +1866,12 @@ Are you sure?</translation>
         <translation>Expert</translation>
     </message>
     <message>
-        <source>Automatically start PIVX after logging in to the system.</source>
-        <translation>Automatically start PIVX after logging in to the system.</translation>
+        <source>Automatically start BCZ after logging in to the system.</source>
+        <translation>Automatically start BCZ after logging in to the system.</translation>
     </message>
     <message>
-        <source>&amp;Start PIVX on system login</source>
-        <translation>&amp;Start PIVX on system login</translation>
+        <source>&amp;Start BCZ on system login</source>
+        <translation>&amp;Start BCZ on system login</translation>
     </message>
     <message>
         <source>Whether to show coin control features or not.</source>
@@ -1898,58 +1898,58 @@ Are you sure?</translation>
         <translation>&amp;Network</translation>
     </message>
     <message>
-        <source>The user interface language can be set here. This setting will take effect after restarting PIVX.</source>
-        <translation>The user interface language can be set here. This setting will take effect after restarting PIVX.</translation>
+        <source>The user interface language can be set here. This setting will take effect after restarting BCZ.</source>
+        <translation>The user interface language can be set here. This setting will take effect after restarting BCZ.</translation>
     </message>
     <message>
         <source>Language missing or translation incomplete? Help contributing translations here:
-https://www.transifex.com/pivx-project/pivx-project-translations</source>
+https://www.transifex.com/bcz-project/bcz-project-translations</source>
         <translation>Language missing or translation incomplete? Help contributing translations here:
-https://www.transifex.com/pivx-project/pivx-project-translations</translation>
+https://www.transifex.com/bcz-project/bcz-project-translations</translation>
     </message>
     <message>
         <source>Map port using &amp;UPnP</source>
         <translation>Map port using &amp;UPnP</translation>
     </message>
     <message>
-        <source>Enable automatic minting of PIV units to zPIV</source>
-        <translation>Enable automatic minting of PIV units to zPIV</translation>
+        <source>Enable automatic minting of BCZ units to zBCZ</source>
+        <translation>Enable automatic minting of BCZ units to zBCZ</translation>
     </message>
     <message>
-        <source>Enable zPIV Automint</source>
-        <translation>Enable zPIV Automint</translation>
+        <source>Enable zBCZ Automint</source>
+        <translation>Enable zBCZ Automint</translation>
     </message>
     <message>
-        <source>Enable automatic zPIV minting from specific addresses</source>
-        <translation>Enable automatic zPIV minting from specific addresses</translation>
+        <source>Enable automatic zBCZ minting from specific addresses</source>
+        <translation>Enable automatic zBCZ minting from specific addresses</translation>
     </message>
     <message>
         <source>Enable Automint Addresses</source>
         <translation>Enable Automint Addresses</translation>
     </message>
     <message>
-        <source>Percentage of incoming PIV which get automatically converted to zPIV via Zerocoin Protocol (min: 10%)</source>
-        <translation>Percentage of incoming PIV which get automatically converted to zPIV via Zerocoin Protocol (min: 10%)</translation>
+        <source>Percentage of incoming BCZ which get automatically converted to zBCZ via Zerocoin Protocol (min: 10%)</source>
+        <translation>Percentage of incoming BCZ which get automatically converted to zBCZ via Zerocoin Protocol (min: 10%)</translation>
     </message>
     <message>
-        <source>Percentage of autominted zPIV</source>
-        <translation>Percentage of autominted zPIV</translation>
+        <source>Percentage of autominted zBCZ</source>
+        <translation>Percentage of autominted zBCZ</translation>
     </message>
     <message>
-        <source>Wait with automatic conversion to Zerocoin until enough PIV for this denomination is available</source>
-        <translation>Wait with automatic conversion to Zerocoin until enough PIV for this denomination is available</translation>
+        <source>Wait with automatic conversion to Zerocoin until enough BCZ for this denomination is available</source>
+        <translation>Wait with automatic conversion to Zerocoin until enough BCZ for this denomination is available</translation>
     </message>
     <message>
-        <source>Preferred Automint zPIV Denomination</source>
-        <translation>Preferred Automint zPIV Denomination</translation>
+        <source>Preferred Automint zBCZ Denomination</source>
+        <translation>Preferred Automint zBCZ Denomination</translation>
     </message>
     <message>
         <source>Stake split threshold:</source>
         <translation>Stake split threshold:</translation>
     </message>
     <message>
-        <source>Connect to the PIVX network through a SOCKS5 proxy.</source>
-        <translation>Connect to the PIVX network through a SOCKS5 proxy.</translation>
+        <source>Connect to the BCZ network through a SOCKS5 proxy.</source>
+        <translation>Connect to the BCZ network through a SOCKS5 proxy.</translation>
     </message>
     <message>
         <source>Proxy &amp;IP:</source>
@@ -2093,10 +2093,10 @@ https://www.transifex.com/pivx-project/pivx-project-translations</translation>
     </message>
 </context>
 <context>
-    <name>PIVXGUI</name>
+    <name>BCZGUI</name>
     <message>
-        <source>PIVX Core</source>
-        <translation>PIVX Core</translation>
+        <source>BCZ Core</source>
+        <translation>BCZ Core</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -2123,8 +2123,8 @@ https://www.transifex.com/pivx-project/pivx-project-translations</translation>
         <translation>Quit application</translation>
     </message>
     <message>
-        <source>PIVX Core client</source>
-        <translation>PIVX Core client</translation>
+        <source>BCZ Core client</source>
+        <translation>BCZ Core client</translation>
     </message>
     <message>
         <source>Error</source>
@@ -2167,8 +2167,8 @@ Address: %4
 </translation>
     </message>
     <message>
-        <source>A fatal error occurred. PIVX can no longer continue safely and will quit.</source>
-        <translation>A fatal error occurred. PIVX can no longer continue safely and will quit.</translation>
+        <source>A fatal error occurred. BCZ can no longer continue safely and will quit.</source>
+        <translation>A fatal error occurred. BCZ can no longer continue safely and will quit.</translation>
     </message>
 </context>
 <context>
@@ -2194,12 +2194,12 @@ Address: %4
         <translation>Invalid payment address %1</translation>
     </message>
     <message>
-        <source>Cannot start pivx: click-to-pay handler</source>
-        <translation>Cannot start pivx: click-to-pay handler</translation>
+        <source>Cannot start bcz: click-to-pay handler</source>
+        <translation>Cannot start bcz: click-to-pay handler</translation>
     </message>
     <message>
-        <source>URI cannot be parsed! This can be caused by an invalid PIVX address or malformed URI parameters.</source>
-        <translation>URI cannot be parsed! This can be caused by an invalid PIVX address or malformed URI parameters.</translation>
+        <source>URI cannot be parsed! This can be caused by an invalid BCZ address or malformed URI parameters.</source>
+        <translation>URI cannot be parsed! This can be caused by an invalid BCZ address or malformed URI parameters.</translation>
     </message>
     <message>
         <source>Payment request file cannot be read! This can be caused by an invalid payment request file.</source>
@@ -2312,50 +2312,50 @@ Address: %4
         <translation>Mint</translation>
     </message>
     <message>
-        <source>Minting zPIV anonymizes your PIV by removing any
+        <source>Minting zBCZ anonymizes your BCZ by removing any
 transaction history, making transactions untraceable </source>
-        <translation>Minting zPIV anonymizes your PIV by removing any
+        <translation>Minting zBCZ anonymizes your BCZ by removing any
 transaction history, making transactions untraceable </translation>
     </message>
     <message>
-        <source>Mint new zPIV or convert back to PIV</source>
-        <translation>Mint new zPIV or convert back to PIV</translation>
+        <source>Mint new zBCZ or convert back to BCZ</source>
+        <translation>Mint new zBCZ or convert back to BCZ</translation>
     </message>
     <message>
-        <source>Last zPIV Movements</source>
-        <translation>Last zPIV Movements</translation>
+        <source>Last zBCZ Movements</source>
+        <translation>Last zBCZ Movements</translation>
     </message>
     <message>
         <source>No transactions yet</source>
         <translation>No transactions yet</translation>
     </message>
     <message>
-        <source>Mint zPIV</source>
-        <translation>Mint zPIV</translation>
+        <source>Mint zBCZ</source>
+        <translation>Mint zBCZ</translation>
     </message>
     <message>
-        <source>Enter amount of PIV to mint into zPIV</source>
-        <translation>Enter amount of PIV to mint into zPIV</translation>
+        <source>Enter amount of BCZ to mint into zBCZ</source>
+        <translation>Enter amount of BCZ to mint into zBCZ</translation>
     </message>
     <message>
-        <source>Convert back to PIV</source>
-        <translation>Convert back to PIV</translation>
+        <source>Convert back to BCZ</source>
+        <translation>Convert back to BCZ</translation>
     </message>
     <message>
-        <source>Enter amount of zPIV to convert back into PIV</source>
-        <translation>Enter amount of zPIV to convert back into PIV</translation>
+        <source>Enter amount of zBCZ to convert back into BCZ</source>
+        <translation>Enter amount of zBCZ to convert back into BCZ</translation>
     </message>
     <message>
         <source>Zerocoin</source>
         <translation>Zerocoin</translation>
     </message>
     <message>
-        <source>zPIV is currently undergoing maintenance</source>
-        <translation>zPIV is currently undergoing maintenance</translation>
+        <source>zBCZ is currently undergoing maintenance</source>
+        <translation>zBCZ is currently undergoing maintenance</translation>
     </message>
     <message>
-        <source>You need to unlock the wallet to be able to %1 zPIV</source>
-        <translation>You need to unlock the wallet to be able to %1 zPIV</translation>
+        <source>You need to unlock the wallet to be able to %1 zBCZ</source>
+        <translation>You need to unlock the wallet to be able to %1 zBCZ</translation>
     </message>
     <message>
         <source>convert</source>
@@ -2370,16 +2370,16 @@ transaction history, making transactions untraceable </translation>
         <translation>Invalid value</translation>
     </message>
     <message>
-        <source>zPIV minted successfully</source>
-        <translation>zPIV minted successfully</translation>
+        <source>zBCZ minted successfully</source>
+        <translation>zBCZ minted successfully</translation>
     </message>
     <message>
-        <source>zPIV converted back to PIV</source>
-        <translation>zPIV converted back to PIV</translation>
+        <source>zBCZ converted back to BCZ</source>
+        <translation>zBCZ converted back to BCZ</translation>
     </message>
     <message>
-        <source>You don't have any PIV to select.</source>
-        <translation>You don't have any PIV to select.</translation>
+        <source>You don't have any BCZ to select.</source>
+        <translation>You don't have any BCZ to select.</translation>
     </message>
     <message>
         <source>Rescan Mints</source>
@@ -2390,8 +2390,8 @@ transaction history, making transactions untraceable </translation>
         <translation>Your zerocoin mints are going to be scanned from the blockchain from scratch</translation>
     </message>
     <message>
-        <source>Reset Spent zPIV</source>
-        <translation>Reset Spent zPIV</translation>
+        <source>Reset Spent zBCZ</source>
+        <translation>Reset Spent zBCZ</translation>
     </message>
     <message>
         <source>Your zerocoin spends are going to be scanned from the blockchain from scratch</source>
@@ -2409,8 +2409,8 @@ transaction history, making transactions untraceable </translation>
         <translation>Amount</translation>
     </message>
     <message>
-        <source>Enter PIVX address (e.g. %1)</source>
-        <translation>Enter PIVX address (e.g. %1)</translation>
+        <source>Enter BCZ address (e.g. %1)</source>
+        <translation>Enter BCZ address (e.g. %1)</translation>
     </message>
     <message>
         <source>%1 d</source>
@@ -2453,8 +2453,8 @@ transaction history, making transactions untraceable </translation>
         <translation>%1 ms</translation>
     </message>
     <message>
-        <source>PIVX Core</source>
-        <translation>PIVX Core</translation>
+        <source>BCZ Core</source>
+        <translation>BCZ Core</translation>
     </message>
     <message>
         <source>Error: Specified data directory "%1" does not exist.</source>
@@ -2473,8 +2473,8 @@ transaction history, making transactions untraceable </translation>
         <translation>Error reading masternode configuration file: %1</translation>
     </message>
     <message>
-        <source>PIVX Core didn't yet exit safely...</source>
-        <translation>PIVX Core didn't yet exit safely...</translation>
+        <source>BCZ Core didn't yet exit safely...</source>
+        <translation>BCZ Core didn't yet exit safely...</translation>
     </message>
     <message>
         <source>Contact</source>
@@ -2660,8 +2660,8 @@ transaction history, making transactions untraceable </translation>
         <translation>Block chain</translation>
     </message>
     <message>
-        <source>Open the PIVX debug log file from the current data directory. This can take a few seconds for large log files.</source>
-        <translation>Open the PIVX debug log file from the current data directory. This can take a few seconds for large log files.</translation>
+        <source>Open the BCZ debug log file from the current data directory. This can take a few seconds for large log files.</source>
+        <translation>Open the BCZ debug log file from the current data directory. This can take a few seconds for large log files.</translation>
     </message>
     <message>
         <source>Number of Masternodes</source>
@@ -2804,8 +2804,8 @@ transaction history, making transactions untraceable </translation>
         <translation>Custom Backup Path:</translation>
     </message>
     <message>
-        <source>Custom zPIV Backup Path:</source>
-        <translation>Custom zPIV Backup Path:</translation>
+        <source>Custom zBCZ Backup Path:</source>
+        <translation>Custom zBCZ Backup Path:</translation>
     </message>
     <message>
         <source>Custom Backups Threshold:</source>
@@ -2884,8 +2884,8 @@ transaction history, making transactions untraceable </translation>
         <translation>Out:</translation>
     </message>
     <message>
-        <source>Welcome to the PIVX RPC console.</source>
-        <translation>Welcome to the PIVX RPC console.</translation>
+        <source>Welcome to the BCZ RPC console.</source>
+        <translation>Welcome to the BCZ RPC console.</translation>
     </message>
     <message>
         <source>&amp;Disconnect Node</source>
@@ -3050,8 +3050,8 @@ transaction history, making transactions untraceable </translation>
         <translation>Receive</translation>
     </message>
     <message>
-        <source>Scan the QR code or copy the address to receive PIV.</source>
-        <translation>Scan the QR code or copy the address to receive PIV.</translation>
+        <source>Scan the QR code or copy the address to receive BCZ.</source>
+        <translation>Scan the QR code or copy the address to receive BCZ.</translation>
     </message>
     <message>
         <source>No address </source>
@@ -3160,8 +3160,8 @@ transaction history, making transactions untraceable </translation>
         <translation>Amount</translation>
     </message>
     <message>
-        <source>PIV</source>
-        <translation>PIV</translation>
+        <source>BCZ</source>
+        <translation>BCZ</translation>
     </message>
     <message>
         <source>TextLabel</source>
@@ -3200,8 +3200,8 @@ transaction history, making transactions untraceable </translation>
         <translation>New Payment Request</translation>
     </message>
     <message>
-        <source>Instead of sharing only a PIVX address, you can create a payment request, bundling up more information.</source>
-        <translation>Instead of sharing only a PIVX address, you can create a payment request, bundling up more information.</translation>
+        <source>Instead of sharing only a BCZ address, you can create a payment request, bundling up more information.</source>
+        <translation>Instead of sharing only a BCZ address, you can create a payment request, bundling up more information.</translation>
     </message>
     <message>
         <source>Enter a label for the address</source>
@@ -3259,8 +3259,8 @@ transaction history, making transactions untraceable </translation>
         <translation>Custom Change Address</translation>
     </message>
     <message>
-        <source>The remainder of the value resultant from the inputs minus the outputs value goes to the "change" PIVX address</source>
-        <translation>The remainder of the value resultant from the inputs minus the outputs value goes to the "change" PIVX address</translation>
+        <source>The remainder of the value resultant from the inputs minus the outputs value goes to the "change" BCZ address</source>
+        <translation>The remainder of the value resultant from the inputs minus the outputs value goes to the "change" BCZ address</translation>
     </message>
     <message>
         <source>SAVE</source>
@@ -3294,8 +3294,8 @@ transaction history, making transactions untraceable </translation>
         <translation>Recommended</translation>
     </message>
     <message>
-        <source>PIV/kilobyte</source>
-        <translation>PIV/kilobyte</translation>
+        <source>BCZ/kilobyte</source>
+        <translation>BCZ/kilobyte</translation>
     </message>
     <message>
         <source>0.00 KB</source>
@@ -3372,8 +3372,8 @@ transaction history, making transactions untraceable </translation>
         <translation>Send</translation>
     </message>
     <message>
-        <source>You can transfer public coins (PIV) or private coins (zPIV)</source>
-        <translation>You can transfer public coins (PIV) or private coins (zPIV)</translation>
+        <source>You can transfer public coins (BCZ) or private coins (zBCZ)</source>
+        <translation>You can transfer public coins (BCZ) or private coins (zBCZ)</translation>
     </message>
     <message>
         <source>Select coin type to spend</source>
@@ -3404,12 +3404,12 @@ transaction history, making transactions untraceable </translation>
         <translation>Total to send</translation>
     </message>
     <message>
-        <source>Send PIV</source>
-        <translation>Send PIV</translation>
+        <source>Send BCZ</source>
+        <translation>Send BCZ</translation>
     </message>
     <message>
-        <source>Send zPIV</source>
-        <translation>Send zPIV</translation>
+        <source>Send zBCZ</source>
+        <translation>Send zBCZ</translation>
     </message>
     <message>
         <source>Total remaining from the selected UTXO</source>
@@ -3440,8 +3440,8 @@ Do you want to continue?</translation>
         <translation>Maximum amount of outputs reached</translation>
     </message>
     <message>
-        <source>PIVX address or contact label</source>
-        <translation>PIVX address or contact label</translation>
+        <source>BCZ address or contact label</source>
+        <translation>BCZ address or contact label</translation>
     </message>
     <message>
         <source>Invalid entry, previous entries must be valid before add a new one</source>
@@ -3484,8 +3484,8 @@ These coins will no longer be cold-staked.</translation>
         <translation>Spend Zerocoin</translation>
     </message>
     <message>
-        <source>zPIV is currently undergoing maintenance.</source>
-        <translation>zPIV is currently undergoing maintenance.</translation>
+        <source>zBCZ is currently undergoing maintenance.</source>
+        <translation>zBCZ is currently undergoing maintenance.</translation>
     </message>
     <message>
         <source>Coin control mint not found</source>
@@ -3504,12 +3504,12 @@ These coins will no longer be cold-staked.</translation>
 %2</translation>
     </message>
     <message>
-        <source>zPIV transaction sent!</source>
-        <translation>zPIV transaction sent!</translation>
+        <source>zBCZ transaction sent!</source>
+        <translation>zBCZ transaction sent!</translation>
     </message>
     <message>
-        <source>Version 1 zPIV require a security level of 100 to successfully spend.</source>
-        <translation>Version 1 zPIV require a security level of 100 to successfully spend.</translation>
+        <source>Version 1 zBCZ require a security level of 100 to successfully spend.</source>
+        <translation>Version 1 zBCZ require a security level of 100 to successfully spend.</translation>
     </message>
     <message>
         <source>Too much inputs (</source>
@@ -3544,12 +3544,12 @@ Either mint higher denominations (so fewer inputs are needed) or reduce the amou
         <translation>Custom Fee %1</translation>
     </message>
     <message>
-        <source>You don't have any PIV to select.</source>
-        <translation>You don't have any PIV to select.</translation>
+        <source>You don't have any BCZ to select.</source>
+        <translation>You don't have any BCZ to select.</translation>
     </message>
     <message>
-        <source>You don't have any zPIV in your balance to select.</source>
-        <translation>You don't have any zPIV in your balance to select.</translation>
+        <source>You don't have any zBCZ in your balance to select.</source>
+        <translation>You don't have any zBCZ in your balance to select.</translation>
     </message>
     <message>
         <source>No contacts available, you can go to the contacts screen and add some there!</source>
@@ -3718,8 +3718,8 @@ This option creates a wallet.dat file that can be used to recover your whole bal
         <translation>DECRYPT KEY</translation>
     </message>
     <message>
-        <source>PIVX address</source>
-        <translation>PIVX address</translation>
+        <source>BCZ address</source>
+        <translation>BCZ address</translation>
     </message>
     <message>
         <source>Enter address</source>
@@ -3851,8 +3851,8 @@ Verify that you have installed a predetermined text editor.</source>
 Verify that you have installed a predetermined text editor.</translation>
     </message>
     <message>
-        <source>Welcome to the PIVX RPC console.</source>
-        <translation>Welcome to the PIVX RPC console.</translation>
+        <source>Welcome to the BCZ RPC console.</source>
+        <translation>Welcome to the BCZ RPC console.</translation>
     </message>
     <message>
         <source>Use up and down arrows to navigate history, and %1 to clear screen.</source>
@@ -3965,12 +3965,12 @@ Verify that you have installed a predetermined text editor.</translation>
         <translation>Export Address List</translation>
     </message>
     <message>
-        <source>PIVX_tx_csv_export(*.csv)</source>
-        <translation>PIVX_tx_csv_export(*.csv)</translation>
+        <source>BCZ_tx_csv_export(*.csv)</source>
+        <translation>BCZ_tx_csv_export(*.csv)</translation>
     </message>
     <message>
-        <source>PIVX_addresses_csv_export(*.csv)</source>
-        <translation>PIVX_addresses_csv_export(*.csv)</translation>
+        <source>BCZ_addresses_csv_export(*.csv)</source>
+        <translation>BCZ_addresses_csv_export(*.csv)</translation>
     </message>
     <message>
         <source>Please select a folder to export the csv file first.</source>
@@ -4048,34 +4048,34 @@ There was an error trying to save the address list to %1. Please try again.</tra
         <translation>PushButton</translation>
     </message>
     <message>
-        <source>1) What is PIVX?</source>
-        <translation>1) What is PIVX?</translation>
+        <source>1) What is BCZ?</source>
+        <translation>1) What is BCZ?</translation>
     </message>
     <message>
-        <source>2) Why are my PIV unspendable?</source>
-        <translation>2) Why are my PIV unspendable?</translation>
+        <source>2) Why are my BCZ unspendable?</source>
+        <translation>2) Why are my BCZ unspendable?</translation>
     </message>
     <message>
-        <source>3) PIVX privacy? What is Zerocoin (zPIV)?</source>
-        <translation>3) PIVX privacy? What is Zerocoin (zPIV)?</translation>
+        <source>3) BCZ privacy? What is Zerocoin (zBCZ)?</source>
+        <translation>3) BCZ privacy? What is Zerocoin (zBCZ)?</translation>
     </message>
     <message>
-        <source>4) Why are my zPIV unspendable?</source>
-        <translation>4) Why are my zPIV unspendable?</translation>
+        <source>4) Why are my zBCZ unspendable?</source>
+        <translation>4) Why are my zBCZ unspendable?</translation>
     </message>
     <message>
         <source>5) Why did my wallet convert the balance
-    into zPIV automatically?</source>
+    into zBCZ automatically?</source>
         <translation>5) Why did my wallet convert the balance
-    into zPIV automatically?</translation>
+    into zBCZ automatically?</translation>
     </message>
     <message>
-        <source>6) How do I receive PIV/zPIV?</source>
-        <translation>6) How do I receive PIV/zPIV?</translation>
+        <source>6) How do I receive BCZ/zBCZ?</source>
+        <translation>6) How do I receive BCZ/zBCZ?</translation>
     </message>
     <message>
-        <source>7) How do I stake PIV/zPIV?</source>
-        <translation>7) How do I stake PIV/zPIV?</translation>
+        <source>7) How do I stake BCZ/zBCZ?</source>
+        <translation>7) How do I stake BCZ/zBCZ?</translation>
     </message>
     <message>
         <source>8) Where I should go if I need support?</source>
@@ -4094,34 +4094,34 @@ There was an error trying to save the address list to %1. Please try again.</tra
         <translation>1</translation>
     </message>
     <message>
-        <source>What is PIVX?</source>
-        <translation>What is PIVX?</translation>
+        <source>What is BCZ?</source>
+        <translation>What is BCZ?</translation>
     </message>
     <message>
         <source>
                            &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;
-                           PIVX is a form of digital online money using blockchain technology
+                           BCZ is a form of digital online money using blockchain technology
                            that can be easily transferred globally, instantly, and with near
-                           zero fees.  PIVX incorporates market leading security &amp;
+                           zero fees.  BCZ incorporates market leading security &amp;
                            privacy and is also the first PoS (Proof of Stake) Cryptocurrency
-                           to implement ZeroCoin(zPIV) and Zerocoin staking.
+                           to implement ZeroCoin(zBCZ) and Zerocoin staking.
                            &lt;/p&gt;&lt;p align="justify"&gt;
-                           PIVX utilizes a Proof of Stake (PoS) consensus system algorithm,
-                           allowing all owners of PIVX to participate in earning block rewards
+                           BCZ utilizes a Proof of Stake (PoS) consensus system algorithm,
+                           allowing all owners of BCZ to participate in earning block rewards
                            while securing the network with full node wallets, as well as to
                            run Masternodes to create and vote on proposals.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
                          </source>
         <translation>
                            &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;
-                           PIVX is a form of digital online money using blockchain technology
+                           BCZ is a form of digital online money using blockchain technology
                            that can be easily transferred globally, instantly, and with near
-                           zero fees.  PIVX incorporates market leading security &amp;
+                           zero fees.  BCZ incorporates market leading security &amp;
                            privacy and is also the first PoS (Proof of Stake) Cryptocurrency
-                           to implement ZeroCoin(zPIV) and Zerocoin staking.
+                           to implement ZeroCoin(zBCZ) and Zerocoin staking.
                            &lt;/p&gt;&lt;p align="justify"&gt;
-                           PIVX utilizes a Proof of Stake (PoS) consensus system algorithm,
-                           allowing all owners of PIVX to participate in earning block rewards
+                           BCZ utilizes a Proof of Stake (PoS) consensus system algorithm,
+                           allowing all owners of BCZ to participate in earning block rewards
                            while securing the network with full node wallets, as well as to
                            run Masternodes to create and vote on proposals.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
@@ -4132,25 +4132,25 @@ There was an error trying to save the address list to %1. Please try again.</tra
         <translation>2</translation>
     </message>
     <message>
-        <source>Why are my PIV unspendable?</source>
-        <translation>Why are my PIV unspendable?</translation>
+        <source>Why are my BCZ unspendable?</source>
+        <translation>Why are my BCZ unspendable?</translation>
     </message>
     <message>
         <source>
                            &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;
-                           Newly received PIVX requires 6 confirmations on the network
+                           Newly received BCZ requires 6 confirmations on the network
                            to become eligible for spending which can take ~6 minutes.
                            &lt;/p&gt;&lt;p align="justify"&gt;
-                           Your PIVX wallet also needs to be completely synchronized
+                           Your BCZ wallet also needs to be completely synchronized
                            to see and spend balances on the network.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
                          </source>
         <translation>
                            &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;
-                           Newly received PIVX requires 6 confirmations on the network
+                           Newly received BCZ requires 6 confirmations on the network
                            to become eligible for spending which can take ~6 minutes.
                            &lt;/p&gt;&lt;p align="justify"&gt;
-                           Your PIVX wallet also needs to be completely synchronized
+                           Your BCZ wallet also needs to be completely synchronized
                            to see and spend balances on the network.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
                          </translation>
@@ -4160,26 +4160,26 @@ There was an error trying to save the address list to %1. Please try again.</tra
         <translation>3</translation>
     </message>
     <message>
-        <source>PIVX privacy? What is Zerocoin (zPIV)?</source>
-        <translation>PIVX privacy? What is Zerocoin (zPIV)?</translation>
+        <source>BCZ privacy? What is Zerocoin (zBCZ)?</source>
+        <translation>BCZ privacy? What is Zerocoin (zBCZ)?</translation>
     </message>
     <message>
         <source>
                            &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;
-                           zPIV is an optional privacy-centric method of coin mixing on the
-                           PIVX blockchain. Basically all your transactions cannot be tracked
+                           zBCZ is an optional privacy-centric method of coin mixing on the
+                           BCZ blockchain. Basically all your transactions cannot be tracked
                            on to any block explorer. You can read more about the technicals in the
-                           &lt;a style='color: #b088ff' href='https://PIVX.org/zpiv/'&gt;
-                           "PIVX Zerocoin (zPIV) Technical Paper"&lt;/a&gt;.
+                           &lt;a style='color: #b088ff' href='https://BCZ.org/zbcz/'&gt;
+                           "BCZ Zerocoin (zBCZ) Technical Paper"&lt;/a&gt;.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
                          </source>
         <translation>
                            &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;
-                           zPIV is an optional privacy-centric method of coin mixing on the
-                           PIVX blockchain. Basically all your transactions cannot be tracked
+                           zBCZ is an optional privacy-centric method of coin mixing on the
+                           BCZ blockchain. Basically all your transactions cannot be tracked
                            on to any block explorer. You can read more about the technicals in the
-                           &lt;a style='color: #b088ff' href='https://PIVX.org/zpiv/'&gt;
-                           "PIVX Zerocoin (zPIV) Technical Paper"&lt;/a&gt;.
+                           &lt;a style='color: #b088ff' href='https://BCZ.org/zbcz/'&gt;
+                           "BCZ Zerocoin (zBCZ) Technical Paper"&lt;/a&gt;.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
                          </translation>
     </message>
@@ -4188,20 +4188,20 @@ There was an error trying to save the address list to %1. Please try again.</tra
         <translation>4</translation>
     </message>
     <message>
-        <source>Why are my zPIV unspendable?</source>
-        <translation>Why are my zPIV unspendable?</translation>
+        <source>Why are my zBCZ unspendable?</source>
+        <translation>Why are my zBCZ unspendable?</translation>
     </message>
     <message>
         <source>
                            &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;
-                           After minting, zPIV will require 20 confirmations as well as 1
+                           After minting, zBCZ will require 20 confirmations as well as 1
                            additional mint of the same denomination on the network to
                            become eligible for spending.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
                          </source>
         <translation>
                            &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;
-                           After minting, zPIV will require 20 confirmations as well as 1
+                           After minting, zBCZ will require 20 confirmations as well as 1
                            additional mint of the same denomination on the network to
                            become eligible for spending.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
@@ -4212,41 +4212,41 @@ There was an error trying to save the address list to %1. Please try again.</tra
         <translation>5</translation>
     </message>
     <message>
-        <source>Why did my wallet convert the balance into zPIV automatically?</source>
-        <translation>Why did my wallet convert the balance into zPIV automatically?</translation>
+        <source>Why did my wallet convert the balance into zBCZ automatically?</source>
+        <translation>Why did my wallet convert the balance into zBCZ automatically?</translation>
     </message>
     <message>
         <source>
                            &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;
-                           By default the PIVX wallet will convert 10% of your entire PIV
-                           balance to zPIV to assist the network. If you do not wish to
-                           stake zPIV or take advantage of the privacy benefit it brings,
-                           you can disable the automatic minting in your PIVX wallet by
-                           going to Settings-&gt;Options and deselecting “Enable zPIV Automint”.
-                           If you are not making use of the PIVX-QT or GUI you can simply open
-                           your pivx.conf file and add &lt;i&gt;enablezeromint=0&lt;/i&gt; Without the quotation
+                           By default the BCZ wallet will convert 10% of your entire BCZ
+                           balance to zBCZ to assist the network. If you do not wish to
+                           stake zBCZ or take advantage of the privacy benefit it brings,
+                           you can disable the automatic minting in your BCZ wallet by
+                           going to Settings-&gt;Options and deselecting “Enable zBCZ Automint”.
+                           If you are not making use of the BCZ-QT or GUI you can simply open
+                           your bcz.conf file and add &lt;i&gt;enablezeromint=0&lt;/i&gt; Without the quotation
                            marks and restart your wallet to disable automint.&lt;/p&gt;
                            &lt;/p&gt;&lt;p align="justify"&gt;
-                           You can read more about zPIV in the
-                           &lt;a style='color: #b088ff' href='https://PIVX.org/zpiv/'&gt; "PIVX Zerocoin (zPIV) Technical Paper"&lt;/a&gt;.
-                           If you would like to keep and stake your zPIV, please read the "How do I stake"
+                           You can read more about zBCZ in the
+                           &lt;a style='color: #b088ff' href='https://BCZ.org/zbcz/'&gt; "BCZ Zerocoin (zBCZ) Technical Paper"&lt;/a&gt;.
+                           If you would like to keep and stake your zBCZ, please read the "How do I stake"
                            section of the FAQ below.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
                          </source>
         <translation>
                            &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;
-                           By default the PIVX wallet will convert 10% of your entire PIV
-                           balance to zPIV to assist the network. If you do not wish to
-                           stake zPIV or take advantage of the privacy benefit it brings,
-                           you can disable the automatic minting in your PIVX wallet by
-                           going to Settings-&gt;Options and deselecting “Enable zPIV Automint”.
-                           If you are not making use of the PIVX-QT or GUI you can simply open
-                           your pivx.conf file and add &lt;i&gt;enablezeromint=0&lt;/i&gt; Without the quotation
+                           By default the BCZ wallet will convert 10% of your entire BCZ
+                           balance to zBCZ to assist the network. If you do not wish to
+                           stake zBCZ or take advantage of the privacy benefit it brings,
+                           you can disable the automatic minting in your BCZ wallet by
+                           going to Settings-&gt;Options and deselecting “Enable zBCZ Automint”.
+                           If you are not making use of the BCZ-QT or GUI you can simply open
+                           your bcz.conf file and add &lt;i&gt;enablezeromint=0&lt;/i&gt; Without the quotation
                            marks and restart your wallet to disable automint.&lt;/p&gt;
                            &lt;/p&gt;&lt;p align="justify"&gt;
-                           You can read more about zPIV in the
-                           &lt;a style='color: #b088ff' href='https://PIVX.org/zpiv/'&gt; "PIVX Zerocoin (zPIV) Technical Paper"&lt;/a&gt;.
-                           If you would like to keep and stake your zPIV, please read the "How do I stake"
+                           You can read more about zBCZ in the
+                           &lt;a style='color: #b088ff' href='https://BCZ.org/zbcz/'&gt; "BCZ Zerocoin (zBCZ) Technical Paper"&lt;/a&gt;.
+                           If you would like to keep and stake your zBCZ, please read the "How do I stake"
                            section of the FAQ below.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
                          </translation>
@@ -4256,24 +4256,24 @@ There was an error trying to save the address list to %1. Please try again.</tra
         <translation>6</translation>
     </message>
     <message>
-        <source>How do I receive PIV/zPIV?</source>
-        <translation>How do I receive PIV/zPIV?</translation>
+        <source>How do I receive BCZ/zBCZ?</source>
+        <translation>How do I receive BCZ/zBCZ?</translation>
     </message>
     <message>
         <source>
                            &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;
-                           zPIV can be spent and sent to any PIVX address. The receiver will
-                           receive standard PIVX but the origin of the PIVX is anonymized by the zPIV Protocol.
+                           zBCZ can be spent and sent to any BCZ address. The receiver will
+                           receive standard BCZ but the origin of the BCZ is anonymized by the zBCZ Protocol.
                            &lt;/p&gt;&lt;p align="justify"&gt;
-                           If you want more zPIV you will need to mint your balance in the “Privacy” tab.
+                           If you want more zBCZ you will need to mint your balance in the “Privacy” tab.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
                          </source>
         <translation>
                            &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;
-                           zPIV can be spent and sent to any PIVX address. The receiver will
-                           receive standard PIVX but the origin of the PIVX is anonymized by the zPIV Protocol.
+                           zBCZ can be spent and sent to any BCZ address. The receiver will
+                           receive standard BCZ but the origin of the BCZ is anonymized by the zBCZ Protocol.
                            &lt;/p&gt;&lt;p align="justify"&gt;
-                           If you want more zPIV you will need to mint your balance in the “Privacy” tab.
+                           If you want more zBCZ you will need to mint your balance in the “Privacy” tab.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
                          </translation>
     </message>
@@ -4282,32 +4282,32 @@ There was an error trying to save the address list to %1. Please try again.</tra
         <translation>7</translation>
     </message>
     <message>
-        <source>How do I stake PIV/zPIV?</source>
-        <translation>How do I stake PIV/zPIV?</translation>
+        <source>How do I stake BCZ/zBCZ?</source>
+        <translation>How do I stake BCZ/zBCZ?</translation>
     </message>
     <message>
         <source>
                            &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;
-                           To Stake PIVX:
+                           To Stake BCZ:
                            &lt;/p&gt;&lt;p align="justify"&gt;
                            &lt;ol&gt;&lt;li&gt;
                            Make sure your wallet is completely synchronized and you are using the latest release.
                            &lt;li&gt;
-                           You must have a balance of PIVX with a minimum of 600 confirmations.
+                           You must have a balance of BCZ with a minimum of 600 confirmations.
                            &lt;li&gt;
                            Your wallet must stay online and be unlocked for staking purposes.
                            &lt;li&gt;
                            Once all those steps are followed staking should be enabled.
                            &lt;li&gt;
-                           You can see the status of staking in the wallet by mousing over the package icon in the row on the top left of the wallet interface. There package will be lit up and will state "Staking Enabled" to indicate it is staking.  Using the command line interface (pivx-cli); the command &lt;i&gt;getstakingstatus&lt;/i&gt; will confirm that staking is active.
+                           You can see the status of staking in the wallet by mousing over the package icon in the row on the top left of the wallet interface. There package will be lit up and will state "Staking Enabled" to indicate it is staking.  Using the command line interface (bcz-cli); the command &lt;i&gt;getstakingstatus&lt;/i&gt; will confirm that staking is active.
                            &lt;/li&gt;&lt;/ol&gt;
                            &lt;/p&gt;&lt;p align="justify"&gt;
-                           To Stake zPIV:
+                           To Stake zBCZ:
                            &lt;/p&gt;&lt;p align="justify"&gt;
                            &lt;ol&gt;&lt;li&gt;
                            Make sure your wallet is completely synchronized and you are using the latest release.
                            &lt;li&gt;
-                           Your newly minted or existing zPIV balance must have a minimum of 200 confirmations.
+                           Your newly minted or existing zBCZ balance must have a minimum of 200 confirmations.
                            &lt;li&gt;
                            Your wallet must stay online and be unlocked for anonymization and staking purposes.
                            Staking should now be enabled.
@@ -4316,26 +4316,26 @@ There was an error trying to save the address list to %1. Please try again.</tra
                          </source>
         <translation>
                            &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;
-                           To Stake PIVX:
+                           To Stake BCZ:
                            &lt;/p&gt;&lt;p align="justify"&gt;
                            &lt;ol&gt;&lt;li&gt;
                            Make sure your wallet is completely synchronized and you are using the latest release.
                            &lt;li&gt;
-                           You must have a balance of PIVX with a minimum of 600 confirmations.
+                           You must have a balance of BCZ with a minimum of 600 confirmations.
                            &lt;li&gt;
                            Your wallet must stay online and be unlocked for staking purposes.
                            &lt;li&gt;
                            Once all those steps are followed staking should be enabled.
                            &lt;li&gt;
-                           You can see the status of staking in the wallet by mousing over the package icon in the row on the top left of the wallet interface. There package will be lit up and will state "Staking Enabled" to indicate it is staking.  Using the command line interface (pivx-cli); the command &lt;i&gt;getstakingstatus&lt;/i&gt; will confirm that staking is active.
+                           You can see the status of staking in the wallet by mousing over the package icon in the row on the top left of the wallet interface. There package will be lit up and will state "Staking Enabled" to indicate it is staking.  Using the command line interface (bcz-cli); the command &lt;i&gt;getstakingstatus&lt;/i&gt; will confirm that staking is active.
                            &lt;/li&gt;&lt;/ol&gt;
                            &lt;/p&gt;&lt;p align="justify"&gt;
-                           To Stake zPIV:
+                           To Stake zBCZ:
                            &lt;/p&gt;&lt;p align="justify"&gt;
                            &lt;ol&gt;&lt;li&gt;
                            Make sure your wallet is completely synchronized and you are using the latest release.
                            &lt;li&gt;
-                           Your newly minted or existing zPIV balance must have a minimum of 200 confirmations.
+                           Your newly minted or existing zBCZ balance must have a minimum of 200 confirmations.
                            &lt;li&gt;
                            Your wallet must stay online and be unlocked for anonymization and staking purposes.
                            Staking should now be enabled.
@@ -4356,8 +4356,8 @@ There was an error trying to save the address list to %1. Please try again.</tra
         <translation>What is a Masternode Controller?</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;A Masternode Controller wallet is where the 10,000 PIV collateral can reside during a Controller-Remote masternode setup. It is a wallet that can activate the remote masternode wallet(s) and allows you to keep your collateral coins offline while the remote masternode remains online. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;A Masternode Controller wallet is where the 10,000 PIV collateral can reside during a Controller-Remote masternode setup. It is a wallet that can activate the remote masternode wallet(s) and allows you to keep your collateral coins offline while the remote masternode remains online. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;A Masternode Controller wallet is where the 10,000 BCZ collateral can reside during a Controller-Remote masternode setup. It is a wallet that can activate the remote masternode wallet(s) and allows you to keep your collateral coins offline while the remote masternode remains online. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;A Masternode Controller wallet is where the 10,000 BCZ collateral can reside during a Controller-Remote masternode setup. It is a wallet that can activate the remote masternode wallet(s) and allows you to keep your collateral coins offline while the remote masternode remains online. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>8</source>
@@ -4367,20 +4367,20 @@ There was an error trying to save the address list to %1. Please try again.</tra
         <source>
                            &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;
                            We have support channels in most of our official chat groups, for example
-                           &lt;a style='color: #b088ff' href='https://discord.PIVX.org'&gt;
+                           &lt;a style='color: #b088ff' href='https://discord.BCZ.org'&gt;
                            #support in our Discord&lt;/a&gt;.
                            If you prefer to submit a ticket, One can be
-                           &lt;a style='color: #b088ff' href='https://PIVX.freshdesk.com'&gt;
+                           &lt;a style='color: #b088ff' href='https://BCZ.freshdesk.com'&gt;
                            our Freshdesk support site&lt;/a&gt;.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
                          </source>
         <translation>
                            &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;
                            We have support channels in most of our official chat groups, for example
-                           &lt;a style='color: #b088ff' href='https://discord.PIVX.org'&gt;
+                           &lt;a style='color: #b088ff' href='https://discord.BCZ.org'&gt;
                            #support in our Discord&lt;/a&gt;.
                            If you prefer to submit a ticket, One can be
-                           &lt;a style='color: #b088ff' href='https://PIVX.freshdesk.com'&gt;
+                           &lt;a style='color: #b088ff' href='https://BCZ.freshdesk.com'&gt;
                            our Freshdesk support site&lt;/a&gt;.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
                          </translation>
@@ -4392,8 +4392,8 @@ There was an error trying to save the address list to %1. Please try again.</tra
     <message>
         <source>
                            &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;
-                           A masternode is a computer running a full node PIVX core wallet with a
-                           requirement of 10,000 PIV secured collateral to provide extra services
+                           A masternode is a computer running a full node BCZ core wallet with a
+                           requirement of 10,000 BCZ secured collateral to provide extra services
                            to the network and in return, receive a portion of the block reward
                            regularly.  These services include:
                            &lt;/p&gt;&lt;p align="justify"&gt;
@@ -4415,17 +4415,17 @@ There was an error trying to save the address list to %1. Please try again.</tra
                            Masternode Perks:
                            &lt;/p&gt;&lt;p align="justify"&gt;
                            &lt;ul&gt;
-                           &lt;li&gt;Participate in PIVX Governance&lt;/li&gt;
+                           &lt;li&gt;Participate in BCZ Governance&lt;/li&gt;
                            &lt;li&gt;Earn Masternode Rewards&lt;/li&gt;
                            &lt;li&gt;Commodity option for future sale&lt;/li&gt;
-                           &lt;li&gt;Help secure the PIVX network&lt;/li&gt;
+                           &lt;li&gt;Help secure the BCZ network&lt;/li&gt;
                            &lt;/ul&gt;
                            &lt;/p&gt;&lt;p align="justify"&gt;
 
                            Requirements:
                            &lt;/p&gt;&lt;p align="justify"&gt;
                            &lt;ul&gt;
-                           &lt;li&gt;10,000 PIV per single Masternode instance&lt;/li&gt;
+                           &lt;li&gt;10,000 BCZ per single Masternode instance&lt;/li&gt;
                            &lt;li&gt;Must be stored in a core wallet&lt;/li&gt;
                            &lt;li&gt;Need dedicated IP address&lt;/li&gt;
                            &lt;li&gt;Masternode wallet to remain online&lt;/li&gt;
@@ -4434,8 +4434,8 @@ There was an error trying to save the address list to %1. Please try again.</tra
                          </source>
         <translation>
                            &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;
-                           A masternode is a computer running a full node PIVX core wallet with a
-                           requirement of 10,000 PIV secured collateral to provide extra services
+                           A masternode is a computer running a full node BCZ core wallet with a
+                           requirement of 10,000 BCZ secured collateral to provide extra services
                            to the network and in return, receive a portion of the block reward
                            regularly.  These services include:
                            &lt;/p&gt;&lt;p align="justify"&gt;
@@ -4457,17 +4457,17 @@ There was an error trying to save the address list to %1. Please try again.</tra
                            Masternode Perks:
                            &lt;/p&gt;&lt;p align="justify"&gt;
                            &lt;ul&gt;
-                           &lt;li&gt;Participate in PIVX Governance&lt;/li&gt;
+                           &lt;li&gt;Participate in BCZ Governance&lt;/li&gt;
                            &lt;li&gt;Earn Masternode Rewards&lt;/li&gt;
                            &lt;li&gt;Commodity option for future sale&lt;/li&gt;
-                           &lt;li&gt;Help secure the PIVX network&lt;/li&gt;
+                           &lt;li&gt;Help secure the BCZ network&lt;/li&gt;
                            &lt;/ul&gt;
                            &lt;/p&gt;&lt;p align="justify"&gt;
 
                            Requirements:
                            &lt;/p&gt;&lt;p align="justify"&gt;
                            &lt;ul&gt;
-                           &lt;li&gt;10,000 PIV per single Masternode instance&lt;/li&gt;
+                           &lt;li&gt;10,000 BCZ per single Masternode instance&lt;/li&gt;
                            &lt;li&gt;Must be stored in a core wallet&lt;/li&gt;
                            &lt;li&gt;Need dedicated IP address&lt;/li&gt;
                            &lt;li&gt;Masternode wallet to remain online&lt;/li&gt;
@@ -4591,8 +4591,8 @@ There was an error trying to save the address list to %1. Please try again.</tra
         <translation>Unable to open backups folder</translation>
     </message>
     <message>
-        <source>Unable to open pivx.conf with default application</source>
-        <translation>Unable to open pivx.conf with default application</translation>
+        <source>Unable to open bcz.conf with default application</source>
+        <translation>Unable to open bcz.conf with default application</translation>
     </message>
     <message>
         <source>In:</source>
@@ -4650,8 +4650,8 @@ There was an error trying to save the address list to %1. Please try again.</tra
         <translation>Number of script verification threads</translation>
     </message>
     <message>
-        <source>Start PIVX on system login</source>
-        <translation>Start PIVX on system login</translation>
+        <source>Start BCZ on system login</source>
+        <translation>Start BCZ on system login</translation>
     </message>
     <message>
         <source>Minimize to the tray instead of the taskbar</source>
@@ -4738,8 +4738,8 @@ Are you sure?
         <translation>CheckBox</translation>
     </message>
     <message>
-        <source>MultiSend allows you to automatically send up to 100% of your stake or masternode reward to a list of other PIVX addresses after it matures.</source>
-        <translation>MultiSend allows you to automatically send up to 100% of your stake or masternode reward to a list of other PIVX addresses after it matures.</translation>
+        <source>MultiSend allows you to automatically send up to 100% of your stake or masternode reward to a list of other BCZ addresses after it matures.</source>
+        <translation>MultiSend allows you to automatically send up to 100% of your stake or masternode reward to a list of other BCZ addresses after it matures.</translation>
     </message>
     <message>
         <source>Active</source>
@@ -4869,8 +4869,8 @@ Check one or both of the check boxes to send on stake and/or masternode rewards<
         <translation>Message</translation>
     </message>
     <message>
-        <source>PIVX address or contact label</source>
-        <translation>PIVX address or contact label</translation>
+        <source>BCZ address or contact label</source>
+        <translation>BCZ address or contact label</translation>
     </message>
     <message>
         <source>Enter address</source>
@@ -5206,8 +5206,8 @@ Check one or both of the check boxes to send on stake and/or masternode rewards<
         <translation>FAQ</translation>
     </message>
     <message>
-        <source>About PIVX</source>
-        <translation>About PIVX</translation>
+        <source>About BCZ</source>
+        <translation>About BCZ</translation>
     </message>
     <message>
         <source>Settings</source>
@@ -5273,8 +5273,8 @@ Are you sure?
 <context>
     <name>ShutdownWindow</name>
     <message>
-        <source>PIVX Core is shutting down...</source>
-        <translation>PIVX Core is shutting down...</translation>
+        <source>BCZ Core is shutting down...</source>
+        <translation>BCZ Core is shutting down...</translation>
     </message>
     <message>
         <source>Do not shut down the computer until this window disappears.</source>
@@ -5303,15 +5303,15 @@ Are you sure?
         <translation>Loading…</translation>
     </message>
     <message>
-        <source>PIVX Core</source>
-        <translation>PIVX Core</translation>
+        <source>BCZ Core</source>
+        <translation>BCZ Core</translation>
     </message>
 </context>
 <context>
     <name>SplashScreen</name>
     <message>
-        <source>PIVX Core</source>
-        <translation>PIVX Core</translation>
+        <source>BCZ Core</source>
+        <translation>BCZ Core</translation>
     </message>
     <message>
         <source>Version %1</source>
@@ -5326,8 +5326,8 @@ Are you sure?
         <translation>The Dash Core developers</translation>
     </message>
     <message>
-        <source>The PIVX Core developers</source>
-        <translation>The PIVX Core developers</translation>
+        <source>The BCZ Core developers</source>
+        <translation>The BCZ Core developers</translation>
     </message>
     <message>
         <source>[testnet]</source>
@@ -5761,40 +5761,40 @@ backup will be created.
         <translation>Received from</translation>
     </message>
     <message>
-        <source>PIV Stake</source>
-        <translation>PIV Stake</translation>
+        <source>BCZ Stake</source>
+        <translation>BCZ Stake</translation>
     </message>
     <message>
-        <source>zPIV Stake</source>
-        <translation>zPIV Stake</translation>
+        <source>zBCZ Stake</source>
+        <translation>zBCZ Stake</translation>
     </message>
     <message>
-        <source>PIV Cold Stake</source>
-        <translation>PIV Cold Stake</translation>
+        <source>BCZ Cold Stake</source>
+        <translation>BCZ Cold Stake</translation>
     </message>
     <message>
         <source>Stake delegation</source>
         <translation>Stake delegation</translation>
     </message>
     <message>
-        <source>Converted PIV to zPIV</source>
-        <translation>Converted PIV to zPIV</translation>
+        <source>Converted BCZ to zBCZ</source>
+        <translation>Converted BCZ to zBCZ</translation>
     </message>
     <message>
-        <source>Spent zPIV</source>
-        <translation>Spent zPIV</translation>
+        <source>Spent zBCZ</source>
+        <translation>Spent zBCZ</translation>
     </message>
     <message>
-        <source>Received PIV from zPIV</source>
-        <translation>Received PIV from zPIV</translation>
+        <source>Received BCZ from zBCZ</source>
+        <translation>Received BCZ from zBCZ</translation>
     </message>
     <message>
-        <source>Minted Change as zPIV from zPIV Spend</source>
-        <translation>Minted Change as zPIV from zPIV Spend</translation>
+        <source>Minted Change as zBCZ from zBCZ Spend</source>
+        <translation>Minted Change as zBCZ from zBCZ Spend</translation>
     </message>
     <message>
-        <source>Converted zPIV to PIV</source>
-        <translation>Converted zPIV to PIV</translation>
+        <source>Converted zBCZ to BCZ</source>
+        <translation>Converted zBCZ to BCZ</translation>
     </message>
     <message>
         <source>Sent to</source>
@@ -5809,8 +5809,8 @@ backup will be created.
         <translation>Payment to yourself</translation>
     </message>
     <message>
-        <source>PIV Stake on behalf of</source>
-        <translation>PIV Stake on behalf of</translation>
+        <source>BCZ Stake on behalf of</source>
+        <translation>BCZ Stake on behalf of</translation>
     </message>
     <message>
         <source>Stake delegation spent by</source>
@@ -5975,8 +5975,8 @@ backup will be created.
         <translation>18/05/18</translation>
     </message>
     <message>
-        <source>+0.000585 PIV</source>
-        <translation>+0.000585 PIV</translation>
+        <source>+0.000585 BCZ</source>
+        <translation>+0.000585 BCZ</translation>
     </message>
 </context>
 <context>
@@ -5986,8 +5986,8 @@ backup will be created.
         <translation>Send Coins</translation>
     </message>
     <message>
-        <source>SwiftX doesn't support sending values that high yet. Transactions are currently limited to %1 PIV.</source>
-        <translation>SwiftX doesn't support sending values that high yet. Transactions are currently limited to %1 PIV.</translation>
+        <source>SwiftX doesn't support sending values that high yet. Transactions are currently limited to %1 BCZ.</source>
+        <translation>SwiftX doesn't support sending values that high yet. Transactions are currently limited to %1 BCZ.</translation>
     </message>
 </context>
 <context>
@@ -6030,25 +6030,25 @@ backup will be created.
     </message>
     <message>
         <source>Welcome to
-PIVX Core Wallet</source>
+BCZ Core Wallet</source>
         <translation>Welcome to
-PIVX Core Wallet</translation>
+BCZ Core Wallet</translation>
     </message>
     <message>
-        <source>PIVX is the world’s most innovative Proof of Stake blockchain based technology. Developed by a team of highly experienced developers and cryptographers.</source>
-        <translation>PIVX is the world’s most innovative Proof of Stake blockchain based technology. Developed by a team of highly experienced developers and cryptographers.</translation>
+        <source>BCZ is the world’s most innovative Proof of Stake blockchain based technology. Developed by a team of highly experienced developers and cryptographers.</source>
+        <translation>BCZ is the world’s most innovative Proof of Stake blockchain based technology. Developed by a team of highly experienced developers and cryptographers.</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;As our manifesto says: Privacy is a non-negotiable basic human right; it grants users the freedom to share their data whenever and with whomever they want - PIVX believes in self sovereignty.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;As our manifesto says: Privacy is a non-negotiable basic human right; it grants users the freedom to share their data whenever and with whomever they want - PIVX believes in self sovereignty.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;As our manifesto says: Privacy is a non-negotiable basic human right; it grants users the freedom to share their data whenever and with whomever they want - BCZ believes in self sovereignty.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;As our manifesto says: Privacy is a non-negotiable basic human right; it grants users the freedom to share their data whenever and with whomever they want - BCZ believes in self sovereignty.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <source>The masternode network is PIVX's second layer network on top of the blockchain that enables our DAO to provide decentralized governance and a treasury.</source>
-        <translation>The masternode network is PIVX's second layer network on top of the blockchain that enables our DAO to provide decentralized governance and a treasury.</translation>
+        <source>The masternode network is BCZ's second layer network on top of the blockchain that enables our DAO to provide decentralized governance and a treasury.</source>
+        <translation>The masternode network is BCZ's second layer network on top of the blockchain that enables our DAO to provide decentralized governance and a treasury.</translation>
     </message>
     <message>
-        <source>How PIVX respects your privacy?</source>
-        <translation>How PIVX respects your privacy?</translation>
+        <source>How BCZ respects your privacy?</source>
+        <translation>How BCZ respects your privacy?</translation>
     </message>
     <message>
         <source>What is a Masternode?</source>
@@ -6060,10 +6060,10 @@ PIVX Core Wallet</translation>
     </message>
 </context>
 <context>
-    <name>ZPivControlDialog</name>
+    <name>ZBczControlDialog</name>
     <message>
-        <source>Select zPIV to Spend</source>
-        <translation>Select zPIV to Spend</translation>
+        <source>Select zBCZ to Spend</source>
+        <translation>Select zBCZ to Spend</translation>
     </message>
     <message>
         <source>Coin Control</source>
@@ -6074,8 +6074,8 @@ PIVX Core Wallet</translation>
         <translation>PushButton</translation>
     </message>
     <message>
-        <source>zPiv</source>
-        <translation>zPiv</translation>
+        <source>zBcz</source>
+        <translation>zBcz</translation>
     </message>
     <message>
         <source>0.00 </source>
@@ -6098,12 +6098,12 @@ PIVX Core Wallet</translation>
         <translation>Select/Deselect All</translation>
     </message>
     <message>
-        <source>Select zPIV Denominations to Spend</source>
-        <translation>Select zPIV Denominations to Spend</translation>
+        <source>Select zBCZ Denominations to Spend</source>
+        <translation>Select zBCZ Denominations to Spend</translation>
     </message>
 </context>
 <context>
-    <name>pivx-core</name>
+    <name>bcz-core</name>
     <message>
         <source>(1 = keep tx meta data e.g. account owner and payment request information, 2 = drop tx meta data)</source>
         <translation>(1 = keep tx meta data e.g. account owner and payment request information, 2 = drop tx meta data)</translation>
@@ -6125,8 +6125,8 @@ PIVX Core Wallet</translation>
         <translation>Bind to given address to listen for JSON-RPC connections. Use [host]:port notation for IPv6. This option can be specified multiple times (default: bind to all interfaces)</translation>
     </message>
     <message>
-        <source>Cannot obtain a lock on data directory %s. PIVX Core is probably already running.</source>
-        <translation>Cannot obtain a lock on data directory %s. PIVX Core is probably already running.</translation>
+        <source>Cannot obtain a lock on data directory %s. BCZ Core is probably already running.</source>
+        <translation>Cannot obtain a lock on data directory %s. BCZ Core is probably already running.</translation>
     </message>
     <message>
         <source>Change automatic finalized budget voting behavior. mode=auto: Vote for only exact finalized budget match to my generated budget. (string, default: auto)</source>
@@ -6157,12 +6157,12 @@ PIVX Core Wallet</translation>
         <translation>Enable cold staking functionality (0-1, default: %u). Disabled if staking=0</translation>
     </message>
     <message>
-        <source>Enable or disable staking functionality for PIV inputs (0-1, default: %u)</source>
-        <translation>Enable or disable staking functionality for PIV inputs (0-1, default: %u)</translation>
+        <source>Enable or disable staking functionality for BCZ inputs (0-1, default: %u)</source>
+        <translation>Enable or disable staking functionality for BCZ inputs (0-1, default: %u)</translation>
     </message>
     <message>
-        <source>Enable or disable staking functionality for zPIV inputs (0-1, default: %u)</source>
-        <translation>Enable or disable staking functionality for zPIV inputs (0-1, default: %u)</translation>
+        <source>Enable or disable staking functionality for zBCZ inputs (0-1, default: %u)</source>
+        <translation>Enable or disable staking functionality for zBCZ inputs (0-1, default: %u)</translation>
     </message>
     <message>
         <source>Enable spork administration functionality with the appropriate private key.</source>
@@ -6201,12 +6201,12 @@ PIVX Core Wallet</translation>
         <translation>Execute command when the best block changes (%s in cmd is replaced by block hash)</translation>
     </message>
     <message>
-        <source>Fees (in PIV/Kb) smaller than this are considered zero fee for relaying (default: %s)</source>
-        <translation>Fees (in PIV/Kb) smaller than this are considered zero fee for relaying (default: %s)</translation>
+        <source>Fees (in BCZ/Kb) smaller than this are considered zero fee for relaying (default: %s)</source>
+        <translation>Fees (in BCZ/Kb) smaller than this are considered zero fee for relaying (default: %s)</translation>
     </message>
     <message>
-        <source>Fees (in PIV/Kb) smaller than this are considered zero fee for transaction creation (default: %s)</source>
-        <translation>Fees (in PIV/Kb) smaller than this are considered zero fee for transaction creation (default: %s)</translation>
+        <source>Fees (in BCZ/Kb) smaller than this are considered zero fee for transaction creation (default: %s)</source>
+        <translation>Fees (in BCZ/Kb) smaller than this are considered zero fee for transaction creation (default: %s)</translation>
     </message>
     <message>
         <source>Flush database activity from memory pool to disk log every &lt;n&gt; megabytes (default: %u)</source>
@@ -6313,8 +6313,8 @@ PIVX Core Wallet</translation>
         <translation>Total length of network version string (%i) exceeds maximum length (%i). Reduce the number or size of uacomments.</translation>
     </message>
     <message>
-        <source>Unable to bind to %s on this computer. PIVX Core is probably already running.</source>
-        <translation>Unable to bind to %s on this computer. PIVX Core is probably already running.</translation>
+        <source>Unable to bind to %s on this computer. BCZ Core is probably already running.</source>
+        <translation>Unable to bind to %s on this computer. BCZ Core is probably already running.</translation>
     </message>
     <message>
         <source>Use separate SOCKS5 proxy to reach peers via Tor hidden services (default: %s)</source>
@@ -6329,8 +6329,8 @@ PIVX Core Wallet</translation>
         <translation>Warning: -paytxfee is set very high! This is the transaction fee you will pay if you send a transaction.</translation>
     </message>
     <message>
-        <source>Warning: Please check that your computer's date and time are correct! If your clock is wrong PIVX Core will not work properly.</source>
-        <translation>Warning: Please check that your computer's date and time are correct! If your clock is wrong PIVX Core will not work properly.</translation>
+        <source>Warning: Please check that your computer's date and time are correct! If your clock is wrong BCZ Core will not work properly.</source>
+        <translation>Warning: Please check that your computer's date and time are correct! If your clock is wrong BCZ Core will not work properly.</translation>
     </message>
     <message>
         <source>Warning: The network does not appear to fully agree! Some miners appear to be experiencing issues.</source>
@@ -6445,8 +6445,8 @@ PIVX Core Wallet</translation>
         <translation>Copyright (C) 2014-%i The Dash Core Developers</translation>
     </message>
     <message>
-        <source>Copyright (C) 2015-%i The PIVX Core Developers</source>
-        <translation>Copyright (C) 2015-%i The PIVX Core Developers</translation>
+        <source>Copyright (C) 2015-%i The BCZ Core Developers</source>
+        <translation>Copyright (C) 2015-%i The BCZ Core Developers</translation>
     </message>
     <message>
         <source>Corrupted block database detected</source>
@@ -6521,8 +6521,8 @@ PIVX Core Wallet</translation>
         <translation>Error loading wallet.dat: Wallet corrupted</translation>
     </message>
     <message>
-        <source>Error loading wallet.dat: Wallet requires newer version of PIVX Core</source>
-        <translation>Error loading wallet.dat: Wallet requires newer version of PIVX Core</translation>
+        <source>Error loading wallet.dat: Wallet requires newer version of BCZ Core</source>
+        <translation>Error loading wallet.dat: Wallet requires newer version of BCZ Core</translation>
     </message>
     <message>
         <source>Error opening block database</source>
@@ -6573,8 +6573,8 @@ PIVX Core Wallet</translation>
         <translation>Failed to read block</translation>
     </message>
     <message>
-        <source>Fee (in PIV/kB) to add to transactions you send (default: %s)</source>
-        <translation>Fee (in PIV/kB) to add to transactions you send (default: %s)</translation>
+        <source>Fee (in BCZ/kB) to add to transactions you send (default: %s)</source>
+        <translation>Fee (in BCZ/kB) to add to transactions you send (default: %s)</translation>
     </message>
     <message>
         <source>Force safe mode (default: %u)</source>
@@ -6613,8 +6613,8 @@ PIVX Core Wallet</translation>
         <translation>Information</translation>
     </message>
     <message>
-        <source>Initialization sanity check failed. PIVX Core is shutting down.</source>
-        <translation>Initialization sanity check failed. PIVX Core is shutting down.</translation>
+        <source>Initialization sanity check failed. BCZ Core is shutting down.</source>
+        <translation>Initialization sanity check failed. BCZ Core is shutting down.</translation>
     </message>
     <message>
         <source>Insufficient funds</source>
@@ -6649,12 +6649,12 @@ PIVX Core Wallet</translation>
         <translation>Invalid port detected in masternode.conf</translation>
     </message>
     <message>
-        <source>Recalculating PIV supply...</source>
-        <translation>Recalculating PIV supply...</translation>
+        <source>Recalculating BCZ supply...</source>
+        <translation>Recalculating BCZ supply...</translation>
     </message>
     <message>
-        <source>Reindex the PIV and zPIV money supply statistics</source>
-        <translation>Reindex the PIV and zPIV money supply statistics</translation>
+        <source>Reindex the BCZ and zBCZ money supply statistics</source>
+        <translation>Reindex the BCZ and zBCZ money supply statistics</translation>
     </message>
     <message>
         <source>Reindexing zerocoin database...</source>
@@ -6693,8 +6693,8 @@ PIVX Core Wallet</translation>
 </translation>
     </message>
     <message>
-        <source>Disable all PIVX specific functionality (Masternodes, Zerocoin, SwiftX, Budgeting) (0-1, default: %u)</source>
-        <translation>Disable all PIVX specific functionality (Masternodes, Zerocoin, SwiftX, Budgeting) (0-1, default: %u)</translation>
+        <source>Disable all BCZ specific functionality (Masternodes, Zerocoin, SwiftX, Budgeting) (0-1, default: %u)</source>
+        <translation>Disable all BCZ specific functionality (Masternodes, Zerocoin, SwiftX, Budgeting) (0-1, default: %u)</translation>
     </message>
     <message>
         <source>Enable SwiftX, show confirmations for locked transactions (bool, default: %s)</source>
@@ -6953,8 +6953,8 @@ PIVX Core Wallet</translation>
         <translation>Preparing for resync...</translation>
     </message>
     <message>
-        <source>Please check that your computer's date and time are correct! If your clock is wrong PIVX Core will not work properly.</source>
-        <translation>Please check that your computer's date and time are correct! If your clock is wrong PIVX Core will not work properly.</translation>
+        <source>Please check that your computer's date and time are correct! If your clock is wrong BCZ Core will not work properly.</source>
+        <translation>Please check that your computer's date and time are correct! If your clock is wrong BCZ Core will not work properly.</translation>
     </message>
     <message>
         <source>Specify location of debug log file: this can be an absolute path or a path relative to the data directory (default: %s)</source>
@@ -7153,8 +7153,8 @@ PIVX Core Wallet</translation>
         <translation>Synchronizing sporks...</translation>
     </message>
     <message>
-        <source>Syncing zPIV wallet...</source>
-        <translation>Syncing zPIV wallet...</translation>
+        <source>Syncing zBCZ wallet...</source>
+        <translation>Syncing zBCZ wallet...</translation>
     </message>
     <message>
         <source>This help message</source>
@@ -7269,8 +7269,8 @@ PIVX Core Wallet</translation>
         <translation>Username for JSON-RPC connections</translation>
     </message>
     <message>
-        <source>Value is below the smallest available denomination (= 1) of zPIV</source>
-        <translation>Value is below the smallest available denomination (= 1) of zPIV</translation>
+        <source>Value is below the smallest available denomination (= 1) of zBCZ</source>
+        <translation>Value is below the smallest available denomination (= 1) of zBCZ</translation>
     </message>
     <message>
         <source>Verifying blocks...</source>
@@ -7285,8 +7285,8 @@ PIVX Core Wallet</translation>
         <translation>Wallet %s resides outside data directory %s</translation>
     </message>
     <message>
-        <source>Wallet needed to be rewritten: restart PIVX Core to complete</source>
-        <translation>Wallet needed to be rewritten: restart PIVX Core to complete</translation>
+        <source>Wallet needed to be rewritten: restart BCZ Core to complete</source>
+        <translation>Wallet needed to be rewritten: restart BCZ Core to complete</translation>
     </message>
     <message>
         <source>Wallet options:</source>

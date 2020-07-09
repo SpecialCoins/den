@@ -1,9 +1,9 @@
-// Copyright (c) 2019 The PIVX developers
+// Copyright (c) 2019 The BCZ developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef PIVX_CORE_NEW_GUI_ADDRESSFILTERPROXYMODEL_H
-#define PIVX_CORE_NEW_GUI_ADDRESSFILTERPROXYMODEL_H
+#ifndef BCZ_CORE_NEW_GUI_ADDRESSFILTERPROXYMODEL_H
+#define BCZ_CORE_NEW_GUI_ADDRESSFILTERPROXYMODEL_H
 
 #include <QSortFilterProxyModel>
 #include "addresstablemodel.h"
@@ -44,4 +44,4 @@ private:
 };
 
 
-#endif //PIVX_CORE_NEW_GUI_ADDRESSFILTERPROXYMODEL_H
+#endif //BCZ_CORE_NEW_GUI_ADDRESSFILTERPROXYMODEL_H

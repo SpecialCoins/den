@@ -1,13 +1,13 @@
-// Copyright (c) 2019 The PIVX developers
+// Copyright (c) 2019 The BCZ developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include "qt/pivx/settings/settingsnetworkwidget.h"
-#include "qt/pivx/settings/forms/ui_settingsnetworkwidget.h"
+#include "qt/bcz/settings/settingsnetworkwidget.h"
+#include "qt/bcz/settings/forms/ui_settingsnetworkwidget.h"
 #include "optionsmodel.h"
-#include "qt/pivx/qtutils.h"
+#include "qt/bcz/qtutils.h"
 
-SettingsNetworkWidget::SettingsNetworkWidget(PIVXGUI* _window, QWidget *parent) :
+SettingsNetworkWidget::SettingsNetworkWidget(BCZGUI* _window, QWidget *parent) :
     PWidget(_window, parent),
     ui(new Ui::SettingsNetworkWidget)
 {

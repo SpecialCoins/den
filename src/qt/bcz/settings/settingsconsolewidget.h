@@ -1,4 +1,4 @@
-// Copyright (c) 2019-2020 The PIVX developers
+// Copyright (c) 2019-2020 The BCZ developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -6,7 +6,7 @@
 #define SETTINGSCONSOLEWIDGET_H
 
 #include <QWidget>
-#include "qt/pivx/pwidget.h"
+#include "qt/bcz/pwidget.h"
 #include "guiutil.h"
 #include "net.h"
 #include <QCompleter>
@@ -28,7 +28,7 @@ class SettingsConsoleWidget : public PWidget
     Q_OBJECT
 
 public:
-    explicit SettingsConsoleWidget(PIVXGUI* _window, QWidget *parent = nullptr);
+    explicit SettingsConsoleWidget(BCZGUI* _window, QWidget *parent = nullptr);
     ~SettingsConsoleWidget();
 
     void loadClientModel() override;

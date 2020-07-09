@@ -1,4 +1,4 @@
-// Copyright (c) 2019-2020 The PIVX developers
+// Copyright (c) 2019-2020 The BCZ developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -6,13 +6,13 @@
 #define TOPBAR_H
 
 #include <QWidget>
-#include "qt/pivx/pwidget.h"
-#include "qt/pivx/lockunlock.h"
+#include "qt/bcz/pwidget.h"
+#include "qt/bcz/lockunlock.h"
 #include "amount.h"
 #include <QTimer>
 #include <QProgressBar>
 
-class PIVXGUI;
+class BCZGUI;
 class WalletModel;
 class ClientModel;
 
@@ -25,7 +25,7 @@ class TopBar : public PWidget
     Q_OBJECT
 
 public:
-    explicit TopBar(PIVXGUI* _mainWindow, QWidget *parent = nullptr);
+    explicit TopBar(BCZGUI* _mainWindow, QWidget *parent = nullptr);
     ~TopBar();
 
     void showTop();

@@ -130,12 +130,12 @@
         <translation>Ontvangstadressen</translation>
     </message>
     <message>
-        <source>These are your PIVX addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>Dit zijn uw PIVX adressen om betalingen mee te verzenden. Controleer altijd zowel het bedrag als het ontvangstadres voor het verzenden van geld.</translation>
+        <source>These are your BCZ addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <translation>Dit zijn uw BCZ adressen om betalingen mee te verzenden. Controleer altijd zowel het bedrag als het ontvangstadres voor het verzenden van geld.</translation>
     </message>
     <message>
-        <source>These are your PIVX addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation>Dit zijn uw PIVX adressen waarop betalingen kunnen worden ontvangen. Het wordt aangeraden om een nieuw ontvangstadres voor elke transactie te gebruiken.</translation>
+        <source>These are your BCZ addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
+        <translation>Dit zijn uw BCZ adressen waarop betalingen kunnen worden ontvangen. Het wordt aangeraden om een nieuw ontvangstadres voor elke transactie te gebruiken.</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -251,8 +251,8 @@
         <translation>bv. Jan Jansen</translation>
     </message>
     <message>
-        <source>Enter PIVX address</source>
-        <translation>Voer PIVX adres in</translation>
+        <source>Enter BCZ address</source>
+        <translation>Voer BCZ adres in</translation>
     </message>
     <message>
         <source>SAVE</source>
@@ -380,8 +380,8 @@ voor bewijs van Inzet</translation>
         <translation>Als u uw portemonnee versleutelt en uw wachtwoord vergeet, zal u</translation>
     </message>
     <message>
-        <source>LOSE ALL OF YOUR PIV</source>
-        <translation>AL UW PIV VERLIEZEN</translation>
+        <source>LOSE ALL OF YOUR BCZ</source>
+        <translation>AL UW BCZ VERLIEZEN</translation>
     </message>
     <message>
         <source>ENCRYPT</source>
@@ -396,8 +396,8 @@ voor bewijs van Inzet</translation>
         <translation>Waarschuwing: De Caps Lock-toets staat aan!</translation>
     </message>
     <message>
-        <source>PIVX will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your PIVs from being stolen by malware infecting your computer.</source>
-        <translation>PIVX zal nu afsluiten om het versleutelingsproces te voltooien. Onthoud dat het versleutelen van uw portemonnee u niet volledig kan beschermen tegen malware infecties op uw computer die uw PIV's kunnen stelen.</translation>
+        <source>BCZ will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your BCZs from being stolen by malware infecting your computer.</source>
+        <translation>BCZ zal nu afsluiten om het versleutelingsproces te voltooien. Onthoud dat het versleutelen van uw portemonnee u niet volledig kan beschermen tegen malware infecties op uw computer die uw BCZ's kunnen stelen.</translation>
     </message>
     <message>
         <source>Are you sure you wish to encrypt your wallet?</source>
@@ -466,8 +466,8 @@ voor bewijs van Inzet</translation>
         <translation>Besparingen</translation>
     </message>
     <message>
-        <source>0,00 PIV</source>
-        <translation>0,00 PIV</translation>
+        <source>0,00 BCZ</source>
+        <translation>0,00 BCZ</translation>
     </message>
     <message>
         <source>address</source>
@@ -508,8 +508,8 @@ voor bewijs van Inzet</translation>
         <translation>Munt Selectie</translation>
     </message>
     <message>
-        <source>Select PIV Outputs to Spend</source>
-        <translation>Selecteer PIV Outputs om te besteden</translation>
+        <source>Select BCZ Outputs to Spend</source>
+        <translation>Selecteer BCZ Outputs om te besteden</translation>
     </message>
     <message>
         <source>Dust:</source>
@@ -536,8 +536,8 @@ voor bewijs van Inzet</translation>
         <translation>Bedrag</translation>
     </message>
     <message>
-        <source>0.00 PIV</source>
-        <translation>0.00 PIV</translation>
+        <source>0.00 BCZ</source>
+        <translation>0.00 BCZ</translation>
     </message>
     <message>
         <source>0</source>
@@ -720,8 +720,8 @@ voor bewijs van Inzet</translation>
         <translation>Dit label wordt rood, als een ontvanger een hoeveelheid kleiner dan %1 ontvangt.</translation>
     </message>
     <message>
-        <source>Can vary +/- %1 upiv per input.</source>
-        <translation>Kan +/-%1 upiv per invoer variëren.</translation>
+        <source>Can vary +/- %1 ubcz per input.</source>
+        <translation>Kan +/-%1 ubcz per invoer variëren.</translation>
     </message>
     <message>
         <source>(no label)</source>
@@ -803,9 +803,9 @@ voor bewijs van Inzet</translation>
         <translation>Fout bij laden delegaties: %1</translation>
     </message>
     <message>
-        <source>You can delegate your PIVs, letting a hot node (24/7 online node)
+        <source>You can delegate your BCZs, letting a hot node (24/7 online node)
 stake on your behalf, while you keep the keys securely offline.</source>
-        <translation>Je kan jouw PIVs delegeren en een hot node (24/7 online node)
+        <translation>Je kan jouw BCZs delegeren en een hot node (24/7 online node)
 voor je laten staken, terwijl je de sleutels veilig offline opslag bewaart.</translation>
     </message>
     <message>
@@ -813,8 +813,8 @@ voor je laten staken, terwijl je de sleutels veilig offline opslag bewaart.</tra
         <translation>Voer eigenaarsadres in</translation>
     </message>
     <message>
-        <source>Accept PIV delegation / Delegate PIV</source>
-        <translation>Accepteer PIV delegatie / Delegeer PIV</translation>
+        <source>Accept BCZ delegation / Delegate BCZ</source>
+        <translation>Accepteer BCZ delegatie / Delegeer BCZ</translation>
     </message>
     <message>
         <source>Cold Staking address</source>
@@ -881,8 +881,8 @@ Wil je verdergaan?</translation>
         <translation>Gedelegeerde Munten</translation>
     </message>
     <message>
-        <source>You don't have any PIV to select.</source>
-        <translation>Je hebt geen PIV om te selecteren</translation>
+        <source>You don't have any BCZ to select.</source>
+        <translation>Je hebt geen BCZ om te selecteren</translation>
     </message>
     <message>
         <source>Cannot perform operation, wallet locked</source>
@@ -1012,12 +1012,12 @@ address</source>
         <translation>Staking statistieken</translation>
     </message>
     <message>
-        <source>PIV</source>
-        <translation>PIV</translation>
+        <source>BCZ</source>
+        <translation>BCZ</translation>
     </message>
     <message>
-        <source>zPIV</source>
-        <translation>zPIV</translation>
+        <source>zBCZ</source>
+        <translation>zBCZ</translation>
     </message>
     <message>
         <source>Sort by</source>
@@ -1048,8 +1048,8 @@ address</source>
         <translation>U kunt de geschiedenis van uw account bekijken</translation>
     </message>
     <message>
-        <source>Amount of PIV and zPIV staked.</source>
-        <translation>Hoeveelheid aan gestaked PIV en zPIV.</translation>
+        <source>Amount of BCZ and zBCZ staked.</source>
+        <translation>Hoeveelheid aan gestaked BCZ en zBCZ.</translation>
     </message>
     <message>
         <source>Please wait until the wallet is fully synced to see your correct balance</source>
@@ -1060,8 +1060,8 @@ address</source>
         <translation>Nog geen transacties</translation>
     </message>
     <message>
-        <source>How to get PIV or zPIV</source>
-        <translation>Hoe PIV of zPIV verkrijgen</translation>
+        <source>How to get BCZ or zBCZ</source>
+        <translation>Hoe BCZ of zBCZ verkrijgen</translation>
     </message>
     <message>
         <source>You can verify the staking activity in the status bar at the top right of the wallet.
@@ -1156,8 +1156,8 @@ Het zal automatisch starten zodra de portemonnee voldoende bevestigingen heeft o
         <translation>Wijzig verzend adres</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid PIVX address.</source>
-        <translation>Het ingevoerde adres: "%1" is geen geldig PIVX adres.</translation>
+        <source>The entered address "%1" is not a valid BCZ address.</source>
+        <translation>Het ingevoerde adres: "%1" is geen geldig BCZ adres.</translation>
     </message>
     <message>
         <source>The entered address "%1" is already in the address book.</source>
@@ -1209,16 +1209,16 @@ Het zal automatisch starten zodra de portemonnee voldoende bevestigingen heeft o
         <translation>versie</translation>
     </message>
     <message>
-        <source>PIVX Core</source>
-        <translation>PIVX Core</translation>
+        <source>BCZ Core</source>
+        <translation>BCZ Core</translation>
     </message>
     <message>
         <source>(%1-bit)</source>
         <translation>(%1-bit)</translation>
     </message>
     <message>
-        <source>About PIVX Core</source>
-        <translation>Over PIVX Core</translation>
+        <source>About BCZ Core</source>
+        <translation>Over BCZ Core</translation>
     </message>
     <message>
         <source>Command-line options</source>
@@ -1272,16 +1272,16 @@ Het zal automatisch starten zodra de portemonnee voldoende bevestigingen heeft o
         <translation>Welkom</translation>
     </message>
     <message>
-        <source>Welcome to PIVX Core.</source>
-        <translation>Welkom bij PIVX Core.</translation>
+        <source>Welcome to BCZ Core.</source>
+        <translation>Welkom bij BCZ Core.</translation>
     </message>
     <message>
-        <source>As this is the first time the program is launched, you can choose where PIVX Core will store its data.</source>
-        <translation>Aangezien dit de eerste keer is dat het programma is gestart, kun je kiezen waar PIVX Core zijn data opslaat.</translation>
+        <source>As this is the first time the program is launched, you can choose where BCZ Core will store its data.</source>
+        <translation>Aangezien dit de eerste keer is dat het programma is gestart, kun je kiezen waar BCZ Core zijn data opslaat.</translation>
     </message>
     <message>
-        <source>PIVX Core will download and store a copy of the PIVX block chain. At least %1GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</source>
-        <translation>PIVX Core zal een kopie van de PIVX blockchain downloaden en opslaan. Tenminste %1GB aan data zal worden opgeslagen in deze map en het zal over de tijd groeien. De portemonnee zal ook in deze map worden opgeslagen.</translation>
+        <source>BCZ Core will download and store a copy of the BCZ block chain. At least %1GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</source>
+        <translation>BCZ Core zal een kopie van de BCZ blockchain downloaden en opslaan. Tenminste %1GB aan data zal worden opgeslagen in deze map en het zal over de tijd groeien. De portemonnee zal ook in deze map worden opgeslagen.</translation>
     </message>
     <message>
         <source>Use the default data directory</source>
@@ -1300,8 +1300,8 @@ Het zal automatisch starten zodra de portemonnee voldoende bevestigingen heeft o
         <translation>Akkoord</translation>
     </message>
     <message>
-        <source>PIVX Core</source>
-        <translation>PIVX Core</translation>
+        <source>BCZ Core</source>
+        <translation>BCZ Core</translation>
     </message>
     <message>
         <source>Error: Specified data directory "%1" cannot be created.</source>
@@ -1400,8 +1400,8 @@ Het zal automatisch starten zodra de portemonnee voldoende bevestigingen heeft o
         <translation>Creëer Nieuwe Masternode Controller</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;To create a PIVX Masternode you must dedicate 10,000 PIV (the unit of PIVX) to the network (however, these coins are still yours and will never leave your possession). &lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;You can deactivate the node and unlock the coins at any time.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Om een PIVX Masternode te creëren moet u 10.000 PIV (de eenheid van PIVX) aan het netwerk wijden (deze munten zijn echter nog steeds van u en zullen nooit uw bezit verlaten). &lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;U kunt de node op elk gewenst moment deactiveren en de munten ontgrendelen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;To create a BCZ Masternode you must dedicate 10,000 BCZ (the unit of BCZ) to the network (however, these coins are still yours and will never leave your possession). &lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;You can deactivate the node and unlock the coins at any time.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Om een BCZ Masternode te creëren moet u 10.000 BCZ (de eenheid van BCZ) aan het netwerk wijden (deze munten zijn echter nog steeds van u en zullen nooit uw bezit verlaten). &lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;U kunt de node op elk gewenst moment deactiveren en de munten ontgrendelen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Set Masternode Name</source>
@@ -1420,8 +1420,8 @@ Het zal automatisch starten zodra de portemonnee voldoende bevestigingen heeft o
         <translation>Zorg ervoor dat je deze hoeveelheid munten hebt.</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A transaction of 10,000 PIV will be made&lt;/p&gt;&lt;p&gt;to a new empty address in your wallet.&lt;/p&gt;&lt;p&gt;The Address is labeled under the master node's name.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Een transactie van 10,000 PIV zal gemaakt worden&lt;/p&gt;&lt;p&gt;naar een nieuw leeg adres in uw portemonnee.&lt;/p&gt;&lt;p&gt;Het adres is gelabeld onder de masternode's naam.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A transaction of 10,000 BCZ will be made&lt;/p&gt;&lt;p&gt;to a new empty address in your wallet.&lt;/p&gt;&lt;p&gt;The Address is labeled under the master node's name.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Een transactie van 10,000 BCZ zal gemaakt worden&lt;/p&gt;&lt;p&gt;naar een nieuw leeg adres in uw portemonnee.&lt;/p&gt;&lt;p&gt;Het adres is gelabeld onder de masternode's naam.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Address of the node that must always be online running the actual master node.</source>
@@ -1619,7 +1619,7 @@ Gelieve nog enkele minuten te wachten (het onderpand van een masternode vereist 
 on a remote server to your clipboard.
 
 
-You will only have to paste the data in the pivx.conf file
+You will only have to paste the data in the bcz.conf file
 of your remote server and start it, then start the Masternode using
 this controller wallet (select the Masternode in the list and press "start").
 </source>
@@ -1627,7 +1627,7 @@ this controller wallet (select the Masternode in the list and press "start").
 op een externe server aan uw klembord.
 
 
-U hoeft alleen de gegevens in het pivx.conf bestand te plakken
+U hoeft alleen de gegevens in het bcz.conf bestand te plakken
 van uw externe server en start deze vervolgens de Masternode met
 deze controller portemonnee (selecteer de Masternode in de lijst en druk op "start").
 </translation>
@@ -1663,8 +1663,8 @@ Weet je het zeker?</translation>
         <translation>Kan geen Masternode controller aanmaken, portemonnee vergrendeld</translation>
     </message>
     <message>
-        <source>Not enough balance to create a masternode, 10,000 PIV required.</source>
-        <translation>Niet genoeg balans om een masternode te creëren, 10,000 PIV vereist.</translation>
+        <source>Not enough balance to create a masternode, 10,000 BCZ required.</source>
+        <translation>Niet genoeg balans om een masternode te creëren, 10,000 BCZ vereist.</translation>
     </message>
     <message>
         <source>Error creating masternode</source>
@@ -1795,8 +1795,8 @@ Weet je het zeker?</translation>
         <translation>Ingelezen data te groot</translation>
     </message>
     <message>
-        <source>Invalid URI, not starting with "pivx" prefix</source>
-        <translation>Ongeldige URI, begint niet met de "pivx" prefix</translation>
+        <source>Invalid URI, not starting with "bcz" prefix</source>
+        <translation>Ongeldige URI, begint niet met de "bcz" prefix</translation>
     </message>
 </context>
 <context>
@@ -1845,8 +1845,8 @@ Weet je het zeker?</translation>
         <translation>Als je de uitgaven van onbevestigde wijzigingen uitschakelt, de wijziging van een transactie&lt;br/&gt;kan niet worden gebruikt tot die transactie tenminste één bevestiging heeft.&lt;br/&gt;Dit beïnvloedt ook hoe uw saldo is berekend.</translation>
     </message>
     <message>
-        <source>Automatically open the PIVX client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation>Open de PIVX client poort automatisch op de router. Dit werkt alleen als je router UPnP ondersteunt en het is ingeschakeld.</translation>
+        <source>Automatically open the BCZ client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>Open de BCZ client poort automatisch op de router. Dit werkt alleen als je router UPnP ondersteunt en het is ingeschakeld.</translation>
     </message>
     <message>
         <source>Accept connections from outside</source>
@@ -1865,12 +1865,12 @@ Weet je het zeker?</translation>
         <translation>Expert</translation>
     </message>
     <message>
-        <source>Automatically start PIVX after logging in to the system.</source>
-        <translation>PIVX automatisch opstarten na inloggen op het systeem.</translation>
+        <source>Automatically start BCZ after logging in to the system.</source>
+        <translation>BCZ automatisch opstarten na inloggen op het systeem.</translation>
     </message>
     <message>
-        <source>&amp;Start PIVX on system login</source>
-        <translation>&amp;PIVX starten bij systeemlogin</translation>
+        <source>&amp;Start BCZ on system login</source>
+        <translation>&amp;BCZ starten bij systeemlogin</translation>
     </message>
     <message>
         <source>Whether to show coin control features or not.</source>
@@ -1897,58 +1897,58 @@ Weet je het zeker?</translation>
         <translation>&amp;Netwerk</translation>
     </message>
     <message>
-        <source>The user interface language can be set here. This setting will take effect after restarting PIVX.</source>
-        <translation>De gebruikersinterface taal kan hier ingesteld worden. Deze instelling zal uitgevoerd na herstart van PIVX.</translation>
+        <source>The user interface language can be set here. This setting will take effect after restarting BCZ.</source>
+        <translation>De gebruikersinterface taal kan hier ingesteld worden. Deze instelling zal uitgevoerd na herstart van BCZ.</translation>
     </message>
     <message>
         <source>Language missing or translation incomplete? Help contributing translations here:
-https://www.transifex.com/pivx-project/pivx-project-translations</source>
+https://www.transifex.com/bcz-project/bcz-project-translations</source>
         <translation>Taal ontbreekt of vertaling onvolledig? Help om bij te dragen aan vertalingen:
-https://www.transifex.com/pivx-project/pivx-project-translations</translation>
+https://www.transifex.com/bcz-project/bcz-project-translations</translation>
     </message>
     <message>
         <source>Map port using &amp;UPnP</source>
         <translation>Map poort gebruikt &amp;UPnP</translation>
     </message>
     <message>
-        <source>Enable automatic minting of PIV units to zPIV</source>
-        <translation>Schakel automatisch slaan van PIV-eenheden in op zPIV</translation>
+        <source>Enable automatic minting of BCZ units to zBCZ</source>
+        <translation>Schakel automatisch slaan van BCZ-eenheden in op zBCZ</translation>
     </message>
     <message>
-        <source>Enable zPIV Automint</source>
-        <translation>Schakel zPIV Automint in</translation>
+        <source>Enable zBCZ Automint</source>
+        <translation>Schakel zBCZ Automint in</translation>
     </message>
     <message>
-        <source>Enable automatic zPIV minting from specific addresses</source>
-        <translation>Automatische zPIV munting inschakelen vanuit specifiek adres</translation>
+        <source>Enable automatic zBCZ minting from specific addresses</source>
+        <translation>Automatische zBCZ munting inschakelen vanuit specifiek adres</translation>
     </message>
     <message>
         <source>Enable Automint Addresses</source>
         <translation>Automint Adressen Inschakelen</translation>
     </message>
     <message>
-        <source>Percentage of incoming PIV which get automatically converted to zPIV via Zerocoin Protocol (min: 10%)</source>
-        <translation>Percentage inkomende PIV die automatisch wordt omgezet naar zPIV via Zerocoin Protocol (min: 10%)</translation>
+        <source>Percentage of incoming BCZ which get automatically converted to zBCZ via Zerocoin Protocol (min: 10%)</source>
+        <translation>Percentage inkomende BCZ die automatisch wordt omgezet naar zBCZ via Zerocoin Protocol (min: 10%)</translation>
     </message>
     <message>
-        <source>Percentage of autominted zPIV</source>
-        <translation>Percentage autominted zPIV</translation>
+        <source>Percentage of autominted zBCZ</source>
+        <translation>Percentage autominted zBCZ</translation>
     </message>
     <message>
-        <source>Wait with automatic conversion to Zerocoin until enough PIV for this denomination is available</source>
-        <translation>Wacht met automatische omzetting naar Zerocoin totdat er genoeg PIV voor deze denominatie beschikbaar is</translation>
+        <source>Wait with automatic conversion to Zerocoin until enough BCZ for this denomination is available</source>
+        <translation>Wacht met automatische omzetting naar Zerocoin totdat er genoeg BCZ voor deze denominatie beschikbaar is</translation>
     </message>
     <message>
-        <source>Preferred Automint zPIV Denomination</source>
-        <translation>Gewenste Automint zPIV denominatie</translation>
+        <source>Preferred Automint zBCZ Denomination</source>
+        <translation>Gewenste Automint zBCZ denominatie</translation>
     </message>
     <message>
         <source>Stake split threshold:</source>
         <translation>Stake splitsdrempel:</translation>
     </message>
     <message>
-        <source>Connect to the PIVX network through a SOCKS5 proxy.</source>
-        <translation>Maak verbinding met het PIVX netwerk via een SOCKS5 proxy.</translation>
+        <source>Connect to the BCZ network through a SOCKS5 proxy.</source>
+        <translation>Maak verbinding met het BCZ netwerk via een SOCKS5 proxy.</translation>
     </message>
     <message>
         <source>Proxy &amp;IP:</source>
@@ -2092,10 +2092,10 @@ https://www.transifex.com/pivx-project/pivx-project-translations</translation>
     </message>
 </context>
 <context>
-    <name>PIVXGUI</name>
+    <name>BCZGUI</name>
     <message>
-        <source>PIVX Core</source>
-        <translation>PIVX Core</translation>
+        <source>BCZ Core</source>
+        <translation>BCZ Core</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -2122,8 +2122,8 @@ https://www.transifex.com/pivx-project/pivx-project-translations</translation>
         <translation>Programma afsluiten</translation>
     </message>
     <message>
-        <source>PIVX Core client</source>
-        <translation>PIVX Core client</translation>
+        <source>BCZ Core client</source>
+        <translation>BCZ Core client</translation>
     </message>
     <message>
         <source>Error</source>
@@ -2166,8 +2166,8 @@ Adres: %4
 </translation>
     </message>
     <message>
-        <source>A fatal error occurred. PIVX can no longer continue safely and will quit.</source>
-        <translation>Een kritieke fout is opgelopen. PIVX kan niet langer veilig uitgevoerd worden en zal afsluiten.</translation>
+        <source>A fatal error occurred. BCZ can no longer continue safely and will quit.</source>
+        <translation>Een kritieke fout is opgelopen. BCZ kan niet langer veilig uitgevoerd worden en zal afsluiten.</translation>
     </message>
 </context>
 <context>
@@ -2193,12 +2193,12 @@ Adres: %4
         <translation>Ongeldig betalingsadres %1</translation>
     </message>
     <message>
-        <source>Cannot start pivx: click-to-pay handler</source>
-        <translation>Kan pivx niet starten: click-to-pay handler</translation>
+        <source>Cannot start bcz: click-to-pay handler</source>
+        <translation>Kan bcz niet starten: click-to-pay handler</translation>
     </message>
     <message>
-        <source>URI cannot be parsed! This can be caused by an invalid PIVX address or malformed URI parameters.</source>
-        <translation>URL kan niet ontleed worden! Dit kan worden veroorzaakt door een ongeldig PIVX adres of misvormde URL parameters.</translation>
+        <source>URI cannot be parsed! This can be caused by an invalid BCZ address or malformed URI parameters.</source>
+        <translation>URL kan niet ontleed worden! Dit kan worden veroorzaakt door een ongeldig BCZ adres of misvormde URL parameters.</translation>
     </message>
     <message>
         <source>Payment request file cannot be read! This can be caused by an invalid payment request file.</source>
@@ -2311,50 +2311,50 @@ Adres: %4
         <translation>Munt</translation>
     </message>
     <message>
-        <source>Minting zPIV anonymizes your PIV by removing any
+        <source>Minting zBCZ anonymizes your BCZ by removing any
 transaction history, making transactions untraceable </source>
-        <translation>Munten van zPIV anonimiseert uw PIV door het verwijderen van eender welke
+        <translation>Munten van zBCZ anonimiseert uw BCZ door het verwijderen van eender welke
 transactiegeschiedenis, waardoor transacties niet meer te traceren zijn</translation>
     </message>
     <message>
-        <source>Mint new zPIV or convert back to PIV</source>
-        <translation>Munt nieuwe zPIV of converteer deze terug in PIV</translation>
+        <source>Mint new zBCZ or convert back to BCZ</source>
+        <translation>Munt nieuwe zBCZ of converteer deze terug in BCZ</translation>
     </message>
     <message>
-        <source>Last zPIV Movements</source>
-        <translation>Laatste zPIV Bewegingen</translation>
+        <source>Last zBCZ Movements</source>
+        <translation>Laatste zBCZ Bewegingen</translation>
     </message>
     <message>
         <source>No transactions yet</source>
         <translation>Nog geen transacties</translation>
     </message>
     <message>
-        <source>Mint zPIV</source>
-        <translation>Munt zPIV</translation>
+        <source>Mint zBCZ</source>
+        <translation>Munt zBCZ</translation>
     </message>
     <message>
-        <source>Enter amount of PIV to mint into zPIV</source>
-        <translation>Vul de hoeveelheid PIV in die u omslaan in zPIV</translation>
+        <source>Enter amount of BCZ to mint into zBCZ</source>
+        <translation>Vul de hoeveelheid BCZ in die u omslaan in zBCZ</translation>
     </message>
     <message>
-        <source>Convert back to PIV</source>
-        <translation>Converteer terug naar PIV</translation>
+        <source>Convert back to BCZ</source>
+        <translation>Converteer terug naar BCZ</translation>
     </message>
     <message>
-        <source>Enter amount of zPIV to convert back into PIV</source>
-        <translation>Voer de hoeveelheed zPIV in om terug te converteren naar PIV</translation>
+        <source>Enter amount of zBCZ to convert back into BCZ</source>
+        <translation>Voer de hoeveelheed zBCZ in om terug te converteren naar BCZ</translation>
     </message>
     <message>
         <source>Zerocoin</source>
         <translation>Zerocoin</translation>
     </message>
     <message>
-        <source>zPIV is currently undergoing maintenance</source>
-        <translation>zPIV ondergaat momenteel onderhoud</translation>
+        <source>zBCZ is currently undergoing maintenance</source>
+        <translation>zBCZ ondergaat momenteel onderhoud</translation>
     </message>
     <message>
-        <source>You need to unlock the wallet to be able to %1 zPIV</source>
-        <translation>Je moet de portemonnee ontgrendelen om in staat zijn om %1 zPIV</translation>
+        <source>You need to unlock the wallet to be able to %1 zBCZ</source>
+        <translation>Je moet de portemonnee ontgrendelen om in staat zijn om %1 zBCZ</translation>
     </message>
     <message>
         <source>convert</source>
@@ -2369,16 +2369,16 @@ transactiegeschiedenis, waardoor transacties niet meer te traceren zijn</transla
         <translation>Ongeldige waarde</translation>
     </message>
     <message>
-        <source>zPIV minted successfully</source>
-        <translation>zPIV munting succesvol</translation>
+        <source>zBCZ minted successfully</source>
+        <translation>zBCZ munting succesvol</translation>
     </message>
     <message>
-        <source>zPIV converted back to PIV</source>
-        <translation>zPIV terug geconverteerd naar PIV</translation>
+        <source>zBCZ converted back to BCZ</source>
+        <translation>zBCZ terug geconverteerd naar BCZ</translation>
     </message>
     <message>
-        <source>You don't have any PIV to select.</source>
-        <translation>Je hebt geen PIV om te selecteren</translation>
+        <source>You don't have any BCZ to select.</source>
+        <translation>Je hebt geen BCZ om te selecteren</translation>
     </message>
     <message>
         <source>Rescan Mints</source>
@@ -2389,8 +2389,8 @@ transactiegeschiedenis, waardoor transacties niet meer te traceren zijn</transla
         <translation>Uw zerocoin muntingen zullen van de blockchain vanaf nul worden gescanned</translation>
     </message>
     <message>
-        <source>Reset Spent zPIV</source>
-        <translation>Reset Besteedde zPIV</translation>
+        <source>Reset Spent zBCZ</source>
+        <translation>Reset Besteedde zBCZ</translation>
     </message>
     <message>
         <source>Your zerocoin spends are going to be scanned from the blockchain from scratch</source>
@@ -2408,8 +2408,8 @@ transactiegeschiedenis, waardoor transacties niet meer te traceren zijn</transla
         <translation>Bedrag</translation>
     </message>
     <message>
-        <source>Enter PIVX address (e.g. %1)</source>
-        <translation>Voer een PIVX adres in (b.v. %1)</translation>
+        <source>Enter BCZ address (e.g. %1)</source>
+        <translation>Voer een BCZ adres in (b.v. %1)</translation>
     </message>
     <message>
         <source>%1 d</source>
@@ -2452,8 +2452,8 @@ transactiegeschiedenis, waardoor transacties niet meer te traceren zijn</transla
         <translation>%1 ms</translation>
     </message>
     <message>
-        <source>PIVX Core</source>
-        <translation>PIVX Core</translation>
+        <source>BCZ Core</source>
+        <translation>BCZ Core</translation>
     </message>
     <message>
         <source>Error: Specified data directory "%1" does not exist.</source>
@@ -2472,8 +2472,8 @@ transactiegeschiedenis, waardoor transacties niet meer te traceren zijn</transla
         <translation>Fout bij het lezen van het masternode configuratiebestand: %1</translation>
     </message>
     <message>
-        <source>PIVX Core didn't yet exit safely...</source>
-        <translation>PIVX Core is nog niet veilig afgesloten...</translation>
+        <source>BCZ Core didn't yet exit safely...</source>
+        <translation>BCZ Core is nog niet veilig afgesloten...</translation>
     </message>
     <message>
         <source>Contact</source>
@@ -2659,8 +2659,8 @@ transactiegeschiedenis, waardoor transacties niet meer te traceren zijn</transla
         <translation>Blockchain</translation>
     </message>
     <message>
-        <source>Open the PIVX debug log file from the current data directory. This can take a few seconds for large log files.</source>
-        <translation>Open het PIVX debug log bestand uit de huidige data directory. Dit kan enkele seconden duren voor grote logbestanden.</translation>
+        <source>Open the BCZ debug log file from the current data directory. This can take a few seconds for large log files.</source>
+        <translation>Open het BCZ debug log bestand uit de huidige data directory. Dit kan enkele seconden duren voor grote logbestanden.</translation>
     </message>
     <message>
         <source>Number of Masternodes</source>
@@ -2803,8 +2803,8 @@ transactiegeschiedenis, waardoor transacties niet meer te traceren zijn</transla
         <translation>Aangepast back-up pad:</translation>
     </message>
     <message>
-        <source>Custom zPIV Backup Path:</source>
-        <translation>Aangepast zPIV back-up pad:</translation>
+        <source>Custom zBCZ Backup Path:</source>
+        <translation>Aangepast zBCZ back-up pad:</translation>
     </message>
     <message>
         <source>Custom Backups Threshold:</source>
@@ -2883,8 +2883,8 @@ transactiegeschiedenis, waardoor transacties niet meer te traceren zijn</transla
         <translation>Uit:</translation>
     </message>
     <message>
-        <source>Welcome to the PIVX RPC console.</source>
-        <translation>Welkom bij de PIVX RPC console.</translation>
+        <source>Welcome to the BCZ RPC console.</source>
+        <translation>Welkom bij de BCZ RPC console.</translation>
     </message>
     <message>
         <source>&amp;Disconnect Node</source>
@@ -3049,8 +3049,8 @@ transactiegeschiedenis, waardoor transacties niet meer te traceren zijn</transla
         <translation>Ontvangen</translation>
     </message>
     <message>
-        <source>Scan the QR code or copy the address to receive PIV.</source>
-        <translation>Scan de QR code of kopieer het adres om PIV te ontvangen.</translation>
+        <source>Scan the QR code or copy the address to receive BCZ.</source>
+        <translation>Scan de QR code of kopieer het adres om BCZ te ontvangen.</translation>
     </message>
     <message>
         <source>No address </source>
@@ -3159,8 +3159,8 @@ transactiegeschiedenis, waardoor transacties niet meer te traceren zijn</transla
         <translation>Bedrag</translation>
     </message>
     <message>
-        <source>PIV</source>
-        <translation>PIV</translation>
+        <source>BCZ</source>
+        <translation>BCZ</translation>
     </message>
     <message>
         <source>TextLabel</source>
@@ -3199,8 +3199,8 @@ transactiegeschiedenis, waardoor transacties niet meer te traceren zijn</transla
         <translation>Nieuw Betalingsverzoek</translation>
     </message>
     <message>
-        <source>Instead of sharing only a PIVX address, you can create a payment request, bundling up more information.</source>
-        <translation>In plaats van een PIVX-adres te delen, kunt u een betalingsverzoek creëren dat meer informatie bundelt.</translation>
+        <source>Instead of sharing only a BCZ address, you can create a payment request, bundling up more information.</source>
+        <translation>In plaats van een BCZ-adres te delen, kunt u een betalingsverzoek creëren dat meer informatie bundelt.</translation>
     </message>
     <message>
         <source>Enter a label for the address</source>
@@ -3258,8 +3258,8 @@ transactiegeschiedenis, waardoor transacties niet meer te traceren zijn</transla
         <translation>Aangepast wijzigingsadres</translation>
     </message>
     <message>
-        <source>The remainder of the value resultant from the inputs minus the outputs value goes to the "change" PIVX address</source>
-        <translation>De rest van de waarde die resulteert uit de ingangen minus de waarde van de uitgangen gaat naar het "wijzig" PIVX-adres</translation>
+        <source>The remainder of the value resultant from the inputs minus the outputs value goes to the "change" BCZ address</source>
+        <translation>De rest van de waarde die resulteert uit de ingangen minus de waarde van de uitgangen gaat naar het "wijzig" BCZ-adres</translation>
     </message>
     <message>
         <source>SAVE</source>
@@ -3293,8 +3293,8 @@ transactiegeschiedenis, waardoor transacties niet meer te traceren zijn</transla
         <translation>Aanbevolen</translation>
     </message>
     <message>
-        <source>PIV/kilobyte</source>
-        <translation>PIV/kilobyte</translation>
+        <source>BCZ/kilobyte</source>
+        <translation>BCZ/kilobyte</translation>
     </message>
     <message>
         <source>0.00 KB</source>
@@ -3363,8 +3363,8 @@ transactiegeschiedenis, waardoor transacties niet meer te traceren zijn</transla
         <translation>Zenden</translation>
     </message>
     <message>
-        <source>You can transfer public coins (PIV) or private coins (zPIV)</source>
-        <translation>Je kan publieke munten (PIV) of private munten (zPIV) overdragen</translation>
+        <source>You can transfer public coins (BCZ) or private coins (zBCZ)</source>
+        <translation>Je kan publieke munten (BCZ) of private munten (zBCZ) overdragen</translation>
     </message>
     <message>
         <source>Select coin type to spend</source>
@@ -3395,12 +3395,12 @@ transactiegeschiedenis, waardoor transacties niet meer te traceren zijn</transla
         <translation>Totaal te versturen</translation>
     </message>
     <message>
-        <source>Send PIV</source>
-        <translation>PIV Versturen</translation>
+        <source>Send BCZ</source>
+        <translation>BCZ Versturen</translation>
     </message>
     <message>
-        <source>Send zPIV</source>
-        <translation>zPIV Versturen</translation>
+        <source>Send zBCZ</source>
+        <translation>zBCZ Versturen</translation>
     </message>
     <message>
         <source>Total remaining from the selected UTXO</source>
@@ -3431,8 +3431,8 @@ Wilt u verdergaan?</translation>
         <translation>Maximum aantal uitvoeren bereikt</translation>
     </message>
     <message>
-        <source>PIVX address or contact label</source>
-        <translation>PIVX adres of contactlabel</translation>
+        <source>BCZ address or contact label</source>
+        <translation>BCZ adres of contactlabel</translation>
     </message>
     <message>
         <source>Invalid entry, previous entries must be valid before add a new one</source>
@@ -3475,8 +3475,8 @@ Deze munten zullen niet langer cold-staked zijn.</translation>
         <translation>Besteed Zerocoin</translation>
     </message>
     <message>
-        <source>zPIV is currently undergoing maintenance.</source>
-        <translation>zPIV wordt momenteel onderhouden.</translation>
+        <source>zBCZ is currently undergoing maintenance.</source>
+        <translation>zBCZ wordt momenteel onderhouden.</translation>
     </message>
     <message>
         <source>Coin control mint not found</source>
@@ -3495,12 +3495,12 @@ Deze munten zullen niet langer cold-staked zijn.</translation>
 %2</translation>
     </message>
     <message>
-        <source>zPIV transaction sent!</source>
-        <translation>zPIV transactie verzonden!</translation>
+        <source>zBCZ transaction sent!</source>
+        <translation>zBCZ transactie verzonden!</translation>
     </message>
     <message>
-        <source>Version 1 zPIV require a security level of 100 to successfully spend.</source>
-        <translation>Versie 1 zPIV vereist een beveiligingsniveau van 100 om succesvol te besteden.</translation>
+        <source>Version 1 zBCZ require a security level of 100 to successfully spend.</source>
+        <translation>Versie 1 zBCZ vereist een beveiligingsniveau van 100 om succesvol te besteden.</translation>
     </message>
     <message>
         <source>Too much inputs (</source>
@@ -3535,12 +3535,12 @@ Ofwel het munten van hogere denominaties (dus minder invoer nodig) of het te bes
         <translation>Aangepaste Kost %1</translation>
     </message>
     <message>
-        <source>You don't have any PIV to select.</source>
-        <translation>Je hebt geen PIV om te selecteren</translation>
+        <source>You don't have any BCZ to select.</source>
+        <translation>Je hebt geen BCZ om te selecteren</translation>
     </message>
     <message>
-        <source>You don't have any zPIV in your balance to select.</source>
-        <translation>Je hebt geen zPIV in je balans om te selecteren.</translation>
+        <source>You don't have any zBCZ in your balance to select.</source>
+        <translation>Je hebt geen zBCZ in je balans om te selecteren.</translation>
     </message>
     <message>
         <source>No contacts available, you can go to the contacts screen and add some there!</source>
@@ -3709,8 +3709,8 @@ Deze optie maakt een wallet.dat bestand aan dat gebruikt kan worden om uw volled
         <translation>DECRYPTEER SLEUTEL</translation>
     </message>
     <message>
-        <source>PIVX address</source>
-        <translation>PIVX adres</translation>
+        <source>BCZ address</source>
+        <translation>BCZ adres</translation>
     </message>
     <message>
         <source>Enter address</source>
@@ -3842,8 +3842,8 @@ Verify that you have installed a predetermined text editor.</source>
 Controleer of u een vooraf bepaalde teksteditor hebt geïnstalleerd.</translation>
     </message>
     <message>
-        <source>Welcome to the PIVX RPC console.</source>
-        <translation>Welkom bij de PIVX RPC console.</translation>
+        <source>Welcome to the BCZ RPC console.</source>
+        <translation>Welkom bij de BCZ RPC console.</translation>
     </message>
     <message>
         <source>Use up and down arrows to navigate history, and %1 to clear screen.</source>
@@ -3956,12 +3956,12 @@ Controleer of u een vooraf bepaalde teksteditor hebt geïnstalleerd.</translatio
         <translation>Exporteer Adreslijst</translation>
     </message>
     <message>
-        <source>PIVX_tx_csv_export(*.csv)</source>
-        <translation>PIVX_tx_csv_export(*.csv)</translation>
+        <source>BCZ_tx_csv_export(*.csv)</source>
+        <translation>BCZ_tx_csv_export(*.csv)</translation>
     </message>
     <message>
-        <source>PIVX_addresses_csv_export(*.csv)</source>
-        <translation>PIVX_addresses_csv_export(*.csv)</translation>
+        <source>BCZ_addresses_csv_export(*.csv)</source>
+        <translation>BCZ_addresses_csv_export(*.csv)</translation>
     </message>
     <message>
         <source>Please select a folder to export the csv file first.</source>
@@ -4039,34 +4039,34 @@ Er was een fout opgetreden tijdens het opslaan van deze adreslijst naar %1. Prob
         <translation>Druk Knop</translation>
     </message>
     <message>
-        <source>1) What is PIVX?</source>
-        <translation>1) Wat is PIVX?</translation>
+        <source>1) What is BCZ?</source>
+        <translation>1) Wat is BCZ?</translation>
     </message>
     <message>
-        <source>2) Why are my PIV unspendable?</source>
-        <translation>2) Waarom is mijn PIV niet besteedbaar?</translation>
+        <source>2) Why are my BCZ unspendable?</source>
+        <translation>2) Waarom is mijn BCZ niet besteedbaar?</translation>
     </message>
     <message>
-        <source>3) PIVX privacy? What is Zerocoin (zPIV)?</source>
-        <translation>3) PIVX privacy? Wat is Zerocoin (zPIV)?</translation>
+        <source>3) BCZ privacy? What is Zerocoin (zBCZ)?</source>
+        <translation>3) BCZ privacy? Wat is Zerocoin (zBCZ)?</translation>
     </message>
     <message>
-        <source>4) Why are my zPIV unspendable?</source>
-        <translation>4) Waarom is mijn zPIV niet besteedbaar?</translation>
+        <source>4) Why are my zBCZ unspendable?</source>
+        <translation>4) Waarom is mijn zBCZ niet besteedbaar?</translation>
     </message>
     <message>
         <source>5) Why did my wallet convert the balance
-    into zPIV automatically?</source>
+    into zBCZ automatically?</source>
         <translation>5) Waarom heeft mijn portemonnee mijn balans
-    automatisch naar zPIV geconverteerd?</translation>
+    automatisch naar zBCZ geconverteerd?</translation>
     </message>
     <message>
-        <source>6) How do I receive PIV/zPIV?</source>
-        <translation>6) Hoe ontvang ik PIV/zPIV?</translation>
+        <source>6) How do I receive BCZ/zBCZ?</source>
+        <translation>6) Hoe ontvang ik BCZ/zBCZ?</translation>
     </message>
     <message>
-        <source>7) How do I stake PIV/zPIV?</source>
-        <translation>7) Hoe stake ik PIV/zPIV?</translation>
+        <source>7) How do I stake BCZ/zBCZ?</source>
+        <translation>7) Hoe stake ik BCZ/zBCZ?</translation>
     </message>
     <message>
         <source>8) Where I should go if I need support?</source>
@@ -4085,34 +4085,34 @@ Er was een fout opgetreden tijdens het opslaan van deze adreslijst naar %1. Prob
         <translation>1</translation>
     </message>
     <message>
-        <source>What is PIVX?</source>
-        <translation>Wat is PIVX?</translation>
+        <source>What is BCZ?</source>
+        <translation>Wat is BCZ?</translation>
     </message>
     <message>
         <source>
                            &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;
-                           PIVX is a form of digital online money using blockchain technology
+                           BCZ is a form of digital online money using blockchain technology
                            that can be easily transferred globally, instantly, and with near
-                           zero fees.  PIVX incorporates market leading security &amp;
+                           zero fees.  BCZ incorporates market leading security &amp;
                            privacy and is also the first PoS (Proof of Stake) Cryptocurrency
-                           to implement ZeroCoin(zPIV) and Zerocoin staking.
+                           to implement ZeroCoin(zBCZ) and Zerocoin staking.
                            &lt;/p&gt;&lt;p align="justify"&gt;
-                           PIVX utilizes a Proof of Stake (PoS) consensus system algorithm,
-                           allowing all owners of PIVX to participate in earning block rewards
+                           BCZ utilizes a Proof of Stake (PoS) consensus system algorithm,
+                           allowing all owners of BCZ to participate in earning block rewards
                            while securing the network with full node wallets, as well as to
                            run Masternodes to create and vote on proposals.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
                          </source>
         <translation>
                            &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;
-                           PIVX is een vorm van digitaal online geld dat gebruik maakt van blockchain technologie.
+                           BCZ is een vorm van digitaal online geld dat gebruik maakt van blockchain technologie.
                            die gemakkelijk wereldwijd kan worden overgebracht, onmiddellijk en met bijna
-                           geen kosten.  PIVX omvat marktleidende beveiliging &amp;
+                           geen kosten.  BCZ omvat marktleidende beveiliging &amp;
                            privacy en is ook de eerste PoS (Proof of Stake) Cryptovaluta
-                           om ZeroCoin (zPIV) en Zerocoin staking te implementeren.
+                           om ZeroCoin (zBCZ) en Zerocoin staking te implementeren.
                            &lt;/p&gt;&lt;p align="justify"&gt;
-                           PIVX gebruikt een Proof of Stake (PoS) consensussysteemalgoritme,
-                           waardoor alle eigenaren van PIVX kunnen deelnemen aan het verdienen van blokbeloningen
+                           BCZ gebruikt een Proof of Stake (PoS) consensussysteemalgoritme,
+                           waardoor alle eigenaren van BCZ kunnen deelnemen aan het verdienen van blokbeloningen
                            en tegelijkertijd het netwerk te beveiligen met volledige node portemonnees, en ook om
                            Masternodes uit te voeren en om voorstellen op te stellen en daarover te stemmen.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
@@ -4123,25 +4123,25 @@ Er was een fout opgetreden tijdens het opslaan van deze adreslijst naar %1. Prob
         <translation>2</translation>
     </message>
     <message>
-        <source>Why are my PIV unspendable?</source>
-        <translation>Waarom is mijn PIV niet besteedbaar?</translation>
+        <source>Why are my BCZ unspendable?</source>
+        <translation>Waarom is mijn BCZ niet besteedbaar?</translation>
     </message>
     <message>
         <source>
                            &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;
-                           Newly received PIVX requires 6 confirmations on the network
+                           Newly received BCZ requires 6 confirmations on the network
                            to become eligible for spending which can take ~6 minutes.
                            &lt;/p&gt;&lt;p align="justify"&gt;
-                           Your PIVX wallet also needs to be completely synchronized
+                           Your BCZ wallet also needs to be completely synchronized
                            to see and spend balances on the network.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
                          </source>
         <translation>
                            &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;
-                           Nieuw ontvangen PIVX vereist 6 bevestigingen op het netwerk
+                           Nieuw ontvangen BCZ vereist 6 bevestigingen op het netwerk
                            om in aanmerking te komen voor uitgaven die ongeveer 6 minuten in beslag kunnen nemen.
                            &lt;/p&gt;&lt;p align="justify"&gt;
-                           Uw PIVX portemonnee moet ook volledig gesynchroniseerd zijn
+                           Uw BCZ portemonnee moet ook volledig gesynchroniseerd zijn
                            om de balans te zien en uit te geven op het netwerk.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
                          </translation>
@@ -4151,26 +4151,26 @@ Er was een fout opgetreden tijdens het opslaan van deze adreslijst naar %1. Prob
         <translation>3</translation>
     </message>
     <message>
-        <source>PIVX privacy? What is Zerocoin (zPIV)?</source>
-        <translation>PIVX privacy? Wat is Zerocoin (zPIV)?</translation>
+        <source>BCZ privacy? What is Zerocoin (zBCZ)?</source>
+        <translation>BCZ privacy? Wat is Zerocoin (zBCZ)?</translation>
     </message>
     <message>
         <source>
                            &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;
-                           zPIV is an optional privacy-centric method of coin mixing on the
-                           PIVX blockchain. Basically all your transactions cannot be tracked
+                           zBCZ is an optional privacy-centric method of coin mixing on the
+                           BCZ blockchain. Basically all your transactions cannot be tracked
                            on to any block explorer. You can read more about the technicals in the
-                           &lt;a style='color: #b088ff' href='https://PIVX.org/zpiv/'&gt;
-                           "PIVX Zerocoin (zPIV) Technical Paper"&lt;/a&gt;.
+                           &lt;a style='color: #b088ff' href='https://BCZ.org/zbcz/'&gt;
+                           "BCZ Zerocoin (zBCZ) Technical Paper"&lt;/a&gt;.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
                          </source>
         <translation>
                            &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;
-                           zPIV is een optionele privacy-gerichte methode om munten te mengen op de
-                           PIVX blockchain. In principe kunnen al uw transacties niet worden gevolgd
+                           zBCZ is een optionele privacy-gerichte methode om munten te mengen op de
+                           BCZ blockchain. In principe kunnen al uw transacties niet worden gevolgd
                            op enige block explorer. U kunt meer lezen over de technische gegevens in de
-                           &lt;a style='color: #b088ff' href='https://PIVX.org/zpiv/'&gt;
-                           "PIVX Zerocoin (zPIV) Technische Paper"&lt;/a&gt;.
+                           &lt;a style='color: #b088ff' href='https://BCZ.org/zbcz/'&gt;
+                           "BCZ Zerocoin (zBCZ) Technische Paper"&lt;/a&gt;.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
                          </translation>
     </message>
@@ -4179,20 +4179,20 @@ Er was een fout opgetreden tijdens het opslaan van deze adreslijst naar %1. Prob
         <translation>4</translation>
     </message>
     <message>
-        <source>Why are my zPIV unspendable?</source>
-        <translation>Waarom is mijn zPIV niet besteedbaar?</translation>
+        <source>Why are my zBCZ unspendable?</source>
+        <translation>Waarom is mijn zBCZ niet besteedbaar?</translation>
     </message>
     <message>
         <source>
                            &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;
-                           After minting, zPIV will require 20 confirmations as well as 1
+                           After minting, zBCZ will require 20 confirmations as well as 1
                            additional mint of the same denomination on the network to
                            become eligible for spending.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
                          </source>
         <translation>
                            &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;
-                           Na het muntenheeft zPIV 20 bevestigingen nodig, evenals 1
+                           Na het muntenheeft zBCZ 20 bevestigingen nodig, evenals 1
                           extra munt van dezelfde denominatie op het netwerk om
                            in aanmerking komen voor uitgaven.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
@@ -4203,41 +4203,41 @@ Er was een fout opgetreden tijdens het opslaan van deze adreslijst naar %1. Prob
         <translation>5</translation>
     </message>
     <message>
-        <source>Why did my wallet convert the balance into zPIV automatically?</source>
-        <translation>Waarom heeft mijn portemonnee mijn balans automatisch naar zPIV geconverteerd?</translation>
+        <source>Why did my wallet convert the balance into zBCZ automatically?</source>
+        <translation>Waarom heeft mijn portemonnee mijn balans automatisch naar zBCZ geconverteerd?</translation>
     </message>
     <message>
         <source>
                            &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;
-                           By default the PIVX wallet will convert 10% of your entire PIV
-                           balance to zPIV to assist the network. If you do not wish to
-                           stake zPIV or take advantage of the privacy benefit it brings,
-                           you can disable the automatic minting in your PIVX wallet by
-                           going to Settings-&gt;Options and deselecting “Enable zPIV Automint”.
-                           If you are not making use of the PIVX-QT or GUI you can simply open
-                           your pivx.conf file and add &lt;i&gt;enablezeromint=0&lt;/i&gt; Without the quotation
+                           By default the BCZ wallet will convert 10% of your entire BCZ
+                           balance to zBCZ to assist the network. If you do not wish to
+                           stake zBCZ or take advantage of the privacy benefit it brings,
+                           you can disable the automatic minting in your BCZ wallet by
+                           going to Settings-&gt;Options and deselecting “Enable zBCZ Automint”.
+                           If you are not making use of the BCZ-QT or GUI you can simply open
+                           your bcz.conf file and add &lt;i&gt;enablezeromint=0&lt;/i&gt; Without the quotation
                            marks and restart your wallet to disable automint.&lt;/p&gt;
                            &lt;/p&gt;&lt;p align="justify"&gt;
-                           You can read more about zPIV in the
-                           &lt;a style='color: #b088ff' href='https://PIVX.org/zpiv/'&gt; "PIVX Zerocoin (zPIV) Technical Paper"&lt;/a&gt;.
-                           If you would like to keep and stake your zPIV, please read the "How do I stake"
+                           You can read more about zBCZ in the
+                           &lt;a style='color: #b088ff' href='https://BCZ.org/zbcz/'&gt; "BCZ Zerocoin (zBCZ) Technical Paper"&lt;/a&gt;.
+                           If you would like to keep and stake your zBCZ, please read the "How do I stake"
                            section of the FAQ below.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
                          </source>
         <translation>
                            &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;
-                           Standaard zal de PIVX portemonnee 10% van uw gehele PIV-balans omzetten
-                          naar zPIV om het netwerk te helpen. Als u niet wenst om
-                           zPIV te staken of voordeel te halen uit het privacyvoordeel dat dit oplevert,
-                           kan je deze automatische omzetting uitschakelen in je PIVX portemonnee door
-                           naar Instellingen &gt; Opties te gaan en dan “Schakel zPIV Automuntering in” te deselecteren.
-                           Als je geen gebruik maakt van de PIVX-QT of GUI kan je simpelweg
-                           je pivx.conf bestand openen en er &lt;i&gt;"enablezeromint=0" aan toevoegen&lt;/i&gt; Zonder de aanhaling
+                           Standaard zal de BCZ portemonnee 10% van uw gehele BCZ-balans omzetten
+                          naar zBCZ om het netwerk te helpen. Als u niet wenst om
+                           zBCZ te staken of voordeel te halen uit het privacyvoordeel dat dit oplevert,
+                           kan je deze automatische omzetting uitschakelen in je BCZ portemonnee door
+                           naar Instellingen &gt; Opties te gaan en dan “Schakel zBCZ Automuntering in” te deselecteren.
+                           Als je geen gebruik maakt van de BCZ-QT of GUI kan je simpelweg
+                           je bcz.conf bestand openen en er &lt;i&gt;"enablezeromint=0" aan toevoegen&lt;/i&gt; Zonder de aanhaling
                            en je portemonnee herstarten om automuntering uit te schakelen.&lt;/p&gt;
                            &lt;/p&gt;&lt;p align="justify"&gt;
-                           Je kan meer lezen over zPIV in de
-                           &lt;a style='color: #b088ff' href='https://PIVX.org/zpiv/'&gt; "PIVX Zerocoin (zPIV) Technische Paper"&lt;/a&gt;.
-                           Als u uw zPIV wilt behouden en staken, lees dan de "Hoe stake ik"
+                           Je kan meer lezen over zBCZ in de
+                           &lt;a style='color: #b088ff' href='https://BCZ.org/zbcz/'&gt; "BCZ Zerocoin (zBCZ) Technische Paper"&lt;/a&gt;.
+                           Als u uw zBCZ wilt behouden en staken, lees dan de "Hoe stake ik"
                            sectie in onderstaande FAQ.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
                          </translation>
@@ -4247,24 +4247,24 @@ Er was een fout opgetreden tijdens het opslaan van deze adreslijst naar %1. Prob
         <translation>6</translation>
     </message>
     <message>
-        <source>How do I receive PIV/zPIV?</source>
-        <translation>Hoe ontvang ik PIV/zPIV?</translation>
+        <source>How do I receive BCZ/zBCZ?</source>
+        <translation>Hoe ontvang ik BCZ/zBCZ?</translation>
     </message>
     <message>
         <source>
                            &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;
-                           zPIV can be spent and sent to any PIVX address. The receiver will
-                           receive standard PIVX but the origin of the PIVX is anonymized by the zPIV Protocol.
+                           zBCZ can be spent and sent to any BCZ address. The receiver will
+                           receive standard BCZ but the origin of the BCZ is anonymized by the zBCZ Protocol.
                            &lt;/p&gt;&lt;p align="justify"&gt;
-                           If you want more zPIV you will need to mint your balance in the “Privacy” tab.
+                           If you want more zBCZ you will need to mint your balance in the “Privacy” tab.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
                          </source>
         <translation>
                            &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;
-                           zPIV kan worden uitgegeven en verzonden naar elk PIVX-adres. De ontvanger zal
-                           gewone PIVX ontvangen, maar de oorsprong van de PIVX is geanonimiseerd door het zPIV-protocol
+                           zBCZ kan worden uitgegeven en verzonden naar elk BCZ-adres. De ontvanger zal
+                           gewone BCZ ontvangen, maar de oorsprong van de BCZ is geanonimiseerd door het zBCZ-protocol
                            &lt;/p&gt;&lt;p align="justify"&gt;
-                           Als u meer zPIV wilt, moet u uw balans op mint zetten in de "Privacy" tab.
+                           Als u meer zBCZ wilt, moet u uw balans op mint zetten in de "Privacy" tab.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
                          </translation>
     </message>
@@ -4273,32 +4273,32 @@ Er was een fout opgetreden tijdens het opslaan van deze adreslijst naar %1. Prob
         <translation>7</translation>
     </message>
     <message>
-        <source>How do I stake PIV/zPIV?</source>
-        <translation>Hoe stake ik PIV/zPIV?</translation>
+        <source>How do I stake BCZ/zBCZ?</source>
+        <translation>Hoe stake ik BCZ/zBCZ?</translation>
     </message>
     <message>
         <source>
                            &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;
-                           To Stake PIVX:
+                           To Stake BCZ:
                            &lt;/p&gt;&lt;p align="justify"&gt;
                            &lt;ol&gt;&lt;li&gt;
                            Make sure your wallet is completely synchronized and you are using the latest release.
                            &lt;li&gt;
-                           You must have a balance of PIVX with a minimum of 600 confirmations.
+                           You must have a balance of BCZ with a minimum of 600 confirmations.
                            &lt;li&gt;
                            Your wallet must stay online and be unlocked for staking purposes.
                            &lt;li&gt;
                            Once all those steps are followed staking should be enabled.
                            &lt;li&gt;
-                           You can see the status of staking in the wallet by mousing over the package icon in the row on the top left of the wallet interface. There package will be lit up and will state "Staking Enabled" to indicate it is staking.  Using the command line interface (pivx-cli); the command &lt;i&gt;getstakingstatus&lt;/i&gt; will confirm that staking is active.
+                           You can see the status of staking in the wallet by mousing over the package icon in the row on the top left of the wallet interface. There package will be lit up and will state "Staking Enabled" to indicate it is staking.  Using the command line interface (bcz-cli); the command &lt;i&gt;getstakingstatus&lt;/i&gt; will confirm that staking is active.
                            &lt;/li&gt;&lt;/ol&gt;
                            &lt;/p&gt;&lt;p align="justify"&gt;
-                           To Stake zPIV:
+                           To Stake zBCZ:
                            &lt;/p&gt;&lt;p align="justify"&gt;
                            &lt;ol&gt;&lt;li&gt;
                            Make sure your wallet is completely synchronized and you are using the latest release.
                            &lt;li&gt;
-                           Your newly minted or existing zPIV balance must have a minimum of 200 confirmations.
+                           Your newly minted or existing zBCZ balance must have a minimum of 200 confirmations.
                            &lt;li&gt;
                            Your wallet must stay online and be unlocked for anonymization and staking purposes.
                            Staking should now be enabled.
@@ -4307,26 +4307,26 @@ Er was een fout opgetreden tijdens het opslaan van deze adreslijst naar %1. Prob
                          </source>
         <translation>
                            &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;
-                           Om PIVX te Staken:
+                           Om BCZ te Staken:
                            &lt;/p&gt;&lt;p align="justify"&gt;
                            &lt;ol&gt;&lt;li&gt;
                            Zorg ervoor dat uw portemonnee volledig gesynchroniseerd is en dat u de laatste versie gebruikt.
                            &lt;li&gt;
-                           U moet een saldo van PIVX hebben met een minimum van 600 bevestigingen.
+                           U moet een saldo van BCZ hebben met een minimum van 600 bevestigingen.
                            &lt;li&gt;
                            Uw portemonnee moet online blijven en ontgrendeld zijn voor staking-doeleinden.
                            &lt;li&gt;
                            Zodra al deze stappen gevolgd zijn, zal het staken worden ingeschakeld.
                            &lt;li&gt;
-                           U kunt de status van de staking in de portemonnee zien door op het pictogram in de rij linksboven in de portemonnee-interface te bewegen. Het pakket zal oplichten en zal "Staking Ingeschakeld" aangeven om aan te geven dat het pakket in de portemonnee is geplaatst. Met behulp van de opdrachtregel-interface (pivx-cli); het commando &lt;i&gt;getstakingstatus&lt;/i&gt; zal bevestigen dat de staking actief is.
+                           U kunt de status van de staking in de portemonnee zien door op het pictogram in de rij linksboven in de portemonnee-interface te bewegen. Het pakket zal oplichten en zal "Staking Ingeschakeld" aangeven om aan te geven dat het pakket in de portemonnee is geplaatst. Met behulp van de opdrachtregel-interface (bcz-cli); het commando &lt;i&gt;getstakingstatus&lt;/i&gt; zal bevestigen dat de staking actief is.
                            &lt;/li&gt;&lt;/ol&gt;
                            &lt;/p&gt;&lt;p align="justify"&gt;
-                           Om zPIV te Staken:
+                           Om zBCZ te Staken:
                            &lt;/p&gt;&lt;p align="justify"&gt;
                            &lt;ol&gt;&lt;li&gt;
                             Zorg ervoor dat uw portemonnee volledig gesynchroniseerd is en dat u de laatste versie gebruikt.
                            &lt;li&gt;
-                           Uw nieuw gemunte of bestaande zPIV balans moet minimaal 200 bevestigingen hebben.
+                           Uw nieuw gemunte of bestaande zBCZ balans moet minimaal 200 bevestigingen hebben.
                            &lt;li&gt;
                            Uw portemonnee moet online blijven en worden ontgrendeld voor anonimisering en staking-doeleinden.
                            Het Staken zou nu ingeschakeld moeten zijn
@@ -4347,8 +4347,8 @@ Er was een fout opgetreden tijdens het opslaan van deze adreslijst naar %1. Prob
         <translation>Wat is een Masternode Controller</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;A Masternode Controller wallet is where the 10,000 PIV collateral can reside during a Controller-Remote masternode setup. It is a wallet that can activate the remote masternode wallet(s) and allows you to keep your collateral coins offline while the remote masternode remains online. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;Een Masternode Controller portemonnee is waar de 10.000 PIV onderpand zich kan bevinden tijdens een Controller-Remote masternode setup. Het is een portemonnee die de remote masternode portemonnee(s) kan activeren en waarmee u uw ondergepande munten offline kunt houden terwijl de remote masternode online blijft. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;A Masternode Controller wallet is where the 10,000 BCZ collateral can reside during a Controller-Remote masternode setup. It is a wallet that can activate the remote masternode wallet(s) and allows you to keep your collateral coins offline while the remote masternode remains online. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;Een Masternode Controller portemonnee is waar de 10.000 BCZ onderpand zich kan bevinden tijdens een Controller-Remote masternode setup. Het is een portemonnee die de remote masternode portemonnee(s) kan activeren en waarmee u uw ondergepande munten offline kunt houden terwijl de remote masternode online blijft. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>8</source>
@@ -4358,20 +4358,20 @@ Er was een fout opgetreden tijdens het opslaan van deze adreslijst naar %1. Prob
         <source>
                            &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;
                            We have support channels in most of our official chat groups, for example
-                           &lt;a style='color: #b088ff' href='https://discord.PIVX.org'&gt;
+                           &lt;a style='color: #b088ff' href='https://discord.BCZ.org'&gt;
                            #support in our Discord&lt;/a&gt;.
                            If you prefer to submit a ticket, One can be
-                           &lt;a style='color: #b088ff' href='https://PIVX.freshdesk.com'&gt;
+                           &lt;a style='color: #b088ff' href='https://BCZ.freshdesk.com'&gt;
                            our Freshdesk support site&lt;/a&gt;.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
                          </source>
         <translation>
                            &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;
                            We hebben ondersteuningskanalen in de meeste van onze officiële chatgroepen, bijvoorbeeld
-                           &lt;a style='color: #b088ff' href='https://discord.PIVX.org'&gt;
+                           &lt;a style='color: #b088ff' href='https://discord.BCZ.org'&gt;
                            #support in onze Discord&lt;/a&gt;.
                            Als u liever een ticket indient, kan men dat
-                           &lt;a style='color: #b088ff' href='https://PIVX.freshdesk.com'&gt;
+                           &lt;a style='color: #b088ff' href='https://BCZ.freshdesk.com'&gt;
                            op onze Freshdesk supportsite&lt;/a&gt;.
                            &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
                          </translation>
@@ -4383,8 +4383,8 @@ Er was een fout opgetreden tijdens het opslaan van deze adreslijst naar %1. Prob
     <message>
         <source>
                            &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;
-                           A masternode is a computer running a full node PIVX core wallet with a
-                           requirement of 10,000 PIV secured collateral to provide extra services
+                           A masternode is a computer running a full node BCZ core wallet with a
+                           requirement of 10,000 BCZ secured collateral to provide extra services
                            to the network and in return, receive a portion of the block reward
                            regularly.  These services include:
                            &lt;/p&gt;&lt;p align="justify"&gt;
@@ -4406,17 +4406,17 @@ Er was een fout opgetreden tijdens het opslaan van deze adreslijst naar %1. Prob
                            Masternode Perks:
                            &lt;/p&gt;&lt;p align="justify"&gt;
                            &lt;ul&gt;
-                           &lt;li&gt;Participate in PIVX Governance&lt;/li&gt;
+                           &lt;li&gt;Participate in BCZ Governance&lt;/li&gt;
                            &lt;li&gt;Earn Masternode Rewards&lt;/li&gt;
                            &lt;li&gt;Commodity option for future sale&lt;/li&gt;
-                           &lt;li&gt;Help secure the PIVX network&lt;/li&gt;
+                           &lt;li&gt;Help secure the BCZ network&lt;/li&gt;
                            &lt;/ul&gt;
                            &lt;/p&gt;&lt;p align="justify"&gt;
 
                            Requirements:
                            &lt;/p&gt;&lt;p align="justify"&gt;
                            &lt;ul&gt;
-                           &lt;li&gt;10,000 PIV per single Masternode instance&lt;/li&gt;
+                           &lt;li&gt;10,000 BCZ per single Masternode instance&lt;/li&gt;
                            &lt;li&gt;Must be stored in a core wallet&lt;/li&gt;
                            &lt;li&gt;Need dedicated IP address&lt;/li&gt;
                            &lt;li&gt;Masternode wallet to remain online&lt;/li&gt;
@@ -4425,8 +4425,8 @@ Er was een fout opgetreden tijdens het opslaan van deze adreslijst naar %1. Prob
                          </source>
         <translation>
                            &lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align="justify"&gt;
-                           Een masternode is een computer met een volledige node PIVX core portemonnee met een
-                           vereiste van 10.000 PIV onderpand om extra diensten te kunnen verlenen
+                           Een masternode is een computer met een volledige node BCZ core portemonnee met een
+                           vereiste van 10.000 BCZ onderpand om extra diensten te kunnen verlenen
                            aan het netwerk en in ruil daarvoor ontvangt u regelmatig een deel van de blokbeloning.
                            Deze diensten omvatten::
                            &lt;/p&gt;&lt;p align="justify"&gt;
@@ -4448,17 +4448,17 @@ Er was een fout opgetreden tijdens het opslaan van deze adreslijst naar %1. Prob
                            Masternode Voordelen:
                            &lt;/p&gt;&lt;p align="justify"&gt;
                            &lt;ul&gt;
-                           &lt;li&gt;Deelnemen in het PIVX Bestuur&lt;/li&gt;
+                           &lt;li&gt;Deelnemen in het BCZ Bestuur&lt;/li&gt;
                            &lt;li&gt;Verdien Masternode Beloningen&lt;/li&gt;
                            &lt;li&gt;Commodity-optie voor toekomstige verkoop&lt;/li&gt;
-                           &lt;li&gt;Helpt bij het beveiligen van het PIVX netwerk&lt;/li&gt;
+                           &lt;li&gt;Helpt bij het beveiligen van het BCZ netwerk&lt;/li&gt;
                            &lt;/ul&gt;
                            &lt;/p&gt;&lt;p align="justify"&gt;
 
                            Vereisten:
                            &lt;/p&gt;&lt;p align="justify"&gt;
                            &lt;ul&gt;
-                           &lt;li&gt;10,000 PIV per Masternode instance&lt;/li&gt;
+                           &lt;li&gt;10,000 BCZ per Masternode instance&lt;/li&gt;
                            &lt;li&gt;Moet in een kernportemonnee worden opgeborgen&lt;/li&gt;
                            &lt;li&gt;Vereist een vast IP-adres
                            &lt;li&gt;Masternode portemonnee moet online blijven&lt;/li&gt;
@@ -4582,8 +4582,8 @@ Er was een fout opgetreden tijdens het opslaan van deze adreslijst naar %1. Prob
         <translation>Kan de back-upmap niet openen</translation>
     </message>
     <message>
-        <source>Unable to open pivx.conf with default application</source>
-        <translation>Kan pivx.conf niet openen met de standaard applicatie</translation>
+        <source>Unable to open bcz.conf with default application</source>
+        <translation>Kan bcz.conf niet openen met de standaard applicatie</translation>
     </message>
     <message>
         <source>In:</source>
@@ -4641,8 +4641,8 @@ Er was een fout opgetreden tijdens het opslaan van deze adreslijst naar %1. Prob
         <translation>Aantal van script verificatiethreads</translation>
     </message>
     <message>
-        <source>Start PIVX on system login</source>
-        <translation>Start PIVX bij systeemlogin</translation>
+        <source>Start BCZ on system login</source>
+        <translation>Start BCZ bij systeemlogin</translation>
     </message>
     <message>
         <source>Minimize to the tray instead of the taskbar</source>
@@ -4703,7 +4703,7 @@ Weet u het zeker?
     </message>
     <message>
         <source>Enter label to be saved with this address</source>
-        <translation>Voer een label in dat bij het adres opgeslagen moet worden </translation>
+        <translation>Voer een label in dat bij het adres opgeslagen moet worden </translation>
     </message>
     <message>
         <source>Percentage</source>
@@ -4729,8 +4729,8 @@ Weet u het zeker?
         <translation>Selectievakje</translation>
     </message>
     <message>
-        <source>MultiSend allows you to automatically send up to 100% of your stake or masternode reward to a list of other PIVX addresses after it matures.</source>
-        <translation>Met MultiSend kunt u automatisch tot 100% van uw inzet of masternode beloning naar een lijst met andere PIVX-adressen sturen nadat deze volwaardig zijn geworden.</translation>
+        <source>MultiSend allows you to automatically send up to 100% of your stake or masternode reward to a list of other BCZ addresses after it matures.</source>
+        <translation>Met MultiSend kunt u automatisch tot 100% van uw inzet of masternode beloning naar een lijst met andere BCZ-adressen sturen nadat deze volwaardig zijn geworden.</translation>
     </message>
     <message>
         <source>Active</source>
@@ -4860,8 +4860,8 @@ Vink één of beide selectievakjes aan om beloningen op de inzet en/of masternod
         <translation>Bericht</translation>
     </message>
     <message>
-        <source>PIVX address or contact label</source>
-        <translation>PIVX adres of contactlabel</translation>
+        <source>BCZ address or contact label</source>
+        <translation>BCZ adres of contactlabel</translation>
     </message>
     <message>
         <source>Enter address</source>
@@ -5197,8 +5197,8 @@ Vink één of beide selectievakjes aan om beloningen op de inzet en/of masternod
         <translation>Veelgestelde vragen</translation>
     </message>
     <message>
-        <source>About PIVX</source>
-        <translation>Over PIVX</translation>
+        <source>About BCZ</source>
+        <translation>Over BCZ</translation>
     </message>
     <message>
         <source>Settings</source>
@@ -5264,8 +5264,8 @@ Weet je zeker dat?
 <context>
     <name>ShutdownWindow</name>
     <message>
-        <source>PIVX Core is shutting down...</source>
-        <translation>PIVX Core is aan het afsluiten...</translation>
+        <source>BCZ Core is shutting down...</source>
+        <translation>BCZ Core is aan het afsluiten...</translation>
     </message>
     <message>
         <source>Do not shut down the computer until this window disappears.</source>
@@ -5294,15 +5294,15 @@ Weet je zeker dat?
         <translation>Laden...</translation>
     </message>
     <message>
-        <source>PIVX Core</source>
-        <translation>PIVX Core</translation>
+        <source>BCZ Core</source>
+        <translation>BCZ Core</translation>
     </message>
 </context>
 <context>
     <name>SplashScreen</name>
     <message>
-        <source>PIVX Core</source>
-        <translation>PIVX Core</translation>
+        <source>BCZ Core</source>
+        <translation>BCZ Core</translation>
     </message>
     <message>
         <source>Version %1</source>
@@ -5317,8 +5317,8 @@ Weet je zeker dat?
         <translation>De Dash Kernontwikkelaars</translation>
     </message>
     <message>
-        <source>The PIVX Core developers</source>
-        <translation>De PIVX Kernontwikkelaars</translation>
+        <source>The BCZ Core developers</source>
+        <translation>De BCZ Kernontwikkelaars</translation>
     </message>
     <message>
         <source>[testnet]</source>
@@ -5752,40 +5752,40 @@ nieuwe back-up aangemaakt worden.
         <translation>Ontvangen van</translation>
     </message>
     <message>
-        <source>PIV Stake</source>
-        <translation>PIV Stake</translation>
+        <source>BCZ Stake</source>
+        <translation>BCZ Stake</translation>
     </message>
     <message>
-        <source>zPIV Stake</source>
-        <translation>zPIV Stake</translation>
+        <source>zBCZ Stake</source>
+        <translation>zBCZ Stake</translation>
     </message>
     <message>
-        <source>PIV Cold Stake</source>
-        <translation>PIV Cold Stake</translation>
+        <source>BCZ Cold Stake</source>
+        <translation>BCZ Cold Stake</translation>
     </message>
     <message>
         <source>Stake delegation</source>
         <translation>Stake delegatie</translation>
     </message>
     <message>
-        <source>Converted PIV to zPIV</source>
-        <translation>Geconverteerde PIV naar zPIV</translation>
+        <source>Converted BCZ to zBCZ</source>
+        <translation>Geconverteerde BCZ naar zBCZ</translation>
     </message>
     <message>
-        <source>Spent zPIV</source>
-        <translation>Bestede zPIV</translation>
+        <source>Spent zBCZ</source>
+        <translation>Bestede zBCZ</translation>
     </message>
     <message>
-        <source>Received PIV from zPIV</source>
-        <translation>Ontvangen PIV van zPIV</translation>
+        <source>Received BCZ from zBCZ</source>
+        <translation>Ontvangen BCZ van zBCZ</translation>
     </message>
     <message>
-        <source>Minted Change as zPIV from zPIV Spend</source>
-        <translation>Gemint wisselgeld als zPIV van bestede zPIV</translation>
+        <source>Minted Change as zBCZ from zBCZ Spend</source>
+        <translation>Gemint wisselgeld als zBCZ van bestede zBCZ</translation>
     </message>
     <message>
-        <source>Converted zPIV to PIV</source>
-        <translation>Geconverteerde zPIV naar PIV</translation>
+        <source>Converted zBCZ to BCZ</source>
+        <translation>Geconverteerde zBCZ naar BCZ</translation>
     </message>
     <message>
         <source>Sent to</source>
@@ -5800,8 +5800,8 @@ nieuwe back-up aangemaakt worden.
         <translation>Betaling naar jezelf</translation>
     </message>
     <message>
-        <source>PIV Stake on behalf of</source>
-        <translation>PIV Stake in naam van</translation>
+        <source>BCZ Stake on behalf of</source>
+        <translation>BCZ Stake in naam van</translation>
     </message>
     <message>
         <source>Stake delegation spent by</source>
@@ -5966,8 +5966,8 @@ nieuwe back-up aangemaakt worden.
         <translation>18/05/18</translation>
     </message>
     <message>
-        <source>+0.000585 PIV</source>
-        <translation>+0.000585 PIV</translation>
+        <source>+0.000585 BCZ</source>
+        <translation>+0.000585 BCZ</translation>
     </message>
 </context>
 <context>
@@ -5977,8 +5977,8 @@ nieuwe back-up aangemaakt worden.
         <translation>Verzend Munten</translation>
     </message>
     <message>
-        <source>SwiftX doesn't support sending values that high yet. Transactions are currently limited to %1 PIV.</source>
-        <translation>SwiftTX ondersteunt geen verzendwaarden die zo hoog zijn. Transacties zijn momenteel beperkt tot %1 PIV.</translation>
+        <source>SwiftX doesn't support sending values that high yet. Transactions are currently limited to %1 BCZ.</source>
+        <translation>SwiftTX ondersteunt geen verzendwaarden die zo hoog zijn. Transacties zijn momenteel beperkt tot %1 BCZ.</translation>
     </message>
 </context>
 <context>
@@ -6021,25 +6021,25 @@ nieuwe back-up aangemaakt worden.
     </message>
     <message>
         <source>Welcome to
-PIVX Core Wallet</source>
+BCZ Core Wallet</source>
         <translation>Welkom bij
-PIVX Core Portemonnee</translation>
+BCZ Core Portemonnee</translation>
     </message>
     <message>
-        <source>PIVX is the world’s most innovative Proof of Stake blockchain based technology. Developed by a team of highly experienced developers and cryptographers.</source>
-        <translation>PIVX is 's werelds meest innovatieve Proof of Stake blockchain gebaseerde technologie. Ontwikkeld door een team van zeer ervaren ontwikkelaars en cryptografen.</translation>
+        <source>BCZ is the world’s most innovative Proof of Stake blockchain based technology. Developed by a team of highly experienced developers and cryptographers.</source>
+        <translation>BCZ is 's werelds meest innovatieve Proof of Stake blockchain gebaseerde technologie. Ontwikkeld door een team van zeer ervaren ontwikkelaars en cryptografen.</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;As our manifesto says: Privacy is a non-negotiable basic human right; it grants users the freedom to share their data whenever and with whomever they want - PIVX believes in self sovereignty.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Zoals ons manifest zegt: Privacy is een niet-onderhandelbaar fundamenteel mensenrecht; het geeft gebruikers de vrijheid om hun gegevens te delen wanneer en met wie ze maar willen - PIVX gelooft in soevereiniteit.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;As our manifesto says: Privacy is a non-negotiable basic human right; it grants users the freedom to share their data whenever and with whomever they want - BCZ believes in self sovereignty.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Zoals ons manifest zegt: Privacy is een niet-onderhandelbaar fundamenteel mensenrecht; het geeft gebruikers de vrijheid om hun gegevens te delen wanneer en met wie ze maar willen - BCZ gelooft in soevereiniteit.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <source>The masternode network is PIVX's second layer network on top of the blockchain that enables our DAO to provide decentralized governance and a treasury.</source>
-        <translation>Het masternode netwerk is PIVX's tweedelaagse netwerk bovenop de blockchain die onze DAO in staat stelt om gedecentraliseerd bestuur, treasury te leveren</translation>
+        <source>The masternode network is BCZ's second layer network on top of the blockchain that enables our DAO to provide decentralized governance and a treasury.</source>
+        <translation>Het masternode netwerk is BCZ's tweedelaagse netwerk bovenop de blockchain die onze DAO in staat stelt om gedecentraliseerd bestuur, treasury te leveren</translation>
     </message>
     <message>
-        <source>How PIVX respects your privacy?</source>
-        <translation>Hoe respecteert PIVX uw privacy?</translation>
+        <source>How BCZ respects your privacy?</source>
+        <translation>Hoe respecteert BCZ uw privacy?</translation>
     </message>
     <message>
         <source>What is a Masternode?</source>
@@ -6051,10 +6051,10 @@ PIVX Core Portemonnee</translation>
     </message>
 </context>
 <context>
-    <name>ZPivControlDialog</name>
+    <name>ZBczControlDialog</name>
     <message>
-        <source>Select zPIV to Spend</source>
-        <translation>Selecteer zPIV om te besteden</translation>
+        <source>Select zBCZ to Spend</source>
+        <translation>Selecteer zBCZ om te besteden</translation>
     </message>
     <message>
         <source>Coin Control</source>
@@ -6065,8 +6065,8 @@ PIVX Core Portemonnee</translation>
         <translation>Druk Knop</translation>
     </message>
     <message>
-        <source>zPiv</source>
-        <translation>zPiv</translation>
+        <source>zBcz</source>
+        <translation>zBcz</translation>
     </message>
     <message>
         <source>0.00 </source>
@@ -6089,12 +6089,12 @@ PIVX Core Portemonnee</translation>
         <translation>Selecteer/Deselecteer Alles</translation>
     </message>
     <message>
-        <source>Select zPIV Denominations to Spend</source>
-        <translation>Selecteer zPIV Denominaties om te Besteden</translation>
+        <source>Select zBCZ Denominations to Spend</source>
+        <translation>Selecteer zBCZ Denominaties om te Besteden</translation>
     </message>
 </context>
 <context>
-    <name>pivx-core</name>
+    <name>bcz-core</name>
     <message>
         <source>(1 = keep tx meta data e.g. account owner and payment request information, 2 = drop tx meta data)</source>
         <translation>(1 = houd tx meta data, bijvoorbeeld account eigenaar en betalingsverzoek informatie, 2 = drop tx meta data)</translation>
@@ -6116,8 +6116,8 @@ PIVX Core Portemonnee</translation>
         <translation>Bind naar het opgegeven adres om te luisteren naar JSON-RPC verbindingen. Gebruik [host]:poort notatie voor IPv6. Deze optie kan meerdere keren worden opgegeven (standaard: bind aan alle interfaces)</translation>
     </message>
     <message>
-        <source>Cannot obtain a lock on data directory %s. PIVX Core is probably already running.</source>
-        <translation>Kan geen vergrendeling op data directory %s verkrijgen. PIVX Core loopt waarschijnlijk al.</translation>
+        <source>Cannot obtain a lock on data directory %s. BCZ Core is probably already running.</source>
+        <translation>Kan geen vergrendeling op data directory %s verkrijgen. BCZ Core loopt waarschijnlijk al.</translation>
     </message>
     <message>
         <source>Change automatic finalized budget voting behavior. mode=auto: Vote for only exact finalized budget match to my generated budget. (string, default: auto)</source>
@@ -6148,12 +6148,12 @@ PIVX Core Portemonnee</translation>
         <translation>Activeer cold staking functionaliteit (0-1, standaard: %u). Uitgeschakeld als staking=0</translation>
     </message>
     <message>
-        <source>Enable or disable staking functionality for PIV inputs (0-1, default: %u)</source>
-        <translation>In- of uitschakelen staking functionaliteit voor PIV inputs (0-1, standaard: %u)</translation>
+        <source>Enable or disable staking functionality for BCZ inputs (0-1, default: %u)</source>
+        <translation>In- of uitschakelen staking functionaliteit voor BCZ inputs (0-1, standaard: %u)</translation>
     </message>
     <message>
-        <source>Enable or disable staking functionality for zPIV inputs (0-1, default: %u)</source>
-        <translation>In- of uitschakelen staking functionaliteit voor zPIV inputs (0-1, standaard: %u)</translation>
+        <source>Enable or disable staking functionality for zBCZ inputs (0-1, default: %u)</source>
+        <translation>In- of uitschakelen staking functionaliteit voor zBCZ inputs (0-1, standaard: %u)</translation>
     </message>
     <message>
         <source>Enable spork administration functionality with the appropriate private key.</source>
@@ -6192,12 +6192,12 @@ PIVX Core Portemonnee</translation>
         <translation>Uitvoeren commando wanneer het beste blok verandert (%s in cmd is vervangen door block hash)</translation>
     </message>
     <message>
-        <source>Fees (in PIV/Kb) smaller than this are considered zero fee for relaying (default: %s)</source>
-        <translation>Kosten (in PIV/Kb) kleiner dan dit worden beschouwd als zero fee voor heruitzending (standaard: %s)</translation>
+        <source>Fees (in BCZ/Kb) smaller than this are considered zero fee for relaying (default: %s)</source>
+        <translation>Kosten (in BCZ/Kb) kleiner dan dit worden beschouwd als zero fee voor heruitzending (standaard: %s)</translation>
     </message>
     <message>
-        <source>Fees (in PIV/Kb) smaller than this are considered zero fee for transaction creation (default: %s)</source>
-        <translation>Kosten (in PIV/Kb) kleiner dan dit worden beschouwd als zero fee voor transactie verrichting (standaard: %s)</translation>
+        <source>Fees (in BCZ/Kb) smaller than this are considered zero fee for transaction creation (default: %s)</source>
+        <translation>Kosten (in BCZ/Kb) kleiner dan dit worden beschouwd als zero fee voor transactie verrichting (standaard: %s)</translation>
     </message>
     <message>
         <source>Flush database activity from memory pool to disk log every &lt;n&gt; megabytes (default: %u)</source>
@@ -6304,8 +6304,8 @@ PIVX Core Portemonnee</translation>
         <translation>De totale lengte van de netwerkversie (%i) overschrijdt de maximale lengte (%i). Verminder het aantal of de grootte van uacommentaren.</translation>
     </message>
     <message>
-        <source>Unable to bind to %s on this computer. PIVX Core is probably already running.</source>
-        <translation>Niet mogelijk te binden aan %s op deze computer. PIVX Core loopt waarschijnlijk al.</translation>
+        <source>Unable to bind to %s on this computer. BCZ Core is probably already running.</source>
+        <translation>Niet mogelijk te binden aan %s op deze computer. BCZ Core loopt waarschijnlijk al.</translation>
     </message>
     <message>
         <source>Use separate SOCKS5 proxy to reach peers via Tor hidden services (default: %s)</source>
@@ -6320,8 +6320,8 @@ PIVX Core Portemonnee</translation>
         <translation>Waarschuwing: -paytxfee is zeer hoog ingesteld! Dit zijn de transactie kosten die je betaalt als je een transactie verstuurt.</translation>
     </message>
     <message>
-        <source>Warning: Please check that your computer's date and time are correct! If your clock is wrong PIVX Core will not work properly.</source>
-        <translation>Waarschuwing: Controleer of de datum en tijd van je computer juist zijn! Als je klok verkeerd staat, werkt PIVX Core niet goed.</translation>
+        <source>Warning: Please check that your computer's date and time are correct! If your clock is wrong BCZ Core will not work properly.</source>
+        <translation>Waarschuwing: Controleer of de datum en tijd van je computer juist zijn! Als je klok verkeerd staat, werkt BCZ Core niet goed.</translation>
     </message>
     <message>
         <source>Warning: The network does not appear to fully agree! Some miners appear to be experiencing issues.</source>
@@ -6436,8 +6436,8 @@ PIVX Core Portemonnee</translation>
         <translation>Copyright (C) 2014-%i The Dash Kernontwikkelaars</translation>
     </message>
     <message>
-        <source>Copyright (C) 2015-%i The PIVX Core Developers</source>
-        <translation>Copyright (C) 2015-%i The PIVX Kernontwikkelaars</translation>
+        <source>Copyright (C) 2015-%i The BCZ Core Developers</source>
+        <translation>Copyright (C) 2015-%i The BCZ Kernontwikkelaars</translation>
     </message>
     <message>
         <source>Corrupted block database detected</source>
@@ -6512,8 +6512,8 @@ PIVX Core Portemonnee</translation>
         <translation>Error tijdens het laden van wallet.dat: Portemonnee corrupt</translation>
     </message>
     <message>
-        <source>Error loading wallet.dat: Wallet requires newer version of PIVX Core</source>
-        <translation>Fout bij het laden van wallet.dat: Portemonnee vereist een nieuwere versie van PIVX Core</translation>
+        <source>Error loading wallet.dat: Wallet requires newer version of BCZ Core</source>
+        <translation>Fout bij het laden van wallet.dat: Portemonnee vereist een nieuwere versie van BCZ Core</translation>
     </message>
     <message>
         <source>Error opening block database</source>
@@ -6564,8 +6564,8 @@ PIVX Core Portemonnee</translation>
         <translation>Mislukt om block te lezen</translation>
     </message>
     <message>
-        <source>Fee (in PIV/kB) to add to transactions you send (default: %s)</source>
-        <translation>Fee (in PIV/kB) om toe te voegen aan transacties die je verzendt (standaard: %s)</translation>
+        <source>Fee (in BCZ/kB) to add to transactions you send (default: %s)</source>
+        <translation>Fee (in BCZ/kB) om toe te voegen aan transacties die je verzendt (standaard: %s)</translation>
     </message>
     <message>
         <source>Force safe mode (default: %u)</source>
@@ -6604,8 +6604,8 @@ PIVX Core Portemonnee</translation>
         <translation>Informatie</translation>
     </message>
     <message>
-        <source>Initialization sanity check failed. PIVX Core is shutting down.</source>
-        <translation>Initialisatie saniteitscontrole mislukt. PIVX Core wordt afgesloten.</translation>
+        <source>Initialization sanity check failed. BCZ Core is shutting down.</source>
+        <translation>Initialisatie saniteitscontrole mislukt. BCZ Core wordt afgesloten.</translation>
     </message>
     <message>
         <source>Insufficient funds</source>
@@ -6640,12 +6640,12 @@ PIVX Core Portemonnee</translation>
         <translation>Ongeldige poort gedetecteerd in masternode.conf</translation>
     </message>
     <message>
-        <source>Recalculating PIV supply...</source>
-        <translation>Hercalculatie van PIV aanbod...</translation>
+        <source>Recalculating BCZ supply...</source>
+        <translation>Hercalculatie van BCZ aanbod...</translation>
     </message>
     <message>
-        <source>Reindex the PIV and zPIV money supply statistics</source>
-        <translation>Indexeer de PIV- en zPIV-geldvoorraadstatistieken opnieuw</translation>
+        <source>Reindex the BCZ and zBCZ money supply statistics</source>
+        <translation>Indexeer de BCZ- en zBCZ-geldvoorraadstatistieken opnieuw</translation>
     </message>
     <message>
         <source>Reindexing zerocoin database...</source>
@@ -6684,8 +6684,8 @@ PIVX Core Portemonnee</translation>
 </translation>
     </message>
     <message>
-        <source>Disable all PIVX specific functionality (Masternodes, Zerocoin, SwiftX, Budgeting) (0-1, default: %u)</source>
-        <translation>Schakel alle specifieke PIVX functionaliteit uit (Masternodes, Zerocoin, SwiftTX, Budgeting) (0-1, standaard: %u)</translation>
+        <source>Disable all BCZ specific functionality (Masternodes, Zerocoin, SwiftX, Budgeting) (0-1, default: %u)</source>
+        <translation>Schakel alle specifieke BCZ functionaliteit uit (Masternodes, Zerocoin, SwiftTX, Budgeting) (0-1, standaard: %u)</translation>
     </message>
     <message>
         <source>Enable SwiftX, show confirmations for locked transactions (bool, default: %s)</source>
@@ -6944,8 +6944,8 @@ PIVX Core Portemonnee</translation>
         <translation>Voorbereiden van hersynchronisatie...</translation>
     </message>
     <message>
-        <source>Please check that your computer's date and time are correct! If your clock is wrong PIVX Core will not work properly.</source>
-        <translation>Controleer of de datum en tijd van je computer juist zijn! Als je klok verkeerd ingesteld staat, werkt PIVX Core niet goed.</translation>
+        <source>Please check that your computer's date and time are correct! If your clock is wrong BCZ Core will not work properly.</source>
+        <translation>Controleer of de datum en tijd van je computer juist zijn! Als je klok verkeerd ingesteld staat, werkt BCZ Core niet goed.</translation>
     </message>
     <message>
         <source>Specify location of debug log file: this can be an absolute path or a path relative to the data directory (default: %s)</source>
@@ -7144,8 +7144,8 @@ PIVX Core Portemonnee</translation>
         <translation>Synchroniseren sporks...</translation>
     </message>
     <message>
-        <source>Syncing zPIV wallet...</source>
-        <translation>Synchroniseren zPIV portemonnee...</translation>
+        <source>Syncing zBCZ wallet...</source>
+        <translation>Synchroniseren zBCZ portemonnee...</translation>
     </message>
     <message>
         <source>This help message</source>
@@ -7260,8 +7260,8 @@ PIVX Core Portemonnee</translation>
         <translation>Gebruikersnaam voor JSON-RPC verbindingen</translation>
     </message>
     <message>
-        <source>Value is below the smallest available denomination (= 1) of zPIV</source>
-        <translation>Waarde is minder dan de kleinst beschikbare denominatie (=1) van zPIV</translation>
+        <source>Value is below the smallest available denomination (= 1) of zBCZ</source>
+        <translation>Waarde is minder dan de kleinst beschikbare denominatie (=1) van zBCZ</translation>
     </message>
     <message>
         <source>Verifying blocks...</source>
@@ -7276,8 +7276,8 @@ PIVX Core Portemonnee</translation>
         <translation>Portemonnee %s verblijft buiten de data directory %s</translation>
     </message>
     <message>
-        <source>Wallet needed to be rewritten: restart PIVX Core to complete</source>
-        <translation>Wallet moest worden herschreven: start PIVX Core opnieuw om te voltooien</translation>
+        <source>Wallet needed to be rewritten: restart BCZ Core to complete</source>
+        <translation>Wallet moest worden herschreven: start BCZ Core opnieuw om te voltooien</translation>
     </message>
     <message>
         <source>Wallet options:</source>

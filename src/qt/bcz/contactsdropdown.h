@@ -1,4 +1,4 @@
-// Copyright (c) 2019 The PIVX developers
+// Copyright (c) 2019 The BCZ developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -6,10 +6,10 @@
 #define CONTACTSDROPDOWN_H
 
 #include "addresstablemodel.h"
-#include "qt/pivx/pwidget.h"
-#include "qt/pivx/contactdropdownrow.h"
-#include "qt/pivx/furabstractlistitemdelegate.h"
-#include "qt/pivx/addressfilterproxymodel.h"
+#include "qt/bcz/pwidget.h"
+#include "qt/bcz/contactdropdownrow.h"
+#include "qt/bcz/furabstractlistitemdelegate.h"
+#include "qt/bcz/addressfilterproxymodel.h"
 #include <QListView>
 #include <QObject>
 #include <QWidget>

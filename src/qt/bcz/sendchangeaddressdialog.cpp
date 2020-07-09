@@ -1,10 +1,10 @@
-// Copyright (c) 2019-2020 The PIVX developers
+// Copyright (c) 2019-2020 The BCZ developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include "qt/pivx/sendchangeaddressdialog.h"
-#include "qt/pivx/forms/ui_sendchangeaddressdialog.h"
-#include "qt/pivx/qtutils.h"
+#include "qt/bcz/sendchangeaddressdialog.h"
+#include "qt/bcz/forms/ui_sendchangeaddressdialog.h"
+#include "qt/bcz/qtutils.h"
 
 SendChangeAddressDialog::SendChangeAddressDialog(QWidget* parent, WalletModel* model) :
     FocusedDialog(parent),

@@ -1,18 +1,18 @@
-// Copyright (c) 2019 The PIVX developers
+// Copyright (c) 2019 The BCZ developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #ifndef REQUESTDIALOG_H
 #define REQUESTDIALOG_H
 
-#include "qt/pivx/focuseddialog.h"
-#include "qt/pivx/snackbar.h"
+#include "qt/bcz/focuseddialog.h"
+#include "qt/bcz/snackbar.h"
 #include "walletmodel.h"
 
 #include <QPixmap>
 
 class WalletModel;
-class PIVXGUI;
+class BCZGUI;
 
 namespace Ui {
 class RequestDialog;

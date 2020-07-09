@@ -1,4 +1,4 @@
-// Copyright (c) 2019 The PIVX developers
+// Copyright (c) 2019 The BCZ developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -6,8 +6,8 @@
 #define SETTINGSBITTOOLWIDGET_H
 
 #include <QWidget>
-#include "qt/pivx/pwidget.h"
-#include "qt/pivx/contactsdropdown.h"
+#include "qt/bcz/pwidget.h"
+#include "qt/bcz/contactsdropdown.h"
 #include "key.h"
 
 namespace Ui {
@@ -19,7 +19,7 @@ class SettingsBitToolWidget : public PWidget
     Q_OBJECT
 
 public:
-    explicit SettingsBitToolWidget(PIVXGUI* _window, QWidget *parent = nullptr);
+    explicit SettingsBitToolWidget(BCZGUI* _window, QWidget *parent = nullptr);
     ~SettingsBitToolWidget();
 protected:
     void resizeEvent(QResizeEvent *event) override;

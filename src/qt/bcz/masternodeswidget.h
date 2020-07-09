@@ -1,14 +1,14 @@
-// Copyright (c) 2019-2020 The PIVX developers
+// Copyright (c) 2019-2020 The BCZ developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #ifndef MASTERNODESWIDGET_H
 #define MASTERNODESWIDGET_H
 
-#include "qt/pivx/pwidget.h"
-#include "qt/pivx/furabstractlistitemdelegate.h"
-#include "qt/pivx/mnmodel.h"
-#include "qt/pivx/tooltipmenu.h"
+#include "qt/bcz/pwidget.h"
+#include "qt/bcz/furabstractlistitemdelegate.h"
+#include "qt/bcz/mnmodel.h"
+#include "qt/bcz/tooltipmenu.h"
 #include "walletmodel.h"
 
 #include <atomic>
@@ -16,7 +16,7 @@
 #include <QTimer>
 #include <QWidget>
 
-class PIVXGUI;
+class BCZGUI;
 
 namespace Ui {
 class MasterNodesWidget;
@@ -32,7 +32,7 @@ class MasterNodesWidget : public PWidget
 
 public:
 
-    explicit MasterNodesWidget(PIVXGUI *parent = nullptr);
+    explicit MasterNodesWidget(BCZGUI *parent = nullptr);
     ~MasterNodesWidget();
 
     void loadWalletModel() override;

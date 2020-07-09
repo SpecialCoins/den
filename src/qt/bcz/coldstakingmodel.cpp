@@ -1,8 +1,8 @@
-// Copyright (c) 2019 The PIVX developers
+// Copyright (c) 2019 The BCZ developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include "qt/pivx/coldstakingmodel.h"
+#include "qt/bcz/coldstakingmodel.h"
 #include "uint256.h"
 #include "bitcoinunits.h"
 #include "guiutil.h"

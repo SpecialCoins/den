@@ -1,16 +1,16 @@
-// Copyright (c) 2019-2020 The PIVX developers
+// Copyright (c) 2019-2020 The BCZ developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include "qt/pivx/navmenuwidget.h"
-#include "qt/pivx/forms/ui_navmenuwidget.h"
-#include "qt/pivx/pivxgui.h"
-#include "qt/pivx/qtutils.h"
+#include "qt/bcz/navmenuwidget.h"
+#include "qt/bcz/forms/ui_navmenuwidget.h"
+#include "qt/bcz/bczgui.h"
+#include "qt/bcz/qtutils.h"
 #include "clientversion.h"
 #include "optionsmodel.h"
 #include <QScrollBar>
 
-NavMenuWidget::NavMenuWidget(PIVXGUI *mainWindow, QWidget *parent) :
+NavMenuWidget::NavMenuWidget(BCZGUI *mainWindow, QWidget *parent) :
     PWidget(mainWindow, parent),
     ui(new Ui::NavMenuWidget)
 {
