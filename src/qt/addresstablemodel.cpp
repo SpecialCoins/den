@@ -424,15 +424,6 @@ void AddressTableModel::updateEntry(const QString& address,
     priv->updateEntry(address, label, isMine, purpose, status);
 }
 
-
-void AddressTableModel::updateEntry(const QString &pubCoin, const QString &isUsed, int status)
-{
-    // Update stealth address book model from Bitcoin core
-    priv->updateEntry(pubCoin, isUsed, status);
-}
-
-
-
 QString AddressTableModel::addRow(const QString& type, const QString& label, const QString& address)
 {
     std::string strLabel = label.toStdString();
