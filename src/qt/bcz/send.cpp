@@ -143,8 +143,7 @@ void SendWidget::refreshAmounts()
     ui->labelAmountRemaining->setText(
             GUIUtil::formatBalance(
                     totalAmount,
-                    nDisplayUnit,
-                    false
+                    nDisplayUnit
                     )
     );
     // show or hide delegations checkbox if need be
