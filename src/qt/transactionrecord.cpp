@@ -157,7 +157,7 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const CWallet* 
             sub.credit = nCredit - nChange;
             parts.append(sub);
             parts.last().involvesWatchAddress = involvesWatchAddress; // maybe pass to TransactionRecord as constructor argument
-        } else if (fAllFromMe || wtx.HasZerocoinMintOutputs()) {
+        } else if (fAllFromMe) {
             //
             // Debit
             //
@@ -179,15 +179,9 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const CWallet* 
                 if (ExtractDestination(txout.scriptPubKey, address)) {
                     //This is most likely only going to happen when resyncing deterministic wallet without the knowledge of the
                     //private keys that the change was sent to. Do not display a "sent to" here.
-                    if (wtx.HasZerocoinMintOutputs())
-                        continue;
                     // Sent to BCZ Address
                     sub.type = TransactionRecord::SendToAddress;
                     sub.address = EncodeDestination(address);
-                } else if (txout.IsZerocoinMint()){
-                    sub.type = TransactionRecord::ZerocoinMint;
-                    sub.address = mapValue["zerocoinmint"];
-                    sub.credit += txout.nValue;
                 } else {
                     // Sent to IP, or other non-address transaction like OP_EVAL
                     sub.type = TransactionRecord::SendToOther;
@@ -310,21 +304,6 @@ bool TransactionRecord::ExtractAddress(const CScript& scriptPubKey, bool fColdSt
                 (fColdStake ? CChainParams::STAKING_ADDRESS : CChainParams::PUBKEY_ADDRESS)
         );
         return true;
-    }
-}
-
-bool IsZBCZType(TransactionRecord::Type type)
-{
-    switch (type) {
-        case TransactionRecord::StakeZBCZ:
-        case TransactionRecord::ZerocoinMint:
-        case TransactionRecord::ZerocoinSpend:
-        case TransactionRecord::RecvFromZerocoinSpend:
-        case TransactionRecord::ZerocoinSpend_Change_zBcz:
-        case TransactionRecord::ZerocoinSpend_FromMe:
-            return true;
-        default:
-            return false;
     }
 }
 
