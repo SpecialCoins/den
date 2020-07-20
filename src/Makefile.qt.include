@@ -281,6 +281,12 @@ BITCOIN_QT_H = \
 RES_ICONS = \
   qt/res/icons/bitcoin.ico \
   qt/res/icons/bitcoin.png \
+  qt/res/icons/bitcoin_testnet.ico \
+  qt/res/icons/bitcoin_testnet.png \
+  qt/res/icons/bitcoin_regtest.png \
+  qt/res/icons/lock_closed.png \
+  qt/res/icons/lock_open.png \
+  qt/res/icons/overview.png \
   qt/res/icons/ic-transaction-received.svg \
   qt/res/icons/ic-transaction-mint.svg \
   qt/res/icons/ic-transaction-sent.svg \
@@ -296,6 +302,7 @@ RES_ICONS = \
   qt/bcz/res/img/ic-nav-cold-staking-active.svg \
   qt/bcz/res/img/ic-nav-dashboard-active.svg \
   qt/bcz/res/img/ic-wallet-status-locked.svg \
+  qt/bcz/res/img/bg-splash.svg \
   qt/bcz/res/img/bg-splash.png \
   qt/bcz/res/img/ic-check-mint.svg \
   qt/bcz/res/img/ic-nav-dashboard-hover.svg \
@@ -306,23 +313,35 @@ RES_ICONS = \
   qt/bcz/res/img/ic-check-peers.svg \
   qt/bcz/res/img/ic-nav-master-active.svg \
   qt/bcz/res/img/ic-watch-password-white.svg \
+  qt/bcz/res/img/bg-welcome-container.jpg \
   qt/bcz/res/img/bg-welcome-container.png \
+  qt/bcz/res/img/bg-welcome-container.svg \
+  qt/bcz/res/img/bg-welcome-container@2x.png \
+  qt/bcz/res/img/bg-welcome-container@3x.png \
   qt/bcz/res/img/ic-check-staking-off.svg \
   qt/bcz/res/img/ic-nav-master-hover.svg \
   qt/bcz/res/img/ic-watch-password.svg \
+  qt/bcz/res/img/bg-welcome.jpg \
+  qt/bcz/res/img/bg-welcome.svg \
+  qt/bcz/res/img/bg-welcome@2x.jpg \
+  qt/bcz/res/img/bg-welcome@3x.jpg \
   qt/bcz/res/img/bg-welcome.png \
   qt/bcz/res/img/ic-check-staking.svg \
   qt/bcz/res/img/ic-nav-master.svg \
+  qt/bcz/res/img/img-dashboard-banner.jpg \
   qt/bcz/res/img/btn-radio-active.svg \
   qt/bcz/res/img/ic-check-sync-off.svg \
+  qt/bcz/res/img/ic-nav-privacy-active.svg \
   qt/bcz/res/img/img-empty-contacts.svg \
   qt/bcz/res/img/btn-radio-off.svg \
   qt/bcz/res/img/ic-check-sync.png \
+  qt/bcz/res/img/ic-nav-privacy-hover.svg \
   qt/bcz/res/img/img-empty-dark-contacts.svg \
   qt/bcz/res/img/ic-contact-arrow-down.svg \
   qt/bcz/res/img/ic-contact-arrow-down-white.svg \
   qt/bcz/res/img/ic-check-sync.svg \
   qt/bcz/res/img/ic-check-faq.svg \
+  qt/bcz/res/img/ic-nav-privacy.svg \
   qt/bcz/res/img/img-empty-dark-error.svg \
   qt/bcz/res/img/ic-add-label.svg \
   qt/bcz/res/img/ic-pending.svg \
@@ -362,29 +381,39 @@ RES_ICONS = \
   qt/bcz/res/img/ic-close-white.svg \
   qt/bcz/res/img/ic-nav-settings.svg \
   qt/bcz/res/img/img-empty-peers.svg \
+  qt/bcz/res/img/img-empty-privacy.svg \
+  qt/bcz/res/img/img-empty-privacy-dark.svg \
   qt/bcz/res/img/ic-arrow-drop-down-white.svg \
   qt/bcz/res/img/ic-close.svg \
   qt/bcz/res/img/ic-radio-liliac-on.svg \
   qt/bcz/res/img/img-empty-staking-off.svg \
   qt/bcz/res/img/ic-arrow-drop-down.svg \
+  qt/bcz/res/img/ic-coin-bcz.svg \
   qt/bcz/res/img/ic-receive-off.svg \
   qt/bcz/res/img/img-empty-staking-on.svg \
   qt/bcz/res/img/ic-arrow-drop-up-white.svg \
+  qt/bcz/res/img/ic-coin-zbcz.png \
   qt/bcz/res/img/ic-receive-on.svg \
   qt/bcz/res/img/img-empty-transactions.svg \
   qt/bcz/res/img/ic-arrow-drop-up.svg \
+  qt/bcz/res/img/ic-coin-zbcz.svg \
   qt/bcz/res/img/ic-received.svg \
+  qt/bcz/res/img/img-logo-bcz.png \
   qt/bcz/res/img/ic-arrow-drop-white-down.svg \
   qt/bcz/res/img/ic-combo-box.svg \
   qt/bcz/res/img/ic-send.svg \
+  qt/bcz/res/img/img-logo-bcz@2x.png \
   qt/bcz/res/img/ic-arrow-purple-down.svg \
   qt/bcz/res/img/ic-connect.svg \
   qt/bcz/res/img/ic-submenu-lock.svg \
+  qt/bcz/res/img/img-logo-bcz@3x.png \
+  qt/bcz/res/img/img-logo-bcz.svg \
   qt/bcz/res/img/ic-arrow-right-white.svg \
   qt/bcz/res/img/ic-arrow-left-white.svg \
   qt/bcz/res/img/ic-arrow-left.svg \
   qt/bcz/res/img/ic-copy-liliac.svg \
   qt/bcz/res/img/ic-submenu-staking.svg \
+  qt/bcz/res/img/img-nav-logo-bcz.png \
   qt/bcz/res/img/ic-arrow-right.svg \
   qt/bcz/res/img/ic-copy.svg \
   qt/bcz/res/img/ic-copy-big.svg \
@@ -394,6 +423,7 @@ RES_ICONS = \
   qt/bcz/res/img/ic-arrow-white-left.svg \
   qt/bcz/res/img/ic-exit.svg \
   qt/bcz/res/img/ic-switch-liliac-on.svg \
+  qt/bcz/res/img/img-nav-logo.svg \
   qt/bcz/res/img/ic-arrow-white-right.svg \
   qt/bcz/res/img/ic-expand.svg \
   qt/bcz/res/img/ic-switch-off.svg \
@@ -463,7 +493,9 @@ RES_ICONS = \
   qt/bcz/res/img/dark/ic-transaction-stake-delegated-inactive.svg \
   qt/bcz/res/img/ic-transaction-cs-contract.svg \
   qt/bcz/res/img/ic-transaction-cs-contract-inactive.svg \
-  qt/bcz/res/img/ic-check-box-indeterminate.svg
+  qt/bcz/res/img/ic-check-box-indeterminate.svg \
+  qt/bcz/res/img/ani-loading-dark.gif \
+  qt/bcz/res/img/ani-loading.gif
 
 
 
@@ -576,7 +608,14 @@ if ENABLE_WALLET
 BITCOIN_QT_CPP += $(BITCOIN_QT_WALLET_CPP)
 endif
 
+RES_IMAGES = \
+  qt/res/images/about.png \
+  qt/res/images/splash.png \
+  qt/res/images/splash_testnet.png \
+  qt/res/images/splash_regtest.png
+
 RES_CSS = \
+  qt/res/css/default.css \
   qt/bcz/res/css/style_dark.css \
   qt/bcz/res/css/style_light.css
 
