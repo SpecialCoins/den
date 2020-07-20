@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" id="ic_empty_transactions" width="100" height="100" viewBox="0 0 100 100"  xmlns:xlink="http://www.w3.org/1999/xlink"><rect id="svgEditorBackground" x="0" y="0" width="100" height="100" style="fill:none;stroke:none;"/>
+<svg xmlns="http://www.w3.org/2000/svg" id="ic_empty_transactions" width="100" height="100" viewBox="0 0 100 100">
     <defs>
         <style type="text/css">
             .cls-1{fill:#d6d6d6}.cls-2{fill:#666}.cls-3{fill:none}
@@ -9,8 +9,8 @@
         <g id="Group_9014" data-name="Group 9014">
             <g id="Group_9012" data-name="Group 9012">
                 <g id="Group_9011" data-name="Group 9011">
-                    
-                    
+                    <path id="Rectangle_4663" d="M0 0h9.582v1.993H0z" class="cls-2" data-name="Rectangle 4663" transform="translate(41.529 44.03)"/>
+                    <path id="Path_18971" d="M60.215 44.967a7.421 7.421 0 0 1-7.829 7.774h-6.3v9.965H43.6V50.488h8.447c3.387 0 5.6-2.053 5.6-5.521 0-3.428-2.211-5.421-5.558-5.421h-2.63l-6.3.02v-2.272h9.2c4.562 0 7.849 2.95 7.849 7.673" class="cls-2" data-name="Path 18971"/>
                 </g>
             </g>
             <g id="Group_9013" data-name="Group 9013">
